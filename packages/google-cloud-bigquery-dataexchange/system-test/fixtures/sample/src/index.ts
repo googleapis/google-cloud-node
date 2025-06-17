@@ -19,9 +19,7 @@
 import {AnalyticsHubServiceClient} from '@google-cloud/bigquery-data-exchange';
 
 // check that the client class type name can be used
-function doStuffWithAnalyticsHubServiceClient(
-  client: AnalyticsHubServiceClient
-) {
+function doStuffWithAnalyticsHubServiceClient(client: AnalyticsHubServiceClient) {
   client.close();
 }
 

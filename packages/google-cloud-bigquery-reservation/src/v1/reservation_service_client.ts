@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -121,41 +114,20 @@ export class ReservationServiceClient {
    *     const client = new ReservationServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ReservationServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'bigqueryreservation.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -181,7 +153,7 @@ export class ReservationServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -195,7 +167,10 @@ export class ReservationServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -240,40 +215,22 @@ export class ReservationServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listReservations: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'reservations'
-      ),
-      listCapacityCommitments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'capacityCommitments'
-      ),
-      listAssignments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'assignments'
-      ),
-      searchAssignments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'assignments'
-      ),
-      searchAllAssignments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'assignments'
-      ),
+      listReservations:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'reservations'),
+      listCapacityCommitments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'capacityCommitments'),
+      listAssignments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'assignments'),
+      searchAssignments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'assignments'),
+      searchAllAssignments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'assignments')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.bigquery.reservation.v1.ReservationService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.bigquery.reservation.v1.ReservationService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -304,59 +261,32 @@ export class ReservationServiceClient {
     // Put together the "service stub" for
     // google.cloud.bigquery.reservation.v1.ReservationService.
     this.reservationServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.bigquery.reservation.v1.ReservationService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.bigquery.reservation.v1
-            .ReservationService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.bigquery.reservation.v1.ReservationService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.bigquery.reservation.v1.ReservationService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const reservationServiceStubMethods = [
-      'createReservation',
-      'listReservations',
-      'getReservation',
-      'deleteReservation',
-      'updateReservation',
-      'failoverReservation',
-      'createCapacityCommitment',
-      'listCapacityCommitments',
-      'getCapacityCommitment',
-      'deleteCapacityCommitment',
-      'updateCapacityCommitment',
-      'splitCapacityCommitment',
-      'mergeCapacityCommitments',
-      'createAssignment',
-      'listAssignments',
-      'deleteAssignment',
-      'searchAssignments',
-      'searchAllAssignments',
-      'moveAssignment',
-      'updateAssignment',
-      'getBiReservation',
-      'updateBiReservation',
-    ];
+    const reservationServiceStubMethods =
+        ['createReservation', 'listReservations', 'getReservation', 'deleteReservation', 'updateReservation', 'failoverReservation', 'createCapacityCommitment', 'listCapacityCommitments', 'getCapacityCommitment', 'deleteCapacityCommitment', 'updateCapacityCommitment', 'splitCapacityCommitment', 'mergeCapacityCommitments', 'createAssignment', 'listAssignments', 'deleteAssignment', 'searchAssignments', 'searchAllAssignments', 'moveAssignment', 'updateAssignment', 'getBiReservation', 'updateBiReservation'];
     for (const methodName of reservationServiceStubMethods) {
       const callPromise = this.reservationServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -376,14 +306,8 @@ export class ReservationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'bigqueryreservation.googleapis.com';
   }
@@ -394,14 +318,8 @@ export class ReservationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'bigqueryreservation.googleapis.com';
   }
@@ -434,7 +352,7 @@ export class ReservationServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/bigquery',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -444,9 +362,8 @@ export class ReservationServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -457,2428 +374,1842 @@ export class ReservationServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a new reservation resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project, location. E.g.,
-   *   `projects/myproject/locations/US`
-   * @param {string} request.reservationId
-   *   The reservation ID. It must only contain lower case alphanumeric
-   *   characters or dashes. It must start with a letter and must not end
-   *   with a dash. Its maximum length is 64 characters.
-   * @param {google.cloud.bigquery.reservation.v1.Reservation} request.reservation
-   *   Definition of the new reservation to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.create_reservation.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_CreateReservation_async
-   */
+/**
+ * Creates a new reservation resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project, location. E.g.,
+ *   `projects/myproject/locations/US`
+ * @param {string} request.reservationId
+ *   The reservation ID. It must only contain lower case alphanumeric
+ *   characters or dashes. It must start with a letter and must not end
+ *   with a dash. Its maximum length is 64 characters.
+ * @param {google.cloud.bigquery.reservation.v1.Reservation} request.reservation
+ *   Definition of the new reservation to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.create_reservation.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_CreateReservation_async
+ */
   createReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest|undefined, {}|undefined
+      ]>;
   createReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.IReservation,
-          | protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  createReservation(
+      request: protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  createReservation(
+      request?: protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createReservation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.IReservation,
-          | protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createReservation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createReservation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.IReservation,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createReservation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createReservation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createReservation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns information about the reservation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the reservation to retrieve. E.g.,
-   *      `projects/myproject/locations/US/reservations/team1-prod`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.get_reservation.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_GetReservation_async
-   */
+/**
+ * Returns information about the reservation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the reservation to retrieve. E.g.,
+ *      `projects/myproject/locations/US/reservations/team1-prod`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.get_reservation.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_GetReservation_async
+ */
   getReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest|undefined, {}|undefined
+      ]>;
   getReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.IReservation,
-          | protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReservation(
+      request: protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReservation(
+      request?: protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getReservation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.IReservation,
-          | protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getReservation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getReservation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.IReservation,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getReservation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getReservation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getReservation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a reservation.
-   * Returns `google.rpc.Code.FAILED_PRECONDITION` when reservation has
-   * assignments.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the reservation to retrieve. E.g.,
-   *      `projects/myproject/locations/US/reservations/team1-prod`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.delete_reservation.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_DeleteReservation_async
-   */
+/**
+ * Deletes a reservation.
+ * Returns `google.rpc.Code.FAILED_PRECONDITION` when reservation has
+ * assignments.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the reservation to retrieve. E.g.,
+ *      `projects/myproject/locations/US/reservations/team1-prod`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.delete_reservation.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_DeleteReservation_async
+ */
   deleteReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest|undefined, {}|undefined
+      ]>;
   deleteReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteReservation(
+      request: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteReservation(
+      request?: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteReservation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteReservation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteReservation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteReservation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteReservation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteReservation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an existing reservation resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.bigquery.reservation.v1.Reservation} request.reservation
-   *   Content of the reservation to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Standard field mask for the set of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.update_reservation.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_UpdateReservation_async
-   */
+/**
+ * Updates an existing reservation resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.bigquery.reservation.v1.Reservation} request.reservation
+ *   Content of the reservation to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Standard field mask for the set of fields to be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.update_reservation.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_UpdateReservation_async
+ */
   updateReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest|undefined, {}|undefined
+      ]>;
   updateReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.IReservation,
-          | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateReservation(
+      request: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateReservation(
+      request?: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'reservation.name': request.reservation!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'reservation.name': request.reservation!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateReservation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.IReservation,
-          | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateReservation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateReservation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.IReservation,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateReservation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateReservation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateReservation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fail over a reservation to the secondary location. The operation should be
-   * done in the current secondary location, which will be promoted to the
-   * new primary location for the reservation.
-   * Attempting to failover a reservation in the current primary location will
-   * fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the reservation to failover. E.g.,
-   *      `projects/myproject/locations/US/reservations/team1-prod`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.failover_reservation.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_FailoverReservation_async
-   */
+/**
+ * Fail over a reservation to the secondary location. The operation should be
+ * done in the current secondary location, which will be promoted to the
+ * new primary location for the reservation.
+ * Attempting to failover a reservation in the current primary location will
+ * fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the reservation to failover. E.g.,
+ *      `projects/myproject/locations/US/reservations/team1-prod`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.failover_reservation.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_FailoverReservation_async
+ */
   failoverReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest|undefined, {}|undefined
+      ]>;
   failoverReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  failoverReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  failoverReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.IReservation,
-          | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  failoverReservation(
+      request: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  failoverReservation(
+      request?: protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservation,
+          protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('failoverReservation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.IReservation,
-          | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('failoverReservation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .failoverReservation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.IReservation,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('failoverReservation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.failoverReservation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.IReservation,
+        protos.google.cloud.bigquery.reservation.v1.IFailoverReservationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('failoverReservation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new capacity commitment resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent reservation. E.g.,
-   *      `projects/myproject/locations/US`
-   * @param {google.cloud.bigquery.reservation.v1.CapacityCommitment} request.capacityCommitment
-   *   Content of the capacity commitment to create.
-   * @param {boolean} request.enforceSingleAdminProjectPerOrg
-   *   If true, fail the request if another project in the organization has a
-   *   capacity commitment.
-   * @param {string} request.capacityCommitmentId
-   *   The optional capacity commitment ID. Capacity commitment name will be
-   *   generated automatically if this field is empty.
-   *   This field must only contain lower case alphanumeric characters or dashes.
-   *   The first and last character cannot be a dash. Max length is 64 characters.
-   *   NOTE: this ID won't be kept if the capacity commitment is split or merged.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.create_capacity_commitment.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_CreateCapacityCommitment_async
-   */
+/**
+ * Creates a new capacity commitment resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the parent reservation. E.g.,
+ *      `projects/myproject/locations/US`
+ * @param {google.cloud.bigquery.reservation.v1.CapacityCommitment} request.capacityCommitment
+ *   Content of the capacity commitment to create.
+ * @param {boolean} request.enforceSingleAdminProjectPerOrg
+ *   If true, fail the request if another project in the organization has a
+ *   capacity commitment.
+ * @param {string} request.capacityCommitmentId
+ *   The optional capacity commitment ID. Capacity commitment name will be
+ *   generated automatically if this field is empty.
+ *   This field must only contain lower case alphanumeric characters or dashes.
+ *   The first and last character cannot be a dash. Max length is 64 characters.
+ *   NOTE: this ID won't be kept if the capacity commitment is split or merged.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.create_capacity_commitment.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_CreateCapacityCommitment_async
+ */
   createCapacityCommitment(
-    request?: protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest|undefined, {}|undefined
+      ]>;
   createCapacityCommitment(
-    request: protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCapacityCommitment(
-    request: protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCapacityCommitment(
-    request?: protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          | protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCapacityCommitment(
+      request: protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCapacityCommitment(
+      request?: protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createCapacityCommitment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          | protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCapacityCommitment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createCapacityCommitment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createCapacityCommitment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createCapacityCommitment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createCapacityCommitment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns information about the capacity commitment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the capacity commitment to retrieve. E.g.,
-   *      `projects/myproject/locations/US/capacityCommitments/123`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.get_capacity_commitment.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_GetCapacityCommitment_async
-   */
+/**
+ * Returns information about the capacity commitment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the capacity commitment to retrieve. E.g.,
+ *      `projects/myproject/locations/US/capacityCommitments/123`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.get_capacity_commitment.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_GetCapacityCommitment_async
+ */
   getCapacityCommitment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest|undefined, {}|undefined
+      ]>;
   getCapacityCommitment(
-    request: protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCapacityCommitment(
-    request: protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCapacityCommitment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          | protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCapacityCommitment(
+      request: protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCapacityCommitment(
+      request?: protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCapacityCommitment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          | protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCapacityCommitment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCapacityCommitment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCapacityCommitment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCapacityCommitment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCapacityCommitment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a capacity commitment. Attempting to delete capacity commitment
-   * before its commitment_end_time will fail with the error code
-   * `google.rpc.Code.FAILED_PRECONDITION`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the capacity commitment to delete. E.g.,
-   *      `projects/myproject/locations/US/capacityCommitments/123`
-   * @param {boolean} request.force
-   *   Can be used to force delete commitments even if assignments exist. Deleting
-   *   commitments with assignments may cause queries to fail if they no longer
-   *   have access to slots.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.delete_capacity_commitment.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_DeleteCapacityCommitment_async
-   */
+/**
+ * Deletes a capacity commitment. Attempting to delete capacity commitment
+ * before its commitment_end_time will fail with the error code
+ * `google.rpc.Code.FAILED_PRECONDITION`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the capacity commitment to delete. E.g.,
+ *      `projects/myproject/locations/US/capacityCommitments/123`
+ * @param {boolean} request.force
+ *   Can be used to force delete commitments even if assignments exist. Deleting
+ *   commitments with assignments may cause queries to fail if they no longer
+ *   have access to slots.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.delete_capacity_commitment.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_DeleteCapacityCommitment_async
+ */
   deleteCapacityCommitment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest|undefined, {}|undefined
+      ]>;
   deleteCapacityCommitment(
-    request: protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCapacityCommitment(
-    request: protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCapacityCommitment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCapacityCommitment(
+      request: protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCapacityCommitment(
+      request?: protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteCapacityCommitment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteCapacityCommitment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteCapacityCommitment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCapacityCommitment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteCapacityCommitment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteCapacityCommitment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an existing capacity commitment.
-   *
-   * Only `plan` and `renewal_plan` fields can be updated.
-   *
-   * Plan can only be changed to a plan of a longer commitment period.
-   * Attempting to change to a plan with shorter commitment period will fail
-   * with the error code `google.rpc.Code.FAILED_PRECONDITION`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.bigquery.reservation.v1.CapacityCommitment} request.capacityCommitment
-   *   Content of the capacity commitment to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Standard field mask for the set of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.update_capacity_commitment.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_UpdateCapacityCommitment_async
-   */
+/**
+ * Updates an existing capacity commitment.
+ *
+ * Only `plan` and `renewal_plan` fields can be updated.
+ *
+ * Plan can only be changed to a plan of a longer commitment period.
+ * Attempting to change to a plan with shorter commitment period will fail
+ * with the error code `google.rpc.Code.FAILED_PRECONDITION`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.bigquery.reservation.v1.CapacityCommitment} request.capacityCommitment
+ *   Content of the capacity commitment to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Standard field mask for the set of fields to be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.update_capacity_commitment.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_UpdateCapacityCommitment_async
+ */
   updateCapacityCommitment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest|undefined, {}|undefined
+      ]>;
   updateCapacityCommitment(
-    request: protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCapacityCommitment(
-    request: protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCapacityCommitment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          | protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCapacityCommitment(
+      request: protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCapacityCommitment(
+      request?: protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'capacity_commitment.name': request.capacityCommitment!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'capacity_commitment.name': request.capacityCommitment!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateCapacityCommitment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          | protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCapacityCommitment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateCapacityCommitment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCapacityCommitment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateCapacityCommitment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateCapacityCommitment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Splits capacity commitment to two commitments of the same plan and
-   * `commitment_end_time`.
-   *
-   * A common use case is to enable downgrading commitments.
-   *
-   * For example, in order to downgrade from 10000 slots to 8000, you might
-   * split a 10000 capacity commitment into commitments of 2000 and 8000. Then,
-   * you delete the first one after the commitment end time passes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name e.g.,:
-   *    `projects/myproject/locations/US/capacityCommitments/123`
-   * @param {number} request.slotCount
-   *   Number of slots in the capacity commitment after the split.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse|SplitCapacityCommitmentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.split_capacity_commitment.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_SplitCapacityCommitment_async
-   */
+/**
+ * Splits capacity commitment to two commitments of the same plan and
+ * `commitment_end_time`.
+ *
+ * A common use case is to enable downgrading commitments.
+ *
+ * For example, in order to downgrade from 10000 slots to 8000, you might
+ * split a 10000 capacity commitment into commitments of 2000 and 8000. Then,
+ * you delete the first one after the commitment end time passes.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name e.g.,:
+ *    `projects/myproject/locations/US/capacityCommitments/123`
+ * @param {number} request.slotCount
+ *   Number of slots in the capacity commitment after the split.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse|SplitCapacityCommitmentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.split_capacity_commitment.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_SplitCapacityCommitment_async
+ */
   splitCapacityCommitment(
-    request?: protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
+        protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest|undefined, {}|undefined
+      ]>;
   splitCapacityCommitment(
-    request: protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
-      | protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  splitCapacityCommitment(
-    request: protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
-      | protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  splitCapacityCommitment(
-    request?: protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
-          | protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
-      | protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  splitCapacityCommitment(
+      request: protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
+          protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  splitCapacityCommitment(
+      request?: protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
+          protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
+          protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
+        protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('splitCapacityCommitment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
-          | protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
+        protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('splitCapacityCommitment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .splitCapacityCommitment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('splitCapacityCommitment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.splitCapacityCommitment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse,
+        protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('splitCapacityCommitment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Merges capacity commitments of the same plan into a single commitment.
-   *
-   * The resulting capacity commitment has the greater commitment_end_time
-   * out of the to-be-merged capacity commitments.
-   *
-   * Attempting to merge capacity commitments of different plan will fail
-   * with the error code `google.rpc.Code.FAILED_PRECONDITION`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Parent resource that identifies admin project and location e.g.,
-   *    `projects/myproject/locations/us`
-   * @param {string[]} request.capacityCommitmentIds
-   *   Ids of capacity commitments to merge.
-   *   These capacity commitments must exist under admin project and location
-   *   specified in the parent.
-   *   ID is the last portion of capacity commitment name e.g., 'abc' for
-   *   projects/myproject/locations/US/capacityCommitments/abc
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.merge_capacity_commitments.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_MergeCapacityCommitments_async
-   */
+/**
+ * Merges capacity commitments of the same plan into a single commitment.
+ *
+ * The resulting capacity commitment has the greater commitment_end_time
+ * out of the to-be-merged capacity commitments.
+ *
+ * Attempting to merge capacity commitments of different plan will fail
+ * with the error code `google.rpc.Code.FAILED_PRECONDITION`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Parent resource that identifies admin project and location e.g.,
+ *    `projects/myproject/locations/us`
+ * @param {string[]} request.capacityCommitmentIds
+ *   Ids of capacity commitments to merge.
+ *   These capacity commitments must exist under admin project and location
+ *   specified in the parent.
+ *   ID is the last portion of capacity commitment name e.g., 'abc' for
+ *   projects/myproject/locations/US/capacityCommitments/abc
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.merge_capacity_commitments.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_MergeCapacityCommitments_async
+ */
   mergeCapacityCommitments(
-    request?: protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest|undefined, {}|undefined
+      ]>;
   mergeCapacityCommitments(
-    request: protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  mergeCapacityCommitments(
-    request: protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  mergeCapacityCommitments(
-    request?: protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          | protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      | protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest|null|undefined,
+          {}|null|undefined>): void;
+  mergeCapacityCommitments(
+      request: protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest|null|undefined,
+          {}|null|undefined>): void;
+  mergeCapacityCommitments(
+      request?: protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+          protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('mergeCapacityCommitments request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          | protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('mergeCapacityCommitments response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .mergeCapacityCommitments(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('mergeCapacityCommitments response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.mergeCapacityCommitments(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment,
+        protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('mergeCapacityCommitments response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates an assignment object which allows the given project to submit jobs
-   * of a certain type using slots from the specified reservation.
-   *
-   * Currently a
-   * resource (project, folder, organization) can only have one assignment per
-   * each (job_type, location) combination, and that reservation will be used
-   * for all jobs of the matching type.
-   *
-   * Different assignments can be created on different levels of the
-   * projects, folders or organization hierarchy.  During query execution,
-   * the assignment is looked up at the project, folder and organization levels
-   * in that order. The first assignment found is applied to the query.
-   *
-   * When creating assignments, it does not matter if other assignments exist at
-   * higher levels.
-   *
-   * Example:
-   *
-   * * The organization `organizationA` contains two projects, `project1`
-   *   and `project2`.
-   * * Assignments for all three entities (`organizationA`, `project1`, and
-   *   `project2`) could all be created and mapped to the same or different
-   *   reservations.
-   *
-   * "None" assignments represent an absence of the assignment. Projects
-   * assigned to None use on-demand pricing. To create a "None" assignment, use
-   * "none" as a reservation_id in the parent. Example parent:
-   * `projects/myproject/locations/US/reservations/none`.
-   *
-   * Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have
-   * 'bigquery.admin' permissions on the project using the reservation
-   * and the project that owns this reservation.
-   *
-   * Returns `google.rpc.Code.INVALID_ARGUMENT` when location of the assignment
-   * does not match location of the reservation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name of the assignment
-   *   E.g. `projects/myproject/locations/US/reservations/team1-prod`
-   * @param {google.cloud.bigquery.reservation.v1.Assignment} request.assignment
-   *   Assignment resource to create.
-   * @param {string} request.assignmentId
-   *   The optional assignment ID. Assignment name will be generated automatically
-   *   if this field is empty.
-   *   This field must only contain lower case alphanumeric characters or dashes.
-   *   Max length is 64 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.create_assignment.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_CreateAssignment_async
-   */
+/**
+ * Creates an assignment object which allows the given project to submit jobs
+ * of a certain type using slots from the specified reservation.
+ *
+ * Currently a
+ * resource (project, folder, organization) can only have one assignment per
+ * each (job_type, location) combination, and that reservation will be used
+ * for all jobs of the matching type.
+ *
+ * Different assignments can be created on different levels of the
+ * projects, folders or organization hierarchy.  During query execution,
+ * the assignment is looked up at the project, folder and organization levels
+ * in that order. The first assignment found is applied to the query.
+ *
+ * When creating assignments, it does not matter if other assignments exist at
+ * higher levels.
+ *
+ * Example:
+ *
+ * * The organization `organizationA` contains two projects, `project1`
+ *   and `project2`.
+ * * Assignments for all three entities (`organizationA`, `project1`, and
+ *   `project2`) could all be created and mapped to the same or different
+ *   reservations.
+ *
+ * "None" assignments represent an absence of the assignment. Projects
+ * assigned to None use on-demand pricing. To create a "None" assignment, use
+ * "none" as a reservation_id in the parent. Example parent:
+ * `projects/myproject/locations/US/reservations/none`.
+ *
+ * Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have
+ * 'bigquery.admin' permissions on the project using the reservation
+ * and the project that owns this reservation.
+ *
+ * Returns `google.rpc.Code.INVALID_ARGUMENT` when location of the assignment
+ * does not match location of the reservation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name of the assignment
+ *   E.g. `projects/myproject/locations/US/reservations/team1-prod`
+ * @param {google.cloud.bigquery.reservation.v1.Assignment} request.assignment
+ *   Assignment resource to create.
+ * @param {string} request.assignmentId
+ *   The optional assignment ID. Assignment name will be generated automatically
+ *   if this field is empty.
+ *   This field must only contain lower case alphanumeric characters or dashes.
+ *   Max length is 64 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.create_assignment.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_CreateAssignment_async
+ */
   createAssignment(
-    request?: protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest|undefined, {}|undefined
+      ]>;
   createAssignment(
-    request: protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      | protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAssignment(
-    request: protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      | protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAssignment(
-    request?: protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.IAssignment,
-          | protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      | protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAssignment(
+      request: protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IAssignment,
+          protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAssignment(
+      request?: protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.IAssignment,
+          protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IAssignment,
+          protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createAssignment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.IAssignment,
-          | protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createAssignment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createAssignment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.IAssignment,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createAssignment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createAssignment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createAssignment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a assignment. No expansion will happen.
-   *
-   * Example:
-   *
-   * * Organization `organizationA` contains two projects, `project1` and
-   *   `project2`.
-   * * Reservation `res1` exists and was created previously.
-   * * CreateAssignment was used previously to define the following
-   *   associations between entities and reservations: `<organizationA, res1>`
-   *   and `<project1, res1>`
-   *
-   * In this example, deletion of the `<organizationA, res1>` assignment won't
-   * affect the other assignment `<project1, res1>`. After said deletion,
-   * queries from `project1` will still use `res1` while queries from
-   * `project2` will switch to use on-demand mode.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource, e.g.
-   *     `projects/myproject/locations/US/reservations/team1-prod/assignments/123`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.delete_assignment.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_DeleteAssignment_async
-   */
+/**
+ * Deletes a assignment. No expansion will happen.
+ *
+ * Example:
+ *
+ * * Organization `organizationA` contains two projects, `project1` and
+ *   `project2`.
+ * * Reservation `res1` exists and was created previously.
+ * * CreateAssignment was used previously to define the following
+ *   associations between entities and reservations: `<organizationA, res1>`
+ *   and `<project1, res1>`
+ *
+ * In this example, deletion of the `<organizationA, res1>` assignment won't
+ * affect the other assignment `<project1, res1>`. After said deletion,
+ * queries from `project1` will still use `res1` while queries from
+ * `project2` will switch to use on-demand mode.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource, e.g.
+ *     `projects/myproject/locations/US/reservations/team1-prod/assignments/123`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.delete_assignment.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_DeleteAssignment_async
+ */
   deleteAssignment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest|undefined, {}|undefined
+      ]>;
   deleteAssignment(
-    request: protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAssignment(
-    request: protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAssignment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAssignment(
+      request: protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAssignment(
+      request?: protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteAssignment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteAssignment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteAssignment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAssignment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteAssignment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteAssignment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Moves an assignment under a new reservation.
-   *
-   * This differs from removing an existing assignment and recreating a new one
-   * by providing a transactional change that ensures an assignee always has an
-   * associated reservation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the assignment,
-   *   e.g.
-   *   `projects/myproject/locations/US/reservations/team1-prod/assignments/123`
-   * @param {string} request.destinationId
-   *   The new reservation ID, e.g.:
-   *     `projects/myotherproject/locations/US/reservations/team2-prod`
-   * @param {string} request.assignmentId
-   *   The optional assignment ID. A new assignment name is generated if this
-   *   field is empty.
-   *
-   *   This field can contain only lowercase alphanumeric characters or dashes.
-   *   Max length is 64 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.move_assignment.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_MoveAssignment_async
-   */
+/**
+ * Moves an assignment under a new reservation.
+ *
+ * This differs from removing an existing assignment and recreating a new one
+ * by providing a transactional change that ensures an assignee always has an
+ * associated reservation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the assignment,
+ *   e.g.
+ *   `projects/myproject/locations/US/reservations/team1-prod/assignments/123`
+ * @param {string} request.destinationId
+ *   The new reservation ID, e.g.:
+ *     `projects/myotherproject/locations/US/reservations/team2-prod`
+ * @param {string} request.assignmentId
+ *   The optional assignment ID. A new assignment name is generated if this
+ *   field is empty.
+ *
+ *   This field can contain only lowercase alphanumeric characters or dashes.
+ *   Max length is 64 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.move_assignment.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_MoveAssignment_async
+ */
   moveAssignment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest|undefined, {}|undefined
+      ]>;
   moveAssignment(
-    request: protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      | protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  moveAssignment(
-    request: protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      | protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  moveAssignment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.IAssignment,
-          | protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      | protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  moveAssignment(
+      request: protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IAssignment,
+          protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  moveAssignment(
+      request?: protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.IAssignment,
+          protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IAssignment,
+          protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('moveAssignment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.IAssignment,
-          | protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('moveAssignment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .moveAssignment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.IAssignment,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('moveAssignment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.moveAssignment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('moveAssignment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an existing assignment.
-   *
-   * Only the `priority` field can be updated.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.bigquery.reservation.v1.Assignment} request.assignment
-   *   Content of the assignment to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Standard field mask for the set of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.update_assignment.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_UpdateAssignment_async
-   */
+/**
+ * Updates an existing assignment.
+ *
+ * Only the `priority` field can be updated.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.bigquery.reservation.v1.Assignment} request.assignment
+ *   Content of the assignment to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Standard field mask for the set of fields to be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.update_assignment.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_UpdateAssignment_async
+ */
   updateAssignment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest|undefined, {}|undefined
+      ]>;
   updateAssignment(
-    request: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAssignment(
-    request: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAssignment(
-    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.IAssignment,
-          | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAssignment(
+      request: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IAssignment,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAssignment(
+      request?: protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.IAssignment,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IAssignment,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'assignment.name': request.assignment!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'assignment.name': request.assignment!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateAssignment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.IAssignment,
-          | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateAssignment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateAssignment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.IAssignment,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAssignment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateAssignment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.IAssignment,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateAssignment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves a BI reservation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the requested reservation, for example:
-   *   `projects/{project_id}/locations/{location_id}/biReservation`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.BiReservation|BiReservation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.get_bi_reservation.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_GetBiReservation_async
-   */
+/**
+ * Retrieves a BI reservation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the requested reservation, for example:
+ *   `projects/{project_id}/locations/{location_id}/biReservation`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.BiReservation|BiReservation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.get_bi_reservation.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_GetBiReservation_async
+ */
   getBiReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+        protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest|undefined, {}|undefined
+      ]>;
   getBiReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBiReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBiReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-          | protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBiReservation(
+      request: protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+          protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBiReservation(
+      request?: protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+          protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+          protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+        protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getBiReservation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-          | protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+        protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getBiReservation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getBiReservation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getBiReservation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getBiReservation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+        protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getBiReservation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a BI reservation.
-   *
-   * Only fields specified in the `field_mask` are updated.
-   *
-   * A singleton BI reservation always exists with default size 0.
-   * In order to reserve BI capacity it needs to be updated to an amount
-   * greater than 0. In order to release BI capacity reservation size
-   * must be set to 0.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.bigquery.reservation.v1.BiReservation} request.biReservation
-   *   A reservation to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   A list of fields to be updated in this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.BiReservation|BiReservation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.update_bi_reservation.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_UpdateBiReservation_async
-   */
+/**
+ * Updates a BI reservation.
+ *
+ * Only fields specified in the `field_mask` are updated.
+ *
+ * A singleton BI reservation always exists with default size 0.
+ * In order to reserve BI capacity it needs to be updated to an amount
+ * greater than 0. In order to release BI capacity reservation size
+ * must be set to 0.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.bigquery.reservation.v1.BiReservation} request.biReservation
+ *   A reservation to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   A list of fields to be updated in this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.BiReservation|BiReservation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.update_bi_reservation.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_UpdateBiReservation_async
+ */
   updateBiReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest|undefined, {}|undefined
+      ]>;
   updateBiReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateBiReservation(
-    request: protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateBiReservation(
-    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-          | protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-      | protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-      (
-        | protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateBiReservation(
+      request: protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateBiReservation(
+      request?: protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+          protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'bi_reservation.name': request.biReservation!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'bi_reservation.name': request.biReservation!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateBiReservation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-          | protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateBiReservation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateBiReservation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.reservation.v1.IBiReservation,
-          (
-            | protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateBiReservation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateBiReservation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.IBiReservation,
+        protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateBiReservation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists all the reservations for the project in the specified location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name containing project and location, e.g.:
-   *     `projects/myproject/locations/US`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listReservationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the reservations for the project in the specified location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name containing project and location, e.g.:
+ *     `projects/myproject/locations/US`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listReservationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReservations(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IReservation[],
-      protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservation[],
+        protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse
+      ]>;
   listReservations(
-    request: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IReservation
-    >
-  ): void;
-  listReservations(
-    request: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IReservation
-    >
-  ): void;
-  listReservations(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
-          | protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.reservation.v1.IReservation
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IReservation
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IReservation[],
-      protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IReservation>): void;
+  listReservations(
+      request: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IReservation>): void;
+  listReservations(
+      request?: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IReservation>,
+      callback?: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IReservation>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservation[],
+        protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
-          | protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.reservation.v1.IReservation
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
+      protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse|null|undefined,
+      protos.google.cloud.bigquery.reservation.v1.IReservation>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReservations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2887,57 +2218,54 @@ export class ReservationServiceClient {
     this._log.info('listReservations request %j', request);
     return this.innerApiCalls
       .listReservations(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.bigquery.reservation.v1.IReservation[],
-          protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest | null,
-          protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse,
-        ]) => {
-          this._log.info('listReservations values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.bigquery.reservation.v1.IReservation[],
+        protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse
+      ]) => {
+        this._log.info('listReservations values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listReservations`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name containing project and location, e.g.:
-   *     `projects/myproject/locations/US`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listReservationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listReservations`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name containing project and location, e.g.:
+ *     `projects/myproject/locations/US`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listReservationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReservationsStream(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReservations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReservations stream %j', request);
     return this.descriptors.page.listReservations.createStream(
       this.innerApiCalls.listReservations as GaxCall,
@@ -2946,48 +2274,47 @@ export class ReservationServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listReservations`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name containing project and location, e.g.:
-   *     `projects/myproject/locations/US`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.list_reservations.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_ListReservations_async
-   */
+/**
+ * Equivalent to `listReservations`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name containing project and location, e.g.:
+ *     `projects/myproject/locations/US`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.bigquery.reservation.v1.Reservation|Reservation}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.list_reservations.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_ListReservations_async
+ */
   listReservationsAsync(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IReservation> {
+      request?: protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IReservation>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReservations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReservations iterate %j', request);
     return this.descriptors.page.listReservations.asyncIterate(
       this.innerApiCalls['listReservations'] as GaxCall,
@@ -2995,113 +2322,88 @@ export class ReservationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IReservation>;
   }
-  /**
-   * Lists all the capacity commitments for the admin project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent reservation. E.g.,
-   *      `projects/myproject/locations/US`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCapacityCommitmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the capacity commitments for the admin project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the parent reservation. E.g.,
+ *      `projects/myproject/locations/US`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCapacityCommitmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCapacityCommitments(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[],
-      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[],
+        protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse
+      ]>;
   listCapacityCommitments(
-    request: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment
-    >
-  ): void;
-  listCapacityCommitments(
-    request: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment
-    >
-  ): void;
-  listCapacityCommitments(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
-          | protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[],
-      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment>): void;
+  listCapacityCommitments(
+      request: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment>): void;
+  listCapacityCommitments(
+      request?: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[],
+        protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
-          | protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
+      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse|null|undefined,
+      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCapacityCommitments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3110,57 +2412,54 @@ export class ReservationServiceClient {
     this._log.info('listCapacityCommitments request %j', request);
     return this.innerApiCalls
       .listCapacityCommitments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[],
-          protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest | null,
-          protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse,
-        ]) => {
-          this._log.info('listCapacityCommitments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[],
+        protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse
+      ]) => {
+        this._log.info('listCapacityCommitments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCapacityCommitments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent reservation. E.g.,
-   *      `projects/myproject/locations/US`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCapacityCommitmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCapacityCommitments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the parent reservation. E.g.,
+ *      `projects/myproject/locations/US`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCapacityCommitmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCapacityCommitmentsStream(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCapacityCommitments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCapacityCommitments stream %j', request);
     return this.descriptors.page.listCapacityCommitments.createStream(
       this.innerApiCalls.listCapacityCommitments as GaxCall,
@@ -3169,48 +2468,47 @@ export class ReservationServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listCapacityCommitments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent reservation. E.g.,
-   *      `projects/myproject/locations/US`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.list_capacity_commitments.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_ListCapacityCommitments_async
-   */
+/**
+ * Equivalent to `listCapacityCommitments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the parent reservation. E.g.,
+ *      `projects/myproject/locations/US`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.bigquery.reservation.v1.CapacityCommitment|CapacityCommitment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.list_capacity_commitments.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_ListCapacityCommitments_async
+ */
   listCapacityCommitmentsAsync(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment> {
+      request?: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCapacityCommitments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCapacityCommitments iterate %j', request);
     return this.descriptors.page.listCapacityCommitments.asyncIterate(
       this.innerApiCalls['listCapacityCommitments'] as GaxCall,
@@ -3218,138 +2516,113 @@ export class ReservationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment>;
   }
-  /**
-   * Lists assignments.
-   *
-   * Only explicitly created assignments will be returned.
-   *
-   * Example:
-   *
-   * * Organization `organizationA` contains two projects, `project1` and
-   *   `project2`.
-   * * Reservation `res1` exists and was created previously.
-   * * CreateAssignment was used previously to define the following
-   *   associations between entities and reservations: `<organizationA, res1>`
-   *   and `<project1, res1>`
-   *
-   * In this example, ListAssignments will just return the above two assignments
-   * for reservation `res1`, and no expansion/merge will happen.
-   *
-   * The wildcard "-" can be used for
-   * reservations in the request. In that case all assignments belongs to the
-   * specified project and location will be listed.
-   *
-   * **Note** "-" cannot be used for projects nor locations.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name e.g.:
-   *
-   *   `projects/myproject/locations/US/reservations/team1-prod`
-   *
-   *   Or:
-   *
-   *   `projects/myproject/locations/US/reservations/-`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAssignmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists assignments.
+ *
+ * Only explicitly created assignments will be returned.
+ *
+ * Example:
+ *
+ * * Organization `organizationA` contains two projects, `project1` and
+ *   `project2`.
+ * * Reservation `res1` exists and was created previously.
+ * * CreateAssignment was used previously to define the following
+ *   associations between entities and reservations: `<organizationA, res1>`
+ *   and `<project1, res1>`
+ *
+ * In this example, ListAssignments will just return the above two assignments
+ * for reservation `res1`, and no expansion/merge will happen.
+ *
+ * The wildcard "-" can be used for
+ * reservations in the request. In that case all assignments belongs to the
+ * specified project and location will be listed.
+ *
+ * **Note** "-" cannot be used for projects nor locations.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name e.g.:
+ *
+ *   `projects/myproject/locations/US/reservations/team1-prod`
+ *
+ *   Or:
+ *
+ *   `projects/myproject/locations/US/reservations/-`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAssignmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAssignments(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment[],
-      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment[],
+        protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse
+      ]>;
   listAssignments(
-    request: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IAssignment
-    >
-  ): void;
-  listAssignments(
-    request: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IAssignment
-    >
-  ): void;
-  listAssignments(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
-          | protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.reservation.v1.IAssignment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IAssignment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment[],
-      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>): void;
+  listAssignments(
+      request: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>): void;
+  listAssignments(
+      request?: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment[],
+        protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
-          | protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.reservation.v1.IAssignment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
+      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse|null|undefined,
+      protos.google.cloud.bigquery.reservation.v1.IAssignment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAssignments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3358,62 +2631,59 @@ export class ReservationServiceClient {
     this._log.info('listAssignments request %j', request);
     return this.innerApiCalls
       .listAssignments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.bigquery.reservation.v1.IAssignment[],
-          protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest | null,
-          protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse,
-        ]) => {
-          this._log.info('listAssignments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.bigquery.reservation.v1.IAssignment[],
+        protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse
+      ]) => {
+        this._log.info('listAssignments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAssignments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name e.g.:
-   *
-   *   `projects/myproject/locations/US/reservations/team1-prod`
-   *
-   *   Or:
-   *
-   *   `projects/myproject/locations/US/reservations/-`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAssignmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAssignments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name e.g.:
+ *
+ *   `projects/myproject/locations/US/reservations/team1-prod`
+ *
+ *   Or:
+ *
+ *   `projects/myproject/locations/US/reservations/-`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAssignmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAssignmentsStream(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAssignments stream %j', request);
     return this.descriptors.page.listAssignments.createStream(
       this.innerApiCalls.listAssignments as GaxCall,
@@ -3422,53 +2692,52 @@ export class ReservationServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listAssignments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name e.g.:
-   *
-   *   `projects/myproject/locations/US/reservations/team1-prod`
-   *
-   *   Or:
-   *
-   *   `projects/myproject/locations/US/reservations/-`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.list_assignments.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_ListAssignments_async
-   */
+/**
+ * Equivalent to `listAssignments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name e.g.:
+ *
+ *   `projects/myproject/locations/US/reservations/team1-prod`
+ *
+ *   Or:
+ *
+ *   `projects/myproject/locations/US/reservations/-`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.list_assignments.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_ListAssignments_async
+ */
   listAssignmentsAsync(
-    request?: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment> {
+      request?: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAssignments iterate %j', request);
     return this.descriptors.page.listAssignments.asyncIterate(
       this.innerApiCalls['listAssignments'] as GaxCall,
@@ -3476,150 +2745,121 @@ export class ReservationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>;
   }
-  /**
-   * Deprecated: Looks up assignments for a specified resource for a particular
-   * region. If the request is about a project:
-   *
-   * 1. Assignments created on the project will be returned if they exist.
-   * 2. Otherwise assignments created on the closest ancestor will be
-   *    returned.
-   * 3. Assignments for different JobTypes will all be returned.
-   *
-   * The same logic applies if the request is about a folder.
-   *
-   * If the request is about an organization, then assignments created on the
-   * organization will be returned (organization doesn't have ancestors).
-   *
-   * Comparing to ListAssignments, there are some behavior
-   * differences:
-   *
-   * 1. permission on the assignee will be verified in this API.
-   * 2. Hierarchy lookup (project->folder->organization) happens in this API.
-   * 3. Parent here is `projects/* /locations/*`, instead of
-   *    `projects/* /locations/*reservations/*`.
-   *
-   * **Note** "-" cannot be used for projects
-   * nor locations.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the admin project(containing project and
-   *   location), e.g.:
-   *     `projects/myproject/locations/US`.
-   * @param {string} request.query
-   *   Please specify resource name as assignee in the query.
-   *
-   *   Examples:
-   *
-   *   * `assignee=projects/myproject`
-   *   * `assignee=folders/123`
-   *   * `assignee=organizations/456`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchAssignmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @deprecated SearchAssignments is deprecated and may be removed in a future version.
-   */
+ /**
+ * Deprecated: Looks up assignments for a specified resource for a particular
+ * region. If the request is about a project:
+ *
+ * 1. Assignments created on the project will be returned if they exist.
+ * 2. Otherwise assignments created on the closest ancestor will be
+ *    returned.
+ * 3. Assignments for different JobTypes will all be returned.
+ *
+ * The same logic applies if the request is about a folder.
+ *
+ * If the request is about an organization, then assignments created on the
+ * organization will be returned (organization doesn't have ancestors).
+ *
+ * Comparing to ListAssignments, there are some behavior
+ * differences:
+ *
+ * 1. permission on the assignee will be verified in this API.
+ * 2. Hierarchy lookup (project->folder->organization) happens in this API.
+ * 3. Parent here is `projects/* /locations/*`, instead of
+ *    `projects/* /locations/*reservations/*`.
+ *
+ * **Note** "-" cannot be used for projects
+ * nor locations.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the admin project(containing project and
+ *   location), e.g.:
+ *     `projects/myproject/locations/US`.
+ * @param {string} request.query
+ *   Please specify resource name as assignee in the query.
+ *
+ *   Examples:
+ *
+ *   * `assignee=projects/myproject`
+ *   * `assignee=folders/123`
+ *   * `assignee=organizations/456`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchAssignmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @deprecated SearchAssignments is deprecated and may be removed in a future version.
+ */
   searchAssignments(
-    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment[],
-      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment[],
+        protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse
+      ]>;
   searchAssignments(
-    request: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IAssignment
-    >
-  ): void;
-  searchAssignments(
-    request: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IAssignment
-    >
-  ): void;
-  searchAssignments(
-    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
-          | protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.reservation.v1.IAssignment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IAssignment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment[],
-      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>): void;
+  searchAssignments(
+      request: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>): void;
+  searchAssignments(
+      request?: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment[],
+        protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    this.warn(
-      'DEP$ReservationService-$SearchAssignments',
-      'SearchAssignments is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
-          | protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.reservation.v1.IAssignment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$ReservationService-$SearchAssignments','SearchAssignments is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
+      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse|null|undefined,
+      protos.google.cloud.bigquery.reservation.v1.IAssignment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchAssignments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3628,72 +2868,65 @@ export class ReservationServiceClient {
     this._log.info('searchAssignments request %j', request);
     return this.innerApiCalls
       .searchAssignments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.bigquery.reservation.v1.IAssignment[],
-          protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest | null,
-          protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse,
-        ]) => {
-          this._log.info('searchAssignments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.bigquery.reservation.v1.IAssignment[],
+        protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse
+      ]) => {
+        this._log.info('searchAssignments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchAssignments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the admin project(containing project and
-   *   location), e.g.:
-   *     `projects/myproject/locations/US`.
-   * @param {string} request.query
-   *   Please specify resource name as assignee in the query.
-   *
-   *   Examples:
-   *
-   *   * `assignee=projects/myproject`
-   *   * `assignee=folders/123`
-   *   * `assignee=organizations/456`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchAssignmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @deprecated SearchAssignments is deprecated and may be removed in a future version.
-   */
+/**
+ * Equivalent to `searchAssignments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the admin project(containing project and
+ *   location), e.g.:
+ *     `projects/myproject/locations/US`.
+ * @param {string} request.query
+ *   Please specify resource name as assignee in the query.
+ *
+ *   Examples:
+ *
+ *   * `assignee=projects/myproject`
+ *   * `assignee=folders/123`
+ *   * `assignee=organizations/456`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchAssignmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @deprecated SearchAssignments is deprecated and may be removed in a future version.
+ */
   searchAssignmentsStream(
-    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this.warn(
-      'DEP$ReservationService-$SearchAssignments',
-      'SearchAssignments is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$ReservationService-$SearchAssignments','SearchAssignments is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('searchAssignments stream %j', request);
     return this.descriptors.page.searchAssignments.createStream(
       this.innerApiCalls.searchAssignments as GaxCall,
@@ -3702,63 +2935,58 @@ export class ReservationServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchAssignments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the admin project(containing project and
-   *   location), e.g.:
-   *     `projects/myproject/locations/US`.
-   * @param {string} request.query
-   *   Please specify resource name as assignee in the query.
-   *
-   *   Examples:
-   *
-   *   * `assignee=projects/myproject`
-   *   * `assignee=folders/123`
-   *   * `assignee=organizations/456`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.search_assignments.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_SearchAssignments_async
-   * @deprecated SearchAssignments is deprecated and may be removed in a future version.
-   */
+/**
+ * Equivalent to `searchAssignments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the admin project(containing project and
+ *   location), e.g.:
+ *     `projects/myproject/locations/US`.
+ * @param {string} request.query
+ *   Please specify resource name as assignee in the query.
+ *
+ *   Examples:
+ *
+ *   * `assignee=projects/myproject`
+ *   * `assignee=folders/123`
+ *   * `assignee=organizations/456`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.search_assignments.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_SearchAssignments_async
+ * @deprecated SearchAssignments is deprecated and may be removed in a future version.
+ */
   searchAssignmentsAsync(
-    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment> {
+      request?: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this.warn(
-      'DEP$ReservationService-$SearchAssignments',
-      'SearchAssignments is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$ReservationService-$SearchAssignments','SearchAssignments is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('searchAssignments iterate %j', request);
     return this.descriptors.page.searchAssignments.asyncIterate(
       this.innerApiCalls['searchAssignments'] as GaxCall,
@@ -3766,141 +2994,116 @@ export class ReservationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>;
   }
-  /**
-   * Looks up assignments for a specified resource for a particular region.
-   * If the request is about a project:
-   *
-   * 1. Assignments created on the project will be returned if they exist.
-   * 2. Otherwise assignments created on the closest ancestor will be
-   *    returned.
-   * 3. Assignments for different JobTypes will all be returned.
-   *
-   * The same logic applies if the request is about a folder.
-   *
-   * If the request is about an organization, then assignments created on the
-   * organization will be returned (organization doesn't have ancestors).
-   *
-   * Comparing to ListAssignments, there are some behavior
-   * differences:
-   *
-   * 1. permission on the assignee will be verified in this API.
-   * 2. Hierarchy lookup (project->folder->organization) happens in this API.
-   * 3. Parent here is `projects/* /locations/*`, instead of
-   *    `projects/* /locations/*reservations/*`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name with location (project name could be the
-   *   wildcard '-'), e.g.:
-   *     `projects/-/locations/US`.
-   * @param {string} request.query
-   *   Please specify resource name as assignee in the query.
-   *
-   *   Examples:
-   *
-   *   * `assignee=projects/myproject`
-   *   * `assignee=folders/123`
-   *   * `assignee=organizations/456`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchAllAssignmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Looks up assignments for a specified resource for a particular region.
+ * If the request is about a project:
+ *
+ * 1. Assignments created on the project will be returned if they exist.
+ * 2. Otherwise assignments created on the closest ancestor will be
+ *    returned.
+ * 3. Assignments for different JobTypes will all be returned.
+ *
+ * The same logic applies if the request is about a folder.
+ *
+ * If the request is about an organization, then assignments created on the
+ * organization will be returned (organization doesn't have ancestors).
+ *
+ * Comparing to ListAssignments, there are some behavior
+ * differences:
+ *
+ * 1. permission on the assignee will be verified in this API.
+ * 2. Hierarchy lookup (project->folder->organization) happens in this API.
+ * 3. Parent here is `projects/* /locations/*`, instead of
+ *    `projects/* /locations/*reservations/*`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name with location (project name could be the
+ *   wildcard '-'), e.g.:
+ *     `projects/-/locations/US`.
+ * @param {string} request.query
+ *   Please specify resource name as assignee in the query.
+ *
+ *   Examples:
+ *
+ *   * `assignee=projects/myproject`
+ *   * `assignee=folders/123`
+ *   * `assignee=organizations/456`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchAllAssignmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchAllAssignments(
-    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment[],
-      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment[],
+        protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
+      ]>;
   searchAllAssignments(
-    request: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IAssignment
-    >
-  ): void;
-  searchAllAssignments(
-    request: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IAssignment
-    >
-  ): void;
-  searchAllAssignments(
-    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
-          | protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.reservation.v1.IAssignment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
-      | protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.reservation.v1.IAssignment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.reservation.v1.IAssignment[],
-      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>): void;
+  searchAllAssignments(
+      request: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>): void;
+  searchAllAssignments(
+      request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+          protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IAssignment[],
+        protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
-          | protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.reservation.v1.IAssignment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse|null|undefined,
+      protos.google.cloud.bigquery.reservation.v1.IAssignment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchAllAssignments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3909,66 +3112,63 @@ export class ReservationServiceClient {
     this._log.info('searchAllAssignments request %j', request);
     return this.innerApiCalls
       .searchAllAssignments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.bigquery.reservation.v1.IAssignment[],
-          protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest | null,
-          protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse,
-        ]) => {
-          this._log.info('searchAllAssignments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.bigquery.reservation.v1.IAssignment[],
+        protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
+      ]) => {
+        this._log.info('searchAllAssignments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchAllAssignments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name with location (project name could be the
-   *   wildcard '-'), e.g.:
-   *     `projects/-/locations/US`.
-   * @param {string} request.query
-   *   Please specify resource name as assignee in the query.
-   *
-   *   Examples:
-   *
-   *   * `assignee=projects/myproject`
-   *   * `assignee=folders/123`
-   *   * `assignee=organizations/456`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchAllAssignmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchAllAssignments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name with location (project name could be the
+ *   wildcard '-'), e.g.:
+ *     `projects/-/locations/US`.
+ * @param {string} request.query
+ *   Please specify resource name as assignee in the query.
+ *
+ *   Examples:
+ *
+ *   * `assignee=projects/myproject`
+ *   * `assignee=folders/123`
+ *   * `assignee=organizations/456`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchAllAssignmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchAllAssignmentsStream(
-    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchAllAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchAllAssignments stream %j', request);
     return this.descriptors.page.searchAllAssignments.createStream(
       this.innerApiCalls.searchAllAssignments as GaxCall,
@@ -3977,57 +3177,56 @@ export class ReservationServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchAllAssignments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name with location (project name could be the
-   *   wildcard '-'), e.g.:
-   *     `projects/-/locations/US`.
-   * @param {string} request.query
-   *   Please specify resource name as assignee in the query.
-   *
-   *   Examples:
-   *
-   *   * `assignee=projects/myproject`
-   *   * `assignee=folders/123`
-   *   * `assignee=organizations/456`
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/reservation_service.search_all_assignments.js</caption>
-   * region_tag:bigqueryreservation_v1_generated_ReservationService_SearchAllAssignments_async
-   */
+/**
+ * Equivalent to `searchAllAssignments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name with location (project name could be the
+ *   wildcard '-'), e.g.:
+ *     `projects/-/locations/US`.
+ * @param {string} request.query
+ *   Please specify resource name as assignee in the query.
+ *
+ *   Examples:
+ *
+ *   * `assignee=projects/myproject`
+ *   * `assignee=folders/123`
+ *   * `assignee=organizations/456`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.bigquery.reservation.v1.Assignment|Assignment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.search_all_assignments.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_SearchAllAssignments_async
+ */
   searchAllAssignmentsAsync(
-    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment> {
+      request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchAllAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchAllAssignments iterate %j', request);
     return this.descriptors.page.searchAllAssignments.asyncIterate(
       this.innerApiCalls['searchAllAssignments'] as GaxCall,
@@ -4048,12 +3247,7 @@ export class ReservationServiceClient {
    * @param {string} assignment
    * @returns {string} Resource name string.
    */
-  assignmentPath(
-    project: string,
-    location: string,
-    reservation: string,
-    assignment: string
-  ) {
+  assignmentPath(project:string,location:string,reservation:string,assignment:string) {
     return this.pathTemplates.assignmentPathTemplate.render({
       project: project,
       location: location,
@@ -4070,8 +3264,7 @@ export class ReservationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAssignmentName(assignmentName: string) {
-    return this.pathTemplates.assignmentPathTemplate.match(assignmentName)
-      .project;
+    return this.pathTemplates.assignmentPathTemplate.match(assignmentName).project;
   }
 
   /**
@@ -4082,8 +3275,7 @@ export class ReservationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAssignmentName(assignmentName: string) {
-    return this.pathTemplates.assignmentPathTemplate.match(assignmentName)
-      .location;
+    return this.pathTemplates.assignmentPathTemplate.match(assignmentName).location;
   }
 
   /**
@@ -4094,8 +3286,7 @@ export class ReservationServiceClient {
    * @returns {string} A string representing the reservation.
    */
   matchReservationFromAssignmentName(assignmentName: string) {
-    return this.pathTemplates.assignmentPathTemplate.match(assignmentName)
-      .reservation;
+    return this.pathTemplates.assignmentPathTemplate.match(assignmentName).reservation;
   }
 
   /**
@@ -4106,8 +3297,7 @@ export class ReservationServiceClient {
    * @returns {string} A string representing the assignment.
    */
   matchAssignmentFromAssignmentName(assignmentName: string) {
-    return this.pathTemplates.assignmentPathTemplate.match(assignmentName)
-      .assignment;
+    return this.pathTemplates.assignmentPathTemplate.match(assignmentName).assignment;
   }
 
   /**
@@ -4117,7 +3307,7 @@ export class ReservationServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  biReservationPath(project: string, location: string) {
+  biReservationPath(project:string,location:string) {
     return this.pathTemplates.biReservationPathTemplate.render({
       project: project,
       location: location,
@@ -4132,8 +3322,7 @@ export class ReservationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBiReservationName(biReservationName: string) {
-    return this.pathTemplates.biReservationPathTemplate.match(biReservationName)
-      .project;
+    return this.pathTemplates.biReservationPathTemplate.match(biReservationName).project;
   }
 
   /**
@@ -4144,8 +3333,7 @@ export class ReservationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBiReservationName(biReservationName: string) {
-    return this.pathTemplates.biReservationPathTemplate.match(biReservationName)
-      .location;
+    return this.pathTemplates.biReservationPathTemplate.match(biReservationName).location;
   }
 
   /**
@@ -4156,11 +3344,7 @@ export class ReservationServiceClient {
    * @param {string} capacity_commitment
    * @returns {string} Resource name string.
    */
-  capacityCommitmentPath(
-    project: string,
-    location: string,
-    capacityCommitment: string
-  ) {
+  capacityCommitmentPath(project:string,location:string,capacityCommitment:string) {
     return this.pathTemplates.capacityCommitmentPathTemplate.render({
       project: project,
       location: location,
@@ -4176,9 +3360,7 @@ export class ReservationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCapacityCommitmentName(capacityCommitmentName: string) {
-    return this.pathTemplates.capacityCommitmentPathTemplate.match(
-      capacityCommitmentName
-    ).project;
+    return this.pathTemplates.capacityCommitmentPathTemplate.match(capacityCommitmentName).project;
   }
 
   /**
@@ -4189,9 +3371,7 @@ export class ReservationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCapacityCommitmentName(capacityCommitmentName: string) {
-    return this.pathTemplates.capacityCommitmentPathTemplate.match(
-      capacityCommitmentName
-    ).location;
+    return this.pathTemplates.capacityCommitmentPathTemplate.match(capacityCommitmentName).location;
   }
 
   /**
@@ -4201,12 +3381,8 @@ export class ReservationServiceClient {
    *   A fully-qualified path representing CapacityCommitment resource.
    * @returns {string} A string representing the capacity_commitment.
    */
-  matchCapacityCommitmentFromCapacityCommitmentName(
-    capacityCommitmentName: string
-  ) {
-    return this.pathTemplates.capacityCommitmentPathTemplate.match(
-      capacityCommitmentName
-    ).capacity_commitment;
+  matchCapacityCommitmentFromCapacityCommitmentName(capacityCommitmentName: string) {
+    return this.pathTemplates.capacityCommitmentPathTemplate.match(capacityCommitmentName).capacity_commitment;
   }
 
   /**
@@ -4216,7 +3392,7 @@ export class ReservationServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -4251,7 +3427,7 @@ export class ReservationServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -4276,7 +3452,7 @@ export class ReservationServiceClient {
    * @param {string} reservation
    * @returns {string} Resource name string.
    */
-  reservationPath(project: string, location: string, reservation: string) {
+  reservationPath(project:string,location:string,reservation:string) {
     return this.pathTemplates.reservationPathTemplate.render({
       project: project,
       location: location,
@@ -4292,8 +3468,7 @@ export class ReservationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReservationName(reservationName: string) {
-    return this.pathTemplates.reservationPathTemplate.match(reservationName)
-      .project;
+    return this.pathTemplates.reservationPathTemplate.match(reservationName).project;
   }
 
   /**
@@ -4304,8 +3479,7 @@ export class ReservationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReservationName(reservationName: string) {
-    return this.pathTemplates.reservationPathTemplate.match(reservationName)
-      .location;
+    return this.pathTemplates.reservationPathTemplate.match(reservationName).location;
   }
 
   /**
@@ -4316,8 +3490,7 @@ export class ReservationServiceClient {
    * @returns {string} A string representing the reservation.
    */
   matchReservationFromReservationName(reservationName: string) {
-    return this.pathTemplates.reservationPathTemplate.match(reservationName)
-      .reservation;
+    return this.pathTemplates.reservationPathTemplate.match(reservationName).reservation;
   }
 
   /**

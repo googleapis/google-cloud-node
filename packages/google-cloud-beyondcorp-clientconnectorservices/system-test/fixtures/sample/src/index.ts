@@ -19,19 +19,14 @@
 import {ClientConnectorServicesServiceClient} from '@google-cloud/clientconnectorservices';
 
 // check that the client class type name can be used
-function doStuffWithClientConnectorServicesServiceClient(
-  client: ClientConnectorServicesServiceClient
-) {
+function doStuffWithClientConnectorServicesServiceClient(client: ClientConnectorServicesServiceClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const clientConnectorServicesServiceClient =
-    new ClientConnectorServicesServiceClient();
-  doStuffWithClientConnectorServicesServiceClient(
-    clientConnectorServicesServiceClient
-  );
+  const clientConnectorServicesServiceClient = new ClientConnectorServicesServiceClient();
+  doStuffWithClientConnectorServicesServiceClient(clientConnectorServicesServiceClient);
 }
 
 main();

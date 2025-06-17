@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -115,41 +106,20 @@ export class AnalyticsHubServiceClient {
    *     const client = new AnalyticsHubServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AnalyticsHubServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'analyticshub.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -172,7 +142,7 @@ export class AnalyticsHubServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -188,9 +158,13 @@ export class AnalyticsHubServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -226,30 +200,18 @@ export class AnalyticsHubServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDataExchanges: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'dataExchanges'
-      ),
-      listOrgDataExchanges: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'dataExchanges'
-      ),
-      listListings: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'listings'
-      ),
+      listDataExchanges:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataExchanges'),
+      listOrgDataExchanges:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataExchanges'),
+      listListings:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'listings')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -280,52 +242,32 @@ export class AnalyticsHubServiceClient {
     // Put together the "service stub" for
     // google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.
     this.analyticsHubServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.bigquery.dataexchange.v1beta1
-            .AnalyticsHubService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const analyticsHubServiceStubMethods = [
-      'listDataExchanges',
-      'listOrgDataExchanges',
-      'getDataExchange',
-      'createDataExchange',
-      'updateDataExchange',
-      'deleteDataExchange',
-      'listListings',
-      'getListing',
-      'createListing',
-      'updateListing',
-      'deleteListing',
-      'subscribeListing',
-      'getIamPolicy',
-      'setIamPolicy',
-      'testIamPermissions',
-    ];
+    const analyticsHubServiceStubMethods =
+        ['listDataExchanges', 'listOrgDataExchanges', 'getDataExchange', 'createDataExchange', 'updateDataExchange', 'deleteDataExchange', 'listListings', 'getListing', 'createListing', 'updateListing', 'deleteListing', 'subscribeListing', 'getIamPolicy', 'setIamPolicy', 'testIamPermissions'];
     for (const methodName of analyticsHubServiceStubMethods) {
       const callPromise = this.analyticsHubServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -345,14 +287,8 @@ export class AnalyticsHubServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'analyticshub.googleapis.com';
   }
@@ -363,14 +299,8 @@ export class AnalyticsHubServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'analyticshub.googleapis.com';
   }
@@ -403,7 +333,7 @@ export class AnalyticsHubServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/bigquery',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -413,9 +343,8 @@ export class AnalyticsHubServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -426,1643 +355,1279 @@ export class AnalyticsHubServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the details of a data exchange.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the data exchange.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.get_data_exchange.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_GetDataExchange_async
-   */
+/**
+ * Gets the details of a data exchange.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the data exchange.
+ *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.get_data_exchange.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_GetDataExchange_async
+ */
   getDataExchange(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest|undefined, {}|undefined
+      ]>;
   getDataExchange(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataExchange(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataExchange(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataExchange(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataExchange(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDataExchange request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataExchange response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDataExchange(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-          (
-            | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDataExchange response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDataExchange(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IGetDataExchangeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDataExchange response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new data exchange.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource path of the data exchange.
-   *   e.g. `projects/myproject/locations/US`.
-   * @param {string} request.dataExchangeId
-   *   Required. The ID of the data exchange.
-   *   Must contain only Unicode letters, numbers (0-9), underscores (_).
-   *   Should not use characters that require URL-escaping, or characters
-   *   outside of ASCII, spaces.
-   *   Max length: 100 bytes.
-   * @param {google.cloud.bigquery.dataexchange.v1beta1.DataExchange} request.dataExchange
-   *   Required. The data exchange to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.create_data_exchange.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_CreateDataExchange_async
-   */
+/**
+ * Creates a new data exchange.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the data exchange.
+ *   e.g. `projects/myproject/locations/US`.
+ * @param {string} request.dataExchangeId
+ *   Required. The ID of the data exchange.
+ *   Must contain only Unicode letters, numbers (0-9), underscores (_).
+ *   Should not use characters that require URL-escaping, or characters
+ *   outside of ASCII, spaces.
+ *   Max length: 100 bytes.
+ * @param {google.cloud.bigquery.dataexchange.v1beta1.DataExchange} request.dataExchange
+ *   Required. The data exchange to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.create_data_exchange.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_CreateDataExchange_async
+ */
   createDataExchange(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest|undefined, {}|undefined
+      ]>;
   createDataExchange(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataExchange(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataExchange(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataExchange(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataExchange(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDataExchange request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDataExchange response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDataExchange(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-          (
-            | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDataExchange response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDataExchange(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateDataExchangeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDataExchange response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an existing data exchange.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask specifies the fields to update in the data exchange
-   *   resource. The fields specified in the
-   *   `updateMask` are relative to the resource and are not a full request.
-   * @param {google.cloud.bigquery.dataexchange.v1beta1.DataExchange} request.dataExchange
-   *   Required. The data exchange to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.update_data_exchange.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_UpdateDataExchange_async
-   */
+/**
+ * Updates an existing data exchange.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask specifies the fields to update in the data exchange
+ *   resource. The fields specified in the
+ *   `updateMask` are relative to the resource and are not a full request.
+ * @param {google.cloud.bigquery.dataexchange.v1beta1.DataExchange} request.dataExchange
+ *   Required. The data exchange to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.update_data_exchange.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_UpdateDataExchange_async
+ */
   updateDataExchange(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest|undefined, {}|undefined
+      ]>;
   updateDataExchange(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDataExchange(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDataExchange(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDataExchange(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDataExchange(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'data_exchange.name': request.dataExchange!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'data_exchange.name': request.dataExchange!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDataExchange request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDataExchange response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDataExchange(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
-          (
-            | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDataExchange response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDataExchange(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateDataExchangeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDataExchange response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an existing data exchange.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The full name of the data exchange resource that you want to delete.
-   *   For example, `projects/myproject/locations/US/dataExchanges/123`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.delete_data_exchange.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_DeleteDataExchange_async
-   */
+/**
+ * Deletes an existing data exchange.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The full name of the data exchange resource that you want to delete.
+ *   For example, `projects/myproject/locations/US/dataExchanges/123`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.delete_data_exchange.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_DeleteDataExchange_async
+ */
   deleteDataExchange(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest|undefined, {}|undefined
+      ]>;
   deleteDataExchange(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataExchange(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataExchange(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataExchange(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataExchange(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDataExchange request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDataExchange response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDataExchange(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDataExchange response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDataExchange(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteDataExchangeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDataExchange response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the details of a listing.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the listing.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.get_listing.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_GetListing_async
-   */
+/**
+ * Gets the details of a listing.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the listing.
+ *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.get_listing.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_GetListing_async
+ */
   getListing(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest|undefined, {}|undefined
+      ]>;
   getListing(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getListing(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getListing(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getListing(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getListing(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getListing request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getListing response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getListing(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-          (
-            | protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getListing response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getListing(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IGetListingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getListing response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new listing.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource path of the listing.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
-   * @param {string} request.listingId
-   *   Required. The ID of the listing to create.
-   *   Must contain only Unicode letters, numbers (0-9), underscores (_).
-   *   Should not use characters that require URL-escaping, or characters
-   *   outside of ASCII, spaces.
-   *   Max length: 100 bytes.
-   * @param {google.cloud.bigquery.dataexchange.v1beta1.Listing} request.listing
-   *   Required. The listing to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.create_listing.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_CreateListing_async
-   */
+/**
+ * Creates a new listing.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the listing.
+ *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
+ * @param {string} request.listingId
+ *   Required. The ID of the listing to create.
+ *   Must contain only Unicode letters, numbers (0-9), underscores (_).
+ *   Should not use characters that require URL-escaping, or characters
+ *   outside of ASCII, spaces.
+ *   Max length: 100 bytes.
+ * @param {google.cloud.bigquery.dataexchange.v1beta1.Listing} request.listing
+ *   Required. The listing to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.create_listing.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_CreateListing_async
+ */
   createListing(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest|undefined, {}|undefined
+      ]>;
   createListing(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createListing(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createListing(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest|null|undefined,
+          {}|null|undefined>): void;
+  createListing(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest|null|undefined,
+          {}|null|undefined>): void;
+  createListing(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createListing request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createListing response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createListing(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-          (
-            | protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createListing response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createListing(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ICreateListingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createListing response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an existing listing.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask specifies the fields to update in the listing resource. The
-   *   fields specified in the `updateMask` are relative to the resource and are
-   *   not a full request.
-   * @param {google.cloud.bigquery.dataexchange.v1beta1.Listing} request.listing
-   *   Required. The listing to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.update_listing.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_UpdateListing_async
-   */
+/**
+ * Updates an existing listing.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask specifies the fields to update in the listing resource. The
+ *   fields specified in the `updateMask` are relative to the resource and are
+ *   not a full request.
+ * @param {google.cloud.bigquery.dataexchange.v1beta1.Listing} request.listing
+ *   Required. The listing to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.update_listing.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_UpdateListing_async
+ */
   updateListing(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest|undefined, {}|undefined
+      ]>;
   updateListing(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateListing(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateListing(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateListing(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateListing(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'listing.name': request.listing!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'listing.name': request.listing!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateListing request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateListing response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateListing(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
-          (
-            | protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateListing response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateListing(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IUpdateListingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateListing response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a listing.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the listing to delete.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.delete_listing.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_DeleteListing_async
-   */
+/**
+ * Deletes a listing.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the listing to delete.
+ *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.delete_listing.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_DeleteListing_async
+ */
   deleteListing(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest|undefined, {}|undefined
+      ]>;
   deleteListing(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteListing(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteListing(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteListing(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteListing(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteListing request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteListing response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteListing(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteListing response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteListing(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDeleteListingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteListing response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Subscribes to a listing.
-   *
-   * Currently, with Analytics Hub, you can create listings that
-   * reference only BigQuery datasets.
-   * Upon subscription to a listing for a BigQuery dataset, Analytics Hub
-   * creates a linked dataset in the subscriber's project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.bigquery.dataexchange.v1beta1.DestinationDataset} request.destinationDataset
-   *   BigQuery destination dataset to create for the subscriber.
-   * @param {string} request.name
-   *   Required. Resource name of the listing that you want to subscribe to.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingResponse|SubscribeListingResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.subscribe_listing.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_SubscribeListing_async
-   */
+/**
+ * Subscribes to a listing.
+ *
+ * Currently, with Analytics Hub, you can create listings that
+ * reference only BigQuery datasets.
+ * Upon subscription to a listing for a BigQuery dataset, Analytics Hub
+ * creates a linked dataset in the subscriber's project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.bigquery.dataexchange.v1beta1.DestinationDataset} request.destinationDataset
+ *   BigQuery destination dataset to create for the subscriber.
+ * @param {string} request.name
+ *   Required. Resource name of the listing that you want to subscribe to.
+ *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingResponse|SubscribeListingResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.subscribe_listing.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_SubscribeListing_async
+ */
   subscribeListing(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest|undefined, {}|undefined
+      ]>;
   subscribeListing(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  subscribeListing(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  subscribeListing(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
-      (
-        | protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest|null|undefined,
+          {}|null|undefined>): void;
+  subscribeListing(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest|null|undefined,
+          {}|null|undefined>): void;
+  subscribeListing(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('subscribeListing request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('subscribeListing response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .subscribeListing(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
-          (
-            | protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('subscribeListing response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.subscribeListing(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingResponse,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('subscribeListing response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the IAM policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.get_iam_policy.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_GetIamPolicy_async
-   */
+/**
+ * Gets the IAM policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.get_iam_policy.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the IAM policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.set_iam_policy.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_SetIamPolicy_async
-   */
+/**
+ * Sets the IAM policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.set_iam_policy.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the permissions that a caller has.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.test_iam_permissions.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_TestIamPermissions_async
-   */
+/**
+ * Returns the permissions that a caller has.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.test_iam_permissions.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists all data exchanges in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource path of the data exchanges.
-   *   e.g. `projects/myproject/locations/US`.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response page. Leverage
-   *   the page tokens to iterate through the entire collection.
-   * @param {string} request.pageToken
-   *   Page token, returned by a previous call, to request the next page of
-   *   results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDataExchangesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all data exchanges in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the data exchanges.
+ *   e.g. `projects/myproject/locations/US`.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response page. Leverage
+ *   the page tokens to iterate through the entire collection.
+ * @param {string} request.pageToken
+ *   Page token, returned by a previous call, to request the next page of
+ *   results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDataExchangesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDataExchanges(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest | null,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest|null,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse
+      ]>;
   listDataExchanges(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange
-    >
-  ): void;
-  listDataExchanges(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange
-    >
-  ): void;
-  listDataExchanges(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest | null,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>): void;
+  listDataExchanges(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>): void;
+  listDataExchanges(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>,
+      callback?: PaginationCallback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest|null,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
+      protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse|null|undefined,
+      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDataExchanges values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2071,59 +1636,56 @@ export class AnalyticsHubServiceClient {
     this._log.info('listDataExchanges request %j', request);
     return this.innerApiCalls
       .listDataExchanges(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest | null,
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse,
-        ]) => {
-          this._log.info('listDataExchanges values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest|null,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesResponse
+      ]) => {
+        this._log.info('listDataExchanges values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDataExchanges`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource path of the data exchanges.
-   *   e.g. `projects/myproject/locations/US`.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response page. Leverage
-   *   the page tokens to iterate through the entire collection.
-   * @param {string} request.pageToken
-   *   Page token, returned by a previous call, to request the next page of
-   *   results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDataExchangesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDataExchanges`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the data exchanges.
+ *   e.g. `projects/myproject/locations/US`.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response page. Leverage
+ *   the page tokens to iterate through the entire collection.
+ * @param {string} request.pageToken
+ *   Page token, returned by a previous call, to request the next page of
+ *   results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDataExchangesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDataExchangesStream(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDataExchanges stream %j', request);
     return this.descriptors.page.listDataExchanges.createStream(
       this.innerApiCalls.listDataExchanges as GaxCall,
@@ -2132,50 +1694,49 @@ export class AnalyticsHubServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDataExchanges`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource path of the data exchanges.
-   *   e.g. `projects/myproject/locations/US`.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response page. Leverage
-   *   the page tokens to iterate through the entire collection.
-   * @param {string} request.pageToken
-   *   Page token, returned by a previous call, to request the next page of
-   *   results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.list_data_exchanges.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_ListDataExchanges_async
-   */
+/**
+ * Equivalent to `listDataExchanges`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the data exchanges.
+ *   e.g. `projects/myproject/locations/US`.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response page. Leverage
+ *   the page tokens to iterate through the entire collection.
+ * @param {string} request.pageToken
+ *   Page token, returned by a previous call, to request the next page of
+ *   results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.list_data_exchanges.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_ListDataExchanges_async
+ */
   listDataExchangesAsync(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange> {
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDataExchanges iterate %j', request);
     return this.descriptors.page.listDataExchanges.asyncIterate(
       this.innerApiCalls['listDataExchanges'] as GaxCall,
@@ -2183,116 +1744,91 @@ export class AnalyticsHubServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>;
   }
-  /**
-   * Lists all data exchanges from projects in a given organization and
-   * location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.organization
-   *   Required. The organization resource path of the projects containing DataExchanges.
-   *   e.g. `organizations/myorg/locations/US`.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response page. Leverage
-   *   the page tokens to iterate through the entire collection.
-   * @param {string} request.pageToken
-   *   Page token, returned by a previous call, to request the next page of
-   *   results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listOrgDataExchangesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all data exchanges from projects in a given organization and
+ * location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.organization
+ *   Required. The organization resource path of the projects containing DataExchanges.
+ *   e.g. `organizations/myorg/locations/US`.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response page. Leverage
+ *   the page tokens to iterate through the entire collection.
+ * @param {string} request.pageToken
+ *   Page token, returned by a previous call, to request the next page of
+ *   results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listOrgDataExchangesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrgDataExchanges(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest | null,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest|null,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse
+      ]>;
   listOrgDataExchanges(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange
-    >
-  ): void;
-  listOrgDataExchanges(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange
-    >
-  ): void;
-  listOrgDataExchanges(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest | null,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>): void;
+  listOrgDataExchanges(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>): void;
+  listOrgDataExchanges(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>,
+      callback?: PaginationCallback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest|null,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        organization: request.organization ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'organization': request.organization ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
+      protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse|null|undefined,
+      protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listOrgDataExchanges values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2301,59 +1837,56 @@ export class AnalyticsHubServiceClient {
     this._log.info('listOrgDataExchanges request %j', request);
     return this.innerApiCalls
       .listOrgDataExchanges(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest | null,
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse,
-        ]) => {
-          this._log.info('listOrgDataExchanges values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange[],
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest|null,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesResponse
+      ]) => {
+        this._log.info('listOrgDataExchanges values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listOrgDataExchanges`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.organization
-   *   Required. The organization resource path of the projects containing DataExchanges.
-   *   e.g. `organizations/myorg/locations/US`.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response page. Leverage
-   *   the page tokens to iterate through the entire collection.
-   * @param {string} request.pageToken
-   *   Page token, returned by a previous call, to request the next page of
-   *   results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listOrgDataExchangesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listOrgDataExchanges`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.organization
+ *   Required. The organization resource path of the projects containing DataExchanges.
+ *   e.g. `organizations/myorg/locations/US`.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response page. Leverage
+ *   the page tokens to iterate through the entire collection.
+ * @param {string} request.pageToken
+ *   Page token, returned by a previous call, to request the next page of
+ *   results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listOrgDataExchangesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrgDataExchangesStream(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        organization: request.organization ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'organization': request.organization ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrgDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrgDataExchanges stream %j', request);
     return this.descriptors.page.listOrgDataExchanges.createStream(
       this.innerApiCalls.listOrgDataExchanges as GaxCall,
@@ -2362,50 +1895,49 @@ export class AnalyticsHubServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listOrgDataExchanges`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.organization
-   *   Required. The organization resource path of the projects containing DataExchanges.
-   *   e.g. `organizations/myorg/locations/US`.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response page. Leverage
-   *   the page tokens to iterate through the entire collection.
-   * @param {string} request.pageToken
-   *   Page token, returned by a previous call, to request the next page of
-   *   results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.list_org_data_exchanges.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_ListOrgDataExchanges_async
-   */
+/**
+ * Equivalent to `listOrgDataExchanges`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.organization
+ *   Required. The organization resource path of the projects containing DataExchanges.
+ *   e.g. `organizations/myorg/locations/US`.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response page. Leverage
+ *   the page tokens to iterate through the entire collection.
+ * @param {string} request.pageToken
+ *   Page token, returned by a previous call, to request the next page of
+ *   results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange|DataExchange}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.list_org_data_exchanges.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_ListOrgDataExchanges_async
+ */
   listOrgDataExchangesAsync(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange> {
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        organization: request.organization ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'organization': request.organization ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrgDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrgDataExchanges iterate %j', request);
     return this.descriptors.page.listOrgDataExchanges.asyncIterate(
       this.innerApiCalls['listOrgDataExchanges'] as GaxCall,
@@ -2413,115 +1945,90 @@ export class AnalyticsHubServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>;
   }
-  /**
-   * Lists all listings in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource path of the listing.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response page. Leverage
-   *   the page tokens to iterate through the entire collection.
-   * @param {string} request.pageToken
-   *   Page token, returned by a previous call, to request the next page of
-   *   results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listListingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all listings in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the listing.
+ *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response page. Leverage
+ *   the page tokens to iterate through the entire collection.
+ * @param {string} request.pageToken
+ *   Page token, returned by a previous call, to request the next page of
+ *   results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listListingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listListings(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing[],
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest | null,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing[],
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest|null,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse
+      ]>;
   listListings(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing
-    >
-  ): void;
-  listListings(
-    request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing
-    >
-  ): void;
-  listListings(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
-      | protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing[],
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest | null,
-      protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing>): void;
+  listListings(
+      request: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing>): void;
+  listListings(
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing>,
+      callback?: PaginationCallback<
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse|null|undefined,
+          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing>):
+      Promise<[
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing[],
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest|null,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
-          | protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
+      protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse|null|undefined,
+      protos.google.cloud.bigquery.dataexchange.v1beta1.IListing>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listListings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2530,59 +2037,56 @@ export class AnalyticsHubServiceClient {
     this._log.info('listListings request %j', request);
     return this.innerApiCalls
       .listListings(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListing[],
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest | null,
-          protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse,
-        ]) => {
-          this._log.info('listListings values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListing[],
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest|null,
+        protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsResponse
+      ]) => {
+        this._log.info('listListings values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listListings`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource path of the listing.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response page. Leverage
-   *   the page tokens to iterate through the entire collection.
-   * @param {string} request.pageToken
-   *   Page token, returned by a previous call, to request the next page of
-   *   results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listListingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listListings`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the listing.
+ *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response page. Leverage
+ *   the page tokens to iterate through the entire collection.
+ * @param {string} request.pageToken
+ *   Page token, returned by a previous call, to request the next page of
+ *   results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listListingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listListingsStream(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listListings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listListings stream %j', request);
     return this.descriptors.page.listListings.createStream(
       this.innerApiCalls.listListings as GaxCall,
@@ -2591,50 +2095,49 @@ export class AnalyticsHubServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listListings`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource path of the listing.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response page. Leverage
-   *   the page tokens to iterate through the entire collection.
-   * @param {string} request.pageToken
-   *   Page token, returned by a previous call, to request the next page of
-   *   results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.list_listings.js</caption>
-   * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_ListListings_async
-   */
+/**
+ * Equivalent to `listListings`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the listing.
+ *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response page. Leverage
+ *   the page tokens to iterate through the entire collection.
+ * @param {string} request.pageToken
+ *   Page token, returned by a previous call, to request the next page of
+ *   results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.bigquery.dataexchange.v1beta1.Listing|Listing}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/analytics_hub_service.list_listings.js</caption>
+ * region_tag:analyticshub_v1beta1_generated_AnalyticsHubService_ListListings_async
+ */
   listListingsAsync(
-    request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IListing> {
+      request?: protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IListing>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listListings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listListings iterate %j', request);
     return this.descriptors.page.listListings.asyncIterate(
       this.innerApiCalls['listListings'] as GaxCall,
@@ -2642,7 +2145,7 @@ export class AnalyticsHubServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IListing>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2682,7 +2185,7 @@ export class AnalyticsHubServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -2732,7 +2235,7 @@ export class AnalyticsHubServiceClient {
    * @param {string} data_exchange
    * @returns {string} Resource name string.
    */
-  dataExchangePath(project: string, location: string, dataExchange: string) {
+  dataExchangePath(project:string,location:string,dataExchange:string) {
     return this.pathTemplates.dataExchangePathTemplate.render({
       project: project,
       location: location,
@@ -2748,8 +2251,7 @@ export class AnalyticsHubServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataExchangeName(dataExchangeName: string) {
-    return this.pathTemplates.dataExchangePathTemplate.match(dataExchangeName)
-      .project;
+    return this.pathTemplates.dataExchangePathTemplate.match(dataExchangeName).project;
   }
 
   /**
@@ -2760,8 +2262,7 @@ export class AnalyticsHubServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataExchangeName(dataExchangeName: string) {
-    return this.pathTemplates.dataExchangePathTemplate.match(dataExchangeName)
-      .location;
+    return this.pathTemplates.dataExchangePathTemplate.match(dataExchangeName).location;
   }
 
   /**
@@ -2772,8 +2273,7 @@ export class AnalyticsHubServiceClient {
    * @returns {string} A string representing the data_exchange.
    */
   matchDataExchangeFromDataExchangeName(dataExchangeName: string) {
-    return this.pathTemplates.dataExchangePathTemplate.match(dataExchangeName)
-      .data_exchange;
+    return this.pathTemplates.dataExchangePathTemplate.match(dataExchangeName).data_exchange;
   }
 
   /**
@@ -2785,12 +2285,7 @@ export class AnalyticsHubServiceClient {
    * @param {string} listing
    * @returns {string} Resource name string.
    */
-  listingPath(
-    project: string,
-    location: string,
-    dataExchange: string,
-    listing: string
-  ) {
+  listingPath(project:string,location:string,dataExchange:string,listing:string) {
     return this.pathTemplates.listingPathTemplate.render({
       project: project,
       location: location,
@@ -2829,8 +2324,7 @@ export class AnalyticsHubServiceClient {
    * @returns {string} A string representing the data_exchange.
    */
   matchDataExchangeFromListingName(listingName: string) {
-    return this.pathTemplates.listingPathTemplate.match(listingName)
-      .data_exchange;
+    return this.pathTemplates.listingPathTemplate.match(listingName).data_exchange;
   }
 
   /**
@@ -2851,7 +2345,7 @@ export class AnalyticsHubServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2892,9 +2386,7 @@ export class AnalyticsHubServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

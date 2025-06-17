@@ -29,5464 +29,4309 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta1.AutoMlClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new automlModule.v1beta1.AutoMlClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'automl.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new automlModule.v1beta1.AutoMlClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = automlModule.v1beta1.AutoMlClient.servicePath;
-        assert.strictEqual(servicePath, 'automl.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = automlModule.v1beta1.AutoMlClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'automl.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'automl.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'automl.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new automlModule.v1beta1.AutoMlClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'automl.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new automlModule.v1beta1.AutoMlClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'automl.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new automlModule.v1beta1.AutoMlClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'automl.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new automlModule.v1beta1.AutoMlClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new automlModule.v1beta1.AutoMlClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = automlModule.v1beta1.AutoMlClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new automlModule.v1beta1.AutoMlClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.autoMlStub, undefined);
-      await client.initialize();
-      assert(client.autoMlStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.autoMlStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.autoMlStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createDataset', () => {
-    it('invokes createDataset without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.Dataset()
-      );
-      client.innerApiCalls.createDataset = stubSimpleCall(expectedResponse);
-      const [response] = await client.createDataset(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataset without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.Dataset()
-      );
-      client.innerApiCalls.createDataset =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createDataset(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.IDataset | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataset with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDataset = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createDataset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataset with closed client', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createDataset(request), expectedError);
-    });
-  });
-
-  describe('getDataset', () => {
-    it('invokes getDataset without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.Dataset()
-      );
-      client.innerApiCalls.getDataset = stubSimpleCall(expectedResponse);
-      const [response] = await client.getDataset(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataset without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.Dataset()
-      );
-      client.innerApiCalls.getDataset =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getDataset(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.IDataset | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataset with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getDataset = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getDataset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataset with closed client', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getDataset(request), expectedError);
-    });
-  });
-
-  describe('updateDataset', () => {
-    it('invokes updateDataset without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateDatasetRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.Dataset()
-      );
-      client.innerApiCalls.updateDataset = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateDataset(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataset without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateDatasetRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.Dataset()
-      );
-      client.innerApiCalls.updateDataset =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateDataset(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.IDataset | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataset with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateDatasetRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateDataset = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateDataset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataset with closed client', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateDatasetRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateDataset(request), expectedError);
-    });
-  });
-
-  describe('getAnnotationSpec', () => {
-    it('invokes getAnnotationSpec without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetAnnotationSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.AnnotationSpec()
-      );
-      client.innerApiCalls.getAnnotationSpec = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAnnotationSpec(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAnnotationSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAnnotationSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAnnotationSpec without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetAnnotationSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.AnnotationSpec()
-      );
-      client.innerApiCalls.getAnnotationSpec =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAnnotationSpec(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.IAnnotationSpec | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAnnotationSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAnnotationSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAnnotationSpec with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetAnnotationSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAnnotationSpec = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAnnotationSpec(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAnnotationSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAnnotationSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAnnotationSpec with closed client', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetAnnotationSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getAnnotationSpec(request), expectedError);
-    });
-  });
-
-  describe('getTableSpec', () => {
-    it('invokes getTableSpec without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetTableSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.TableSpec()
-      );
-      client.innerApiCalls.getTableSpec = stubSimpleCall(expectedResponse);
-      const [response] = await client.getTableSpec(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTableSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTableSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTableSpec without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetTableSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.TableSpec()
-      );
-      client.innerApiCalls.getTableSpec =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getTableSpec(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.ITableSpec | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTableSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTableSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTableSpec with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetTableSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getTableSpec = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getTableSpec(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getTableSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTableSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTableSpec with closed client', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetTableSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getTableSpec(request), expectedError);
-    });
-  });
-
-  describe('updateTableSpec', () => {
-    it('invokes updateTableSpec without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
-      );
-      request.tableSpec ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateTableSpecRequest',
-        ['tableSpec', 'name']
-      );
-      request.tableSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `table_spec.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.TableSpec()
-      );
-      client.innerApiCalls.updateTableSpec = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateTableSpec(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTableSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTableSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTableSpec without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
-      );
-      request.tableSpec ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateTableSpecRequest',
-        ['tableSpec', 'name']
-      );
-      request.tableSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `table_spec.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.TableSpec()
-      );
-      client.innerApiCalls.updateTableSpec =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateTableSpec(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.ITableSpec | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTableSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTableSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTableSpec with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
-      );
-      request.tableSpec ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateTableSpecRequest',
-        ['tableSpec', 'name']
-      );
-      request.tableSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `table_spec.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateTableSpec = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateTableSpec(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateTableSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTableSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTableSpec with closed client', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
-      );
-      request.tableSpec ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateTableSpecRequest',
-        ['tableSpec', 'name']
-      );
-      request.tableSpec.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateTableSpec(request), expectedError);
-    });
-  });
-
-  describe('getColumnSpec', () => {
-    it('invokes getColumnSpec without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetColumnSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ColumnSpec()
-      );
-      client.innerApiCalls.getColumnSpec = stubSimpleCall(expectedResponse);
-      const [response] = await client.getColumnSpec(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getColumnSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getColumnSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getColumnSpec without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetColumnSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ColumnSpec()
-      );
-      client.innerApiCalls.getColumnSpec =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getColumnSpec(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.IColumnSpec | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getColumnSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getColumnSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getColumnSpec with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetColumnSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getColumnSpec = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getColumnSpec(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getColumnSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getColumnSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getColumnSpec with closed client', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetColumnSpecRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getColumnSpec(request), expectedError);
-    });
-  });
-
-  describe('updateColumnSpec', () => {
-    it('invokes updateColumnSpec without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
-      );
-      request.columnSpec ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateColumnSpecRequest',
-        ['columnSpec', 'name']
-      );
-      request.columnSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `column_spec.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ColumnSpec()
-      );
-      client.innerApiCalls.updateColumnSpec = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateColumnSpec(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateColumnSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateColumnSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateColumnSpec without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
-      );
-      request.columnSpec ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateColumnSpecRequest',
-        ['columnSpec', 'name']
-      );
-      request.columnSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `column_spec.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ColumnSpec()
-      );
-      client.innerApiCalls.updateColumnSpec =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateColumnSpec(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.IColumnSpec | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateColumnSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateColumnSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateColumnSpec with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
-      );
-      request.columnSpec ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateColumnSpecRequest',
-        ['columnSpec', 'name']
-      );
-      request.columnSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `column_spec.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateColumnSpec = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateColumnSpec(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateColumnSpec as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateColumnSpec as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateColumnSpec with closed client', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
-      );
-      request.columnSpec ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UpdateColumnSpecRequest',
-        ['columnSpec', 'name']
-      );
-      request.columnSpec.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateColumnSpec(request), expectedError);
-    });
-  });
-
-  describe('getModel', () => {
-    it('invokes getModel without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.Model()
-      );
-      client.innerApiCalls.getModel = stubSimpleCall(expectedResponse);
-      const [response] = await client.getModel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getModel without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.Model()
-      );
-      client.innerApiCalls.getModel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getModel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.IModel | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getModel with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getModel with closed client', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getModel(request), expectedError);
-    });
-  });
-
-  describe('getModelEvaluation', () => {
-    it('invokes getModelEvaluation without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetModelEvaluationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-      );
-      client.innerApiCalls.getModelEvaluation =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getModelEvaluation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getModelEvaluation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getModelEvaluation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getModelEvaluation without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetModelEvaluationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-      );
-      client.innerApiCalls.getModelEvaluation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getModelEvaluation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.IModelEvaluation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getModelEvaluation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getModelEvaluation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getModelEvaluation with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetModelEvaluationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getModelEvaluation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getModelEvaluation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getModelEvaluation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getModelEvaluation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getModelEvaluation with closed client', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.GetModelEvaluationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getModelEvaluation(request), expectedError);
-    });
-  });
-
-  describe('deleteDataset', () => {
-    it('invokes deleteDataset without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteDataset =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteDataset(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataset without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteDataset =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteDataset(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.automl.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataset with call error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDataset = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteDataset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataset with LRO error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDataset = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteDataset(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteDatasetProgress without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteDatasetProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteDatasetProgress with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteDatasetProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('importData', () => {
-    it('invokes importData without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ImportDataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ImportDataRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importData = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importData(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importData as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importData as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importData without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ImportDataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ImportDataRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importData =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.importData(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.automl.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importData as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importData as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importData with call error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ImportDataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ImportDataRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importData = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.importData(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.importData as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importData as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importData with LRO error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ImportDataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ImportDataRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importData = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.importData(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.importData as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importData as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkImportDataProgress without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkImportDataProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkImportDataProgress with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkImportDataProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('exportData', () => {
-    it('invokes exportData without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportDataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportDataRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportData = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.exportData(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportData as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportData as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportData without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportDataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportDataRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportData =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.exportData(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.automl.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportData as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportData as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportData with call error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportDataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportDataRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportData = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.exportData(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportData as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportData as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportData with LRO error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportDataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportDataRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportData = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.exportData(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportData as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportData as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkExportDataProgress without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkExportDataProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkExportDataProgress with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkExportDataProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createModel', () => {
-    it('invokes createModel without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createModel = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createModel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createModel without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createModel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createModel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.automl.v1beta1.IModel,
-              protos.google.cloud.automl.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.automl.v1beta1.IModel,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createModel with call error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createModel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createModel with LRO error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createModel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createModel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateModelProgress without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateModelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateModelProgress with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateModelProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteModel', () => {
-    it('invokes deleteModel without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteModel = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteModel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteModel without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteModel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteModel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.automl.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteModel with call error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteModel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteModel with LRO error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteModel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteModel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteModelProgress without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteModelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteModelProgress with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteModelProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deployModel', () => {
-    it('invokes deployModel without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeployModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeployModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deployModel = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deployModel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deployModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deployModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deployModel without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeployModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeployModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deployModel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deployModel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.automl.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deployModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deployModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deployModel with call error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeployModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeployModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deployModel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deployModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deployModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deployModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deployModel with LRO error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.DeployModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.DeployModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deployModel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deployModel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deployModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deployModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeployModelProgress without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeployModelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeployModelProgress with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeployModelProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('undeployModel', () => {
-    it('invokes undeployModel without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UndeployModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.undeployModel =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.undeployModel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.undeployModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.undeployModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes undeployModel without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UndeployModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.undeployModel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.undeployModel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.automl.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.undeployModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.undeployModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes undeployModel with call error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UndeployModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.undeployModel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.undeployModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.undeployModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.undeployModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes undeployModel with LRO error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.UndeployModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.undeployModel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.undeployModel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.undeployModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.undeployModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUndeployModelProgress without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUndeployModelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUndeployModelProgress with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUndeployModelProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('exportModel', () => {
-    it('invokes exportModel without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportModel = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.exportModel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportModel without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportModel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.exportModel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.automl.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportModel with call error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportModel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.exportModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportModel with LRO error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportModel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.exportModel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkExportModelProgress without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkExportModelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkExportModelProgress with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkExportModelProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('exportEvaluatedExamples', () => {
-    it('invokes exportEvaluatedExamples without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportEvaluatedExamples =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.exportEvaluatedExamples(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportEvaluatedExamples as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEvaluatedExamples as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportEvaluatedExamples without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportEvaluatedExamples =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.exportEvaluatedExamples(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.automl.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportEvaluatedExamples as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEvaluatedExamples as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportEvaluatedExamples with call error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportEvaluatedExamples = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.exportEvaluatedExamples(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.exportEvaluatedExamples as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEvaluatedExamples as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportEvaluatedExamples with LRO error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportEvaluatedExamples = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.exportEvaluatedExamples(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportEvaluatedExamples as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEvaluatedExamples as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkExportEvaluatedExamplesProgress without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkExportEvaluatedExamplesProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkExportEvaluatedExamplesProgress with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkExportEvaluatedExamplesProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listDatasets', () => {
-    it('invokes listDatasets without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-      ];
-      client.innerApiCalls.listDatasets = stubSimpleCall(expectedResponse);
-      const [response] = await client.listDatasets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDatasets without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-      ];
-      client.innerApiCalls.listDatasets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listDatasets(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.IDataset[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDatasets with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listDatasets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listDatasets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDatasetsStream without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-      ];
-      client.descriptors.page.listDatasets.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDatasetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.Dataset[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.automl.v1beta1.Dataset) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDatasets, request)
-      );
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listDatasetsStream with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listDatasetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.Dataset[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.automl.v1beta1.Dataset) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDatasets, request)
-      );
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDatasets without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
-      ];
-      client.descriptors.page.listDatasets.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.automl.v1beta1.IDataset[] = [];
-      const iterable = client.listDatasetsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDatasets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDatasets with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDatasets.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDatasetsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.automl.v1beta1.IDataset[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = automlModule.v1beta1.AutoMlClient.servicePath;
+                assert.strictEqual(servicePath, 'automl.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = automlModule.v1beta1.AutoMlClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'automl.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDatasets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listTableSpecs', () => {
-    it('invokes listTableSpecs without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListTableSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-      ];
-      client.innerApiCalls.listTableSpecs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listTableSpecs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTableSpecs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTableSpecs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTableSpecs without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListTableSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-      ];
-      client.innerApiCalls.listTableSpecs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listTableSpecs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.ITableSpec[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTableSpecs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTableSpecs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTableSpecs with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListTableSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listTableSpecs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listTableSpecs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listTableSpecs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTableSpecs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTableSpecsStream without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListTableSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-      ];
-      client.descriptors.page.listTableSpecs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listTableSpecsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.TableSpec[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.automl.v1beta1.TableSpec) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new automlModule.v1beta1.AutoMlClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'automl.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listTableSpecs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTableSpecs, request)
-      );
-      assert(
-        (client.descriptors.page.listTableSpecs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listTableSpecsStream with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListTableSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTableSpecs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listTableSpecsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.TableSpec[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.automl.v1beta1.TableSpec) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new automlModule.v1beta1.AutoMlClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'automl.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listTableSpecs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTableSpecs, request)
-      );
-      assert(
-        (client.descriptors.page.listTableSpecs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listTableSpecs without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListTableSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.TableSpec()
-        ),
-      ];
-      client.descriptors.page.listTableSpecs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.automl.v1beta1.ITableSpec[] = [];
-      const iterable = client.listTableSpecsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listTableSpecs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTableSpecs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new automlModule.v1beta1.AutoMlClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'automl.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listTableSpecs with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListTableSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTableSpecs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listTableSpecsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.automl.v1beta1.ITableSpec[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new automlModule.v1beta1.AutoMlClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'automl.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listTableSpecs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTableSpecs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new automlModule.v1beta1.AutoMlClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listColumnSpecs', () => {
-    it('invokes listColumnSpecs without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListColumnSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-      ];
-      client.innerApiCalls.listColumnSpecs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listColumnSpecs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listColumnSpecs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listColumnSpecs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = automlModule.v1beta1.AutoMlClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new automlModule.v1beta1.AutoMlClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.autoMlStub, undefined);
+            await client.initialize();
+            assert(client.autoMlStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.autoMlStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.autoMlStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listColumnSpecs without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListColumnSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-      ];
-      client.innerApiCalls.listColumnSpecs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listColumnSpecs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.IColumnSpec[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('createDataset', () => {
+        it('invokes createDataset without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.Dataset()
+            );
+            client.innerApiCalls.createDataset = stubSimpleCall(expectedResponse);
+            const [response] = await client.createDataset(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataset without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.Dataset()
+            );
+            client.innerApiCalls.createDataset = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createDataset(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IDataset|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataset with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDataset = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createDataset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataset with closed client', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createDataset(request), expectedError);
+        });
+    });
+
+    describe('getDataset', () => {
+        it('invokes getDataset without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.Dataset()
+            );
+            client.innerApiCalls.getDataset = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDataset(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataset without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.Dataset()
+            );
+            client.innerApiCalls.getDataset = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDataset(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IDataset|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataset with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDataset = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDataset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataset with closed client', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDataset(request), expectedError);
+        });
+    });
+
+    describe('updateDataset', () => {
+        it('invokes updateDataset without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateDatasetRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.Dataset()
+            );
+            client.innerApiCalls.updateDataset = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateDataset(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataset without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateDatasetRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.Dataset()
+            );
+            client.innerApiCalls.updateDataset = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateDataset(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IDataset|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataset with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateDatasetRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateDataset = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateDataset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataset with closed client', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateDatasetRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateDataset(request), expectedError);
+        });
+    });
+
+    describe('getAnnotationSpec', () => {
+        it('invokes getAnnotationSpec without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetAnnotationSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.AnnotationSpec()
+            );
+            client.innerApiCalls.getAnnotationSpec = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAnnotationSpec(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAnnotationSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAnnotationSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAnnotationSpec without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetAnnotationSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.AnnotationSpec()
+            );
+            client.innerApiCalls.getAnnotationSpec = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAnnotationSpec(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IAnnotationSpec|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAnnotationSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAnnotationSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAnnotationSpec with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetAnnotationSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAnnotationSpec = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAnnotationSpec(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAnnotationSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAnnotationSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAnnotationSpec with closed client', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetAnnotationSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAnnotationSpec(request), expectedError);
+        });
+    });
+
+    describe('getTableSpec', () => {
+        it('invokes getTableSpec without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetTableSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.TableSpec()
+            );
+            client.innerApiCalls.getTableSpec = stubSimpleCall(expectedResponse);
+            const [response] = await client.getTableSpec(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTableSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTableSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTableSpec without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetTableSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.TableSpec()
+            );
+            client.innerApiCalls.getTableSpec = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getTableSpec(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.ITableSpec|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTableSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTableSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTableSpec with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetTableSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getTableSpec = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getTableSpec(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getTableSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTableSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTableSpec with closed client', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetTableSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getTableSpec(request), expectedError);
+        });
+    });
+
+    describe('updateTableSpec', () => {
+        it('invokes updateTableSpec without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
+            );
+            request.tableSpec ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateTableSpecRequest', ['tableSpec', 'name']);
+            request.tableSpec.name = defaultValue1;
+            const expectedHeaderRequestParams = `table_spec.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.TableSpec()
+            );
+            client.innerApiCalls.updateTableSpec = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateTableSpec(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTableSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTableSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTableSpec without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
+            );
+            request.tableSpec ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateTableSpecRequest', ['tableSpec', 'name']);
+            request.tableSpec.name = defaultValue1;
+            const expectedHeaderRequestParams = `table_spec.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.TableSpec()
+            );
+            client.innerApiCalls.updateTableSpec = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateTableSpec(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.ITableSpec|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTableSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTableSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTableSpec with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
+            );
+            request.tableSpec ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateTableSpecRequest', ['tableSpec', 'name']);
+            request.tableSpec.name = defaultValue1;
+            const expectedHeaderRequestParams = `table_spec.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateTableSpec = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateTableSpec(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateTableSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTableSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTableSpec with closed client', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
+            );
+            request.tableSpec ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateTableSpecRequest', ['tableSpec', 'name']);
+            request.tableSpec.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateTableSpec(request), expectedError);
+        });
+    });
+
+    describe('getColumnSpec', () => {
+        it('invokes getColumnSpec without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetColumnSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ColumnSpec()
+            );
+            client.innerApiCalls.getColumnSpec = stubSimpleCall(expectedResponse);
+            const [response] = await client.getColumnSpec(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getColumnSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getColumnSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getColumnSpec without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetColumnSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ColumnSpec()
+            );
+            client.innerApiCalls.getColumnSpec = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getColumnSpec(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IColumnSpec|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getColumnSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getColumnSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getColumnSpec with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetColumnSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getColumnSpec = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getColumnSpec(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getColumnSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getColumnSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getColumnSpec with closed client', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetColumnSpecRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getColumnSpec(request), expectedError);
+        });
+    });
+
+    describe('updateColumnSpec', () => {
+        it('invokes updateColumnSpec without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
+            );
+            request.columnSpec ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateColumnSpecRequest', ['columnSpec', 'name']);
+            request.columnSpec.name = defaultValue1;
+            const expectedHeaderRequestParams = `column_spec.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ColumnSpec()
+            );
+            client.innerApiCalls.updateColumnSpec = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateColumnSpec(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateColumnSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateColumnSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateColumnSpec without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
+            );
+            request.columnSpec ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateColumnSpecRequest', ['columnSpec', 'name']);
+            request.columnSpec.name = defaultValue1;
+            const expectedHeaderRequestParams = `column_spec.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ColumnSpec()
+            );
+            client.innerApiCalls.updateColumnSpec = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateColumnSpec(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IColumnSpec|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateColumnSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateColumnSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateColumnSpec with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
+            );
+            request.columnSpec ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateColumnSpecRequest', ['columnSpec', 'name']);
+            request.columnSpec.name = defaultValue1;
+            const expectedHeaderRequestParams = `column_spec.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateColumnSpec = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateColumnSpec(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateColumnSpec as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateColumnSpec as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateColumnSpec with closed client', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
+            );
+            request.columnSpec ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UpdateColumnSpecRequest', ['columnSpec', 'name']);
+            request.columnSpec.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateColumnSpec(request), expectedError);
+        });
+    });
+
+    describe('getModel', () => {
+        it('invokes getModel without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.Model()
+            );
+            client.innerApiCalls.getModel = stubSimpleCall(expectedResponse);
+            const [response] = await client.getModel(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getModel without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.Model()
+            );
+            client.innerApiCalls.getModel = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getModel(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IModel|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getModel with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getModel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getModel with closed client', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getModel(request), expectedError);
+        });
+    });
+
+    describe('getModelEvaluation', () => {
+        it('invokes getModelEvaluation without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetModelEvaluationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ModelEvaluation()
+            );
+            client.innerApiCalls.getModelEvaluation = stubSimpleCall(expectedResponse);
+            const [response] = await client.getModelEvaluation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getModelEvaluation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getModelEvaluation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getModelEvaluation without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetModelEvaluationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ModelEvaluation()
+            );
+            client.innerApiCalls.getModelEvaluation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getModelEvaluation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IModelEvaluation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getModelEvaluation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getModelEvaluation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getModelEvaluation with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetModelEvaluationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getModelEvaluation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getModelEvaluation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getModelEvaluation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getModelEvaluation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getModelEvaluation with closed client', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.GetModelEvaluationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getModelEvaluation(request), expectedError);
+        });
+    });
+
+    describe('deleteDataset', () => {
+        it('invokes deleteDataset without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDataset = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteDataset(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataset without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDataset = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteDataset(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataset with call error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDataset = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteDataset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataset with LRO error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDataset = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteDataset(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteDatasetProgress without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteDatasetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteDatasetProgress with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteDatasetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('importData', () => {
+        it('invokes importData without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ImportDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ImportDataRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.importData = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.importData(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importData as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importData as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importData without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ImportDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ImportDataRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.importData = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.importData(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importData as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importData as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importData with call error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ImportDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ImportDataRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.importData = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.importData(request), expectedError);
+            const actualRequest = (client.innerApiCalls.importData as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importData as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importData with LRO error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ImportDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ImportDataRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.importData = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.importData(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.importData as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importData as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkImportDataProgress without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkImportDataProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkImportDataProgress with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkImportDataProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('exportData', () => {
+        it('invokes exportData without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportDataRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportData = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportData(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportData as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportData as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportData without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportDataRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportData = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportData(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportData as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportData as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportData with call error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportDataRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportData = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportData(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportData as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportData as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportData with LRO error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportDataRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportData = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportData(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportData as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportData as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportDataProgress without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportDataProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportDataProgress with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportDataProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createModel', () => {
+        it('invokes createModel without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.CreateModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.CreateModelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createModel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createModel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createModel without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.CreateModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.CreateModelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createModel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createModel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.automl.v1beta1.IModel, protos.google.cloud.automl.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.automl.v1beta1.IModel, protos.google.cloud.automl.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createModel with call error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.CreateModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.CreateModelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createModel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createModel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createModel with LRO error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.CreateModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.CreateModelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createModel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createModel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateModelProgress without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateModelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateModelProgress with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateModelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteModel', () => {
+        it('invokes deleteModel without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeleteModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteModel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteModel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteModel without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeleteModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteModel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteModel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteModel with call error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeleteModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteModel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteModel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteModel with LRO error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeleteModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteModel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteModel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteModelProgress without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteModelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteModelProgress with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteModelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deployModel', () => {
+        it('invokes deployModel without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeployModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeployModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deployModel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deployModel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deployModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deployModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deployModel without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeployModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeployModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deployModel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deployModel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deployModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deployModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deployModel with call error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeployModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeployModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deployModel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deployModel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deployModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deployModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deployModel with LRO error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.DeployModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.DeployModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deployModel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deployModel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deployModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deployModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeployModelProgress without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeployModelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeployModelProgress with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeployModelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('undeployModel', () => {
+        it('invokes undeployModel without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UndeployModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.undeployModel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.undeployModel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.undeployModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.undeployModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes undeployModel without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UndeployModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.undeployModel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.undeployModel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.undeployModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.undeployModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes undeployModel with call error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UndeployModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.undeployModel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.undeployModel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.undeployModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.undeployModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes undeployModel with LRO error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.UndeployModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.undeployModel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.undeployModel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.undeployModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.undeployModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUndeployModelProgress without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUndeployModelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUndeployModelProgress with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUndeployModelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('exportModel', () => {
+        it('invokes exportModel without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportModel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportModel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportModel without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportModel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportModel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportModel with call error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportModel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportModel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportModel with LRO error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportModelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportModelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportModel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportModel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportModel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportModel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportModelProgress without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportModelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportModelProgress with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportModelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('exportEvaluatedExamples', () => {
+        it('invokes exportEvaluatedExamples without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportEvaluatedExamples = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportEvaluatedExamples(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportEvaluatedExamples as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEvaluatedExamples as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportEvaluatedExamples without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportEvaluatedExamples = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportEvaluatedExamples(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.automl.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportEvaluatedExamples as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEvaluatedExamples as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportEvaluatedExamples with call error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportEvaluatedExamples = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportEvaluatedExamples(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportEvaluatedExamples as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEvaluatedExamples as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportEvaluatedExamples with LRO error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportEvaluatedExamples = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportEvaluatedExamples(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportEvaluatedExamples as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEvaluatedExamples as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportEvaluatedExamplesProgress without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportEvaluatedExamplesProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportEvaluatedExamplesProgress with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportEvaluatedExamplesProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listDatasets', () => {
+        it('invokes listDatasets without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+            ];
+            client.innerApiCalls.listDatasets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDatasets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatasets without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+            ];
+            client.innerApiCalls.listDatasets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDatasets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IDataset[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatasets with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDatasets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDatasets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatasetsStream without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+            ];
+            client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDatasetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.automl.v1beta1.Dataset[] = [];
+                stream.on('data', (response: protos.google.cloud.automl.v1beta1.Dataset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDatasets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDatasets, request));
+            assert(
+                (client.descriptors.page.listDatasets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDatasetsStream with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDatasetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.automl.v1beta1.Dataset[] = [];
+                stream.on('data', (response: protos.google.cloud.automl.v1beta1.Dataset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDatasets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDatasets, request));
+            assert(
+                (client.descriptors.page.listDatasets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDatasets without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
+            ];
+            client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.automl.v1beta1.IDataset[] = [];
+            const iterable = client.listDatasetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listColumnSpecs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listColumnSpecs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listColumnSpecs with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListColumnSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listColumnSpecs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listColumnSpecs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listColumnSpecs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listColumnSpecs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listColumnSpecsStream without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListColumnSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-      ];
-      client.descriptors.page.listColumnSpecs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listColumnSpecsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.ColumnSpec[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.automl.v1beta1.ColumnSpec) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listDatasets with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDatasetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.automl.v1beta1.IDataset[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listColumnSpecs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listColumnSpecs, request)
-      );
-      assert(
-        (client.descriptors.page.listColumnSpecs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listColumnSpecsStream with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListColumnSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listColumnSpecs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listColumnSpecsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.ColumnSpec[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.automl.v1beta1.ColumnSpec) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listTableSpecs', () => {
+        it('invokes listTableSpecs without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListTableSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+            ];
+            client.innerApiCalls.listTableSpecs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listTableSpecs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTableSpecs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTableSpecs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listTableSpecs without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListTableSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+            ];
+            client.innerApiCalls.listTableSpecs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listTableSpecs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.ITableSpec[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTableSpecs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTableSpecs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listColumnSpecs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listColumnSpecs, request)
-      );
-      assert(
-        (client.descriptors.page.listColumnSpecs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listColumnSpecs without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListColumnSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ColumnSpec()
-        ),
-      ];
-      client.descriptors.page.listColumnSpecs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.automl.v1beta1.IColumnSpec[] = [];
-      const iterable = client.listColumnSpecsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listTableSpecs with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListTableSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listTableSpecs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listTableSpecs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listTableSpecs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTableSpecs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listColumnSpecs with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListColumnSpecsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listColumnSpecs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listColumnSpecsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.automl.v1beta1.IColumnSpec[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listTableSpecsStream without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListTableSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+            ];
+            client.descriptors.page.listTableSpecs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listTableSpecsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.automl.v1beta1.TableSpec[] = [];
+                stream.on('data', (response: protos.google.cloud.automl.v1beta1.TableSpec) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listTableSpecs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTableSpecs, request));
+            assert(
+                (client.descriptors.page.listTableSpecs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listModels', () => {
-    it('invokes listModels without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-      ];
-      client.innerApiCalls.listModels = stubSimpleCall(expectedResponse);
-      const [response] = await client.listModels(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listTableSpecsStream with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListTableSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTableSpecs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listTableSpecsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.automl.v1beta1.TableSpec[] = [];
+                stream.on('data', (response: protos.google.cloud.automl.v1beta1.TableSpec) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listTableSpecs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTableSpecs, request));
+            assert(
+                (client.descriptors.page.listTableSpecs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listModels without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-      ];
-      client.innerApiCalls.listModels =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listModels(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.automl.v1beta1.IModel[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listTableSpecs without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListTableSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.TableSpec()),
+            ];
+            client.descriptors.page.listTableSpecs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.automl.v1beta1.ITableSpec[] = [];
+            const iterable = client.listTableSpecsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listModels with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listModels = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listModels(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listModelsStream without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-      ];
-      client.descriptors.page.listModels.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listModelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.Model[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.automl.v1beta1.Model) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTableSpecs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTableSpecs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listTableSpecs with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListTableSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTableSpecs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listTableSpecsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.automl.v1beta1.ITableSpec[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTableSpecs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTableSpecs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listModels, request)
-      );
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listModelsStream with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listModels.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listModelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.Model[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.automl.v1beta1.Model) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listColumnSpecs', () => {
+        it('invokes listColumnSpecs without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListColumnSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+            ];
+            client.innerApiCalls.listColumnSpecs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listColumnSpecs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listColumnSpecs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listColumnSpecs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listColumnSpecs without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListColumnSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+            ];
+            client.innerApiCalls.listColumnSpecs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listColumnSpecs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IColumnSpec[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listColumnSpecs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listColumnSpecs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listModels, request)
-      );
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listModels without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-        generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
-      ];
-      client.descriptors.page.listModels.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.automl.v1beta1.IModel[] = [];
-      const iterable = client.listModelsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listColumnSpecs with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListColumnSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listColumnSpecs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listColumnSpecs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listColumnSpecs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listColumnSpecs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listModels with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listModelsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.automl.v1beta1.IModel[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listColumnSpecsStream without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListColumnSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+            ];
+            client.descriptors.page.listColumnSpecs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listColumnSpecsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.automl.v1beta1.ColumnSpec[] = [];
+                stream.on('data', (response: protos.google.cloud.automl.v1beta1.ColumnSpec) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listColumnSpecs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listColumnSpecs, request));
+            assert(
+                (client.descriptors.page.listColumnSpecs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listModelEvaluations', () => {
-    it('invokes listModelEvaluations without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelEvaluationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-      ];
-      client.innerApiCalls.listModelEvaluations =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listModelEvaluations(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listModelEvaluations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModelEvaluations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listColumnSpecsStream with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListColumnSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listColumnSpecs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listColumnSpecsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.automl.v1beta1.ColumnSpec[] = [];
+                stream.on('data', (response: protos.google.cloud.automl.v1beta1.ColumnSpec) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listColumnSpecs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listColumnSpecs, request));
+            assert(
+                (client.descriptors.page.listColumnSpecs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listModelEvaluations without error using callback', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelEvaluationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-      ];
-      client.innerApiCalls.listModelEvaluations =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listModelEvaluations(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.automl.v1beta1.IModelEvaluation[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listColumnSpecs without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListColumnSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ColumnSpec()),
+            ];
+            client.descriptors.page.listColumnSpecs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.automl.v1beta1.IColumnSpec[] = [];
+            const iterable = client.listColumnSpecsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listModelEvaluations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModelEvaluations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listModelEvaluations with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelEvaluationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listModelEvaluations = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listModelEvaluations(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listModelEvaluations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModelEvaluations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listModelEvaluationsStream without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelEvaluationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-      ];
-      client.descriptors.page.listModelEvaluations.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listModelEvaluationsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.ModelEvaluation[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.automl.v1beta1.ModelEvaluation) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listColumnSpecs with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListColumnSpecsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listColumnSpecs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listColumnSpecsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.automl.v1beta1.IColumnSpec[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listModelEvaluations.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listModelEvaluations, request)
-      );
-      assert(
-        (client.descriptors.page.listModelEvaluations.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listModelEvaluationsStream with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelEvaluationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listModelEvaluations.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listModelEvaluationsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.ModelEvaluation[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.automl.v1beta1.ModelEvaluation) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listModels', () => {
+        it('invokes listModels without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+            ];
+            client.innerApiCalls.listModels = stubSimpleCall(expectedResponse);
+            const [response] = await client.listModels(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listModels without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+            ];
+            client.innerApiCalls.listModels = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listModels(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IModel[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listModelEvaluations.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listModelEvaluations, request)
-      );
-      assert(
-        (client.descriptors.page.listModelEvaluations.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('invokes listModels with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listModels = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listModels(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listModels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listModelsStream without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+            ];
+            client.descriptors.page.listModels.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listModelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.automl.v1beta1.Model[] = [];
+                stream.on('data', (response: protos.google.cloud.automl.v1beta1.Model) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listModels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listModels, request));
+            assert(
+                (client.descriptors.page.listModels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listModelsStream with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listModels.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listModelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.automl.v1beta1.Model[] = [];
+                stream.on('data', (response: protos.google.cloud.automl.v1beta1.Model) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listModels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listModels, request));
+            assert(
+                (client.descriptors.page.listModels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listModels without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
+            ];
+            client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.automl.v1beta1.IModel[] = [];
+            const iterable = client.listModelsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listModels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listModels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listModels with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listModelsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.automl.v1beta1.IModel[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listModels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listModels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listModelEvaluations without error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelEvaluationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.automl.v1beta1.ModelEvaluation()
-        ),
-      ];
-      client.descriptors.page.listModelEvaluations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.automl.v1beta1.IModelEvaluation[] =
-        [];
-      const iterable = client.listModelEvaluationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('listModelEvaluations', () => {
+        it('invokes listModelEvaluations without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelEvaluationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+            ];
+            client.innerApiCalls.listModelEvaluations = stubSimpleCall(expectedResponse);
+            const [response] = await client.listModelEvaluations(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listModelEvaluations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listModelEvaluations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listModelEvaluations without error using callback', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelEvaluationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+            ];
+            client.innerApiCalls.listModelEvaluations = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listModelEvaluations(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.automl.v1beta1.IModelEvaluation[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listModelEvaluations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listModelEvaluations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listModelEvaluations with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelEvaluationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listModelEvaluations = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listModelEvaluations(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listModelEvaluations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listModelEvaluations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listModelEvaluationsStream without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelEvaluationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+            ];
+            client.descriptors.page.listModelEvaluations.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listModelEvaluationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.automl.v1beta1.ModelEvaluation[] = [];
+                stream.on('data', (response: protos.google.cloud.automl.v1beta1.ModelEvaluation) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listModelEvaluations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listModelEvaluations, request));
+            assert(
+                (client.descriptors.page.listModelEvaluations.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listModelEvaluationsStream with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelEvaluationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listModelEvaluations.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listModelEvaluationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.automl.v1beta1.ModelEvaluation[] = [];
+                stream.on('data', (response: protos.google.cloud.automl.v1beta1.ModelEvaluation) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listModelEvaluations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listModelEvaluations, request));
+            assert(
+                (client.descriptors.page.listModelEvaluations.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listModelEvaluations without error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelEvaluationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+              generateSampleMessage(new protos.google.cloud.automl.v1beta1.ModelEvaluation()),
+            ];
+            client.descriptors.page.listModelEvaluations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.automl.v1beta1.IModelEvaluation[] = [];
+            const iterable = client.listModelEvaluationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listModelEvaluations with error', async () => {
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.automl.v1beta1.ListModelEvaluationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listModelEvaluations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listModelEvaluationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.automl.v1beta1.IModelEvaluation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listModelEvaluations with error', async () => {
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.automl.v1beta1.ListModelEvaluationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listModelEvaluations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listModelEvaluationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.automl.v1beta1.IModelEvaluation[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('Path templates', () => {
+
+        describe('annotationSpec', async () => {
+            const fakePath = "/rendered/path/annotationSpec";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                dataset: "datasetValue",
+                annotation_spec: "annotationSpecValue",
+            };
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.annotationSpecPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.annotationSpecPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('annotationSpecPath', () => {
+                const result = client.annotationSpecPath("projectValue", "locationValue", "datasetValue", "annotationSpecValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.annotationSpecPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAnnotationSpecName', () => {
+                const result = client.matchProjectFromAnnotationSpecName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAnnotationSpecName', () => {
+                const result = client.matchLocationFromAnnotationSpecName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDatasetFromAnnotationSpecName', () => {
+                const result = client.matchDatasetFromAnnotationSpecName(fakePath);
+                assert.strictEqual(result, "datasetValue");
+                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAnnotationSpecFromAnnotationSpecName', () => {
+                const result = client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
+                assert.strictEqual(result, "annotationSpecValue");
+                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('columnSpec', async () => {
+            const fakePath = "/rendered/path/columnSpec";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                dataset: "datasetValue",
+                table_spec: "tableSpecValue",
+                column_spec: "columnSpecValue",
+            };
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.columnSpecPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.columnSpecPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('columnSpecPath', () => {
+                const result = client.columnSpecPath("projectValue", "locationValue", "datasetValue", "tableSpecValue", "columnSpecValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.columnSpecPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromColumnSpecName', () => {
+                const result = client.matchProjectFromColumnSpecName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.columnSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromColumnSpecName', () => {
+                const result = client.matchLocationFromColumnSpecName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.columnSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDatasetFromColumnSpecName', () => {
+                const result = client.matchDatasetFromColumnSpecName(fakePath);
+                assert.strictEqual(result, "datasetValue");
+                assert((client.pathTemplates.columnSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTableSpecFromColumnSpecName', () => {
+                const result = client.matchTableSpecFromColumnSpecName(fakePath);
+                assert.strictEqual(result, "tableSpecValue");
+                assert((client.pathTemplates.columnSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchColumnSpecFromColumnSpecName', () => {
+                const result = client.matchColumnSpecFromColumnSpecName(fakePath);
+                assert.strictEqual(result, "columnSpecValue");
+                assert((client.pathTemplates.columnSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataset', async () => {
+            const fakePath = "/rendered/path/dataset";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                dataset: "datasetValue",
+            };
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.datasetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.datasetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('datasetPath', () => {
+                const result = client.datasetPath("projectValue", "locationValue", "datasetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.datasetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDatasetName', () => {
+                const result = client.matchProjectFromDatasetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDatasetName', () => {
+                const result = client.matchLocationFromDatasetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDatasetFromDatasetName', () => {
+                const result = client.matchDatasetFromDatasetName(fakePath);
+                assert.strictEqual(result, "datasetValue");
+                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('model', async () => {
+            const fakePath = "/rendered/path/model";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                model: "modelValue",
+            };
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.modelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.modelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('modelPath', () => {
+                const result = client.modelPath("projectValue", "locationValue", "modelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.modelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromModelName', () => {
+                const result = client.matchProjectFromModelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromModelName', () => {
+                const result = client.matchLocationFromModelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchModelFromModelName', () => {
+                const result = client.matchModelFromModelName(fakePath);
+                assert.strictEqual(result, "modelValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('modelEvaluation', async () => {
+            const fakePath = "/rendered/path/modelEvaluation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                model: "modelValue",
+                model_evaluation: "modelEvaluationValue",
+            };
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.modelEvaluationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.modelEvaluationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('modelEvaluationPath', () => {
+                const result = client.modelEvaluationPath("projectValue", "locationValue", "modelValue", "modelEvaluationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.modelEvaluationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromModelEvaluationName', () => {
+                const result = client.matchProjectFromModelEvaluationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromModelEvaluationName', () => {
+                const result = client.matchLocationFromModelEvaluationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchModelFromModelEvaluationName', () => {
+                const result = client.matchModelFromModelEvaluationName(fakePath);
+                assert.strictEqual(result, "modelValue");
+                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchModelEvaluationFromModelEvaluationName', () => {
+                const result = client.matchModelEvaluationFromModelEvaluationName(fakePath);
+                assert.strictEqual(result, "modelEvaluationValue");
+                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tableSpec', async () => {
+            const fakePath = "/rendered/path/tableSpec";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                dataset: "datasetValue",
+                table_spec: "tableSpecValue",
+            };
+            const client = new automlModule.v1beta1.AutoMlClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tableSpecPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tableSpecPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tableSpecPath', () => {
+                const result = client.tableSpecPath("projectValue", "locationValue", "datasetValue", "tableSpecValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tableSpecPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTableSpecName', () => {
+                const result = client.matchProjectFromTableSpecName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.tableSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTableSpecName', () => {
+                const result = client.matchLocationFromTableSpecName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.tableSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDatasetFromTableSpecName', () => {
+                const result = client.matchDatasetFromTableSpecName(fakePath);
+                assert.strictEqual(result, "datasetValue");
+                assert((client.pathTemplates.tableSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTableSpecFromTableSpecName', () => {
+                const result = client.matchTableSpecFromTableSpecName(fakePath);
+                assert.strictEqual(result, "tableSpecValue");
+                assert((client.pathTemplates.tableSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
-
-  describe('Path templates', () => {
-    describe('annotationSpec', async () => {
-      const fakePath = '/rendered/path/annotationSpec';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        dataset: 'datasetValue',
-        annotation_spec: 'annotationSpecValue',
-      };
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.annotationSpecPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.annotationSpecPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('annotationSpecPath', () => {
-        const result = client.annotationSpecPath(
-          'projectValue',
-          'locationValue',
-          'datasetValue',
-          'annotationSpecValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.annotationSpecPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAnnotationSpecName', () => {
-        const result = client.matchProjectFromAnnotationSpecName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAnnotationSpecName', () => {
-        const result = client.matchLocationFromAnnotationSpecName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDatasetFromAnnotationSpecName', () => {
-        const result = client.matchDatasetFromAnnotationSpecName(fakePath);
-        assert.strictEqual(result, 'datasetValue');
-        assert(
-          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result =
-          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
-        assert.strictEqual(result, 'annotationSpecValue');
-        assert(
-          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('columnSpec', async () => {
-      const fakePath = '/rendered/path/columnSpec';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        dataset: 'datasetValue',
-        table_spec: 'tableSpecValue',
-        column_spec: 'columnSpecValue',
-      };
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.columnSpecPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.columnSpecPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('columnSpecPath', () => {
-        const result = client.columnSpecPath(
-          'projectValue',
-          'locationValue',
-          'datasetValue',
-          'tableSpecValue',
-          'columnSpecValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.columnSpecPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromColumnSpecName', () => {
-        const result = client.matchProjectFromColumnSpecName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.columnSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromColumnSpecName', () => {
-        const result = client.matchLocationFromColumnSpecName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.columnSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDatasetFromColumnSpecName', () => {
-        const result = client.matchDatasetFromColumnSpecName(fakePath);
-        assert.strictEqual(result, 'datasetValue');
-        assert(
-          (client.pathTemplates.columnSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTableSpecFromColumnSpecName', () => {
-        const result = client.matchTableSpecFromColumnSpecName(fakePath);
-        assert.strictEqual(result, 'tableSpecValue');
-        assert(
-          (client.pathTemplates.columnSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchColumnSpecFromColumnSpecName', () => {
-        const result = client.matchColumnSpecFromColumnSpecName(fakePath);
-        assert.strictEqual(result, 'columnSpecValue');
-        assert(
-          (client.pathTemplates.columnSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('dataset', async () => {
-      const fakePath = '/rendered/path/dataset';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        dataset: 'datasetValue',
-      };
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.datasetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.datasetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('datasetPath', () => {
-        const result = client.datasetPath(
-          'projectValue',
-          'locationValue',
-          'datasetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.datasetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromDatasetName', () => {
-        const result = client.matchProjectFromDatasetName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromDatasetName', () => {
-        const result = client.matchLocationFromDatasetName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDatasetFromDatasetName', () => {
-        const result = client.matchDatasetFromDatasetName(fakePath);
-        assert.strictEqual(result, 'datasetValue');
-        assert(
-          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('model', async () => {
-      const fakePath = '/rendered/path/model';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        model: 'modelValue',
-      };
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.modelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.modelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('modelPath', () => {
-        const result = client.modelPath(
-          'projectValue',
-          'locationValue',
-          'modelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.modelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromModelName', () => {
-        const result = client.matchProjectFromModelName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromModelName', () => {
-        const result = client.matchLocationFromModelName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchModelFromModelName', () => {
-        const result = client.matchModelFromModelName(fakePath);
-        assert.strictEqual(result, 'modelValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('modelEvaluation', async () => {
-      const fakePath = '/rendered/path/modelEvaluation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        model: 'modelValue',
-        model_evaluation: 'modelEvaluationValue',
-      };
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.modelEvaluationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.modelEvaluationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('modelEvaluationPath', () => {
-        const result = client.modelEvaluationPath(
-          'projectValue',
-          'locationValue',
-          'modelValue',
-          'modelEvaluationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.modelEvaluationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromModelEvaluationName', () => {
-        const result = client.matchProjectFromModelEvaluationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromModelEvaluationName', () => {
-        const result = client.matchLocationFromModelEvaluationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchModelFromModelEvaluationName', () => {
-        const result = client.matchModelFromModelEvaluationName(fakePath);
-        assert.strictEqual(result, 'modelValue');
-        assert(
-          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchModelEvaluationFromModelEvaluationName', () => {
-        const result =
-          client.matchModelEvaluationFromModelEvaluationName(fakePath);
-        assert.strictEqual(result, 'modelEvaluationValue');
-        assert(
-          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('tableSpec', async () => {
-      const fakePath = '/rendered/path/tableSpec';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        dataset: 'datasetValue',
-        table_spec: 'tableSpecValue',
-      };
-      const client = new automlModule.v1beta1.AutoMlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tableSpecPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tableSpecPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('tableSpecPath', () => {
-        const result = client.tableSpecPath(
-          'projectValue',
-          'locationValue',
-          'datasetValue',
-          'tableSpecValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tableSpecPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTableSpecName', () => {
-        const result = client.matchProjectFromTableSpecName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.tableSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromTableSpecName', () => {
-        const result = client.matchLocationFromTableSpecName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.tableSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDatasetFromTableSpecName', () => {
-        const result = client.matchDatasetFromTableSpecName(fakePath);
-        assert.strictEqual(result, 'datasetValue');
-        assert(
-          (client.pathTemplates.tableSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTableSpecFromTableSpecName', () => {
-        const result = client.matchTableSpecFromTableSpecName(fakePath);
-        assert.strictEqual(result, 'tableSpecValue');
-        assert(
-          (client.pathTemplates.tableSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

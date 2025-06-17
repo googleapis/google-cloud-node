@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -105,42 +100,20 @@ export class SqlTranslationServiceClient {
    *     const client = new SqlTranslationServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof SqlTranslationServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof SqlTranslationServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'bigquerymigration.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -163,7 +136,7 @@ export class SqlTranslationServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -177,7 +150,10 @@ export class SqlTranslationServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -211,11 +187,8 @@ export class SqlTranslationServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.bigquery.migration.v2alpha.SqlTranslationService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.bigquery.migration.v2alpha.SqlTranslationService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -246,36 +219,31 @@ export class SqlTranslationServiceClient {
     // Put together the "service stub" for
     // google.cloud.bigquery.migration.v2alpha.SqlTranslationService.
     this.sqlTranslationServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.bigquery.migration.v2alpha.SqlTranslationService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.bigquery.migration.v2alpha
-            .SqlTranslationService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.bigquery.migration.v2alpha.SqlTranslationService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.bigquery.migration.v2alpha.SqlTranslationService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const sqlTranslationServiceStubMethods = ['translateQuery'];
+    const sqlTranslationServiceStubMethods =
+        ['translateQuery'];
     for (const methodName of sqlTranslationServiceStubMethods) {
       const callPromise = this.sqlTranslationServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -295,14 +263,8 @@ export class SqlTranslationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'bigquerymigration.googleapis.com';
   }
@@ -313,14 +275,8 @@ export class SqlTranslationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'bigquerymigration.googleapis.com';
   }
@@ -351,7 +307,9 @@ export class SqlTranslationServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -360,9 +318,8 @@ export class SqlTranslationServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -373,137 +330,104 @@ export class SqlTranslationServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Translates input queries from source dialects to GoogleSQL.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project to which this translation request belongs.
-   *   Example: `projects/foo/locations/bar`
-   * @param {google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest.SqlTranslationSourceDialect} request.sourceDialect
-   *   Required. The source SQL dialect of `queries`.
-   * @param {string} request.query
-   *   Required. The query to be translated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse|TranslateQueryResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/sql_translation_service.translate_query.js</caption>
-   * region_tag:bigquerymigration_v2alpha_generated_SqlTranslationService_TranslateQuery_async
-   */
+/**
+ * Translates input queries from source dialects to GoogleSQL.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project to which this translation request belongs.
+ *   Example: `projects/foo/locations/bar`
+ * @param {google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest.SqlTranslationSourceDialect} request.sourceDialect
+ *   Required. The source SQL dialect of `queries`.
+ * @param {string} request.query
+ *   Required. The query to be translated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse|TranslateQueryResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/sql_translation_service.translate_query.js</caption>
+ * region_tag:bigquerymigration_v2alpha_generated_SqlTranslationService_TranslateQuery_async
+ */
   translateQuery(
-    request?: protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
-      (
-        | protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
+        protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest|undefined, {}|undefined
+      ]>;
   translateQuery(
-    request: protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
-      | protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  translateQuery(
-    request: protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
-      | protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  translateQuery(
-    request?: protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
-          | protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
-      | protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
-      (
-        | protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest|null|undefined,
+          {}|null|undefined>): void;
+  translateQuery(
+      request: protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
+          protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest|null|undefined,
+          {}|null|undefined>): void;
+  translateQuery(
+      request?: protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
+          protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
+          protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
+        protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('translateQuery request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
-          | protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
+        protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('translateQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .translateQuery(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
-          (
-            | protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('translateQuery response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.translateQuery(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse,
+        protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('translateQuery response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -517,7 +441,7 @@ export class SqlTranslationServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -555,12 +479,7 @@ export class SqlTranslationServiceClient {
    * @param {string} subtask
    * @returns {string} Resource name string.
    */
-  migrationSubtaskPath(
-    project: string,
-    location: string,
-    workflow: string,
-    subtask: string
-  ) {
+  migrationSubtaskPath(project:string,location:string,workflow:string,subtask:string) {
     return this.pathTemplates.migrationSubtaskPathTemplate.render({
       project: project,
       location: location,
@@ -577,9 +496,7 @@ export class SqlTranslationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMigrationSubtaskName(migrationSubtaskName: string) {
-    return this.pathTemplates.migrationSubtaskPathTemplate.match(
-      migrationSubtaskName
-    ).project;
+    return this.pathTemplates.migrationSubtaskPathTemplate.match(migrationSubtaskName).project;
   }
 
   /**
@@ -590,9 +507,7 @@ export class SqlTranslationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMigrationSubtaskName(migrationSubtaskName: string) {
-    return this.pathTemplates.migrationSubtaskPathTemplate.match(
-      migrationSubtaskName
-    ).location;
+    return this.pathTemplates.migrationSubtaskPathTemplate.match(migrationSubtaskName).location;
   }
 
   /**
@@ -603,9 +518,7 @@ export class SqlTranslationServiceClient {
    * @returns {string} A string representing the workflow.
    */
   matchWorkflowFromMigrationSubtaskName(migrationSubtaskName: string) {
-    return this.pathTemplates.migrationSubtaskPathTemplate.match(
-      migrationSubtaskName
-    ).workflow;
+    return this.pathTemplates.migrationSubtaskPathTemplate.match(migrationSubtaskName).workflow;
   }
 
   /**
@@ -616,9 +529,7 @@ export class SqlTranslationServiceClient {
    * @returns {string} A string representing the subtask.
    */
   matchSubtaskFromMigrationSubtaskName(migrationSubtaskName: string) {
-    return this.pathTemplates.migrationSubtaskPathTemplate.match(
-      migrationSubtaskName
-    ).subtask;
+    return this.pathTemplates.migrationSubtaskPathTemplate.match(migrationSubtaskName).subtask;
   }
 
   /**
@@ -629,7 +540,7 @@ export class SqlTranslationServiceClient {
    * @param {string} workflow
    * @returns {string} Resource name string.
    */
-  migrationWorkflowPath(project: string, location: string, workflow: string) {
+  migrationWorkflowPath(project:string,location:string,workflow:string) {
     return this.pathTemplates.migrationWorkflowPathTemplate.render({
       project: project,
       location: location,
@@ -645,9 +556,7 @@ export class SqlTranslationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMigrationWorkflowName(migrationWorkflowName: string) {
-    return this.pathTemplates.migrationWorkflowPathTemplate.match(
-      migrationWorkflowName
-    ).project;
+    return this.pathTemplates.migrationWorkflowPathTemplate.match(migrationWorkflowName).project;
   }
 
   /**
@@ -658,9 +567,7 @@ export class SqlTranslationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMigrationWorkflowName(migrationWorkflowName: string) {
-    return this.pathTemplates.migrationWorkflowPathTemplate.match(
-      migrationWorkflowName
-    ).location;
+    return this.pathTemplates.migrationWorkflowPathTemplate.match(migrationWorkflowName).location;
   }
 
   /**
@@ -671,9 +578,7 @@ export class SqlTranslationServiceClient {
    * @returns {string} A string representing the workflow.
    */
   matchWorkflowFromMigrationWorkflowName(migrationWorkflowName: string) {
-    return this.pathTemplates.migrationWorkflowPathTemplate.match(
-      migrationWorkflowName
-    ).workflow;
+    return this.pathTemplates.migrationWorkflowPathTemplate.match(migrationWorkflowName).workflow;
   }
 
   /**

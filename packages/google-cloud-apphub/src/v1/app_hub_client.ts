@@ -18,24 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -116,41 +103,20 @@ export class AppHubClient {
    *     const client = new AppHubClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AppHubClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'apphub.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -176,7 +142,7 @@ export class AppHubClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -189,14 +155,18 @@ export class AppHubClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -247,233 +217,129 @@ export class AppHubClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listServiceProjectAttachments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'serviceProjectAttachments'
-      ),
-      listDiscoveredServices: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'discoveredServices'
-      ),
-      listServices: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'services'
-      ),
-      listDiscoveredWorkloads: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'discoveredWorkloads'
-      ),
-      listWorkloads: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'workloads'
-      ),
-      listApplications: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'applications'
-      ),
+      listServiceProjectAttachments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'serviceProjectAttachments'),
+      listDiscoveredServices:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'discoveredServices'),
+      listServices:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'services'),
+      listDiscoveredWorkloads:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'discoveredWorkloads'),
+      listWorkloads:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workloads'),
+      listApplications:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'applications')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*/applications/*}:getIamPolicy',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*/applications/*}:setIamPolicy',
-          body: '*',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/applications/*}:testIamPermissions',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/applications/*}:getIamPolicy',},{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/applications/*}:setIamPolicy',body: '*',},{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/applications/*}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createServiceProjectAttachmentResponse = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.ServiceProjectAttachment'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.ServiceProjectAttachment') as gax.protobuf.Type;
     const createServiceProjectAttachmentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteServiceProjectAttachmentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteServiceProjectAttachmentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.OperationMetadata') as gax.protobuf.Type;
     const createServiceResponse = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.Service'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.Service') as gax.protobuf.Type;
     const createServiceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.OperationMetadata') as gax.protobuf.Type;
     const updateServiceResponse = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.Service'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.Service') as gax.protobuf.Type;
     const updateServiceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteServiceResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteServiceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.OperationMetadata') as gax.protobuf.Type;
     const createWorkloadResponse = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.Workload'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.Workload') as gax.protobuf.Type;
     const createWorkloadMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.OperationMetadata') as gax.protobuf.Type;
     const updateWorkloadResponse = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.Workload'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.Workload') as gax.protobuf.Type;
     const updateWorkloadMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteWorkloadResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteWorkloadMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.OperationMetadata') as gax.protobuf.Type;
     const createApplicationResponse = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.Application'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.Application') as gax.protobuf.Type;
     const createApplicationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.OperationMetadata') as gax.protobuf.Type;
     const updateApplicationResponse = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.Application'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.Application') as gax.protobuf.Type;
     const updateApplicationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteApplicationResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteApplicationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apphub.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apphub.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createServiceProjectAttachment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createServiceProjectAttachmentResponse.decode.bind(
-          createServiceProjectAttachmentResponse
-        ),
-        createServiceProjectAttachmentMetadata.decode.bind(
-          createServiceProjectAttachmentMetadata
-        )
-      ),
+        createServiceProjectAttachmentResponse.decode.bind(createServiceProjectAttachmentResponse),
+        createServiceProjectAttachmentMetadata.decode.bind(createServiceProjectAttachmentMetadata)),
       deleteServiceProjectAttachment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteServiceProjectAttachmentResponse.decode.bind(
-          deleteServiceProjectAttachmentResponse
-        ),
-        deleteServiceProjectAttachmentMetadata.decode.bind(
-          deleteServiceProjectAttachmentMetadata
-        )
-      ),
+        deleteServiceProjectAttachmentResponse.decode.bind(deleteServiceProjectAttachmentResponse),
+        deleteServiceProjectAttachmentMetadata.decode.bind(deleteServiceProjectAttachmentMetadata)),
       createService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createServiceResponse.decode.bind(createServiceResponse),
-        createServiceMetadata.decode.bind(createServiceMetadata)
-      ),
+        createServiceMetadata.decode.bind(createServiceMetadata)),
       updateService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateServiceResponse.decode.bind(updateServiceResponse),
-        updateServiceMetadata.decode.bind(updateServiceMetadata)
-      ),
+        updateServiceMetadata.decode.bind(updateServiceMetadata)),
       deleteService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteServiceResponse.decode.bind(deleteServiceResponse),
-        deleteServiceMetadata.decode.bind(deleteServiceMetadata)
-      ),
+        deleteServiceMetadata.decode.bind(deleteServiceMetadata)),
       createWorkload: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createWorkloadResponse.decode.bind(createWorkloadResponse),
-        createWorkloadMetadata.decode.bind(createWorkloadMetadata)
-      ),
+        createWorkloadMetadata.decode.bind(createWorkloadMetadata)),
       updateWorkload: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateWorkloadResponse.decode.bind(updateWorkloadResponse),
-        updateWorkloadMetadata.decode.bind(updateWorkloadMetadata)
-      ),
+        updateWorkloadMetadata.decode.bind(updateWorkloadMetadata)),
       deleteWorkload: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteWorkloadResponse.decode.bind(deleteWorkloadResponse),
-        deleteWorkloadMetadata.decode.bind(deleteWorkloadMetadata)
-      ),
+        deleteWorkloadMetadata.decode.bind(deleteWorkloadMetadata)),
       createApplication: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createApplicationResponse.decode.bind(createApplicationResponse),
-        createApplicationMetadata.decode.bind(createApplicationMetadata)
-      ),
+        createApplicationMetadata.decode.bind(createApplicationMetadata)),
       updateApplication: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateApplicationResponse.decode.bind(updateApplicationResponse),
-        updateApplicationMetadata.decode.bind(updateApplicationMetadata)
-      ),
+        updateApplicationMetadata.decode.bind(updateApplicationMetadata)),
       deleteApplication: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteApplicationResponse.decode.bind(deleteApplicationResponse),
-        deleteApplicationMetadata.decode.bind(deleteApplicationMetadata)
-      ),
+        deleteApplicationMetadata.decode.bind(deleteApplicationMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.apphub.v1.AppHub',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.apphub.v1.AppHub', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -504,61 +370,28 @@ export class AppHubClient {
     // Put together the "service stub" for
     // google.cloud.apphub.v1.AppHub.
     this.appHubStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.apphub.v1.AppHub'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.apphub.v1.AppHub') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.apphub.v1.AppHub,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const appHubStubMethods = [
-      'lookupServiceProjectAttachment',
-      'listServiceProjectAttachments',
-      'createServiceProjectAttachment',
-      'getServiceProjectAttachment',
-      'deleteServiceProjectAttachment',
-      'detachServiceProjectAttachment',
-      'listDiscoveredServices',
-      'getDiscoveredService',
-      'lookupDiscoveredService',
-      'listServices',
-      'createService',
-      'getService',
-      'updateService',
-      'deleteService',
-      'listDiscoveredWorkloads',
-      'getDiscoveredWorkload',
-      'lookupDiscoveredWorkload',
-      'listWorkloads',
-      'createWorkload',
-      'getWorkload',
-      'updateWorkload',
-      'deleteWorkload',
-      'listApplications',
-      'createApplication',
-      'getApplication',
-      'updateApplication',
-      'deleteApplication',
-    ];
+    const appHubStubMethods =
+        ['lookupServiceProjectAttachment', 'listServiceProjectAttachments', 'createServiceProjectAttachment', 'getServiceProjectAttachment', 'deleteServiceProjectAttachment', 'detachServiceProjectAttachment', 'listDiscoveredServices', 'getDiscoveredService', 'lookupDiscoveredService', 'listServices', 'createService', 'getService', 'updateService', 'deleteService', 'listDiscoveredWorkloads', 'getDiscoveredWorkload', 'lookupDiscoveredWorkload', 'listWorkloads', 'createWorkload', 'getWorkload', 'updateWorkload', 'deleteWorkload', 'listApplications', 'createApplication', 'getApplication', 'updateApplication', 'deleteApplication'];
     for (const methodName of appHubStubMethods) {
       const callPromise = this.appHubStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -583,14 +416,8 @@ export class AppHubClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apphub.googleapis.com';
   }
@@ -601,14 +428,8 @@ export class AppHubClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apphub.googleapis.com';
   }
@@ -639,7 +460,9 @@ export class AppHubClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -648,9 +471,8 @@ export class AppHubClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -661,3459 +483,2469 @@ export class AppHubClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Lists a service project attachment for a given service project. You can
-   * call this API from any project to find if it is attached to a host project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Service project ID and location to lookup service project
-   *   attachment for. Only global location is supported. Expected format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.LookupServiceProjectAttachmentResponse|LookupServiceProjectAttachmentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.lookup_service_project_attachment.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_LookupServiceProjectAttachment_async
-   */
+/**
+ * Lists a service project attachment for a given service project. You can
+ * call this API from any project to find if it is attached to a host project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Service project ID and location to lookup service project
+ *   attachment for. Only global location is supported. Expected format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.LookupServiceProjectAttachmentResponse|LookupServiceProjectAttachmentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.lookup_service_project_attachment.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_LookupServiceProjectAttachment_async
+ */
   lookupServiceProjectAttachment(
-    request?: protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
-      (
-        | protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
+        protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest|undefined, {}|undefined
+      ]>;
   lookupServiceProjectAttachment(
-    request: protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
-      | protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lookupServiceProjectAttachment(
-    request: protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
-      | protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lookupServiceProjectAttachment(
-    request?: protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
-          | protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
-      | protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
-      (
-        | protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupServiceProjectAttachment(
+      request: protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest,
+      callback: Callback<
+          protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
+          protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupServiceProjectAttachment(
+      request?: protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
+          protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
+          protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
+        protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('lookupServiceProjectAttachment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
-          | protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
+        protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'lookupServiceProjectAttachment response %j',
-            response
-          );
+          this._log.info('lookupServiceProjectAttachment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .lookupServiceProjectAttachment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
-          (
-            | protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'lookupServiceProjectAttachment response %j',
-            response
-          );
-          return [response, options, rawResponse];
+    return this.innerApiCalls.lookupServiceProjectAttachment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentResponse,
+        protos.google.cloud.apphub.v1.ILookupServiceProjectAttachmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('lookupServiceProjectAttachment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a service project attachment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Fully qualified name of the service project attachment to
-   *   retrieve. Expected format:
-   *   `projects/{project}/locations/{location}/serviceProjectAttachments/{serviceProjectAttachment}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.ServiceProjectAttachment|ServiceProjectAttachment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.get_service_project_attachment.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_GetServiceProjectAttachment_async
-   */
+/**
+ * Gets a service project attachment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Fully qualified name of the service project attachment to
+ *   retrieve. Expected format:
+ *   `projects/{project}/locations/{location}/serviceProjectAttachments/{serviceProjectAttachment}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.ServiceProjectAttachment|ServiceProjectAttachment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.get_service_project_attachment.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_GetServiceProjectAttachment_async
+ */
   getServiceProjectAttachment(
-    request?: protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-      (
-        | protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IServiceProjectAttachment,
+        protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest|undefined, {}|undefined
+      ]>;
   getServiceProjectAttachment(
-    request: protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-      | protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getServiceProjectAttachment(
-    request: protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-      | protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getServiceProjectAttachment(
-    request?: protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-          | protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-      | protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-      (
-        | protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServiceProjectAttachment(
+      request: protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest,
+      callback: Callback<
+          protos.google.cloud.apphub.v1.IServiceProjectAttachment,
+          protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServiceProjectAttachment(
+      request?: protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apphub.v1.IServiceProjectAttachment,
+          protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apphub.v1.IServiceProjectAttachment,
+          protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IServiceProjectAttachment,
+        protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getServiceProjectAttachment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-          | protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apphub.v1.IServiceProjectAttachment,
+        protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getServiceProjectAttachment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getServiceProjectAttachment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-          (
-            | protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getServiceProjectAttachment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getServiceProjectAttachment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apphub.v1.IServiceProjectAttachment,
+        protos.google.cloud.apphub.v1.IGetServiceProjectAttachmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getServiceProjectAttachment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Detaches a service project from a host project.
-   * You can call this API from any service project without needing access to
-   * the host project that it is attached to.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Service project id and location to detach from a host project.
-   *   Only global location is supported. Expected format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.DetachServiceProjectAttachmentResponse|DetachServiceProjectAttachmentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.detach_service_project_attachment.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_DetachServiceProjectAttachment_async
-   */
+/**
+ * Detaches a service project from a host project.
+ * You can call this API from any service project without needing access to
+ * the host project that it is attached to.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Service project id and location to detach from a host project.
+ *   Only global location is supported. Expected format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.DetachServiceProjectAttachmentResponse|DetachServiceProjectAttachmentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.detach_service_project_attachment.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_DetachServiceProjectAttachment_async
+ */
   detachServiceProjectAttachment(
-    request?: protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
-      (
-        | protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
+        protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest|undefined, {}|undefined
+      ]>;
   detachServiceProjectAttachment(
-    request: protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
-      | protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  detachServiceProjectAttachment(
-    request: protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
-      | protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  detachServiceProjectAttachment(
-    request?: protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
-          | protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
-      | protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
-      (
-        | protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  detachServiceProjectAttachment(
+      request: protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest,
+      callback: Callback<
+          protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
+          protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  detachServiceProjectAttachment(
+      request?: protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
+          protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
+          protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
+        protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('detachServiceProjectAttachment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
-          | protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
+        protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'detachServiceProjectAttachment response %j',
-            response
-          );
+          this._log.info('detachServiceProjectAttachment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .detachServiceProjectAttachment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
-          (
-            | protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'detachServiceProjectAttachment response %j',
-            response
-          );
-          return [response, options, rawResponse];
+    return this.innerApiCalls.detachServiceProjectAttachment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentResponse,
+        protos.google.cloud.apphub.v1.IDetachServiceProjectAttachmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('detachServiceProjectAttachment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a Discovered Service in a host project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Fully qualified name of the Discovered Service to fetch.
-   *   Expected format:
-   *   `projects/{project}/locations/{location}/discoveredServices/{discoveredService}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.DiscoveredService|DiscoveredService}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.get_discovered_service.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_GetDiscoveredService_async
-   */
+/**
+ * Gets a Discovered Service in a host project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Fully qualified name of the Discovered Service to fetch.
+ *   Expected format:
+ *   `projects/{project}/locations/{location}/discoveredServices/{discoveredService}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.DiscoveredService|DiscoveredService}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.get_discovered_service.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_GetDiscoveredService_async
+ */
   getDiscoveredService(
-    request?: protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IDiscoveredService,
-      protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IDiscoveredService,
+        protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest|undefined, {}|undefined
+      ]>;
   getDiscoveredService(
-    request: protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IDiscoveredService,
-      | protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDiscoveredService(
-    request: protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IDiscoveredService,
-      | protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDiscoveredService(
-    request?: protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apphub.v1.IDiscoveredService,
-          | protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apphub.v1.IDiscoveredService,
-      | protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IDiscoveredService,
-      protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDiscoveredService(
+      request: protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest,
+      callback: Callback<
+          protos.google.cloud.apphub.v1.IDiscoveredService,
+          protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDiscoveredService(
+      request?: protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apphub.v1.IDiscoveredService,
+          protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apphub.v1.IDiscoveredService,
+          protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IDiscoveredService,
+        protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDiscoveredService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apphub.v1.IDiscoveredService,
-          | protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apphub.v1.IDiscoveredService,
+        protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDiscoveredService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDiscoveredService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apphub.v1.IDiscoveredService,
-          (
-            | protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDiscoveredService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDiscoveredService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apphub.v1.IDiscoveredService,
+        protos.google.cloud.apphub.v1.IGetDiscoveredServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDiscoveredService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lists a Discovered Service in a host project and location, with a
-   * given resource URI.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Host project ID and location to lookup Discovered Service in.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {string} request.uri
-   *   Required. Resource URI to find DiscoveredService for.
-   *   Accepts both project number and project ID and does translation when
-   *   needed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.LookupDiscoveredServiceResponse|LookupDiscoveredServiceResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.lookup_discovered_service.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_LookupDiscoveredService_async
-   */
+/**
+ * Lists a Discovered Service in a host project and location, with a
+ * given resource URI.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Host project ID and location to lookup Discovered Service in.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {string} request.uri
+ *   Required. Resource URI to find DiscoveredService for.
+ *   Accepts both project number and project ID and does translation when
+ *   needed.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.LookupDiscoveredServiceResponse|LookupDiscoveredServiceResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.lookup_discovered_service.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_LookupDiscoveredService_async
+ */
   lookupDiscoveredService(
-    request?: protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
-      protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
+        protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest|undefined, {}|undefined
+      ]>;
   lookupDiscoveredService(
-    request: protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
-      | protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lookupDiscoveredService(
-    request: protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
-      | protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lookupDiscoveredService(
-    request?: protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
-          | protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
-      | protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
-      protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupDiscoveredService(
+      request: protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest,
+      callback: Callback<
+          protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
+          protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupDiscoveredService(
+      request?: protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
+          protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
+          protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
+        protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('lookupDiscoveredService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
-          | protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
+        protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('lookupDiscoveredService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .lookupDiscoveredService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
-          (
-            | protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('lookupDiscoveredService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.lookupDiscoveredService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apphub.v1.ILookupDiscoveredServiceResponse,
+        protos.google.cloud.apphub.v1.ILookupDiscoveredServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('lookupDiscoveredService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a Service in an Application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Fully qualified name of the Service to fetch.
-   *   Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}/services/{service}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.Service|Service}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.get_service.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_GetService_async
-   */
+/**
+ * Gets a Service in an Application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Fully qualified name of the Service to fetch.
+ *   Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}/services/{service}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.Service|Service}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.get_service.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_GetService_async
+ */
   getService(
-    request?: protos.google.cloud.apphub.v1.IGetServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IService,
-      protos.google.cloud.apphub.v1.IGetServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IGetServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IService,
+        protos.google.cloud.apphub.v1.IGetServiceRequest|undefined, {}|undefined
+      ]>;
   getService(
-    request: protos.google.cloud.apphub.v1.IGetServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IService,
-      protos.google.cloud.apphub.v1.IGetServiceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getService(
-    request: protos.google.cloud.apphub.v1.IGetServiceRequest,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IService,
-      protos.google.cloud.apphub.v1.IGetServiceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getService(
-    request?: protos.google.cloud.apphub.v1.IGetServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apphub.v1.IGetServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apphub.v1.IService,
-          protos.google.cloud.apphub.v1.IGetServiceRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apphub.v1.IService,
-      protos.google.cloud.apphub.v1.IGetServiceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IService,
-      protos.google.cloud.apphub.v1.IGetServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getService(
+      request: protos.google.cloud.apphub.v1.IGetServiceRequest,
+      callback: Callback<
+          protos.google.cloud.apphub.v1.IService,
+          protos.google.cloud.apphub.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getService(
+      request?: protos.google.cloud.apphub.v1.IGetServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apphub.v1.IService,
+          protos.google.cloud.apphub.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apphub.v1.IService,
+          protos.google.cloud.apphub.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IService,
+        protos.google.cloud.apphub.v1.IGetServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apphub.v1.IService,
-          protos.google.cloud.apphub.v1.IGetServiceRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apphub.v1.IService,
+        protos.google.cloud.apphub.v1.IGetServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apphub.v1.IService,
-          protos.google.cloud.apphub.v1.IGetServiceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apphub.v1.IService,
+        protos.google.cloud.apphub.v1.IGetServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a Discovered Workload in a host project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Fully qualified name of the Discovered Workload to fetch.
-   *   Expected format:
-   *   `projects/{project}/locations/{location}/discoveredWorkloads/{discoveredWorkload}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.DiscoveredWorkload|DiscoveredWorkload}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.get_discovered_workload.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_GetDiscoveredWorkload_async
-   */
+/**
+ * Gets a Discovered Workload in a host project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Fully qualified name of the Discovered Workload to fetch.
+ *   Expected format:
+ *   `projects/{project}/locations/{location}/discoveredWorkloads/{discoveredWorkload}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.DiscoveredWorkload|DiscoveredWorkload}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.get_discovered_workload.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_GetDiscoveredWorkload_async
+ */
   getDiscoveredWorkload(
-    request?: protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IDiscoveredWorkload,
-      protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IDiscoveredWorkload,
+        protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest|undefined, {}|undefined
+      ]>;
   getDiscoveredWorkload(
-    request: protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IDiscoveredWorkload,
-      | protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDiscoveredWorkload(
-    request: protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IDiscoveredWorkload,
-      | protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDiscoveredWorkload(
-    request?: protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apphub.v1.IDiscoveredWorkload,
-          | protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apphub.v1.IDiscoveredWorkload,
-      | protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IDiscoveredWorkload,
-      protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDiscoveredWorkload(
+      request: protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest,
+      callback: Callback<
+          protos.google.cloud.apphub.v1.IDiscoveredWorkload,
+          protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDiscoveredWorkload(
+      request?: protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apphub.v1.IDiscoveredWorkload,
+          protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apphub.v1.IDiscoveredWorkload,
+          protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IDiscoveredWorkload,
+        protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDiscoveredWorkload request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apphub.v1.IDiscoveredWorkload,
-          | protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apphub.v1.IDiscoveredWorkload,
+        protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDiscoveredWorkload response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDiscoveredWorkload(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apphub.v1.IDiscoveredWorkload,
-          (
-            | protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDiscoveredWorkload response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDiscoveredWorkload(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apphub.v1.IDiscoveredWorkload,
+        protos.google.cloud.apphub.v1.IGetDiscoveredWorkloadRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDiscoveredWorkload response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lists a Discovered Workload in a host project and location, with a
-   * given resource URI.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Host project ID and location to lookup Discovered Workload in.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {string} request.uri
-   *   Required. Resource URI to find Discovered Workload for.
-   *   Accepts both project number and project ID and does translation when
-   *   needed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.LookupDiscoveredWorkloadResponse|LookupDiscoveredWorkloadResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.lookup_discovered_workload.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_LookupDiscoveredWorkload_async
-   */
+/**
+ * Lists a Discovered Workload in a host project and location, with a
+ * given resource URI.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Host project ID and location to lookup Discovered Workload in.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {string} request.uri
+ *   Required. Resource URI to find Discovered Workload for.
+ *   Accepts both project number and project ID and does translation when
+ *   needed.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.LookupDiscoveredWorkloadResponse|LookupDiscoveredWorkloadResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.lookup_discovered_workload.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_LookupDiscoveredWorkload_async
+ */
   lookupDiscoveredWorkload(
-    request?: protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
-      (
-        | protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
+        protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest|undefined, {}|undefined
+      ]>;
   lookupDiscoveredWorkload(
-    request: protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
-      | protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lookupDiscoveredWorkload(
-    request: protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
-      | protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lookupDiscoveredWorkload(
-    request?: protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
-          | protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
-      | protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
-      (
-        | protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupDiscoveredWorkload(
+      request: protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest,
+      callback: Callback<
+          protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
+          protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupDiscoveredWorkload(
+      request?: protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
+          protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
+          protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
+        protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('lookupDiscoveredWorkload request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
-          | protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
+        protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('lookupDiscoveredWorkload response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .lookupDiscoveredWorkload(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
-          (
-            | protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('lookupDiscoveredWorkload response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.lookupDiscoveredWorkload(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadResponse,
+        protos.google.cloud.apphub.v1.ILookupDiscoveredWorkloadRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('lookupDiscoveredWorkload response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a Workload in an Application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Fully qualified name of the Workload to fetch.
-   *   Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}/workloads/{workload}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.Workload|Workload}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.get_workload.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_GetWorkload_async
-   */
+/**
+ * Gets a Workload in an Application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Fully qualified name of the Workload to fetch.
+ *   Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}/workloads/{workload}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.Workload|Workload}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.get_workload.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_GetWorkload_async
+ */
   getWorkload(
-    request?: protos.google.cloud.apphub.v1.IGetWorkloadRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IWorkload,
-      protos.google.cloud.apphub.v1.IGetWorkloadRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IGetWorkloadRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IWorkload,
+        protos.google.cloud.apphub.v1.IGetWorkloadRequest|undefined, {}|undefined
+      ]>;
   getWorkload(
-    request: protos.google.cloud.apphub.v1.IGetWorkloadRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IWorkload,
-      protos.google.cloud.apphub.v1.IGetWorkloadRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkload(
-    request: protos.google.cloud.apphub.v1.IGetWorkloadRequest,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IWorkload,
-      protos.google.cloud.apphub.v1.IGetWorkloadRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkload(
-    request?: protos.google.cloud.apphub.v1.IGetWorkloadRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apphub.v1.IGetWorkloadRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apphub.v1.IWorkload,
-          protos.google.cloud.apphub.v1.IGetWorkloadRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apphub.v1.IWorkload,
-      protos.google.cloud.apphub.v1.IGetWorkloadRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IWorkload,
-      protos.google.cloud.apphub.v1.IGetWorkloadRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IGetWorkloadRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkload(
+      request: protos.google.cloud.apphub.v1.IGetWorkloadRequest,
+      callback: Callback<
+          protos.google.cloud.apphub.v1.IWorkload,
+          protos.google.cloud.apphub.v1.IGetWorkloadRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkload(
+      request?: protos.google.cloud.apphub.v1.IGetWorkloadRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apphub.v1.IWorkload,
+          protos.google.cloud.apphub.v1.IGetWorkloadRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apphub.v1.IWorkload,
+          protos.google.cloud.apphub.v1.IGetWorkloadRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IWorkload,
+        protos.google.cloud.apphub.v1.IGetWorkloadRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getWorkload request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apphub.v1.IWorkload,
-          protos.google.cloud.apphub.v1.IGetWorkloadRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apphub.v1.IWorkload,
+        protos.google.cloud.apphub.v1.IGetWorkloadRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getWorkload response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getWorkload(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apphub.v1.IWorkload,
-          protos.google.cloud.apphub.v1.IGetWorkloadRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getWorkload response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getWorkload(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apphub.v1.IWorkload,
+        protos.google.cloud.apphub.v1.IGetWorkloadRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getWorkload response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an Application in a host project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Fully qualified name of the Application to fetch.
-   *   Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.Application|Application}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.get_application.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_GetApplication_async
-   */
+/**
+ * Gets an Application in a host project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Fully qualified name of the Application to fetch.
+ *   Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.Application|Application}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.get_application.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_GetApplication_async
+ */
   getApplication(
-    request?: protos.google.cloud.apphub.v1.IGetApplicationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IApplication,
-      protos.google.cloud.apphub.v1.IGetApplicationRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IGetApplicationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IApplication,
+        protos.google.cloud.apphub.v1.IGetApplicationRequest|undefined, {}|undefined
+      ]>;
   getApplication(
-    request: protos.google.cloud.apphub.v1.IGetApplicationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IApplication,
-      protos.google.cloud.apphub.v1.IGetApplicationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getApplication(
-    request: protos.google.cloud.apphub.v1.IGetApplicationRequest,
-    callback: Callback<
-      protos.google.cloud.apphub.v1.IApplication,
-      protos.google.cloud.apphub.v1.IGetApplicationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getApplication(
-    request?: protos.google.cloud.apphub.v1.IGetApplicationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apphub.v1.IGetApplicationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apphub.v1.IApplication,
-          | protos.google.cloud.apphub.v1.IGetApplicationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apphub.v1.IApplication,
-      protos.google.cloud.apphub.v1.IGetApplicationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IApplication,
-      protos.google.cloud.apphub.v1.IGetApplicationRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IGetApplicationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getApplication(
+      request: protos.google.cloud.apphub.v1.IGetApplicationRequest,
+      callback: Callback<
+          protos.google.cloud.apphub.v1.IApplication,
+          protos.google.cloud.apphub.v1.IGetApplicationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getApplication(
+      request?: protos.google.cloud.apphub.v1.IGetApplicationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apphub.v1.IApplication,
+          protos.google.cloud.apphub.v1.IGetApplicationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apphub.v1.IApplication,
+          protos.google.cloud.apphub.v1.IGetApplicationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IApplication,
+        protos.google.cloud.apphub.v1.IGetApplicationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getApplication request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apphub.v1.IApplication,
-          | protos.google.cloud.apphub.v1.IGetApplicationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apphub.v1.IApplication,
+        protos.google.cloud.apphub.v1.IGetApplicationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getApplication response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getApplication(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apphub.v1.IApplication,
-          protos.google.cloud.apphub.v1.IGetApplicationRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getApplication response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getApplication(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apphub.v1.IApplication,
+        protos.google.cloud.apphub.v1.IGetApplicationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getApplication response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Attaches a service project to the host project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Host project ID and location to which service project is being
-   *   attached. Only global location is supported. Expected format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {string} request.serviceProjectAttachmentId
-   *   Required. The service project attachment identifier must contain the
-   *   project id of the service project specified in the
-   *   service_project_attachment.service_project field.
-   * @param {google.cloud.apphub.v1.ServiceProjectAttachment} request.serviceProjectAttachment
-   *   Required. The resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.create_service_project_attachment.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_CreateServiceProjectAttachment_async
-   */
+/**
+ * Attaches a service project to the host project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Host project ID and location to which service project is being
+ *   attached. Only global location is supported. Expected format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {string} request.serviceProjectAttachmentId
+ *   Required. The service project attachment identifier must contain the
+ *   project id of the service project specified in the
+ *   service_project_attachment.service_project field.
+ * @param {google.cloud.apphub.v1.ServiceProjectAttachment} request.serviceProjectAttachment
+ *   Required. The resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.create_service_project_attachment.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_CreateServiceProjectAttachment_async
+ */
   createServiceProjectAttachment(
-    request?: protos.google.cloud.apphub.v1.ICreateServiceProjectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.ICreateServiceProjectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IServiceProjectAttachment, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createServiceProjectAttachment(
-    request: protos.google.cloud.apphub.v1.ICreateServiceProjectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.ICreateServiceProjectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IServiceProjectAttachment, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createServiceProjectAttachment(
-    request: protos.google.cloud.apphub.v1.ICreateServiceProjectAttachmentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.ICreateServiceProjectAttachmentRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IServiceProjectAttachment, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createServiceProjectAttachment(
-    request?: protos.google.cloud.apphub.v1.ICreateServiceProjectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apphub.v1.ICreateServiceProjectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apphub.v1.IServiceProjectAttachment, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IServiceProjectAttachment, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IServiceProjectAttachment, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IServiceProjectAttachment, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'createServiceProjectAttachment response %j',
-            rawResponse
-          );
+          this._log.info('createServiceProjectAttachment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createServiceProjectAttachment request %j', request);
-    return this.innerApiCalls
-      .createServiceProjectAttachment(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apphub.v1.IServiceProjectAttachment,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'createServiceProjectAttachment response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createServiceProjectAttachment(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apphub.v1.IServiceProjectAttachment, protos.google.cloud.apphub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createServiceProjectAttachment response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createServiceProjectAttachment()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.create_service_project_attachment.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_CreateServiceProjectAttachment_async
-   */
-  async checkCreateServiceProjectAttachmentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apphub.v1.ServiceProjectAttachment,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createServiceProjectAttachment()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.create_service_project_attachment.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_CreateServiceProjectAttachment_async
+ */
+  async checkCreateServiceProjectAttachmentProgress(name: string): Promise<LROperation<protos.google.cloud.apphub.v1.ServiceProjectAttachment, protos.google.cloud.apphub.v1.OperationMetadata>>{
     this._log.info('createServiceProjectAttachment long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createServiceProjectAttachment,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apphub.v1.ServiceProjectAttachment,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createServiceProjectAttachment, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apphub.v1.ServiceProjectAttachment, protos.google.cloud.apphub.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a service project attachment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Fully qualified name of the service project attachment to delete.
-   *   Expected format:
-   *   `projects/{project}/locations/{location}/serviceProjectAttachments/{serviceProjectAttachment}`.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.delete_service_project_attachment.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_DeleteServiceProjectAttachment_async
-   */
+/**
+ * Deletes a service project attachment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Fully qualified name of the service project attachment to delete.
+ *   Expected format:
+ *   `projects/{project}/locations/{location}/serviceProjectAttachments/{serviceProjectAttachment}`.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.delete_service_project_attachment.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_DeleteServiceProjectAttachment_async
+ */
   deleteServiceProjectAttachment(
-    request?: protos.google.cloud.apphub.v1.IDeleteServiceProjectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IDeleteServiceProjectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteServiceProjectAttachment(
-    request: protos.google.cloud.apphub.v1.IDeleteServiceProjectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IDeleteServiceProjectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteServiceProjectAttachment(
-    request: protos.google.cloud.apphub.v1.IDeleteServiceProjectAttachmentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IDeleteServiceProjectAttachmentRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteServiceProjectAttachment(
-    request?: protos.google.cloud.apphub.v1.IDeleteServiceProjectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apphub.v1.IDeleteServiceProjectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'deleteServiceProjectAttachment response %j',
-            rawResponse
-          );
+          this._log.info('deleteServiceProjectAttachment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteServiceProjectAttachment request %j', request);
-    return this.innerApiCalls
-      .deleteServiceProjectAttachment(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'deleteServiceProjectAttachment response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteServiceProjectAttachment(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteServiceProjectAttachment response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteServiceProjectAttachment()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.delete_service_project_attachment.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_DeleteServiceProjectAttachment_async
-   */
-  async checkDeleteServiceProjectAttachmentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteServiceProjectAttachment()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.delete_service_project_attachment.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_DeleteServiceProjectAttachment_async
+ */
+  async checkDeleteServiceProjectAttachmentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.apphub.v1.OperationMetadata>>{
     this._log.info('deleteServiceProjectAttachment long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteServiceProjectAttachment,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteServiceProjectAttachment, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.apphub.v1.OperationMetadata>;
   }
-  /**
-   * Creates a Service in an Application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Fully qualified name of the parent Application to create the
-   *   Service in. Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}`.
-   * @param {string} request.serviceId
-   *   Required. The Service identifier.
-   *   Must contain only lowercase letters, numbers
-   *   or hyphens, with the first character a letter, the last a letter or a
-   *   number, and a 63 character maximum.
-   * @param {google.cloud.apphub.v1.Service} request.service
-   *   Required. The resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.create_service.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_CreateService_async
-   */
+/**
+ * Creates a Service in an Application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Fully qualified name of the parent Application to create the
+ *   Service in. Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}`.
+ * @param {string} request.serviceId
+ *   Required. The Service identifier.
+ *   Must contain only lowercase letters, numbers
+ *   or hyphens, with the first character a letter, the last a letter or a
+ *   number, and a 63 character maximum.
+ * @param {google.cloud.apphub.v1.Service} request.service
+ *   Required. The resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.create_service.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_CreateService_async
+ */
   createService(
-    request?: protos.google.cloud.apphub.v1.ICreateServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IService,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.ICreateServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createService(
-    request: protos.google.cloud.apphub.v1.ICreateServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IService,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.ICreateServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createService(
-    request: protos.google.cloud.apphub.v1.ICreateServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IService,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.ICreateServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createService(
-    request?: protos.google.cloud.apphub.v1.ICreateServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IService,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IService,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IService,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apphub.v1.ICreateServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IService,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createService request %j', request);
-    return this.innerApiCalls
-      .createService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apphub.v1.IService,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.create_service.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_CreateService_async
-   */
-  async checkCreateServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apphub.v1.Service,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.create_service.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_CreateService_async
+ */
+  async checkCreateServiceProgress(name: string): Promise<LROperation<protos.google.cloud.apphub.v1.Service, protos.google.cloud.apphub.v1.OperationMetadata>>{
     this._log.info('createService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apphub.v1.Service,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apphub.v1.Service, protos.google.cloud.apphub.v1.OperationMetadata>;
   }
-  /**
-   * Updates a Service in an Application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Service resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request.
-   *   The API changes the values of the fields as specified in the update_mask.
-   *   The API ignores the values of all fields not covered by the update_mask.
-   *   You can also unset a field by not specifying it in the updated message, but
-   *   adding the field to the mask. This clears whatever value the field
-   *   previously had.
-   * @param {google.cloud.apphub.v1.Service} request.service
-   *   Required. The resource being updated.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.update_service.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_UpdateService_async
-   */
+/**
+ * Updates a Service in an Application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   Service resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request.
+ *   The API changes the values of the fields as specified in the update_mask.
+ *   The API ignores the values of all fields not covered by the update_mask.
+ *   You can also unset a field by not specifying it in the updated message, but
+ *   adding the field to the mask. This clears whatever value the field
+ *   previously had.
+ * @param {google.cloud.apphub.v1.Service} request.service
+ *   Required. The resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.update_service.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_UpdateService_async
+ */
   updateService(
-    request?: protos.google.cloud.apphub.v1.IUpdateServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IService,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IUpdateServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateService(
-    request: protos.google.cloud.apphub.v1.IUpdateServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IService,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IUpdateServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateService(
-    request: protos.google.cloud.apphub.v1.IUpdateServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IService,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IUpdateServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateService(
-    request?: protos.google.cloud.apphub.v1.IUpdateServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IService,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IService,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IService,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apphub.v1.IUpdateServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'service.name': request.service!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service.name': request.service!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IService,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateService request %j', request);
-    return this.innerApiCalls
-      .updateService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apphub.v1.IService,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apphub.v1.IService, protos.google.cloud.apphub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.update_service.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_UpdateService_async
-   */
-  async checkUpdateServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apphub.v1.Service,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.update_service.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_UpdateService_async
+ */
+  async checkUpdateServiceProgress(name: string): Promise<LROperation<protos.google.cloud.apphub.v1.Service, protos.google.cloud.apphub.v1.OperationMetadata>>{
     this._log.info('updateService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apphub.v1.Service,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apphub.v1.Service, protos.google.cloud.apphub.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a Service from an Application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Fully qualified name of the Service to delete from an
-   *   Application. Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}/services/{service}`.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.delete_service.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_DeleteService_async
-   */
+/**
+ * Deletes a Service from an Application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Fully qualified name of the Service to delete from an
+ *   Application. Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}/services/{service}`.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.delete_service.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_DeleteService_async
+ */
   deleteService(
-    request?: protos.google.cloud.apphub.v1.IDeleteServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IDeleteServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteService(
-    request: protos.google.cloud.apphub.v1.IDeleteServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IDeleteServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteService(
-    request: protos.google.cloud.apphub.v1.IDeleteServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IDeleteServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteService(
-    request?: protos.google.cloud.apphub.v1.IDeleteServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apphub.v1.IDeleteServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteService request %j', request);
-    return this.innerApiCalls
-      .deleteService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.delete_service.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_DeleteService_async
-   */
-  async checkDeleteServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.delete_service.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_DeleteService_async
+ */
+  async checkDeleteServiceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.apphub.v1.OperationMetadata>>{
     this._log.info('deleteService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.apphub.v1.OperationMetadata>;
   }
-  /**
-   * Creates a Workload in an Application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Fully qualified name of the Application to create Workload in.
-   *   Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}`.
-   * @param {string} request.workloadId
-   *   Required. The Workload identifier.
-   *   Must contain only lowercase letters, numbers
-   *   or hyphens, with the first character a letter, the last a letter or a
-   *   number, and a 63 character maximum.
-   * @param {google.cloud.apphub.v1.Workload} request.workload
-   *   Required. The resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.create_workload.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_CreateWorkload_async
-   */
+/**
+ * Creates a Workload in an Application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Fully qualified name of the Application to create Workload in.
+ *   Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}`.
+ * @param {string} request.workloadId
+ *   Required. The Workload identifier.
+ *   Must contain only lowercase letters, numbers
+ *   or hyphens, with the first character a letter, the last a letter or a
+ *   number, and a 63 character maximum.
+ * @param {google.cloud.apphub.v1.Workload} request.workload
+ *   Required. The resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.create_workload.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_CreateWorkload_async
+ */
   createWorkload(
-    request?: protos.google.cloud.apphub.v1.ICreateWorkloadRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IWorkload,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.ICreateWorkloadRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createWorkload(
-    request: protos.google.cloud.apphub.v1.ICreateWorkloadRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IWorkload,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.ICreateWorkloadRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createWorkload(
-    request: protos.google.cloud.apphub.v1.ICreateWorkloadRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IWorkload,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.ICreateWorkloadRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createWorkload(
-    request?: protos.google.cloud.apphub.v1.ICreateWorkloadRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IWorkload,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IWorkload,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IWorkload,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apphub.v1.ICreateWorkloadRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IWorkload,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createWorkload response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createWorkload request %j', request);
-    return this.innerApiCalls
-      .createWorkload(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apphub.v1.IWorkload,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createWorkload response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createWorkload(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createWorkload response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createWorkload()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.create_workload.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_CreateWorkload_async
-   */
-  async checkCreateWorkloadProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apphub.v1.Workload,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createWorkload()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.create_workload.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_CreateWorkload_async
+ */
+  async checkCreateWorkloadProgress(name: string): Promise<LROperation<protos.google.cloud.apphub.v1.Workload, protos.google.cloud.apphub.v1.OperationMetadata>>{
     this._log.info('createWorkload long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createWorkload,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apphub.v1.Workload,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createWorkload, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apphub.v1.Workload, protos.google.cloud.apphub.v1.OperationMetadata>;
   }
-  /**
-   * Updates a Workload in an Application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Workload resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request.
-   *   The API changes the values of the fields as specified in the update_mask.
-   *   The API ignores the values of all fields not covered by the update_mask.
-   *   You can also unset a field by not specifying it in the updated message, but
-   *   adding the field to the mask. This clears whatever value the field
-   *   previously had.
-   * @param {google.cloud.apphub.v1.Workload} request.workload
-   *   Required. The resource being updated.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.update_workload.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_UpdateWorkload_async
-   */
+/**
+ * Updates a Workload in an Application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   Workload resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request.
+ *   The API changes the values of the fields as specified in the update_mask.
+ *   The API ignores the values of all fields not covered by the update_mask.
+ *   You can also unset a field by not specifying it in the updated message, but
+ *   adding the field to the mask. This clears whatever value the field
+ *   previously had.
+ * @param {google.cloud.apphub.v1.Workload} request.workload
+ *   Required. The resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.update_workload.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_UpdateWorkload_async
+ */
   updateWorkload(
-    request?: protos.google.cloud.apphub.v1.IUpdateWorkloadRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IWorkload,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IUpdateWorkloadRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateWorkload(
-    request: protos.google.cloud.apphub.v1.IUpdateWorkloadRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IWorkload,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IUpdateWorkloadRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateWorkload(
-    request: protos.google.cloud.apphub.v1.IUpdateWorkloadRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IWorkload,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IUpdateWorkloadRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateWorkload(
-    request?: protos.google.cloud.apphub.v1.IUpdateWorkloadRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IWorkload,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IWorkload,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IWorkload,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apphub.v1.IUpdateWorkloadRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'workload.name': request.workload!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workload.name': request.workload!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IWorkload,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateWorkload response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateWorkload request %j', request);
-    return this.innerApiCalls
-      .updateWorkload(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apphub.v1.IWorkload,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateWorkload response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateWorkload(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apphub.v1.IWorkload, protos.google.cloud.apphub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateWorkload response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateWorkload()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.update_workload.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_UpdateWorkload_async
-   */
-  async checkUpdateWorkloadProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apphub.v1.Workload,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateWorkload()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.update_workload.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_UpdateWorkload_async
+ */
+  async checkUpdateWorkloadProgress(name: string): Promise<LROperation<protos.google.cloud.apphub.v1.Workload, protos.google.cloud.apphub.v1.OperationMetadata>>{
     this._log.info('updateWorkload long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateWorkload,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apphub.v1.Workload,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateWorkload, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apphub.v1.Workload, protos.google.cloud.apphub.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a Workload from an Application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Fully qualified name of the Workload to delete from an
-   *   Application. Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}/workloads/{workload}`.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.delete_workload.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_DeleteWorkload_async
-   */
+/**
+ * Deletes a Workload from an Application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Fully qualified name of the Workload to delete from an
+ *   Application. Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}/workloads/{workload}`.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.delete_workload.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_DeleteWorkload_async
+ */
   deleteWorkload(
-    request?: protos.google.cloud.apphub.v1.IDeleteWorkloadRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IDeleteWorkloadRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteWorkload(
-    request: protos.google.cloud.apphub.v1.IDeleteWorkloadRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IDeleteWorkloadRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteWorkload(
-    request: protos.google.cloud.apphub.v1.IDeleteWorkloadRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IDeleteWorkloadRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteWorkload(
-    request?: protos.google.cloud.apphub.v1.IDeleteWorkloadRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apphub.v1.IDeleteWorkloadRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteWorkload response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteWorkload request %j', request);
-    return this.innerApiCalls
-      .deleteWorkload(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteWorkload response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteWorkload(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteWorkload response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteWorkload()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.delete_workload.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_DeleteWorkload_async
-   */
-  async checkDeleteWorkloadProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteWorkload()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.delete_workload.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_DeleteWorkload_async
+ */
+  async checkDeleteWorkloadProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.apphub.v1.OperationMetadata>>{
     this._log.info('deleteWorkload long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteWorkload,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteWorkload, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.apphub.v1.OperationMetadata>;
   }
-  /**
-   * Creates an Application in a host project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location to create Application in.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {string} request.applicationId
-   *   Required. The Application identifier.
-   *   Must contain only lowercase letters, numbers
-   *   or hyphens, with the first character a letter, the last a letter or a
-   *   number, and a 63 character maximum.
-   * @param {google.cloud.apphub.v1.Application} request.application
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.create_application.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_CreateApplication_async
-   */
+/**
+ * Creates an Application in a host project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location to create Application in.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {string} request.applicationId
+ *   Required. The Application identifier.
+ *   Must contain only lowercase letters, numbers
+ *   or hyphens, with the first character a letter, the last a letter or a
+ *   number, and a 63 character maximum.
+ * @param {google.cloud.apphub.v1.Application} request.application
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.create_application.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_CreateApplication_async
+ */
   createApplication(
-    request?: protos.google.cloud.apphub.v1.ICreateApplicationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IApplication,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.ICreateApplicationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createApplication(
-    request: protos.google.cloud.apphub.v1.ICreateApplicationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IApplication,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.ICreateApplicationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createApplication(
-    request: protos.google.cloud.apphub.v1.ICreateApplicationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IApplication,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.ICreateApplicationRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createApplication(
-    request?: protos.google.cloud.apphub.v1.ICreateApplicationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IApplication,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IApplication,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IApplication,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apphub.v1.ICreateApplicationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IApplication,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createApplication request %j', request);
-    return this.innerApiCalls
-      .createApplication(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apphub.v1.IApplication,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createApplication response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createApplication(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createApplication response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createApplication()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.create_application.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_CreateApplication_async
-   */
-  async checkCreateApplicationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apphub.v1.Application,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createApplication()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.create_application.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_CreateApplication_async
+ */
+  async checkCreateApplicationProgress(name: string): Promise<LROperation<protos.google.cloud.apphub.v1.Application, protos.google.cloud.apphub.v1.OperationMetadata>>{
     this._log.info('createApplication long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createApplication,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apphub.v1.Application,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createApplication, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apphub.v1.Application, protos.google.cloud.apphub.v1.OperationMetadata>;
   }
-  /**
-   * Updates an Application in a host project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Application resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request.
-   *   The API changes the values of the fields as specified in the update_mask.
-   *   The API ignores the values of all fields not covered by the update_mask.
-   *   You can also unset a field by not specifying it in the updated message, but
-   *   adding the field to the mask. This clears whatever value the field
-   *   previously had.
-   * @param {google.cloud.apphub.v1.Application} request.application
-   *   Required. The resource being updated.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.update_application.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_UpdateApplication_async
-   */
+/**
+ * Updates an Application in a host project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   Application resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request.
+ *   The API changes the values of the fields as specified in the update_mask.
+ *   The API ignores the values of all fields not covered by the update_mask.
+ *   You can also unset a field by not specifying it in the updated message, but
+ *   adding the field to the mask. This clears whatever value the field
+ *   previously had.
+ * @param {google.cloud.apphub.v1.Application} request.application
+ *   Required. The resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.update_application.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_UpdateApplication_async
+ */
   updateApplication(
-    request?: protos.google.cloud.apphub.v1.IUpdateApplicationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IApplication,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IUpdateApplicationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateApplication(
-    request: protos.google.cloud.apphub.v1.IUpdateApplicationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IApplication,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IUpdateApplicationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateApplication(
-    request: protos.google.cloud.apphub.v1.IUpdateApplicationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IApplication,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IUpdateApplicationRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateApplication(
-    request?: protos.google.cloud.apphub.v1.IUpdateApplicationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IApplication,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apphub.v1.IApplication,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apphub.v1.IApplication,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apphub.v1.IUpdateApplicationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'application.name': request.application!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'application.name': request.application!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apphub.v1.IApplication,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateApplication request %j', request);
-    return this.innerApiCalls
-      .updateApplication(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apphub.v1.IApplication,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateApplication response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateApplication(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apphub.v1.IApplication, protos.google.cloud.apphub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateApplication response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateApplication()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.update_application.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_UpdateApplication_async
-   */
-  async checkUpdateApplicationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apphub.v1.Application,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateApplication()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.update_application.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_UpdateApplication_async
+ */
+  async checkUpdateApplicationProgress(name: string): Promise<LROperation<protos.google.cloud.apphub.v1.Application, protos.google.cloud.apphub.v1.OperationMetadata>>{
     this._log.info('updateApplication long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateApplication,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apphub.v1.Application,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateApplication, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apphub.v1.Application, protos.google.cloud.apphub.v1.OperationMetadata>;
   }
-  /**
-   * Deletes an Application in a host project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Fully qualified name of the Application to delete.
-   *   Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}`.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.delete_application.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_DeleteApplication_async
-   */
+/**
+ * Deletes an Application in a host project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Fully qualified name of the Application to delete.
+ *   Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}`.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.delete_application.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_DeleteApplication_async
+ */
   deleteApplication(
-    request?: protos.google.cloud.apphub.v1.IDeleteApplicationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IDeleteApplicationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteApplication(
-    request: protos.google.cloud.apphub.v1.IDeleteApplicationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IDeleteApplicationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteApplication(
-    request: protos.google.cloud.apphub.v1.IDeleteApplicationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apphub.v1.IDeleteApplicationRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteApplication(
-    request?: protos.google.cloud.apphub.v1.IDeleteApplicationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apphub.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apphub.v1.IDeleteApplicationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteApplication request %j', request);
-    return this.innerApiCalls
-      .deleteApplication(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apphub.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteApplication response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteApplication(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apphub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteApplication response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteApplication()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.delete_application.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_DeleteApplication_async
-   */
-  async checkDeleteApplicationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteApplication()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.delete_application.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_DeleteApplication_async
+ */
+  async checkDeleteApplicationProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.apphub.v1.OperationMetadata>>{
     this._log.info('deleteApplication long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteApplication,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apphub.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteApplication, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.apphub.v1.OperationMetadata>;
   }
-  /**
-   * Lists service projects attached to the host project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Host project ID and location to list service project attachments.
-   *   Only global location is supported. Expected format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.ServiceProjectAttachment|ServiceProjectAttachment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServiceProjectAttachmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists service projects attached to the host project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Host project ID and location to list service project attachments.
+ *   Only global location is supported. Expected format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.ServiceProjectAttachment|ServiceProjectAttachment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listServiceProjectAttachmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServiceProjectAttachments(
-    request?: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IServiceProjectAttachment[],
-      protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest | null,
-      protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IServiceProjectAttachment[],
+        protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest|null,
+        protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse
+      ]>;
   listServiceProjectAttachments(
-    request: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
-      | protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IServiceProjectAttachment
-    >
-  ): void;
-  listServiceProjectAttachments(
-    request: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
-      | protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IServiceProjectAttachment
-    >
-  ): void;
-  listServiceProjectAttachments(
-    request?: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
-          | protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IServiceProjectAttachment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
-      | protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IServiceProjectAttachment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IServiceProjectAttachment[],
-      protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest | null,
-      protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IServiceProjectAttachment>): void;
+  listServiceProjectAttachments(
+      request: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
+          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IServiceProjectAttachment>): void;
+  listServiceProjectAttachments(
+      request?: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
+          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IServiceProjectAttachment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
+          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IServiceProjectAttachment>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IServiceProjectAttachment[],
+        protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest|null,
+        protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
-          | protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IServiceProjectAttachment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
+      protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse|null|undefined,
+      protos.google.cloud.apphub.v1.IServiceProjectAttachment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServiceProjectAttachments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4122,63 +2954,60 @@ export class AppHubClient {
     this._log.info('listServiceProjectAttachments request %j', request);
     return this.innerApiCalls
       .listServiceProjectAttachments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.apphub.v1.IServiceProjectAttachment[],
-          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest | null,
-          protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse,
-        ]) => {
-          this._log.info('listServiceProjectAttachments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apphub.v1.IServiceProjectAttachment[],
+        protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest|null,
+        protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsResponse
+      ]) => {
+        this._log.info('listServiceProjectAttachments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listServiceProjectAttachments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Host project ID and location to list service project attachments.
-   *   Only global location is supported. Expected format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.ServiceProjectAttachment|ServiceProjectAttachment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listServiceProjectAttachmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listServiceProjectAttachments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Host project ID and location to list service project attachments.
+ *   Only global location is supported. Expected format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.ServiceProjectAttachment|ServiceProjectAttachment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listServiceProjectAttachmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServiceProjectAttachmentsStream(
-    request?: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServiceProjectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServiceProjectAttachments stream %j', request);
     return this.descriptors.page.listServiceProjectAttachments.createStream(
       this.innerApiCalls.listServiceProjectAttachments as GaxCall,
@@ -4187,54 +3016,53 @@ export class AppHubClient {
     );
   }
 
-  /**
-   * Equivalent to `listServiceProjectAttachments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Host project ID and location to list service project attachments.
-   *   Only global location is supported. Expected format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.apphub.v1.ServiceProjectAttachment|ServiceProjectAttachment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.list_service_project_attachments.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_ListServiceProjectAttachments_async
-   */
+/**
+ * Equivalent to `listServiceProjectAttachments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Host project ID and location to list service project attachments.
+ *   Only global location is supported. Expected format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apphub.v1.ServiceProjectAttachment|ServiceProjectAttachment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.list_service_project_attachments.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_ListServiceProjectAttachments_async
+ */
   listServiceProjectAttachmentsAsync(
-    request?: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.apphub.v1.IServiceProjectAttachment> {
+      request?: protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apphub.v1.IServiceProjectAttachment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServiceProjectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServiceProjectAttachments iterate %j', request);
     return this.descriptors.page.listServiceProjectAttachments.asyncIterate(
       this.innerApiCalls['listServiceProjectAttachments'] as GaxCall,
@@ -4242,119 +3070,94 @@ export class AppHubClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.apphub.v1.IServiceProjectAttachment>;
   }
-  /**
-   * Lists Discovered Services that can be added to an Application in a host
-   * project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location to list Discovered Services on.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.DiscoveredService|DiscoveredService}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDiscoveredServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Discovered Services that can be added to an Application in a host
+ * project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location to list Discovered Services on.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.DiscoveredService|DiscoveredService}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDiscoveredServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDiscoveredServices(
-    request?: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IDiscoveredService[],
-      protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest | null,
-      protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IDiscoveredService[],
+        protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest|null,
+        protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse
+      ]>;
   listDiscoveredServices(
-    request: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
-      | protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IDiscoveredService
-    >
-  ): void;
-  listDiscoveredServices(
-    request: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
-      | protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IDiscoveredService
-    >
-  ): void;
-  listDiscoveredServices(
-    request?: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
-          | protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IDiscoveredService
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
-      | protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IDiscoveredService
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IDiscoveredService[],
-      protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest | null,
-      protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IDiscoveredService>): void;
+  listDiscoveredServices(
+      request: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
+          protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IDiscoveredService>): void;
+  listDiscoveredServices(
+      request?: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
+          protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IDiscoveredService>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
+          protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IDiscoveredService>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IDiscoveredService[],
+        protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest|null,
+        protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
-          | protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IDiscoveredService
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
+      protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse|null|undefined,
+      protos.google.cloud.apphub.v1.IDiscoveredService>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDiscoveredServices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4363,62 +3166,59 @@ export class AppHubClient {
     this._log.info('listDiscoveredServices request %j', request);
     return this.innerApiCalls
       .listDiscoveredServices(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.apphub.v1.IDiscoveredService[],
-          protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest | null,
-          protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse,
-        ]) => {
-          this._log.info('listDiscoveredServices values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apphub.v1.IDiscoveredService[],
+        protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest|null,
+        protos.google.cloud.apphub.v1.IListDiscoveredServicesResponse
+      ]) => {
+        this._log.info('listDiscoveredServices values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDiscoveredServices`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location to list Discovered Services on.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.DiscoveredService|DiscoveredService} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDiscoveredServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDiscoveredServices`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location to list Discovered Services on.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.DiscoveredService|DiscoveredService} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDiscoveredServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDiscoveredServicesStream(
-    request?: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDiscoveredServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDiscoveredServices stream %j', request);
     return this.descriptors.page.listDiscoveredServices.createStream(
       this.innerApiCalls.listDiscoveredServices as GaxCall,
@@ -4427,53 +3227,52 @@ export class AppHubClient {
     );
   }
 
-  /**
-   * Equivalent to `listDiscoveredServices`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location to list Discovered Services on.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.apphub.v1.DiscoveredService|DiscoveredService}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.list_discovered_services.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_ListDiscoveredServices_async
-   */
+/**
+ * Equivalent to `listDiscoveredServices`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location to list Discovered Services on.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apphub.v1.DiscoveredService|DiscoveredService}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.list_discovered_services.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_ListDiscoveredServices_async
+ */
   listDiscoveredServicesAsync(
-    request?: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.apphub.v1.IDiscoveredService> {
+      request?: protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apphub.v1.IDiscoveredService>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDiscoveredServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDiscoveredServices iterate %j', request);
     return this.descriptors.page.listDiscoveredServices.asyncIterate(
       this.innerApiCalls['listDiscoveredServices'] as GaxCall,
@@ -4481,113 +3280,94 @@ export class AppHubClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.apphub.v1.IDiscoveredService>;
   }
-  /**
-   * Lists Services in an Application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Fully qualified name of the parent Application to list Services
-   *   for. Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.Service|Service}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Services in an Application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Fully qualified name of the parent Application to list Services
+ *   for. Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.Service|Service}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServices(
-    request?: protos.google.cloud.apphub.v1.IListServicesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IService[],
-      protos.google.cloud.apphub.v1.IListServicesRequest | null,
-      protos.google.cloud.apphub.v1.IListServicesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IListServicesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IService[],
+        protos.google.cloud.apphub.v1.IListServicesRequest|null,
+        protos.google.cloud.apphub.v1.IListServicesResponse
+      ]>;
   listServices(
-    request: protos.google.cloud.apphub.v1.IListServicesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListServicesRequest,
-      protos.google.cloud.apphub.v1.IListServicesResponse | null | undefined,
-      protos.google.cloud.apphub.v1.IService
-    >
-  ): void;
-  listServices(
-    request: protos.google.cloud.apphub.v1.IListServicesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListServicesRequest,
-      protos.google.cloud.apphub.v1.IListServicesResponse | null | undefined,
-      protos.google.cloud.apphub.v1.IService
-    >
-  ): void;
-  listServices(
-    request?: protos.google.cloud.apphub.v1.IListServicesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.apphub.v1.IListServicesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.apphub.v1.IListServicesRequest,
-          | protos.google.cloud.apphub.v1.IListServicesResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IService
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListServicesRequest,
-      protos.google.cloud.apphub.v1.IListServicesResponse | null | undefined,
-      protos.google.cloud.apphub.v1.IService
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IService[],
-      protos.google.cloud.apphub.v1.IListServicesRequest | null,
-      protos.google.cloud.apphub.v1.IListServicesResponse,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IListServicesResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IService>): void;
+  listServices(
+      request: protos.google.cloud.apphub.v1.IListServicesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListServicesRequest,
+          protos.google.cloud.apphub.v1.IListServicesResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IService>): void;
+  listServices(
+      request?: protos.google.cloud.apphub.v1.IListServicesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apphub.v1.IListServicesRequest,
+          protos.google.cloud.apphub.v1.IListServicesResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IService>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListServicesRequest,
+          protos.google.cloud.apphub.v1.IListServicesResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IService>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IService[],
+        protos.google.cloud.apphub.v1.IListServicesRequest|null,
+        protos.google.cloud.apphub.v1.IListServicesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.apphub.v1.IListServicesRequest,
-          | protos.google.cloud.apphub.v1.IListServicesResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IService
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apphub.v1.IListServicesRequest,
+      protos.google.cloud.apphub.v1.IListServicesResponse|null|undefined,
+      protos.google.cloud.apphub.v1.IService>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4596,63 +3376,60 @@ export class AppHubClient {
     this._log.info('listServices request %j', request);
     return this.innerApiCalls
       .listServices(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.apphub.v1.IService[],
-          protos.google.cloud.apphub.v1.IListServicesRequest | null,
-          protos.google.cloud.apphub.v1.IListServicesResponse,
-        ]) => {
-          this._log.info('listServices values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apphub.v1.IService[],
+        protos.google.cloud.apphub.v1.IListServicesRequest|null,
+        protos.google.cloud.apphub.v1.IListServicesResponse
+      ]) => {
+        this._log.info('listServices values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listServices`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Fully qualified name of the parent Application to list Services
-   *   for. Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.Service|Service} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listServices`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Fully qualified name of the parent Application to list Services
+ *   for. Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.Service|Service} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServicesStream(
-    request?: protos.google.cloud.apphub.v1.IListServicesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.apphub.v1.IListServicesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
@@ -4661,54 +3438,53 @@ export class AppHubClient {
     );
   }
 
-  /**
-   * Equivalent to `listServices`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Fully qualified name of the parent Application to list Services
-   *   for. Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.apphub.v1.Service|Service}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.list_services.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_ListServices_async
-   */
+/**
+ * Equivalent to `listServices`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Fully qualified name of the parent Application to list Services
+ *   for. Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apphub.v1.Service|Service}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.list_services.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_ListServices_async
+ */
   listServicesAsync(
-    request?: protos.google.cloud.apphub.v1.IListServicesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.apphub.v1.IService> {
+      request?: protos.google.cloud.apphub.v1.IListServicesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apphub.v1.IService>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
@@ -4716,119 +3492,94 @@ export class AppHubClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.apphub.v1.IService>;
   }
-  /**
-   * Lists Discovered Workloads that can be added to an Application in a host
-   * project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location to list Discovered Workloads on.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.DiscoveredWorkload|DiscoveredWorkload}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDiscoveredWorkloadsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Discovered Workloads that can be added to an Application in a host
+ * project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location to list Discovered Workloads on.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.DiscoveredWorkload|DiscoveredWorkload}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDiscoveredWorkloadsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDiscoveredWorkloads(
-    request?: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IDiscoveredWorkload[],
-      protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest | null,
-      protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IDiscoveredWorkload[],
+        protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest|null,
+        protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse
+      ]>;
   listDiscoveredWorkloads(
-    request: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
-      | protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IDiscoveredWorkload
-    >
-  ): void;
-  listDiscoveredWorkloads(
-    request: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
-      | protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IDiscoveredWorkload
-    >
-  ): void;
-  listDiscoveredWorkloads(
-    request?: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
-          | protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IDiscoveredWorkload
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
-      | protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IDiscoveredWorkload
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IDiscoveredWorkload[],
-      protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest | null,
-      protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IDiscoveredWorkload>): void;
+  listDiscoveredWorkloads(
+      request: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
+          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IDiscoveredWorkload>): void;
+  listDiscoveredWorkloads(
+      request?: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
+          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IDiscoveredWorkload>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
+          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IDiscoveredWorkload>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IDiscoveredWorkload[],
+        protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest|null,
+        protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
-          | protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IDiscoveredWorkload
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
+      protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse|null|undefined,
+      protos.google.cloud.apphub.v1.IDiscoveredWorkload>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDiscoveredWorkloads values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4837,62 +3588,59 @@ export class AppHubClient {
     this._log.info('listDiscoveredWorkloads request %j', request);
     return this.innerApiCalls
       .listDiscoveredWorkloads(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.apphub.v1.IDiscoveredWorkload[],
-          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest | null,
-          protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse,
-        ]) => {
-          this._log.info('listDiscoveredWorkloads values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apphub.v1.IDiscoveredWorkload[],
+        protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest|null,
+        protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsResponse
+      ]) => {
+        this._log.info('listDiscoveredWorkloads values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDiscoveredWorkloads`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location to list Discovered Workloads on.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.DiscoveredWorkload|DiscoveredWorkload} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDiscoveredWorkloadsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDiscoveredWorkloads`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location to list Discovered Workloads on.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.DiscoveredWorkload|DiscoveredWorkload} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDiscoveredWorkloadsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDiscoveredWorkloadsStream(
-    request?: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDiscoveredWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDiscoveredWorkloads stream %j', request);
     return this.descriptors.page.listDiscoveredWorkloads.createStream(
       this.innerApiCalls.listDiscoveredWorkloads as GaxCall,
@@ -4901,53 +3649,52 @@ export class AppHubClient {
     );
   }
 
-  /**
-   * Equivalent to `listDiscoveredWorkloads`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location to list Discovered Workloads on.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.apphub.v1.DiscoveredWorkload|DiscoveredWorkload}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.list_discovered_workloads.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_ListDiscoveredWorkloads_async
-   */
+/**
+ * Equivalent to `listDiscoveredWorkloads`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location to list Discovered Workloads on.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apphub.v1.DiscoveredWorkload|DiscoveredWorkload}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.list_discovered_workloads.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_ListDiscoveredWorkloads_async
+ */
   listDiscoveredWorkloadsAsync(
-    request?: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.apphub.v1.IDiscoveredWorkload> {
+      request?: protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apphub.v1.IDiscoveredWorkload>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDiscoveredWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDiscoveredWorkloads iterate %j', request);
     return this.descriptors.page.listDiscoveredWorkloads.asyncIterate(
       this.innerApiCalls['listDiscoveredWorkloads'] as GaxCall,
@@ -4955,113 +3702,94 @@ export class AppHubClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.apphub.v1.IDiscoveredWorkload>;
   }
-  /**
-   * Lists Workloads in an Application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Fully qualified name of the parent Application to list Workloads
-   *   for. Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.Workload|Workload}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listWorkloadsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Workloads in an Application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Fully qualified name of the parent Application to list Workloads
+ *   for. Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.Workload|Workload}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listWorkloadsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkloads(
-    request?: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IWorkload[],
-      protos.google.cloud.apphub.v1.IListWorkloadsRequest | null,
-      protos.google.cloud.apphub.v1.IListWorkloadsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IWorkload[],
+        protos.google.cloud.apphub.v1.IListWorkloadsRequest|null,
+        protos.google.cloud.apphub.v1.IListWorkloadsResponse
+      ]>;
   listWorkloads(
-    request: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListWorkloadsRequest,
-      protos.google.cloud.apphub.v1.IListWorkloadsResponse | null | undefined,
-      protos.google.cloud.apphub.v1.IWorkload
-    >
-  ): void;
-  listWorkloads(
-    request: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListWorkloadsRequest,
-      protos.google.cloud.apphub.v1.IListWorkloadsResponse | null | undefined,
-      protos.google.cloud.apphub.v1.IWorkload
-    >
-  ): void;
-  listWorkloads(
-    request?: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.apphub.v1.IListWorkloadsRequest,
-          | protos.google.cloud.apphub.v1.IListWorkloadsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IWorkload
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListWorkloadsRequest,
-      protos.google.cloud.apphub.v1.IListWorkloadsResponse | null | undefined,
-      protos.google.cloud.apphub.v1.IWorkload
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IWorkload[],
-      protos.google.cloud.apphub.v1.IListWorkloadsRequest | null,
-      protos.google.cloud.apphub.v1.IListWorkloadsResponse,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IListWorkloadsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IWorkload>): void;
+  listWorkloads(
+      request: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListWorkloadsRequest,
+          protos.google.cloud.apphub.v1.IListWorkloadsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IWorkload>): void;
+  listWorkloads(
+      request?: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apphub.v1.IListWorkloadsRequest,
+          protos.google.cloud.apphub.v1.IListWorkloadsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IWorkload>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListWorkloadsRequest,
+          protos.google.cloud.apphub.v1.IListWorkloadsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IWorkload>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IWorkload[],
+        protos.google.cloud.apphub.v1.IListWorkloadsRequest|null,
+        protos.google.cloud.apphub.v1.IListWorkloadsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.apphub.v1.IListWorkloadsRequest,
-          | protos.google.cloud.apphub.v1.IListWorkloadsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IWorkload
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apphub.v1.IListWorkloadsRequest,
+      protos.google.cloud.apphub.v1.IListWorkloadsResponse|null|undefined,
+      protos.google.cloud.apphub.v1.IWorkload>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listWorkloads values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5070,63 +3798,60 @@ export class AppHubClient {
     this._log.info('listWorkloads request %j', request);
     return this.innerApiCalls
       .listWorkloads(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.apphub.v1.IWorkload[],
-          protos.google.cloud.apphub.v1.IListWorkloadsRequest | null,
-          protos.google.cloud.apphub.v1.IListWorkloadsResponse,
-        ]) => {
-          this._log.info('listWorkloads values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apphub.v1.IWorkload[],
+        protos.google.cloud.apphub.v1.IListWorkloadsRequest|null,
+        protos.google.cloud.apphub.v1.IListWorkloadsResponse
+      ]) => {
+        this._log.info('listWorkloads values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listWorkloads`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Fully qualified name of the parent Application to list Workloads
-   *   for. Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.Workload|Workload} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listWorkloadsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listWorkloads`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Fully qualified name of the parent Application to list Workloads
+ *   for. Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.Workload|Workload} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listWorkloadsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkloadsStream(
-    request?: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkloads stream %j', request);
     return this.descriptors.page.listWorkloads.createStream(
       this.innerApiCalls.listWorkloads as GaxCall,
@@ -5135,54 +3860,53 @@ export class AppHubClient {
     );
   }
 
-  /**
-   * Equivalent to `listWorkloads`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Fully qualified name of the parent Application to list Workloads
-   *   for. Expected format:
-   *   `projects/{project}/locations/{location}/applications/{application}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.apphub.v1.Workload|Workload}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.list_workloads.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_ListWorkloads_async
-   */
+/**
+ * Equivalent to `listWorkloads`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Fully qualified name of the parent Application to list Workloads
+ *   for. Expected format:
+ *   `projects/{project}/locations/{location}/applications/{application}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apphub.v1.Workload|Workload}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.list_workloads.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_ListWorkloads_async
+ */
   listWorkloadsAsync(
-    request?: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.apphub.v1.IWorkload> {
+      request?: protos.google.cloud.apphub.v1.IListWorkloadsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apphub.v1.IWorkload>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkloads iterate %j', request);
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
@@ -5190,118 +3914,93 @@ export class AppHubClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.apphub.v1.IWorkload>;
   }
-  /**
-   * Lists Applications in a host project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location to list Applications on.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.Application|Application}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listApplicationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Applications in a host project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location to list Applications on.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.Application|Application}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listApplicationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listApplications(
-    request?: protos.google.cloud.apphub.v1.IListApplicationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IApplication[],
-      protos.google.cloud.apphub.v1.IListApplicationsRequest | null,
-      protos.google.cloud.apphub.v1.IListApplicationsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.apphub.v1.IListApplicationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apphub.v1.IApplication[],
+        protos.google.cloud.apphub.v1.IListApplicationsRequest|null,
+        protos.google.cloud.apphub.v1.IListApplicationsResponse
+      ]>;
   listApplications(
-    request: protos.google.cloud.apphub.v1.IListApplicationsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListApplicationsRequest,
-      | protos.google.cloud.apphub.v1.IListApplicationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IApplication
-    >
-  ): void;
-  listApplications(
-    request: protos.google.cloud.apphub.v1.IListApplicationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListApplicationsRequest,
-      | protos.google.cloud.apphub.v1.IListApplicationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IApplication
-    >
-  ): void;
-  listApplications(
-    request?: protos.google.cloud.apphub.v1.IListApplicationsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.apphub.v1.IListApplicationsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.apphub.v1.IListApplicationsRequest,
-          | protos.google.cloud.apphub.v1.IListApplicationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IApplication
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.apphub.v1.IListApplicationsRequest,
-      | protos.google.cloud.apphub.v1.IListApplicationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apphub.v1.IApplication
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apphub.v1.IApplication[],
-      protos.google.cloud.apphub.v1.IListApplicationsRequest | null,
-      protos.google.cloud.apphub.v1.IListApplicationsResponse,
-    ]
-  > | void {
+          protos.google.cloud.apphub.v1.IListApplicationsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IApplication>): void;
+  listApplications(
+      request: protos.google.cloud.apphub.v1.IListApplicationsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListApplicationsRequest,
+          protos.google.cloud.apphub.v1.IListApplicationsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IApplication>): void;
+  listApplications(
+      request?: protos.google.cloud.apphub.v1.IListApplicationsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apphub.v1.IListApplicationsRequest,
+          protos.google.cloud.apphub.v1.IListApplicationsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IApplication>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apphub.v1.IListApplicationsRequest,
+          protos.google.cloud.apphub.v1.IListApplicationsResponse|null|undefined,
+          protos.google.cloud.apphub.v1.IApplication>):
+      Promise<[
+        protos.google.cloud.apphub.v1.IApplication[],
+        protos.google.cloud.apphub.v1.IListApplicationsRequest|null,
+        protos.google.cloud.apphub.v1.IListApplicationsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.apphub.v1.IListApplicationsRequest,
-          | protos.google.cloud.apphub.v1.IListApplicationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apphub.v1.IApplication
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apphub.v1.IListApplicationsRequest,
+      protos.google.cloud.apphub.v1.IListApplicationsResponse|null|undefined,
+      protos.google.cloud.apphub.v1.IApplication>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listApplications values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5310,62 +4009,59 @@ export class AppHubClient {
     this._log.info('listApplications request %j', request);
     return this.innerApiCalls
       .listApplications(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.apphub.v1.IApplication[],
-          protos.google.cloud.apphub.v1.IListApplicationsRequest | null,
-          protos.google.cloud.apphub.v1.IListApplicationsResponse,
-        ]) => {
-          this._log.info('listApplications values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apphub.v1.IApplication[],
+        protos.google.cloud.apphub.v1.IListApplicationsRequest|null,
+        protos.google.cloud.apphub.v1.IListApplicationsResponse
+      ]) => {
+        this._log.info('listApplications values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listApplications`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location to list Applications on.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.Application|Application} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listApplicationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listApplications`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location to list Applications on.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.Application|Application} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listApplicationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listApplicationsStream(
-    request?: protos.google.cloud.apphub.v1.IListApplicationsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.apphub.v1.IListApplicationsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listApplications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listApplications stream %j', request);
     return this.descriptors.page.listApplications.createStream(
       this.innerApiCalls.listApplications as GaxCall,
@@ -5374,53 +4070,52 @@ export class AppHubClient {
     );
   }
 
-  /**
-   * Equivalent to `listApplications`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location to list Applications on.
-   *   Expected format: `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.apphub.v1.Application|Application}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_hub.list_applications.js</caption>
-   * region_tag:apphub_v1_generated_AppHub_ListApplications_async
-   */
+/**
+ * Equivalent to `listApplications`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location to list Applications on.
+ *   Expected format: `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apphub.v1.Application|Application}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/app_hub.list_applications.js</caption>
+ * region_tag:apphub_v1_generated_AppHub_ListApplications_async
+ */
   listApplicationsAsync(
-    request?: protos.google.cloud.apphub.v1.IListApplicationsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.apphub.v1.IApplication> {
+      request?: protos.google.cloud.apphub.v1.IListApplicationsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apphub.v1.IApplication>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listApplications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listApplications iterate %j', request);
     return this.descriptors.page.listApplications.asyncIterate(
       this.innerApiCalls['listApplications'] as GaxCall,
@@ -5428,31 +4123,31 @@ export class AppHubClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.apphub.v1.IApplication>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -5467,39 +4162,39 @@ export class AppHubClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -5514,40 +4209,40 @@ export class AppHubClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -5562,11 +4257,11 @@ export class AppHubClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -5606,7 +4301,7 @@ export class AppHubClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -5644,7 +4339,7 @@ export class AppHubClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -5689,20 +4384,20 @@ export class AppHubClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5739,13 +4434,13 @@ export class AppHubClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5779,7 +4474,7 @@ export class AppHubClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -5794,20 +4489,20 @@ export class AppHubClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5851,20 +4546,20 @@ export class AppHubClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5880,7 +4575,7 @@ export class AppHubClient {
    * @param {string} application
    * @returns {string} Resource name string.
    */
-  applicationPath(project: string, location: string, application: string) {
+  applicationPath(project:string,location:string,application:string) {
     return this.pathTemplates.applicationPathTemplate.render({
       project: project,
       location: location,
@@ -5896,8 +4591,7 @@ export class AppHubClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName)
-      .project;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName).project;
   }
 
   /**
@@ -5908,8 +4602,7 @@ export class AppHubClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName)
-      .location;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName).location;
   }
 
   /**
@@ -5920,8 +4613,7 @@ export class AppHubClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName)
-      .application;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName).application;
   }
 
   /**
@@ -5932,11 +4624,7 @@ export class AppHubClient {
    * @param {string} discovered_service
    * @returns {string} Resource name string.
    */
-  discoveredServicePath(
-    project: string,
-    location: string,
-    discoveredService: string
-  ) {
+  discoveredServicePath(project:string,location:string,discoveredService:string) {
     return this.pathTemplates.discoveredServicePathTemplate.render({
       project: project,
       location: location,
@@ -5952,9 +4640,7 @@ export class AppHubClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDiscoveredServiceName(discoveredServiceName: string) {
-    return this.pathTemplates.discoveredServicePathTemplate.match(
-      discoveredServiceName
-    ).project;
+    return this.pathTemplates.discoveredServicePathTemplate.match(discoveredServiceName).project;
   }
 
   /**
@@ -5965,9 +4651,7 @@ export class AppHubClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDiscoveredServiceName(discoveredServiceName: string) {
-    return this.pathTemplates.discoveredServicePathTemplate.match(
-      discoveredServiceName
-    ).location;
+    return this.pathTemplates.discoveredServicePathTemplate.match(discoveredServiceName).location;
   }
 
   /**
@@ -5977,12 +4661,8 @@ export class AppHubClient {
    *   A fully-qualified path representing DiscoveredService resource.
    * @returns {string} A string representing the discovered_service.
    */
-  matchDiscoveredServiceFromDiscoveredServiceName(
-    discoveredServiceName: string
-  ) {
-    return this.pathTemplates.discoveredServicePathTemplate.match(
-      discoveredServiceName
-    ).discovered_service;
+  matchDiscoveredServiceFromDiscoveredServiceName(discoveredServiceName: string) {
+    return this.pathTemplates.discoveredServicePathTemplate.match(discoveredServiceName).discovered_service;
   }
 
   /**
@@ -5993,11 +4673,7 @@ export class AppHubClient {
    * @param {string} discovered_workload
    * @returns {string} Resource name string.
    */
-  discoveredWorkloadPath(
-    project: string,
-    location: string,
-    discoveredWorkload: string
-  ) {
+  discoveredWorkloadPath(project:string,location:string,discoveredWorkload:string) {
     return this.pathTemplates.discoveredWorkloadPathTemplate.render({
       project: project,
       location: location,
@@ -6013,9 +4689,7 @@ export class AppHubClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDiscoveredWorkloadName(discoveredWorkloadName: string) {
-    return this.pathTemplates.discoveredWorkloadPathTemplate.match(
-      discoveredWorkloadName
-    ).project;
+    return this.pathTemplates.discoveredWorkloadPathTemplate.match(discoveredWorkloadName).project;
   }
 
   /**
@@ -6026,9 +4700,7 @@ export class AppHubClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDiscoveredWorkloadName(discoveredWorkloadName: string) {
-    return this.pathTemplates.discoveredWorkloadPathTemplate.match(
-      discoveredWorkloadName
-    ).location;
+    return this.pathTemplates.discoveredWorkloadPathTemplate.match(discoveredWorkloadName).location;
   }
 
   /**
@@ -6038,12 +4710,8 @@ export class AppHubClient {
    *   A fully-qualified path representing DiscoveredWorkload resource.
    * @returns {string} A string representing the discovered_workload.
    */
-  matchDiscoveredWorkloadFromDiscoveredWorkloadName(
-    discoveredWorkloadName: string
-  ) {
-    return this.pathTemplates.discoveredWorkloadPathTemplate.match(
-      discoveredWorkloadName
-    ).discovered_workload;
+  matchDiscoveredWorkloadFromDiscoveredWorkloadName(discoveredWorkloadName: string) {
+    return this.pathTemplates.discoveredWorkloadPathTemplate.match(discoveredWorkloadName).discovered_workload;
   }
 
   /**
@@ -6053,7 +4721,7 @@ export class AppHubClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -6088,7 +4756,7 @@ export class AppHubClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -6114,12 +4782,7 @@ export class AppHubClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  servicePath(
-    project: string,
-    location: string,
-    application: string,
-    service: string
-  ) {
+  servicePath(project:string,location:string,application:string,service:string) {
     return this.pathTemplates.servicePathTemplate.render({
       project: project,
       location: location,
@@ -6158,8 +4821,7 @@ export class AppHubClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromServiceName(serviceName: string) {
-    return this.pathTemplates.servicePathTemplate.match(serviceName)
-      .application;
+    return this.pathTemplates.servicePathTemplate.match(serviceName).application;
   }
 
   /**
@@ -6181,11 +4843,7 @@ export class AppHubClient {
    * @param {string} service_project_attachment
    * @returns {string} Resource name string.
    */
-  serviceProjectAttachmentPath(
-    project: string,
-    location: string,
-    serviceProjectAttachment: string
-  ) {
+  serviceProjectAttachmentPath(project:string,location:string,serviceProjectAttachment:string) {
     return this.pathTemplates.serviceProjectAttachmentPathTemplate.render({
       project: project,
       location: location,
@@ -6200,12 +4858,8 @@ export class AppHubClient {
    *   A fully-qualified path representing ServiceProjectAttachment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromServiceProjectAttachmentName(
-    serviceProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.serviceProjectAttachmentPathTemplate.match(
-      serviceProjectAttachmentName
-    ).project;
+  matchProjectFromServiceProjectAttachmentName(serviceProjectAttachmentName: string) {
+    return this.pathTemplates.serviceProjectAttachmentPathTemplate.match(serviceProjectAttachmentName).project;
   }
 
   /**
@@ -6215,12 +4869,8 @@ export class AppHubClient {
    *   A fully-qualified path representing ServiceProjectAttachment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromServiceProjectAttachmentName(
-    serviceProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.serviceProjectAttachmentPathTemplate.match(
-      serviceProjectAttachmentName
-    ).location;
+  matchLocationFromServiceProjectAttachmentName(serviceProjectAttachmentName: string) {
+    return this.pathTemplates.serviceProjectAttachmentPathTemplate.match(serviceProjectAttachmentName).location;
   }
 
   /**
@@ -6230,12 +4880,8 @@ export class AppHubClient {
    *   A fully-qualified path representing ServiceProjectAttachment resource.
    * @returns {string} A string representing the service_project_attachment.
    */
-  matchServiceProjectAttachmentFromServiceProjectAttachmentName(
-    serviceProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.serviceProjectAttachmentPathTemplate.match(
-      serviceProjectAttachmentName
-    ).service_project_attachment;
+  matchServiceProjectAttachmentFromServiceProjectAttachmentName(serviceProjectAttachmentName: string) {
+    return this.pathTemplates.serviceProjectAttachmentPathTemplate.match(serviceProjectAttachmentName).service_project_attachment;
   }
 
   /**
@@ -6247,12 +4893,7 @@ export class AppHubClient {
    * @param {string} workload
    * @returns {string} Resource name string.
    */
-  workloadPath(
-    project: string,
-    location: string,
-    application: string,
-    workload: string
-  ) {
+  workloadPath(project:string,location:string,application:string,workload:string) {
     return this.pathTemplates.workloadPathTemplate.render({
       project: project,
       location: location,
@@ -6291,8 +4932,7 @@ export class AppHubClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromWorkloadName(workloadName: string) {
-    return this.pathTemplates.workloadPathTemplate.match(workloadName)
-      .application;
+    return this.pathTemplates.workloadPathTemplate.match(workloadName).application;
   }
 
   /**
@@ -6318,12 +4958,8 @@ export class AppHubClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

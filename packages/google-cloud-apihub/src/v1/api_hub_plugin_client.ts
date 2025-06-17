@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,36 +101,17 @@ export class ApiHubPluginClient {
    *     const client = new ApiHubPluginClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ApiHubPluginClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'apihub.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -146,9 +120,7 @@ export class ApiHubPluginClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -174,7 +146,7 @@ export class ApiHubPluginClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -190,9 +162,13 @@ export class ApiHubPluginClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -259,11 +235,8 @@ export class ApiHubPluginClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.apihub.v1.ApiHubPlugin',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.apihub.v1.ApiHubPlugin', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -294,39 +267,31 @@ export class ApiHubPluginClient {
     // Put together the "service stub" for
     // google.cloud.apihub.v1.ApiHubPlugin.
     this.apiHubPluginStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.apihub.v1.ApiHubPlugin'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.apihub.v1.ApiHubPlugin') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.apihub.v1.ApiHubPlugin,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const apiHubPluginStubMethods = [
-      'getPlugin',
-      'enablePlugin',
-      'disablePlugin',
-    ];
+    const apiHubPluginStubMethods =
+        ['getPlugin', 'enablePlugin', 'disablePlugin'];
     for (const methodName of apiHubPluginStubMethods) {
       const callPromise = this.apiHubPluginStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -346,14 +311,8 @@ export class ApiHubPluginClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apihub.googleapis.com';
   }
@@ -364,14 +323,8 @@ export class ApiHubPluginClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apihub.googleapis.com';
   }
@@ -402,7 +355,9 @@ export class ApiHubPluginClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -411,9 +366,8 @@ export class ApiHubPluginClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -424,341 +378,295 @@ export class ApiHubPluginClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Get details about an API Hub plugin.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the plugin to retrieve.
-   *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_hub_plugin.get_plugin.js</caption>
-   * region_tag:apihub_v1_generated_ApiHubPlugin_GetPlugin_async
-   */
+/**
+ * Get details about an API Hub plugin.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the plugin to retrieve.
+ *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.get_plugin.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_GetPlugin_async
+ */
   getPlugin(
-    request?: protos.google.cloud.apihub.v1.IGetPluginRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IGetPluginRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apihub.v1.IGetPluginRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IGetPluginRequest|undefined, {}|undefined
+      ]>;
   getPlugin(
-    request: protos.google.cloud.apihub.v1.IGetPluginRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IGetPluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPlugin(
-    request: protos.google.cloud.apihub.v1.IGetPluginRequest,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IGetPluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPlugin(
-    request?: protos.google.cloud.apihub.v1.IGetPluginRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apihub.v1.IGetPluginRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IGetPluginRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IGetPluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IGetPluginRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apihub.v1.IGetPluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPlugin(
+      request: protos.google.cloud.apihub.v1.IGetPluginRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IGetPluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPlugin(
+      request?: protos.google.cloud.apihub.v1.IGetPluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IGetPluginRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IGetPluginRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IGetPluginRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPlugin request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IGetPluginRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IGetPluginRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPlugin response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPlugin(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IGetPluginRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getPlugin response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPlugin(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IGetPluginRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPlugin response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Enables a plugin.
-   * The `state` of the plugin after enabling is `ENABLED`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the plugin to enable.
-   *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_hub_plugin.enable_plugin.js</caption>
-   * region_tag:apihub_v1_generated_ApiHubPlugin_EnablePlugin_async
-   */
+/**
+ * Enables a plugin.
+ * The `state` of the plugin after enabling is `ENABLED`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the plugin to enable.
+ *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.enable_plugin.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_EnablePlugin_async
+ */
   enablePlugin(
-    request?: protos.google.cloud.apihub.v1.IEnablePluginRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IEnablePluginRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apihub.v1.IEnablePluginRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IEnablePluginRequest|undefined, {}|undefined
+      ]>;
   enablePlugin(
-    request: protos.google.cloud.apihub.v1.IEnablePluginRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IEnablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  enablePlugin(
-    request: protos.google.cloud.apihub.v1.IEnablePluginRequest,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IEnablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  enablePlugin(
-    request?: protos.google.cloud.apihub.v1.IEnablePluginRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apihub.v1.IEnablePluginRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IEnablePluginRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IEnablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IEnablePluginRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apihub.v1.IEnablePluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  enablePlugin(
+      request: protos.google.cloud.apihub.v1.IEnablePluginRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IEnablePluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  enablePlugin(
+      request?: protos.google.cloud.apihub.v1.IEnablePluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IEnablePluginRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IEnablePluginRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IEnablePluginRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('enablePlugin request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IEnablePluginRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IEnablePluginRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('enablePlugin response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .enablePlugin(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IEnablePluginRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('enablePlugin response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.enablePlugin(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IEnablePluginRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('enablePlugin response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Disables a plugin.
-   * The `state` of the plugin after disabling is `DISABLED`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the plugin to disable.
-   *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_hub_plugin.disable_plugin.js</caption>
-   * region_tag:apihub_v1_generated_ApiHubPlugin_DisablePlugin_async
-   */
+/**
+ * Disables a plugin.
+ * The `state` of the plugin after disabling is `DISABLED`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the plugin to disable.
+ *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.disable_plugin.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_DisablePlugin_async
+ */
   disablePlugin(
-    request?: protos.google.cloud.apihub.v1.IDisablePluginRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IDisablePluginRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apihub.v1.IDisablePluginRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IDisablePluginRequest|undefined, {}|undefined
+      ]>;
   disablePlugin(
-    request: protos.google.cloud.apihub.v1.IDisablePluginRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IDisablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  disablePlugin(
-    request: protos.google.cloud.apihub.v1.IDisablePluginRequest,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IDisablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  disablePlugin(
-    request?: protos.google.cloud.apihub.v1.IDisablePluginRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apihub.v1.IDisablePluginRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apihub.v1.IPlugin,
-          | protos.google.cloud.apihub.v1.IDisablePluginRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IDisablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IDisablePluginRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apihub.v1.IDisablePluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  disablePlugin(
+      request: protos.google.cloud.apihub.v1.IDisablePluginRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IDisablePluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  disablePlugin(
+      request?: protos.google.cloud.apihub.v1.IDisablePluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IDisablePluginRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IDisablePluginRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IDisablePluginRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('disablePlugin request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apihub.v1.IPlugin,
-          | protos.google.cloud.apihub.v1.IDisablePluginRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IDisablePluginRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('disablePlugin response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .disablePlugin(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IDisablePluginRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('disablePlugin response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.disablePlugin(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IDisablePluginRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('disablePlugin response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -798,7 +706,7 @@ export class ApiHubPluginClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -848,7 +756,7 @@ export class ApiHubPluginClient {
    * @param {string} api
    * @returns {string} Resource name string.
    */
-  apiPath(project: string, location: string, api: string) {
+  apiPath(project:string,location:string,api:string) {
     return this.pathTemplates.apiPathTemplate.render({
       project: project,
       location: location,
@@ -897,11 +805,7 @@ export class ApiHubPluginClient {
    * @param {string} api_hub_instance
    * @returns {string} Resource name string.
    */
-  apiHubInstancePath(
-    project: string,
-    location: string,
-    apiHubInstance: string
-  ) {
+  apiHubInstancePath(project:string,location:string,apiHubInstance:string) {
     return this.pathTemplates.apiHubInstancePathTemplate.render({
       project: project,
       location: location,
@@ -917,9 +821,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(
-      apiHubInstanceName
-    ).project;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).project;
   }
 
   /**
@@ -930,9 +832,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(
-      apiHubInstanceName
-    ).location;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).location;
   }
 
   /**
@@ -943,9 +843,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the api_hub_instance.
    */
   matchApiHubInstanceFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(
-      apiHubInstanceName
-    ).api_hub_instance;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).api_hub_instance;
   }
 
   /**
@@ -958,13 +856,7 @@ export class ApiHubPluginClient {
    * @param {string} operation
    * @returns {string} Resource name string.
    */
-  apiOperationPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    operation: string
-  ) {
+  apiOperationPath(project:string,location:string,api:string,version:string,operation:string) {
     return this.pathTemplates.apiOperationPathTemplate.render({
       project: project,
       location: location,
@@ -982,8 +874,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .project;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).project;
   }
 
   /**
@@ -994,8 +885,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .location;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).location;
   }
 
   /**
@@ -1006,8 +896,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the api.
    */
   matchApiFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .api;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).api;
   }
 
   /**
@@ -1018,8 +907,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .version;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).version;
   }
 
   /**
@@ -1030,8 +918,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the operation.
    */
   matchOperationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .operation;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).operation;
   }
 
   /**
@@ -1042,7 +929,7 @@ export class ApiHubPluginClient {
    * @param {string} attribute
    * @returns {string} Resource name string.
    */
-  attributePath(project: string, location: string, attribute: string) {
+  attributePath(project:string,location:string,attribute:string) {
     return this.pathTemplates.attributePathTemplate.render({
       project: project,
       location: location,
@@ -1058,8 +945,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName)
-      .project;
+    return this.pathTemplates.attributePathTemplate.match(attributeName).project;
   }
 
   /**
@@ -1070,8 +956,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName)
-      .location;
+    return this.pathTemplates.attributePathTemplate.match(attributeName).location;
   }
 
   /**
@@ -1082,8 +967,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the attribute.
    */
   matchAttributeFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName)
-      .attribute;
+    return this.pathTemplates.attributePathTemplate.match(attributeName).attribute;
   }
 
   /**
@@ -1096,13 +980,7 @@ export class ApiHubPluginClient {
    * @param {string} definition
    * @returns {string} Resource name string.
    */
-  definitionPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    definition: string
-  ) {
+  definitionPath(project:string,location:string,api:string,version:string,definition:string) {
     return this.pathTemplates.definitionPathTemplate.render({
       project: project,
       location: location,
@@ -1120,8 +998,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .project;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).project;
   }
 
   /**
@@ -1132,8 +1009,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .location;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).location;
   }
 
   /**
@@ -1155,8 +1031,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .version;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).version;
   }
 
   /**
@@ -1167,8 +1042,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the definition.
    */
   matchDefinitionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .definition;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).definition;
   }
 
   /**
@@ -1179,7 +1053,7 @@ export class ApiHubPluginClient {
    * @param {string} dependency
    * @returns {string} Resource name string.
    */
-  dependencyPath(project: string, location: string, dependency: string) {
+  dependencyPath(project:string,location:string,dependency:string) {
     return this.pathTemplates.dependencyPathTemplate.render({
       project: project,
       location: location,
@@ -1195,8 +1069,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
-      .project;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).project;
   }
 
   /**
@@ -1207,8 +1080,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
-      .location;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).location;
   }
 
   /**
@@ -1219,8 +1091,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the dependency.
    */
   matchDependencyFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
-      .dependency;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).dependency;
   }
 
   /**
@@ -1231,7 +1102,7 @@ export class ApiHubPluginClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project: string, location: string, deployment: string) {
+  deploymentPath(project:string,location:string,deployment:string) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1247,8 +1118,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
   }
 
   /**
@@ -1259,8 +1129,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
   }
 
   /**
@@ -1271,8 +1140,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
   }
 
   /**
@@ -1283,7 +1151,7 @@ export class ApiHubPluginClient {
    * @param {string} external_api
    * @returns {string} Resource name string.
    */
-  externalApiPath(project: string, location: string, externalApi: string) {
+  externalApiPath(project:string,location:string,externalApi:string) {
     return this.pathTemplates.externalApiPathTemplate.render({
       project: project,
       location: location,
@@ -1299,8 +1167,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
-      .project;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).project;
   }
 
   /**
@@ -1311,8 +1178,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
-      .location;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).location;
   }
 
   /**
@@ -1323,8 +1189,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the external_api.
    */
   matchExternalApiFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
-      .external_api;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).external_api;
   }
 
   /**
@@ -1335,11 +1200,7 @@ export class ApiHubPluginClient {
    * @param {string} host_project_registration
    * @returns {string} Resource name string.
    */
-  hostProjectRegistrationPath(
-    project: string,
-    location: string,
-    hostProjectRegistration: string
-  ) {
+  hostProjectRegistrationPath(project:string,location:string,hostProjectRegistration:string) {
     return this.pathTemplates.hostProjectRegistrationPathTemplate.render({
       project: project,
       location: location,
@@ -1354,12 +1215,8 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHostProjectRegistrationName(
-    hostProjectRegistrationName: string
-  ) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
-      hostProjectRegistrationName
-    ).project;
+  matchProjectFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).project;
   }
 
   /**
@@ -1369,12 +1226,8 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHostProjectRegistrationName(
-    hostProjectRegistrationName: string
-  ) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
-      hostProjectRegistrationName
-    ).location;
+  matchLocationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).location;
   }
 
   /**
@@ -1384,12 +1237,8 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the host_project_registration.
    */
-  matchHostProjectRegistrationFromHostProjectRegistrationName(
-    hostProjectRegistrationName: string
-  ) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
-      hostProjectRegistrationName
-    ).host_project_registration;
+  matchHostProjectRegistrationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).host_project_registration;
   }
 
   /**
@@ -1400,7 +1249,7 @@ export class ApiHubPluginClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  pluginPath(project: string, location: string, plugin: string) {
+  pluginPath(project:string,location:string,plugin:string) {
     return this.pathTemplates.pluginPathTemplate.render({
       project: project,
       location: location,
@@ -1449,11 +1298,7 @@ export class ApiHubPluginClient {
    * @param {string} runtime_project_attachment
    * @returns {string} Resource name string.
    */
-  runtimeProjectAttachmentPath(
-    project: string,
-    location: string,
-    runtimeProjectAttachment: string
-  ) {
+  runtimeProjectAttachmentPath(project:string,location:string,runtimeProjectAttachment:string) {
     return this.pathTemplates.runtimeProjectAttachmentPathTemplate.render({
       project: project,
       location: location,
@@ -1468,12 +1313,8 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromRuntimeProjectAttachmentName(
-    runtimeProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
-      runtimeProjectAttachmentName
-    ).project;
+  matchProjectFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).project;
   }
 
   /**
@@ -1483,12 +1324,8 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromRuntimeProjectAttachmentName(
-    runtimeProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
-      runtimeProjectAttachmentName
-    ).location;
+  matchLocationFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).location;
   }
 
   /**
@@ -1498,12 +1335,8 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the runtime_project_attachment.
    */
-  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(
-    runtimeProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
-      runtimeProjectAttachmentName
-    ).runtime_project_attachment;
+  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).runtime_project_attachment;
   }
 
   /**
@@ -1516,13 +1349,7 @@ export class ApiHubPluginClient {
    * @param {string} spec
    * @returns {string} Resource name string.
    */
-  specPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    spec: string
-  ) {
+  specPath(project:string,location:string,api:string,version:string,spec:string) {
     return this.pathTemplates.specPathTemplate.render({
       project: project,
       location: location,
@@ -1595,7 +1422,7 @@ export class ApiHubPluginClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  styleGuidePath(project: string, location: string, plugin: string) {
+  styleGuidePath(project:string,location:string,plugin:string) {
     return this.pathTemplates.styleGuidePathTemplate.render({
       project: project,
       location: location,
@@ -1611,8 +1438,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
-      .project;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).project;
   }
 
   /**
@@ -1623,8 +1449,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
-      .location;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).location;
   }
 
   /**
@@ -1635,8 +1460,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the plugin.
    */
   matchPluginFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
-      .plugin;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).plugin;
   }
 
   /**
@@ -1648,7 +1472,7 @@ export class ApiHubPluginClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  versionPath(project: string, location: string, api: string, version: string) {
+  versionPath(project:string,location:string,api:string,version:string) {
     return this.pathTemplates.versionPathTemplate.render({
       project: project,
       location: location,
@@ -1713,9 +1537,7 @@ export class ApiHubPluginClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class AssetServiceClient {
    *     const client = new AssetServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AssetServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'cloudasset.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class AssetServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class AssetServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -244,100 +217,59 @@ export class AssetServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAssets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'assets'
-      ),
-      searchAllResources: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'results'
-      ),
-      searchAllIamPolicies: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'results'
-      ),
-      listSavedQueries: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'savedQueries'
-      ),
-      analyzeOrgPolicies: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'orgPolicyResults'
-      ),
-      analyzeOrgPolicyGovernedContainers: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'governedContainers'
-      ),
-      analyzeOrgPolicyGovernedAssets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'governedAssets'
-      ),
+      listAssets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'assets'),
+      searchAllResources:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'results'),
+      searchAllIamPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'results'),
+      listSavedQueries:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'savedQueries'),
+      analyzeOrgPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'orgPolicyResults'),
+      analyzeOrgPolicyGovernedContainers:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'governedContainers'),
+      analyzeOrgPolicyGovernedAssets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'governedAssets')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=*/*/operations/*/**}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=*/*/operations/*/**}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const exportAssetsResponse = protoFilesRoot.lookup(
-      '.google.cloud.asset.v1.ExportAssetsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.asset.v1.ExportAssetsResponse') as gax.protobuf.Type;
     const exportAssetsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.asset.v1.ExportAssetsRequest'
-    ) as gax.protobuf.Type;
+      '.google.cloud.asset.v1.ExportAssetsRequest') as gax.protobuf.Type;
     const analyzeIamPolicyLongrunningResponse = protoFilesRoot.lookup(
-      '.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse') as gax.protobuf.Type;
     const analyzeIamPolicyLongrunningMetadata = protoFilesRoot.lookup(
-      '.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       exportAssets: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportAssetsResponse.decode.bind(exportAssetsResponse),
-        exportAssetsMetadata.decode.bind(exportAssetsMetadata)
-      ),
+        exportAssetsMetadata.decode.bind(exportAssetsMetadata)),
       analyzeIamPolicyLongrunning: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        analyzeIamPolicyLongrunningResponse.decode.bind(
-          analyzeIamPolicyLongrunningResponse
-        ),
-        analyzeIamPolicyLongrunningMetadata.decode.bind(
-          analyzeIamPolicyLongrunningMetadata
-        )
-      ),
+        analyzeIamPolicyLongrunningResponse.decode.bind(analyzeIamPolicyLongrunningResponse),
+        analyzeIamPolicyLongrunningMetadata.decode.bind(analyzeIamPolicyLongrunningMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.asset.v1.AssetService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.asset.v1.AssetService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -368,57 +300,28 @@ export class AssetServiceClient {
     // Put together the "service stub" for
     // google.cloud.asset.v1.AssetService.
     this.assetServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.asset.v1.AssetService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.asset.v1.AssetService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.asset.v1.AssetService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const assetServiceStubMethods = [
-      'exportAssets',
-      'listAssets',
-      'batchGetAssetsHistory',
-      'createFeed',
-      'getFeed',
-      'listFeeds',
-      'updateFeed',
-      'deleteFeed',
-      'searchAllResources',
-      'searchAllIamPolicies',
-      'analyzeIamPolicy',
-      'analyzeIamPolicyLongrunning',
-      'analyzeMove',
-      'queryAssets',
-      'createSavedQuery',
-      'getSavedQuery',
-      'listSavedQueries',
-      'updateSavedQuery',
-      'deleteSavedQuery',
-      'batchGetEffectiveIamPolicies',
-      'analyzeOrgPolicies',
-      'analyzeOrgPolicyGovernedContainers',
-      'analyzeOrgPolicyGovernedAssets',
-    ];
+    const assetServiceStubMethods =
+        ['exportAssets', 'listAssets', 'batchGetAssetsHistory', 'createFeed', 'getFeed', 'listFeeds', 'updateFeed', 'deleteFeed', 'searchAllResources', 'searchAllIamPolicies', 'analyzeIamPolicy', 'analyzeIamPolicyLongrunning', 'analyzeMove', 'queryAssets', 'createSavedQuery', 'getSavedQuery', 'listSavedQueries', 'updateSavedQuery', 'deleteSavedQuery', 'batchGetEffectiveIamPolicies', 'analyzeOrgPolicies', 'analyzeOrgPolicyGovernedContainers', 'analyzeOrgPolicyGovernedAssets'];
     for (const methodName of assetServiceStubMethods) {
       const callPromise = this.assetServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -443,14 +346,8 @@ export class AssetServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudasset.googleapis.com';
   }
@@ -461,14 +358,8 @@ export class AssetServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudasset.googleapis.com';
   }
@@ -499,7 +390,9 @@ export class AssetServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -508,9 +401,8 @@ export class AssetServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -521,2382 +413,1993 @@ export class AssetServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Batch gets the update history of assets that overlap a time window.
-   * For IAM_POLICY content, this API outputs history when the asset and its
-   * attached IAM POLICY both exist. This can create gaps in the output history.
-   * Otherwise, this API outputs history with asset in both non-delete or
-   * deleted status.
-   * If a specified asset does not exist, this API returns an INVALID_ARGUMENT
-   * error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative name of the root asset. It can only be an
-   *   organization number (such as "organizations/123"), a project ID (such as
-   *   "projects/my-project-id")", or a project number (such as "projects/12345").
-   * @param {string[]} request.assetNames
-   *   A list of the full names of the assets.
-   *   See: https://cloud.google.com/asset-inventory/docs/resource-name-format
-   *   Example:
-   *
-   *   `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
-   *
-   *   The request becomes a no-op if the asset name list is empty, and the max
-   *   size of the asset name list is 100 in one request.
-   * @param {google.cloud.asset.v1.ContentType} [request.contentType]
-   *   Optional. The content type.
-   * @param {google.cloud.asset.v1.TimeWindow} [request.readTimeWindow]
-   *   Optional. The time window for the asset history. Both start_time and
-   *   end_time are optional and if set, it must be after the current time minus
-   *   35 days. If end_time is not set, it is default to current timestamp.
-   *   If start_time is not set, the snapshot of the assets at end_time will be
-   *   returned. The returned results contain all temporal assets whose time
-   *   window overlap with read_time_window.
-   * @param {string[]} [request.relationshipTypes]
-   *   Optional. A list of relationship types to output, for example:
-   *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
-   *   content_type=RELATIONSHIP.
-   *   * If specified:
-   *   it outputs specified relationships' history on the [asset_names]. It
-   *   returns an error if any of the [relationship_types] doesn't belong to the
-   *   supported relationship types of the [asset_names] or if any of the
-   *   [asset_names]'s types doesn't belong to the source types of the
-   *   [relationship_types].
-   *   * Otherwise:
-   *   it outputs the supported relationships' history on the [asset_names] or
-   *   returns an error if any of the [asset_names]'s types has no relationship
-   *   support.
-   *   See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
-   *   supported asset types and relationship types.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.BatchGetAssetsHistoryResponse|BatchGetAssetsHistoryResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.batch_get_assets_history.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_BatchGetAssetsHistory_async
-   */
+/**
+ * Batch gets the update history of assets that overlap a time window.
+ * For IAM_POLICY content, this API outputs history when the asset and its
+ * attached IAM POLICY both exist. This can create gaps in the output history.
+ * Otherwise, this API outputs history with asset in both non-delete or
+ * deleted status.
+ * If a specified asset does not exist, this API returns an INVALID_ARGUMENT
+ * error.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative name of the root asset. It can only be an
+ *   organization number (such as "organizations/123"), a project ID (such as
+ *   "projects/my-project-id")", or a project number (such as "projects/12345").
+ * @param {string[]} request.assetNames
+ *   A list of the full names of the assets.
+ *   See: https://cloud.google.com/asset-inventory/docs/resource-name-format
+ *   Example:
+ *
+ *   `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
+ *
+ *   The request becomes a no-op if the asset name list is empty, and the max
+ *   size of the asset name list is 100 in one request.
+ * @param {google.cloud.asset.v1.ContentType} [request.contentType]
+ *   Optional. The content type.
+ * @param {google.cloud.asset.v1.TimeWindow} [request.readTimeWindow]
+ *   Optional. The time window for the asset history. Both start_time and
+ *   end_time are optional and if set, it must be after the current time minus
+ *   35 days. If end_time is not set, it is default to current timestamp.
+ *   If start_time is not set, the snapshot of the assets at end_time will be
+ *   returned. The returned results contain all temporal assets whose time
+ *   window overlap with read_time_window.
+ * @param {string[]} [request.relationshipTypes]
+ *   Optional. A list of relationship types to output, for example:
+ *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+ *   content_type=RELATIONSHIP.
+ *   * If specified:
+ *   it outputs specified relationships' history on the [asset_names]. It
+ *   returns an error if any of the [relationship_types] doesn't belong to the
+ *   supported relationship types of the [asset_names] or if any of the
+ *   [asset_names]'s types doesn't belong to the source types of the
+ *   [relationship_types].
+ *   * Otherwise:
+ *   it outputs the supported relationships' history on the [asset_names] or
+ *   returns an error if any of the [asset_names]'s types has no relationship
+ *   support.
+ *   See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+ *   supported asset types and relationship types.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.BatchGetAssetsHistoryResponse|BatchGetAssetsHistoryResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.batch_get_assets_history.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_BatchGetAssetsHistory_async
+ */
   batchGetAssetsHistory(
-    request?: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
-      protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
+        protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest|undefined, {}|undefined
+      ]>;
   batchGetAssetsHistory(
-    request: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
-      | protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchGetAssetsHistory(
-    request: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
-      | protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchGetAssetsHistory(
-    request?: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
-          | protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
-      | protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
-      protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchGetAssetsHistory(
+      request: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
+          protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchGetAssetsHistory(
+      request?: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
+          protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
+          protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
+        protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchGetAssetsHistory request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
-          | protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
+        protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchGetAssetsHistory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchGetAssetsHistory(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
-          (
-            | protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchGetAssetsHistory response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchGetAssetsHistory(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
+        protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchGetAssetsHistory response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a feed in a parent project/folder/organization to listen to its
-   * asset updates.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project/folder/organization where this feed
-   *   should be created in. It can only be an organization number (such as
-   *   "organizations/123"), a folder number (such as "folders/123"), a project ID
-   *   (such as "projects/my-project-id"), or a project number (such as
-   *   "projects/12345").
-   * @param {string} request.feedId
-   *   Required. This is the client-assigned asset feed identifier and it needs to
-   *   be unique under a specific parent project/folder/organization.
-   * @param {google.cloud.asset.v1.Feed} request.feed
-   *   Required. The feed details. The field `name` must be empty and it will be
-   *   generated in the format of: projects/project_number/feeds/feed_id
-   *   folders/folder_number/feeds/feed_id
-   *   organizations/organization_number/feeds/feed_id
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.Feed|Feed}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.create_feed.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_CreateFeed_async
-   */
+/**
+ * Creates a feed in a parent project/folder/organization to listen to its
+ * asset updates.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project/folder/organization where this feed
+ *   should be created in. It can only be an organization number (such as
+ *   "organizations/123"), a folder number (such as "folders/123"), a project ID
+ *   (such as "projects/my-project-id"), or a project number (such as
+ *   "projects/12345").
+ * @param {string} request.feedId
+ *   Required. This is the client-assigned asset feed identifier and it needs to
+ *   be unique under a specific parent project/folder/organization.
+ * @param {google.cloud.asset.v1.Feed} request.feed
+ *   Required. The feed details. The field `name` must be empty and it will be
+ *   generated in the format of: projects/project_number/feeds/feed_id
+ *   folders/folder_number/feeds/feed_id
+ *   organizations/organization_number/feeds/feed_id
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.Feed|Feed}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.create_feed.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_CreateFeed_async
+ */
   createFeed(
-    request?: protos.google.cloud.asset.v1.ICreateFeedRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.ICreateFeedRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.ICreateFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.ICreateFeedRequest|undefined, {}|undefined
+      ]>;
   createFeed(
-    request: protos.google.cloud.asset.v1.ICreateFeedRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.ICreateFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createFeed(
-    request: protos.google.cloud.asset.v1.ICreateFeedRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.ICreateFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createFeed(
-    request?: protos.google.cloud.asset.v1.ICreateFeedRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.ICreateFeedRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.IFeed,
-          protos.google.cloud.asset.v1.ICreateFeedRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.ICreateFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.ICreateFeedRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.ICreateFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  createFeed(
+      request: protos.google.cloud.asset.v1.ICreateFeedRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.ICreateFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  createFeed(
+      request?: protos.google.cloud.asset.v1.ICreateFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.ICreateFeedRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.ICreateFeedRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.ICreateFeedRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createFeed request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.IFeed,
-          protos.google.cloud.asset.v1.ICreateFeedRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.ICreateFeedRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createFeed(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.IFeed,
-          protos.google.cloud.asset.v1.ICreateFeedRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createFeed response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createFeed(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.ICreateFeedRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createFeed response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details about an asset feed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Feed and it must be in the format of:
-   *   projects/project_number/feeds/feed_id
-   *   folders/folder_number/feeds/feed_id
-   *   organizations/organization_number/feeds/feed_id
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.Feed|Feed}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.get_feed.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_GetFeed_async
-   */
+/**
+ * Gets details about an asset feed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Feed and it must be in the format of:
+ *   projects/project_number/feeds/feed_id
+ *   folders/folder_number/feeds/feed_id
+ *   organizations/organization_number/feeds/feed_id
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.Feed|Feed}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.get_feed.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_GetFeed_async
+ */
   getFeed(
-    request?: protos.google.cloud.asset.v1.IGetFeedRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.IGetFeedRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IGetFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.IGetFeedRequest|undefined, {}|undefined
+      ]>;
   getFeed(
-    request: protos.google.cloud.asset.v1.IGetFeedRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.IGetFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFeed(
-    request: protos.google.cloud.asset.v1.IGetFeedRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.IGetFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFeed(
-    request?: protos.google.cloud.asset.v1.IGetFeedRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IGetFeedRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.IFeed,
-          protos.google.cloud.asset.v1.IGetFeedRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.IGetFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.IGetFeedRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IGetFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFeed(
+      request: protos.google.cloud.asset.v1.IGetFeedRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.IGetFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFeed(
+      request?: protos.google.cloud.asset.v1.IGetFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.IGetFeedRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.IGetFeedRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.IGetFeedRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getFeed request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.IFeed,
-          protos.google.cloud.asset.v1.IGetFeedRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.IGetFeedRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getFeed(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.IFeed,
-          protos.google.cloud.asset.v1.IGetFeedRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getFeed response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getFeed(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.IGetFeedRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getFeed response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lists all asset feeds in a parent project/folder/organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent project/folder/organization whose feeds are to be
-   *   listed. It can only be using project/folder/organization number (such as
-   *   "folders/12345")", or a project ID (such as "projects/my-project-id").
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.ListFeedsResponse|ListFeedsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.list_feeds.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_ListFeeds_async
-   */
+/**
+ * Lists all asset feeds in a parent project/folder/organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent project/folder/organization whose feeds are to be
+ *   listed. It can only be using project/folder/organization number (such as
+ *   "folders/12345")", or a project ID (such as "projects/my-project-id").
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.ListFeedsResponse|ListFeedsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.list_feeds.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_ListFeeds_async
+ */
   listFeeds(
-    request?: protos.google.cloud.asset.v1.IListFeedsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IListFeedsResponse,
-      protos.google.cloud.asset.v1.IListFeedsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IListFeedsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IListFeedsResponse,
+        protos.google.cloud.asset.v1.IListFeedsRequest|undefined, {}|undefined
+      ]>;
   listFeeds(
-    request: protos.google.cloud.asset.v1.IListFeedsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IListFeedsResponse,
-      protos.google.cloud.asset.v1.IListFeedsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listFeeds(
-    request: protos.google.cloud.asset.v1.IListFeedsRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IListFeedsResponse,
-      protos.google.cloud.asset.v1.IListFeedsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listFeeds(
-    request?: protos.google.cloud.asset.v1.IListFeedsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IListFeedsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.IListFeedsResponse,
-          protos.google.cloud.asset.v1.IListFeedsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.IListFeedsResponse,
-      protos.google.cloud.asset.v1.IListFeedsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IListFeedsResponse,
-      protos.google.cloud.asset.v1.IListFeedsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IListFeedsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listFeeds(
+      request: protos.google.cloud.asset.v1.IListFeedsRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.IListFeedsResponse,
+          protos.google.cloud.asset.v1.IListFeedsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listFeeds(
+      request?: protos.google.cloud.asset.v1.IListFeedsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.IListFeedsResponse,
+          protos.google.cloud.asset.v1.IListFeedsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.IListFeedsResponse,
+          protos.google.cloud.asset.v1.IListFeedsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.IListFeedsResponse,
+        protos.google.cloud.asset.v1.IListFeedsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFeeds request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.IListFeedsResponse,
-          protos.google.cloud.asset.v1.IListFeedsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.IListFeedsResponse,
+        protos.google.cloud.asset.v1.IListFeedsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listFeeds response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listFeeds(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.IListFeedsResponse,
-          protos.google.cloud.asset.v1.IListFeedsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('listFeeds response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listFeeds(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.IListFeedsResponse,
+        protos.google.cloud.asset.v1.IListFeedsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listFeeds response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an asset feed configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.asset.v1.Feed} request.feed
-   *   Required. The new values of feed details. It must match an existing feed
-   *   and the field `name` must be in the format of:
-   *   projects/project_number/feeds/feed_id or
-   *   folders/folder_number/feeds/feed_id or
-   *   organizations/organization_number/feeds/feed_id.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Only updates the `feed` fields indicated by this mask.
-   *   The field mask must not be empty, and it must not contain fields that
-   *   are immutable or only set by the server.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.Feed|Feed}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.update_feed.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_UpdateFeed_async
-   */
+/**
+ * Updates an asset feed configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.asset.v1.Feed} request.feed
+ *   Required. The new values of feed details. It must match an existing feed
+ *   and the field `name` must be in the format of:
+ *   projects/project_number/feeds/feed_id or
+ *   folders/folder_number/feeds/feed_id or
+ *   organizations/organization_number/feeds/feed_id.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Only updates the `feed` fields indicated by this mask.
+ *   The field mask must not be empty, and it must not contain fields that
+ *   are immutable or only set by the server.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.Feed|Feed}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.update_feed.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_UpdateFeed_async
+ */
   updateFeed(
-    request?: protos.google.cloud.asset.v1.IUpdateFeedRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.IUpdateFeedRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IUpdateFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.IUpdateFeedRequest|undefined, {}|undefined
+      ]>;
   updateFeed(
-    request: protos.google.cloud.asset.v1.IUpdateFeedRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.IUpdateFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFeed(
-    request: protos.google.cloud.asset.v1.IUpdateFeedRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.IUpdateFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFeed(
-    request?: protos.google.cloud.asset.v1.IUpdateFeedRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IUpdateFeedRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.IFeed,
-          protos.google.cloud.asset.v1.IUpdateFeedRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.IUpdateFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IFeed,
-      protos.google.cloud.asset.v1.IUpdateFeedRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IUpdateFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFeed(
+      request: protos.google.cloud.asset.v1.IUpdateFeedRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.IUpdateFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFeed(
+      request?: protos.google.cloud.asset.v1.IUpdateFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.IUpdateFeedRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.IUpdateFeedRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.IUpdateFeedRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'feed.name': request.feed!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'feed.name': request.feed!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateFeed request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.IFeed,
-          protos.google.cloud.asset.v1.IUpdateFeedRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.IUpdateFeedRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateFeed(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.IFeed,
-          protos.google.cloud.asset.v1.IUpdateFeedRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateFeed response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateFeed(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.IFeed,
+        protos.google.cloud.asset.v1.IUpdateFeedRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateFeed response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an asset feed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the feed and it must be in the format of:
-   *   projects/project_number/feeds/feed_id
-   *   folders/folder_number/feeds/feed_id
-   *   organizations/organization_number/feeds/feed_id
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.delete_feed.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_DeleteFeed_async
-   */
+/**
+ * Deletes an asset feed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the feed and it must be in the format of:
+ *   projects/project_number/feeds/feed_id
+ *   folders/folder_number/feeds/feed_id
+ *   organizations/organization_number/feeds/feed_id
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.delete_feed.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_DeleteFeed_async
+ */
   deleteFeed(
-    request?: protos.google.cloud.asset.v1.IDeleteFeedRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.asset.v1.IDeleteFeedRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IDeleteFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.asset.v1.IDeleteFeedRequest|undefined, {}|undefined
+      ]>;
   deleteFeed(
-    request: protos.google.cloud.asset.v1.IDeleteFeedRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.asset.v1.IDeleteFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteFeed(
-    request: protos.google.cloud.asset.v1.IDeleteFeedRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.asset.v1.IDeleteFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteFeed(
-    request?: protos.google.cloud.asset.v1.IDeleteFeedRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IDeleteFeedRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.asset.v1.IDeleteFeedRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.asset.v1.IDeleteFeedRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.asset.v1.IDeleteFeedRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IDeleteFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteFeed(
+      request: protos.google.cloud.asset.v1.IDeleteFeedRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.asset.v1.IDeleteFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteFeed(
+      request?: protos.google.cloud.asset.v1.IDeleteFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.asset.v1.IDeleteFeedRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.asset.v1.IDeleteFeedRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.asset.v1.IDeleteFeedRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteFeed request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.asset.v1.IDeleteFeedRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.asset.v1.IDeleteFeedRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteFeed(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.asset.v1.IDeleteFeedRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteFeed response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteFeed(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.asset.v1.IDeleteFeedRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteFeed response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Analyzes IAM policies to answer which identities have what accesses on
-   * which resources.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.asset.v1.IamPolicyAnalysisQuery} request.analysisQuery
-   *   Required. The request query.
-   * @param {string} [request.savedAnalysisQuery]
-   *   Optional. The name of a saved query, which must be in the format of:
-   *
-   *   * projects/project_number/savedQueries/saved_query_id
-   *   * folders/folder_number/savedQueries/saved_query_id
-   *   * organizations/organization_number/savedQueries/saved_query_id
-   *
-   *   If both `analysis_query` and `saved_analysis_query` are provided, they
-   *   will be merged together with the `saved_analysis_query` as base and
-   *   the `analysis_query` as overrides. For more details of the merge behavior,
-   *   refer to the
-   *   [MergeFrom](https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details)
-   *   page.
-   *
-   *   Note that you cannot override primitive fields with default value, such as
-   *   0 or empty string, etc., because we use proto3, which doesn't support field
-   *   presence yet.
-   * @param {google.protobuf.Duration} [request.executionTimeout]
-   *   Optional. Amount of time executable has to complete.  See JSON
-   *   representation of
-   *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
-   *
-   *   If this field is set with a value less than the RPC deadline, and the
-   *   execution of your query hasn't finished in the specified
-   *   execution timeout,  you will get a response with partial result.
-   *   Otherwise, your query's execution will continue until the RPC deadline.
-   *   If it's not finished until then, you will get a  DEADLINE_EXCEEDED error.
-   *
-   *   Default is empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse|AnalyzeIamPolicyResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.analyze_iam_policy.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_AnalyzeIamPolicy_async
-   */
+/**
+ * Analyzes IAM policies to answer which identities have what accesses on
+ * which resources.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.asset.v1.IamPolicyAnalysisQuery} request.analysisQuery
+ *   Required. The request query.
+ * @param {string} [request.savedAnalysisQuery]
+ *   Optional. The name of a saved query, which must be in the format of:
+ *
+ *   * projects/project_number/savedQueries/saved_query_id
+ *   * folders/folder_number/savedQueries/saved_query_id
+ *   * organizations/organization_number/savedQueries/saved_query_id
+ *
+ *   If both `analysis_query` and `saved_analysis_query` are provided, they
+ *   will be merged together with the `saved_analysis_query` as base and
+ *   the `analysis_query` as overrides. For more details of the merge behavior,
+ *   refer to the
+ *   [MergeFrom](https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details)
+ *   page.
+ *
+ *   Note that you cannot override primitive fields with default value, such as
+ *   0 or empty string, etc., because we use proto3, which doesn't support field
+ *   presence yet.
+ * @param {google.protobuf.Duration} [request.executionTimeout]
+ *   Optional. Amount of time executable has to complete.  See JSON
+ *   representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
+ *
+ *   If this field is set with a value less than the RPC deadline, and the
+ *   execution of your query hasn't finished in the specified
+ *   execution timeout,  you will get a response with partial result.
+ *   Otherwise, your query's execution will continue until the RPC deadline.
+ *   If it's not finished until then, you will get a  DEADLINE_EXCEEDED error.
+ *
+ *   Default is empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse|AnalyzeIamPolicyResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.analyze_iam_policy.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_AnalyzeIamPolicy_async
+ */
   analyzeIamPolicy(
-    request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest|undefined, {}|undefined
+      ]>;
   analyzeIamPolicy(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeIamPolicy(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeIamPolicy(
-    request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-          | protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeIamPolicy(
+      request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
+          protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeIamPolicy(
+      request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
+          protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
+          protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'analysis_query.scope': request.analysisQuery!.scope ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'analysis_query.scope': request.analysisQuery!.scope ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-          | protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('analyzeIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .analyzeIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-          protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('analyzeIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.analyzeIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('analyzeIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Analyze moving a resource to a specified destination without kicking off
-   * the actual move. The analysis is best effort depending on the user's
-   * permissions of viewing different hierarchical policies and configurations.
-   * The policies and configuration are subject to change before the actual
-   * resource migration takes place.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   Required. Name of the resource to perform the analysis against.
-   *   Only Google Cloud projects are supported as of today. Hence, this can only
-   *   be a project ID (such as "projects/my-project-id") or a project number
-   *   (such as "projects/12345").
-   * @param {string} request.destinationParent
-   *   Required. Name of the Google Cloud folder or organization to reparent the
-   *   target resource. The analysis will be performed against hypothetically
-   *   moving the resource to this specified destination parent. This can only be
-   *   a folder number (such as "folders/123") or an organization number (such as
-   *   "organizations/123").
-   * @param {google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView} request.view
-   *   Analysis view indicating what information should be included in the
-   *   analysis response. If unspecified, the default view is FULL.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.AnalyzeMoveResponse|AnalyzeMoveResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.analyze_move.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_AnalyzeMove_async
-   */
+/**
+ * Analyze moving a resource to a specified destination without kicking off
+ * the actual move. The analysis is best effort depending on the user's
+ * permissions of viewing different hierarchical policies and configurations.
+ * The policies and configuration are subject to change before the actual
+ * resource migration takes place.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   Required. Name of the resource to perform the analysis against.
+ *   Only Google Cloud projects are supported as of today. Hence, this can only
+ *   be a project ID (such as "projects/my-project-id") or a project number
+ *   (such as "projects/12345").
+ * @param {string} request.destinationParent
+ *   Required. Name of the Google Cloud folder or organization to reparent the
+ *   target resource. The analysis will be performed against hypothetically
+ *   moving the resource to this specified destination parent. This can only be
+ *   a folder number (such as "folders/123") or an organization number (such as
+ *   "organizations/123").
+ * @param {google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView} request.view
+ *   Analysis view indicating what information should be included in the
+ *   analysis response. If unspecified, the default view is FULL.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.AnalyzeMoveResponse|AnalyzeMoveResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.analyze_move.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_AnalyzeMove_async
+ */
   analyzeMove(
-    request?: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
-      protos.google.cloud.asset.v1.IAnalyzeMoveRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+        protos.google.cloud.asset.v1.IAnalyzeMoveRequest|undefined, {}|undefined
+      ]>;
   analyzeMove(
-    request: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
-      protos.google.cloud.asset.v1.IAnalyzeMoveRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeMove(
-    request: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
-      protos.google.cloud.asset.v1.IAnalyzeMoveRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeMove(
-    request?: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
-          protos.google.cloud.asset.v1.IAnalyzeMoveRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
-      protos.google.cloud.asset.v1.IAnalyzeMoveRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
-      protos.google.cloud.asset.v1.IAnalyzeMoveRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IAnalyzeMoveRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeMove(
+      request: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+          protos.google.cloud.asset.v1.IAnalyzeMoveRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeMove(
+      request?: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+          protos.google.cloud.asset.v1.IAnalyzeMoveRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+          protos.google.cloud.asset.v1.IAnalyzeMoveRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+        protos.google.cloud.asset.v1.IAnalyzeMoveRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeMove request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
-          protos.google.cloud.asset.v1.IAnalyzeMoveRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+        protos.google.cloud.asset.v1.IAnalyzeMoveRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('analyzeMove response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .analyzeMove(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
-          protos.google.cloud.asset.v1.IAnalyzeMoveRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('analyzeMove response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.analyzeMove(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+        protos.google.cloud.asset.v1.IAnalyzeMoveRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('analyzeMove response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Issue a job that queries assets using a SQL statement compatible with
-   * [BigQuery SQL](https://cloud.google.com/bigquery/docs/introduction-sql).
-   *
-   * If the query execution finishes within timeout and there's no pagination,
-   * the full query results will be returned in the `QueryAssetsResponse`.
-   *
-   * Otherwise, full query results can be obtained by issuing extra requests
-   * with the `job_reference` from the a previous `QueryAssets` call.
-   *
-   * Note, the query result has approximately 10 GB limitation enforced by
-   * [BigQuery](https://cloud.google.com/bigquery/docs/best-practices-performance-output).
-   * Queries return larger results will result in errors.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative name of the root asset. This can only be an
-   *   organization number (such as "organizations/123"), a project ID (such as
-   *   "projects/my-project-id"), or a project number (such as "projects/12345"),
-   *   or a folder number (such as "folders/123").
-   *
-   *   Only assets belonging to the `parent` will be returned.
-   * @param {string} [request.statement]
-   *   Optional. A SQL statement that's compatible with [BigQuery
-   *   SQL](https://cloud.google.com/bigquery/docs/introduction-sql).
-   * @param {string} [request.jobReference]
-   *   Optional. Reference to the query job, which is from the
-   *   `QueryAssetsResponse` of previous `QueryAssets` call.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of rows to return in the results. Responses
-   *   are limited to 10 MB and 1000 rows.
-   *
-   *   By default, the maximum row count is 1000. When the byte or row count limit
-   *   is reached, the rest of the query results will be paginated.
-   *
-   *   The field will be ignored when [output_config] is specified.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token received from previous `QueryAssets`.
-   *
-   *   The field will be ignored when [output_config] is specified.
-   * @param {google.protobuf.Duration} [request.timeout]
-   *   Optional. Specifies the maximum amount of time that the client is willing
-   *   to wait for the query to complete. By default, this limit is 5 min for the
-   *   first query, and 1 minute for the following queries. If the query is
-   *   complete, the `done` field in the `QueryAssetsResponse` is true, otherwise
-   *   false.
-   *
-   *   Like BigQuery [jobs.query
-   *   API](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest)
-   *   The call is not guaranteed to wait for the specified timeout; it typically
-   *   returns after around 200 seconds (200,000 milliseconds), even if the query
-   *   is not complete.
-   *
-   *   The field will be ignored when [output_config] is specified.
-   * @param {google.cloud.asset.v1.TimeWindow} [request.readTimeWindow]
-   *   Optional. [start_time] is required. [start_time] must be less than
-   *   [end_time] Defaults [end_time] to now if [start_time] is set and
-   *   [end_time] isn't. Maximum permitted time range is 7 days.
-   * @param {google.protobuf.Timestamp} [request.readTime]
-   *   Optional. Queries cloud assets as they appeared at the specified point in
-   *   time.
-   * @param {google.cloud.asset.v1.QueryAssetsOutputConfig} [request.outputConfig]
-   *   Optional. Destination where the query results will be saved.
-   *
-   *   When this field is specified, the query results won't be saved in the
-   *   [QueryAssetsResponse.query_result]. Instead
-   *   [QueryAssetsResponse.output_config] will be set.
-   *
-   *   Meanwhile, [QueryAssetsResponse.job_reference] will be set and can be used
-   *   to check the status of the query job when passed to a following
-   *   [QueryAssets] API call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.QueryAssetsResponse|QueryAssetsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.query_assets.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_QueryAssets_async
-   */
+/**
+ * Issue a job that queries assets using a SQL statement compatible with
+ * [BigQuery SQL](https://cloud.google.com/bigquery/docs/introduction-sql).
+ *
+ * If the query execution finishes within timeout and there's no pagination,
+ * the full query results will be returned in the `QueryAssetsResponse`.
+ *
+ * Otherwise, full query results can be obtained by issuing extra requests
+ * with the `job_reference` from the a previous `QueryAssets` call.
+ *
+ * Note, the query result has approximately 10 GB limitation enforced by
+ * [BigQuery](https://cloud.google.com/bigquery/docs/best-practices-performance-output).
+ * Queries return larger results will result in errors.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative name of the root asset. This can only be an
+ *   organization number (such as "organizations/123"), a project ID (such as
+ *   "projects/my-project-id"), or a project number (such as "projects/12345"),
+ *   or a folder number (such as "folders/123").
+ *
+ *   Only assets belonging to the `parent` will be returned.
+ * @param {string} [request.statement]
+ *   Optional. A SQL statement that's compatible with [BigQuery
+ *   SQL](https://cloud.google.com/bigquery/docs/introduction-sql).
+ * @param {string} [request.jobReference]
+ *   Optional. Reference to the query job, which is from the
+ *   `QueryAssetsResponse` of previous `QueryAssets` call.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of rows to return in the results. Responses
+ *   are limited to 10 MB and 1000 rows.
+ *
+ *   By default, the maximum row count is 1000. When the byte or row count limit
+ *   is reached, the rest of the query results will be paginated.
+ *
+ *   The field will be ignored when [output_config] is specified.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token received from previous `QueryAssets`.
+ *
+ *   The field will be ignored when [output_config] is specified.
+ * @param {google.protobuf.Duration} [request.timeout]
+ *   Optional. Specifies the maximum amount of time that the client is willing
+ *   to wait for the query to complete. By default, this limit is 5 min for the
+ *   first query, and 1 minute for the following queries. If the query is
+ *   complete, the `done` field in the `QueryAssetsResponse` is true, otherwise
+ *   false.
+ *
+ *   Like BigQuery [jobs.query
+ *   API](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest)
+ *   The call is not guaranteed to wait for the specified timeout; it typically
+ *   returns after around 200 seconds (200,000 milliseconds), even if the query
+ *   is not complete.
+ *
+ *   The field will be ignored when [output_config] is specified.
+ * @param {google.cloud.asset.v1.TimeWindow} [request.readTimeWindow]
+ *   Optional. [start_time] is required. [start_time] must be less than
+ *   [end_time] Defaults [end_time] to now if [start_time] is set and
+ *   [end_time] isn't. Maximum permitted time range is 7 days.
+ * @param {google.protobuf.Timestamp} [request.readTime]
+ *   Optional. Queries cloud assets as they appeared at the specified point in
+ *   time.
+ * @param {google.cloud.asset.v1.QueryAssetsOutputConfig} [request.outputConfig]
+ *   Optional. Destination where the query results will be saved.
+ *
+ *   When this field is specified, the query results won't be saved in the
+ *   [QueryAssetsResponse.query_result]. Instead
+ *   [QueryAssetsResponse.output_config] will be set.
+ *
+ *   Meanwhile, [QueryAssetsResponse.job_reference] will be set and can be used
+ *   to check the status of the query job when passed to a following
+ *   [QueryAssets] API call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.QueryAssetsResponse|QueryAssetsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.query_assets.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_QueryAssets_async
+ */
   queryAssets(
-    request?: protos.google.cloud.asset.v1.IQueryAssetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IQueryAssetsResponse,
-      protos.google.cloud.asset.v1.IQueryAssetsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IQueryAssetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IQueryAssetsResponse,
+        protos.google.cloud.asset.v1.IQueryAssetsRequest|undefined, {}|undefined
+      ]>;
   queryAssets(
-    request: protos.google.cloud.asset.v1.IQueryAssetsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IQueryAssetsResponse,
-      protos.google.cloud.asset.v1.IQueryAssetsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryAssets(
-    request: protos.google.cloud.asset.v1.IQueryAssetsRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IQueryAssetsResponse,
-      protos.google.cloud.asset.v1.IQueryAssetsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryAssets(
-    request?: protos.google.cloud.asset.v1.IQueryAssetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IQueryAssetsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.IQueryAssetsResponse,
-          protos.google.cloud.asset.v1.IQueryAssetsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.IQueryAssetsResponse,
-      protos.google.cloud.asset.v1.IQueryAssetsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IQueryAssetsResponse,
-      protos.google.cloud.asset.v1.IQueryAssetsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IQueryAssetsRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryAssets(
+      request: protos.google.cloud.asset.v1.IQueryAssetsRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.IQueryAssetsResponse,
+          protos.google.cloud.asset.v1.IQueryAssetsRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryAssets(
+      request?: protos.google.cloud.asset.v1.IQueryAssetsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.IQueryAssetsResponse,
+          protos.google.cloud.asset.v1.IQueryAssetsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.IQueryAssetsResponse,
+          protos.google.cloud.asset.v1.IQueryAssetsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.IQueryAssetsResponse,
+        protos.google.cloud.asset.v1.IQueryAssetsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('queryAssets request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.IQueryAssetsResponse,
-          protos.google.cloud.asset.v1.IQueryAssetsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.IQueryAssetsResponse,
+        protos.google.cloud.asset.v1.IQueryAssetsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('queryAssets response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .queryAssets(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.IQueryAssetsResponse,
-          protos.google.cloud.asset.v1.IQueryAssetsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('queryAssets response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.queryAssets(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.IQueryAssetsResponse,
+        protos.google.cloud.asset.v1.IQueryAssetsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('queryAssets response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a saved query in a parent project/folder/organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project/folder/organization where this
-   *   saved_query should be created in. It can only be an organization number
-   *   (such as "organizations/123"), a folder number (such as "folders/123"), a
-   *   project ID (such as "projects/my-project-id"), or a project number (such as
-   *   "projects/12345").
-   * @param {google.cloud.asset.v1.SavedQuery} request.savedQuery
-   *   Required. The saved_query details. The `name` field must be empty as it
-   *   will be generated based on the parent and saved_query_id.
-   * @param {string} request.savedQueryId
-   *   Required. The ID to use for the saved query, which must be unique in the
-   *   specified parent. It will become the final component of the saved query's
-   *   resource name.
-   *
-   *   This value should be 4-63 characters, and valid characters
-   *   are `{@link protos.0-9|a-z}-`.
-   *
-   *   Notice that this field is required in the saved query creation, and the
-   *   `name` field of the `saved_query` will be ignored.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.create_saved_query.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_CreateSavedQuery_async
-   */
+/**
+ * Creates a saved query in a parent project/folder/organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project/folder/organization where this
+ *   saved_query should be created in. It can only be an organization number
+ *   (such as "organizations/123"), a folder number (such as "folders/123"), a
+ *   project ID (such as "projects/my-project-id"), or a project number (such as
+ *   "projects/12345").
+ * @param {google.cloud.asset.v1.SavedQuery} request.savedQuery
+ *   Required. The saved_query details. The `name` field must be empty as it
+ *   will be generated based on the parent and saved_query_id.
+ * @param {string} request.savedQueryId
+ *   Required. The ID to use for the saved query, which must be unique in the
+ *   specified parent. It will become the final component of the saved query's
+ *   resource name.
+ *
+ *   This value should be 4-63 characters, and valid characters
+ *   are `{@link protos.0-9|a-z}-`.
+ *
+ *   Notice that this field is required in the saved query creation, and the
+ *   `name` field of the `saved_query` will be ignored.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.create_saved_query.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_CreateSavedQuery_async
+ */
   createSavedQuery(
-    request?: protos.google.cloud.asset.v1.ICreateSavedQueryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.ICreateSavedQueryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.ICreateSavedQueryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.ICreateSavedQueryRequest|undefined, {}|undefined
+      ]>;
   createSavedQuery(
-    request: protos.google.cloud.asset.v1.ICreateSavedQueryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.ICreateSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSavedQuery(
-    request: protos.google.cloud.asset.v1.ICreateSavedQueryRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.ICreateSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSavedQuery(
-    request?: protos.google.cloud.asset.v1.ICreateSavedQueryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.ICreateSavedQueryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.ISavedQuery,
-          | protos.google.cloud.asset.v1.ICreateSavedQueryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.ICreateSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.ICreateSavedQueryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.ICreateSavedQueryRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSavedQuery(
+      request: protos.google.cloud.asset.v1.ICreateSavedQueryRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.ICreateSavedQueryRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSavedQuery(
+      request?: protos.google.cloud.asset.v1.ICreateSavedQueryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.ICreateSavedQueryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.ICreateSavedQueryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.ICreateSavedQueryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createSavedQuery request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.ISavedQuery,
-          | protos.google.cloud.asset.v1.ICreateSavedQueryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.ICreateSavedQueryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createSavedQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createSavedQuery(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.ISavedQuery,
-          protos.google.cloud.asset.v1.ICreateSavedQueryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createSavedQuery response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createSavedQuery(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.ICreateSavedQueryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createSavedQuery response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details about a saved query.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the saved query and it must be in the format of:
-   *
-   *   * projects/project_number/savedQueries/saved_query_id
-   *   * folders/folder_number/savedQueries/saved_query_id
-   *   * organizations/organization_number/savedQueries/saved_query_id
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.get_saved_query.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_GetSavedQuery_async
-   */
+/**
+ * Gets details about a saved query.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the saved query and it must be in the format of:
+ *
+ *   * projects/project_number/savedQueries/saved_query_id
+ *   * folders/folder_number/savedQueries/saved_query_id
+ *   * organizations/organization_number/savedQueries/saved_query_id
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.get_saved_query.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_GetSavedQuery_async
+ */
   getSavedQuery(
-    request?: protos.google.cloud.asset.v1.IGetSavedQueryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.IGetSavedQueryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IGetSavedQueryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.IGetSavedQueryRequest|undefined, {}|undefined
+      ]>;
   getSavedQuery(
-    request: protos.google.cloud.asset.v1.IGetSavedQueryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.IGetSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSavedQuery(
-    request: protos.google.cloud.asset.v1.IGetSavedQueryRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.IGetSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSavedQuery(
-    request?: protos.google.cloud.asset.v1.IGetSavedQueryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IGetSavedQueryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.ISavedQuery,
-          protos.google.cloud.asset.v1.IGetSavedQueryRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.IGetSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.IGetSavedQueryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IGetSavedQueryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSavedQuery(
+      request: protos.google.cloud.asset.v1.IGetSavedQueryRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.IGetSavedQueryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSavedQuery(
+      request?: protos.google.cloud.asset.v1.IGetSavedQueryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.IGetSavedQueryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.IGetSavedQueryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.IGetSavedQueryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSavedQuery request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.ISavedQuery,
-          protos.google.cloud.asset.v1.IGetSavedQueryRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.IGetSavedQueryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSavedQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSavedQuery(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.ISavedQuery,
-          protos.google.cloud.asset.v1.IGetSavedQueryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getSavedQuery response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getSavedQuery(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.IGetSavedQueryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSavedQuery response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a saved query.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.asset.v1.SavedQuery} request.savedQuery
-   *   Required. The saved query to update.
-   *
-   *   The saved query's `name` field is used to identify the one to update,
-   *   which has format as below:
-   *
-   *   * projects/project_number/savedQueries/saved_query_id
-   *   * folders/folder_number/savedQueries/saved_query_id
-   *   * organizations/organization_number/savedQueries/saved_query_id
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.update_saved_query.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_UpdateSavedQuery_async
-   */
+/**
+ * Updates a saved query.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.asset.v1.SavedQuery} request.savedQuery
+ *   Required. The saved query to update.
+ *
+ *   The saved query's `name` field is used to identify the one to update,
+ *   which has format as below:
+ *
+ *   * projects/project_number/savedQueries/saved_query_id
+ *   * folders/folder_number/savedQueries/saved_query_id
+ *   * organizations/organization_number/savedQueries/saved_query_id
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.update_saved_query.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_UpdateSavedQuery_async
+ */
   updateSavedQuery(
-    request?: protos.google.cloud.asset.v1.IUpdateSavedQueryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.IUpdateSavedQueryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IUpdateSavedQueryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.IUpdateSavedQueryRequest|undefined, {}|undefined
+      ]>;
   updateSavedQuery(
-    request: protos.google.cloud.asset.v1.IUpdateSavedQueryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.IUpdateSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSavedQuery(
-    request: protos.google.cloud.asset.v1.IUpdateSavedQueryRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.IUpdateSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSavedQuery(
-    request?: protos.google.cloud.asset.v1.IUpdateSavedQueryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IUpdateSavedQueryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.ISavedQuery,
-          | protos.google.cloud.asset.v1.IUpdateSavedQueryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.IUpdateSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.ISavedQuery,
-      protos.google.cloud.asset.v1.IUpdateSavedQueryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IUpdateSavedQueryRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSavedQuery(
+      request: protos.google.cloud.asset.v1.IUpdateSavedQueryRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.IUpdateSavedQueryRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSavedQuery(
+      request?: protos.google.cloud.asset.v1.IUpdateSavedQueryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.IUpdateSavedQueryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.IUpdateSavedQueryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.IUpdateSavedQueryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'saved_query.name': request.savedQuery!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'saved_query.name': request.savedQuery!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateSavedQuery request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.ISavedQuery,
-          | protos.google.cloud.asset.v1.IUpdateSavedQueryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.IUpdateSavedQueryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSavedQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateSavedQuery(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.ISavedQuery,
-          protos.google.cloud.asset.v1.IUpdateSavedQueryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSavedQuery response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateSavedQuery(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.ISavedQuery,
+        protos.google.cloud.asset.v1.IUpdateSavedQueryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateSavedQuery response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a saved query.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the saved query to delete. It must be in the format
-   *   of:
-   *
-   *   * projects/project_number/savedQueries/saved_query_id
-   *   * folders/folder_number/savedQueries/saved_query_id
-   *   * organizations/organization_number/savedQueries/saved_query_id
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.delete_saved_query.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_DeleteSavedQuery_async
-   */
+/**
+ * Deletes a saved query.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the saved query to delete. It must be in the format
+ *   of:
+ *
+ *   * projects/project_number/savedQueries/saved_query_id
+ *   * folders/folder_number/savedQueries/saved_query_id
+ *   * organizations/organization_number/savedQueries/saved_query_id
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.delete_saved_query.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_DeleteSavedQuery_async
+ */
   deleteSavedQuery(
-    request?: protos.google.cloud.asset.v1.IDeleteSavedQueryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.asset.v1.IDeleteSavedQueryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IDeleteSavedQueryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.asset.v1.IDeleteSavedQueryRequest|undefined, {}|undefined
+      ]>;
   deleteSavedQuery(
-    request: protos.google.cloud.asset.v1.IDeleteSavedQueryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.asset.v1.IDeleteSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSavedQuery(
-    request: protos.google.cloud.asset.v1.IDeleteSavedQueryRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.asset.v1.IDeleteSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSavedQuery(
-    request?: protos.google.cloud.asset.v1.IDeleteSavedQueryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IDeleteSavedQueryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.asset.v1.IDeleteSavedQueryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.asset.v1.IDeleteSavedQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.asset.v1.IDeleteSavedQueryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IDeleteSavedQueryRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteSavedQuery(
+      request: protos.google.cloud.asset.v1.IDeleteSavedQueryRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.asset.v1.IDeleteSavedQueryRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteSavedQuery(
+      request?: protos.google.cloud.asset.v1.IDeleteSavedQueryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.asset.v1.IDeleteSavedQueryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.asset.v1.IDeleteSavedQueryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.asset.v1.IDeleteSavedQueryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteSavedQuery request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.asset.v1.IDeleteSavedQueryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.asset.v1.IDeleteSavedQueryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteSavedQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteSavedQuery(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.asset.v1.IDeleteSavedQueryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteSavedQuery response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteSavedQuery(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.asset.v1.IDeleteSavedQueryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteSavedQuery response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets effective IAM policies for a batch of resources.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. Only IAM policies on or below the scope will be returned.
-   *
-   *   This can only be an organization number (such as "organizations/123"), a
-   *   folder number (such as "folders/123"), a project ID (such as
-   *   "projects/my-project-id"), or a project number (such as "projects/12345").
-   *
-   *   To know how to get organization ID, visit [here
-   *   ](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
-   *
-   *   To know how to get folder or project ID, visit [here
-   *   ](https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects).
-   * @param {string[]} request.names
-   *   Required. The names refer to the [full_resource_names]
-   *   (https://cloud.google.com/asset-inventory/docs/resource-name-format)
-   *   of the asset types [supported by search
-   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
-   *   A maximum of 20 resources' effective policies can be retrieved in a batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse|BatchGetEffectiveIamPoliciesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.batch_get_effective_iam_policies.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_BatchGetEffectiveIamPolicies_async
-   */
+/**
+ * Gets effective IAM policies for a batch of resources.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. Only IAM policies on or below the scope will be returned.
+ *
+ *   This can only be an organization number (such as "organizations/123"), a
+ *   folder number (such as "folders/123"), a project ID (such as
+ *   "projects/my-project-id"), or a project number (such as "projects/12345").
+ *
+ *   To know how to get organization ID, visit [here
+ *   ](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
+ *
+ *   To know how to get folder or project ID, visit [here
+ *   ](https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects).
+ * @param {string[]} request.names
+ *   Required. The names refer to the [full_resource_names]
+ *   (https://cloud.google.com/asset-inventory/docs/resource-name-format)
+ *   of the asset types [supported by search
+ *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+ *   A maximum of 20 resources' effective policies can be retrieved in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse|BatchGetEffectiveIamPoliciesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.batch_get_effective_iam_policies.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_BatchGetEffectiveIamPolicies_async
+ */
   batchGetEffectiveIamPolicies(
-    request?: protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
-      (
-        | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
+        protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest|undefined, {}|undefined
+      ]>;
   batchGetEffectiveIamPolicies(
-    request: protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
-      | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchGetEffectiveIamPolicies(
-    request: protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
-      | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchGetEffectiveIamPolicies(
-    request?: protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
-          | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
-      | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
-      (
-        | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchGetEffectiveIamPolicies(
+      request: protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest,
+      callback: Callback<
+          protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
+          protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchGetEffectiveIamPolicies(
+      request?: protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
+          protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
+          protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
+        protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchGetEffectiveIamPolicies request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
-          | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
+        protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchGetEffectiveIamPolicies response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchGetEffectiveIamPolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
-          (
-            | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchGetEffectiveIamPolicies response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchGetEffectiveIamPolicies(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
+        protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchGetEffectiveIamPolicies response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Exports assets with time and resource types to a given Cloud Storage
-   * location/BigQuery table. For Cloud Storage location destinations, the
-   * output format is newline-delimited JSON. Each line represents a
-   * {@link protos.google.cloud.asset.v1.Asset|google.cloud.asset.v1.Asset} in the JSON
-   * format; for BigQuery table destinations, the output table stores the fields
-   * in asset Protobuf as columns. This API implements the
-   * {@link protos.google.longrunning.Operation|google.longrunning.Operation} API, which
-   * allows you to keep track of the export. We recommend intervals of at least
-   * 2 seconds with exponential retry to poll the export operation result. For
-   * regular-size resource parent, the export operation usually finishes within
-   * 5 minutes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative name of the root asset. This can only be an
-   *   organization number (such as "organizations/123"), a project ID (such as
-   *   "projects/my-project-id"), or a project number (such as "projects/12345"),
-   *   or a folder number (such as "folders/123").
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Timestamp to take an asset snapshot. This can only be set to a timestamp
-   *   between the current time and the current time minus 35 days (inclusive).
-   *   If not specified, the current time will be used. Due to delays in resource
-   *   data collection and indexing, there is a volatile window during which
-   *   running the same query may get different results.
-   * @param {string[]} request.assetTypes
-   *   A list of asset types to take a snapshot for. For example:
-   *   "compute.googleapis.com/Disk".
-   *
-   *   Regular expressions are also supported. For example:
-   *
-   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
-   *   with "compute.googleapis.com".
-   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
-   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported asset type, an INVALID_ARGUMENT error will be returned.
-   *
-   *   If specified, only matching assets will be returned, otherwise, it will
-   *   snapshot all asset types. See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
-   *   for all supported asset types.
-   * @param {google.cloud.asset.v1.ContentType} request.contentType
-   *   Asset content type. If not specified, no content but the asset name will be
-   *   returned.
-   * @param {google.cloud.asset.v1.OutputConfig} request.outputConfig
-   *   Required. Output configuration indicating where the results will be output
-   *   to.
-   * @param {string[]} request.relationshipTypes
-   *   A list of relationship types to export, for example:
-   *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
-   *   content_type=RELATIONSHIP.
-   *   * If specified:
-   *   it snapshots specified relationships. It returns an error if
-   *   any of the [relationship_types] doesn't belong to the supported
-   *   relationship types of the [asset_types] or if any of the [asset_types]
-   *   doesn't belong to the source types of the [relationship_types].
-   *   * Otherwise:
-   *   it snapshots the supported relationships for all [asset_types] or returns
-   *   an error if any of the [asset_types] has no relationship support.
-   *   An unspecified asset types field means all supported asset_types.
-   *   See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
-   *   supported asset types and relationship types.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.export_assets.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_ExportAssets_async
-   */
+/**
+ * Exports assets with time and resource types to a given Cloud Storage
+ * location/BigQuery table. For Cloud Storage location destinations, the
+ * output format is newline-delimited JSON. Each line represents a
+ * {@link protos.google.cloud.asset.v1.Asset|google.cloud.asset.v1.Asset} in the JSON
+ * format; for BigQuery table destinations, the output table stores the fields
+ * in asset Protobuf as columns. This API implements the
+ * {@link protos.google.longrunning.Operation|google.longrunning.Operation} API, which
+ * allows you to keep track of the export. We recommend intervals of at least
+ * 2 seconds with exponential retry to poll the export operation result. For
+ * regular-size resource parent, the export operation usually finishes within
+ * 5 minutes.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative name of the root asset. This can only be an
+ *   organization number (such as "organizations/123"), a project ID (such as
+ *   "projects/my-project-id"), or a project number (such as "projects/12345"),
+ *   or a folder number (such as "folders/123").
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Timestamp to take an asset snapshot. This can only be set to a timestamp
+ *   between the current time and the current time minus 35 days (inclusive).
+ *   If not specified, the current time will be used. Due to delays in resource
+ *   data collection and indexing, there is a volatile window during which
+ *   running the same query may get different results.
+ * @param {string[]} request.assetTypes
+ *   A list of asset types to take a snapshot for. For example:
+ *   "compute.googleapis.com/Disk".
+ *
+ *   Regular expressions are also supported. For example:
+ *
+ *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+ *   with "compute.googleapis.com".
+ *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+ *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported asset type, an INVALID_ARGUMENT error will be returned.
+ *
+ *   If specified, only matching assets will be returned, otherwise, it will
+ *   snapshot all asset types. See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+ *   for all supported asset types.
+ * @param {google.cloud.asset.v1.ContentType} request.contentType
+ *   Asset content type. If not specified, no content but the asset name will be
+ *   returned.
+ * @param {google.cloud.asset.v1.OutputConfig} request.outputConfig
+ *   Required. Output configuration indicating where the results will be output
+ *   to.
+ * @param {string[]} request.relationshipTypes
+ *   A list of relationship types to export, for example:
+ *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+ *   content_type=RELATIONSHIP.
+ *   * If specified:
+ *   it snapshots specified relationships. It returns an error if
+ *   any of the [relationship_types] doesn't belong to the supported
+ *   relationship types of the [asset_types] or if any of the [asset_types]
+ *   doesn't belong to the source types of the [relationship_types].
+ *   * Otherwise:
+ *   it snapshots the supported relationships for all [asset_types] or returns
+ *   an error if any of the [asset_types] has no relationship support.
+ *   An unspecified asset types field means all supported asset_types.
+ *   See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+ *   supported asset types and relationship types.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.export_assets.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_ExportAssets_async
+ */
   exportAssets(
-    request?: protos.google.cloud.asset.v1.IExportAssetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.asset.v1.IExportAssetsResponse,
-        protos.google.cloud.asset.v1.IExportAssetsRequest
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IExportAssetsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.asset.v1.IExportAssetsResponse, protos.google.cloud.asset.v1.IExportAssetsRequest>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportAssets(
-    request: protos.google.cloud.asset.v1.IExportAssetsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.asset.v1.IExportAssetsResponse,
-        protos.google.cloud.asset.v1.IExportAssetsRequest
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.asset.v1.IExportAssetsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.asset.v1.IExportAssetsResponse, protos.google.cloud.asset.v1.IExportAssetsRequest>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportAssets(
-    request: protos.google.cloud.asset.v1.IExportAssetsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.asset.v1.IExportAssetsResponse,
-        protos.google.cloud.asset.v1.IExportAssetsRequest
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.asset.v1.IExportAssetsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.asset.v1.IExportAssetsResponse, protos.google.cloud.asset.v1.IExportAssetsRequest>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportAssets(
-    request?: protos.google.cloud.asset.v1.IExportAssetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.asset.v1.IExportAssetsResponse,
-            protos.google.cloud.asset.v1.IExportAssetsRequest
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.asset.v1.IExportAssetsResponse,
-        protos.google.cloud.asset.v1.IExportAssetsRequest
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.asset.v1.IExportAssetsResponse,
-        protos.google.cloud.asset.v1.IExportAssetsRequest
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.asset.v1.IExportAssetsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.asset.v1.IExportAssetsResponse, protos.google.cloud.asset.v1.IExportAssetsRequest>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.asset.v1.IExportAssetsResponse, protos.google.cloud.asset.v1.IExportAssetsRequest>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.asset.v1.IExportAssetsResponse, protos.google.cloud.asset.v1.IExportAssetsRequest>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.asset.v1.IExportAssetsResponse,
-            protos.google.cloud.asset.v1.IExportAssetsRequest
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.asset.v1.IExportAssetsResponse, protos.google.cloud.asset.v1.IExportAssetsRequest>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportAssets response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportAssets request %j', request);
-    return this.innerApiCalls
-      .exportAssets(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.asset.v1.IExportAssetsResponse,
-            protos.google.cloud.asset.v1.IExportAssetsRequest
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('exportAssets response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportAssets(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.asset.v1.IExportAssetsResponse, protos.google.cloud.asset.v1.IExportAssetsRequest>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportAssets response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportAssets()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.export_assets.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_ExportAssets_async
-   */
-  async checkExportAssetsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.asset.v1.ExportAssetsResponse,
-      protos.google.cloud.asset.v1.ExportAssetsRequest
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportAssets()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.export_assets.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_ExportAssets_async
+ */
+  async checkExportAssetsProgress(name: string): Promise<LROperation<protos.google.cloud.asset.v1.ExportAssetsResponse, protos.google.cloud.asset.v1.ExportAssetsRequest>>{
     this._log.info('exportAssets long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportAssets,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.asset.v1.ExportAssetsResponse,
-      protos.google.cloud.asset.v1.ExportAssetsRequest
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportAssets, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.asset.v1.ExportAssetsResponse, protos.google.cloud.asset.v1.ExportAssetsRequest>;
   }
-  /**
-   * Analyzes IAM policies asynchronously to answer which identities have what
-   * accesses on which resources, and writes the analysis results to a Google
-   * Cloud Storage or a BigQuery destination. For Cloud Storage destination, the
-   * output format is the JSON format that represents a
-   * {@link protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse|AnalyzeIamPolicyResponse}.
-   * This method implements the
-   * {@link protos.google.longrunning.Operation|google.longrunning.Operation}, which allows
-   * you to track the operation status. We recommend intervals of at least 2
-   * seconds with exponential backoff retry to poll the operation result. The
-   * metadata contains the metadata for the long-running operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.asset.v1.IamPolicyAnalysisQuery} request.analysisQuery
-   *   Required. The request query.
-   * @param {string} [request.savedAnalysisQuery]
-   *   Optional. The name of a saved query, which must be in the format of:
-   *
-   *   * projects/project_number/savedQueries/saved_query_id
-   *   * folders/folder_number/savedQueries/saved_query_id
-   *   * organizations/organization_number/savedQueries/saved_query_id
-   *
-   *   If both `analysis_query` and `saved_analysis_query` are provided, they
-   *   will be merged together with the `saved_analysis_query` as base and
-   *   the `analysis_query` as overrides. For more details of the merge behavior,
-   *   refer to the
-   *   [MergeFrom](https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details)
-   *   doc.
-   *
-   *   Note that you cannot override primitive fields with default value, such as
-   *   0 or empty string, etc., because we use proto3, which doesn't support field
-   *   presence yet.
-   * @param {google.cloud.asset.v1.IamPolicyAnalysisOutputConfig} request.outputConfig
-   *   Required. Output configuration indicating where the results will be output
-   *   to.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.analyze_iam_policy_longrunning.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_AnalyzeIamPolicyLongrunning_async
-   */
+/**
+ * Analyzes IAM policies asynchronously to answer which identities have what
+ * accesses on which resources, and writes the analysis results to a Google
+ * Cloud Storage or a BigQuery destination. For Cloud Storage destination, the
+ * output format is the JSON format that represents a
+ * {@link protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse|AnalyzeIamPolicyResponse}.
+ * This method implements the
+ * {@link protos.google.longrunning.Operation|google.longrunning.Operation}, which allows
+ * you to track the operation status. We recommend intervals of at least 2
+ * seconds with exponential backoff retry to poll the operation result. The
+ * metadata contains the metadata for the long-running operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.asset.v1.IamPolicyAnalysisQuery} request.analysisQuery
+ *   Required. The request query.
+ * @param {string} [request.savedAnalysisQuery]
+ *   Optional. The name of a saved query, which must be in the format of:
+ *
+ *   * projects/project_number/savedQueries/saved_query_id
+ *   * folders/folder_number/savedQueries/saved_query_id
+ *   * organizations/organization_number/savedQueries/saved_query_id
+ *
+ *   If both `analysis_query` and `saved_analysis_query` are provided, they
+ *   will be merged together with the `saved_analysis_query` as base and
+ *   the `analysis_query` as overrides. For more details of the merge behavior,
+ *   refer to the
+ *   [MergeFrom](https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details)
+ *   doc.
+ *
+ *   Note that you cannot override primitive fields with default value, such as
+ *   0 or empty string, etc., because we use proto3, which doesn't support field
+ *   presence yet.
+ * @param {google.cloud.asset.v1.IamPolicyAnalysisOutputConfig} request.outputConfig
+ *   Required. Output configuration indicating where the results will be output
+ *   to.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.analyze_iam_policy_longrunning.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_AnalyzeIamPolicyLongrunning_async
+ */
   analyzeIamPolicyLongrunning(
-    request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse, protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   analyzeIamPolicyLongrunning(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse, protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   analyzeIamPolicyLongrunning(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse, protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   analyzeIamPolicyLongrunning(
-    request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse, protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse, protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse, protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'analysis_query.scope': request.analysisQuery!.scope ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'analysis_query.scope': request.analysisQuery!.scope ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse, protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'analyzeIamPolicyLongrunning response %j',
-            rawResponse
-          );
+          this._log.info('analyzeIamPolicyLongrunning response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('analyzeIamPolicyLongrunning request %j', request);
-    return this.innerApiCalls
-      .analyzeIamPolicyLongrunning(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'analyzeIamPolicyLongrunning response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.analyzeIamPolicyLongrunning(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse, protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('analyzeIamPolicyLongrunning response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `analyzeIamPolicyLongrunning()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.analyze_iam_policy_longrunning.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_AnalyzeIamPolicyLongrunning_async
-   */
-  async checkAnalyzeIamPolicyLongrunningProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse,
-      protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `analyzeIamPolicyLongrunning()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.analyze_iam_policy_longrunning.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_AnalyzeIamPolicyLongrunning_async
+ */
+  async checkAnalyzeIamPolicyLongrunningProgress(name: string): Promise<LROperation<protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse, protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata>>{
     this._log.info('analyzeIamPolicyLongrunning long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.analyzeIamPolicyLongrunning,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse,
-      protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.analyzeIamPolicyLongrunning, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse, protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata>;
   }
-  /**
-   * Lists assets with time and resource types and returns paged results in
-   * response.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the organization, folder, or project the assets belong
-   *   to. Format: "organizations/[organization-number]" (such as
-   *   "organizations/123"), "projects/[project-id]" (such as
-   *   "projects/my-project-id"), "projects/[project-number]" (such as
-   *   "projects/12345"), or "folders/[folder-number]" (such as "folders/12345").
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Timestamp to take an asset snapshot. This can only be set to a timestamp
-   *   between the current time and the current time minus 35 days (inclusive).
-   *   If not specified, the current time will be used. Due to delays in resource
-   *   data collection and indexing, there is a volatile window during which
-   *   running the same query may get different results.
-   * @param {string[]} request.assetTypes
-   *   A list of asset types to take a snapshot for. For example:
-   *   "compute.googleapis.com/Disk".
-   *
-   *   Regular expression is also supported. For example:
-   *
-   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
-   *   with "compute.googleapis.com".
-   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
-   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported asset type, an INVALID_ARGUMENT error will be returned.
-   *
-   *   If specified, only matching assets will be returned, otherwise, it will
-   *   snapshot all asset types. See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
-   *   for all supported asset types.
-   * @param {google.cloud.asset.v1.ContentType} request.contentType
-   *   Asset content type. If not specified, no content but the asset name will
-   *   be returned.
-   * @param {number} request.pageSize
-   *   The maximum number of assets to be returned in a single response. Default
-   *   is 100, minimum is 1, and maximum is 1000.
-   * @param {string} request.pageToken
-   *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
-   *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
-   *   prior `ListAssets` call, and the API should return the next page of assets.
-   * @param {string[]} request.relationshipTypes
-   *   A list of relationship types to output, for example:
-   *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
-   *   content_type=RELATIONSHIP.
-   *   * If specified:
-   *   it snapshots specified relationships. It returns an error if
-   *   any of the [relationship_types] doesn't belong to the supported
-   *   relationship types of the [asset_types] or if any of the [asset_types]
-   *   doesn't belong to the source types of the [relationship_types].
-   *   * Otherwise:
-   *   it snapshots the supported relationships for all [asset_types] or returns
-   *   an error if any of the [asset_types] has no relationship support.
-   *   An unspecified asset types field means all supported asset_types.
-   *   See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
-   *   for all supported asset types and relationship types.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.Asset|Asset}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAssetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists assets with time and resource types and returns paged results in
+ * response.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the organization, folder, or project the assets belong
+ *   to. Format: "organizations/[organization-number]" (such as
+ *   "organizations/123"), "projects/[project-id]" (such as
+ *   "projects/my-project-id"), "projects/[project-number]" (such as
+ *   "projects/12345"), or "folders/[folder-number]" (such as "folders/12345").
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Timestamp to take an asset snapshot. This can only be set to a timestamp
+ *   between the current time and the current time minus 35 days (inclusive).
+ *   If not specified, the current time will be used. Due to delays in resource
+ *   data collection and indexing, there is a volatile window during which
+ *   running the same query may get different results.
+ * @param {string[]} request.assetTypes
+ *   A list of asset types to take a snapshot for. For example:
+ *   "compute.googleapis.com/Disk".
+ *
+ *   Regular expression is also supported. For example:
+ *
+ *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+ *   with "compute.googleapis.com".
+ *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+ *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported asset type, an INVALID_ARGUMENT error will be returned.
+ *
+ *   If specified, only matching assets will be returned, otherwise, it will
+ *   snapshot all asset types. See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+ *   for all supported asset types.
+ * @param {google.cloud.asset.v1.ContentType} request.contentType
+ *   Asset content type. If not specified, no content but the asset name will
+ *   be returned.
+ * @param {number} request.pageSize
+ *   The maximum number of assets to be returned in a single response. Default
+ *   is 100, minimum is 1, and maximum is 1000.
+ * @param {string} request.pageToken
+ *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
+ *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
+ *   prior `ListAssets` call, and the API should return the next page of assets.
+ * @param {string[]} request.relationshipTypes
+ *   A list of relationship types to output, for example:
+ *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+ *   content_type=RELATIONSHIP.
+ *   * If specified:
+ *   it snapshots specified relationships. It returns an error if
+ *   any of the [relationship_types] doesn't belong to the supported
+ *   relationship types of the [asset_types] or if any of the [asset_types]
+ *   doesn't belong to the source types of the [relationship_types].
+ *   * Otherwise:
+ *   it snapshots the supported relationships for all [asset_types] or returns
+ *   an error if any of the [asset_types] has no relationship support.
+ *   An unspecified asset types field means all supported asset_types.
+ *   See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+ *   for all supported asset types and relationship types.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.Asset|Asset}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAssetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAssets(
-    request?: protos.google.cloud.asset.v1.IListAssetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IAsset[],
-      protos.google.cloud.asset.v1.IListAssetsRequest | null,
-      protos.google.cloud.asset.v1.IListAssetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IListAssetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IAsset[],
+        protos.google.cloud.asset.v1.IListAssetsRequest|null,
+        protos.google.cloud.asset.v1.IListAssetsResponse
+      ]>;
   listAssets(
-    request: protos.google.cloud.asset.v1.IListAssetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.IListAssetsRequest,
-      protos.google.cloud.asset.v1.IListAssetsResponse | null | undefined,
-      protos.google.cloud.asset.v1.IAsset
-    >
-  ): void;
-  listAssets(
-    request: protos.google.cloud.asset.v1.IListAssetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.IListAssetsRequest,
-      protos.google.cloud.asset.v1.IListAssetsResponse | null | undefined,
-      protos.google.cloud.asset.v1.IAsset
-    >
-  ): void;
-  listAssets(
-    request?: protos.google.cloud.asset.v1.IListAssetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.asset.v1.IListAssetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.asset.v1.IListAssetsRequest,
-          protos.google.cloud.asset.v1.IListAssetsResponse | null | undefined,
-          protos.google.cloud.asset.v1.IAsset
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.asset.v1.IListAssetsRequest,
-      protos.google.cloud.asset.v1.IListAssetsResponse | null | undefined,
-      protos.google.cloud.asset.v1.IAsset
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IAsset[],
-      protos.google.cloud.asset.v1.IListAssetsRequest | null,
-      protos.google.cloud.asset.v1.IListAssetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.asset.v1.IAsset>): void;
+  listAssets(
+      request: protos.google.cloud.asset.v1.IListAssetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.asset.v1.IListAssetsRequest,
+          protos.google.cloud.asset.v1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.asset.v1.IAsset>): void;
+  listAssets(
+      request?: protos.google.cloud.asset.v1.IListAssetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.asset.v1.IListAssetsRequest,
+          protos.google.cloud.asset.v1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.asset.v1.IAsset>,
+      callback?: PaginationCallback<
+          protos.google.cloud.asset.v1.IListAssetsRequest,
+          protos.google.cloud.asset.v1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.asset.v1.IAsset>):
+      Promise<[
+        protos.google.cloud.asset.v1.IAsset[],
+        protos.google.cloud.asset.v1.IListAssetsRequest|null,
+        protos.google.cloud.asset.v1.IListAssetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.asset.v1.IListAssetsRequest,
-          protos.google.cloud.asset.v1.IListAssetsResponse | null | undefined,
-          protos.google.cloud.asset.v1.IAsset
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.asset.v1.IListAssetsRequest,
+      protos.google.cloud.asset.v1.IListAssetsResponse|null|undefined,
+      protos.google.cloud.asset.v1.IAsset>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAssets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2905,107 +2408,104 @@ export class AssetServiceClient {
     this._log.info('listAssets request %j', request);
     return this.innerApiCalls
       .listAssets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.asset.v1.IAsset[],
-          protos.google.cloud.asset.v1.IListAssetsRequest | null,
-          protos.google.cloud.asset.v1.IListAssetsResponse,
-        ]) => {
-          this._log.info('listAssets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.asset.v1.IAsset[],
+        protos.google.cloud.asset.v1.IListAssetsRequest|null,
+        protos.google.cloud.asset.v1.IListAssetsResponse
+      ]) => {
+        this._log.info('listAssets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAssets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the organization, folder, or project the assets belong
-   *   to. Format: "organizations/[organization-number]" (such as
-   *   "organizations/123"), "projects/[project-id]" (such as
-   *   "projects/my-project-id"), "projects/[project-number]" (such as
-   *   "projects/12345"), or "folders/[folder-number]" (such as "folders/12345").
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Timestamp to take an asset snapshot. This can only be set to a timestamp
-   *   between the current time and the current time minus 35 days (inclusive).
-   *   If not specified, the current time will be used. Due to delays in resource
-   *   data collection and indexing, there is a volatile window during which
-   *   running the same query may get different results.
-   * @param {string[]} request.assetTypes
-   *   A list of asset types to take a snapshot for. For example:
-   *   "compute.googleapis.com/Disk".
-   *
-   *   Regular expression is also supported. For example:
-   *
-   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
-   *   with "compute.googleapis.com".
-   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
-   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported asset type, an INVALID_ARGUMENT error will be returned.
-   *
-   *   If specified, only matching assets will be returned, otherwise, it will
-   *   snapshot all asset types. See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
-   *   for all supported asset types.
-   * @param {google.cloud.asset.v1.ContentType} request.contentType
-   *   Asset content type. If not specified, no content but the asset name will
-   *   be returned.
-   * @param {number} request.pageSize
-   *   The maximum number of assets to be returned in a single response. Default
-   *   is 100, minimum is 1, and maximum is 1000.
-   * @param {string} request.pageToken
-   *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
-   *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
-   *   prior `ListAssets` call, and the API should return the next page of assets.
-   * @param {string[]} request.relationshipTypes
-   *   A list of relationship types to output, for example:
-   *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
-   *   content_type=RELATIONSHIP.
-   *   * If specified:
-   *   it snapshots specified relationships. It returns an error if
-   *   any of the [relationship_types] doesn't belong to the supported
-   *   relationship types of the [asset_types] or if any of the [asset_types]
-   *   doesn't belong to the source types of the [relationship_types].
-   *   * Otherwise:
-   *   it snapshots the supported relationships for all [asset_types] or returns
-   *   an error if any of the [asset_types] has no relationship support.
-   *   An unspecified asset types field means all supported asset_types.
-   *   See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
-   *   for all supported asset types and relationship types.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.Asset|Asset} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAssetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAssets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the organization, folder, or project the assets belong
+ *   to. Format: "organizations/[organization-number]" (such as
+ *   "organizations/123"), "projects/[project-id]" (such as
+ *   "projects/my-project-id"), "projects/[project-number]" (such as
+ *   "projects/12345"), or "folders/[folder-number]" (such as "folders/12345").
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Timestamp to take an asset snapshot. This can only be set to a timestamp
+ *   between the current time and the current time minus 35 days (inclusive).
+ *   If not specified, the current time will be used. Due to delays in resource
+ *   data collection and indexing, there is a volatile window during which
+ *   running the same query may get different results.
+ * @param {string[]} request.assetTypes
+ *   A list of asset types to take a snapshot for. For example:
+ *   "compute.googleapis.com/Disk".
+ *
+ *   Regular expression is also supported. For example:
+ *
+ *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+ *   with "compute.googleapis.com".
+ *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+ *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported asset type, an INVALID_ARGUMENT error will be returned.
+ *
+ *   If specified, only matching assets will be returned, otherwise, it will
+ *   snapshot all asset types. See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+ *   for all supported asset types.
+ * @param {google.cloud.asset.v1.ContentType} request.contentType
+ *   Asset content type. If not specified, no content but the asset name will
+ *   be returned.
+ * @param {number} request.pageSize
+ *   The maximum number of assets to be returned in a single response. Default
+ *   is 100, minimum is 1, and maximum is 1000.
+ * @param {string} request.pageToken
+ *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
+ *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
+ *   prior `ListAssets` call, and the API should return the next page of assets.
+ * @param {string[]} request.relationshipTypes
+ *   A list of relationship types to output, for example:
+ *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+ *   content_type=RELATIONSHIP.
+ *   * If specified:
+ *   it snapshots specified relationships. It returns an error if
+ *   any of the [relationship_types] doesn't belong to the supported
+ *   relationship types of the [asset_types] or if any of the [asset_types]
+ *   doesn't belong to the source types of the [relationship_types].
+ *   * Otherwise:
+ *   it snapshots the supported relationships for all [asset_types] or returns
+ *   an error if any of the [asset_types] has no relationship support.
+ *   An unspecified asset types field means all supported asset_types.
+ *   See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+ *   for all supported asset types and relationship types.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.Asset|Asset} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAssetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAssetsStream(
-    request?: protos.google.cloud.asset.v1.IListAssetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.asset.v1.IListAssetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
@@ -3014,98 +2514,97 @@ export class AssetServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listAssets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the organization, folder, or project the assets belong
-   *   to. Format: "organizations/[organization-number]" (such as
-   *   "organizations/123"), "projects/[project-id]" (such as
-   *   "projects/my-project-id"), "projects/[project-number]" (such as
-   *   "projects/12345"), or "folders/[folder-number]" (such as "folders/12345").
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Timestamp to take an asset snapshot. This can only be set to a timestamp
-   *   between the current time and the current time minus 35 days (inclusive).
-   *   If not specified, the current time will be used. Due to delays in resource
-   *   data collection and indexing, there is a volatile window during which
-   *   running the same query may get different results.
-   * @param {string[]} request.assetTypes
-   *   A list of asset types to take a snapshot for. For example:
-   *   "compute.googleapis.com/Disk".
-   *
-   *   Regular expression is also supported. For example:
-   *
-   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
-   *   with "compute.googleapis.com".
-   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
-   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported asset type, an INVALID_ARGUMENT error will be returned.
-   *
-   *   If specified, only matching assets will be returned, otherwise, it will
-   *   snapshot all asset types. See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
-   *   for all supported asset types.
-   * @param {google.cloud.asset.v1.ContentType} request.contentType
-   *   Asset content type. If not specified, no content but the asset name will
-   *   be returned.
-   * @param {number} request.pageSize
-   *   The maximum number of assets to be returned in a single response. Default
-   *   is 100, minimum is 1, and maximum is 1000.
-   * @param {string} request.pageToken
-   *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
-   *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
-   *   prior `ListAssets` call, and the API should return the next page of assets.
-   * @param {string[]} request.relationshipTypes
-   *   A list of relationship types to output, for example:
-   *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
-   *   content_type=RELATIONSHIP.
-   *   * If specified:
-   *   it snapshots specified relationships. It returns an error if
-   *   any of the [relationship_types] doesn't belong to the supported
-   *   relationship types of the [asset_types] or if any of the [asset_types]
-   *   doesn't belong to the source types of the [relationship_types].
-   *   * Otherwise:
-   *   it snapshots the supported relationships for all [asset_types] or returns
-   *   an error if any of the [asset_types] has no relationship support.
-   *   An unspecified asset types field means all supported asset_types.
-   *   See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
-   *   for all supported asset types and relationship types.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.asset.v1.Asset|Asset}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.list_assets.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_ListAssets_async
-   */
+/**
+ * Equivalent to `listAssets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the organization, folder, or project the assets belong
+ *   to. Format: "organizations/[organization-number]" (such as
+ *   "organizations/123"), "projects/[project-id]" (such as
+ *   "projects/my-project-id"), "projects/[project-number]" (such as
+ *   "projects/12345"), or "folders/[folder-number]" (such as "folders/12345").
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Timestamp to take an asset snapshot. This can only be set to a timestamp
+ *   between the current time and the current time minus 35 days (inclusive).
+ *   If not specified, the current time will be used. Due to delays in resource
+ *   data collection and indexing, there is a volatile window during which
+ *   running the same query may get different results.
+ * @param {string[]} request.assetTypes
+ *   A list of asset types to take a snapshot for. For example:
+ *   "compute.googleapis.com/Disk".
+ *
+ *   Regular expression is also supported. For example:
+ *
+ *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+ *   with "compute.googleapis.com".
+ *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+ *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported asset type, an INVALID_ARGUMENT error will be returned.
+ *
+ *   If specified, only matching assets will be returned, otherwise, it will
+ *   snapshot all asset types. See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+ *   for all supported asset types.
+ * @param {google.cloud.asset.v1.ContentType} request.contentType
+ *   Asset content type. If not specified, no content but the asset name will
+ *   be returned.
+ * @param {number} request.pageSize
+ *   The maximum number of assets to be returned in a single response. Default
+ *   is 100, minimum is 1, and maximum is 1000.
+ * @param {string} request.pageToken
+ *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
+ *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
+ *   prior `ListAssets` call, and the API should return the next page of assets.
+ * @param {string[]} request.relationshipTypes
+ *   A list of relationship types to output, for example:
+ *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+ *   content_type=RELATIONSHIP.
+ *   * If specified:
+ *   it snapshots specified relationships. It returns an error if
+ *   any of the [relationship_types] doesn't belong to the supported
+ *   relationship types of the [asset_types] or if any of the [asset_types]
+ *   doesn't belong to the source types of the [relationship_types].
+ *   * Otherwise:
+ *   it snapshots the supported relationships for all [asset_types] or returns
+ *   an error if any of the [asset_types] has no relationship support.
+ *   An unspecified asset types field means all supported asset_types.
+ *   See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+ *   for all supported asset types and relationship types.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.asset.v1.Asset|Asset}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.list_assets.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_ListAssets_async
+ */
   listAssetsAsync(
-    request?: protos.google.cloud.asset.v1.IListAssetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.asset.v1.IAsset> {
+      request?: protos.google.cloud.asset.v1.IListAssetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.asset.v1.IAsset>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
@@ -3113,279 +2612,254 @@ export class AssetServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1.IAsset>;
   }
-  /**
-   * Searches all Google Cloud resources within the specified scope, such as a
-   * project, folder, or organization. The caller must be granted the
-   * `cloudasset.assets.searchAllResources` permission on the desired scope,
-   * otherwise the request will be rejected.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. A scope can be a project, a folder, or an organization. The
-   *   search is limited to the resources within the `scope`. The caller must be
-   *   granted the
-   *   [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
-   *   permission on the desired scope.
-   *
-   *   The allowed values are:
-   *
-   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
-   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
-   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} [request.query]
-   *   Optional. The query statement. See [how to construct a
-   *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
-   *   for more information. If not specified or empty, it will search all the
-   *   resources within the specified `scope`.
-   *
-   *   Examples:
-   *
-   *   * `name:Important` to find Google Cloud resources whose name contains
-   *     `Important` as a word.
-   *   * `name=Important` to find the Google Cloud resource whose name is exactly
-   *     `Important`.
-   *   * `displayName:Impor*` to find Google Cloud resources whose display name
-   *     contains `Impor` as a prefix of any word in the field.
-   *   * `location:us-west*` to find Google Cloud resources whose location
-   *     contains both `us` and `west` as prefixes.
-   *   * `labels:prod` to find Google Cloud resources whose labels contain `prod`
-   *     as a key or value.
-   *   * `labels.env:prod` to find Google Cloud resources that have a label `env`
-   *     and its value is `prod`.
-   *   * `labels.env:*` to find Google Cloud resources that have a label `env`.
-   *   * `tagKeys:env` to find Google Cloud resources that have directly
-   *     attached tags where the
-   *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
-   *     contains `env`.
-   *   * `tagValues:prod*` to find Google Cloud resources that have directly
-   *     attached tags where the
-   *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     contains a word prefixed by `prod`.
-   *   * `tagValueIds=tagValues/123` to find Google Cloud resources that have
-   *     directly attached tags where the
-   *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     is exactly `tagValues/123`.
-   *   * `effectiveTagKeys:env` to find Google Cloud resources that have
-   *     directly attached or inherited tags where the
-   *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
-   *     contains `env`.
-   *   * `effectiveTagValues:prod*` to find Google Cloud resources that have
-   *     directly attached or inherited tags where the
-   *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     contains a word prefixed by `prod`.
-   *   * `effectiveTagValueIds=tagValues/123` to find Google Cloud resources that
-   *      have directly attached or inherited tags where the
-   *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     is exactly `tagValues/123`.
-   *   * `kmsKey:key` to find Google Cloud resources encrypted with a
-   *     customer-managed encryption key whose name contains `key` as a word. This
-   *     field is deprecated. Use the `kmsKeys` field to retrieve Cloud KMS
-   *     key information.
-   *   * `kmsKeys:key` to find Google Cloud resources encrypted with
-   *     customer-managed encryption keys whose name contains the word `key`.
-   *   * `relationships:instance-group-1` to find Google Cloud resources that have
-   *     relationships with `instance-group-1` in the related resource name.
-   *   * `relationships:INSTANCE_TO_INSTANCEGROUP` to find Compute Engine
-   *     instances that have relationships of type `INSTANCE_TO_INSTANCEGROUP`.
-   *   * `relationships.INSTANCE_TO_INSTANCEGROUP:instance-group-1` to find
-   *     Compute Engine instances that have relationships with `instance-group-1`
-   *     in the Compute Engine instance group resource name, for relationship type
-   *     `INSTANCE_TO_INSTANCEGROUP`.
-   *   * `sccSecurityMarks.key=value` to find Cloud resources that are attached
-   *     with security marks whose key is `key` and value is `value`.
-   *   * `sccSecurityMarks.key:*` to find Cloud resources that are attached with
-   *     security marks whose key is `key`.
-   *   * `state:ACTIVE` to find Google Cloud resources whose state contains
-   *     `ACTIVE` as a word.
-   *   * `NOT state:ACTIVE` to find Google Cloud resources whose state doesn't
-   *     contain `ACTIVE` as a word.
-   *   * `createTime<1609459200` to find Google Cloud resources that were created
-   *     before `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
-   *     `2021-01-01 00:00:00 UTC` in seconds.
-   *   * `updateTime>1609459200` to find Google Cloud resources that were updated
-   *     after `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
-   *     `2021-01-01 00:00:00 UTC` in seconds.
-   *   * `Important` to find Google Cloud resources that contain `Important` as a
-   *     word in any of the searchable fields.
-   *   * `Impor*` to find Google Cloud resources that contain `Impor` as a prefix
-   *     of any word in any of the searchable fields.
-   *   * `Important location:(us-west1 OR global)` to find Google Cloud
-   *     resources that contain `Important` as a word in any of the searchable
-   *     fields and are also located in the `us-west1` region or the `global`
-   *     location.
-   * @param {string[]} [request.assetTypes]
-   *   Optional. A list of asset types that this request searches for. If empty,
-   *   it will search all the asset types [supported by search
-   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
-   *
-   *   Regular expressions are also supported. For example:
-   *
-   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
-   *   with "compute.googleapis.com".
-   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
-   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported asset type, an INVALID_ARGUMENT error will be returned.
-   * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Page size is capped
-   *   at 500 even if a larger value is given. If set to zero or a negative value,
-   *   server will pick an appropriate default. Returned results may be fewer than
-   *   requested. When this happens, there could be more results as long as
-   *   `next_page_token` is returned.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, then retrieve the next batch of results from the
-   *   preceding call to this method. `page_token` must be the value of
-   *   `next_page_token` from the previous response. The values of all other
-   *   method parameters, must be identical to those in the previous call.
-   * @param {string} [request.orderBy]
-   *   Optional. A comma-separated list of fields specifying the sorting order of
-   *   the results. The default order is ascending. Add " DESC" after the field
-   *   name to indicate descending order. Redundant space characters are ignored.
-   *   Example: "location DESC, name".
-   *   Only the following fields in the response are sortable:
-   *
-   *     * name
-   *     * assetType
-   *     * project
-   *     * displayName
-   *     * description
-   *     * location
-   *     * createTime
-   *     * updateTime
-   *     * state
-   *     * parentFullResourceName
-   *     * parentAssetType
-   * @param {google.protobuf.FieldMask} [request.readMask]
-   *   Optional. A comma-separated list of fields that you want returned in the
-   *   results. The following fields are returned by default if not specified:
-   *
-   *     * `name`
-   *     * `assetType`
-   *     * `project`
-   *     * `folders`
-   *     * `organization`
-   *     * `displayName`
-   *     * `description`
-   *     * `location`
-   *     * `labels`
-   *     * `tags`
-   *     * `effectiveTags`
-   *     * `networkTags`
-   *     * `kmsKeys`
-   *     * `createTime`
-   *     * `updateTime`
-   *     * `state`
-   *     * `additionalAttributes`
-   *     * `parentFullResourceName`
-   *     * `parentAssetType`
-   *
-   *   Some fields of large size, such as `versionedResources`,
-   *   `attachedResources`, `effectiveTags` etc., are not returned by default, but
-   *   you can specify them in the `read_mask` parameter if you want to include
-   *   them. If `"*"` is specified, all [available
-   *   fields](https://cloud.google.com/asset-inventory/docs/reference/rest/v1/TopLevel/searchAllResources#resourcesearchresult)
-   *   are returned.
-   *   Examples: `"name,location"`, `"name,versionedResources"`, `"*"`.
-   *   Any invalid field path will trigger INVALID_ARGUMENT error.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.ResourceSearchResult|ResourceSearchResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchAllResourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Searches all Google Cloud resources within the specified scope, such as a
+ * project, folder, or organization. The caller must be granted the
+ * `cloudasset.assets.searchAllResources` permission on the desired scope,
+ * otherwise the request will be rejected.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. A scope can be a project, a folder, or an organization. The
+ *   search is limited to the resources within the `scope`. The caller must be
+ *   granted the
+ *   [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+ *   permission on the desired scope.
+ *
+ *   The allowed values are:
+ *
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+ *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} [request.query]
+ *   Optional. The query statement. See [how to construct a
+ *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+ *   for more information. If not specified or empty, it will search all the
+ *   resources within the specified `scope`.
+ *
+ *   Examples:
+ *
+ *   * `name:Important` to find Google Cloud resources whose name contains
+ *     `Important` as a word.
+ *   * `name=Important` to find the Google Cloud resource whose name is exactly
+ *     `Important`.
+ *   * `displayName:Impor*` to find Google Cloud resources whose display name
+ *     contains `Impor` as a prefix of any word in the field.
+ *   * `location:us-west*` to find Google Cloud resources whose location
+ *     contains both `us` and `west` as prefixes.
+ *   * `labels:prod` to find Google Cloud resources whose labels contain `prod`
+ *     as a key or value.
+ *   * `labels.env:prod` to find Google Cloud resources that have a label `env`
+ *     and its value is `prod`.
+ *   * `labels.env:*` to find Google Cloud resources that have a label `env`.
+ *   * `tagKeys:env` to find Google Cloud resources that have directly
+ *     attached tags where the
+ *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
+ *     contains `env`.
+ *   * `tagValues:prod*` to find Google Cloud resources that have directly
+ *     attached tags where the
+ *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     contains a word prefixed by `prod`.
+ *   * `tagValueIds=tagValues/123` to find Google Cloud resources that have
+ *     directly attached tags where the
+ *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     is exactly `tagValues/123`.
+ *   * `effectiveTagKeys:env` to find Google Cloud resources that have
+ *     directly attached or inherited tags where the
+ *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
+ *     contains `env`.
+ *   * `effectiveTagValues:prod*` to find Google Cloud resources that have
+ *     directly attached or inherited tags where the
+ *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     contains a word prefixed by `prod`.
+ *   * `effectiveTagValueIds=tagValues/123` to find Google Cloud resources that
+ *      have directly attached or inherited tags where the
+ *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     is exactly `tagValues/123`.
+ *   * `kmsKey:key` to find Google Cloud resources encrypted with a
+ *     customer-managed encryption key whose name contains `key` as a word. This
+ *     field is deprecated. Use the `kmsKeys` field to retrieve Cloud KMS
+ *     key information.
+ *   * `kmsKeys:key` to find Google Cloud resources encrypted with
+ *     customer-managed encryption keys whose name contains the word `key`.
+ *   * `relationships:instance-group-1` to find Google Cloud resources that have
+ *     relationships with `instance-group-1` in the related resource name.
+ *   * `relationships:INSTANCE_TO_INSTANCEGROUP` to find Compute Engine
+ *     instances that have relationships of type `INSTANCE_TO_INSTANCEGROUP`.
+ *   * `relationships.INSTANCE_TO_INSTANCEGROUP:instance-group-1` to find
+ *     Compute Engine instances that have relationships with `instance-group-1`
+ *     in the Compute Engine instance group resource name, for relationship type
+ *     `INSTANCE_TO_INSTANCEGROUP`.
+ *   * `sccSecurityMarks.key=value` to find Cloud resources that are attached
+ *     with security marks whose key is `key` and value is `value`.
+ *   * `sccSecurityMarks.key:*` to find Cloud resources that are attached with
+ *     security marks whose key is `key`.
+ *   * `state:ACTIVE` to find Google Cloud resources whose state contains
+ *     `ACTIVE` as a word.
+ *   * `NOT state:ACTIVE` to find Google Cloud resources whose state doesn't
+ *     contain `ACTIVE` as a word.
+ *   * `createTime<1609459200` to find Google Cloud resources that were created
+ *     before `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
+ *     `2021-01-01 00:00:00 UTC` in seconds.
+ *   * `updateTime>1609459200` to find Google Cloud resources that were updated
+ *     after `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
+ *     `2021-01-01 00:00:00 UTC` in seconds.
+ *   * `Important` to find Google Cloud resources that contain `Important` as a
+ *     word in any of the searchable fields.
+ *   * `Impor*` to find Google Cloud resources that contain `Impor` as a prefix
+ *     of any word in any of the searchable fields.
+ *   * `Important location:(us-west1 OR global)` to find Google Cloud
+ *     resources that contain `Important` as a word in any of the searchable
+ *     fields and are also located in the `us-west1` region or the `global`
+ *     location.
+ * @param {string[]} [request.assetTypes]
+ *   Optional. A list of asset types that this request searches for. If empty,
+ *   it will search all the asset types [supported by search
+ *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+ *
+ *   Regular expressions are also supported. For example:
+ *
+ *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+ *   with "compute.googleapis.com".
+ *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+ *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported asset type, an INVALID_ARGUMENT error will be returned.
+ * @param {number} [request.pageSize]
+ *   Optional. The page size for search result pagination. Page size is capped
+ *   at 500 even if a larger value is given. If set to zero or a negative value,
+ *   server will pick an appropriate default. Returned results may be fewer than
+ *   requested. When this happens, there could be more results as long as
+ *   `next_page_token` is returned.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, then retrieve the next batch of results from the
+ *   preceding call to this method. `page_token` must be the value of
+ *   `next_page_token` from the previous response. The values of all other
+ *   method parameters, must be identical to those in the previous call.
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields specifying the sorting order of
+ *   the results. The default order is ascending. Add " DESC" after the field
+ *   name to indicate descending order. Redundant space characters are ignored.
+ *   Example: "location DESC, name".
+ *   Only the following fields in the response are sortable:
+ *
+ *     * name
+ *     * assetType
+ *     * project
+ *     * displayName
+ *     * description
+ *     * location
+ *     * createTime
+ *     * updateTime
+ *     * state
+ *     * parentFullResourceName
+ *     * parentAssetType
+ * @param {google.protobuf.FieldMask} [request.readMask]
+ *   Optional. A comma-separated list of fields that you want returned in the
+ *   results. The following fields are returned by default if not specified:
+ *
+ *     * `name`
+ *     * `assetType`
+ *     * `project`
+ *     * `folders`
+ *     * `organization`
+ *     * `displayName`
+ *     * `description`
+ *     * `location`
+ *     * `labels`
+ *     * `tags`
+ *     * `effectiveTags`
+ *     * `networkTags`
+ *     * `kmsKeys`
+ *     * `createTime`
+ *     * `updateTime`
+ *     * `state`
+ *     * `additionalAttributes`
+ *     * `parentFullResourceName`
+ *     * `parentAssetType`
+ *
+ *   Some fields of large size, such as `versionedResources`,
+ *   `attachedResources`, `effectiveTags` etc., are not returned by default, but
+ *   you can specify them in the `read_mask` parameter if you want to include
+ *   them. If `"*"` is specified, all [available
+ *   fields](https://cloud.google.com/asset-inventory/docs/reference/rest/v1/TopLevel/searchAllResources#resourcesearchresult)
+ *   are returned.
+ *   Examples: `"name,location"`, `"name,versionedResources"`, `"*"`.
+ *   Any invalid field path will trigger INVALID_ARGUMENT error.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.ResourceSearchResult|ResourceSearchResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchAllResourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchAllResources(
-    request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IResourceSearchResult[],
-      protos.google.cloud.asset.v1.ISearchAllResourcesRequest | null,
-      protos.google.cloud.asset.v1.ISearchAllResourcesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IResourceSearchResult[],
+        protos.google.cloud.asset.v1.ISearchAllResourcesRequest|null,
+        protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+      ]>;
   searchAllResources(
-    request: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
-      | protos.google.cloud.asset.v1.ISearchAllResourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.IResourceSearchResult
-    >
-  ): void;
-  searchAllResources(
-    request: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
-      | protos.google.cloud.asset.v1.ISearchAllResourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.IResourceSearchResult
-    >
-  ): void;
-  searchAllResources(
-    request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
-          | protos.google.cloud.asset.v1.ISearchAllResourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.IResourceSearchResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
-      | protos.google.cloud.asset.v1.ISearchAllResourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.IResourceSearchResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IResourceSearchResult[],
-      protos.google.cloud.asset.v1.ISearchAllResourcesRequest | null,
-      protos.google.cloud.asset.v1.ISearchAllResourcesResponse,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.ISearchAllResourcesResponse|null|undefined,
+          protos.google.cloud.asset.v1.IResourceSearchResult>): void;
+  searchAllResources(
+      request: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+          protos.google.cloud.asset.v1.ISearchAllResourcesResponse|null|undefined,
+          protos.google.cloud.asset.v1.IResourceSearchResult>): void;
+  searchAllResources(
+      request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+          protos.google.cloud.asset.v1.ISearchAllResourcesResponse|null|undefined,
+          protos.google.cloud.asset.v1.IResourceSearchResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+          protos.google.cloud.asset.v1.ISearchAllResourcesResponse|null|undefined,
+          protos.google.cloud.asset.v1.IResourceSearchResult>):
+      Promise<[
+        protos.google.cloud.asset.v1.IResourceSearchResult[],
+        protos.google.cloud.asset.v1.ISearchAllResourcesRequest|null,
+        protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
-          | protos.google.cloud.asset.v1.ISearchAllResourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.IResourceSearchResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+      protos.google.cloud.asset.v1.ISearchAllResourcesResponse|null|undefined,
+      protos.google.cloud.asset.v1.IResourceSearchResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchAllResources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3394,220 +2868,217 @@ export class AssetServiceClient {
     this._log.info('searchAllResources request %j', request);
     return this.innerApiCalls
       .searchAllResources(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.asset.v1.IResourceSearchResult[],
-          protos.google.cloud.asset.v1.ISearchAllResourcesRequest | null,
-          protos.google.cloud.asset.v1.ISearchAllResourcesResponse,
-        ]) => {
-          this._log.info('searchAllResources values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.asset.v1.IResourceSearchResult[],
+        protos.google.cloud.asset.v1.ISearchAllResourcesRequest|null,
+        protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+      ]) => {
+        this._log.info('searchAllResources values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchAllResources`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. A scope can be a project, a folder, or an organization. The
-   *   search is limited to the resources within the `scope`. The caller must be
-   *   granted the
-   *   [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
-   *   permission on the desired scope.
-   *
-   *   The allowed values are:
-   *
-   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
-   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
-   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} [request.query]
-   *   Optional. The query statement. See [how to construct a
-   *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
-   *   for more information. If not specified or empty, it will search all the
-   *   resources within the specified `scope`.
-   *
-   *   Examples:
-   *
-   *   * `name:Important` to find Google Cloud resources whose name contains
-   *     `Important` as a word.
-   *   * `name=Important` to find the Google Cloud resource whose name is exactly
-   *     `Important`.
-   *   * `displayName:Impor*` to find Google Cloud resources whose display name
-   *     contains `Impor` as a prefix of any word in the field.
-   *   * `location:us-west*` to find Google Cloud resources whose location
-   *     contains both `us` and `west` as prefixes.
-   *   * `labels:prod` to find Google Cloud resources whose labels contain `prod`
-   *     as a key or value.
-   *   * `labels.env:prod` to find Google Cloud resources that have a label `env`
-   *     and its value is `prod`.
-   *   * `labels.env:*` to find Google Cloud resources that have a label `env`.
-   *   * `tagKeys:env` to find Google Cloud resources that have directly
-   *     attached tags where the
-   *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
-   *     contains `env`.
-   *   * `tagValues:prod*` to find Google Cloud resources that have directly
-   *     attached tags where the
-   *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     contains a word prefixed by `prod`.
-   *   * `tagValueIds=tagValues/123` to find Google Cloud resources that have
-   *     directly attached tags where the
-   *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     is exactly `tagValues/123`.
-   *   * `effectiveTagKeys:env` to find Google Cloud resources that have
-   *     directly attached or inherited tags where the
-   *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
-   *     contains `env`.
-   *   * `effectiveTagValues:prod*` to find Google Cloud resources that have
-   *     directly attached or inherited tags where the
-   *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     contains a word prefixed by `prod`.
-   *   * `effectiveTagValueIds=tagValues/123` to find Google Cloud resources that
-   *      have directly attached or inherited tags where the
-   *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     is exactly `tagValues/123`.
-   *   * `kmsKey:key` to find Google Cloud resources encrypted with a
-   *     customer-managed encryption key whose name contains `key` as a word. This
-   *     field is deprecated. Use the `kmsKeys` field to retrieve Cloud KMS
-   *     key information.
-   *   * `kmsKeys:key` to find Google Cloud resources encrypted with
-   *     customer-managed encryption keys whose name contains the word `key`.
-   *   * `relationships:instance-group-1` to find Google Cloud resources that have
-   *     relationships with `instance-group-1` in the related resource name.
-   *   * `relationships:INSTANCE_TO_INSTANCEGROUP` to find Compute Engine
-   *     instances that have relationships of type `INSTANCE_TO_INSTANCEGROUP`.
-   *   * `relationships.INSTANCE_TO_INSTANCEGROUP:instance-group-1` to find
-   *     Compute Engine instances that have relationships with `instance-group-1`
-   *     in the Compute Engine instance group resource name, for relationship type
-   *     `INSTANCE_TO_INSTANCEGROUP`.
-   *   * `sccSecurityMarks.key=value` to find Cloud resources that are attached
-   *     with security marks whose key is `key` and value is `value`.
-   *   * `sccSecurityMarks.key:*` to find Cloud resources that are attached with
-   *     security marks whose key is `key`.
-   *   * `state:ACTIVE` to find Google Cloud resources whose state contains
-   *     `ACTIVE` as a word.
-   *   * `NOT state:ACTIVE` to find Google Cloud resources whose state doesn't
-   *     contain `ACTIVE` as a word.
-   *   * `createTime<1609459200` to find Google Cloud resources that were created
-   *     before `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
-   *     `2021-01-01 00:00:00 UTC` in seconds.
-   *   * `updateTime>1609459200` to find Google Cloud resources that were updated
-   *     after `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
-   *     `2021-01-01 00:00:00 UTC` in seconds.
-   *   * `Important` to find Google Cloud resources that contain `Important` as a
-   *     word in any of the searchable fields.
-   *   * `Impor*` to find Google Cloud resources that contain `Impor` as a prefix
-   *     of any word in any of the searchable fields.
-   *   * `Important location:(us-west1 OR global)` to find Google Cloud
-   *     resources that contain `Important` as a word in any of the searchable
-   *     fields and are also located in the `us-west1` region or the `global`
-   *     location.
-   * @param {string[]} [request.assetTypes]
-   *   Optional. A list of asset types that this request searches for. If empty,
-   *   it will search all the asset types [supported by search
-   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
-   *
-   *   Regular expressions are also supported. For example:
-   *
-   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
-   *   with "compute.googleapis.com".
-   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
-   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported asset type, an INVALID_ARGUMENT error will be returned.
-   * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Page size is capped
-   *   at 500 even if a larger value is given. If set to zero or a negative value,
-   *   server will pick an appropriate default. Returned results may be fewer than
-   *   requested. When this happens, there could be more results as long as
-   *   `next_page_token` is returned.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, then retrieve the next batch of results from the
-   *   preceding call to this method. `page_token` must be the value of
-   *   `next_page_token` from the previous response. The values of all other
-   *   method parameters, must be identical to those in the previous call.
-   * @param {string} [request.orderBy]
-   *   Optional. A comma-separated list of fields specifying the sorting order of
-   *   the results. The default order is ascending. Add " DESC" after the field
-   *   name to indicate descending order. Redundant space characters are ignored.
-   *   Example: "location DESC, name".
-   *   Only the following fields in the response are sortable:
-   *
-   *     * name
-   *     * assetType
-   *     * project
-   *     * displayName
-   *     * description
-   *     * location
-   *     * createTime
-   *     * updateTime
-   *     * state
-   *     * parentFullResourceName
-   *     * parentAssetType
-   * @param {google.protobuf.FieldMask} [request.readMask]
-   *   Optional. A comma-separated list of fields that you want returned in the
-   *   results. The following fields are returned by default if not specified:
-   *
-   *     * `name`
-   *     * `assetType`
-   *     * `project`
-   *     * `folders`
-   *     * `organization`
-   *     * `displayName`
-   *     * `description`
-   *     * `location`
-   *     * `labels`
-   *     * `tags`
-   *     * `effectiveTags`
-   *     * `networkTags`
-   *     * `kmsKeys`
-   *     * `createTime`
-   *     * `updateTime`
-   *     * `state`
-   *     * `additionalAttributes`
-   *     * `parentFullResourceName`
-   *     * `parentAssetType`
-   *
-   *   Some fields of large size, such as `versionedResources`,
-   *   `attachedResources`, `effectiveTags` etc., are not returned by default, but
-   *   you can specify them in the `read_mask` parameter if you want to include
-   *   them. If `"*"` is specified, all [available
-   *   fields](https://cloud.google.com/asset-inventory/docs/reference/rest/v1/TopLevel/searchAllResources#resourcesearchresult)
-   *   are returned.
-   *   Examples: `"name,location"`, `"name,versionedResources"`, `"*"`.
-   *   Any invalid field path will trigger INVALID_ARGUMENT error.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.ResourceSearchResult|ResourceSearchResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchAllResourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchAllResources`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. A scope can be a project, a folder, or an organization. The
+ *   search is limited to the resources within the `scope`. The caller must be
+ *   granted the
+ *   [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+ *   permission on the desired scope.
+ *
+ *   The allowed values are:
+ *
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+ *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} [request.query]
+ *   Optional. The query statement. See [how to construct a
+ *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+ *   for more information. If not specified or empty, it will search all the
+ *   resources within the specified `scope`.
+ *
+ *   Examples:
+ *
+ *   * `name:Important` to find Google Cloud resources whose name contains
+ *     `Important` as a word.
+ *   * `name=Important` to find the Google Cloud resource whose name is exactly
+ *     `Important`.
+ *   * `displayName:Impor*` to find Google Cloud resources whose display name
+ *     contains `Impor` as a prefix of any word in the field.
+ *   * `location:us-west*` to find Google Cloud resources whose location
+ *     contains both `us` and `west` as prefixes.
+ *   * `labels:prod` to find Google Cloud resources whose labels contain `prod`
+ *     as a key or value.
+ *   * `labels.env:prod` to find Google Cloud resources that have a label `env`
+ *     and its value is `prod`.
+ *   * `labels.env:*` to find Google Cloud resources that have a label `env`.
+ *   * `tagKeys:env` to find Google Cloud resources that have directly
+ *     attached tags where the
+ *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
+ *     contains `env`.
+ *   * `tagValues:prod*` to find Google Cloud resources that have directly
+ *     attached tags where the
+ *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     contains a word prefixed by `prod`.
+ *   * `tagValueIds=tagValues/123` to find Google Cloud resources that have
+ *     directly attached tags where the
+ *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     is exactly `tagValues/123`.
+ *   * `effectiveTagKeys:env` to find Google Cloud resources that have
+ *     directly attached or inherited tags where the
+ *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
+ *     contains `env`.
+ *   * `effectiveTagValues:prod*` to find Google Cloud resources that have
+ *     directly attached or inherited tags where the
+ *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     contains a word prefixed by `prod`.
+ *   * `effectiveTagValueIds=tagValues/123` to find Google Cloud resources that
+ *      have directly attached or inherited tags where the
+ *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     is exactly `tagValues/123`.
+ *   * `kmsKey:key` to find Google Cloud resources encrypted with a
+ *     customer-managed encryption key whose name contains `key` as a word. This
+ *     field is deprecated. Use the `kmsKeys` field to retrieve Cloud KMS
+ *     key information.
+ *   * `kmsKeys:key` to find Google Cloud resources encrypted with
+ *     customer-managed encryption keys whose name contains the word `key`.
+ *   * `relationships:instance-group-1` to find Google Cloud resources that have
+ *     relationships with `instance-group-1` in the related resource name.
+ *   * `relationships:INSTANCE_TO_INSTANCEGROUP` to find Compute Engine
+ *     instances that have relationships of type `INSTANCE_TO_INSTANCEGROUP`.
+ *   * `relationships.INSTANCE_TO_INSTANCEGROUP:instance-group-1` to find
+ *     Compute Engine instances that have relationships with `instance-group-1`
+ *     in the Compute Engine instance group resource name, for relationship type
+ *     `INSTANCE_TO_INSTANCEGROUP`.
+ *   * `sccSecurityMarks.key=value` to find Cloud resources that are attached
+ *     with security marks whose key is `key` and value is `value`.
+ *   * `sccSecurityMarks.key:*` to find Cloud resources that are attached with
+ *     security marks whose key is `key`.
+ *   * `state:ACTIVE` to find Google Cloud resources whose state contains
+ *     `ACTIVE` as a word.
+ *   * `NOT state:ACTIVE` to find Google Cloud resources whose state doesn't
+ *     contain `ACTIVE` as a word.
+ *   * `createTime<1609459200` to find Google Cloud resources that were created
+ *     before `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
+ *     `2021-01-01 00:00:00 UTC` in seconds.
+ *   * `updateTime>1609459200` to find Google Cloud resources that were updated
+ *     after `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
+ *     `2021-01-01 00:00:00 UTC` in seconds.
+ *   * `Important` to find Google Cloud resources that contain `Important` as a
+ *     word in any of the searchable fields.
+ *   * `Impor*` to find Google Cloud resources that contain `Impor` as a prefix
+ *     of any word in any of the searchable fields.
+ *   * `Important location:(us-west1 OR global)` to find Google Cloud
+ *     resources that contain `Important` as a word in any of the searchable
+ *     fields and are also located in the `us-west1` region or the `global`
+ *     location.
+ * @param {string[]} [request.assetTypes]
+ *   Optional. A list of asset types that this request searches for. If empty,
+ *   it will search all the asset types [supported by search
+ *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+ *
+ *   Regular expressions are also supported. For example:
+ *
+ *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+ *   with "compute.googleapis.com".
+ *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+ *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported asset type, an INVALID_ARGUMENT error will be returned.
+ * @param {number} [request.pageSize]
+ *   Optional. The page size for search result pagination. Page size is capped
+ *   at 500 even if a larger value is given. If set to zero or a negative value,
+ *   server will pick an appropriate default. Returned results may be fewer than
+ *   requested. When this happens, there could be more results as long as
+ *   `next_page_token` is returned.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, then retrieve the next batch of results from the
+ *   preceding call to this method. `page_token` must be the value of
+ *   `next_page_token` from the previous response. The values of all other
+ *   method parameters, must be identical to those in the previous call.
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields specifying the sorting order of
+ *   the results. The default order is ascending. Add " DESC" after the field
+ *   name to indicate descending order. Redundant space characters are ignored.
+ *   Example: "location DESC, name".
+ *   Only the following fields in the response are sortable:
+ *
+ *     * name
+ *     * assetType
+ *     * project
+ *     * displayName
+ *     * description
+ *     * location
+ *     * createTime
+ *     * updateTime
+ *     * state
+ *     * parentFullResourceName
+ *     * parentAssetType
+ * @param {google.protobuf.FieldMask} [request.readMask]
+ *   Optional. A comma-separated list of fields that you want returned in the
+ *   results. The following fields are returned by default if not specified:
+ *
+ *     * `name`
+ *     * `assetType`
+ *     * `project`
+ *     * `folders`
+ *     * `organization`
+ *     * `displayName`
+ *     * `description`
+ *     * `location`
+ *     * `labels`
+ *     * `tags`
+ *     * `effectiveTags`
+ *     * `networkTags`
+ *     * `kmsKeys`
+ *     * `createTime`
+ *     * `updateTime`
+ *     * `state`
+ *     * `additionalAttributes`
+ *     * `parentFullResourceName`
+ *     * `parentAssetType`
+ *
+ *   Some fields of large size, such as `versionedResources`,
+ *   `attachedResources`, `effectiveTags` etc., are not returned by default, but
+ *   you can specify them in the `read_mask` parameter if you want to include
+ *   them. If `"*"` is specified, all [available
+ *   fields](https://cloud.google.com/asset-inventory/docs/reference/rest/v1/TopLevel/searchAllResources#resourcesearchresult)
+ *   are returned.
+ *   Examples: `"name,location"`, `"name,versionedResources"`, `"*"`.
+ *   Any invalid field path will trigger INVALID_ARGUMENT error.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.ResourceSearchResult|ResourceSearchResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchAllResourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchAllResourcesStream(
-    request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
+    });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchAllResources stream %j', request);
     return this.descriptors.page.searchAllResources.createStream(
       this.innerApiCalls.searchAllResources as GaxCall,
@@ -3616,211 +3087,210 @@ export class AssetServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchAllResources`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. A scope can be a project, a folder, or an organization. The
-   *   search is limited to the resources within the `scope`. The caller must be
-   *   granted the
-   *   [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
-   *   permission on the desired scope.
-   *
-   *   The allowed values are:
-   *
-   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
-   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
-   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} [request.query]
-   *   Optional. The query statement. See [how to construct a
-   *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
-   *   for more information. If not specified or empty, it will search all the
-   *   resources within the specified `scope`.
-   *
-   *   Examples:
-   *
-   *   * `name:Important` to find Google Cloud resources whose name contains
-   *     `Important` as a word.
-   *   * `name=Important` to find the Google Cloud resource whose name is exactly
-   *     `Important`.
-   *   * `displayName:Impor*` to find Google Cloud resources whose display name
-   *     contains `Impor` as a prefix of any word in the field.
-   *   * `location:us-west*` to find Google Cloud resources whose location
-   *     contains both `us` and `west` as prefixes.
-   *   * `labels:prod` to find Google Cloud resources whose labels contain `prod`
-   *     as a key or value.
-   *   * `labels.env:prod` to find Google Cloud resources that have a label `env`
-   *     and its value is `prod`.
-   *   * `labels.env:*` to find Google Cloud resources that have a label `env`.
-   *   * `tagKeys:env` to find Google Cloud resources that have directly
-   *     attached tags where the
-   *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
-   *     contains `env`.
-   *   * `tagValues:prod*` to find Google Cloud resources that have directly
-   *     attached tags where the
-   *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     contains a word prefixed by `prod`.
-   *   * `tagValueIds=tagValues/123` to find Google Cloud resources that have
-   *     directly attached tags where the
-   *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     is exactly `tagValues/123`.
-   *   * `effectiveTagKeys:env` to find Google Cloud resources that have
-   *     directly attached or inherited tags where the
-   *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
-   *     contains `env`.
-   *   * `effectiveTagValues:prod*` to find Google Cloud resources that have
-   *     directly attached or inherited tags where the
-   *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     contains a word prefixed by `prod`.
-   *   * `effectiveTagValueIds=tagValues/123` to find Google Cloud resources that
-   *      have directly attached or inherited tags where the
-   *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-   *     is exactly `tagValues/123`.
-   *   * `kmsKey:key` to find Google Cloud resources encrypted with a
-   *     customer-managed encryption key whose name contains `key` as a word. This
-   *     field is deprecated. Use the `kmsKeys` field to retrieve Cloud KMS
-   *     key information.
-   *   * `kmsKeys:key` to find Google Cloud resources encrypted with
-   *     customer-managed encryption keys whose name contains the word `key`.
-   *   * `relationships:instance-group-1` to find Google Cloud resources that have
-   *     relationships with `instance-group-1` in the related resource name.
-   *   * `relationships:INSTANCE_TO_INSTANCEGROUP` to find Compute Engine
-   *     instances that have relationships of type `INSTANCE_TO_INSTANCEGROUP`.
-   *   * `relationships.INSTANCE_TO_INSTANCEGROUP:instance-group-1` to find
-   *     Compute Engine instances that have relationships with `instance-group-1`
-   *     in the Compute Engine instance group resource name, for relationship type
-   *     `INSTANCE_TO_INSTANCEGROUP`.
-   *   * `sccSecurityMarks.key=value` to find Cloud resources that are attached
-   *     with security marks whose key is `key` and value is `value`.
-   *   * `sccSecurityMarks.key:*` to find Cloud resources that are attached with
-   *     security marks whose key is `key`.
-   *   * `state:ACTIVE` to find Google Cloud resources whose state contains
-   *     `ACTIVE` as a word.
-   *   * `NOT state:ACTIVE` to find Google Cloud resources whose state doesn't
-   *     contain `ACTIVE` as a word.
-   *   * `createTime<1609459200` to find Google Cloud resources that were created
-   *     before `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
-   *     `2021-01-01 00:00:00 UTC` in seconds.
-   *   * `updateTime>1609459200` to find Google Cloud resources that were updated
-   *     after `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
-   *     `2021-01-01 00:00:00 UTC` in seconds.
-   *   * `Important` to find Google Cloud resources that contain `Important` as a
-   *     word in any of the searchable fields.
-   *   * `Impor*` to find Google Cloud resources that contain `Impor` as a prefix
-   *     of any word in any of the searchable fields.
-   *   * `Important location:(us-west1 OR global)` to find Google Cloud
-   *     resources that contain `Important` as a word in any of the searchable
-   *     fields and are also located in the `us-west1` region or the `global`
-   *     location.
-   * @param {string[]} [request.assetTypes]
-   *   Optional. A list of asset types that this request searches for. If empty,
-   *   it will search all the asset types [supported by search
-   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
-   *
-   *   Regular expressions are also supported. For example:
-   *
-   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
-   *   with "compute.googleapis.com".
-   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
-   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported asset type, an INVALID_ARGUMENT error will be returned.
-   * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Page size is capped
-   *   at 500 even if a larger value is given. If set to zero or a negative value,
-   *   server will pick an appropriate default. Returned results may be fewer than
-   *   requested. When this happens, there could be more results as long as
-   *   `next_page_token` is returned.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, then retrieve the next batch of results from the
-   *   preceding call to this method. `page_token` must be the value of
-   *   `next_page_token` from the previous response. The values of all other
-   *   method parameters, must be identical to those in the previous call.
-   * @param {string} [request.orderBy]
-   *   Optional. A comma-separated list of fields specifying the sorting order of
-   *   the results. The default order is ascending. Add " DESC" after the field
-   *   name to indicate descending order. Redundant space characters are ignored.
-   *   Example: "location DESC, name".
-   *   Only the following fields in the response are sortable:
-   *
-   *     * name
-   *     * assetType
-   *     * project
-   *     * displayName
-   *     * description
-   *     * location
-   *     * createTime
-   *     * updateTime
-   *     * state
-   *     * parentFullResourceName
-   *     * parentAssetType
-   * @param {google.protobuf.FieldMask} [request.readMask]
-   *   Optional. A comma-separated list of fields that you want returned in the
-   *   results. The following fields are returned by default if not specified:
-   *
-   *     * `name`
-   *     * `assetType`
-   *     * `project`
-   *     * `folders`
-   *     * `organization`
-   *     * `displayName`
-   *     * `description`
-   *     * `location`
-   *     * `labels`
-   *     * `tags`
-   *     * `effectiveTags`
-   *     * `networkTags`
-   *     * `kmsKeys`
-   *     * `createTime`
-   *     * `updateTime`
-   *     * `state`
-   *     * `additionalAttributes`
-   *     * `parentFullResourceName`
-   *     * `parentAssetType`
-   *
-   *   Some fields of large size, such as `versionedResources`,
-   *   `attachedResources`, `effectiveTags` etc., are not returned by default, but
-   *   you can specify them in the `read_mask` parameter if you want to include
-   *   them. If `"*"` is specified, all [available
-   *   fields](https://cloud.google.com/asset-inventory/docs/reference/rest/v1/TopLevel/searchAllResources#resourcesearchresult)
-   *   are returned.
-   *   Examples: `"name,location"`, `"name,versionedResources"`, `"*"`.
-   *   Any invalid field path will trigger INVALID_ARGUMENT error.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.asset.v1.ResourceSearchResult|ResourceSearchResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.search_all_resources.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_SearchAllResources_async
-   */
+/**
+ * Equivalent to `searchAllResources`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. A scope can be a project, a folder, or an organization. The
+ *   search is limited to the resources within the `scope`. The caller must be
+ *   granted the
+ *   [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+ *   permission on the desired scope.
+ *
+ *   The allowed values are:
+ *
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+ *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} [request.query]
+ *   Optional. The query statement. See [how to construct a
+ *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+ *   for more information. If not specified or empty, it will search all the
+ *   resources within the specified `scope`.
+ *
+ *   Examples:
+ *
+ *   * `name:Important` to find Google Cloud resources whose name contains
+ *     `Important` as a word.
+ *   * `name=Important` to find the Google Cloud resource whose name is exactly
+ *     `Important`.
+ *   * `displayName:Impor*` to find Google Cloud resources whose display name
+ *     contains `Impor` as a prefix of any word in the field.
+ *   * `location:us-west*` to find Google Cloud resources whose location
+ *     contains both `us` and `west` as prefixes.
+ *   * `labels:prod` to find Google Cloud resources whose labels contain `prod`
+ *     as a key or value.
+ *   * `labels.env:prod` to find Google Cloud resources that have a label `env`
+ *     and its value is `prod`.
+ *   * `labels.env:*` to find Google Cloud resources that have a label `env`.
+ *   * `tagKeys:env` to find Google Cloud resources that have directly
+ *     attached tags where the
+ *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
+ *     contains `env`.
+ *   * `tagValues:prod*` to find Google Cloud resources that have directly
+ *     attached tags where the
+ *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     contains a word prefixed by `prod`.
+ *   * `tagValueIds=tagValues/123` to find Google Cloud resources that have
+ *     directly attached tags where the
+ *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     is exactly `tagValues/123`.
+ *   * `effectiveTagKeys:env` to find Google Cloud resources that have
+ *     directly attached or inherited tags where the
+ *     [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
+ *     contains `env`.
+ *   * `effectiveTagValues:prod*` to find Google Cloud resources that have
+ *     directly attached or inherited tags where the
+ *     [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     contains a word prefixed by `prod`.
+ *   * `effectiveTagValueIds=tagValues/123` to find Google Cloud resources that
+ *      have directly attached or inherited tags where the
+ *     [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+ *     is exactly `tagValues/123`.
+ *   * `kmsKey:key` to find Google Cloud resources encrypted with a
+ *     customer-managed encryption key whose name contains `key` as a word. This
+ *     field is deprecated. Use the `kmsKeys` field to retrieve Cloud KMS
+ *     key information.
+ *   * `kmsKeys:key` to find Google Cloud resources encrypted with
+ *     customer-managed encryption keys whose name contains the word `key`.
+ *   * `relationships:instance-group-1` to find Google Cloud resources that have
+ *     relationships with `instance-group-1` in the related resource name.
+ *   * `relationships:INSTANCE_TO_INSTANCEGROUP` to find Compute Engine
+ *     instances that have relationships of type `INSTANCE_TO_INSTANCEGROUP`.
+ *   * `relationships.INSTANCE_TO_INSTANCEGROUP:instance-group-1` to find
+ *     Compute Engine instances that have relationships with `instance-group-1`
+ *     in the Compute Engine instance group resource name, for relationship type
+ *     `INSTANCE_TO_INSTANCEGROUP`.
+ *   * `sccSecurityMarks.key=value` to find Cloud resources that are attached
+ *     with security marks whose key is `key` and value is `value`.
+ *   * `sccSecurityMarks.key:*` to find Cloud resources that are attached with
+ *     security marks whose key is `key`.
+ *   * `state:ACTIVE` to find Google Cloud resources whose state contains
+ *     `ACTIVE` as a word.
+ *   * `NOT state:ACTIVE` to find Google Cloud resources whose state doesn't
+ *     contain `ACTIVE` as a word.
+ *   * `createTime<1609459200` to find Google Cloud resources that were created
+ *     before `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
+ *     `2021-01-01 00:00:00 UTC` in seconds.
+ *   * `updateTime>1609459200` to find Google Cloud resources that were updated
+ *     after `2021-01-01 00:00:00 UTC`. `1609459200` is the epoch timestamp of
+ *     `2021-01-01 00:00:00 UTC` in seconds.
+ *   * `Important` to find Google Cloud resources that contain `Important` as a
+ *     word in any of the searchable fields.
+ *   * `Impor*` to find Google Cloud resources that contain `Impor` as a prefix
+ *     of any word in any of the searchable fields.
+ *   * `Important location:(us-west1 OR global)` to find Google Cloud
+ *     resources that contain `Important` as a word in any of the searchable
+ *     fields and are also located in the `us-west1` region or the `global`
+ *     location.
+ * @param {string[]} [request.assetTypes]
+ *   Optional. A list of asset types that this request searches for. If empty,
+ *   it will search all the asset types [supported by search
+ *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+ *
+ *   Regular expressions are also supported. For example:
+ *
+ *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+ *   with "compute.googleapis.com".
+ *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+ *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported asset type, an INVALID_ARGUMENT error will be returned.
+ * @param {number} [request.pageSize]
+ *   Optional. The page size for search result pagination. Page size is capped
+ *   at 500 even if a larger value is given. If set to zero or a negative value,
+ *   server will pick an appropriate default. Returned results may be fewer than
+ *   requested. When this happens, there could be more results as long as
+ *   `next_page_token` is returned.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, then retrieve the next batch of results from the
+ *   preceding call to this method. `page_token` must be the value of
+ *   `next_page_token` from the previous response. The values of all other
+ *   method parameters, must be identical to those in the previous call.
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields specifying the sorting order of
+ *   the results. The default order is ascending. Add " DESC" after the field
+ *   name to indicate descending order. Redundant space characters are ignored.
+ *   Example: "location DESC, name".
+ *   Only the following fields in the response are sortable:
+ *
+ *     * name
+ *     * assetType
+ *     * project
+ *     * displayName
+ *     * description
+ *     * location
+ *     * createTime
+ *     * updateTime
+ *     * state
+ *     * parentFullResourceName
+ *     * parentAssetType
+ * @param {google.protobuf.FieldMask} [request.readMask]
+ *   Optional. A comma-separated list of fields that you want returned in the
+ *   results. The following fields are returned by default if not specified:
+ *
+ *     * `name`
+ *     * `assetType`
+ *     * `project`
+ *     * `folders`
+ *     * `organization`
+ *     * `displayName`
+ *     * `description`
+ *     * `location`
+ *     * `labels`
+ *     * `tags`
+ *     * `effectiveTags`
+ *     * `networkTags`
+ *     * `kmsKeys`
+ *     * `createTime`
+ *     * `updateTime`
+ *     * `state`
+ *     * `additionalAttributes`
+ *     * `parentFullResourceName`
+ *     * `parentAssetType`
+ *
+ *   Some fields of large size, such as `versionedResources`,
+ *   `attachedResources`, `effectiveTags` etc., are not returned by default, but
+ *   you can specify them in the `read_mask` parameter if you want to include
+ *   them. If `"*"` is specified, all [available
+ *   fields](https://cloud.google.com/asset-inventory/docs/reference/rest/v1/TopLevel/searchAllResources#resourcesearchresult)
+ *   are returned.
+ *   Examples: `"name,location"`, `"name,versionedResources"`, `"*"`.
+ *   Any invalid field path will trigger INVALID_ARGUMENT error.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.asset.v1.ResourceSearchResult|ResourceSearchResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.search_all_resources.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_SearchAllResources_async
+ */
   searchAllResourcesAsync(
-    request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.asset.v1.IResourceSearchResult> {
+      request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.asset.v1.IResourceSearchResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
+    });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchAllResources iterate %j', request);
     return this.descriptors.page.searchAllResources.asyncIterate(
       this.innerApiCalls['searchAllResources'] as GaxCall,
@@ -3828,205 +3298,180 @@ export class AssetServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1.IResourceSearchResult>;
   }
-  /**
-   * Searches all IAM policies within the specified scope, such as a project,
-   * folder, or organization. The caller must be granted the
-   * `cloudasset.assets.searchAllIamPolicies` permission on the desired scope,
-   * otherwise the request will be rejected.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. A scope can be a project, a folder, or an organization. The
-   *   search is limited to the IAM policies within the `scope`. The caller must
-   *   be granted the
-   *   [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
-   *   permission on the desired scope.
-   *
-   *   The allowed values are:
-   *
-   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
-   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
-   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} [request.query]
-   *   Optional. The query statement. See [how to construct a
-   *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
-   *   for more information. If not specified or empty, it will search all the
-   *   IAM policies within the specified `scope`. Note that the query string is
-   *   compared against each IAM policy binding, including its principals,
-   *   roles, and IAM conditions. The returned IAM policies will only
-   *   contain the bindings that match your query. To learn more about the IAM
-   *   policy structure, see the [IAM policy
-   *   documentation](https://cloud.google.com/iam/help/allow-policies/structure).
-   *
-   *   Examples:
-   *
-   *   * `policy:amy@gmail.com` to find IAM policy bindings that specify user
-   *     "amy@gmail.com".
-   *   * `policy:roles/compute.admin` to find IAM policy bindings that specify
-   *     the Compute Admin role.
-   *   * `policy:comp*` to find IAM policy bindings that contain "comp" as a
-   *     prefix of any word in the binding.
-   *   * `policy.role.permissions:storage.buckets.update` to find IAM policy
-   *     bindings that specify a role containing "storage.buckets.update"
-   *     permission. Note that if callers don't have `iam.roles.get` access to a
-   *     role's included permissions, policy bindings that specify this role will
-   *     be dropped from the search results.
-   *   * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
-   *     role containing "upd" as a prefix of any word in the role permission.
-   *     Note that if callers don't have `iam.roles.get` access to a role's
-   *     included permissions, policy bindings that specify this role will be
-   *     dropped from the search results.
-   *   * `resource:organizations/123456` to find IAM policy bindings
-   *     that are set on "organizations/123456".
-   *   * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
-   *     find IAM policy bindings that are set on the project named "myproject".
-   *   * `Important` to find IAM policy bindings that contain "Important" as a
-   *     word in any of the searchable fields (except for the included
-   *     permissions).
-   *   * `resource:(instance1 OR instance2) policy:amy` to find
-   *     IAM policy bindings that are set on resources "instance1" or
-   *     "instance2" and also specify user "amy".
-   *   * `roles:roles/compute.admin` to find IAM policy bindings that specify the
-   *     Compute Admin role.
-   *   * `memberTypes:user` to find IAM policy bindings that contain the
-   *     principal type "user".
-   * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Page size is capped
-   *   at 500 even if a larger value is given. If set to zero or a negative value,
-   *   server will pick an appropriate default. Returned results may be fewer than
-   *   requested. When this happens, there could be more results as long as
-   *   `next_page_token` is returned.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, retrieve the next batch of results from the preceding
-   *   call to this method. `page_token` must be the value of `next_page_token`
-   *   from the previous response. The values of all other method parameters must
-   *   be identical to those in the previous call.
-   * @param {string[]} [request.assetTypes]
-   *   Optional. A list of asset types that the IAM policies are attached to. If
-   *   empty, it will search the IAM policies that are attached to all the asset
-   *   types [supported by search
-   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
-   *
-   *   Regular expressions are also supported. For example:
-   *
-   *   * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
-   *   starts with "compute.googleapis.com".
-   *   * ".*Instance" snapshots IAM policies attached to asset type ends with
-   *   "Instance".
-   *   * ".*Instance.*" snapshots IAM policies attached to asset type contains
-   *   "Instance".
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported asset type, an INVALID_ARGUMENT error will be returned.
-   * @param {string} [request.orderBy]
-   *   Optional. A comma-separated list of fields specifying the sorting order of
-   *   the results. The default order is ascending. Add " DESC" after the field
-   *   name to indicate descending order. Redundant space characters are ignored.
-   *   Example: "assetType DESC, resource".
-   *   Only singular primitive fields in the response are sortable:
-   *     * resource
-   *     * assetType
-   *     * project
-   *   All the other fields such as repeated fields (e.g., `folders`) and
-   *   non-primitive fields (e.g., `policy`) are not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.IamPolicySearchResult|IamPolicySearchResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchAllIamPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Searches all IAM policies within the specified scope, such as a project,
+ * folder, or organization. The caller must be granted the
+ * `cloudasset.assets.searchAllIamPolicies` permission on the desired scope,
+ * otherwise the request will be rejected.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. A scope can be a project, a folder, or an organization. The
+ *   search is limited to the IAM policies within the `scope`. The caller must
+ *   be granted the
+ *   [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+ *   permission on the desired scope.
+ *
+ *   The allowed values are:
+ *
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+ *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} [request.query]
+ *   Optional. The query statement. See [how to construct a
+ *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
+ *   for more information. If not specified or empty, it will search all the
+ *   IAM policies within the specified `scope`. Note that the query string is
+ *   compared against each IAM policy binding, including its principals,
+ *   roles, and IAM conditions. The returned IAM policies will only
+ *   contain the bindings that match your query. To learn more about the IAM
+ *   policy structure, see the [IAM policy
+ *   documentation](https://cloud.google.com/iam/help/allow-policies/structure).
+ *
+ *   Examples:
+ *
+ *   * `policy:amy@gmail.com` to find IAM policy bindings that specify user
+ *     "amy@gmail.com".
+ *   * `policy:roles/compute.admin` to find IAM policy bindings that specify
+ *     the Compute Admin role.
+ *   * `policy:comp*` to find IAM policy bindings that contain "comp" as a
+ *     prefix of any word in the binding.
+ *   * `policy.role.permissions:storage.buckets.update` to find IAM policy
+ *     bindings that specify a role containing "storage.buckets.update"
+ *     permission. Note that if callers don't have `iam.roles.get` access to a
+ *     role's included permissions, policy bindings that specify this role will
+ *     be dropped from the search results.
+ *   * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
+ *     role containing "upd" as a prefix of any word in the role permission.
+ *     Note that if callers don't have `iam.roles.get` access to a role's
+ *     included permissions, policy bindings that specify this role will be
+ *     dropped from the search results.
+ *   * `resource:organizations/123456` to find IAM policy bindings
+ *     that are set on "organizations/123456".
+ *   * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
+ *     find IAM policy bindings that are set on the project named "myproject".
+ *   * `Important` to find IAM policy bindings that contain "Important" as a
+ *     word in any of the searchable fields (except for the included
+ *     permissions).
+ *   * `resource:(instance1 OR instance2) policy:amy` to find
+ *     IAM policy bindings that are set on resources "instance1" or
+ *     "instance2" and also specify user "amy".
+ *   * `roles:roles/compute.admin` to find IAM policy bindings that specify the
+ *     Compute Admin role.
+ *   * `memberTypes:user` to find IAM policy bindings that contain the
+ *     principal type "user".
+ * @param {number} [request.pageSize]
+ *   Optional. The page size for search result pagination. Page size is capped
+ *   at 500 even if a larger value is given. If set to zero or a negative value,
+ *   server will pick an appropriate default. Returned results may be fewer than
+ *   requested. When this happens, there could be more results as long as
+ *   `next_page_token` is returned.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, retrieve the next batch of results from the preceding
+ *   call to this method. `page_token` must be the value of `next_page_token`
+ *   from the previous response. The values of all other method parameters must
+ *   be identical to those in the previous call.
+ * @param {string[]} [request.assetTypes]
+ *   Optional. A list of asset types that the IAM policies are attached to. If
+ *   empty, it will search the IAM policies that are attached to all the asset
+ *   types [supported by search
+ *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+ *
+ *   Regular expressions are also supported. For example:
+ *
+ *   * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
+ *   starts with "compute.googleapis.com".
+ *   * ".*Instance" snapshots IAM policies attached to asset type ends with
+ *   "Instance".
+ *   * ".*Instance.*" snapshots IAM policies attached to asset type contains
+ *   "Instance".
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported asset type, an INVALID_ARGUMENT error will be returned.
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields specifying the sorting order of
+ *   the results. The default order is ascending. Add " DESC" after the field
+ *   name to indicate descending order. Redundant space characters are ignored.
+ *   Example: "assetType DESC, resource".
+ *   Only singular primitive fields in the response are sortable:
+ *     * resource
+ *     * assetType
+ *     * project
+ *   All the other fields such as repeated fields (e.g., `folders`) and
+ *   non-primitive fields (e.g., `policy`) are not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.IamPolicySearchResult|IamPolicySearchResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchAllIamPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchAllIamPolicies(
-    request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IIamPolicySearchResult[],
-      protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest | null,
-      protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.IIamPolicySearchResult[],
+        protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest|null,
+        protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+      ]>;
   searchAllIamPolicies(
-    request: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
-      | protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.IIamPolicySearchResult
-    >
-  ): void;
-  searchAllIamPolicies(
-    request: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
-      | protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.IIamPolicySearchResult
-    >
-  ): void;
-  searchAllIamPolicies(
-    request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
-          | protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.IIamPolicySearchResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
-      | protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.IIamPolicySearchResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IIamPolicySearchResult[],
-      protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest | null,
-      protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse|null|undefined,
+          protos.google.cloud.asset.v1.IIamPolicySearchResult>): void;
+  searchAllIamPolicies(
+      request: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+          protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse|null|undefined,
+          protos.google.cloud.asset.v1.IIamPolicySearchResult>): void;
+  searchAllIamPolicies(
+      request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+          protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse|null|undefined,
+          protos.google.cloud.asset.v1.IIamPolicySearchResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+          protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse|null|undefined,
+          protos.google.cloud.asset.v1.IIamPolicySearchResult>):
+      Promise<[
+        protos.google.cloud.asset.v1.IIamPolicySearchResult[],
+        protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest|null,
+        protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
-          | protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.IIamPolicySearchResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+      protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse|null|undefined,
+      protos.google.cloud.asset.v1.IIamPolicySearchResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchAllIamPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4035,146 +3480,143 @@ export class AssetServiceClient {
     this._log.info('searchAllIamPolicies request %j', request);
     return this.innerApiCalls
       .searchAllIamPolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.asset.v1.IIamPolicySearchResult[],
-          protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest | null,
-          protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse,
-        ]) => {
-          this._log.info('searchAllIamPolicies values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.asset.v1.IIamPolicySearchResult[],
+        protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest|null,
+        protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+      ]) => {
+        this._log.info('searchAllIamPolicies values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchAllIamPolicies`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. A scope can be a project, a folder, or an organization. The
-   *   search is limited to the IAM policies within the `scope`. The caller must
-   *   be granted the
-   *   [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
-   *   permission on the desired scope.
-   *
-   *   The allowed values are:
-   *
-   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
-   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
-   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} [request.query]
-   *   Optional. The query statement. See [how to construct a
-   *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
-   *   for more information. If not specified or empty, it will search all the
-   *   IAM policies within the specified `scope`. Note that the query string is
-   *   compared against each IAM policy binding, including its principals,
-   *   roles, and IAM conditions. The returned IAM policies will only
-   *   contain the bindings that match your query. To learn more about the IAM
-   *   policy structure, see the [IAM policy
-   *   documentation](https://cloud.google.com/iam/help/allow-policies/structure).
-   *
-   *   Examples:
-   *
-   *   * `policy:amy@gmail.com` to find IAM policy bindings that specify user
-   *     "amy@gmail.com".
-   *   * `policy:roles/compute.admin` to find IAM policy bindings that specify
-   *     the Compute Admin role.
-   *   * `policy:comp*` to find IAM policy bindings that contain "comp" as a
-   *     prefix of any word in the binding.
-   *   * `policy.role.permissions:storage.buckets.update` to find IAM policy
-   *     bindings that specify a role containing "storage.buckets.update"
-   *     permission. Note that if callers don't have `iam.roles.get` access to a
-   *     role's included permissions, policy bindings that specify this role will
-   *     be dropped from the search results.
-   *   * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
-   *     role containing "upd" as a prefix of any word in the role permission.
-   *     Note that if callers don't have `iam.roles.get` access to a role's
-   *     included permissions, policy bindings that specify this role will be
-   *     dropped from the search results.
-   *   * `resource:organizations/123456` to find IAM policy bindings
-   *     that are set on "organizations/123456".
-   *   * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
-   *     find IAM policy bindings that are set on the project named "myproject".
-   *   * `Important` to find IAM policy bindings that contain "Important" as a
-   *     word in any of the searchable fields (except for the included
-   *     permissions).
-   *   * `resource:(instance1 OR instance2) policy:amy` to find
-   *     IAM policy bindings that are set on resources "instance1" or
-   *     "instance2" and also specify user "amy".
-   *   * `roles:roles/compute.admin` to find IAM policy bindings that specify the
-   *     Compute Admin role.
-   *   * `memberTypes:user` to find IAM policy bindings that contain the
-   *     principal type "user".
-   * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Page size is capped
-   *   at 500 even if a larger value is given. If set to zero or a negative value,
-   *   server will pick an appropriate default. Returned results may be fewer than
-   *   requested. When this happens, there could be more results as long as
-   *   `next_page_token` is returned.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, retrieve the next batch of results from the preceding
-   *   call to this method. `page_token` must be the value of `next_page_token`
-   *   from the previous response. The values of all other method parameters must
-   *   be identical to those in the previous call.
-   * @param {string[]} [request.assetTypes]
-   *   Optional. A list of asset types that the IAM policies are attached to. If
-   *   empty, it will search the IAM policies that are attached to all the asset
-   *   types [supported by search
-   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
-   *
-   *   Regular expressions are also supported. For example:
-   *
-   *   * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
-   *   starts with "compute.googleapis.com".
-   *   * ".*Instance" snapshots IAM policies attached to asset type ends with
-   *   "Instance".
-   *   * ".*Instance.*" snapshots IAM policies attached to asset type contains
-   *   "Instance".
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported asset type, an INVALID_ARGUMENT error will be returned.
-   * @param {string} [request.orderBy]
-   *   Optional. A comma-separated list of fields specifying the sorting order of
-   *   the results. The default order is ascending. Add " DESC" after the field
-   *   name to indicate descending order. Redundant space characters are ignored.
-   *   Example: "assetType DESC, resource".
-   *   Only singular primitive fields in the response are sortable:
-   *     * resource
-   *     * assetType
-   *     * project
-   *   All the other fields such as repeated fields (e.g., `folders`) and
-   *   non-primitive fields (e.g., `policy`) are not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.IamPolicySearchResult|IamPolicySearchResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchAllIamPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchAllIamPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. A scope can be a project, a folder, or an organization. The
+ *   search is limited to the IAM policies within the `scope`. The caller must
+ *   be granted the
+ *   [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+ *   permission on the desired scope.
+ *
+ *   The allowed values are:
+ *
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+ *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} [request.query]
+ *   Optional. The query statement. See [how to construct a
+ *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
+ *   for more information. If not specified or empty, it will search all the
+ *   IAM policies within the specified `scope`. Note that the query string is
+ *   compared against each IAM policy binding, including its principals,
+ *   roles, and IAM conditions. The returned IAM policies will only
+ *   contain the bindings that match your query. To learn more about the IAM
+ *   policy structure, see the [IAM policy
+ *   documentation](https://cloud.google.com/iam/help/allow-policies/structure).
+ *
+ *   Examples:
+ *
+ *   * `policy:amy@gmail.com` to find IAM policy bindings that specify user
+ *     "amy@gmail.com".
+ *   * `policy:roles/compute.admin` to find IAM policy bindings that specify
+ *     the Compute Admin role.
+ *   * `policy:comp*` to find IAM policy bindings that contain "comp" as a
+ *     prefix of any word in the binding.
+ *   * `policy.role.permissions:storage.buckets.update` to find IAM policy
+ *     bindings that specify a role containing "storage.buckets.update"
+ *     permission. Note that if callers don't have `iam.roles.get` access to a
+ *     role's included permissions, policy bindings that specify this role will
+ *     be dropped from the search results.
+ *   * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
+ *     role containing "upd" as a prefix of any word in the role permission.
+ *     Note that if callers don't have `iam.roles.get` access to a role's
+ *     included permissions, policy bindings that specify this role will be
+ *     dropped from the search results.
+ *   * `resource:organizations/123456` to find IAM policy bindings
+ *     that are set on "organizations/123456".
+ *   * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
+ *     find IAM policy bindings that are set on the project named "myproject".
+ *   * `Important` to find IAM policy bindings that contain "Important" as a
+ *     word in any of the searchable fields (except for the included
+ *     permissions).
+ *   * `resource:(instance1 OR instance2) policy:amy` to find
+ *     IAM policy bindings that are set on resources "instance1" or
+ *     "instance2" and also specify user "amy".
+ *   * `roles:roles/compute.admin` to find IAM policy bindings that specify the
+ *     Compute Admin role.
+ *   * `memberTypes:user` to find IAM policy bindings that contain the
+ *     principal type "user".
+ * @param {number} [request.pageSize]
+ *   Optional. The page size for search result pagination. Page size is capped
+ *   at 500 even if a larger value is given. If set to zero or a negative value,
+ *   server will pick an appropriate default. Returned results may be fewer than
+ *   requested. When this happens, there could be more results as long as
+ *   `next_page_token` is returned.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, retrieve the next batch of results from the preceding
+ *   call to this method. `page_token` must be the value of `next_page_token`
+ *   from the previous response. The values of all other method parameters must
+ *   be identical to those in the previous call.
+ * @param {string[]} [request.assetTypes]
+ *   Optional. A list of asset types that the IAM policies are attached to. If
+ *   empty, it will search the IAM policies that are attached to all the asset
+ *   types [supported by search
+ *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+ *
+ *   Regular expressions are also supported. For example:
+ *
+ *   * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
+ *   starts with "compute.googleapis.com".
+ *   * ".*Instance" snapshots IAM policies attached to asset type ends with
+ *   "Instance".
+ *   * ".*Instance.*" snapshots IAM policies attached to asset type contains
+ *   "Instance".
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported asset type, an INVALID_ARGUMENT error will be returned.
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields specifying the sorting order of
+ *   the results. The default order is ascending. Add " DESC" after the field
+ *   name to indicate descending order. Redundant space characters are ignored.
+ *   Example: "assetType DESC, resource".
+ *   Only singular primitive fields in the response are sortable:
+ *     * resource
+ *     * assetType
+ *     * project
+ *   All the other fields such as repeated fields (e.g., `folders`) and
+ *   non-primitive fields (e.g., `policy`) are not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.IamPolicySearchResult|IamPolicySearchResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchAllIamPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchAllIamPoliciesStream(
-    request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
+    });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchAllIamPolicies stream %j', request);
     return this.descriptors.page.searchAllIamPolicies.createStream(
       this.innerApiCalls.searchAllIamPolicies as GaxCall,
@@ -4183,137 +3625,136 @@ export class AssetServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchAllIamPolicies`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. A scope can be a project, a folder, or an organization. The
-   *   search is limited to the IAM policies within the `scope`. The caller must
-   *   be granted the
-   *   [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
-   *   permission on the desired scope.
-   *
-   *   The allowed values are:
-   *
-   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
-   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
-   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} [request.query]
-   *   Optional. The query statement. See [how to construct a
-   *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
-   *   for more information. If not specified or empty, it will search all the
-   *   IAM policies within the specified `scope`. Note that the query string is
-   *   compared against each IAM policy binding, including its principals,
-   *   roles, and IAM conditions. The returned IAM policies will only
-   *   contain the bindings that match your query. To learn more about the IAM
-   *   policy structure, see the [IAM policy
-   *   documentation](https://cloud.google.com/iam/help/allow-policies/structure).
-   *
-   *   Examples:
-   *
-   *   * `policy:amy@gmail.com` to find IAM policy bindings that specify user
-   *     "amy@gmail.com".
-   *   * `policy:roles/compute.admin` to find IAM policy bindings that specify
-   *     the Compute Admin role.
-   *   * `policy:comp*` to find IAM policy bindings that contain "comp" as a
-   *     prefix of any word in the binding.
-   *   * `policy.role.permissions:storage.buckets.update` to find IAM policy
-   *     bindings that specify a role containing "storage.buckets.update"
-   *     permission. Note that if callers don't have `iam.roles.get` access to a
-   *     role's included permissions, policy bindings that specify this role will
-   *     be dropped from the search results.
-   *   * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
-   *     role containing "upd" as a prefix of any word in the role permission.
-   *     Note that if callers don't have `iam.roles.get` access to a role's
-   *     included permissions, policy bindings that specify this role will be
-   *     dropped from the search results.
-   *   * `resource:organizations/123456` to find IAM policy bindings
-   *     that are set on "organizations/123456".
-   *   * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
-   *     find IAM policy bindings that are set on the project named "myproject".
-   *   * `Important` to find IAM policy bindings that contain "Important" as a
-   *     word in any of the searchable fields (except for the included
-   *     permissions).
-   *   * `resource:(instance1 OR instance2) policy:amy` to find
-   *     IAM policy bindings that are set on resources "instance1" or
-   *     "instance2" and also specify user "amy".
-   *   * `roles:roles/compute.admin` to find IAM policy bindings that specify the
-   *     Compute Admin role.
-   *   * `memberTypes:user` to find IAM policy bindings that contain the
-   *     principal type "user".
-   * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Page size is capped
-   *   at 500 even if a larger value is given. If set to zero or a negative value,
-   *   server will pick an appropriate default. Returned results may be fewer than
-   *   requested. When this happens, there could be more results as long as
-   *   `next_page_token` is returned.
-   * @param {string} [request.pageToken]
-   *   Optional. If present, retrieve the next batch of results from the preceding
-   *   call to this method. `page_token` must be the value of `next_page_token`
-   *   from the previous response. The values of all other method parameters must
-   *   be identical to those in the previous call.
-   * @param {string[]} [request.assetTypes]
-   *   Optional. A list of asset types that the IAM policies are attached to. If
-   *   empty, it will search the IAM policies that are attached to all the asset
-   *   types [supported by search
-   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
-   *
-   *   Regular expressions are also supported. For example:
-   *
-   *   * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
-   *   starts with "compute.googleapis.com".
-   *   * ".*Instance" snapshots IAM policies attached to asset type ends with
-   *   "Instance".
-   *   * ".*Instance.*" snapshots IAM policies attached to asset type contains
-   *   "Instance".
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported asset type, an INVALID_ARGUMENT error will be returned.
-   * @param {string} [request.orderBy]
-   *   Optional. A comma-separated list of fields specifying the sorting order of
-   *   the results. The default order is ascending. Add " DESC" after the field
-   *   name to indicate descending order. Redundant space characters are ignored.
-   *   Example: "assetType DESC, resource".
-   *   Only singular primitive fields in the response are sortable:
-   *     * resource
-   *     * assetType
-   *     * project
-   *   All the other fields such as repeated fields (e.g., `folders`) and
-   *   non-primitive fields (e.g., `policy`) are not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.asset.v1.IamPolicySearchResult|IamPolicySearchResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.search_all_iam_policies.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_SearchAllIamPolicies_async
-   */
+/**
+ * Equivalent to `searchAllIamPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. A scope can be a project, a folder, or an organization. The
+ *   search is limited to the IAM policies within the `scope`. The caller must
+ *   be granted the
+ *   [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+ *   permission on the desired scope.
+ *
+ *   The allowed values are:
+ *
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+ *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} [request.query]
+ *   Optional. The query statement. See [how to construct a
+ *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
+ *   for more information. If not specified or empty, it will search all the
+ *   IAM policies within the specified `scope`. Note that the query string is
+ *   compared against each IAM policy binding, including its principals,
+ *   roles, and IAM conditions. The returned IAM policies will only
+ *   contain the bindings that match your query. To learn more about the IAM
+ *   policy structure, see the [IAM policy
+ *   documentation](https://cloud.google.com/iam/help/allow-policies/structure).
+ *
+ *   Examples:
+ *
+ *   * `policy:amy@gmail.com` to find IAM policy bindings that specify user
+ *     "amy@gmail.com".
+ *   * `policy:roles/compute.admin` to find IAM policy bindings that specify
+ *     the Compute Admin role.
+ *   * `policy:comp*` to find IAM policy bindings that contain "comp" as a
+ *     prefix of any word in the binding.
+ *   * `policy.role.permissions:storage.buckets.update` to find IAM policy
+ *     bindings that specify a role containing "storage.buckets.update"
+ *     permission. Note that if callers don't have `iam.roles.get` access to a
+ *     role's included permissions, policy bindings that specify this role will
+ *     be dropped from the search results.
+ *   * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
+ *     role containing "upd" as a prefix of any word in the role permission.
+ *     Note that if callers don't have `iam.roles.get` access to a role's
+ *     included permissions, policy bindings that specify this role will be
+ *     dropped from the search results.
+ *   * `resource:organizations/123456` to find IAM policy bindings
+ *     that are set on "organizations/123456".
+ *   * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
+ *     find IAM policy bindings that are set on the project named "myproject".
+ *   * `Important` to find IAM policy bindings that contain "Important" as a
+ *     word in any of the searchable fields (except for the included
+ *     permissions).
+ *   * `resource:(instance1 OR instance2) policy:amy` to find
+ *     IAM policy bindings that are set on resources "instance1" or
+ *     "instance2" and also specify user "amy".
+ *   * `roles:roles/compute.admin` to find IAM policy bindings that specify the
+ *     Compute Admin role.
+ *   * `memberTypes:user` to find IAM policy bindings that contain the
+ *     principal type "user".
+ * @param {number} [request.pageSize]
+ *   Optional. The page size for search result pagination. Page size is capped
+ *   at 500 even if a larger value is given. If set to zero or a negative value,
+ *   server will pick an appropriate default. Returned results may be fewer than
+ *   requested. When this happens, there could be more results as long as
+ *   `next_page_token` is returned.
+ * @param {string} [request.pageToken]
+ *   Optional. If present, retrieve the next batch of results from the preceding
+ *   call to this method. `page_token` must be the value of `next_page_token`
+ *   from the previous response. The values of all other method parameters must
+ *   be identical to those in the previous call.
+ * @param {string[]} [request.assetTypes]
+ *   Optional. A list of asset types that the IAM policies are attached to. If
+ *   empty, it will search the IAM policies that are attached to all the asset
+ *   types [supported by search
+ *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+ *
+ *   Regular expressions are also supported. For example:
+ *
+ *   * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
+ *   starts with "compute.googleapis.com".
+ *   * ".*Instance" snapshots IAM policies attached to asset type ends with
+ *   "Instance".
+ *   * ".*Instance.*" snapshots IAM policies attached to asset type contains
+ *   "Instance".
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported asset type, an INVALID_ARGUMENT error will be returned.
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields specifying the sorting order of
+ *   the results. The default order is ascending. Add " DESC" after the field
+ *   name to indicate descending order. Redundant space characters are ignored.
+ *   Example: "assetType DESC, resource".
+ *   Only singular primitive fields in the response are sortable:
+ *     * resource
+ *     * assetType
+ *     * project
+ *   All the other fields such as repeated fields (e.g., `folders`) and
+ *   non-primitive fields (e.g., `policy`) are not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.asset.v1.IamPolicySearchResult|IamPolicySearchResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.search_all_iam_policies.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_SearchAllIamPolicies_async
+ */
   searchAllIamPoliciesAsync(
-    request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.asset.v1.IIamPolicySearchResult> {
+      request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.asset.v1.IIamPolicySearchResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
+    });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchAllIamPolicies iterate %j', request);
     return this.descriptors.page.searchAllIamPolicies.asyncIterate(
       this.innerApiCalls['searchAllIamPolicies'] as GaxCall,
@@ -4321,123 +3762,104 @@ export class AssetServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1.IIamPolicySearchResult>;
   }
-  /**
-   * Lists all saved queries in a parent project/folder/organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent project/folder/organization whose savedQueries are to
-   *   be listed. It can only be using project/folder/organization number (such as
-   *   "folders/12345")", or a project ID (such as "projects/my-project-id").
-   * @param {string} [request.filter]
-   *   Optional. The expression to filter resources.
-   *   The expression is a list of zero or more restrictions combined via logical
-   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
-   *   expression, parentheses must be appropriately used to group the
-   *   combinations. The expression may also contain regular expressions.
-   *
-   *   See https://google.aip.dev/160 for more information on the grammar.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of saved queries to return per page. The
-   *   service may return fewer than this value. If unspecified, at most 50 will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListSavedQueries` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListSavedQueries` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSavedQueriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all saved queries in a parent project/folder/organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent project/folder/organization whose savedQueries are to
+ *   be listed. It can only be using project/folder/organization number (such as
+ *   "folders/12345")", or a project ID (such as "projects/my-project-id").
+ * @param {string} [request.filter]
+ *   Optional. The expression to filter resources.
+ *   The expression is a list of zero or more restrictions combined via logical
+ *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+ *   expression, parentheses must be appropriately used to group the
+ *   combinations. The expression may also contain regular expressions.
+ *
+ *   See https://google.aip.dev/160 for more information on the grammar.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of saved queries to return per page. The
+ *   service may return fewer than this value. If unspecified, at most 50 will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListSavedQueries` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListSavedQueries` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSavedQueriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSavedQueries(
-    request?: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.ISavedQuery[],
-      protos.google.cloud.asset.v1.IListSavedQueriesRequest | null,
-      protos.google.cloud.asset.v1.IListSavedQueriesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.ISavedQuery[],
+        protos.google.cloud.asset.v1.IListSavedQueriesRequest|null,
+        protos.google.cloud.asset.v1.IListSavedQueriesResponse
+      ]>;
   listSavedQueries(
-    request: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.IListSavedQueriesRequest,
-      protos.google.cloud.asset.v1.IListSavedQueriesResponse | null | undefined,
-      protos.google.cloud.asset.v1.ISavedQuery
-    >
-  ): void;
-  listSavedQueries(
-    request: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.IListSavedQueriesRequest,
-      protos.google.cloud.asset.v1.IListSavedQueriesResponse | null | undefined,
-      protos.google.cloud.asset.v1.ISavedQuery
-    >
-  ): void;
-  listSavedQueries(
-    request?: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.asset.v1.IListSavedQueriesRequest,
-          | protos.google.cloud.asset.v1.IListSavedQueriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.ISavedQuery
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.asset.v1.IListSavedQueriesRequest,
-      protos.google.cloud.asset.v1.IListSavedQueriesResponse | null | undefined,
-      protos.google.cloud.asset.v1.ISavedQuery
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.ISavedQuery[],
-      protos.google.cloud.asset.v1.IListSavedQueriesRequest | null,
-      protos.google.cloud.asset.v1.IListSavedQueriesResponse,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IListSavedQueriesResponse|null|undefined,
+          protos.google.cloud.asset.v1.ISavedQuery>): void;
+  listSavedQueries(
+      request: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.asset.v1.IListSavedQueriesRequest,
+          protos.google.cloud.asset.v1.IListSavedQueriesResponse|null|undefined,
+          protos.google.cloud.asset.v1.ISavedQuery>): void;
+  listSavedQueries(
+      request?: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.asset.v1.IListSavedQueriesRequest,
+          protos.google.cloud.asset.v1.IListSavedQueriesResponse|null|undefined,
+          protos.google.cloud.asset.v1.ISavedQuery>,
+      callback?: PaginationCallback<
+          protos.google.cloud.asset.v1.IListSavedQueriesRequest,
+          protos.google.cloud.asset.v1.IListSavedQueriesResponse|null|undefined,
+          protos.google.cloud.asset.v1.ISavedQuery>):
+      Promise<[
+        protos.google.cloud.asset.v1.ISavedQuery[],
+        protos.google.cloud.asset.v1.IListSavedQueriesRequest|null,
+        protos.google.cloud.asset.v1.IListSavedQueriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.asset.v1.IListSavedQueriesRequest,
-          | protos.google.cloud.asset.v1.IListSavedQueriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.ISavedQuery
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.asset.v1.IListSavedQueriesRequest,
+      protos.google.cloud.asset.v1.IListSavedQueriesResponse|null|undefined,
+      protos.google.cloud.asset.v1.ISavedQuery>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSavedQueries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4446,73 +3868,70 @@ export class AssetServiceClient {
     this._log.info('listSavedQueries request %j', request);
     return this.innerApiCalls
       .listSavedQueries(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.asset.v1.ISavedQuery[],
-          protos.google.cloud.asset.v1.IListSavedQueriesRequest | null,
-          protos.google.cloud.asset.v1.IListSavedQueriesResponse,
-        ]) => {
-          this._log.info('listSavedQueries values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.asset.v1.ISavedQuery[],
+        protos.google.cloud.asset.v1.IListSavedQueriesRequest|null,
+        protos.google.cloud.asset.v1.IListSavedQueriesResponse
+      ]) => {
+        this._log.info('listSavedQueries values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listSavedQueries`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent project/folder/organization whose savedQueries are to
-   *   be listed. It can only be using project/folder/organization number (such as
-   *   "folders/12345")", or a project ID (such as "projects/my-project-id").
-   * @param {string} [request.filter]
-   *   Optional. The expression to filter resources.
-   *   The expression is a list of zero or more restrictions combined via logical
-   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
-   *   expression, parentheses must be appropriately used to group the
-   *   combinations. The expression may also contain regular expressions.
-   *
-   *   See https://google.aip.dev/160 for more information on the grammar.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of saved queries to return per page. The
-   *   service may return fewer than this value. If unspecified, at most 50 will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListSavedQueries` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListSavedQueries` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSavedQueriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listSavedQueries`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent project/folder/organization whose savedQueries are to
+ *   be listed. It can only be using project/folder/organization number (such as
+ *   "folders/12345")", or a project ID (such as "projects/my-project-id").
+ * @param {string} [request.filter]
+ *   Optional. The expression to filter resources.
+ *   The expression is a list of zero or more restrictions combined via logical
+ *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+ *   expression, parentheses must be appropriately used to group the
+ *   combinations. The expression may also contain regular expressions.
+ *
+ *   See https://google.aip.dev/160 for more information on the grammar.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of saved queries to return per page. The
+ *   service may return fewer than this value. If unspecified, at most 50 will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListSavedQueries` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListSavedQueries` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSavedQueriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSavedQueriesStream(
-    request?: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSavedQueries stream %j', request);
     return this.descriptors.page.listSavedQueries.createStream(
       this.innerApiCalls.listSavedQueries as GaxCall,
@@ -4521,64 +3940,63 @@ export class AssetServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listSavedQueries`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent project/folder/organization whose savedQueries are to
-   *   be listed. It can only be using project/folder/organization number (such as
-   *   "folders/12345")", or a project ID (such as "projects/my-project-id").
-   * @param {string} [request.filter]
-   *   Optional. The expression to filter resources.
-   *   The expression is a list of zero or more restrictions combined via logical
-   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
-   *   expression, parentheses must be appropriately used to group the
-   *   combinations. The expression may also contain regular expressions.
-   *
-   *   See https://google.aip.dev/160 for more information on the grammar.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of saved queries to return per page. The
-   *   service may return fewer than this value. If unspecified, at most 50 will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListSavedQueries` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListSavedQueries` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.list_saved_queries.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_ListSavedQueries_async
-   */
+/**
+ * Equivalent to `listSavedQueries`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent project/folder/organization whose savedQueries are to
+ *   be listed. It can only be using project/folder/organization number (such as
+ *   "folders/12345")", or a project ID (such as "projects/my-project-id").
+ * @param {string} [request.filter]
+ *   Optional. The expression to filter resources.
+ *   The expression is a list of zero or more restrictions combined via logical
+ *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+ *   expression, parentheses must be appropriately used to group the
+ *   combinations. The expression may also contain regular expressions.
+ *
+ *   See https://google.aip.dev/160 for more information on the grammar.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of saved queries to return per page. The
+ *   service may return fewer than this value. If unspecified, at most 50 will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListSavedQueries` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListSavedQueries` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.list_saved_queries.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_ListSavedQueries_async
+ */
   listSavedQueriesAsync(
-    request?: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.asset.v1.ISavedQuery> {
+      request?: protos.google.cloud.asset.v1.IListSavedQueriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.asset.v1.ISavedQuery>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSavedQueries iterate %j', request);
     return this.descriptors.page.listSavedQueries.asyncIterate(
       this.innerApiCalls['listSavedQueries'] as GaxCall,
@@ -4586,133 +4004,108 @@ export class AssetServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1.ISavedQuery>;
   }
-  /**
-   * Analyzes organization policies under a scope.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. The organization to scope the request. Only organization
-   *   policies within the scope will be analyzed.
-   *
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} request.constraint
-   *   Required. The name of the constraint to analyze organization policies for.
-   *   The response only contains analyzed organization policies for the provided
-   *   constraint.
-   * @param {string} request.filter
-   *   The expression to filter
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
-   *   Filtering is currently available for bare literal values and the following
-   *   fields:
-   *   * consolidated_policy.attached_resource
-   *   * consolidated_policy.rules.enforce
-   *
-   *   When filtering by a specific field, the only supported operator is `=`.
-   *   For example, filtering by
-   *   consolidated_policy.attached_resource="//cloudresourcemanager.googleapis.com/folders/001"
-   *   will return all the Organization Policy results attached to "folders/001".
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page. If unspecified,
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
-   *   will contain 20 items with a maximum of 200.
-   * @param {string} request.pageToken
-   *   The pagination token to retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult|OrgPolicyResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `analyzeOrgPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Analyzes organization policies under a scope.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. The organization to scope the request. Only organization
+ *   policies within the scope will be analyzed.
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} request.constraint
+ *   Required. The name of the constraint to analyze organization policies for.
+ *   The response only contains analyzed organization policies for the provided
+ *   constraint.
+ * @param {string} request.filter
+ *   The expression to filter
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
+ *   Filtering is currently available for bare literal values and the following
+ *   fields:
+ *   * consolidated_policy.attached_resource
+ *   * consolidated_policy.rules.enforce
+ *
+ *   When filtering by a specific field, the only supported operator is `=`.
+ *   For example, filtering by
+ *   consolidated_policy.attached_resource="//cloudresourcemanager.googleapis.com/folders/001"
+ *   will return all the Organization Policy results attached to "folders/001".
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page. If unspecified,
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
+ *   will contain 20 items with a maximum of 200.
+ * @param {string} request.pageToken
+ *   The pagination token to retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult|OrgPolicyResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `analyzeOrgPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   analyzeOrgPolicies(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[],
-      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[],
+        protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest|null,
+        protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse
+      ]>;
   analyzeOrgPolicies(
-    request: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
-      | protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult
-    >
-  ): void;
-  analyzeOrgPolicies(
-    request: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
-      | protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult
-    >
-  ): void;
-  analyzeOrgPolicies(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
-          | protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
-      | protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[],
-      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult>): void;
+  analyzeOrgPolicies(
+      request: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult>): void;
+  analyzeOrgPolicies(
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult>):
+      Promise<[
+        protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[],
+        protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest|null,
+        protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
-          | protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
+      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse|null|undefined,
+      protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('analyzeOrgPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4721,77 +4114,74 @@ export class AssetServiceClient {
     this._log.info('analyzeOrgPolicies request %j', request);
     return this.innerApiCalls
       .analyzeOrgPolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[],
-          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest | null,
-          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse,
-        ]) => {
-          this._log.info('analyzeOrgPolicies values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[],
+        protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest|null,
+        protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse
+      ]) => {
+        this._log.info('analyzeOrgPolicies values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `analyzeOrgPolicies`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. The organization to scope the request. Only organization
-   *   policies within the scope will be analyzed.
-   *
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} request.constraint
-   *   Required. The name of the constraint to analyze organization policies for.
-   *   The response only contains analyzed organization policies for the provided
-   *   constraint.
-   * @param {string} request.filter
-   *   The expression to filter
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
-   *   Filtering is currently available for bare literal values and the following
-   *   fields:
-   *   * consolidated_policy.attached_resource
-   *   * consolidated_policy.rules.enforce
-   *
-   *   When filtering by a specific field, the only supported operator is `=`.
-   *   For example, filtering by
-   *   consolidated_policy.attached_resource="//cloudresourcemanager.googleapis.com/folders/001"
-   *   will return all the Organization Policy results attached to "folders/001".
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page. If unspecified,
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
-   *   will contain 20 items with a maximum of 200.
-   * @param {string} request.pageToken
-   *   The pagination token to retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult|OrgPolicyResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `analyzeOrgPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `analyzeOrgPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. The organization to scope the request. Only organization
+ *   policies within the scope will be analyzed.
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} request.constraint
+ *   Required. The name of the constraint to analyze organization policies for.
+ *   The response only contains analyzed organization policies for the provided
+ *   constraint.
+ * @param {string} request.filter
+ *   The expression to filter
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
+ *   Filtering is currently available for bare literal values and the following
+ *   fields:
+ *   * consolidated_policy.attached_resource
+ *   * consolidated_policy.rules.enforce
+ *
+ *   When filtering by a specific field, the only supported operator is `=`.
+ *   For example, filtering by
+ *   consolidated_policy.attached_resource="//cloudresourcemanager.googleapis.com/folders/001"
+ *   will return all the Organization Policy results attached to "folders/001".
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page. If unspecified,
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
+ *   will contain 20 items with a maximum of 200.
+ * @param {string} request.pageToken
+ *   The pagination token to retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult|OrgPolicyResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `analyzeOrgPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   analyzeOrgPoliciesStream(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
+    });
     const defaultCallSettings = this._defaults['analyzeOrgPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeOrgPolicies stream %j', request);
     return this.descriptors.page.analyzeOrgPolicies.createStream(
       this.innerApiCalls.analyzeOrgPolicies as GaxCall,
@@ -4800,68 +4190,67 @@ export class AssetServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `analyzeOrgPolicies`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. The organization to scope the request. Only organization
-   *   policies within the scope will be analyzed.
-   *
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} request.constraint
-   *   Required. The name of the constraint to analyze organization policies for.
-   *   The response only contains analyzed organization policies for the provided
-   *   constraint.
-   * @param {string} request.filter
-   *   The expression to filter
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
-   *   Filtering is currently available for bare literal values and the following
-   *   fields:
-   *   * consolidated_policy.attached_resource
-   *   * consolidated_policy.rules.enforce
-   *
-   *   When filtering by a specific field, the only supported operator is `=`.
-   *   For example, filtering by
-   *   consolidated_policy.attached_resource="//cloudresourcemanager.googleapis.com/folders/001"
-   *   will return all the Organization Policy results attached to "folders/001".
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page. If unspecified,
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
-   *   will contain 20 items with a maximum of 200.
-   * @param {string} request.pageToken
-   *   The pagination token to retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult|OrgPolicyResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.analyze_org_policies.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_AnalyzeOrgPolicies_async
-   */
+/**
+ * Equivalent to `analyzeOrgPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. The organization to scope the request. Only organization
+ *   policies within the scope will be analyzed.
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} request.constraint
+ *   Required. The name of the constraint to analyze organization policies for.
+ *   The response only contains analyzed organization policies for the provided
+ *   constraint.
+ * @param {string} request.filter
+ *   The expression to filter
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
+ *   Filtering is currently available for bare literal values and the following
+ *   fields:
+ *   * consolidated_policy.attached_resource
+ *   * consolidated_policy.rules.enforce
+ *
+ *   When filtering by a specific field, the only supported operator is `=`.
+ *   For example, filtering by
+ *   consolidated_policy.attached_resource="//cloudresourcemanager.googleapis.com/folders/001"
+ *   will return all the Organization Policy results attached to "folders/001".
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page. If unspecified,
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
+ *   will contain 20 items with a maximum of 200.
+ * @param {string} request.pageToken
+ *   The pagination token to retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult|OrgPolicyResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.analyze_org_policies.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_AnalyzeOrgPolicies_async
+ */
   analyzeOrgPoliciesAsync(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult> {
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
+    });
     const defaultCallSettings = this._defaults['analyzeOrgPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeOrgPolicies iterate %j', request);
     return this.descriptors.page.analyzeOrgPolicies.asyncIterate(
       this.innerApiCalls['analyzeOrgPolicies'] as GaxCall,
@@ -4869,224 +4258,189 @@ export class AssetServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult>;
   }
-  /**
-   * Analyzes organization policies governed containers (projects, folders or
-   * organization) under a scope.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. The organization to scope the request. Only organization
-   *   policies within the scope will be analyzed. The output containers will
-   *   also be limited to the ones governed by those in-scope organization
-   *   policies.
-   *
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} request.constraint
-   *   Required. The name of the constraint to analyze governed containers for.
-   *   The analysis only contains organization policies for the provided
-   *   constraint.
-   * @param {string} request.filter
-   *   The expression to filter
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}.
-   *   Filtering is currently available for bare literal values and the following
-   *   fields:
-   *   * parent
-   *   * consolidated_policy.rules.enforce
-   *
-   *   When filtering by a specific field, the only supported operator is `=`.
-   *   For example, filtering by
-   *   parent="//cloudresourcemanager.googleapis.com/folders/001"
-   *   will return all the containers under "folders/001".
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page. If unspecified,
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
-   *   will contain 100 items with a maximum of 200.
-   * @param {string} request.pageToken
-   *   The pagination token to retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer|GovernedContainer}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `analyzeOrgPolicyGovernedContainersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Analyzes organization policies governed containers (projects, folders or
+ * organization) under a scope.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. The organization to scope the request. Only organization
+ *   policies within the scope will be analyzed. The output containers will
+ *   also be limited to the ones governed by those in-scope organization
+ *   policies.
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} request.constraint
+ *   Required. The name of the constraint to analyze governed containers for.
+ *   The analysis only contains organization policies for the provided
+ *   constraint.
+ * @param {string} request.filter
+ *   The expression to filter
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}.
+ *   Filtering is currently available for bare literal values and the following
+ *   fields:
+ *   * parent
+ *   * consolidated_policy.rules.enforce
+ *
+ *   When filtering by a specific field, the only supported operator is `=`.
+ *   For example, filtering by
+ *   parent="//cloudresourcemanager.googleapis.com/folders/001"
+ *   will return all the containers under "folders/001".
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page. If unspecified,
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
+ *   will contain 100 items with a maximum of 200.
+ * @param {string} request.pageToken
+ *   The pagination token to retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer|GovernedContainer}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `analyzeOrgPolicyGovernedContainersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   analyzeOrgPolicyGovernedContainers(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[],
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[],
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest|null,
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse
+      ]>;
   analyzeOrgPolicyGovernedContainers(
-    request: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
-      | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer
-    >
-  ): void;
-  analyzeOrgPolicyGovernedContainers(
-    request: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
-      | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer
-    >
-  ): void;
-  analyzeOrgPolicyGovernedContainers(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
-          | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
-      | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[],
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer>): void;
+  analyzeOrgPolicyGovernedContainers(
+      request: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer>): void;
+  analyzeOrgPolicyGovernedContainers(
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer>,
+      callback?: PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer>):
+      Promise<[
+        protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[],
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest|null,
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
-          | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
+      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse|null|undefined,
+      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
-            'analyzeOrgPolicyGovernedContainers values %j',
-            values
-          );
+          this._log.info('analyzeOrgPolicyGovernedContainers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
     this._log.info('analyzeOrgPolicyGovernedContainers request %j', request);
     return this.innerApiCalls
       .analyzeOrgPolicyGovernedContainers(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[],
-          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest | null,
-          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse,
-        ]) => {
-          this._log.info(
-            'analyzeOrgPolicyGovernedContainers values %j',
-            response
-          );
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[],
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest|null,
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse
+      ]) => {
+        this._log.info('analyzeOrgPolicyGovernedContainers values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `analyzeOrgPolicyGovernedContainers`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. The organization to scope the request. Only organization
-   *   policies within the scope will be analyzed. The output containers will
-   *   also be limited to the ones governed by those in-scope organization
-   *   policies.
-   *
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} request.constraint
-   *   Required. The name of the constraint to analyze governed containers for.
-   *   The analysis only contains organization policies for the provided
-   *   constraint.
-   * @param {string} request.filter
-   *   The expression to filter
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}.
-   *   Filtering is currently available for bare literal values and the following
-   *   fields:
-   *   * parent
-   *   * consolidated_policy.rules.enforce
-   *
-   *   When filtering by a specific field, the only supported operator is `=`.
-   *   For example, filtering by
-   *   parent="//cloudresourcemanager.googleapis.com/folders/001"
-   *   will return all the containers under "folders/001".
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page. If unspecified,
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
-   *   will contain 100 items with a maximum of 200.
-   * @param {string} request.pageToken
-   *   The pagination token to retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer|GovernedContainer} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `analyzeOrgPolicyGovernedContainersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `analyzeOrgPolicyGovernedContainers`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. The organization to scope the request. Only organization
+ *   policies within the scope will be analyzed. The output containers will
+ *   also be limited to the ones governed by those in-scope organization
+ *   policies.
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} request.constraint
+ *   Required. The name of the constraint to analyze governed containers for.
+ *   The analysis only contains organization policies for the provided
+ *   constraint.
+ * @param {string} request.filter
+ *   The expression to filter
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}.
+ *   Filtering is currently available for bare literal values and the following
+ *   fields:
+ *   * parent
+ *   * consolidated_policy.rules.enforce
+ *
+ *   When filtering by a specific field, the only supported operator is `=`.
+ *   For example, filtering by
+ *   parent="//cloudresourcemanager.googleapis.com/folders/001"
+ *   will return all the containers under "folders/001".
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page. If unspecified,
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
+ *   will contain 100 items with a maximum of 200.
+ * @param {string} request.pageToken
+ *   The pagination token to retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer|GovernedContainer} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `analyzeOrgPolicyGovernedContainersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   analyzeOrgPolicyGovernedContainersStream(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['analyzeOrgPolicyGovernedContainers'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
     });
+    const defaultCallSettings = this._defaults['analyzeOrgPolicyGovernedContainers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeOrgPolicyGovernedContainers stream %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedContainers.createStream(
       this.innerApiCalls.analyzeOrgPolicyGovernedContainers as GaxCall,
@@ -5095,71 +4449,69 @@ export class AssetServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `analyzeOrgPolicyGovernedContainers`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. The organization to scope the request. Only organization
-   *   policies within the scope will be analyzed. The output containers will
-   *   also be limited to the ones governed by those in-scope organization
-   *   policies.
-   *
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} request.constraint
-   *   Required. The name of the constraint to analyze governed containers for.
-   *   The analysis only contains organization policies for the provided
-   *   constraint.
-   * @param {string} request.filter
-   *   The expression to filter
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}.
-   *   Filtering is currently available for bare literal values and the following
-   *   fields:
-   *   * parent
-   *   * consolidated_policy.rules.enforce
-   *
-   *   When filtering by a specific field, the only supported operator is `=`.
-   *   For example, filtering by
-   *   parent="//cloudresourcemanager.googleapis.com/folders/001"
-   *   will return all the containers under "folders/001".
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page. If unspecified,
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
-   *   will contain 100 items with a maximum of 200.
-   * @param {string} request.pageToken
-   *   The pagination token to retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer|GovernedContainer}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.analyze_org_policy_governed_containers.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedContainers_async
-   */
+/**
+ * Equivalent to `analyzeOrgPolicyGovernedContainers`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. The organization to scope the request. Only organization
+ *   policies within the scope will be analyzed. The output containers will
+ *   also be limited to the ones governed by those in-scope organization
+ *   policies.
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} request.constraint
+ *   Required. The name of the constraint to analyze governed containers for.
+ *   The analysis only contains organization policies for the provided
+ *   constraint.
+ * @param {string} request.filter
+ *   The expression to filter
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}.
+ *   Filtering is currently available for bare literal values and the following
+ *   fields:
+ *   * parent
+ *   * consolidated_policy.rules.enforce
+ *
+ *   When filtering by a specific field, the only supported operator is `=`.
+ *   For example, filtering by
+ *   parent="//cloudresourcemanager.googleapis.com/folders/001"
+ *   will return all the containers under "folders/001".
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page. If unspecified,
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
+ *   will contain 100 items with a maximum of 200.
+ * @param {string} request.pageToken
+ *   The pagination token to retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer|GovernedContainer}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.analyze_org_policy_governed_containers.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedContainers_async
+ */
   analyzeOrgPolicyGovernedContainersAsync(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer> {
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['analyzeOrgPolicyGovernedContainers'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
     });
+    const defaultCallSettings = this._defaults['analyzeOrgPolicyGovernedContainers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeOrgPolicyGovernedContainers iterate %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedContainers.asyncIterate(
       this.innerApiCalls['analyzeOrgPolicyGovernedContainers'] as GaxCall,
@@ -5167,199 +4519,174 @@ export class AssetServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer>;
   }
-  /**
-   * Analyzes organization policies governed assets (Google Cloud resources or
-   * policies) under a scope. This RPC supports custom constraints and the
-   * following canned constraints:
-   *
-   * * constraints/ainotebooks.accessMode
-   * * constraints/ainotebooks.disableFileDownloads
-   * * constraints/ainotebooks.disableRootAccess
-   * * constraints/ainotebooks.disableTerminal
-   * * constraints/ainotebooks.environmentOptions
-   * * constraints/ainotebooks.requireAutoUpgradeSchedule
-   * * constraints/ainotebooks.restrictVpcNetworks
-   * * constraints/compute.disableGuestAttributesAccess
-   * * constraints/compute.disableInstanceDataAccessApis
-   * * constraints/compute.disableNestedVirtualization
-   * * constraints/compute.disableSerialPortAccess
-   * * constraints/compute.disableSerialPortLogging
-   * * constraints/compute.disableVpcExternalIpv6
-   * * constraints/compute.requireOsLogin
-   * * constraints/compute.requireShieldedVm
-   * * constraints/compute.restrictLoadBalancerCreationForTypes
-   * * constraints/compute.restrictProtocolForwardingCreationForTypes
-   * * constraints/compute.restrictXpnProjectLienRemoval
-   * * constraints/compute.setNewProjectDefaultToZonalDNSOnly
-   * * constraints/compute.skipDefaultNetworkCreation
-   * * constraints/compute.trustedImageProjects
-   * * constraints/compute.vmCanIpForward
-   * * constraints/compute.vmExternalIpAccess
-   * * constraints/gcp.detailedAuditLoggingMode
-   * * constraints/gcp.resourceLocations
-   * * constraints/iam.allowedPolicyMemberDomains
-   * * constraints/iam.automaticIamGrantsForDefaultServiceAccounts
-   * * constraints/iam.disableServiceAccountCreation
-   * * constraints/iam.disableServiceAccountKeyCreation
-   * * constraints/iam.disableServiceAccountKeyUpload
-   * * constraints/iam.restrictCrossProjectServiceAccountLienRemoval
-   * * constraints/iam.serviceAccountKeyExpiryHours
-   * * constraints/resourcemanager.accessBoundaries
-   * * constraints/resourcemanager.allowedExportDestinations
-   * * constraints/sql.restrictAuthorizedNetworks
-   * * constraints/sql.restrictNoncompliantDiagnosticDataAccess
-   * * constraints/sql.restrictNoncompliantResourceCreation
-   * * constraints/sql.restrictPublicIp
-   * * constraints/storage.publicAccessPrevention
-   * * constraints/storage.restrictAuthTypes
-   * * constraints/storage.uniformBucketLevelAccess
-   *
-   * This RPC only returns either resources of types [supported by search
-   * APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
-   * or IAM policies.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. The organization to scope the request. Only organization
-   *   policies within the scope will be analyzed. The output assets will
-   *   also be limited to the ones governed by those in-scope organization
-   *   policies.
-   *
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} request.constraint
-   *   Required. The name of the constraint to analyze governed assets for. The
-   *   analysis only contains analyzed organization policies for the provided
-   *   constraint.
-   * @param {string} request.filter
-   *   The expression to filter
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}.
-   *
-   *   For governed resources, filtering is currently available for bare literal
-   *   values and the following fields:
-   *   * governed_resource.project
-   *   * governed_resource.folders
-   *   * consolidated_policy.rules.enforce
-   *   When filtering by `governed_resource.project` or
-   *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
-   *   When filtering by `governed_resource.folders`, the supported operators
-   *   are `=` and `:`.
-   *   For example, filtering by `governed_resource.project="projects/12345678"`
-   *   will return all the governed resources under "projects/12345678",
-   *   including the project itself if applicable.
-   *
-   *   For governed IAM policies, filtering is currently available for bare
-   *   literal values and the following fields:
-   *   * governed_iam_policy.project
-   *   * governed_iam_policy.folders
-   *   * consolidated_policy.rules.enforce
-   *   When filtering by `governed_iam_policy.project` or
-   *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
-   *   When filtering by `governed_iam_policy.folders`, the supported operators
-   *   are `=` and `:`.
-   *   For example, filtering by `governed_iam_policy.folders:"folders/12345678"`
-   *   will return all the governed IAM policies under "folders/001".
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page. If unspecified,
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
-   *   will contain 100 items with a maximum of 200.
-   * @param {string} request.pageToken
-   *   The pagination token to retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset|GovernedAsset}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `analyzeOrgPolicyGovernedAssetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Analyzes organization policies governed assets (Google Cloud resources or
+ * policies) under a scope. This RPC supports custom constraints and the
+ * following canned constraints:
+ *
+ * * constraints/ainotebooks.accessMode
+ * * constraints/ainotebooks.disableFileDownloads
+ * * constraints/ainotebooks.disableRootAccess
+ * * constraints/ainotebooks.disableTerminal
+ * * constraints/ainotebooks.environmentOptions
+ * * constraints/ainotebooks.requireAutoUpgradeSchedule
+ * * constraints/ainotebooks.restrictVpcNetworks
+ * * constraints/compute.disableGuestAttributesAccess
+ * * constraints/compute.disableInstanceDataAccessApis
+ * * constraints/compute.disableNestedVirtualization
+ * * constraints/compute.disableSerialPortAccess
+ * * constraints/compute.disableSerialPortLogging
+ * * constraints/compute.disableVpcExternalIpv6
+ * * constraints/compute.requireOsLogin
+ * * constraints/compute.requireShieldedVm
+ * * constraints/compute.restrictLoadBalancerCreationForTypes
+ * * constraints/compute.restrictProtocolForwardingCreationForTypes
+ * * constraints/compute.restrictXpnProjectLienRemoval
+ * * constraints/compute.setNewProjectDefaultToZonalDNSOnly
+ * * constraints/compute.skipDefaultNetworkCreation
+ * * constraints/compute.trustedImageProjects
+ * * constraints/compute.vmCanIpForward
+ * * constraints/compute.vmExternalIpAccess
+ * * constraints/gcp.detailedAuditLoggingMode
+ * * constraints/gcp.resourceLocations
+ * * constraints/iam.allowedPolicyMemberDomains
+ * * constraints/iam.automaticIamGrantsForDefaultServiceAccounts
+ * * constraints/iam.disableServiceAccountCreation
+ * * constraints/iam.disableServiceAccountKeyCreation
+ * * constraints/iam.disableServiceAccountKeyUpload
+ * * constraints/iam.restrictCrossProjectServiceAccountLienRemoval
+ * * constraints/iam.serviceAccountKeyExpiryHours
+ * * constraints/resourcemanager.accessBoundaries
+ * * constraints/resourcemanager.allowedExportDestinations
+ * * constraints/sql.restrictAuthorizedNetworks
+ * * constraints/sql.restrictNoncompliantDiagnosticDataAccess
+ * * constraints/sql.restrictNoncompliantResourceCreation
+ * * constraints/sql.restrictPublicIp
+ * * constraints/storage.publicAccessPrevention
+ * * constraints/storage.restrictAuthTypes
+ * * constraints/storage.uniformBucketLevelAccess
+ *
+ * This RPC only returns either resources of types [supported by search
+ * APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+ * or IAM policies.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. The organization to scope the request. Only organization
+ *   policies within the scope will be analyzed. The output assets will
+ *   also be limited to the ones governed by those in-scope organization
+ *   policies.
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} request.constraint
+ *   Required. The name of the constraint to analyze governed assets for. The
+ *   analysis only contains analyzed organization policies for the provided
+ *   constraint.
+ * @param {string} request.filter
+ *   The expression to filter
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}.
+ *
+ *   For governed resources, filtering is currently available for bare literal
+ *   values and the following fields:
+ *   * governed_resource.project
+ *   * governed_resource.folders
+ *   * consolidated_policy.rules.enforce
+ *   When filtering by `governed_resource.project` or
+ *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
+ *   When filtering by `governed_resource.folders`, the supported operators
+ *   are `=` and `:`.
+ *   For example, filtering by `governed_resource.project="projects/12345678"`
+ *   will return all the governed resources under "projects/12345678",
+ *   including the project itself if applicable.
+ *
+ *   For governed IAM policies, filtering is currently available for bare
+ *   literal values and the following fields:
+ *   * governed_iam_policy.project
+ *   * governed_iam_policy.folders
+ *   * consolidated_policy.rules.enforce
+ *   When filtering by `governed_iam_policy.project` or
+ *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
+ *   When filtering by `governed_iam_policy.folders`, the supported operators
+ *   are `=` and `:`.
+ *   For example, filtering by `governed_iam_policy.folders:"folders/12345678"`
+ *   will return all the governed IAM policies under "folders/001".
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page. If unspecified,
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
+ *   will contain 100 items with a maximum of 200.
+ * @param {string} request.pageToken
+ *   The pagination token to retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset|GovernedAsset}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `analyzeOrgPolicyGovernedAssetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   analyzeOrgPolicyGovernedAssets(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[],
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[],
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest|null,
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse
+      ]>;
   analyzeOrgPolicyGovernedAssets(
-    request: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
-      | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset
-    >
-  ): void;
-  analyzeOrgPolicyGovernedAssets(
-    request: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
-      | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset
-    >
-  ): void;
-  analyzeOrgPolicyGovernedAssets(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
-          | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
-      | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[],
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset>): void;
+  analyzeOrgPolicyGovernedAssets(
+      request: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset>): void;
+  analyzeOrgPolicyGovernedAssets(
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset>,
+      callback?: PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse|null|undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset>):
+      Promise<[
+        protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[],
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest|null,
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
-          | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
+      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse|null|undefined,
+      protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('analyzeOrgPolicyGovernedAssets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5368,96 +4695,92 @@ export class AssetServiceClient {
     this._log.info('analyzeOrgPolicyGovernedAssets request %j', request);
     return this.innerApiCalls
       .analyzeOrgPolicyGovernedAssets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[],
-          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest | null,
-          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse,
-        ]) => {
-          this._log.info('analyzeOrgPolicyGovernedAssets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[],
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest|null,
+        protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse
+      ]) => {
+        this._log.info('analyzeOrgPolicyGovernedAssets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `analyzeOrgPolicyGovernedAssets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. The organization to scope the request. Only organization
-   *   policies within the scope will be analyzed. The output assets will
-   *   also be limited to the ones governed by those in-scope organization
-   *   policies.
-   *
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} request.constraint
-   *   Required. The name of the constraint to analyze governed assets for. The
-   *   analysis only contains analyzed organization policies for the provided
-   *   constraint.
-   * @param {string} request.filter
-   *   The expression to filter
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}.
-   *
-   *   For governed resources, filtering is currently available for bare literal
-   *   values and the following fields:
-   *   * governed_resource.project
-   *   * governed_resource.folders
-   *   * consolidated_policy.rules.enforce
-   *   When filtering by `governed_resource.project` or
-   *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
-   *   When filtering by `governed_resource.folders`, the supported operators
-   *   are `=` and `:`.
-   *   For example, filtering by `governed_resource.project="projects/12345678"`
-   *   will return all the governed resources under "projects/12345678",
-   *   including the project itself if applicable.
-   *
-   *   For governed IAM policies, filtering is currently available for bare
-   *   literal values and the following fields:
-   *   * governed_iam_policy.project
-   *   * governed_iam_policy.folders
-   *   * consolidated_policy.rules.enforce
-   *   When filtering by `governed_iam_policy.project` or
-   *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
-   *   When filtering by `governed_iam_policy.folders`, the supported operators
-   *   are `=` and `:`.
-   *   For example, filtering by `governed_iam_policy.folders:"folders/12345678"`
-   *   will return all the governed IAM policies under "folders/001".
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page. If unspecified,
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
-   *   will contain 100 items with a maximum of 200.
-   * @param {string} request.pageToken
-   *   The pagination token to retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset|GovernedAsset} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `analyzeOrgPolicyGovernedAssetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `analyzeOrgPolicyGovernedAssets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. The organization to scope the request. Only organization
+ *   policies within the scope will be analyzed. The output assets will
+ *   also be limited to the ones governed by those in-scope organization
+ *   policies.
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} request.constraint
+ *   Required. The name of the constraint to analyze governed assets for. The
+ *   analysis only contains analyzed organization policies for the provided
+ *   constraint.
+ * @param {string} request.filter
+ *   The expression to filter
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}.
+ *
+ *   For governed resources, filtering is currently available for bare literal
+ *   values and the following fields:
+ *   * governed_resource.project
+ *   * governed_resource.folders
+ *   * consolidated_policy.rules.enforce
+ *   When filtering by `governed_resource.project` or
+ *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
+ *   When filtering by `governed_resource.folders`, the supported operators
+ *   are `=` and `:`.
+ *   For example, filtering by `governed_resource.project="projects/12345678"`
+ *   will return all the governed resources under "projects/12345678",
+ *   including the project itself if applicable.
+ *
+ *   For governed IAM policies, filtering is currently available for bare
+ *   literal values and the following fields:
+ *   * governed_iam_policy.project
+ *   * governed_iam_policy.folders
+ *   * consolidated_policy.rules.enforce
+ *   When filtering by `governed_iam_policy.project` or
+ *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
+ *   When filtering by `governed_iam_policy.folders`, the supported operators
+ *   are `=` and `:`.
+ *   For example, filtering by `governed_iam_policy.folders:"folders/12345678"`
+ *   will return all the governed IAM policies under "folders/001".
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page. If unspecified,
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
+ *   will contain 100 items with a maximum of 200.
+ * @param {string} request.pageToken
+ *   The pagination token to retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset|GovernedAsset} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `analyzeOrgPolicyGovernedAssetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   analyzeOrgPolicyGovernedAssetsStream(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['analyzeOrgPolicyGovernedAssets'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
     });
+    const defaultCallSettings = this._defaults['analyzeOrgPolicyGovernedAssets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeOrgPolicyGovernedAssets stream %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedAssets.createStream(
       this.innerApiCalls.analyzeOrgPolicyGovernedAssets as GaxCall,
@@ -5466,87 +4789,85 @@ export class AssetServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `analyzeOrgPolicyGovernedAssets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. The organization to scope the request. Only organization
-   *   policies within the scope will be analyzed. The output assets will
-   *   also be limited to the ones governed by those in-scope organization
-   *   policies.
-   *
-   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
-   * @param {string} request.constraint
-   *   Required. The name of the constraint to analyze governed assets for. The
-   *   analysis only contains analyzed organization policies for the provided
-   *   constraint.
-   * @param {string} request.filter
-   *   The expression to filter
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}.
-   *
-   *   For governed resources, filtering is currently available for bare literal
-   *   values and the following fields:
-   *   * governed_resource.project
-   *   * governed_resource.folders
-   *   * consolidated_policy.rules.enforce
-   *   When filtering by `governed_resource.project` or
-   *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
-   *   When filtering by `governed_resource.folders`, the supported operators
-   *   are `=` and `:`.
-   *   For example, filtering by `governed_resource.project="projects/12345678"`
-   *   will return all the governed resources under "projects/12345678",
-   *   including the project itself if applicable.
-   *
-   *   For governed IAM policies, filtering is currently available for bare
-   *   literal values and the following fields:
-   *   * governed_iam_policy.project
-   *   * governed_iam_policy.folders
-   *   * consolidated_policy.rules.enforce
-   *   When filtering by `governed_iam_policy.project` or
-   *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
-   *   When filtering by `governed_iam_policy.folders`, the supported operators
-   *   are `=` and `:`.
-   *   For example, filtering by `governed_iam_policy.folders:"folders/12345678"`
-   *   will return all the governed IAM policies under "folders/001".
-   * @param {number} request.pageSize
-   *   The maximum number of items to return per page. If unspecified,
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
-   *   will contain 100 items with a maximum of 200.
-   * @param {string} request.pageToken
-   *   The pagination token to retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset|GovernedAsset}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/asset_service.analyze_org_policy_governed_assets.js</caption>
-   * region_tag:cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedAssets_async
-   */
+/**
+ * Equivalent to `analyzeOrgPolicyGovernedAssets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. The organization to scope the request. Only organization
+ *   policies within the scope will be analyzed. The output assets will
+ *   also be limited to the ones governed by those in-scope organization
+ *   policies.
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+ * @param {string} request.constraint
+ *   Required. The name of the constraint to analyze governed assets for. The
+ *   analysis only contains analyzed organization policies for the provided
+ *   constraint.
+ * @param {string} request.filter
+ *   The expression to filter
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}.
+ *
+ *   For governed resources, filtering is currently available for bare literal
+ *   values and the following fields:
+ *   * governed_resource.project
+ *   * governed_resource.folders
+ *   * consolidated_policy.rules.enforce
+ *   When filtering by `governed_resource.project` or
+ *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
+ *   When filtering by `governed_resource.folders`, the supported operators
+ *   are `=` and `:`.
+ *   For example, filtering by `governed_resource.project="projects/12345678"`
+ *   will return all the governed resources under "projects/12345678",
+ *   including the project itself if applicable.
+ *
+ *   For governed IAM policies, filtering is currently available for bare
+ *   literal values and the following fields:
+ *   * governed_iam_policy.project
+ *   * governed_iam_policy.folders
+ *   * consolidated_policy.rules.enforce
+ *   When filtering by `governed_iam_policy.project` or
+ *   `consolidated_policy.rules.enforce`, the only supported operator is `=`.
+ *   When filtering by `governed_iam_policy.folders`, the supported operators
+ *   are `=` and `:`.
+ *   For example, filtering by `governed_iam_policy.folders:"folders/12345678"`
+ *   will return all the governed IAM policies under "folders/001".
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page. If unspecified,
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
+ *   will contain 100 items with a maximum of 200.
+ * @param {string} request.pageToken
+ *   The pagination token to retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset|GovernedAsset}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/asset_service.analyze_org_policy_governed_assets.js</caption>
+ * region_tag:cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedAssets_async
+ */
   analyzeOrgPolicyGovernedAssetsAsync(
-    request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset> {
+      request?: protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['analyzeOrgPolicyGovernedAssets'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
     });
+    const defaultCallSettings = this._defaults['analyzeOrgPolicyGovernedAssets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeOrgPolicyGovernedAssets iterate %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedAssets.asyncIterate(
       this.innerApiCalls['analyzeOrgPolicyGovernedAssets'] as GaxCall,
@@ -5554,7 +4875,7 @@ export class AssetServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -5599,20 +4920,20 @@ export class AssetServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5649,13 +4970,13 @@ export class AssetServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5689,7 +5010,7 @@ export class AssetServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -5704,20 +5025,20 @@ export class AssetServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5761,20 +5082,20 @@ export class AssetServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5789,7 +5110,7 @@ export class AssetServiceClient {
    * @param {string} access_level
    * @returns {string} Resource name string.
    */
-  accessLevelPath(accessPolicy: string, accessLevel: string) {
+  accessLevelPath(accessPolicy:string,accessLevel:string) {
     return this.pathTemplates.accessLevelPathTemplate.render({
       access_policy: accessPolicy,
       access_level: accessLevel,
@@ -5804,8 +5125,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the access_policy.
    */
   matchAccessPolicyFromAccessLevelName(accessLevelName: string) {
-    return this.pathTemplates.accessLevelPathTemplate.match(accessLevelName)
-      .access_policy;
+    return this.pathTemplates.accessLevelPathTemplate.match(accessLevelName).access_policy;
   }
 
   /**
@@ -5816,8 +5136,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the access_level.
    */
   matchAccessLevelFromAccessLevelName(accessLevelName: string) {
-    return this.pathTemplates.accessLevelPathTemplate.match(accessLevelName)
-      .access_level;
+    return this.pathTemplates.accessLevelPathTemplate.match(accessLevelName).access_level;
   }
 
   /**
@@ -5826,7 +5145,7 @@ export class AssetServiceClient {
    * @param {string} access_policy
    * @returns {string} Resource name string.
    */
-  accessPolicyPath(accessPolicy: string) {
+  accessPolicyPath(accessPolicy:string) {
     return this.pathTemplates.accessPolicyPathTemplate.render({
       access_policy: accessPolicy,
     });
@@ -5840,8 +5159,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the access_policy.
    */
   matchAccessPolicyFromAccessPolicyName(accessPolicyName: string) {
-    return this.pathTemplates.accessPolicyPathTemplate.match(accessPolicyName)
-      .access_policy;
+    return this.pathTemplates.accessPolicyPathTemplate.match(accessPolicyName).access_policy;
   }
 
   /**
@@ -5851,7 +5169,7 @@ export class AssetServiceClient {
    * @param {string} feed
    * @returns {string} Resource name string.
    */
-  folderFeedPath(folder: string, feed: string) {
+  folderFeedPath(folder:string,feed:string) {
     return this.pathTemplates.folderFeedPathTemplate.render({
       folder: folder,
       feed: feed,
@@ -5866,8 +5184,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderFeedName(folderFeedName: string) {
-    return this.pathTemplates.folderFeedPathTemplate.match(folderFeedName)
-      .folder;
+    return this.pathTemplates.folderFeedPathTemplate.match(folderFeedName).folder;
   }
 
   /**
@@ -5888,7 +5205,7 @@ export class AssetServiceClient {
    * @param {string} saved_query
    * @returns {string} Resource name string.
    */
-  folderSavedQueryPath(folder: string, savedQuery: string) {
+  folderSavedQueryPath(folder:string,savedQuery:string) {
     return this.pathTemplates.folderSavedQueryPathTemplate.render({
       folder: folder,
       saved_query: savedQuery,
@@ -5903,9 +5220,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderSavedQueryName(folderSavedQueryName: string) {
-    return this.pathTemplates.folderSavedQueryPathTemplate.match(
-      folderSavedQueryName
-    ).folder;
+    return this.pathTemplates.folderSavedQueryPathTemplate.match(folderSavedQueryName).folder;
   }
 
   /**
@@ -5916,9 +5231,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the saved_query.
    */
   matchSavedQueryFromFolderSavedQueryName(folderSavedQueryName: string) {
-    return this.pathTemplates.folderSavedQueryPathTemplate.match(
-      folderSavedQueryName
-    ).saved_query;
+    return this.pathTemplates.folderSavedQueryPathTemplate.match(folderSavedQueryName).saved_query;
   }
 
   /**
@@ -5929,7 +5242,7 @@ export class AssetServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  inventoryPath(project: string, location: string, instance: string) {
+  inventoryPath(project:string,location:string,instance:string) {
     return this.pathTemplates.inventoryPathTemplate.render({
       project: project,
       location: location,
@@ -5945,8 +5258,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromInventoryName(inventoryName: string) {
-    return this.pathTemplates.inventoryPathTemplate.match(inventoryName)
-      .project;
+    return this.pathTemplates.inventoryPathTemplate.match(inventoryName).project;
   }
 
   /**
@@ -5957,8 +5269,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromInventoryName(inventoryName: string) {
-    return this.pathTemplates.inventoryPathTemplate.match(inventoryName)
-      .location;
+    return this.pathTemplates.inventoryPathTemplate.match(inventoryName).location;
   }
 
   /**
@@ -5969,8 +5280,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromInventoryName(inventoryName: string) {
-    return this.pathTemplates.inventoryPathTemplate.match(inventoryName)
-      .instance;
+    return this.pathTemplates.inventoryPathTemplate.match(inventoryName).instance;
   }
 
   /**
@@ -5980,7 +5290,7 @@ export class AssetServiceClient {
    * @param {string} feed
    * @returns {string} Resource name string.
    */
-  organizationFeedPath(organization: string, feed: string) {
+  organizationFeedPath(organization:string,feed:string) {
     return this.pathTemplates.organizationFeedPathTemplate.render({
       organization: organization,
       feed: feed,
@@ -5995,9 +5305,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationFeedName(organizationFeedName: string) {
-    return this.pathTemplates.organizationFeedPathTemplate.match(
-      organizationFeedName
-    ).organization;
+    return this.pathTemplates.organizationFeedPathTemplate.match(organizationFeedName).organization;
   }
 
   /**
@@ -6008,9 +5316,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the feed.
    */
   matchFeedFromOrganizationFeedName(organizationFeedName: string) {
-    return this.pathTemplates.organizationFeedPathTemplate.match(
-      organizationFeedName
-    ).feed;
+    return this.pathTemplates.organizationFeedPathTemplate.match(organizationFeedName).feed;
   }
 
   /**
@@ -6020,7 +5326,7 @@ export class AssetServiceClient {
    * @param {string} saved_query
    * @returns {string} Resource name string.
    */
-  organizationSavedQueryPath(organization: string, savedQuery: string) {
+  organizationSavedQueryPath(organization:string,savedQuery:string) {
     return this.pathTemplates.organizationSavedQueryPathTemplate.render({
       organization: organization,
       saved_query: savedQuery,
@@ -6034,12 +5340,8 @@ export class AssetServiceClient {
    *   A fully-qualified path representing organization_saved_query resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSavedQueryName(
-    organizationSavedQueryName: string
-  ) {
-    return this.pathTemplates.organizationSavedQueryPathTemplate.match(
-      organizationSavedQueryName
-    ).organization;
+  matchOrganizationFromOrganizationSavedQueryName(organizationSavedQueryName: string) {
+    return this.pathTemplates.organizationSavedQueryPathTemplate.match(organizationSavedQueryName).organization;
   }
 
   /**
@@ -6049,12 +5351,8 @@ export class AssetServiceClient {
    *   A fully-qualified path representing organization_saved_query resource.
    * @returns {string} A string representing the saved_query.
    */
-  matchSavedQueryFromOrganizationSavedQueryName(
-    organizationSavedQueryName: string
-  ) {
-    return this.pathTemplates.organizationSavedQueryPathTemplate.match(
-      organizationSavedQueryName
-    ).saved_query;
+  matchSavedQueryFromOrganizationSavedQueryName(organizationSavedQueryName: string) {
+    return this.pathTemplates.organizationSavedQueryPathTemplate.match(organizationSavedQueryName).saved_query;
   }
 
   /**
@@ -6063,7 +5361,7 @@ export class AssetServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -6087,7 +5385,7 @@ export class AssetServiceClient {
    * @param {string} feed
    * @returns {string} Resource name string.
    */
-  projectFeedPath(project: string, feed: string) {
+  projectFeedPath(project:string,feed:string) {
     return this.pathTemplates.projectFeedPathTemplate.render({
       project: project,
       feed: feed,
@@ -6102,8 +5400,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectFeedName(projectFeedName: string) {
-    return this.pathTemplates.projectFeedPathTemplate.match(projectFeedName)
-      .project;
+    return this.pathTemplates.projectFeedPathTemplate.match(projectFeedName).project;
   }
 
   /**
@@ -6114,8 +5411,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the feed.
    */
   matchFeedFromProjectFeedName(projectFeedName: string) {
-    return this.pathTemplates.projectFeedPathTemplate.match(projectFeedName)
-      .feed;
+    return this.pathTemplates.projectFeedPathTemplate.match(projectFeedName).feed;
   }
 
   /**
@@ -6125,7 +5421,7 @@ export class AssetServiceClient {
    * @param {string} saved_query
    * @returns {string} Resource name string.
    */
-  projectSavedQueryPath(project: string, savedQuery: string) {
+  projectSavedQueryPath(project:string,savedQuery:string) {
     return this.pathTemplates.projectSavedQueryPathTemplate.render({
       project: project,
       saved_query: savedQuery,
@@ -6140,9 +5436,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectSavedQueryName(projectSavedQueryName: string) {
-    return this.pathTemplates.projectSavedQueryPathTemplate.match(
-      projectSavedQueryName
-    ).project;
+    return this.pathTemplates.projectSavedQueryPathTemplate.match(projectSavedQueryName).project;
   }
 
   /**
@@ -6153,9 +5447,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the saved_query.
    */
   matchSavedQueryFromProjectSavedQueryName(projectSavedQueryName: string) {
-    return this.pathTemplates.projectSavedQueryPathTemplate.match(
-      projectSavedQueryName
-    ).saved_query;
+    return this.pathTemplates.projectSavedQueryPathTemplate.match(projectSavedQueryName).saved_query;
   }
 
   /**
@@ -6165,7 +5457,7 @@ export class AssetServiceClient {
    * @param {string} service_perimeter
    * @returns {string} Resource name string.
    */
-  servicePerimeterPath(accessPolicy: string, servicePerimeter: string) {
+  servicePerimeterPath(accessPolicy:string,servicePerimeter:string) {
     return this.pathTemplates.servicePerimeterPathTemplate.render({
       access_policy: accessPolicy,
       service_perimeter: servicePerimeter,
@@ -6180,9 +5472,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the access_policy.
    */
   matchAccessPolicyFromServicePerimeterName(servicePerimeterName: string) {
-    return this.pathTemplates.servicePerimeterPathTemplate.match(
-      servicePerimeterName
-    ).access_policy;
+    return this.pathTemplates.servicePerimeterPathTemplate.match(servicePerimeterName).access_policy;
   }
 
   /**
@@ -6193,9 +5483,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the service_perimeter.
    */
   matchServicePerimeterFromServicePerimeterName(servicePerimeterName: string) {
-    return this.pathTemplates.servicePerimeterPathTemplate.match(
-      servicePerimeterName
-    ).service_perimeter;
+    return this.pathTemplates.servicePerimeterPathTemplate.match(servicePerimeterName).service_perimeter;
   }
 
   /**

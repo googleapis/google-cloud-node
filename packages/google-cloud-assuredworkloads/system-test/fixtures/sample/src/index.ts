@@ -19,9 +19,7 @@
 import {AssuredWorkloadsServiceClient} from '@google-cloud/assured-workloads';
 
 // check that the client class type name can be used
-function doStuffWithAssuredWorkloadsServiceClient(
-  client: AssuredWorkloadsServiceClient
-) {
+function doStuffWithAssuredWorkloadsServiceClient(client: AssuredWorkloadsServiceClient) {
   client.close();
 }
 

@@ -29,4672 +29,3579 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.ReservationServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'bigqueryreservation.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          reservationserviceModule.v1.ReservationServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'bigqueryreservation.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          reservationserviceModule.v1.ReservationServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'bigqueryreservation.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'bigqueryreservation.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'bigqueryreservation.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new reservationserviceModule.v1.ReservationServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'bigqueryreservation.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'bigqueryreservation.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new reservationserviceModule.v1.ReservationServiceClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = reservationserviceModule.v1.ReservationServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'bigqueryreservation.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'bigqueryreservation.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new reservationserviceModule.v1.ReservationServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = reservationserviceModule.v1.ReservationServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.reservationServiceStub, undefined);
-      await client.initialize();
-      assert(client.reservationServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.reservationServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.reservationServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createReservation', () => {
-    it('invokes createReservation without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateReservationRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Reservation()
-      );
-      client.innerApiCalls.createReservation = stubSimpleCall(expectedResponse);
-      const [response] = await client.createReservation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createReservation without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateReservationRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Reservation()
-      );
-      client.innerApiCalls.createReservation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createReservation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.IReservation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createReservation with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateReservationRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createReservation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createReservation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createReservation with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateReservationRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createReservation(request), expectedError);
-    });
-  });
-
-  describe('getReservation', () => {
-    it('invokes getReservation without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Reservation()
-      );
-      client.innerApiCalls.getReservation = stubSimpleCall(expectedResponse);
-      const [response] = await client.getReservation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getReservation without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Reservation()
-      );
-      client.innerApiCalls.getReservation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getReservation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.IReservation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getReservation with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getReservation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getReservation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getReservation with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getReservation(request), expectedError);
-    });
-  });
-
-  describe('deleteReservation', () => {
-    it('invokes deleteReservation without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteReservation = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteReservation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteReservation without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteReservation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteReservation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteReservation with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteReservation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteReservation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteReservation with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteReservation(request), expectedError);
-    });
-  });
-
-  describe('updateReservation', () => {
-    it('invokes updateReservation without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
-      );
-      request.reservation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateReservationRequest',
-        ['reservation', 'name']
-      );
-      request.reservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `reservation.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Reservation()
-      );
-      client.innerApiCalls.updateReservation = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateReservation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateReservation without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
-      );
-      request.reservation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateReservationRequest',
-        ['reservation', 'name']
-      );
-      request.reservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `reservation.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Reservation()
-      );
-      client.innerApiCalls.updateReservation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateReservation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.IReservation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateReservation with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
-      );
-      request.reservation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateReservationRequest',
-        ['reservation', 'name']
-      );
-      request.reservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `reservation.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateReservation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateReservation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateReservation with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
-      );
-      request.reservation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateReservationRequest',
-        ['reservation', 'name']
-      );
-      request.reservation.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateReservation(request), expectedError);
-    });
-  });
-
-  describe('failoverReservation', () => {
-    it('invokes failoverReservation without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Reservation()
-      );
-      client.innerApiCalls.failoverReservation =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.failoverReservation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.failoverReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.failoverReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes failoverReservation without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Reservation()
-      );
-      client.innerApiCalls.failoverReservation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.failoverReservation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.IReservation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.failoverReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.failoverReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes failoverReservation with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.failoverReservation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.failoverReservation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.failoverReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.failoverReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes failoverReservation with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.failoverReservation(request), expectedError);
-    });
-  });
-
-  describe('createCapacityCommitment', () => {
-    it('invokes createCapacityCommitment without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-      );
-      client.innerApiCalls.createCapacityCommitment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createCapacityCommitment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCapacityCommitment without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-      );
-      client.innerApiCalls.createCapacityCommitment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createCapacityCommitment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCapacityCommitment with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createCapacityCommitment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createCapacityCommitment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCapacityCommitment with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.createCapacityCommitment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getCapacityCommitment', () => {
-    it('invokes getCapacityCommitment without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-      );
-      client.innerApiCalls.getCapacityCommitment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getCapacityCommitment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCapacityCommitment without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-      );
-      client.innerApiCalls.getCapacityCommitment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getCapacityCommitment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCapacityCommitment with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getCapacityCommitment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getCapacityCommitment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCapacityCommitment with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getCapacityCommitment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('deleteCapacityCommitment', () => {
-    it('invokes deleteCapacityCommitment without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteCapacityCommitment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteCapacityCommitment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCapacityCommitment without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteCapacityCommitment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteCapacityCommitment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCapacityCommitment with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteCapacityCommitment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteCapacityCommitment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCapacityCommitment with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.deleteCapacityCommitment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('updateCapacityCommitment', () => {
-    it('invokes updateCapacityCommitment without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
-      );
-      request.capacityCommitment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest',
-        ['capacityCommitment', 'name']
-      );
-      request.capacityCommitment.name = defaultValue1;
-      const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-      );
-      client.innerApiCalls.updateCapacityCommitment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateCapacityCommitment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCapacityCommitment without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
-      );
-      request.capacityCommitment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest',
-        ['capacityCommitment', 'name']
-      );
-      request.capacityCommitment.name = defaultValue1;
-      const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-      );
-      client.innerApiCalls.updateCapacityCommitment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateCapacityCommitment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCapacityCommitment with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
-      );
-      request.capacityCommitment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest',
-        ['capacityCommitment', 'name']
-      );
-      request.capacityCommitment.name = defaultValue1;
-      const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCapacityCommitment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateCapacityCommitment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCapacityCommitment with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
-      );
-      request.capacityCommitment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest',
-        ['capacityCommitment', 'name']
-      );
-      request.capacityCommitment.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateCapacityCommitment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('splitCapacityCommitment', () => {
-    it('invokes splitCapacityCommitment without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse()
-      );
-      client.innerApiCalls.splitCapacityCommitment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.splitCapacityCommitment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.splitCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.splitCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes splitCapacityCommitment without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse()
-      );
-      client.innerApiCalls.splitCapacityCommitment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.splitCapacityCommitment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.splitCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.splitCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes splitCapacityCommitment with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.splitCapacityCommitment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.splitCapacityCommitment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.splitCapacityCommitment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.splitCapacityCommitment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes splitCapacityCommitment with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.splitCapacityCommitment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('mergeCapacityCommitments', () => {
-    it('invokes mergeCapacityCommitments without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-      );
-      client.innerApiCalls.mergeCapacityCommitments =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.mergeCapacityCommitments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.mergeCapacityCommitments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.mergeCapacityCommitments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes mergeCapacityCommitments without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-      );
-      client.innerApiCalls.mergeCapacityCommitments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.mergeCapacityCommitments(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.mergeCapacityCommitments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.mergeCapacityCommitments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes mergeCapacityCommitments with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.mergeCapacityCommitments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.mergeCapacityCommitments(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.mergeCapacityCommitments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.mergeCapacityCommitments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes mergeCapacityCommitments with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.mergeCapacityCommitments(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('createAssignment', () => {
-    it('invokes createAssignment without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Assignment()
-      );
-      client.innerApiCalls.createAssignment = stubSimpleCall(expectedResponse);
-      const [response] = await client.createAssignment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAssignment without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Assignment()
-      );
-      client.innerApiCalls.createAssignment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createAssignment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.IAssignment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAssignment with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAssignment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createAssignment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAssignment with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createAssignment(request), expectedError);
-    });
-  });
-
-  describe('deleteAssignment', () => {
-    it('invokes deleteAssignment without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAssignment = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteAssignment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAssignment without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAssignment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAssignment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAssignment with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAssignment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteAssignment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAssignment with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteAssignment(request), expectedError);
-    });
-  });
-
-  describe('moveAssignment', () => {
-    it('invokes moveAssignment without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Assignment()
-      );
-      client.innerApiCalls.moveAssignment = stubSimpleCall(expectedResponse);
-      const [response] = await client.moveAssignment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.moveAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.moveAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes moveAssignment without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Assignment()
-      );
-      client.innerApiCalls.moveAssignment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.moveAssignment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.IAssignment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.moveAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.moveAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes moveAssignment with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.moveAssignment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.moveAssignment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.moveAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.moveAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes moveAssignment with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.moveAssignment(request), expectedError);
-    });
-  });
-
-  describe('updateAssignment', () => {
-    it('invokes updateAssignment without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
-      );
-      request.assignment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest',
-        ['assignment', 'name']
-      );
-      request.assignment.name = defaultValue1;
-      const expectedHeaderRequestParams = `assignment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Assignment()
-      );
-      client.innerApiCalls.updateAssignment = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateAssignment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAssignment without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
-      );
-      request.assignment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest',
-        ['assignment', 'name']
-      );
-      request.assignment.name = defaultValue1;
-      const expectedHeaderRequestParams = `assignment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.Assignment()
-      );
-      client.innerApiCalls.updateAssignment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAssignment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.IAssignment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAssignment with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
-      );
-      request.assignment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest',
-        ['assignment', 'name']
-      );
-      request.assignment.name = defaultValue1;
-      const expectedHeaderRequestParams = `assignment.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAssignment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateAssignment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAssignment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAssignment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAssignment with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
-      );
-      request.assignment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest',
-        ['assignment', 'name']
-      );
-      request.assignment.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateAssignment(request), expectedError);
-    });
-  });
-
-  describe('getBiReservation', () => {
-    it('invokes getBiReservation without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetBiReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.BiReservation()
-      );
-      client.innerApiCalls.getBiReservation = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBiReservation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBiReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBiReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBiReservation without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetBiReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.BiReservation()
-      );
-      client.innerApiCalls.getBiReservation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBiReservation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.IBiReservation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBiReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBiReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBiReservation with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetBiReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBiReservation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getBiReservation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBiReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBiReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBiReservation with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.GetBiReservationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBiReservation(request), expectedError);
-    });
-  });
-
-  describe('updateBiReservation', () => {
-    it('invokes updateBiReservation without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
-      );
-      request.biReservation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest',
-        ['biReservation', 'name']
-      );
-      request.biReservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.BiReservation()
-      );
-      client.innerApiCalls.updateBiReservation =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateBiReservation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBiReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBiReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBiReservation without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
-      );
-      request.biReservation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest',
-        ['biReservation', 'name']
-      );
-      request.biReservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.BiReservation()
-      );
-      client.innerApiCalls.updateBiReservation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateBiReservation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.reservation.v1.IBiReservation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBiReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBiReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBiReservation with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
-      );
-      request.biReservation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest',
-        ['biReservation', 'name']
-      );
-      request.biReservation.name = defaultValue1;
-      const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBiReservation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateBiReservation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBiReservation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBiReservation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBiReservation with closed client', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
-      );
-      request.biReservation ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest',
-        ['biReservation', 'name']
-      );
-      request.biReservation.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateBiReservation(request), expectedError);
-    });
-  });
-
-  describe('listReservations', () => {
-    it('invokes listReservations without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-      ];
-      client.innerApiCalls.listReservations = stubSimpleCall(expectedResponse);
-      const [response] = await client.listReservations(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listReservations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listReservations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listReservations without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-      ];
-      client.innerApiCalls.listReservations =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listReservations(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.bigquery.reservation.v1.IReservation[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listReservations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listReservations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listReservations with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listReservations = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listReservations(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listReservations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listReservations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listReservationsStream without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-      ];
-      client.descriptors.page.listReservations.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listReservationsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.Reservation[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.reservation.v1.Reservation
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listReservations.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listReservations, request)
-      );
-      assert(
-        (client.descriptors.page.listReservations.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listReservationsStream with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listReservations.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listReservationsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.Reservation[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.reservation.v1.Reservation
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listReservations.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listReservations, request)
-      );
-      assert(
-        (client.descriptors.page.listReservations.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listReservations without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Reservation()
-        ),
-      ];
-      client.descriptors.page.listReservations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.bigquery.reservation.v1.IReservation[] =
-        [];
-      const iterable = client.listReservationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listReservations.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listReservations.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listReservations with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listReservations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listReservationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.IReservation[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = reservationserviceModule.v1.ReservationServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'bigqueryreservation.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listReservations.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listReservations.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listCapacityCommitments', () => {
-    it('invokes listCapacityCommitments without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-      ];
-      client.innerApiCalls.listCapacityCommitments =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listCapacityCommitments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCapacityCommitments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCapacityCommitments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCapacityCommitments without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-      ];
-      client.innerApiCalls.listCapacityCommitments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listCapacityCommitments(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCapacityCommitments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCapacityCommitments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCapacityCommitments with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listCapacityCommitments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listCapacityCommitments(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listCapacityCommitments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCapacityCommitments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCapacityCommitmentsStream without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-      ];
-      client.descriptors.page.listCapacityCommitments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listCapacityCommitmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.CapacityCommitment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.reservation.v1.CapacityCommitment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'bigqueryreservation.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listCapacityCommitments
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCapacityCommitments, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listCapacityCommitments
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('invokes listCapacityCommitmentsStream with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCapacityCommitments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listCapacityCommitmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.CapacityCommitment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.reservation.v1.CapacityCommitment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'bigqueryreservation.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listCapacityCommitments
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCapacityCommitments, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listCapacityCommitments
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listCapacityCommitments without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
-        ),
-      ];
-      client.descriptors.page.listCapacityCommitments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[] =
-        [];
-      const iterable = client.listCapacityCommitmentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listCapacityCommitments
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listCapacityCommitments
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new reservationserviceModule.v1.ReservationServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'bigqueryreservation.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listCapacityCommitments with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCapacityCommitments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listCapacityCommitmentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new reservationserviceModule.v1.ReservationServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'bigqueryreservation.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listCapacityCommitments
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listCapacityCommitments
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new reservationserviceModule.v1.ReservationServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listAssignments', () => {
-    it('invokes listAssignments without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.innerApiCalls.listAssignments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAssignments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAssignments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssignments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = reservationserviceModule.v1.ReservationServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.reservationServiceStub, undefined);
+            await client.initialize();
+            assert(client.reservationServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.reservationServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.reservationServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listAssignments without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.innerApiCalls.listAssignments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAssignments(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.bigquery.reservation.v1.IAssignment[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('createReservation', () => {
+        it('invokes createReservation without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateReservationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Reservation()
+            );
+            client.innerApiCalls.createReservation = stubSimpleCall(expectedResponse);
+            const [response] = await client.createReservation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createReservation without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateReservationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Reservation()
+            );
+            client.innerApiCalls.createReservation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createReservation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IReservation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createReservation with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateReservationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createReservation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createReservation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createReservation with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateReservationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createReservation(request), expectedError);
+        });
+    });
+
+    describe('getReservation', () => {
+        it('invokes getReservation without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Reservation()
+            );
+            client.innerApiCalls.getReservation = stubSimpleCall(expectedResponse);
+            const [response] = await client.getReservation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReservation without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Reservation()
+            );
+            client.innerApiCalls.getReservation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getReservation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IReservation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReservation with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getReservation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getReservation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReservation with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getReservation(request), expectedError);
+        });
+    });
+
+    describe('deleteReservation', () => {
+        it('invokes deleteReservation without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteReservation = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteReservation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteReservation without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteReservation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteReservation(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteReservation with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteReservation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteReservation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteReservation with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteReservation(request), expectedError);
+        });
+    });
+
+    describe('updateReservation', () => {
+        it('invokes updateReservation without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
+            );
+            request.reservation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateReservationRequest', ['reservation', 'name']);
+            request.reservation.name = defaultValue1;
+            const expectedHeaderRequestParams = `reservation.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Reservation()
+            );
+            client.innerApiCalls.updateReservation = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateReservation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateReservation without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
+            );
+            request.reservation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateReservationRequest', ['reservation', 'name']);
+            request.reservation.name = defaultValue1;
+            const expectedHeaderRequestParams = `reservation.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Reservation()
+            );
+            client.innerApiCalls.updateReservation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateReservation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IReservation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateReservation with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
+            );
+            request.reservation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateReservationRequest', ['reservation', 'name']);
+            request.reservation.name = defaultValue1;
+            const expectedHeaderRequestParams = `reservation.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateReservation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateReservation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateReservation with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
+            );
+            request.reservation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateReservationRequest', ['reservation', 'name']);
+            request.reservation.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateReservation(request), expectedError);
+        });
+    });
+
+    describe('failoverReservation', () => {
+        it('invokes failoverReservation without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.FailoverReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Reservation()
+            );
+            client.innerApiCalls.failoverReservation = stubSimpleCall(expectedResponse);
+            const [response] = await client.failoverReservation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.failoverReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.failoverReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes failoverReservation without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.FailoverReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Reservation()
+            );
+            client.innerApiCalls.failoverReservation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.failoverReservation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IReservation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.failoverReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.failoverReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes failoverReservation with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.FailoverReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.failoverReservation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.failoverReservation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.failoverReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.failoverReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes failoverReservation with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.FailoverReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.failoverReservation(request), expectedError);
+        });
+    });
+
+    describe('createCapacityCommitment', () => {
+        it('invokes createCapacityCommitment without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
+            );
+            client.innerApiCalls.createCapacityCommitment = stubSimpleCall(expectedResponse);
+            const [response] = await client.createCapacityCommitment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCapacityCommitment without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
+            );
+            client.innerApiCalls.createCapacityCommitment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createCapacityCommitment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCapacityCommitment with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCapacityCommitment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createCapacityCommitment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCapacityCommitment with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createCapacityCommitment(request), expectedError);
+        });
+    });
+
+    describe('getCapacityCommitment', () => {
+        it('invokes getCapacityCommitment without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
+            );
+            client.innerApiCalls.getCapacityCommitment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getCapacityCommitment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCapacityCommitment without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
+            );
+            client.innerApiCalls.getCapacityCommitment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getCapacityCommitment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCapacityCommitment with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getCapacityCommitment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getCapacityCommitment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCapacityCommitment with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getCapacityCommitment(request), expectedError);
+        });
+    });
+
+    describe('deleteCapacityCommitment', () => {
+        it('invokes deleteCapacityCommitment without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteCapacityCommitment = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteCapacityCommitment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCapacityCommitment without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteCapacityCommitment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteCapacityCommitment(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCapacityCommitment with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCapacityCommitment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteCapacityCommitment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCapacityCommitment with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteCapacityCommitment(request), expectedError);
+        });
+    });
+
+    describe('updateCapacityCommitment', () => {
+        it('invokes updateCapacityCommitment without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
+            );
+            request.capacityCommitment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest', ['capacityCommitment', 'name']);
+            request.capacityCommitment.name = defaultValue1;
+            const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
+            );
+            client.innerApiCalls.updateCapacityCommitment = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateCapacityCommitment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCapacityCommitment without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
+            );
+            request.capacityCommitment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest', ['capacityCommitment', 'name']);
+            request.capacityCommitment.name = defaultValue1;
+            const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
+            );
+            client.innerApiCalls.updateCapacityCommitment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCapacityCommitment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCapacityCommitment with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
+            );
+            request.capacityCommitment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest', ['capacityCommitment', 'name']);
+            request.capacityCommitment.name = defaultValue1;
+            const expectedHeaderRequestParams = `capacity_commitment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCapacityCommitment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateCapacityCommitment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCapacityCommitment with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
+            );
+            request.capacityCommitment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest', ['capacityCommitment', 'name']);
+            request.capacityCommitment.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateCapacityCommitment(request), expectedError);
+        });
+    });
+
+    describe('splitCapacityCommitment', () => {
+        it('invokes splitCapacityCommitment without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse()
+            );
+            client.innerApiCalls.splitCapacityCommitment = stubSimpleCall(expectedResponse);
+            const [response] = await client.splitCapacityCommitment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.splitCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.splitCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes splitCapacityCommitment without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse()
+            );
+            client.innerApiCalls.splitCapacityCommitment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.splitCapacityCommitment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.splitCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.splitCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes splitCapacityCommitment with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.splitCapacityCommitment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.splitCapacityCommitment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.splitCapacityCommitment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.splitCapacityCommitment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes splitCapacityCommitment with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.splitCapacityCommitment(request), expectedError);
+        });
+    });
+
+    describe('mergeCapacityCommitments', () => {
+        it('invokes mergeCapacityCommitments without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
+            );
+            client.innerApiCalls.mergeCapacityCommitments = stubSimpleCall(expectedResponse);
+            const [response] = await client.mergeCapacityCommitments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.mergeCapacityCommitments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.mergeCapacityCommitments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes mergeCapacityCommitments without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()
+            );
+            client.innerApiCalls.mergeCapacityCommitments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.mergeCapacityCommitments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.mergeCapacityCommitments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.mergeCapacityCommitments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes mergeCapacityCommitments with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.mergeCapacityCommitments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.mergeCapacityCommitments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.mergeCapacityCommitments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.mergeCapacityCommitments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes mergeCapacityCommitments with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.mergeCapacityCommitments(request), expectedError);
+        });
+    });
+
+    describe('createAssignment', () => {
+        it('invokes createAssignment without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Assignment()
+            );
+            client.innerApiCalls.createAssignment = stubSimpleCall(expectedResponse);
+            const [response] = await client.createAssignment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAssignment without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Assignment()
+            );
+            client.innerApiCalls.createAssignment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAssignment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IAssignment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAssignment with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAssignment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createAssignment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAssignment with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createAssignment(request), expectedError);
+        });
+    });
+
+    describe('deleteAssignment', () => {
+        it('invokes deleteAssignment without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteAssignment = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteAssignment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAssignment without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteAssignment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAssignment(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAssignment with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAssignment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteAssignment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAssignment with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteAssignment(request), expectedError);
+        });
+    });
+
+    describe('moveAssignment', () => {
+        it('invokes moveAssignment without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Assignment()
+            );
+            client.innerApiCalls.moveAssignment = stubSimpleCall(expectedResponse);
+            const [response] = await client.moveAssignment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.moveAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveAssignment without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Assignment()
+            );
+            client.innerApiCalls.moveAssignment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.moveAssignment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IAssignment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.moveAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveAssignment with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.moveAssignment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.moveAssignment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.moveAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveAssignment with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.moveAssignment(request), expectedError);
+        });
+    });
+
+    describe('updateAssignment', () => {
+        it('invokes updateAssignment without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
+            );
+            request.assignment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest', ['assignment', 'name']);
+            request.assignment.name = defaultValue1;
+            const expectedHeaderRequestParams = `assignment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Assignment()
+            );
+            client.innerApiCalls.updateAssignment = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateAssignment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAssignment without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
+            );
+            request.assignment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest', ['assignment', 'name']);
+            request.assignment.name = defaultValue1;
+            const expectedHeaderRequestParams = `assignment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.Assignment()
+            );
+            client.innerApiCalls.updateAssignment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAssignment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IAssignment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAssignment with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
+            );
+            request.assignment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest', ['assignment', 'name']);
+            request.assignment.name = defaultValue1;
+            const expectedHeaderRequestParams = `assignment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAssignment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateAssignment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAssignment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAssignment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAssignment with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
+            );
+            request.assignment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest', ['assignment', 'name']);
+            request.assignment.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateAssignment(request), expectedError);
+        });
+    });
+
+    describe('getBiReservation', () => {
+        it('invokes getBiReservation without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetBiReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.BiReservation()
+            );
+            client.innerApiCalls.getBiReservation = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBiReservation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBiReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBiReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBiReservation without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetBiReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.BiReservation()
+            );
+            client.innerApiCalls.getBiReservation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBiReservation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IBiReservation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBiReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBiReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBiReservation with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetBiReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBiReservation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBiReservation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBiReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBiReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBiReservation with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.GetBiReservationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBiReservation(request), expectedError);
+        });
+    });
+
+    describe('updateBiReservation', () => {
+        it('invokes updateBiReservation without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
+            );
+            request.biReservation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest', ['biReservation', 'name']);
+            request.biReservation.name = defaultValue1;
+            const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.BiReservation()
+            );
+            client.innerApiCalls.updateBiReservation = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateBiReservation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBiReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBiReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBiReservation without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
+            );
+            request.biReservation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest', ['biReservation', 'name']);
+            request.biReservation.name = defaultValue1;
+            const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.BiReservation()
+            );
+            client.innerApiCalls.updateBiReservation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateBiReservation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IBiReservation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBiReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBiReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBiReservation with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
+            );
+            request.biReservation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest', ['biReservation', 'name']);
+            request.biReservation.name = defaultValue1;
+            const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBiReservation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateBiReservation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBiReservation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBiReservation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBiReservation with closed client', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
+            );
+            request.biReservation ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest', ['biReservation', 'name']);
+            request.biReservation.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateBiReservation(request), expectedError);
+        });
+    });
+
+    describe('listReservations', () => {
+        it('invokes listReservations without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListReservationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+            ];
+            client.innerApiCalls.listReservations = stubSimpleCall(expectedResponse);
+            const [response] = await client.listReservations(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listReservations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listReservations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listReservations without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListReservationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+            ];
+            client.innerApiCalls.listReservations = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listReservations(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IReservation[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listReservations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listReservations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listReservations with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListReservationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listReservations = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listReservations(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listReservations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listReservations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listReservationsStream without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListReservationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+            ];
+            client.descriptors.page.listReservations.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listReservationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.Reservation[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.reservation.v1.Reservation) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listReservations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listReservations, request));
+            assert(
+                (client.descriptors.page.listReservations.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listReservationsStream with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListReservationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listReservations.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listReservationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.Reservation[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.reservation.v1.Reservation) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listReservations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listReservations, request));
+            assert(
+                (client.descriptors.page.listReservations.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listReservations without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListReservationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Reservation()),
+            ];
+            client.descriptors.page.listReservations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.bigquery.reservation.v1.IReservation[] = [];
+            const iterable = client.listReservationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAssignments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssignments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssignments with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAssignments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAssignments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAssignments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssignments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssignmentsStream without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.descriptors.page.listAssignments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAssignmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.reservation.v1.Assignment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listReservations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listReservations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listReservations with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListReservationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listReservations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listReservationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.IReservation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listReservations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listReservations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAssignments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAssignments, request)
-      );
-      assert(
-        (client.descriptors.page.listAssignments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listAssignmentsStream with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAssignments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAssignmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.reservation.v1.Assignment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listCapacityCommitments', () => {
+        it('invokes listCapacityCommitments without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+            ];
+            client.innerApiCalls.listCapacityCommitments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listCapacityCommitments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCapacityCommitments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCapacityCommitments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listCapacityCommitments without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+            ];
+            client.innerApiCalls.listCapacityCommitments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listCapacityCommitments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCapacityCommitments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCapacityCommitments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAssignments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAssignments, request)
-      );
-      assert(
-        (client.descriptors.page.listAssignments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listAssignments without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.descriptors.page.listAssignments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] =
-        [];
-      const iterable = client.listAssignmentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAssignments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAssignments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listCapacityCommitments with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listCapacityCommitments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listCapacityCommitments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listCapacityCommitments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCapacityCommitments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listAssignments with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAssignments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAssignmentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAssignments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAssignments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listCapacityCommitmentsStream without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+            ];
+            client.descriptors.page.listCapacityCommitments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listCapacityCommitmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.CapacityCommitment[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.reservation.v1.CapacityCommitment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listCapacityCommitments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCapacityCommitments, request));
+            assert(
+                (client.descriptors.page.listCapacityCommitments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('searchAssignments', () => {
-    it('invokes searchAssignments without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.innerApiCalls.searchAssignments = stubSimpleCall(expectedResponse);
-      const [response] = await client.searchAssignments(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchAssignments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchAssignments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listCapacityCommitmentsStream with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCapacityCommitments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listCapacityCommitmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.CapacityCommitment[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.reservation.v1.CapacityCommitment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listCapacityCommitments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCapacityCommitments, request));
+            assert(
+                (client.descriptors.page.listCapacityCommitments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes searchAssignments without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.innerApiCalls.searchAssignments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.searchAssignments(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.bigquery.reservation.v1.IAssignment[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listCapacityCommitments without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.CapacityCommitment()),
+            ];
+            client.descriptors.page.listCapacityCommitments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[] = [];
+            const iterable = client.listCapacityCommitmentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchAssignments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchAssignments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchAssignments with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.searchAssignments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.searchAssignments(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.searchAssignments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchAssignments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchAssignmentsStream without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.descriptors.page.searchAssignments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.searchAssignmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.reservation.v1.Assignment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCapacityCommitments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCapacityCommitments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listCapacityCommitments with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCapacityCommitments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listCapacityCommitmentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCapacityCommitments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCapacityCommitments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.searchAssignments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchAssignments, request)
-      );
-      assert(
-        (client.descriptors.page.searchAssignments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes searchAssignmentsStream with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchAssignments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.searchAssignmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.reservation.v1.Assignment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listAssignments', () => {
+        it('invokes listAssignments without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.innerApiCalls.listAssignments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAssignments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAssignments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssignments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listAssignments without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.innerApiCalls.listAssignments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAssignments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IAssignment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAssignments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssignments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(stub.calledOnce);
-      assert(
-        (client.descriptors.page.searchAssignments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchAssignments, request)
-      );
-      assert(
-        (client.descriptors.page.searchAssignments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with searchAssignments without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.descriptors.page.searchAssignments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] =
-        [];
-      const iterable = client.searchAssignmentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchAssignments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.searchAssignments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listAssignments with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAssignments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAssignments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAssignments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssignments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with searchAssignments with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchAssignments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.searchAssignmentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchAssignments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.searchAssignments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listAssignmentsStream without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.descriptors.page.listAssignments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAssignmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.reservation.v1.Assignment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAssignments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAssignments, request));
+            assert(
+                (client.descriptors.page.listAssignments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('searchAllAssignments', () => {
-    it('invokes searchAllAssignments without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.innerApiCalls.searchAllAssignments =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.searchAllAssignments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchAllAssignments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchAllAssignments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listAssignmentsStream with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAssignments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAssignmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.reservation.v1.Assignment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAssignments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAssignments, request));
+            assert(
+                (client.descriptors.page.listAssignments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes searchAllAssignments without error using callback', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.innerApiCalls.searchAllAssignments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.searchAllAssignments(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.bigquery.reservation.v1.IAssignment[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listAssignments without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.descriptors.page.listAssignments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] = [];
+            const iterable = client.listAssignmentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchAllAssignments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchAllAssignments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchAllAssignments with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.searchAllAssignments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.searchAllAssignments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.searchAllAssignments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchAllAssignments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchAllAssignmentsStream without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.descriptors.page.searchAllAssignments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.searchAllAssignmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.reservation.v1.Assignment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listAssignments with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAssignments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAssignmentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchAllAssignments, request)
-      );
-      assert(
-        (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes searchAllAssignmentsStream with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchAllAssignments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.searchAllAssignmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.reservation.v1.Assignment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('searchAssignments', () => {
+        it('invokes searchAssignments without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.innerApiCalls.searchAssignments = stubSimpleCall(expectedResponse);
+            const [response] = await client.searchAssignments(request);
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchAssignments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchAssignments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes searchAssignments without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.innerApiCalls.searchAssignments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.searchAssignments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IAssignment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchAssignments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchAssignments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchAllAssignments, request)
-      );
-      assert(
-        (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('invokes searchAssignments with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.searchAssignments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.searchAssignments(request), expectedError);
+            assert(stub.calledOnce);
+            const actualRequest = (client.innerApiCalls.searchAssignments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchAssignments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes searchAssignmentsStream without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.descriptors.page.searchAssignments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.searchAssignmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.reservation.v1.Assignment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.searchAssignments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchAssignments, request));
+            assert(
+                (client.descriptors.page.searchAssignments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes searchAssignmentsStream with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchAssignments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.searchAssignmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.reservation.v1.Assignment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert(stub.calledOnce);
+            assert((client.descriptors.page.searchAssignments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchAssignments, request));
+            assert(
+                (client.descriptors.page.searchAssignments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with searchAssignments without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.descriptors.page.searchAssignments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] = [];
+            const iterable = client.searchAssignmentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with searchAssignments with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchAssignments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.searchAssignmentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with searchAllAssignments without error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.reservation.v1.Assignment()
-        ),
-      ];
-      client.descriptors.page.searchAllAssignments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] =
-        [];
-      const iterable = client.searchAllAssignmentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('searchAllAssignments', () => {
+        it('invokes searchAllAssignments without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.innerApiCalls.searchAllAssignments = stubSimpleCall(expectedResponse);
+            const [response] = await client.searchAllAssignments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchAllAssignments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchAllAssignments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes searchAllAssignments without error using callback', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.innerApiCalls.searchAllAssignments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.searchAllAssignments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.reservation.v1.IAssignment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchAllAssignments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchAllAssignments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes searchAllAssignments with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.searchAllAssignments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.searchAllAssignments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.searchAllAssignments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchAllAssignments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes searchAllAssignmentsStream without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.descriptors.page.searchAllAssignments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.searchAllAssignmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.reservation.v1.Assignment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.searchAllAssignments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchAllAssignments, request));
+            assert(
+                (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes searchAllAssignmentsStream with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchAllAssignments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.searchAllAssignmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.reservation.v1.Assignment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.searchAllAssignments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchAllAssignments, request));
+            assert(
+                (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with searchAllAssignments without error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+              generateSampleMessage(new protos.google.cloud.bigquery.reservation.v1.Assignment()),
+            ];
+            client.descriptors.page.searchAllAssignments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] = [];
+            const iterable = client.searchAllAssignmentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with searchAllAssignments with error', async () => {
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchAllAssignments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.searchAllAssignmentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with searchAllAssignments with error', async () => {
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchAllAssignments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.searchAllAssignmentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('Path templates', () => {
+
+        describe('assignment', async () => {
+            const fakePath = "/rendered/path/assignment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reservation: "reservationValue",
+                assignment: "assignmentValue",
+            };
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.assignmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.assignmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('assignmentPath', () => {
+                const result = client.assignmentPath("projectValue", "locationValue", "reservationValue", "assignmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.assignmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAssignmentName', () => {
+                const result = client.matchProjectFromAssignmentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.assignmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAssignmentName', () => {
+                const result = client.matchLocationFromAssignmentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.assignmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReservationFromAssignmentName', () => {
+                const result = client.matchReservationFromAssignmentName(fakePath);
+                assert.strictEqual(result, "reservationValue");
+                assert((client.pathTemplates.assignmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAssignmentFromAssignmentName', () => {
+                const result = client.matchAssignmentFromAssignmentName(fakePath);
+                assert.strictEqual(result, "assignmentValue");
+                assert((client.pathTemplates.assignmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('biReservation', async () => {
+            const fakePath = "/rendered/path/biReservation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.biReservationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.biReservationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('biReservationPath', () => {
+                const result = client.biReservationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.biReservationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBiReservationName', () => {
+                const result = client.matchProjectFromBiReservationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.biReservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBiReservationName', () => {
+                const result = client.matchLocationFromBiReservationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.biReservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('capacityCommitment', async () => {
+            const fakePath = "/rendered/path/capacityCommitment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                capacity_commitment: "capacityCommitmentValue",
+            };
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.capacityCommitmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.capacityCommitmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('capacityCommitmentPath', () => {
+                const result = client.capacityCommitmentPath("projectValue", "locationValue", "capacityCommitmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.capacityCommitmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCapacityCommitmentName', () => {
+                const result = client.matchProjectFromCapacityCommitmentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.capacityCommitmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCapacityCommitmentName', () => {
+                const result = client.matchLocationFromCapacityCommitmentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.capacityCommitmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCapacityCommitmentFromCapacityCommitmentName', () => {
+                const result = client.matchCapacityCommitmentFromCapacityCommitmentName(fakePath);
+                assert.strictEqual(result, "capacityCommitmentValue");
+                assert((client.pathTemplates.capacityCommitmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('reservation', async () => {
+            const fakePath = "/rendered/path/reservation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reservation: "reservationValue",
+            };
+            const client = new reservationserviceModule.v1.ReservationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.reservationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.reservationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('reservationPath', () => {
+                const result = client.reservationPath("projectValue", "locationValue", "reservationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.reservationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromReservationName', () => {
+                const result = client.matchProjectFromReservationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.reservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromReservationName', () => {
+                const result = client.matchLocationFromReservationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.reservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReservationFromReservationName', () => {
+                const result = client.matchReservationFromReservationName(fakePath);
+                assert.strictEqual(result, "reservationValue");
+                assert((client.pathTemplates.reservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
-
-  describe('Path templates', () => {
-    describe('assignment', async () => {
-      const fakePath = '/rendered/path/assignment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        reservation: 'reservationValue',
-        assignment: 'assignmentValue',
-      };
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.assignmentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.assignmentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('assignmentPath', () => {
-        const result = client.assignmentPath(
-          'projectValue',
-          'locationValue',
-          'reservationValue',
-          'assignmentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.assignmentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAssignmentName', () => {
-        const result = client.matchProjectFromAssignmentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.assignmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAssignmentName', () => {
-        const result = client.matchLocationFromAssignmentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.assignmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchReservationFromAssignmentName', () => {
-        const result = client.matchReservationFromAssignmentName(fakePath);
-        assert.strictEqual(result, 'reservationValue');
-        assert(
-          (client.pathTemplates.assignmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAssignmentFromAssignmentName', () => {
-        const result = client.matchAssignmentFromAssignmentName(fakePath);
-        assert.strictEqual(result, 'assignmentValue');
-        assert(
-          (client.pathTemplates.assignmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('biReservation', async () => {
-      const fakePath = '/rendered/path/biReservation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.biReservationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.biReservationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('biReservationPath', () => {
-        const result = client.biReservationPath(
-          'projectValue',
-          'locationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.biReservationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromBiReservationName', () => {
-        const result = client.matchProjectFromBiReservationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.biReservationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBiReservationName', () => {
-        const result = client.matchLocationFromBiReservationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.biReservationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('capacityCommitment', async () => {
-      const fakePath = '/rendered/path/capacityCommitment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        capacity_commitment: 'capacityCommitmentValue',
-      };
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.capacityCommitmentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.capacityCommitmentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('capacityCommitmentPath', () => {
-        const result = client.capacityCommitmentPath(
-          'projectValue',
-          'locationValue',
-          'capacityCommitmentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.capacityCommitmentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromCapacityCommitmentName', () => {
-        const result = client.matchProjectFromCapacityCommitmentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.capacityCommitmentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCapacityCommitmentName', () => {
-        const result = client.matchLocationFromCapacityCommitmentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.capacityCommitmentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCapacityCommitmentFromCapacityCommitmentName', () => {
-        const result =
-          client.matchCapacityCommitmentFromCapacityCommitmentName(fakePath);
-        assert.strictEqual(result, 'capacityCommitmentValue');
-        assert(
-          (
-            client.pathTemplates.capacityCommitmentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('reservation', async () => {
-      const fakePath = '/rendered/path/reservation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        reservation: 'reservationValue',
-      };
-      const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.reservationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.reservationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('reservationPath', () => {
-        const result = client.reservationPath(
-          'projectValue',
-          'locationValue',
-          'reservationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.reservationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromReservationName', () => {
-        const result = client.matchProjectFromReservationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.reservationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromReservationName', () => {
-        const result = client.matchLocationFromReservationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.reservationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchReservationFromReservationName', () => {
-        const result = client.matchReservationFromReservationName(fakePath);
-        assert.strictEqual(result, 'reservationValue');
-        assert(
-          (client.pathTemplates.reservationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

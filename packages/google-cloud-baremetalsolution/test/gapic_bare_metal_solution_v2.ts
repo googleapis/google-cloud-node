@@ -25,10851 +25,8400 @@ import * as baremetalsolutionModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  IamProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v2.BareMetalSolutionClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'baremetalsolution.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          baremetalsolutionModule.v2.BareMetalSolutionClient.servicePath;
-        assert.strictEqual(servicePath, 'baremetalsolution.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          baremetalsolutionModule.v2.BareMetalSolutionClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'baremetalsolution.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'baremetalsolution.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'baremetalsolution.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new baremetalsolutionModule.v2.BareMetalSolutionClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'baremetalsolution.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'baremetalsolution.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new baremetalsolutionModule.v2.BareMetalSolutionClient(
-            {universeDomain: 'configured.example.com'}
-          );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'baremetalsolution.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new baremetalsolutionModule.v2.BareMetalSolutionClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = baremetalsolutionModule.v2.BareMetalSolutionClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.bareMetalSolutionStub, undefined);
-      await client.initialize();
-      assert(client.bareMetalSolutionStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.bareMetalSolutionStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.bareMetalSolutionStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getInstance', () => {
-    it('invokes getInstance without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Instance()
-      );
-      client.innerApiCalls.getInstance = stubSimpleCall(expectedResponse);
-      const [response] = await client.getInstance(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstance without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Instance()
-      );
-      client.innerApiCalls.getInstance =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IInstance | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstance with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getInstance = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstance with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getInstance(request), expectedError);
-    });
-  });
-
-  describe('renameInstance', () => {
-    it('invokes renameInstance without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Instance()
-      );
-      client.innerApiCalls.renameInstance = stubSimpleCall(expectedResponse);
-      const [response] = await client.renameInstance(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.renameInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameInstance without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Instance()
-      );
-      client.innerApiCalls.renameInstance =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.renameInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IInstance | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.renameInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameInstance with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.renameInstance = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.renameInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.renameInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameInstance with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.renameInstance(request), expectedError);
-    });
-  });
-
-  describe('createSSHKey', () => {
-    it('invokes createSSHKey without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.SSHKey()
-      );
-      client.innerApiCalls.createSshKey = stubSimpleCall(expectedResponse);
-      const [response] = await client.createSSHKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSshKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSshKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSSHKey without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.SSHKey()
-      );
-      client.innerApiCalls.createSshKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createSSHKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.ISSHKey | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSshKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSshKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSSHKey with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSshKey = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createSSHKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSshKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSshKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSSHKey with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createSSHKey(request), expectedError);
-    });
-  });
-
-  describe('deleteSSHKey', () => {
-    it('invokes deleteSSHKey without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSshKey = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteSSHKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSshKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSshKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSSHKey without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSshKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSSHKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSshKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSshKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSSHKey with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSshKey = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteSSHKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSshKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSshKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSSHKey with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteSSHKey(request), expectedError);
-    });
-  });
-
-  describe('getVolume', () => {
-    it('invokes getVolume without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Volume()
-      );
-      client.innerApiCalls.getVolume = stubSimpleCall(expectedResponse);
-      const [response] = await client.getVolume(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolume without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Volume()
-      );
-      client.innerApiCalls.getVolume =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getVolume(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IVolume | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolume with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getVolume = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getVolume(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolume with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getVolume(request), expectedError);
-    });
-  });
-
-  describe('renameVolume', () => {
-    it('invokes renameVolume without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Volume()
-      );
-      client.innerApiCalls.renameVolume = stubSimpleCall(expectedResponse);
-      const [response] = await client.renameVolume(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.renameVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameVolume without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Volume()
-      );
-      client.innerApiCalls.renameVolume =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.renameVolume(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IVolume | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.renameVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameVolume with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.renameVolume = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.renameVolume(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.renameVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameVolume with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.renameVolume(request), expectedError);
-    });
-  });
-
-  describe('listNetworkUsage', () => {
-    it('invokes listNetworkUsage without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest',
-        ['location']
-      );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageResponse()
-      );
-      client.innerApiCalls.listNetworkUsage = stubSimpleCall(expectedResponse);
-      const [response] = await client.listNetworkUsage(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNetworkUsage as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNetworkUsage as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNetworkUsage without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest',
-        ['location']
-      );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageResponse()
-      );
-      client.innerApiCalls.listNetworkUsage =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listNetworkUsage(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IListNetworkUsageResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNetworkUsage as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNetworkUsage as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNetworkUsage with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest',
-        ['location']
-      );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listNetworkUsage = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listNetworkUsage(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listNetworkUsage as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNetworkUsage as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNetworkUsage with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest',
-        ['location']
-      );
-      request.location = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.listNetworkUsage(request), expectedError);
-    });
-  });
-
-  describe('getNetwork', () => {
-    it('invokes getNetwork without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetNetworkRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Network()
-      );
-      client.innerApiCalls.getNetwork = stubSimpleCall(expectedResponse);
-      const [response] = await client.getNetwork(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNetwork as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNetwork as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNetwork without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetNetworkRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Network()
-      );
-      client.innerApiCalls.getNetwork =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getNetwork(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.INetwork | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNetwork as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNetwork as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNetwork with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetNetworkRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getNetwork = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getNetwork(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getNetwork as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNetwork as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNetwork with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetNetworkRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getNetwork(request), expectedError);
-    });
-  });
-
-  describe('createVolumeSnapshot', () => {
-    it('invokes createVolumeSnapshot without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-      );
-      client.innerApiCalls.createVolumeSnapshot =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createVolumeSnapshot(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVolumeSnapshot without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-      );
-      client.innerApiCalls.createVolumeSnapshot =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createVolumeSnapshot(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVolumeSnapshot with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createVolumeSnapshot = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createVolumeSnapshot(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVolumeSnapshot with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createVolumeSnapshot(request), expectedError);
-    });
-  });
-
-  describe('deleteVolumeSnapshot', () => {
-    it('invokes deleteVolumeSnapshot without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteVolumeSnapshot =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteVolumeSnapshot(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteVolumeSnapshot without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteVolumeSnapshot =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteVolumeSnapshot(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteVolumeSnapshot with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteVolumeSnapshot = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteVolumeSnapshot(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteVolumeSnapshot with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteVolumeSnapshot(request), expectedError);
-    });
-  });
-
-  describe('getVolumeSnapshot', () => {
-    it('invokes getVolumeSnapshot without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-      );
-      client.innerApiCalls.getVolumeSnapshot = stubSimpleCall(expectedResponse);
-      const [response] = await client.getVolumeSnapshot(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolumeSnapshot without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-      );
-      client.innerApiCalls.getVolumeSnapshot =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getVolumeSnapshot(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolumeSnapshot with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getVolumeSnapshot = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getVolumeSnapshot(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolumeSnapshot with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getVolumeSnapshot(request), expectedError);
-    });
-  });
-
-  describe('getLun', () => {
-    it('invokes getLun without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetLunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Lun()
-      );
-      client.innerApiCalls.getLun = stubSimpleCall(expectedResponse);
-      const [response] = await client.getLun(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getLun as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLun without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetLunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Lun()
-      );
-      client.innerApiCalls.getLun =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLun(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.ILun | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getLun as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLun with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetLunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getLun = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getLun(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getLun as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLun with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetLunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getLun(request), expectedError);
-    });
-  });
-
-  describe('getNfsShare', () => {
-    it('invokes getNfsShare without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.NfsShare()
-      );
-      client.innerApiCalls.getNfsShare = stubSimpleCall(expectedResponse);
-      const [response] = await client.getNfsShare(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNfsShare without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.NfsShare()
-      );
-      client.innerApiCalls.getNfsShare =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getNfsShare(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.INfsShare | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNfsShare with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getNfsShare = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getNfsShare(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNfsShare with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getNfsShare(request), expectedError);
-    });
-  });
-
-  describe('renameNfsShare', () => {
-    it('invokes renameNfsShare without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.NfsShare()
-      );
-      client.innerApiCalls.renameNfsShare = stubSimpleCall(expectedResponse);
-      const [response] = await client.renameNfsShare(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.renameNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameNfsShare without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.NfsShare()
-      );
-      client.innerApiCalls.renameNfsShare =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.renameNfsShare(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.INfsShare | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.renameNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameNfsShare with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.renameNfsShare = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.renameNfsShare(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.renameNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameNfsShare with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.renameNfsShare(request), expectedError);
-    });
-  });
-
-  describe('submitProvisioningConfig', () => {
-    it('invokes submitProvisioningConfig without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse()
-      );
-      client.innerApiCalls.submitProvisioningConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.submitProvisioningConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.submitProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.submitProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes submitProvisioningConfig without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse()
-      );
-      client.innerApiCalls.submitProvisioningConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.submitProvisioningConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.submitProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.submitProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes submitProvisioningConfig with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.submitProvisioningConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.submitProvisioningConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.submitProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.submitProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes submitProvisioningConfig with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.submitProvisioningConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getProvisioningConfig', () => {
-    it('invokes getProvisioningConfig without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
-      );
-      client.innerApiCalls.getProvisioningConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getProvisioningConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getProvisioningConfig without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
-      );
-      client.innerApiCalls.getProvisioningConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getProvisioningConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IProvisioningConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getProvisioningConfig with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getProvisioningConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getProvisioningConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getProvisioningConfig with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getProvisioningConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('createProvisioningConfig', () => {
-    it('invokes createProvisioningConfig without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
-      );
-      client.innerApiCalls.createProvisioningConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createProvisioningConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createProvisioningConfig without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
-      );
-      client.innerApiCalls.createProvisioningConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createProvisioningConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IProvisioningConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createProvisioningConfig with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createProvisioningConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createProvisioningConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createProvisioningConfig with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.createProvisioningConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('updateProvisioningConfig', () => {
-    it('invokes updateProvisioningConfig without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
-      );
-      request.provisioningConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest',
-        ['provisioningConfig', 'name']
-      );
-      request.provisioningConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
-      );
-      client.innerApiCalls.updateProvisioningConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateProvisioningConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProvisioningConfig without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
-      );
-      request.provisioningConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest',
-        ['provisioningConfig', 'name']
-      );
-      request.provisioningConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
-      );
-      client.innerApiCalls.updateProvisioningConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateProvisioningConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IProvisioningConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProvisioningConfig with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
-      );
-      request.provisioningConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest',
-        ['provisioningConfig', 'name']
-      );
-      request.provisioningConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateProvisioningConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateProvisioningConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateProvisioningConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProvisioningConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProvisioningConfig with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
-      );
-      request.provisioningConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest',
-        ['provisioningConfig', 'name']
-      );
-      request.provisioningConfig.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateProvisioningConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('renameNetwork', () => {
-    it('invokes renameNetwork without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameNetworkRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Network()
-      );
-      client.innerApiCalls.renameNetwork = stubSimpleCall(expectedResponse);
-      const [response] = await client.renameNetwork(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.renameNetwork as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameNetwork as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameNetwork without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameNetworkRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.Network()
-      );
-      client.innerApiCalls.renameNetwork =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.renameNetwork(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.INetwork | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.renameNetwork as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameNetwork as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameNetwork with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameNetworkRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.renameNetwork = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.renameNetwork(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.renameNetwork as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.renameNetwork as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes renameNetwork with closed client', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RenameNetworkRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.renameNetwork(request), expectedError);
-    });
-  });
-
-  describe('updateInstance', () => {
-    it('invokes updateInstance without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateInstance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInstance without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.IInstance,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.IInstance,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInstance with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInstance with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateInstanceProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateInstanceProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateInstanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('resetInstance', () => {
-    it('invokes resetInstance without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ResetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.resetInstance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.resetInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resetInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resetInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resetInstance without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ResetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.resetInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.resetInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.IResetInstanceResponse,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.IResetInstanceResponse,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resetInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resetInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resetInstance with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ResetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.resetInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.resetInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.resetInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resetInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resetInstance with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ResetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.resetInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.resetInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.resetInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resetInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkResetInstanceProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkResetInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkResetInstanceProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkResetInstanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('startInstance', () => {
-    it('invokes startInstance without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.StartInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.startInstance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.startInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.startInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startInstance without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.StartInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.startInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.startInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.IStartInstanceResponse,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.IStartInstanceResponse,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.startInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startInstance with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.StartInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.startInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.startInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.startInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startInstance with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.StartInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.startInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.startInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.startInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkStartInstanceProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkStartInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkStartInstanceProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkStartInstanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('stopInstance', () => {
-    it('invokes stopInstance without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.StopInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.stopInstance = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.stopInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.stopInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.stopInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes stopInstance without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.StopInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.stopInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.stopInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.IStopInstanceResponse,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.IStopInstanceResponse,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.stopInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.stopInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes stopInstance with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.StopInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.stopInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.stopInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.stopInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.stopInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes stopInstance with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.StopInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.stopInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.stopInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.stopInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.stopInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkStopInstanceProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkStopInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkStopInstanceProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkStopInstanceProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('enableInteractiveSerialConsole', () => {
-    it('invokes enableInteractiveSerialConsole without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.enableInteractiveSerialConsole =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.enableInteractiveSerialConsole(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.enableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableInteractiveSerialConsole without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.enableInteractiveSerialConsole =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.enableInteractiveSerialConsole(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.enableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableInteractiveSerialConsole with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.enableInteractiveSerialConsole = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.enableInteractiveSerialConsole(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.enableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableInteractiveSerialConsole with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.enableInteractiveSerialConsole = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.enableInteractiveSerialConsole(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.enableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkEnableInteractiveSerialConsoleProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkEnableInteractiveSerialConsoleProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkEnableInteractiveSerialConsoleProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkEnableInteractiveSerialConsoleProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('disableInteractiveSerialConsole', () => {
-    it('invokes disableInteractiveSerialConsole without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.disableInteractiveSerialConsole =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.disableInteractiveSerialConsole(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.disableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableInteractiveSerialConsole without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.disableInteractiveSerialConsole =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.disableInteractiveSerialConsole(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.disableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableInteractiveSerialConsole with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.disableInteractiveSerialConsole =
-        stubLongRunningCall(undefined, expectedError);
-      await assert.rejects(
-        client.disableInteractiveSerialConsole(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.disableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableInteractiveSerialConsole with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.disableInteractiveSerialConsole =
-        stubLongRunningCall(undefined, undefined, expectedError);
-      const [operation] = await client.disableInteractiveSerialConsole(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.disableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableInteractiveSerialConsole as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDisableInteractiveSerialConsoleProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkDisableInteractiveSerialConsoleProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDisableInteractiveSerialConsoleProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDisableInteractiveSerialConsoleProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('detachLun', () => {
-    it('invokes detachLun without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DetachLunRequest',
-        ['instance']
-      );
-      request.instance = defaultValue1;
-      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.detachLun = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.detachLun(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.detachLun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.detachLun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes detachLun without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DetachLunRequest',
-        ['instance']
-      );
-      request.instance = defaultValue1;
-      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.detachLun =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.detachLun(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.IInstance,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.IInstance,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.detachLun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.detachLun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes detachLun with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DetachLunRequest',
-        ['instance']
-      );
-      request.instance = defaultValue1;
-      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.detachLun = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.detachLun(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.detachLun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.detachLun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes detachLun with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DetachLunRequest',
-        ['instance']
-      );
-      request.instance = defaultValue1;
-      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.detachLun = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.detachLun(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.detachLun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.detachLun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDetachLunProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDetachLunProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDetachLunProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDetachLunProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateVolume', () => {
-    it('invokes updateVolume without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
-      );
-      request.volume ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateVolumeRequest',
-        ['volume', 'name']
-      );
-      request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateVolume = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateVolume(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateVolume without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
-      );
-      request.volume ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateVolumeRequest',
-        ['volume', 'name']
-      );
-      request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateVolume =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateVolume(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.IVolume,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.IVolume,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateVolume with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
-      );
-      request.volume ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateVolumeRequest',
-        ['volume', 'name']
-      );
-      request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateVolume = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateVolume(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateVolume with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
-      );
-      request.volume ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateVolumeRequest',
-        ['volume', 'name']
-      );
-      request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateVolume = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateVolume(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateVolumeProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateVolumeProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateVolumeProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateVolumeProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('evictVolume', () => {
-    it('invokes evictVolume without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EvictVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.evictVolume = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.evictVolume(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.evictVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.evictVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes evictVolume without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EvictVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.evictVolume =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.evictVolume(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.evictVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.evictVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes evictVolume with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EvictVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.evictVolume = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.evictVolume(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.evictVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.evictVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes evictVolume with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EvictVolumeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.evictVolume = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.evictVolume(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.evictVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.evictVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkEvictVolumeProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkEvictVolumeProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkEvictVolumeProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkEvictVolumeProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('resizeVolume', () => {
-    it('invokes resizeVolume without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ResizeVolumeRequest',
-        ['volume']
-      );
-      request.volume = defaultValue1;
-      const expectedHeaderRequestParams = `volume=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.resizeVolume = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.resizeVolume(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resizeVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resizeVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resizeVolume without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ResizeVolumeRequest',
-        ['volume']
-      );
-      request.volume = defaultValue1;
-      const expectedHeaderRequestParams = `volume=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.resizeVolume =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.resizeVolume(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.IVolume,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.IVolume,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resizeVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resizeVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resizeVolume with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ResizeVolumeRequest',
-        ['volume']
-      );
-      request.volume = defaultValue1;
-      const expectedHeaderRequestParams = `volume=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.resizeVolume = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.resizeVolume(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.resizeVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resizeVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resizeVolume with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ResizeVolumeRequest',
-        ['volume']
-      );
-      request.volume = defaultValue1;
-      const expectedHeaderRequestParams = `volume=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.resizeVolume = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.resizeVolume(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.resizeVolume as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resizeVolume as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkResizeVolumeProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkResizeVolumeProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkResizeVolumeProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkResizeVolumeProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateNetwork', () => {
-    it('invokes updateNetwork without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
-      );
-      request.network ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateNetworkRequest',
-        ['network', 'name']
-      );
-      request.network.name = defaultValue1;
-      const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateNetwork =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateNetwork(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNetwork as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNetwork as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNetwork without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
-      );
-      request.network ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateNetworkRequest',
-        ['network', 'name']
-      );
-      request.network.name = defaultValue1;
-      const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateNetwork =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateNetwork(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.INetwork,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.INetwork,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNetwork as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNetwork as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNetwork with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
-      );
-      request.network ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateNetworkRequest',
-        ['network', 'name']
-      );
-      request.network.name = defaultValue1;
-      const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateNetwork = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateNetwork(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateNetwork as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNetwork as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNetwork with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
-      );
-      request.network ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateNetworkRequest',
-        ['network', 'name']
-      );
-      request.network.name = defaultValue1;
-      const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateNetwork = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateNetwork(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateNetwork as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNetwork as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateNetworkProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateNetworkProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateNetworkProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateNetworkProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('restoreVolumeSnapshot', () => {
-    it('invokes restoreVolumeSnapshot without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest',
-        ['volumeSnapshot']
-      );
-      request.volumeSnapshot = defaultValue1;
-      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.restoreVolumeSnapshot =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.restoreVolumeSnapshot(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.restoreVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restoreVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restoreVolumeSnapshot without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest',
-        ['volumeSnapshot']
-      );
-      request.volumeSnapshot = defaultValue1;
-      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.restoreVolumeSnapshot =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.restoreVolumeSnapshot(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.restoreVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restoreVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restoreVolumeSnapshot with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest',
-        ['volumeSnapshot']
-      );
-      request.volumeSnapshot = defaultValue1;
-      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.restoreVolumeSnapshot = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.restoreVolumeSnapshot(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.restoreVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restoreVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restoreVolumeSnapshot with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest',
-        ['volumeSnapshot']
-      );
-      request.volumeSnapshot = defaultValue1;
-      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.restoreVolumeSnapshot = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.restoreVolumeSnapshot(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.restoreVolumeSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restoreVolumeSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRestoreVolumeSnapshotProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRestoreVolumeSnapshotProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRestoreVolumeSnapshotProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkRestoreVolumeSnapshotProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('evictLun', () => {
-    it('invokes evictLun without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EvictLunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.evictLun = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.evictLun(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.evictLun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.evictLun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes evictLun without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EvictLunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.evictLun =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.evictLun(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.evictLun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.evictLun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes evictLun with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EvictLunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.evictLun = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.evictLun(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.evictLun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.evictLun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes evictLun with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.EvictLunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.evictLun = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.evictLun(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.evictLun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.evictLun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkEvictLunProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkEvictLunProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkEvictLunProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkEvictLunProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateNfsShare', () => {
-    it('invokes updateNfsShare without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
-      );
-      request.nfsShare ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest',
-        ['nfsShare', 'name']
-      );
-      request.nfsShare.name = defaultValue1;
-      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateNfsShare =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateNfsShare(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNfsShare without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
-      );
-      request.nfsShare ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest',
-        ['nfsShare', 'name']
-      );
-      request.nfsShare.name = defaultValue1;
-      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateNfsShare =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateNfsShare(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.INfsShare,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.INfsShare,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNfsShare with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
-      );
-      request.nfsShare ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest',
-        ['nfsShare', 'name']
-      );
-      request.nfsShare.name = defaultValue1;
-      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateNfsShare = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateNfsShare(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNfsShare with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
-      );
-      request.nfsShare ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest',
-        ['nfsShare', 'name']
-      );
-      request.nfsShare.name = defaultValue1;
-      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateNfsShare = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateNfsShare(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateNfsShareProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateNfsShareProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateNfsShareProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateNfsShareProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createNfsShare', () => {
-    it('invokes createNfsShare without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateNfsShareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createNfsShare =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createNfsShare(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNfsShare without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateNfsShareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createNfsShare =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createNfsShare(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.baremetalsolution.v2.INfsShare,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.baremetalsolution.v2.INfsShare,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNfsShare with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateNfsShareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createNfsShare = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createNfsShare(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNfsShare with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.CreateNfsShareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createNfsShare = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createNfsShare(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateNfsShareProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateNfsShareProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateNfsShareProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateNfsShareProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteNfsShare', () => {
-    it('invokes deleteNfsShare without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteNfsShare =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteNfsShare(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNfsShare without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteNfsShare =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteNfsShare(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNfsShare with call error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteNfsShare = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteNfsShare(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNfsShare with LRO error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteNfsShare = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteNfsShare(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteNfsShare as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNfsShare as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteNfsShareProgress without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteNfsShareProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteNfsShareProgress with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteNfsShareProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listInstances', () => {
-    it('invokes listInstances without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-      ];
-      client.innerApiCalls.listInstances = stubSimpleCall(expectedResponse);
-      const [response] = await client.listInstances(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInstances without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-      ];
-      client.innerApiCalls.listInstances =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listInstances(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IInstance[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInstances with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listInstances = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listInstances(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInstancesStream without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-      ];
-      client.descriptors.page.listInstances.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listInstancesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.Instance[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.Instance) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listInstances, request)
-      );
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listInstancesStream with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listInstancesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.Instance[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.Instance) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listInstances, request)
-      );
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listInstances without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Instance()
-        ),
-      ];
-      client.descriptors.page.listInstances.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.baremetalsolution.v2.IInstance[] =
-        [];
-      const iterable = client.listInstancesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listInstances.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listInstances.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listInstances with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listInstancesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.baremetalsolution.v2.IInstance[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = baremetalsolutionModule.v2.BareMetalSolutionClient.servicePath;
+                assert.strictEqual(servicePath, 'baremetalsolution.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = baremetalsolutionModule.v2.BareMetalSolutionClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'baremetalsolution.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listInstances.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listInstances.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listSSHKeys', () => {
-    it('invokes listSSHKeys without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListSSHKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-      ];
-      client.innerApiCalls.listSshKeys = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSSHKeys(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSshKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSshKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSSHKeys without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListSSHKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-      ];
-      client.innerApiCalls.listSshKeys =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSSHKeys(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.ISSHKey[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSshKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSshKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSSHKeys with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListSSHKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSshKeys = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listSSHKeys(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSshKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSshKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSSHKeysStream without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListSSHKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-      ];
-      client.descriptors.page.listSSHKeys.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSSHKeysStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.SSHKey[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.SSHKey) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'baremetalsolution.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSSHKeys.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSshKeys, request)
-      );
-      assert(
-        (client.descriptors.page.listSSHKeys.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listSSHKeysStream with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListSSHKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSSHKeys.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSSHKeysStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.SSHKey[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.SSHKey) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'baremetalsolution.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSSHKeys.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSshKeys, request)
-      );
-      assert(
-        (client.descriptors.page.listSSHKeys.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listSSHKeys without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListSSHKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.SSHKey()
-        ),
-      ];
-      client.descriptors.page.listSSHKeys.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.baremetalsolution.v2.ISSHKey[] = [];
-      const iterable = client.listSSHKeysAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new baremetalsolutionModule.v2.BareMetalSolutionClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'baremetalsolution.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listSSHKeys with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListSSHKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSSHKeys.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listSSHKeysAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.baremetalsolution.v2.ISSHKey[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'baremetalsolution.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new baremetalsolutionModule.v2.BareMetalSolutionClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listVolumes', () => {
-    it('invokes listVolumes without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-      ];
-      client.innerApiCalls.listVolumes = stubSimpleCall(expectedResponse);
-      const [response] = await client.listVolumes(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVolumes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = baremetalsolutionModule.v2.BareMetalSolutionClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.bareMetalSolutionStub, undefined);
+            await client.initialize();
+            assert(client.bareMetalSolutionStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.bareMetalSolutionStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.bareMetalSolutionStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listVolumes without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-      ];
-      client.innerApiCalls.listVolumes =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listVolumes(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IVolume[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getInstance', () => {
+        it('invokes getInstance without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Instance()
+            );
+            client.innerApiCalls.getInstance = stubSimpleCall(expectedResponse);
+            const [response] = await client.getInstance(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstance without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Instance()
+            );
+            client.innerApiCalls.getInstance = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getInstance(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IInstance|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstance with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getInstance = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstance with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getInstance(request), expectedError);
+        });
+    });
+
+    describe('renameInstance', () => {
+        it('invokes renameInstance without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Instance()
+            );
+            client.innerApiCalls.renameInstance = stubSimpleCall(expectedResponse);
+            const [response] = await client.renameInstance(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.renameInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameInstance without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Instance()
+            );
+            client.innerApiCalls.renameInstance = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.renameInstance(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IInstance|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.renameInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameInstance with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.renameInstance = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.renameInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.renameInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameInstance with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.renameInstance(request), expectedError);
+        });
+    });
+
+    describe('createSSHKey', () => {
+        it('invokes createSSHKey without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.SSHKey()
+            );
+            client.innerApiCalls.createSshKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.createSSHKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSshKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSshKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSSHKey without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.SSHKey()
+            );
+            client.innerApiCalls.createSshKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSSHKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.ISSHKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSshKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSshKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSSHKey with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSshKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createSSHKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createSshKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSshKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSSHKey with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createSSHKey(request), expectedError);
+        });
+    });
+
+    describe('deleteSSHKey', () => {
+        it('invokes deleteSSHKey without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSshKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteSSHKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSshKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSshKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSSHKey without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSshKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteSSHKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSshKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSshKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSSHKey with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSshKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteSSHKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSshKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSshKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSSHKey with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteSSHKey(request), expectedError);
+        });
+    });
+
+    describe('getVolume', () => {
+        it('invokes getVolume without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Volume()
+            );
+            client.innerApiCalls.getVolume = stubSimpleCall(expectedResponse);
+            const [response] = await client.getVolume(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolume without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Volume()
+            );
+            client.innerApiCalls.getVolume = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getVolume(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IVolume|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolume with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getVolume = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getVolume(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolume with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getVolume(request), expectedError);
+        });
+    });
+
+    describe('renameVolume', () => {
+        it('invokes renameVolume without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Volume()
+            );
+            client.innerApiCalls.renameVolume = stubSimpleCall(expectedResponse);
+            const [response] = await client.renameVolume(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.renameVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameVolume without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Volume()
+            );
+            client.innerApiCalls.renameVolume = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.renameVolume(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IVolume|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.renameVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameVolume with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.renameVolume = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.renameVolume(request), expectedError);
+            const actualRequest = (client.innerApiCalls.renameVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameVolume with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.renameVolume(request), expectedError);
+        });
+    });
+
+    describe('listNetworkUsage', () => {
+        it('invokes listNetworkUsage without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest', ['location']);
+            request.location = defaultValue1;
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageResponse()
+            );
+            client.innerApiCalls.listNetworkUsage = stubSimpleCall(expectedResponse);
+            const [response] = await client.listNetworkUsage(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNetworkUsage as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNetworkUsage as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNetworkUsage without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest', ['location']);
+            request.location = defaultValue1;
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageResponse()
+            );
+            client.innerApiCalls.listNetworkUsage = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listNetworkUsage(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IListNetworkUsageResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNetworkUsage as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNetworkUsage as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNetworkUsage with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest', ['location']);
+            request.location = defaultValue1;
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listNetworkUsage = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listNetworkUsage(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listNetworkUsage as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNetworkUsage as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNetworkUsage with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest', ['location']);
+            request.location = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.listNetworkUsage(request), expectedError);
+        });
+    });
+
+    describe('getNetwork', () => {
+        it('invokes getNetwork without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Network()
+            );
+            client.innerApiCalls.getNetwork = stubSimpleCall(expectedResponse);
+            const [response] = await client.getNetwork(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNetwork without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Network()
+            );
+            client.innerApiCalls.getNetwork = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getNetwork(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.INetwork|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNetwork with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getNetwork = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getNetwork(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNetwork with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getNetwork(request), expectedError);
+        });
+    });
+
+    describe('createVolumeSnapshot', () => {
+        it('invokes createVolumeSnapshot without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
+            );
+            client.innerApiCalls.createVolumeSnapshot = stubSimpleCall(expectedResponse);
+            const [response] = await client.createVolumeSnapshot(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVolumeSnapshot without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
+            );
+            client.innerApiCalls.createVolumeSnapshot = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createVolumeSnapshot(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVolumeSnapshot with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createVolumeSnapshot = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createVolumeSnapshot(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVolumeSnapshot with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createVolumeSnapshot(request), expectedError);
+        });
+    });
+
+    describe('deleteVolumeSnapshot', () => {
+        it('invokes deleteVolumeSnapshot without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteVolumeSnapshot = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteVolumeSnapshot(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVolumeSnapshot without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteVolumeSnapshot = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteVolumeSnapshot(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVolumeSnapshot with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteVolumeSnapshot = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteVolumeSnapshot(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVolumeSnapshot with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteVolumeSnapshot(request), expectedError);
+        });
+    });
+
+    describe('getVolumeSnapshot', () => {
+        it('invokes getVolumeSnapshot without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
+            );
+            client.innerApiCalls.getVolumeSnapshot = stubSimpleCall(expectedResponse);
+            const [response] = await client.getVolumeSnapshot(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolumeSnapshot without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
+            );
+            client.innerApiCalls.getVolumeSnapshot = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getVolumeSnapshot(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolumeSnapshot with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getVolumeSnapshot = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getVolumeSnapshot(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolumeSnapshot with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getVolumeSnapshot(request), expectedError);
+        });
+    });
+
+    describe('getLun', () => {
+        it('invokes getLun without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetLunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Lun()
+            );
+            client.innerApiCalls.getLun = stubSimpleCall(expectedResponse);
+            const [response] = await client.getLun(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLun without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetLunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Lun()
+            );
+            client.innerApiCalls.getLun = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLun(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.ILun|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLun with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetLunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getLun = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLun(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getLun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLun with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetLunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getLun(request), expectedError);
+        });
+    });
+
+    describe('getNfsShare', () => {
+        it('invokes getNfsShare without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.NfsShare()
+            );
+            client.innerApiCalls.getNfsShare = stubSimpleCall(expectedResponse);
+            const [response] = await client.getNfsShare(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNfsShare without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.NfsShare()
+            );
+            client.innerApiCalls.getNfsShare = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getNfsShare(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.INfsShare|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNfsShare with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getNfsShare = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getNfsShare(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNfsShare with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getNfsShare(request), expectedError);
+        });
+    });
+
+    describe('renameNfsShare', () => {
+        it('invokes renameNfsShare without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.NfsShare()
+            );
+            client.innerApiCalls.renameNfsShare = stubSimpleCall(expectedResponse);
+            const [response] = await client.renameNfsShare(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.renameNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameNfsShare without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.NfsShare()
+            );
+            client.innerApiCalls.renameNfsShare = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.renameNfsShare(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.INfsShare|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.renameNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameNfsShare with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.renameNfsShare = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.renameNfsShare(request), expectedError);
+            const actualRequest = (client.innerApiCalls.renameNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameNfsShare with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.renameNfsShare(request), expectedError);
+        });
+    });
+
+    describe('submitProvisioningConfig', () => {
+        it('invokes submitProvisioningConfig without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse()
+            );
+            client.innerApiCalls.submitProvisioningConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.submitProvisioningConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.submitProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.submitProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes submitProvisioningConfig without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse()
+            );
+            client.innerApiCalls.submitProvisioningConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.submitProvisioningConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.submitProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.submitProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes submitProvisioningConfig with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.submitProvisioningConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.submitProvisioningConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.submitProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.submitProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes submitProvisioningConfig with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.submitProvisioningConfig(request), expectedError);
+        });
+    });
+
+    describe('getProvisioningConfig', () => {
+        it('invokes getProvisioningConfig without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
+            );
+            client.innerApiCalls.getProvisioningConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getProvisioningConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getProvisioningConfig without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
+            );
+            client.innerApiCalls.getProvisioningConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getProvisioningConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IProvisioningConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getProvisioningConfig with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getProvisioningConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getProvisioningConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getProvisioningConfig with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getProvisioningConfig(request), expectedError);
+        });
+    });
+
+    describe('createProvisioningConfig', () => {
+        it('invokes createProvisioningConfig without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
+            );
+            client.innerApiCalls.createProvisioningConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.createProvisioningConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createProvisioningConfig without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
+            );
+            client.innerApiCalls.createProvisioningConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createProvisioningConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IProvisioningConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createProvisioningConfig with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createProvisioningConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createProvisioningConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createProvisioningConfig with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createProvisioningConfig(request), expectedError);
+        });
+    });
+
+    describe('updateProvisioningConfig', () => {
+        it('invokes updateProvisioningConfig without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
+            );
+            request.provisioningConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest', ['provisioningConfig', 'name']);
+            request.provisioningConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
+            );
+            client.innerApiCalls.updateProvisioningConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateProvisioningConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProvisioningConfig without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
+            );
+            request.provisioningConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest', ['provisioningConfig', 'name']);
+            request.provisioningConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
+            );
+            client.innerApiCalls.updateProvisioningConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateProvisioningConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IProvisioningConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProvisioningConfig with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
+            );
+            request.provisioningConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest', ['provisioningConfig', 'name']);
+            request.provisioningConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateProvisioningConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateProvisioningConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateProvisioningConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProvisioningConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProvisioningConfig with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
+            );
+            request.provisioningConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest', ['provisioningConfig', 'name']);
+            request.provisioningConfig.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateProvisioningConfig(request), expectedError);
+        });
+    });
+
+    describe('renameNetwork', () => {
+        it('invokes renameNetwork without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Network()
+            );
+            client.innerApiCalls.renameNetwork = stubSimpleCall(expectedResponse);
+            const [response] = await client.renameNetwork(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.renameNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameNetwork without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.Network()
+            );
+            client.innerApiCalls.renameNetwork = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.renameNetwork(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.INetwork|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.renameNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameNetwork with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.renameNetwork = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.renameNetwork(request), expectedError);
+            const actualRequest = (client.innerApiCalls.renameNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.renameNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes renameNetwork with closed client', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RenameNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.renameNetwork(request), expectedError);
+        });
+    });
+
+    describe('updateInstance', () => {
+        it('invokes updateInstance without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInstance without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.IInstance, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.IInstance, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInstance with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInstance with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateInstanceProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateInstanceProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('resetInstance', () => {
+        it('invokes resetInstance without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ResetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.resetInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.resetInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resetInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resetInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resetInstance without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ResetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.resetInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.resetInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.IResetInstanceResponse, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.IResetInstanceResponse, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resetInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resetInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resetInstance with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ResetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.resetInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.resetInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.resetInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resetInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resetInstance with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ResetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.resetInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.resetInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.resetInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resetInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkResetInstanceProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkResetInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkResetInstanceProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkResetInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('startInstance', () => {
+        it('invokes startInstance without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.StartInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.startInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.startInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.startInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startInstance without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.StartInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.startInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.startInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.IStartInstanceResponse, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.IStartInstanceResponse, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.startInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startInstance with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.StartInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.startInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.startInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.startInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startInstance with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.StartInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.startInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.startInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.startInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkStartInstanceProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkStartInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkStartInstanceProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkStartInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('stopInstance', () => {
+        it('invokes stopInstance without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.StopInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.stopInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.stopInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.stopInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.stopInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes stopInstance without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.StopInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.stopInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.stopInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.IStopInstanceResponse, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.IStopInstanceResponse, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.stopInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.stopInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes stopInstance with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.StopInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.stopInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.stopInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.stopInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.stopInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes stopInstance with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.StopInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.stopInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.stopInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.stopInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.stopInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkStopInstanceProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkStopInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkStopInstanceProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkStopInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('enableInteractiveSerialConsole', () => {
+        it('invokes enableInteractiveSerialConsole without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.enableInteractiveSerialConsole = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.enableInteractiveSerialConsole(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.enableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enableInteractiveSerialConsole without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.enableInteractiveSerialConsole = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.enableInteractiveSerialConsole(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.enableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enableInteractiveSerialConsole with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.enableInteractiveSerialConsole = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.enableInteractiveSerialConsole(request), expectedError);
+            const actualRequest = (client.innerApiCalls.enableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enableInteractiveSerialConsole with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.enableInteractiveSerialConsole = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.enableInteractiveSerialConsole(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.enableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkEnableInteractiveSerialConsoleProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkEnableInteractiveSerialConsoleProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkEnableInteractiveSerialConsoleProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkEnableInteractiveSerialConsoleProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('disableInteractiveSerialConsole', () => {
+        it('invokes disableInteractiveSerialConsole without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.disableInteractiveSerialConsole = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.disableInteractiveSerialConsole(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.disableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disableInteractiveSerialConsole without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.disableInteractiveSerialConsole = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.disableInteractiveSerialConsole(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.disableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disableInteractiveSerialConsole with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.disableInteractiveSerialConsole = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.disableInteractiveSerialConsole(request), expectedError);
+            const actualRequest = (client.innerApiCalls.disableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disableInteractiveSerialConsole with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.disableInteractiveSerialConsole = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.disableInteractiveSerialConsole(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.disableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disableInteractiveSerialConsole as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDisableInteractiveSerialConsoleProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDisableInteractiveSerialConsoleProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDisableInteractiveSerialConsoleProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDisableInteractiveSerialConsoleProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('detachLun', () => {
+        it('invokes detachLun without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DetachLunRequest', ['instance']);
+            request.instance = defaultValue1;
+            const expectedHeaderRequestParams = `instance=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.detachLun = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.detachLun(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.detachLun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.detachLun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes detachLun without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DetachLunRequest', ['instance']);
+            request.instance = defaultValue1;
+            const expectedHeaderRequestParams = `instance=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.detachLun = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.detachLun(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.IInstance, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.IInstance, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.detachLun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.detachLun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes detachLun with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DetachLunRequest', ['instance']);
+            request.instance = defaultValue1;
+            const expectedHeaderRequestParams = `instance=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.detachLun = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.detachLun(request), expectedError);
+            const actualRequest = (client.innerApiCalls.detachLun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.detachLun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes detachLun with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DetachLunRequest', ['instance']);
+            request.instance = defaultValue1;
+            const expectedHeaderRequestParams = `instance=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.detachLun = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.detachLun(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.detachLun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.detachLun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDetachLunProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDetachLunProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDetachLunProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDetachLunProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateVolume', () => {
+        it('invokes updateVolume without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
+            );
+            request.volume ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateVolumeRequest', ['volume', 'name']);
+            request.volume.name = defaultValue1;
+            const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateVolume = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateVolume(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateVolume without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
+            );
+            request.volume ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateVolumeRequest', ['volume', 'name']);
+            request.volume.name = defaultValue1;
+            const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateVolume = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateVolume(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.IVolume, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.IVolume, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateVolume with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
+            );
+            request.volume ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateVolumeRequest', ['volume', 'name']);
+            request.volume.name = defaultValue1;
+            const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateVolume = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateVolume(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateVolume with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
+            );
+            request.volume ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateVolumeRequest', ['volume', 'name']);
+            request.volume.name = defaultValue1;
+            const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateVolume = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateVolume(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateVolumeProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateVolumeProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateVolumeProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateVolumeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('evictVolume', () => {
+        it('invokes evictVolume without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EvictVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.evictVolume = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.evictVolume(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.evictVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.evictVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes evictVolume without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EvictVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.evictVolume = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.evictVolume(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.evictVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.evictVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes evictVolume with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EvictVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.evictVolume = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.evictVolume(request), expectedError);
+            const actualRequest = (client.innerApiCalls.evictVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.evictVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes evictVolume with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EvictVolumeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.evictVolume = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.evictVolume(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.evictVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.evictVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkEvictVolumeProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkEvictVolumeProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkEvictVolumeProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkEvictVolumeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('resizeVolume', () => {
+        it('invokes resizeVolume without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ResizeVolumeRequest', ['volume']);
+            request.volume = defaultValue1;
+            const expectedHeaderRequestParams = `volume=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.resizeVolume = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.resizeVolume(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resizeVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resizeVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resizeVolume without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ResizeVolumeRequest', ['volume']);
+            request.volume = defaultValue1;
+            const expectedHeaderRequestParams = `volume=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.resizeVolume = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.resizeVolume(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.IVolume, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.IVolume, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resizeVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resizeVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resizeVolume with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ResizeVolumeRequest', ['volume']);
+            request.volume = defaultValue1;
+            const expectedHeaderRequestParams = `volume=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.resizeVolume = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.resizeVolume(request), expectedError);
+            const actualRequest = (client.innerApiCalls.resizeVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resizeVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resizeVolume with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ResizeVolumeRequest', ['volume']);
+            request.volume = defaultValue1;
+            const expectedHeaderRequestParams = `volume=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.resizeVolume = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.resizeVolume(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.resizeVolume as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resizeVolume as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkResizeVolumeProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkResizeVolumeProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkResizeVolumeProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkResizeVolumeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateNetwork', () => {
+        it('invokes updateNetwork without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
+            );
+            request.network ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateNetworkRequest', ['network', 'name']);
+            request.network.name = defaultValue1;
+            const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateNetwork = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateNetwork(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNetwork without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
+            );
+            request.network ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateNetworkRequest', ['network', 'name']);
+            request.network.name = defaultValue1;
+            const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateNetwork = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateNetwork(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.INetwork, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.INetwork, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNetwork with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
+            );
+            request.network ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateNetworkRequest', ['network', 'name']);
+            request.network.name = defaultValue1;
+            const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateNetwork = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateNetwork(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNetwork with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
+            );
+            request.network ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateNetworkRequest', ['network', 'name']);
+            request.network.name = defaultValue1;
+            const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateNetwork = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateNetwork(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateNetworkProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateNetworkProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateNetworkProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateNetworkProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('restoreVolumeSnapshot', () => {
+        it('invokes restoreVolumeSnapshot without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest', ['volumeSnapshot']);
+            request.volumeSnapshot = defaultValue1;
+            const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.restoreVolumeSnapshot = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.restoreVolumeSnapshot(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.restoreVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restoreVolumeSnapshot without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest', ['volumeSnapshot']);
+            request.volumeSnapshot = defaultValue1;
+            const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.restoreVolumeSnapshot = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.restoreVolumeSnapshot(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.restoreVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restoreVolumeSnapshot with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest', ['volumeSnapshot']);
+            request.volumeSnapshot = defaultValue1;
+            const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.restoreVolumeSnapshot = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.restoreVolumeSnapshot(request), expectedError);
+            const actualRequest = (client.innerApiCalls.restoreVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restoreVolumeSnapshot with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest', ['volumeSnapshot']);
+            request.volumeSnapshot = defaultValue1;
+            const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.restoreVolumeSnapshot = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.restoreVolumeSnapshot(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.restoreVolumeSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreVolumeSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRestoreVolumeSnapshotProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRestoreVolumeSnapshotProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRestoreVolumeSnapshotProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRestoreVolumeSnapshotProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('evictLun', () => {
+        it('invokes evictLun without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EvictLunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.evictLun = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.evictLun(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.evictLun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.evictLun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes evictLun without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EvictLunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.evictLun = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.evictLun(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.evictLun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.evictLun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes evictLun with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EvictLunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.evictLun = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.evictLun(request), expectedError);
+            const actualRequest = (client.innerApiCalls.evictLun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.evictLun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes evictLun with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.EvictLunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.evictLun = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.evictLun(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.evictLun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.evictLun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkEvictLunProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkEvictLunProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkEvictLunProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkEvictLunProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateNfsShare', () => {
+        it('invokes updateNfsShare without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
+            );
+            request.nfsShare ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest', ['nfsShare', 'name']);
+            request.nfsShare.name = defaultValue1;
+            const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateNfsShare = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateNfsShare(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNfsShare without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
+            );
+            request.nfsShare ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest', ['nfsShare', 'name']);
+            request.nfsShare.name = defaultValue1;
+            const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateNfsShare = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateNfsShare(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.INfsShare, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.INfsShare, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNfsShare with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
+            );
+            request.nfsShare ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest', ['nfsShare', 'name']);
+            request.nfsShare.name = defaultValue1;
+            const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateNfsShare = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateNfsShare(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNfsShare with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
+            );
+            request.nfsShare ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest', ['nfsShare', 'name']);
+            request.nfsShare.name = defaultValue1;
+            const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateNfsShare = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateNfsShare(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateNfsShareProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateNfsShareProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateNfsShareProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateNfsShareProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createNfsShare', () => {
+        it('invokes createNfsShare without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateNfsShareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createNfsShare = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createNfsShare(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNfsShare without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateNfsShareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createNfsShare = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createNfsShare(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.baremetalsolution.v2.INfsShare, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.baremetalsolution.v2.INfsShare, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNfsShare with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateNfsShareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createNfsShare = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createNfsShare(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNfsShare with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.CreateNfsShareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createNfsShare = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createNfsShare(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateNfsShareProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateNfsShareProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateNfsShareProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateNfsShareProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteNfsShare', () => {
+        it('invokes deleteNfsShare without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteNfsShare = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteNfsShare(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNfsShare without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteNfsShare = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteNfsShare(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.baremetalsolution.v2.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNfsShare with call error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteNfsShare = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteNfsShare(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNfsShare with LRO error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteNfsShare = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteNfsShare(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteNfsShare as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNfsShare as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteNfsShareProgress without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteNfsShareProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteNfsShareProgress with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteNfsShareProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listInstances', () => {
+        it('invokes listInstances without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+            ];
+            client.innerApiCalls.listInstances = stubSimpleCall(expectedResponse);
+            const [response] = await client.listInstances(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listInstances without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+            ];
+            client.innerApiCalls.listInstances = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listInstances(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IInstance[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listInstances with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listInstances = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listInstances(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listInstancesStream without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+            ];
+            client.descriptors.page.listInstances.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listInstancesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.Instance[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.Instance) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listInstances.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listInstances, request));
+            assert(
+                (client.descriptors.page.listInstances.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listInstancesStream with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listInstances.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listInstancesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.Instance[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.Instance) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listInstances.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listInstances, request));
+            assert(
+                (client.descriptors.page.listInstances.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listInstances without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Instance()),
+            ];
+            client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.baremetalsolution.v2.IInstance[] = [];
+            const iterable = client.listInstancesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVolumes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVolumes with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listVolumes = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listVolumes(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listVolumes as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumes as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVolumesStream without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-      ];
-      client.descriptors.page.listVolumes.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listVolumesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.Volume[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.Volume) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listInstances with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listInstancesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.baremetalsolution.v2.IInstance[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listVolumes.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVolumes, request)
-      );
-      assert(
-        (client.descriptors.page.listVolumes.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listVolumesStream with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVolumes.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listVolumesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.Volume[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.Volume) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listSSHKeys', () => {
+        it('invokes listSSHKeys without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListSSHKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+            ];
+            client.innerApiCalls.listSshKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSSHKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSshKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSshKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listSSHKeys without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListSSHKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+            ];
+            client.innerApiCalls.listSshKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSSHKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.ISSHKey[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSshKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSshKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listVolumes.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVolumes, request)
-      );
-      assert(
-        (client.descriptors.page.listVolumes.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listVolumes without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Volume()
-        ),
-      ];
-      client.descriptors.page.listVolumes.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.baremetalsolution.v2.IVolume[] = [];
-      const iterable = client.listVolumesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listVolumes.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listSSHKeys with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListSSHKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSshKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSSHKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSshKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSshKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listVolumes with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVolumes.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listVolumesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.baremetalsolution.v2.IVolume[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listVolumes.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listSSHKeysStream without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListSSHKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+            ];
+            client.descriptors.page.listSSHKeys.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSSHKeysStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.SSHKey[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.SSHKey) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSSHKeys.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSshKeys, request));
+            assert(
+                (client.descriptors.page.listSSHKeys.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listNetworks', () => {
-    it('invokes listNetworks without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-      ];
-      client.innerApiCalls.listNetworks = stubSimpleCall(expectedResponse);
-      const [response] = await client.listNetworks(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNetworks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNetworks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listSSHKeysStream with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListSSHKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSSHKeys.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSSHKeysStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.SSHKey[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.SSHKey) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSSHKeys.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSshKeys, request));
+            assert(
+                (client.descriptors.page.listSSHKeys.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listNetworks without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-      ];
-      client.innerApiCalls.listNetworks =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listNetworks(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.INetwork[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listSSHKeys without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListSSHKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.SSHKey()),
+            ];
+            client.descriptors.page.listSSHKeys.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.baremetalsolution.v2.ISSHKey[] = [];
+            const iterable = client.listSSHKeysAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNetworks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNetworks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNetworks with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listNetworks = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listNetworks(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listNetworks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNetworks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNetworksStream without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-      ];
-      client.descriptors.page.listNetworks.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listNetworksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.Network[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.Network) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listSSHKeys with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListSSHKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSSHKeys.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSSHKeysAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.baremetalsolution.v2.ISSHKey[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listNetworks.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNetworks, request)
-      );
-      assert(
-        (client.descriptors.page.listNetworks.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listNetworksStream with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNetworks.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listNetworksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.Network[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.Network) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listVolumes', () => {
+        it('invokes listVolumes without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+            ];
+            client.innerApiCalls.listVolumes = stubSimpleCall(expectedResponse);
+            const [response] = await client.listVolumes(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVolumes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listVolumes without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+            ];
+            client.innerApiCalls.listVolumes = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listVolumes(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IVolume[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVolumes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listNetworks.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNetworks, request)
-      );
-      assert(
-        (client.descriptors.page.listNetworks.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listNetworks without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Network()
-        ),
-      ];
-      client.descriptors.page.listNetworks.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.baremetalsolution.v2.INetwork[] = [];
-      const iterable = client.listNetworksAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNetworks.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listVolumes with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listVolumes = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listVolumes(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listVolumes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listNetworks with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNetworks.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listNetworksAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.baremetalsolution.v2.INetwork[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNetworks.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listVolumesStream without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+            ];
+            client.descriptors.page.listVolumes.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listVolumesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.Volume[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.Volume) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listVolumes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVolumes, request));
+            assert(
+                (client.descriptors.page.listVolumes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listVolumeSnapshots', () => {
-    it('invokes listVolumeSnapshots without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-      ];
-      client.innerApiCalls.listVolumeSnapshots =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listVolumeSnapshots(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVolumeSnapshots as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumeSnapshots as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listVolumesStream with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVolumes.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listVolumesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.Volume[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.Volume) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listVolumes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVolumes, request));
+            assert(
+                (client.descriptors.page.listVolumes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listVolumeSnapshots without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-      ];
-      client.innerApiCalls.listVolumeSnapshots =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listVolumeSnapshots(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listVolumes without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Volume()),
+            ];
+            client.descriptors.page.listVolumes.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.baremetalsolution.v2.IVolume[] = [];
+            const iterable = client.listVolumesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVolumeSnapshots as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumeSnapshots as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVolumeSnapshots with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listVolumeSnapshots = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listVolumeSnapshots(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listVolumeSnapshots as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumeSnapshots as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVolumeSnapshotsStream without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-      ];
-      client.descriptors.page.listVolumeSnapshots.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listVolumeSnapshotsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.VolumeSnapshot[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.baremetalsolution.v2.VolumeSnapshot
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listVolumes with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVolumes.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listVolumesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.baremetalsolution.v2.IVolume[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVolumeSnapshots, request)
-      );
-      assert(
-        (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listVolumeSnapshotsStream with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVolumeSnapshots.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listVolumeSnapshotsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.VolumeSnapshot[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.baremetalsolution.v2.VolumeSnapshot
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listNetworks', () => {
+        it('invokes listNetworks without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+            ];
+            client.innerApiCalls.listNetworks = stubSimpleCall(expectedResponse);
+            const [response] = await client.listNetworks(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNetworks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNetworks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listNetworks without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+            ];
+            client.innerApiCalls.listNetworks = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listNetworks(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.INetwork[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNetworks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNetworks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVolumeSnapshots, request)
-      );
-      assert(
-        (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listVolumeSnapshots without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
-        ),
-      ];
-      client.descriptors.page.listVolumeSnapshots.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot[] =
-        [];
-      const iterable = client.listVolumeSnapshotsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listNetworks with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listNetworks = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listNetworks(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listNetworks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNetworks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listVolumeSnapshots with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVolumeSnapshots.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listVolumeSnapshotsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listNetworksStream without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+            ];
+            client.descriptors.page.listNetworks.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listNetworksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.Network[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.Network) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listNetworks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNetworks, request));
+            assert(
+                (client.descriptors.page.listNetworks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listLuns', () => {
-    it('invokes listLuns without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-      ];
-      client.innerApiCalls.listLuns = stubSimpleCall(expectedResponse);
-      const [response] = await client.listLuns(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLuns as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLuns as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listNetworksStream with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNetworks.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listNetworksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.Network[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.Network) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listNetworks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNetworks, request));
+            assert(
+                (client.descriptors.page.listNetworks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listLuns without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-      ];
-      client.innerApiCalls.listLuns =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listLuns(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.ILun[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listNetworks without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Network()),
+            ];
+            client.descriptors.page.listNetworks.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.baremetalsolution.v2.INetwork[] = [];
+            const iterable = client.listNetworksAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLuns as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLuns as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLuns with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listLuns = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listLuns(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listLuns as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLuns as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLunsStream without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-      ];
-      client.descriptors.page.listLuns.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listLunsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.Lun[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.Lun) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listNetworks with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNetworks.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listNetworksAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.baremetalsolution.v2.INetwork[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listLuns.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLuns, request)
-      );
-      assert(
-        (client.descriptors.page.listLuns.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listLunsStream with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLuns.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listLunsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.Lun[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.Lun) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listVolumeSnapshots', () => {
+        it('invokes listVolumeSnapshots without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+            ];
+            client.innerApiCalls.listVolumeSnapshots = stubSimpleCall(expectedResponse);
+            const [response] = await client.listVolumeSnapshots(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVolumeSnapshots as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumeSnapshots as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listVolumeSnapshots without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+            ];
+            client.innerApiCalls.listVolumeSnapshots = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listVolumeSnapshots(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVolumeSnapshots as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumeSnapshots as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listLuns.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLuns, request)
-      );
-      assert(
-        (client.descriptors.page.listLuns.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listLuns without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.Lun()
-        ),
-      ];
-      client.descriptors.page.listLuns.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.baremetalsolution.v2.ILun[] = [];
-      const iterable = client.listLunsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listLuns.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLuns.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listVolumeSnapshots with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listVolumeSnapshots = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listVolumeSnapshots(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listVolumeSnapshots as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumeSnapshots as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listLuns with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLuns.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listLunsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.baremetalsolution.v2.ILun[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listLuns.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLuns.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listVolumeSnapshotsStream without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+            ];
+            client.descriptors.page.listVolumeSnapshots.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listVolumeSnapshotsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.VolumeSnapshot[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.VolumeSnapshot) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVolumeSnapshots, request));
+            assert(
+                (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listNfsShares', () => {
-    it('invokes listNfsShares without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-      ];
-      client.innerApiCalls.listNfsShares = stubSimpleCall(expectedResponse);
-      const [response] = await client.listNfsShares(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNfsShares as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNfsShares as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listVolumeSnapshotsStream with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVolumeSnapshots.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listVolumeSnapshotsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.VolumeSnapshot[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.VolumeSnapshot) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVolumeSnapshots, request));
+            assert(
+                (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listNfsShares without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-      ];
-      client.innerApiCalls.listNfsShares =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listNfsShares(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.INfsShare[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listVolumeSnapshots without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()),
+            ];
+            client.descriptors.page.listVolumeSnapshots.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot[] = [];
+            const iterable = client.listVolumeSnapshotsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNfsShares as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNfsShares as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNfsShares with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listNfsShares = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listNfsShares(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listNfsShares as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNfsShares as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNfsSharesStream without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-      ];
-      client.descriptors.page.listNfsShares.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listNfsSharesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.NfsShare[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.NfsShare) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listVolumeSnapshots with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVolumeSnapshots.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listVolumeSnapshotsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listNfsShares.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNfsShares, request)
-      );
-      assert(
-        (client.descriptors.page.listNfsShares.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listNfsSharesStream with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNfsShares.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listNfsSharesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.NfsShare[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.NfsShare) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listLuns', () => {
+        it('invokes listLuns without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListLunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+            ];
+            client.innerApiCalls.listLuns = stubSimpleCall(expectedResponse);
+            const [response] = await client.listLuns(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLuns as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLuns as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listLuns without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListLunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+            ];
+            client.innerApiCalls.listLuns = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listLuns(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.ILun[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLuns as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLuns as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listNfsShares.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNfsShares, request)
-      );
-      assert(
-        (client.descriptors.page.listNfsShares.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listNfsShares without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.NfsShare()
-        ),
-      ];
-      client.descriptors.page.listNfsShares.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.baremetalsolution.v2.INfsShare[] =
-        [];
-      const iterable = client.listNfsSharesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNfsShares.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listLuns with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListLunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listLuns = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listLuns(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listLuns as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLuns as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listNfsShares with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNfsShares.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listNfsSharesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.baremetalsolution.v2.INfsShare[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNfsShares.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listLunsStream without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListLunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+            ];
+            client.descriptors.page.listLuns.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listLunsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.Lun[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.Lun) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listLuns.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLuns, request));
+            assert(
+                (client.descriptors.page.listLuns.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listProvisioningQuotas', () => {
-    it('invokes listProvisioningQuotas without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-      ];
-      client.innerApiCalls.listProvisioningQuotas =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listProvisioningQuotas(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listProvisioningQuotas as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listProvisioningQuotas as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listLunsStream with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListLunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLuns.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listLunsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.Lun[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.Lun) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listLuns.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLuns, request));
+            assert(
+                (client.descriptors.page.listLuns.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listProvisioningQuotas without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-      ];
-      client.innerApiCalls.listProvisioningQuotas =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listProvisioningQuotas(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.baremetalsolution.v2.IProvisioningQuota[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listLuns without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListLunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.Lun()),
+            ];
+            client.descriptors.page.listLuns.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.baremetalsolution.v2.ILun[] = [];
+            const iterable = client.listLunsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listProvisioningQuotas as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listProvisioningQuotas as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listProvisioningQuotas with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listProvisioningQuotas = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listProvisioningQuotas(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listProvisioningQuotas as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listProvisioningQuotas as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listProvisioningQuotasStream without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-      ];
-      client.descriptors.page.listProvisioningQuotas.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listProvisioningQuotasStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.ProvisioningQuota[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.baremetalsolution.v2.ProvisioningQuota
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLuns.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLuns.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listLuns with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListLunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLuns.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLunsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.baremetalsolution.v2.ILun[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLuns.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLuns.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listProvisioningQuotas
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listProvisioningQuotas, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listProvisioningQuotas
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listProvisioningQuotasStream with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listProvisioningQuotas.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listProvisioningQuotasStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.ProvisioningQuota[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.baremetalsolution.v2.ProvisioningQuota
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listNfsShares', () => {
+        it('invokes listNfsShares without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNfsSharesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+            ];
+            client.innerApiCalls.listNfsShares = stubSimpleCall(expectedResponse);
+            const [response] = await client.listNfsShares(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNfsShares as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNfsShares as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listNfsShares without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNfsSharesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+            ];
+            client.innerApiCalls.listNfsShares = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listNfsShares(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.INfsShare[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNfsShares as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNfsShares as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listProvisioningQuotas
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listProvisioningQuotas, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listProvisioningQuotas
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listProvisioningQuotas without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
-        ),
-      ];
-      client.descriptors.page.listProvisioningQuotas.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.baremetalsolution.v2.IProvisioningQuota[] =
-        [];
-      const iterable = client.listProvisioningQuotasAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listProvisioningQuotas
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listProvisioningQuotas
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listProvisioningQuotas with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listProvisioningQuotas.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listProvisioningQuotasAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.baremetalsolution.v2.IProvisioningQuota[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listProvisioningQuotas
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listProvisioningQuotas
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('listOSImages', () => {
-    it('invokes listOSImages without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListOSImagesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-      ];
-      client.innerApiCalls.listOsImages = stubSimpleCall(expectedResponse);
-      const [response] = await client.listOSImages(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOsImages as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOsImages as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOSImages without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListOSImagesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-      ];
-      client.innerApiCalls.listOsImages =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listOSImages(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.baremetalsolution.v2.IOSImage[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOsImages as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOsImages as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOSImages with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListOSImagesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listOsImages = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listOSImages(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listOsImages as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOsImages as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOSImagesStream without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListOSImagesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-      ];
-      client.descriptors.page.listOSImages.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listOSImagesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.OSImage[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.OSImage) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('invokes listNfsShares with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNfsSharesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listNfsShares = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listNfsShares(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listNfsShares as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNfsShares as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listNfsSharesStream without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNfsSharesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+            ];
+            client.descriptors.page.listNfsShares.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listNfsSharesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.NfsShare[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.NfsShare) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listNfsShares.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNfsShares, request));
+            assert(
+                (client.descriptors.page.listNfsShares.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listOSImages.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOsImages, request)
-      );
-      assert(
-        (client.descriptors.page.listOSImages.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listOSImagesStream with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListOSImagesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOSImages.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listOSImagesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.baremetalsolution.v2.OSImage[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.baremetalsolution.v2.OSImage) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('invokes listNfsSharesStream with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNfsSharesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNfsShares.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listNfsSharesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.NfsShare[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.NfsShare) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listNfsShares.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNfsShares, request));
+            assert(
+                (client.descriptors.page.listNfsShares.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listNfsShares without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNfsSharesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.NfsShare()),
+            ];
+            client.descriptors.page.listNfsShares.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.baremetalsolution.v2.INfsShare[] = [];
+            const iterable = client.listNfsSharesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listOSImages.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOsImages, request)
-      );
-      assert(
-        (client.descriptors.page.listOSImages.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('uses async iteration with listNfsShares with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListNfsSharesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNfsShares.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listNfsSharesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.baremetalsolution.v2.INfsShare[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listOSImages without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListOSImagesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.baremetalsolution.v2.OSImage()
-        ),
-      ];
-      client.descriptors.page.listOSImages.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.baremetalsolution.v2.IOSImage[] = [];
-      const iterable = client.listOSImagesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listOSImages.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+    describe('listProvisioningQuotas', () => {
+        it('invokes listProvisioningQuotas without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+            ];
+            client.innerApiCalls.listProvisioningQuotas = stubSimpleCall(expectedResponse);
+            const [response] = await client.listProvisioningQuotas(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listProvisioningQuotas as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listProvisioningQuotas as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listOSImages with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.baremetalsolution.v2.ListOSImagesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOSImages.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listOSImagesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.baremetalsolution.v2.IOSImage[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listOSImages.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.getIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .getIamPolicy(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes listProvisioningQuotas without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+            ];
+            client.innerApiCalls.listProvisioningQuotas = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listProvisioningQuotas(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IProvisioningQuota[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listProvisioningQuotas as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listProvisioningQuotas as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listProvisioningQuotas with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listProvisioningQuotas = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listProvisioningQuotas(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listProvisioningQuotas as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listProvisioningQuotas as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listProvisioningQuotasStream without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+            ];
+            client.descriptors.page.listProvisioningQuotas.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listProvisioningQuotasStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.ProvisioningQuota[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.ProvisioningQuota) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listProvisioningQuotas.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listProvisioningQuotas, request));
+            assert(
+                (client.descriptors.page.listProvisioningQuotas.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listProvisioningQuotasStream with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listProvisioningQuotas.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listProvisioningQuotasStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.ProvisioningQuota[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.ProvisioningQuota) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listProvisioningQuotas.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listProvisioningQuotas, request));
+            assert(
+                (client.descriptors.page.listProvisioningQuotas.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listProvisioningQuotas without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()),
+            ];
+            client.descriptors.page.listProvisioningQuotas.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.baremetalsolution.v2.IProvisioningQuota[] = [];
+            const iterable = client.listProvisioningQuotasAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listProvisioningQuotas.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listProvisioningQuotas.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listProvisioningQuotas with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listProvisioningQuotas.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listProvisioningQuotasAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.baremetalsolution.v2.IProvisioningQuota[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listProvisioningQuotas.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listProvisioningQuotas.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getIamPolicy with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.getIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.setIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .setIamPolicy(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('listOSImages', () => {
+        it('invokes listOSImages without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListOSImagesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+            ];
+            client.innerApiCalls.listOsImages = stubSimpleCall(expectedResponse);
+            const [response] = await client.listOSImages(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOsImages as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOsImages as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOSImages without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListOSImagesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+            ];
+            client.innerApiCalls.listOsImages = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listOSImages(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.baremetalsolution.v2.IOSImage[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOsImages as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOsImages as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOSImages with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListOSImagesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listOsImages = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listOSImages(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listOsImages as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOsImages as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOSImagesStream without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListOSImagesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+            ];
+            client.descriptors.page.listOSImages.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listOSImagesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.OSImage[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.OSImage) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listOSImages.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOsImages, request));
+            assert(
+                (client.descriptors.page.listOSImages.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listOSImagesStream with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListOSImagesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOSImages.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listOSImagesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.baremetalsolution.v2.OSImage[] = [];
+                stream.on('data', (response: protos.google.cloud.baremetalsolution.v2.OSImage) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listOSImages.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOsImages, request));
+            assert(
+                (client.descriptors.page.listOSImages.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listOSImages without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListOSImagesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+              generateSampleMessage(new protos.google.cloud.baremetalsolution.v2.OSImage()),
+            ];
+            client.descriptors.page.listOSImages.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.baremetalsolution.v2.IOSImage[] = [];
+            const iterable = client.listOSImagesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listOSImages with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.baremetalsolution.v2.ListOSImagesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOSImages.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listOSImagesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.baremetalsolution.v2.IOSImage[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes setIamPolicy with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.setIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.getIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getIamPolicy with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
-      const response = await client.testIamPermissions(
-        request,
-        expectedOptions
-      );
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.setIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes setIamPolicy with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .testIamPermissions(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
+            const response = await client.testIamPermissions(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.TestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0));
+        });
+        it('invokes testIamPermissions with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request, expectedOptions), expectedError);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes testIamPermissions with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.testIamPermissions(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('instance', async () => {
-      const fakePath = '/rendered/path/instance';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.instancePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.instancePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('instancePath', () => {
-        const result = client.instancePath(
-          'projectValue',
-          'locationValue',
-          'instanceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.instancePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromInstanceName', () => {
-        const result = client.matchProjectFromInstanceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromInstanceName', () => {
-        const result = client.matchLocationFromInstanceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromInstanceName', () => {
-        const result = client.matchInstanceFromInstanceName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('instanceConfig', async () => {
-      const fakePath = '/rendered/path/instanceConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        instance_config: 'instanceConfigValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.instanceConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.instanceConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('instanceConfigPath', () => {
-        const result = client.instanceConfigPath(
-          'projectValue',
-          'locationValue',
-          'instanceConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.instanceConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('instance', async () => {
+            const fakePath = "/rendered/path/instance";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.instancePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.instancePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromInstanceConfigName', () => {
-        const result = client.matchProjectFromInstanceConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.instanceConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('instancePath', () => {
+                const result = client.instancePath("projectValue", "locationValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.instancePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromInstanceConfigName', () => {
-        const result = client.matchLocationFromInstanceConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.instanceConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromInstanceName', () => {
+                const result = client.matchProjectFromInstanceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchInstanceConfigFromInstanceConfigName', () => {
-        const result =
-          client.matchInstanceConfigFromInstanceConfigName(fakePath);
-        assert.strictEqual(result, 'instanceConfigValue');
-        assert(
-          (client.pathTemplates.instanceConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromInstanceName', () => {
+                const result = client.matchLocationFromInstanceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromInstanceName', () => {
+                const result = client.matchInstanceFromInstanceName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('instanceConfig', async () => {
+            const fakePath = "/rendered/path/instanceConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance_config: "instanceConfigValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.instanceConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.instanceConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('instanceConfigPath', () => {
+                const result = client.instanceConfigPath("projectValue", "locationValue", "instanceConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.instanceConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInstanceConfigName', () => {
+                const result = client.matchProjectFromInstanceConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.instanceConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInstanceConfigName', () => {
+                const result = client.matchLocationFromInstanceConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.instanceConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceConfigFromInstanceConfigName', () => {
+                const result = client.matchInstanceConfigFromInstanceConfigName(fakePath);
+                assert.strictEqual(result, "instanceConfigValue");
+                assert((client.pathTemplates.instanceConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('instanceQuota', async () => {
+            const fakePath = "/rendered/path/instanceQuota";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance_quota: "instanceQuotaValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.instanceQuotaPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.instanceQuotaPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('instanceQuotaPath', () => {
+                const result = client.instanceQuotaPath("projectValue", "locationValue", "instanceQuotaValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.instanceQuotaPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInstanceQuotaName', () => {
+                const result = client.matchProjectFromInstanceQuotaName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.instanceQuotaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInstanceQuotaName', () => {
+                const result = client.matchLocationFromInstanceQuotaName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.instanceQuotaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceQuotaFromInstanceQuotaName', () => {
+                const result = client.matchInstanceQuotaFromInstanceQuotaName(fakePath);
+                assert.strictEqual(result, "instanceQuotaValue");
+                assert((client.pathTemplates.instanceQuotaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('lun', async () => {
+            const fakePath = "/rendered/path/lun";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                volume: "volumeValue",
+                lun: "lunValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lunPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lunPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lunPath', () => {
+                const result = client.lunPath("projectValue", "locationValue", "volumeValue", "lunValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lunPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLunName', () => {
+                const result = client.matchProjectFromLunName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.lunPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLunName', () => {
+                const result = client.matchLocationFromLunName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.lunPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVolumeFromLunName', () => {
+                const result = client.matchVolumeFromLunName(fakePath);
+                assert.strictEqual(result, "volumeValue");
+                assert((client.pathTemplates.lunPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLunFromLunName', () => {
+                const result = client.matchLunFromLunName(fakePath);
+                assert.strictEqual(result, "lunValue");
+                assert((client.pathTemplates.lunPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('nFSShare', async () => {
+            const fakePath = "/rendered/path/nFSShare";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                nfs_share: "nfsShareValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.nFSSharePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.nFSSharePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('nFSSharePath', () => {
+                const result = client.nFSSharePath("projectValue", "locationValue", "nfsShareValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.nFSSharePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNFSShareName', () => {
+                const result = client.matchProjectFromNFSShareName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.nFSSharePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromNFSShareName', () => {
+                const result = client.matchLocationFromNFSShareName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.nFSSharePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNfsShareFromNFSShareName', () => {
+                const result = client.matchNfsShareFromNFSShareName(fakePath);
+                assert.strictEqual(result, "nfsShareValue");
+                assert((client.pathTemplates.nFSSharePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('network', async () => {
+            const fakePath = "/rendered/path/network";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                network: "networkValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.networkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.networkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('networkPath', () => {
+                const result = client.networkPath("projectValue", "locationValue", "networkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.networkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNetworkName', () => {
+                const result = client.matchProjectFromNetworkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.networkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromNetworkName', () => {
+                const result = client.matchLocationFromNetworkName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.networkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNetworkFromNetworkName', () => {
+                const result = client.matchNetworkFromNetworkName(fakePath);
+                assert.strictEqual(result, "networkValue");
+                assert((client.pathTemplates.networkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('networkConfig', async () => {
+            const fakePath = "/rendered/path/networkConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                network_config: "networkConfigValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.networkConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.networkConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('networkConfigPath', () => {
+                const result = client.networkConfigPath("projectValue", "locationValue", "networkConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.networkConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNetworkConfigName', () => {
+                const result = client.matchProjectFromNetworkConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.networkConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromNetworkConfigName', () => {
+                const result = client.matchLocationFromNetworkConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.networkConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNetworkConfigFromNetworkConfigName', () => {
+                const result = client.matchNetworkConfigFromNetworkConfigName(fakePath);
+                assert.strictEqual(result, "networkConfigValue");
+                assert((client.pathTemplates.networkConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('osImage', async () => {
+            const fakePath = "/rendered/path/osImage";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                os_image: "osImageValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.osImagePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.osImagePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('osImagePath', () => {
+                const result = client.osImagePath("projectValue", "locationValue", "osImageValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.osImagePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromOsImageName', () => {
+                const result = client.matchProjectFromOsImageName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.osImagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOsImageName', () => {
+                const result = client.matchLocationFromOsImageName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.osImagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOsImageFromOsImageName', () => {
+                const result = client.matchOsImageFromOsImageName(fakePath);
+                assert.strictEqual(result, "osImageValue");
+                assert((client.pathTemplates.osImagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('provisioningConfig', async () => {
+            const fakePath = "/rendered/path/provisioningConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                provisioning_config: "provisioningConfigValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.provisioningConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.provisioningConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('provisioningConfigPath', () => {
+                const result = client.provisioningConfigPath("projectValue", "locationValue", "provisioningConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.provisioningConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProvisioningConfigName', () => {
+                const result = client.matchProjectFromProvisioningConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.provisioningConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProvisioningConfigName', () => {
+                const result = client.matchLocationFromProvisioningConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.provisioningConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProvisioningConfigFromProvisioningConfigName', () => {
+                const result = client.matchProvisioningConfigFromProvisioningConfigName(fakePath);
+                assert.strictEqual(result, "provisioningConfigValue");
+                assert((client.pathTemplates.provisioningConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('provisioningQuota', async () => {
+            const fakePath = "/rendered/path/provisioningQuota";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                provisioning_quota: "provisioningQuotaValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.provisioningQuotaPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.provisioningQuotaPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('provisioningQuotaPath', () => {
+                const result = client.provisioningQuotaPath("projectValue", "locationValue", "provisioningQuotaValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.provisioningQuotaPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProvisioningQuotaName', () => {
+                const result = client.matchProjectFromProvisioningQuotaName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.provisioningQuotaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProvisioningQuotaName', () => {
+                const result = client.matchLocationFromProvisioningQuotaName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.provisioningQuotaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProvisioningQuotaFromProvisioningQuotaName', () => {
+                const result = client.matchProvisioningQuotaFromProvisioningQuotaName(fakePath);
+                assert.strictEqual(result, "provisioningQuotaValue");
+                assert((client.pathTemplates.provisioningQuotaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('serverNetworkTemplate', async () => {
+            const fakePath = "/rendered/path/serverNetworkTemplate";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                server_network_template: "serverNetworkTemplateValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.serverNetworkTemplatePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.serverNetworkTemplatePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('serverNetworkTemplatePath', () => {
+                const result = client.serverNetworkTemplatePath("projectValue", "locationValue", "serverNetworkTemplateValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.serverNetworkTemplatePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromServerNetworkTemplateName', () => {
+                const result = client.matchProjectFromServerNetworkTemplateName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.serverNetworkTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromServerNetworkTemplateName', () => {
+                const result = client.matchLocationFromServerNetworkTemplateName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.serverNetworkTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServerNetworkTemplateFromServerNetworkTemplateName', () => {
+                const result = client.matchServerNetworkTemplateFromServerNetworkTemplateName(fakePath);
+                assert.strictEqual(result, "serverNetworkTemplateValue");
+                assert((client.pathTemplates.serverNetworkTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sshKey', async () => {
+            const fakePath = "/rendered/path/sshKey";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                ssh_key: "sshKeyValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sshKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sshKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sshKeyPath', () => {
+                const result = client.sshKeyPath("projectValue", "locationValue", "sshKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sshKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSshKeyName', () => {
+                const result = client.matchProjectFromSshKeyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sshKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSshKeyName', () => {
+                const result = client.matchLocationFromSshKeyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sshKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSshKeyFromSshKeyName', () => {
+                const result = client.matchSshKeyFromSshKeyName(fakePath);
+                assert.strictEqual(result, "sshKeyValue");
+                assert((client.pathTemplates.sshKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('volume', async () => {
+            const fakePath = "/rendered/path/volume";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                volume: "volumeValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.volumePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.volumePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('volumePath', () => {
+                const result = client.volumePath("projectValue", "locationValue", "volumeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.volumePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromVolumeName', () => {
+                const result = client.matchProjectFromVolumeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.volumePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromVolumeName', () => {
+                const result = client.matchLocationFromVolumeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.volumePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVolumeFromVolumeName', () => {
+                const result = client.matchVolumeFromVolumeName(fakePath);
+                assert.strictEqual(result, "volumeValue");
+                assert((client.pathTemplates.volumePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('volumeConfig', async () => {
+            const fakePath = "/rendered/path/volumeConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                volume_config: "volumeConfigValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.volumeConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.volumeConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('volumeConfigPath', () => {
+                const result = client.volumeConfigPath("projectValue", "locationValue", "volumeConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.volumeConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromVolumeConfigName', () => {
+                const result = client.matchProjectFromVolumeConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.volumeConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromVolumeConfigName', () => {
+                const result = client.matchLocationFromVolumeConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.volumeConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVolumeConfigFromVolumeConfigName', () => {
+                const result = client.matchVolumeConfigFromVolumeConfigName(fakePath);
+                assert.strictEqual(result, "volumeConfigValue");
+                assert((client.pathTemplates.volumeConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('volumeSnapshot', async () => {
+            const fakePath = "/rendered/path/volumeSnapshot";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                volume: "volumeValue",
+                snapshot: "snapshotValue",
+            };
+            const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.volumeSnapshotPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.volumeSnapshotPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('volumeSnapshotPath', () => {
+                const result = client.volumeSnapshotPath("projectValue", "locationValue", "volumeValue", "snapshotValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.volumeSnapshotPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromVolumeSnapshotName', () => {
+                const result = client.matchProjectFromVolumeSnapshotName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.volumeSnapshotPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromVolumeSnapshotName', () => {
+                const result = client.matchLocationFromVolumeSnapshotName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.volumeSnapshotPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVolumeFromVolumeSnapshotName', () => {
+                const result = client.matchVolumeFromVolumeSnapshotName(fakePath);
+                assert.strictEqual(result, "volumeValue");
+                assert((client.pathTemplates.volumeSnapshotPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSnapshotFromVolumeSnapshotName', () => {
+                const result = client.matchSnapshotFromVolumeSnapshotName(fakePath);
+                assert.strictEqual(result, "snapshotValue");
+                assert((client.pathTemplates.volumeSnapshotPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('instanceQuota', async () => {
-      const fakePath = '/rendered/path/instanceQuota';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        instance_quota: 'instanceQuotaValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.instanceQuotaPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.instanceQuotaPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('instanceQuotaPath', () => {
-        const result = client.instanceQuotaPath(
-          'projectValue',
-          'locationValue',
-          'instanceQuotaValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.instanceQuotaPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromInstanceQuotaName', () => {
-        const result = client.matchProjectFromInstanceQuotaName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.instanceQuotaPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromInstanceQuotaName', () => {
-        const result = client.matchLocationFromInstanceQuotaName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.instanceQuotaPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceQuotaFromInstanceQuotaName', () => {
-        const result = client.matchInstanceQuotaFromInstanceQuotaName(fakePath);
-        assert.strictEqual(result, 'instanceQuotaValue');
-        assert(
-          (client.pathTemplates.instanceQuotaPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('lun', async () => {
-      const fakePath = '/rendered/path/lun';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        volume: 'volumeValue',
-        lun: 'lunValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.lunPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.lunPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('lunPath', () => {
-        const result = client.lunPath(
-          'projectValue',
-          'locationValue',
-          'volumeValue',
-          'lunValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.lunPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLunName', () => {
-        const result = client.matchProjectFromLunName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.lunPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLunName', () => {
-        const result = client.matchLocationFromLunName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.lunPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVolumeFromLunName', () => {
-        const result = client.matchVolumeFromLunName(fakePath);
-        assert.strictEqual(result, 'volumeValue');
-        assert(
-          (client.pathTemplates.lunPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLunFromLunName', () => {
-        const result = client.matchLunFromLunName(fakePath);
-        assert.strictEqual(result, 'lunValue');
-        assert(
-          (client.pathTemplates.lunPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('nFSShare', async () => {
-      const fakePath = '/rendered/path/nFSShare';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        nfs_share: 'nfsShareValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.nFSSharePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.nFSSharePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('nFSSharePath', () => {
-        const result = client.nFSSharePath(
-          'projectValue',
-          'locationValue',
-          'nfsShareValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.nFSSharePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromNFSShareName', () => {
-        const result = client.matchProjectFromNFSShareName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.nFSSharePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromNFSShareName', () => {
-        const result = client.matchLocationFromNFSShareName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.nFSSharePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNfsShareFromNFSShareName', () => {
-        const result = client.matchNfsShareFromNFSShareName(fakePath);
-        assert.strictEqual(result, 'nfsShareValue');
-        assert(
-          (client.pathTemplates.nFSSharePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('network', async () => {
-      const fakePath = '/rendered/path/network';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        network: 'networkValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.networkPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.networkPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('networkPath', () => {
-        const result = client.networkPath(
-          'projectValue',
-          'locationValue',
-          'networkValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.networkPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromNetworkName', () => {
-        const result = client.matchProjectFromNetworkName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.networkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromNetworkName', () => {
-        const result = client.matchLocationFromNetworkName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.networkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNetworkFromNetworkName', () => {
-        const result = client.matchNetworkFromNetworkName(fakePath);
-        assert.strictEqual(result, 'networkValue');
-        assert(
-          (client.pathTemplates.networkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('networkConfig', async () => {
-      const fakePath = '/rendered/path/networkConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        network_config: 'networkConfigValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.networkConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.networkConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('networkConfigPath', () => {
-        const result = client.networkConfigPath(
-          'projectValue',
-          'locationValue',
-          'networkConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.networkConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromNetworkConfigName', () => {
-        const result = client.matchProjectFromNetworkConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.networkConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromNetworkConfigName', () => {
-        const result = client.matchLocationFromNetworkConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.networkConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNetworkConfigFromNetworkConfigName', () => {
-        const result = client.matchNetworkConfigFromNetworkConfigName(fakePath);
-        assert.strictEqual(result, 'networkConfigValue');
-        assert(
-          (client.pathTemplates.networkConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('osImage', async () => {
-      const fakePath = '/rendered/path/osImage';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        os_image: 'osImageValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.osImagePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.osImagePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('osImagePath', () => {
-        const result = client.osImagePath(
-          'projectValue',
-          'locationValue',
-          'osImageValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.osImagePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromOsImageName', () => {
-        const result = client.matchProjectFromOsImageName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.osImagePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOsImageName', () => {
-        const result = client.matchLocationFromOsImageName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.osImagePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchOsImageFromOsImageName', () => {
-        const result = client.matchOsImageFromOsImageName(fakePath);
-        assert.strictEqual(result, 'osImageValue');
-        assert(
-          (client.pathTemplates.osImagePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('provisioningConfig', async () => {
-      const fakePath = '/rendered/path/provisioningConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        provisioning_config: 'provisioningConfigValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.provisioningConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.provisioningConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('provisioningConfigPath', () => {
-        const result = client.provisioningConfigPath(
-          'projectValue',
-          'locationValue',
-          'provisioningConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.provisioningConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProvisioningConfigName', () => {
-        const result = client.matchProjectFromProvisioningConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.provisioningConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProvisioningConfigName', () => {
-        const result = client.matchLocationFromProvisioningConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.provisioningConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchProvisioningConfigFromProvisioningConfigName', () => {
-        const result =
-          client.matchProvisioningConfigFromProvisioningConfigName(fakePath);
-        assert.strictEqual(result, 'provisioningConfigValue');
-        assert(
-          (
-            client.pathTemplates.provisioningConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('provisioningQuota', async () => {
-      const fakePath = '/rendered/path/provisioningQuota';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        provisioning_quota: 'provisioningQuotaValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.provisioningQuotaPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.provisioningQuotaPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('provisioningQuotaPath', () => {
-        const result = client.provisioningQuotaPath(
-          'projectValue',
-          'locationValue',
-          'provisioningQuotaValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.provisioningQuotaPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProvisioningQuotaName', () => {
-        const result = client.matchProjectFromProvisioningQuotaName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.provisioningQuotaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProvisioningQuotaName', () => {
-        const result = client.matchLocationFromProvisioningQuotaName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.provisioningQuotaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchProvisioningQuotaFromProvisioningQuotaName', () => {
-        const result =
-          client.matchProvisioningQuotaFromProvisioningQuotaName(fakePath);
-        assert.strictEqual(result, 'provisioningQuotaValue');
-        assert(
-          (
-            client.pathTemplates.provisioningQuotaPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('serverNetworkTemplate', async () => {
-      const fakePath = '/rendered/path/serverNetworkTemplate';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        server_network_template: 'serverNetworkTemplateValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.serverNetworkTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.serverNetworkTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('serverNetworkTemplatePath', () => {
-        const result = client.serverNetworkTemplatePath(
-          'projectValue',
-          'locationValue',
-          'serverNetworkTemplateValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.serverNetworkTemplatePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromServerNetworkTemplateName', () => {
-        const result =
-          client.matchProjectFromServerNetworkTemplateName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.serverNetworkTemplatePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromServerNetworkTemplateName', () => {
-        const result =
-          client.matchLocationFromServerNetworkTemplateName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.serverNetworkTemplatePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServerNetworkTemplateFromServerNetworkTemplateName', () => {
-        const result =
-          client.matchServerNetworkTemplateFromServerNetworkTemplateName(
-            fakePath
-          );
-        assert.strictEqual(result, 'serverNetworkTemplateValue');
-        assert(
-          (
-            client.pathTemplates.serverNetworkTemplatePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('sshKey', async () => {
-      const fakePath = '/rendered/path/sshKey';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        ssh_key: 'sshKeyValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.sshKeyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.sshKeyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('sshKeyPath', () => {
-        const result = client.sshKeyPath(
-          'projectValue',
-          'locationValue',
-          'sshKeyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.sshKeyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSshKeyName', () => {
-        const result = client.matchProjectFromSshKeyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.sshKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromSshKeyName', () => {
-        const result = client.matchLocationFromSshKeyName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.sshKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSshKeyFromSshKeyName', () => {
-        const result = client.matchSshKeyFromSshKeyName(fakePath);
-        assert.strictEqual(result, 'sshKeyValue');
-        assert(
-          (client.pathTemplates.sshKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('volume', async () => {
-      const fakePath = '/rendered/path/volume';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        volume: 'volumeValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.volumePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.volumePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('volumePath', () => {
-        const result = client.volumePath(
-          'projectValue',
-          'locationValue',
-          'volumeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.volumePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromVolumeName', () => {
-        const result = client.matchProjectFromVolumeName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.volumePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromVolumeName', () => {
-        const result = client.matchLocationFromVolumeName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.volumePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVolumeFromVolumeName', () => {
-        const result = client.matchVolumeFromVolumeName(fakePath);
-        assert.strictEqual(result, 'volumeValue');
-        assert(
-          (client.pathTemplates.volumePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('volumeConfig', async () => {
-      const fakePath = '/rendered/path/volumeConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        volume_config: 'volumeConfigValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.volumeConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.volumeConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('volumeConfigPath', () => {
-        const result = client.volumeConfigPath(
-          'projectValue',
-          'locationValue',
-          'volumeConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.volumeConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromVolumeConfigName', () => {
-        const result = client.matchProjectFromVolumeConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.volumeConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromVolumeConfigName', () => {
-        const result = client.matchLocationFromVolumeConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.volumeConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVolumeConfigFromVolumeConfigName', () => {
-        const result = client.matchVolumeConfigFromVolumeConfigName(fakePath);
-        assert.strictEqual(result, 'volumeConfigValue');
-        assert(
-          (client.pathTemplates.volumeConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('volumeSnapshot', async () => {
-      const fakePath = '/rendered/path/volumeSnapshot';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        volume: 'volumeValue',
-        snapshot: 'snapshotValue',
-      };
-      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.volumeSnapshotPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.volumeSnapshotPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('volumeSnapshotPath', () => {
-        const result = client.volumeSnapshotPath(
-          'projectValue',
-          'locationValue',
-          'volumeValue',
-          'snapshotValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.volumeSnapshotPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromVolumeSnapshotName', () => {
-        const result = client.matchProjectFromVolumeSnapshotName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.volumeSnapshotPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromVolumeSnapshotName', () => {
-        const result = client.matchLocationFromVolumeSnapshotName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.volumeSnapshotPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVolumeFromVolumeSnapshotName', () => {
-        const result = client.matchVolumeFromVolumeSnapshotName(fakePath);
-        assert.strictEqual(result, 'volumeValue');
-        assert(
-          (client.pathTemplates.volumeSnapshotPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSnapshotFromVolumeSnapshotName', () => {
-        const result = client.matchSnapshotFromVolumeSnapshotName(fakePath);
-        assert.strictEqual(result, 'snapshotValue');
-        assert(
-          (client.pathTemplates.volumeSnapshotPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

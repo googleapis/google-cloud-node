@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class DataPolicyServiceClient {
    *     const client = new DataPolicyServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataPolicyServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'bigquerydatapolicy.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -164,7 +136,7 @@ export class DataPolicyServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -178,7 +150,10 @@ export class DataPolicyServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -214,20 +189,14 @@ export class DataPolicyServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDataPolicies: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'dataPolicies'
-      ),
+      listDataPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataPolicies')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.bigquery.datapolicies.v1beta1.DataPolicyService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.bigquery.datapolicies.v1beta1.DataPolicyService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -258,45 +227,32 @@ export class DataPolicyServiceClient {
     // Put together the "service stub" for
     // google.cloud.bigquery.datapolicies.v1beta1.DataPolicyService.
     this.dataPolicyServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.bigquery.datapolicies.v1beta1.DataPolicyService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.bigquery.datapolicies.v1beta1
-            .DataPolicyService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.bigquery.datapolicies.v1beta1.DataPolicyService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.bigquery.datapolicies.v1beta1.DataPolicyService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataPolicyServiceStubMethods = [
-      'createDataPolicy',
-      'updateDataPolicy',
-      'deleteDataPolicy',
-      'getDataPolicy',
-      'listDataPolicies',
-      'getIamPolicy',
-      'setIamPolicy',
-      'testIamPermissions',
-    ];
+    const dataPolicyServiceStubMethods =
+        ['createDataPolicy', 'updateDataPolicy', 'deleteDataPolicy', 'getDataPolicy', 'listDataPolicies', 'getIamPolicy', 'setIamPolicy', 'testIamPermissions'];
     for (const methodName of dataPolicyServiceStubMethods) {
       const callPromise = this.dataPolicyServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -316,14 +272,8 @@ export class DataPolicyServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'bigquerydatapolicy.googleapis.com';
   }
@@ -334,14 +284,8 @@ export class DataPolicyServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'bigquerydatapolicy.googleapis.com';
   }
@@ -374,7 +318,7 @@ export class DataPolicyServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/bigquery',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -384,9 +328,8 @@ export class DataPolicyServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -397,989 +340,790 @@ export class DataPolicyServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a new data policy under a project with the given `dataPolicyId`
-   * (used as the display name), policy tag, and data policy type.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the project that the data policy will belong to. The
-   *   format is `projects/{project_number}/locations/{location_id}`.
-   * @param {google.cloud.bigquery.datapolicies.v1beta1.DataPolicy} request.dataPolicy
-   *   Required. The data policy to create. The `name` field does not need to be
-   *   provided for the data policy creation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_policy_service.create_data_policy.js</caption>
-   * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_CreateDataPolicy_async
-   */
+/**
+ * Creates a new data policy under a project with the given `dataPolicyId`
+ * (used as the display name), policy tag, and data policy type.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the project that the data policy will belong to. The
+ *   format is `projects/{project_number}/locations/{location_id}`.
+ * @param {google.cloud.bigquery.datapolicies.v1beta1.DataPolicy} request.dataPolicy
+ *   Required. The data policy to create. The `name` field does not need to be
+ *   provided for the data policy creation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_policy_service.create_data_policy.js</caption>
+ * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_CreateDataPolicy_async
+ */
   createDataPolicy(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      (
-        | protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest|undefined, {}|undefined
+      ]>;
   createDataPolicy(
-    request: protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataPolicy(
-    request: protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataPolicy(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-          | protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      (
-        | protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataPolicy(
+      request: protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataPolicy(
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDataPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-          | protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDataPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDataPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-          (
-            | protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDataPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDataPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.ICreateDataPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDataPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the metadata for an existing data policy. The target data policy
-   * can be specified by the resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.bigquery.datapolicies.v1beta1.DataPolicy} request.dataPolicy
-   *   Required. Update the data policy's metadata.
-   *
-   *   The target data policy is determined by the `name` field.
-   *   Other fields are updated to the specified values based on the field masks.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   *   If not set, defaults to all of the fields that are allowed to update.
-   *
-   *   Updates to the `name` and `dataPolicyId` fields are not allowed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_policy_service.update_data_policy.js</caption>
-   * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_UpdateDataPolicy_async
-   */
+/**
+ * Updates the metadata for an existing data policy. The target data policy
+ * can be specified by the resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.bigquery.datapolicies.v1beta1.DataPolicy} request.dataPolicy
+ *   Required. Update the data policy's metadata.
+ *
+ *   The target data policy is determined by the `name` field.
+ *   Other fields are updated to the specified values based on the field masks.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The update mask applies to the resource. For the `FieldMask` definition,
+ *   see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+ *   If not set, defaults to all of the fields that are allowed to update.
+ *
+ *   Updates to the `name` and `dataPolicyId` fields are not allowed.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_policy_service.update_data_policy.js</caption>
+ * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_UpdateDataPolicy_async
+ */
   updateDataPolicy(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      (
-        | protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest|undefined, {}|undefined
+      ]>;
   updateDataPolicy(
-    request: protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDataPolicy(
-    request: protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDataPolicy(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-          | protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      (
-        | protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDataPolicy(
+      request: protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDataPolicy(
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'data_policy.name': request.dataPolicy!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'data_policy.name': request.dataPolicy!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDataPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-          | protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDataPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDataPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-          (
-            | protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDataPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDataPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IUpdateDataPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDataPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the data policy specified by its resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the data policy to delete. Format is
-   *   `projects/{project_number}/locations/{location_id}/dataPolicies/{data_policy_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_policy_service.delete_data_policy.js</caption>
-   * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_DeleteDataPolicy_async
-   */
+/**
+ * Deletes the data policy specified by its resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the data policy to delete. Format is
+ *   `projects/{project_number}/locations/{location_id}/dataPolicies/{data_policy_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_policy_service.delete_data_policy.js</caption>
+ * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_DeleteDataPolicy_async
+ */
   deleteDataPolicy(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest|undefined, {}|undefined
+      ]>;
   deleteDataPolicy(
-    request: protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataPolicy(
-    request: protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataPolicy(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataPolicy(
+      request: protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataPolicy(
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDataPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDataPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDataPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDataPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDataPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDeleteDataPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDataPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the data policy specified by its resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the requested data policy. Format is
-   *   `projects/{project_number}/locations/{location_id}/dataPolicies/{data_policy_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_policy_service.get_data_policy.js</caption>
-   * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_GetDataPolicy_async
-   */
+/**
+ * Gets the data policy specified by its resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the requested data policy. Format is
+ *   `projects/{project_number}/locations/{location_id}/dataPolicies/{data_policy_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_policy_service.get_data_policy.js</caption>
+ * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_GetDataPolicy_async
+ */
   getDataPolicy(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      (
-        | protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest|undefined, {}|undefined
+      ]>;
   getDataPolicy(
-    request: protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataPolicy(
-    request: protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataPolicy(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-          | protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-      (
-        | protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataPolicy(
+      request: protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataPolicy(
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDataPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-          | protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDataPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
-          (
-            | protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDataPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDataPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IGetDataPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDataPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the IAM policy for the specified data policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_policy_service.get_iam_policy.js</caption>
-   * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_GetIamPolicy_async
-   */
+/**
+ * Gets the IAM policy for the specified data policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_policy_service.get_iam_policy.js</caption>
+ * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the IAM policy for the specified data policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_policy_service.set_iam_policy.js</caption>
-   * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_SetIamPolicy_async
-   */
+/**
+ * Sets the IAM policy for the specified data policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_policy_service.set_iam_policy.js</caption>
+ * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the caller's permission on the specified data policy resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_policy_service.test_iam_permissions.js</caption>
-   * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_TestIamPermissions_async
-   */
+/**
+ * Returns the caller's permission on the specified data policy resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_policy_service.test_iam_permissions.js</caption>
+ * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * List all of the data policies in the specified parent project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the project for which to list data policies. Format is
-   *   `projects/{project_number}/locations/{location_id}`.
-   * @param {number} request.pageSize
-   *   The maximum number of data policies to return. Must be a value between 1
-   *   and 1000.
-   *   If not set, defaults to 50.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous list request, if any. If
-   *   not set, defaults to an empty string.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDataPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List all of the data policies in the specified parent project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the project for which to list data policies. Format is
+ *   `projects/{project_number}/locations/{location_id}`.
+ * @param {number} request.pageSize
+ *   The maximum number of data policies to return. Must be a value between 1
+ *   and 1000.
+ *   If not set, defaults to 50.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous list request, if any. If
+ *   not set, defaults to an empty string.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDataPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDataPolicies(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy[],
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest | null,
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy[],
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest|null,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse
+      ]>;
   listDataPolicies(
-    request: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy
-    >
-  ): void;
-  listDataPolicies(
-    request: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy
-    >
-  ): void;
-  listDataPolicies(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
-          | protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
-      | protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy[],
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest | null,
-      protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse|null|undefined,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy>): void;
+  listDataPolicies(
+      request: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse|null|undefined,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy>): void;
+  listDataPolicies(
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse|null|undefined,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy>,
+      callback?: PaginationCallback<
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse|null|undefined,
+          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy>):
+      Promise<[
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy[],
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest|null,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
-          | protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse
-          | null
-          | undefined,
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
+      protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse|null|undefined,
+      protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDataPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1388,60 +1132,57 @@ export class DataPolicyServiceClient {
     this._log.info('listDataPolicies request %j', request);
     return this.innerApiCalls
       .listDataPolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy[],
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest | null,
-          protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse,
-        ]) => {
-          this._log.info('listDataPolicies values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy[],
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest|null,
+        protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesResponse
+      ]) => {
+        this._log.info('listDataPolicies values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDataPolicies`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the project for which to list data policies. Format is
-   *   `projects/{project_number}/locations/{location_id}`.
-   * @param {number} request.pageSize
-   *   The maximum number of data policies to return. Must be a value between 1
-   *   and 1000.
-   *   If not set, defaults to 50.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous list request, if any. If
-   *   not set, defaults to an empty string.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDataPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDataPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the project for which to list data policies. Format is
+ *   `projects/{project_number}/locations/{location_id}`.
+ * @param {number} request.pageSize
+ *   The maximum number of data policies to return. Must be a value between 1
+ *   and 1000.
+ *   If not set, defaults to 50.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous list request, if any. If
+ *   not set, defaults to an empty string.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDataPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDataPoliciesStream(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDataPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDataPolicies stream %j', request);
     return this.descriptors.page.listDataPolicies.createStream(
       this.innerApiCalls.listDataPolicies as GaxCall,
@@ -1450,51 +1191,50 @@ export class DataPolicyServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDataPolicies`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the project for which to list data policies. Format is
-   *   `projects/{project_number}/locations/{location_id}`.
-   * @param {number} request.pageSize
-   *   The maximum number of data policies to return. Must be a value between 1
-   *   and 1000.
-   *   If not set, defaults to 50.
-   * @param {string} request.pageToken
-   *   The `nextPageToken` value returned from a previous list request, if any. If
-   *   not set, defaults to an empty string.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_policy_service.list_data_policies.js</caption>
-   * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_ListDataPolicies_async
-   */
+/**
+ * Equivalent to `listDataPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the project for which to list data policies. Format is
+ *   `projects/{project_number}/locations/{location_id}`.
+ * @param {number} request.pageSize
+ *   The maximum number of data policies to return. Must be a value between 1
+ *   and 1000.
+ *   If not set, defaults to 50.
+ * @param {string} request.pageToken
+ *   The `nextPageToken` value returned from a previous list request, if any. If
+ *   not set, defaults to an empty string.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy|DataPolicy}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_policy_service.list_data_policies.js</caption>
+ * region_tag:bigquerydatapolicy_v1beta1_generated_DataPolicyService_ListDataPolicies_async
+ */
   listDataPoliciesAsync(
-    request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy> {
+      request?: protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDataPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDataPolicies iterate %j', request);
     return this.descriptors.page.listDataPolicies.asyncIterate(
       this.innerApiCalls['listDataPolicies'] as GaxCall,
@@ -1514,7 +1254,7 @@ export class DataPolicyServiceClient {
    * @param {string} data_policy
    * @returns {string} Resource name string.
    */
-  dataPolicyPath(project: string, location: string, dataPolicy: string) {
+  dataPolicyPath(project:string,location:string,dataPolicy:string) {
     return this.pathTemplates.dataPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -1530,8 +1270,7 @@ export class DataPolicyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataPolicyName(dataPolicyName: string) {
-    return this.pathTemplates.dataPolicyPathTemplate.match(dataPolicyName)
-      .project;
+    return this.pathTemplates.dataPolicyPathTemplate.match(dataPolicyName).project;
   }
 
   /**
@@ -1542,8 +1281,7 @@ export class DataPolicyServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataPolicyName(dataPolicyName: string) {
-    return this.pathTemplates.dataPolicyPathTemplate.match(dataPolicyName)
-      .location;
+    return this.pathTemplates.dataPolicyPathTemplate.match(dataPolicyName).location;
   }
 
   /**
@@ -1554,8 +1292,7 @@ export class DataPolicyServiceClient {
    * @returns {string} A string representing the data_policy.
    */
   matchDataPolicyFromDataPolicyName(dataPolicyName: string) {
-    return this.pathTemplates.dataPolicyPathTemplate.match(dataPolicyName)
-      .data_policy;
+    return this.pathTemplates.dataPolicyPathTemplate.match(dataPolicyName).data_policy;
   }
 
   /**
@@ -1565,7 +1302,7 @@ export class DataPolicyServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1600,7 +1337,7 @@ export class DataPolicyServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });

@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const datatransfer = require('@google-cloud/bigquery-data-transfer');
 
 function main() {
-  const dataTransferServiceClient =
-    new datatransfer.DataTransferServiceClient();
+  const dataTransferServiceClient = new datatransfer.DataTransferServiceClient();
 }
 
 main();

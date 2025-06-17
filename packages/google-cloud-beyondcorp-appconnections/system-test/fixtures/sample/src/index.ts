@@ -19,9 +19,7 @@
 import {AppConnectionsServiceClient} from '@google-cloud/appconnections';
 
 // check that the client class type name can be used
-function doStuffWithAppConnectionsServiceClient(
-  client: AppConnectionsServiceClient
-) {
+function doStuffWithAppConnectionsServiceClient(client: AppConnectionsServiceClient) {
   client.close();
 }
 
