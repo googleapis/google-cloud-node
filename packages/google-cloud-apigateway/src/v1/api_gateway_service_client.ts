@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class ApiGatewayServiceClient {
    *     const client = new ApiGatewayServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ApiGatewayServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'apigateway.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class ApiGatewayServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class ApiGatewayServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -220,214 +193,110 @@ export class ApiGatewayServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listGateways: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'gateways'
-      ),
-      listApis: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'apis'
-      ),
-      listApiConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'apiConfigs'
-      ),
+      listGateways:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'gateways'),
+      listApis:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'apis'),
+      listApiConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'apiConfigs')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*/gateways/*}:getIamPolicy',
-          additional_bindings: [
-            {get: '/v1/{resource=projects/*/locations/*/apis/*}:getIamPolicy'},
-            {
-              get: '/v1/{resource=projects/*/locations/*/apis/*/configs/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*/gateways/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/configs/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/gateways/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/configs/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/gateways/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/apis/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/apis/*/configs/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/gateways/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/apis/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/configs/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/gateways/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/apis/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/configs/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createGatewayResponse = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.Gateway'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.Gateway') as gax.protobuf.Type;
     const createGatewayMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.OperationMetadata') as gax.protobuf.Type;
     const updateGatewayResponse = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.Gateway'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.Gateway') as gax.protobuf.Type;
     const updateGatewayMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteGatewayResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteGatewayMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.OperationMetadata') as gax.protobuf.Type;
     const createApiResponse = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.Api'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.Api') as gax.protobuf.Type;
     const createApiMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.OperationMetadata') as gax.protobuf.Type;
     const updateApiResponse = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.Api'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.Api') as gax.protobuf.Type;
     const updateApiMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteApiResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteApiMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.OperationMetadata') as gax.protobuf.Type;
     const createApiConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.ApiConfig'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.ApiConfig') as gax.protobuf.Type;
     const createApiConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.OperationMetadata') as gax.protobuf.Type;
     const updateApiConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.ApiConfig'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.ApiConfig') as gax.protobuf.Type;
     const updateApiConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteApiConfigResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteApiConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apigateway.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigateway.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createGateway: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createGatewayResponse.decode.bind(createGatewayResponse),
-        createGatewayMetadata.decode.bind(createGatewayMetadata)
-      ),
+        createGatewayMetadata.decode.bind(createGatewayMetadata)),
       updateGateway: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateGatewayResponse.decode.bind(updateGatewayResponse),
-        updateGatewayMetadata.decode.bind(updateGatewayMetadata)
-      ),
+        updateGatewayMetadata.decode.bind(updateGatewayMetadata)),
       deleteGateway: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteGatewayResponse.decode.bind(deleteGatewayResponse),
-        deleteGatewayMetadata.decode.bind(deleteGatewayMetadata)
-      ),
+        deleteGatewayMetadata.decode.bind(deleteGatewayMetadata)),
       createApi: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createApiResponse.decode.bind(createApiResponse),
-        createApiMetadata.decode.bind(createApiMetadata)
-      ),
+        createApiMetadata.decode.bind(createApiMetadata)),
       updateApi: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateApiResponse.decode.bind(updateApiResponse),
-        updateApiMetadata.decode.bind(updateApiMetadata)
-      ),
+        updateApiMetadata.decode.bind(updateApiMetadata)),
       deleteApi: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteApiResponse.decode.bind(deleteApiResponse),
-        deleteApiMetadata.decode.bind(deleteApiMetadata)
-      ),
+        deleteApiMetadata.decode.bind(deleteApiMetadata)),
       createApiConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createApiConfigResponse.decode.bind(createApiConfigResponse),
-        createApiConfigMetadata.decode.bind(createApiConfigMetadata)
-      ),
+        createApiConfigMetadata.decode.bind(createApiConfigMetadata)),
       updateApiConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateApiConfigResponse.decode.bind(updateApiConfigResponse),
-        updateApiConfigMetadata.decode.bind(updateApiConfigMetadata)
-      ),
+        updateApiConfigMetadata.decode.bind(updateApiConfigMetadata)),
       deleteApiConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteApiConfigResponse.decode.bind(deleteApiConfigResponse),
-        deleteApiConfigMetadata.decode.bind(deleteApiConfigMetadata)
-      ),
+        deleteApiConfigMetadata.decode.bind(deleteApiConfigMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.apigateway.v1.ApiGatewayService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.apigateway.v1.ApiGatewayService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -458,49 +327,28 @@ export class ApiGatewayServiceClient {
     // Put together the "service stub" for
     // google.cloud.apigateway.v1.ApiGatewayService.
     this.apiGatewayServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.apigateway.v1.ApiGatewayService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.apigateway.v1.ApiGatewayService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.apigateway.v1.ApiGatewayService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const apiGatewayServiceStubMethods = [
-      'listGateways',
-      'getGateway',
-      'createGateway',
-      'updateGateway',
-      'deleteGateway',
-      'listApis',
-      'getApi',
-      'createApi',
-      'updateApi',
-      'deleteApi',
-      'listApiConfigs',
-      'getApiConfig',
-      'createApiConfig',
-      'updateApiConfig',
-      'deleteApiConfig',
-    ];
+    const apiGatewayServiceStubMethods =
+        ['listGateways', 'getGateway', 'createGateway', 'updateGateway', 'deleteGateway', 'listApis', 'getApi', 'createApi', 'updateApi', 'deleteApi', 'listApiConfigs', 'getApiConfig', 'createApiConfig', 'updateApiConfig', 'deleteApiConfig'];
     for (const methodName of apiGatewayServiceStubMethods) {
       const callPromise = this.apiGatewayServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -525,14 +373,8 @@ export class ApiGatewayServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apigateway.googleapis.com';
   }
@@ -543,14 +385,8 @@ export class ApiGatewayServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apigateway.googleapis.com';
   }
@@ -581,7 +417,9 @@ export class ApiGatewayServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -590,9 +428,8 @@ export class ApiGatewayServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -603,2016 +440,1383 @@ export class ApiGatewayServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single Gateway.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/* /gateways/*`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apigateway.v1.Gateway|Gateway}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.get_gateway.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_GetGateway_async
-   */
+/**
+ * Gets details of a single Gateway.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the form:
+ *   `projects/* /locations/* /gateways/*`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apigateway.v1.Gateway|Gateway}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.get_gateway.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_GetGateway_async
+ */
   getGateway(
-    request?: protos.google.cloud.apigateway.v1.IGetGatewayRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IGateway,
-      protos.google.cloud.apigateway.v1.IGetGatewayRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IGetGatewayRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IGateway,
+        protos.google.cloud.apigateway.v1.IGetGatewayRequest|undefined, {}|undefined
+      ]>;
   getGateway(
-    request: protos.google.cloud.apigateway.v1.IGetGatewayRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apigateway.v1.IGateway,
-      protos.google.cloud.apigateway.v1.IGetGatewayRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGateway(
-    request: protos.google.cloud.apigateway.v1.IGetGatewayRequest,
-    callback: Callback<
-      protos.google.cloud.apigateway.v1.IGateway,
-      protos.google.cloud.apigateway.v1.IGetGatewayRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGateway(
-    request?: protos.google.cloud.apigateway.v1.IGetGatewayRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apigateway.v1.IGetGatewayRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apigateway.v1.IGateway,
-          | protos.google.cloud.apigateway.v1.IGetGatewayRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apigateway.v1.IGateway,
-      protos.google.cloud.apigateway.v1.IGetGatewayRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IGateway,
-      protos.google.cloud.apigateway.v1.IGetGatewayRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apigateway.v1.IGetGatewayRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGateway(
+      request: protos.google.cloud.apigateway.v1.IGetGatewayRequest,
+      callback: Callback<
+          protos.google.cloud.apigateway.v1.IGateway,
+          protos.google.cloud.apigateway.v1.IGetGatewayRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGateway(
+      request?: protos.google.cloud.apigateway.v1.IGetGatewayRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apigateway.v1.IGateway,
+          protos.google.cloud.apigateway.v1.IGetGatewayRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apigateway.v1.IGateway,
+          protos.google.cloud.apigateway.v1.IGetGatewayRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IGateway,
+        protos.google.cloud.apigateway.v1.IGetGatewayRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getGateway request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apigateway.v1.IGateway,
-          | protos.google.cloud.apigateway.v1.IGetGatewayRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apigateway.v1.IGateway,
+        protos.google.cloud.apigateway.v1.IGetGatewayRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getGateway response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getGateway(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apigateway.v1.IGateway,
-          protos.google.cloud.apigateway.v1.IGetGatewayRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getGateway response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getGateway(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apigateway.v1.IGateway,
+        protos.google.cloud.apigateway.v1.IGetGatewayRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGateway response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single Api.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/global/apis/*`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apigateway.v1.Api|Api}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.get_api.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_GetApi_async
-   */
+/**
+ * Gets details of a single Api.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the form:
+ *   `projects/* /locations/global/apis/*`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apigateway.v1.Api|Api}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.get_api.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_GetApi_async
+ */
   getApi(
-    request?: protos.google.cloud.apigateway.v1.IGetApiRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IApi,
-      protos.google.cloud.apigateway.v1.IGetApiRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IGetApiRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IApi,
+        protos.google.cloud.apigateway.v1.IGetApiRequest|undefined, {}|undefined
+      ]>;
   getApi(
-    request: protos.google.cloud.apigateway.v1.IGetApiRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apigateway.v1.IApi,
-      protos.google.cloud.apigateway.v1.IGetApiRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getApi(
-    request: protos.google.cloud.apigateway.v1.IGetApiRequest,
-    callback: Callback<
-      protos.google.cloud.apigateway.v1.IApi,
-      protos.google.cloud.apigateway.v1.IGetApiRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getApi(
-    request?: protos.google.cloud.apigateway.v1.IGetApiRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apigateway.v1.IGetApiRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apigateway.v1.IApi,
-          protos.google.cloud.apigateway.v1.IGetApiRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apigateway.v1.IApi,
-      protos.google.cloud.apigateway.v1.IGetApiRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IApi,
-      protos.google.cloud.apigateway.v1.IGetApiRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apigateway.v1.IGetApiRequest|null|undefined,
+          {}|null|undefined>): void;
+  getApi(
+      request: protos.google.cloud.apigateway.v1.IGetApiRequest,
+      callback: Callback<
+          protos.google.cloud.apigateway.v1.IApi,
+          protos.google.cloud.apigateway.v1.IGetApiRequest|null|undefined,
+          {}|null|undefined>): void;
+  getApi(
+      request?: protos.google.cloud.apigateway.v1.IGetApiRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apigateway.v1.IApi,
+          protos.google.cloud.apigateway.v1.IGetApiRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apigateway.v1.IApi,
+          protos.google.cloud.apigateway.v1.IGetApiRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IApi,
+        protos.google.cloud.apigateway.v1.IGetApiRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getApi request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apigateway.v1.IApi,
-          protos.google.cloud.apigateway.v1.IGetApiRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apigateway.v1.IApi,
+        protos.google.cloud.apigateway.v1.IGetApiRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getApi response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getApi(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apigateway.v1.IApi,
-          protos.google.cloud.apigateway.v1.IGetApiRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getApi response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getApi(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apigateway.v1.IApi,
+        protos.google.cloud.apigateway.v1.IGetApiRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getApi response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single ApiConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/global/apis/* /configs/*`
-   * @param {google.cloud.apigateway.v1.GetApiConfigRequest.ConfigView} request.view
-   *   Specifies which fields of the API Config are returned in the response.
-   *   Defaults to `BASIC` view.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apigateway.v1.ApiConfig|ApiConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.get_api_config.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_GetApiConfig_async
-   */
+/**
+ * Gets details of a single ApiConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the form:
+ *   `projects/* /locations/global/apis/* /configs/*`
+ * @param {google.cloud.apigateway.v1.GetApiConfigRequest.ConfigView} request.view
+ *   Specifies which fields of the API Config are returned in the response.
+ *   Defaults to `BASIC` view.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apigateway.v1.ApiConfig|ApiConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.get_api_config.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_GetApiConfig_async
+ */
   getApiConfig(
-    request?: protos.google.cloud.apigateway.v1.IGetApiConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IApiConfig,
-      protos.google.cloud.apigateway.v1.IGetApiConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IGetApiConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IApiConfig,
+        protos.google.cloud.apigateway.v1.IGetApiConfigRequest|undefined, {}|undefined
+      ]>;
   getApiConfig(
-    request: protos.google.cloud.apigateway.v1.IGetApiConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apigateway.v1.IApiConfig,
-      protos.google.cloud.apigateway.v1.IGetApiConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getApiConfig(
-    request: protos.google.cloud.apigateway.v1.IGetApiConfigRequest,
-    callback: Callback<
-      protos.google.cloud.apigateway.v1.IApiConfig,
-      protos.google.cloud.apigateway.v1.IGetApiConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getApiConfig(
-    request?: protos.google.cloud.apigateway.v1.IGetApiConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apigateway.v1.IGetApiConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apigateway.v1.IApiConfig,
-          | protos.google.cloud.apigateway.v1.IGetApiConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apigateway.v1.IApiConfig,
-      protos.google.cloud.apigateway.v1.IGetApiConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IApiConfig,
-      protos.google.cloud.apigateway.v1.IGetApiConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apigateway.v1.IGetApiConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getApiConfig(
+      request: protos.google.cloud.apigateway.v1.IGetApiConfigRequest,
+      callback: Callback<
+          protos.google.cloud.apigateway.v1.IApiConfig,
+          protos.google.cloud.apigateway.v1.IGetApiConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getApiConfig(
+      request?: protos.google.cloud.apigateway.v1.IGetApiConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apigateway.v1.IApiConfig,
+          protos.google.cloud.apigateway.v1.IGetApiConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apigateway.v1.IApiConfig,
+          protos.google.cloud.apigateway.v1.IGetApiConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IApiConfig,
+        protos.google.cloud.apigateway.v1.IGetApiConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getApiConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apigateway.v1.IApiConfig,
-          | protos.google.cloud.apigateway.v1.IGetApiConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apigateway.v1.IApiConfig,
+        protos.google.cloud.apigateway.v1.IGetApiConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getApiConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getApiConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apigateway.v1.IApiConfig,
-          protos.google.cloud.apigateway.v1.IGetApiConfigRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getApiConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getApiConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apigateway.v1.IApiConfig,
+        protos.google.cloud.apigateway.v1.IGetApiConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getApiConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new Gateway in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the Gateway, of the form:
-   *   `projects/* /locations/*`
-   * @param {string} request.gatewayId
-   *   Required. Identifier to assign to the Gateway. Must be unique within scope of
-   *   the parent resource.
-   * @param {google.cloud.apigateway.v1.Gateway} request.gateway
-   *   Required. Gateway resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.create_gateway.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateGateway_async
-   */
+/**
+ * Creates a new Gateway in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the Gateway, of the form:
+ *   `projects/* /locations/*`
+ * @param {string} request.gatewayId
+ *   Required. Identifier to assign to the Gateway. Must be unique within scope of
+ *   the parent resource.
+ * @param {google.cloud.apigateway.v1.Gateway} request.gateway
+ *   Required. Gateway resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.create_gateway.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_CreateGateway_async
+ */
   createGateway(
-    request?: protos.google.cloud.apigateway.v1.ICreateGatewayRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IGateway,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.ICreateGatewayRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createGateway(
-    request: protos.google.cloud.apigateway.v1.ICreateGatewayRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IGateway,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.ICreateGatewayRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createGateway(
-    request: protos.google.cloud.apigateway.v1.ICreateGatewayRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IGateway,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.ICreateGatewayRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createGateway(
-    request?: protos.google.cloud.apigateway.v1.ICreateGatewayRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IGateway,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IGateway,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IGateway,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apigateway.v1.ICreateGatewayRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IGateway,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createGateway response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createGateway request %j', request);
-    return this.innerApiCalls
-      .createGateway(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apigateway.v1.IGateway,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createGateway response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createGateway(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createGateway response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createGateway()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.create_gateway.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateGateway_async
-   */
-  async checkCreateGatewayProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apigateway.v1.Gateway,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createGateway()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.create_gateway.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_CreateGateway_async
+ */
+  async checkCreateGatewayProgress(name: string): Promise<LROperation<protos.google.cloud.apigateway.v1.Gateway, protos.google.cloud.apigateway.v1.OperationMetadata>>{
     this._log.info('createGateway long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createGateway,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apigateway.v1.Gateway,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createGateway, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apigateway.v1.Gateway, protos.google.cloud.apigateway.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Gateway.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Field mask is used to specify the fields to be overwritten in the
-   *   Gateway resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.apigateway.v1.Gateway} request.gateway
-   *   Required. Gateway resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.update_gateway.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateGateway_async
-   */
+/**
+ * Updates the parameters of a single Gateway.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Field mask is used to specify the fields to be overwritten in the
+ *   Gateway resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.apigateway.v1.Gateway} request.gateway
+ *   Required. Gateway resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.update_gateway.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateGateway_async
+ */
   updateGateway(
-    request?: protos.google.cloud.apigateway.v1.IUpdateGatewayRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IGateway,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IUpdateGatewayRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateGateway(
-    request: protos.google.cloud.apigateway.v1.IUpdateGatewayRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IGateway,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IUpdateGatewayRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateGateway(
-    request: protos.google.cloud.apigateway.v1.IUpdateGatewayRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IGateway,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IUpdateGatewayRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateGateway(
-    request?: protos.google.cloud.apigateway.v1.IUpdateGatewayRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IGateway,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IGateway,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IGateway,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apigateway.v1.IUpdateGatewayRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'gateway.name': request.gateway!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'gateway.name': request.gateway!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IGateway,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateGateway response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateGateway request %j', request);
-    return this.innerApiCalls
-      .updateGateway(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apigateway.v1.IGateway,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateGateway response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateGateway(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apigateway.v1.IGateway, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateGateway response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateGateway()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.update_gateway.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateGateway_async
-   */
-  async checkUpdateGatewayProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apigateway.v1.Gateway,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateGateway()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.update_gateway.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateGateway_async
+ */
+  async checkUpdateGatewayProgress(name: string): Promise<LROperation<protos.google.cloud.apigateway.v1.Gateway, protos.google.cloud.apigateway.v1.OperationMetadata>>{
     this._log.info('updateGateway long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateGateway,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apigateway.v1.Gateway,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateGateway, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apigateway.v1.Gateway, protos.google.cloud.apigateway.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Gateway.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/* /gateways/*`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_gateway.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteGateway_async
-   */
+/**
+ * Deletes a single Gateway.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the form:
+ *   `projects/* /locations/* /gateways/*`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.delete_gateway.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteGateway_async
+ */
   deleteGateway(
-    request?: protos.google.cloud.apigateway.v1.IDeleteGatewayRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IDeleteGatewayRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteGateway(
-    request: protos.google.cloud.apigateway.v1.IDeleteGatewayRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IDeleteGatewayRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteGateway(
-    request: protos.google.cloud.apigateway.v1.IDeleteGatewayRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IDeleteGatewayRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteGateway(
-    request?: protos.google.cloud.apigateway.v1.IDeleteGatewayRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apigateway.v1.IDeleteGatewayRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteGateway response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteGateway request %j', request);
-    return this.innerApiCalls
-      .deleteGateway(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteGateway response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteGateway(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteGateway response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteGateway()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_gateway.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteGateway_async
-   */
-  async checkDeleteGatewayProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteGateway()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.delete_gateway.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteGateway_async
+ */
+  async checkDeleteGatewayProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.apigateway.v1.OperationMetadata>>{
     this._log.info('deleteGateway long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteGateway,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteGateway, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.apigateway.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new Api in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the API, of the form:
-   *   `projects/* /locations/global`
-   * @param {string} request.apiId
-   *   Required. Identifier to assign to the API. Must be unique within scope of
-   *   the parent resource.
-   * @param {google.cloud.apigateway.v1.Api} request.api
-   *   Required. API resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.create_api.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApi_async
-   */
+/**
+ * Creates a new Api in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the API, of the form:
+ *   `projects/* /locations/global`
+ * @param {string} request.apiId
+ *   Required. Identifier to assign to the API. Must be unique within scope of
+ *   the parent resource.
+ * @param {google.cloud.apigateway.v1.Api} request.api
+ *   Required. API resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.create_api.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApi_async
+ */
   createApi(
-    request?: protos.google.cloud.apigateway.v1.ICreateApiRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApi,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.ICreateApiRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createApi(
-    request: protos.google.cloud.apigateway.v1.ICreateApiRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApi,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.ICreateApiRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createApi(
-    request: protos.google.cloud.apigateway.v1.ICreateApiRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApi,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.ICreateApiRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createApi(
-    request?: protos.google.cloud.apigateway.v1.ICreateApiRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApi,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApi,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApi,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apigateway.v1.ICreateApiRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApi,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createApi response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createApi request %j', request);
-    return this.innerApiCalls
-      .createApi(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApi,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createApi response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createApi(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createApi response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createApi()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.create_api.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApi_async
-   */
-  async checkCreateApiProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apigateway.v1.Api,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createApi()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.create_api.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApi_async
+ */
+  async checkCreateApiProgress(name: string): Promise<LROperation<protos.google.cloud.apigateway.v1.Api, protos.google.cloud.apigateway.v1.OperationMetadata>>{
     this._log.info('createApi long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createApi,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apigateway.v1.Api,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createApi, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apigateway.v1.Api, protos.google.cloud.apigateway.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Api.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Field mask is used to specify the fields to be overwritten in the
-   *   Api resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.apigateway.v1.Api} request.api
-   *   Required. API resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.update_api.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApi_async
-   */
+/**
+ * Updates the parameters of a single Api.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Field mask is used to specify the fields to be overwritten in the
+ *   Api resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.apigateway.v1.Api} request.api
+ *   Required. API resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.update_api.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApi_async
+ */
   updateApi(
-    request?: protos.google.cloud.apigateway.v1.IUpdateApiRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApi,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IUpdateApiRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateApi(
-    request: protos.google.cloud.apigateway.v1.IUpdateApiRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApi,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IUpdateApiRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateApi(
-    request: protos.google.cloud.apigateway.v1.IUpdateApiRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApi,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IUpdateApiRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateApi(
-    request?: protos.google.cloud.apigateway.v1.IUpdateApiRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApi,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApi,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApi,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apigateway.v1.IUpdateApiRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'api.name': request.api!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'api.name': request.api!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApi,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateApi response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateApi request %j', request);
-    return this.innerApiCalls
-      .updateApi(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApi,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateApi response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateApi(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apigateway.v1.IApi, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateApi response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateApi()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.update_api.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApi_async
-   */
-  async checkUpdateApiProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apigateway.v1.Api,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateApi()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.update_api.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApi_async
+ */
+  async checkUpdateApiProgress(name: string): Promise<LROperation<protos.google.cloud.apigateway.v1.Api, protos.google.cloud.apigateway.v1.OperationMetadata>>{
     this._log.info('updateApi long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateApi,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apigateway.v1.Api,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateApi, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apigateway.v1.Api, protos.google.cloud.apigateway.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Api.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/global/apis/*`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApi_async
-   */
+/**
+ * Deletes a single Api.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the form:
+ *   `projects/* /locations/global/apis/*`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApi_async
+ */
   deleteApi(
-    request?: protos.google.cloud.apigateway.v1.IDeleteApiRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IDeleteApiRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteApi(
-    request: protos.google.cloud.apigateway.v1.IDeleteApiRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IDeleteApiRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteApi(
-    request: protos.google.cloud.apigateway.v1.IDeleteApiRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IDeleteApiRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteApi(
-    request?: protos.google.cloud.apigateway.v1.IDeleteApiRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apigateway.v1.IDeleteApiRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteApi response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteApi request %j', request);
-    return this.innerApiCalls
-      .deleteApi(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteApi response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteApi(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteApi response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteApi()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApi_async
-   */
-  async checkDeleteApiProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteApi()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApi_async
+ */
+  async checkDeleteApiProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.apigateway.v1.OperationMetadata>>{
     this._log.info('deleteApi long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteApi,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteApi, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.apigateway.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new ApiConfig in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the API Config, of the form:
-   *   `projects/* /locations/global/apis/*`
-   * @param {string} request.apiConfigId
-   *   Required. Identifier to assign to the API Config. Must be unique within scope of
-   *   the parent resource.
-   * @param {google.cloud.apigateway.v1.ApiConfig} request.apiConfig
-   *   Required. API resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.create_api_config.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApiConfig_async
-   */
+/**
+ * Creates a new ApiConfig in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the API Config, of the form:
+ *   `projects/* /locations/global/apis/*`
+ * @param {string} request.apiConfigId
+ *   Required. Identifier to assign to the API Config. Must be unique within scope of
+ *   the parent resource.
+ * @param {google.cloud.apigateway.v1.ApiConfig} request.apiConfig
+ *   Required. API resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.create_api_config.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApiConfig_async
+ */
   createApiConfig(
-    request?: protos.google.cloud.apigateway.v1.ICreateApiConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApiConfig,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.ICreateApiConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createApiConfig(
-    request: protos.google.cloud.apigateway.v1.ICreateApiConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApiConfig,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.ICreateApiConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createApiConfig(
-    request: protos.google.cloud.apigateway.v1.ICreateApiConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApiConfig,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.ICreateApiConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createApiConfig(
-    request?: protos.google.cloud.apigateway.v1.ICreateApiConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApiConfig,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApiConfig,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApiConfig,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apigateway.v1.ICreateApiConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApiConfig,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createApiConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createApiConfig request %j', request);
-    return this.innerApiCalls
-      .createApiConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApiConfig,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createApiConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createApiConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createApiConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createApiConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.create_api_config.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApiConfig_async
-   */
-  async checkCreateApiConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apigateway.v1.ApiConfig,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createApiConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.create_api_config.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApiConfig_async
+ */
+  async checkCreateApiConfigProgress(name: string): Promise<LROperation<protos.google.cloud.apigateway.v1.ApiConfig, protos.google.cloud.apigateway.v1.OperationMetadata>>{
     this._log.info('createApiConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createApiConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apigateway.v1.ApiConfig,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createApiConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apigateway.v1.ApiConfig, protos.google.cloud.apigateway.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single ApiConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Field mask is used to specify the fields to be overwritten in the
-   *   ApiConfig resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.apigateway.v1.ApiConfig} request.apiConfig
-   *   Required. API Config resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.update_api_config.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApiConfig_async
-   */
+/**
+ * Updates the parameters of a single ApiConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Field mask is used to specify the fields to be overwritten in the
+ *   ApiConfig resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.apigateway.v1.ApiConfig} request.apiConfig
+ *   Required. API Config resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.update_api_config.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApiConfig_async
+ */
   updateApiConfig(
-    request?: protos.google.cloud.apigateway.v1.IUpdateApiConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApiConfig,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IUpdateApiConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateApiConfig(
-    request: protos.google.cloud.apigateway.v1.IUpdateApiConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApiConfig,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IUpdateApiConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateApiConfig(
-    request: protos.google.cloud.apigateway.v1.IUpdateApiConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApiConfig,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IUpdateApiConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateApiConfig(
-    request?: protos.google.cloud.apigateway.v1.IUpdateApiConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApiConfig,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApiConfig,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigateway.v1.IApiConfig,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apigateway.v1.IUpdateApiConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'api_config.name': request.apiConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'api_config.name': request.apiConfig!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApiConfig,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateApiConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateApiConfig request %j', request);
-    return this.innerApiCalls
-      .updateApiConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apigateway.v1.IApiConfig,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateApiConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateApiConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apigateway.v1.IApiConfig, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateApiConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateApiConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.update_api_config.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApiConfig_async
-   */
-  async checkUpdateApiConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apigateway.v1.ApiConfig,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateApiConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.update_api_config.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApiConfig_async
+ */
+  async checkUpdateApiConfigProgress(name: string): Promise<LROperation<protos.google.cloud.apigateway.v1.ApiConfig, protos.google.cloud.apigateway.v1.OperationMetadata>>{
     this._log.info('updateApiConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateApiConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apigateway.v1.ApiConfig,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateApiConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apigateway.v1.ApiConfig, protos.google.cloud.apigateway.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single ApiConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/global/apis/* /configs/*`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api_config.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApiConfig_async
-   */
+/**
+ * Deletes a single ApiConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the form:
+ *   `projects/* /locations/global/apis/* /configs/*`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api_config.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApiConfig_async
+ */
   deleteApiConfig(
-    request?: protos.google.cloud.apigateway.v1.IDeleteApiConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IDeleteApiConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteApiConfig(
-    request: protos.google.cloud.apigateway.v1.IDeleteApiConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IDeleteApiConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteApiConfig(
-    request: protos.google.cloud.apigateway.v1.IDeleteApiConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigateway.v1.IDeleteApiConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteApiConfig(
-    request?: protos.google.cloud.apigateway.v1.IDeleteApiConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigateway.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apigateway.v1.IDeleteApiConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteApiConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteApiConfig request %j', request);
-    return this.innerApiCalls
-      .deleteApiConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigateway.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteApiConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteApiConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigateway.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteApiConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteApiConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api_config.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApiConfig_async
-   */
-  async checkDeleteApiConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteApiConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api_config.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApiConfig_async
+ */
+  async checkDeleteApiConfigProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.apigateway.v1.OperationMetadata>>{
     this._log.info('deleteApiConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteApiConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apigateway.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteApiConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.apigateway.v1.OperationMetadata>;
   }
-  /**
-   * Lists Gateways in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the Gateway, of the form:
-   *   `projects/* /locations/*`
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {string} request.filter
-   *   Filter.
-   * @param {string} request.orderBy
-   *   Order by parameters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.apigateway.v1.Gateway|Gateway}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listGatewaysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Gateways in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the Gateway, of the form:
+ *   `projects/* /locations/*`
+ * @param {number} request.pageSize
+ *   Page size.
+ * @param {string} request.pageToken
+ *   Page token.
+ * @param {string} request.filter
+ *   Filter.
+ * @param {string} request.orderBy
+ *   Order by parameters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apigateway.v1.Gateway|Gateway}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listGatewaysAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGateways(
-    request?: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IGateway[],
-      protos.google.cloud.apigateway.v1.IListGatewaysRequest | null,
-      protos.google.cloud.apigateway.v1.IListGatewaysResponse,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IGateway[],
+        protos.google.cloud.apigateway.v1.IListGatewaysRequest|null,
+        protos.google.cloud.apigateway.v1.IListGatewaysResponse
+      ]>;
   listGateways(
-    request: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.apigateway.v1.IListGatewaysRequest,
-      | protos.google.cloud.apigateway.v1.IListGatewaysResponse
-      | null
-      | undefined,
-      protos.google.cloud.apigateway.v1.IGateway
-    >
-  ): void;
-  listGateways(
-    request: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.apigateway.v1.IListGatewaysRequest,
-      | protos.google.cloud.apigateway.v1.IListGatewaysResponse
-      | null
-      | undefined,
-      protos.google.cloud.apigateway.v1.IGateway
-    >
-  ): void;
-  listGateways(
-    request?: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.apigateway.v1.IListGatewaysRequest,
-          | protos.google.cloud.apigateway.v1.IListGatewaysResponse
-          | null
-          | undefined,
-          protos.google.cloud.apigateway.v1.IGateway
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.apigateway.v1.IListGatewaysRequest,
-      | protos.google.cloud.apigateway.v1.IListGatewaysResponse
-      | null
-      | undefined,
-      protos.google.cloud.apigateway.v1.IGateway
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IGateway[],
-      protos.google.cloud.apigateway.v1.IListGatewaysRequest | null,
-      protos.google.cloud.apigateway.v1.IListGatewaysResponse,
-    ]
-  > | void {
+          protos.google.cloud.apigateway.v1.IListGatewaysResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IGateway>): void;
+  listGateways(
+      request: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListGatewaysRequest,
+          protos.google.cloud.apigateway.v1.IListGatewaysResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IGateway>): void;
+  listGateways(
+      request?: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListGatewaysRequest,
+          protos.google.cloud.apigateway.v1.IListGatewaysResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IGateway>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListGatewaysRequest,
+          protos.google.cloud.apigateway.v1.IListGatewaysResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IGateway>):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IGateway[],
+        protos.google.cloud.apigateway.v1.IListGatewaysRequest|null,
+        protos.google.cloud.apigateway.v1.IListGatewaysResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.apigateway.v1.IListGatewaysRequest,
-          | protos.google.cloud.apigateway.v1.IListGatewaysResponse
-          | null
-          | undefined,
-          protos.google.cloud.apigateway.v1.IGateway
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apigateway.v1.IListGatewaysRequest,
+      protos.google.cloud.apigateway.v1.IListGatewaysResponse|null|undefined,
+      protos.google.cloud.apigateway.v1.IGateway>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listGateways values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2621,61 +1825,58 @@ export class ApiGatewayServiceClient {
     this._log.info('listGateways request %j', request);
     return this.innerApiCalls
       .listGateways(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.apigateway.v1.IGateway[],
-          protos.google.cloud.apigateway.v1.IListGatewaysRequest | null,
-          protos.google.cloud.apigateway.v1.IListGatewaysResponse,
-        ]) => {
-          this._log.info('listGateways values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apigateway.v1.IGateway[],
+        protos.google.cloud.apigateway.v1.IListGatewaysRequest|null,
+        protos.google.cloud.apigateway.v1.IListGatewaysResponse
+      ]) => {
+        this._log.info('listGateways values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listGateways`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the Gateway, of the form:
-   *   `projects/* /locations/*`
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {string} request.filter
-   *   Filter.
-   * @param {string} request.orderBy
-   *   Order by parameters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.apigateway.v1.Gateway|Gateway} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listGatewaysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listGateways`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the Gateway, of the form:
+ *   `projects/* /locations/*`
+ * @param {number} request.pageSize
+ *   Page size.
+ * @param {string} request.pageToken
+ *   Page token.
+ * @param {string} request.filter
+ *   Filter.
+ * @param {string} request.orderBy
+ *   Order by parameters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apigateway.v1.Gateway|Gateway} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listGatewaysAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGatewaysStream(
-    request?: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGateways stream %j', request);
     return this.descriptors.page.listGateways.createStream(
       this.innerApiCalls.listGateways as GaxCall,
@@ -2684,52 +1885,51 @@ export class ApiGatewayServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listGateways`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the Gateway, of the form:
-   *   `projects/* /locations/*`
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {string} request.filter
-   *   Filter.
-   * @param {string} request.orderBy
-   *   Order by parameters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.apigateway.v1.Gateway|Gateway}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.list_gateways.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_ListGateways_async
-   */
+/**
+ * Equivalent to `listGateways`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the Gateway, of the form:
+ *   `projects/* /locations/*`
+ * @param {number} request.pageSize
+ *   Page size.
+ * @param {string} request.pageToken
+ *   Page token.
+ * @param {string} request.filter
+ *   Filter.
+ * @param {string} request.orderBy
+ *   Order by parameters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apigateway.v1.Gateway|Gateway}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.list_gateways.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_ListGateways_async
+ */
   listGatewaysAsync(
-    request?: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.apigateway.v1.IGateway> {
+      request?: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apigateway.v1.IGateway>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGateways iterate %j', request);
     return this.descriptors.page.listGateways.asyncIterate(
       this.innerApiCalls['listGateways'] as GaxCall,
@@ -2737,111 +1937,92 @@ export class ApiGatewayServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.apigateway.v1.IGateway>;
   }
-  /**
-   * Lists Apis in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the API, of the form:
-   *   `projects/* /locations/global`
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {string} request.filter
-   *   Filter.
-   * @param {string} request.orderBy
-   *   Order by parameters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.apigateway.v1.Api|Api}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listApisAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Apis in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the API, of the form:
+ *   `projects/* /locations/global`
+ * @param {number} request.pageSize
+ *   Page size.
+ * @param {string} request.pageToken
+ *   Page token.
+ * @param {string} request.filter
+ *   Filter.
+ * @param {string} request.orderBy
+ *   Order by parameters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apigateway.v1.Api|Api}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listApisAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listApis(
-    request?: protos.google.cloud.apigateway.v1.IListApisRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IApi[],
-      protos.google.cloud.apigateway.v1.IListApisRequest | null,
-      protos.google.cloud.apigateway.v1.IListApisResponse,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IListApisRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IApi[],
+        protos.google.cloud.apigateway.v1.IListApisRequest|null,
+        protos.google.cloud.apigateway.v1.IListApisResponse
+      ]>;
   listApis(
-    request: protos.google.cloud.apigateway.v1.IListApisRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.apigateway.v1.IListApisRequest,
-      protos.google.cloud.apigateway.v1.IListApisResponse | null | undefined,
-      protos.google.cloud.apigateway.v1.IApi
-    >
-  ): void;
-  listApis(
-    request: protos.google.cloud.apigateway.v1.IListApisRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.apigateway.v1.IListApisRequest,
-      protos.google.cloud.apigateway.v1.IListApisResponse | null | undefined,
-      protos.google.cloud.apigateway.v1.IApi
-    >
-  ): void;
-  listApis(
-    request?: protos.google.cloud.apigateway.v1.IListApisRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.apigateway.v1.IListApisRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.apigateway.v1.IListApisRequest,
-          | protos.google.cloud.apigateway.v1.IListApisResponse
-          | null
-          | undefined,
-          protos.google.cloud.apigateway.v1.IApi
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.apigateway.v1.IListApisRequest,
-      protos.google.cloud.apigateway.v1.IListApisResponse | null | undefined,
-      protos.google.cloud.apigateway.v1.IApi
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IApi[],
-      protos.google.cloud.apigateway.v1.IListApisRequest | null,
-      protos.google.cloud.apigateway.v1.IListApisResponse,
-    ]
-  > | void {
+          protos.google.cloud.apigateway.v1.IListApisResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IApi>): void;
+  listApis(
+      request: protos.google.cloud.apigateway.v1.IListApisRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListApisRequest,
+          protos.google.cloud.apigateway.v1.IListApisResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IApi>): void;
+  listApis(
+      request?: protos.google.cloud.apigateway.v1.IListApisRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListApisRequest,
+          protos.google.cloud.apigateway.v1.IListApisResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IApi>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListApisRequest,
+          protos.google.cloud.apigateway.v1.IListApisResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IApi>):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IApi[],
+        protos.google.cloud.apigateway.v1.IListApisRequest|null,
+        protos.google.cloud.apigateway.v1.IListApisResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.apigateway.v1.IListApisRequest,
-          | protos.google.cloud.apigateway.v1.IListApisResponse
-          | null
-          | undefined,
-          protos.google.cloud.apigateway.v1.IApi
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apigateway.v1.IListApisRequest,
+      protos.google.cloud.apigateway.v1.IListApisResponse|null|undefined,
+      protos.google.cloud.apigateway.v1.IApi>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listApis values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2850,61 +2031,58 @@ export class ApiGatewayServiceClient {
     this._log.info('listApis request %j', request);
     return this.innerApiCalls
       .listApis(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.apigateway.v1.IApi[],
-          protos.google.cloud.apigateway.v1.IListApisRequest | null,
-          protos.google.cloud.apigateway.v1.IListApisResponse,
-        ]) => {
-          this._log.info('listApis values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apigateway.v1.IApi[],
+        protos.google.cloud.apigateway.v1.IListApisRequest|null,
+        protos.google.cloud.apigateway.v1.IListApisResponse
+      ]) => {
+        this._log.info('listApis values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listApis`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the API, of the form:
-   *   `projects/* /locations/global`
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {string} request.filter
-   *   Filter.
-   * @param {string} request.orderBy
-   *   Order by parameters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.apigateway.v1.Api|Api} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listApisAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listApis`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the API, of the form:
+ *   `projects/* /locations/global`
+ * @param {number} request.pageSize
+ *   Page size.
+ * @param {string} request.pageToken
+ *   Page token.
+ * @param {string} request.filter
+ *   Filter.
+ * @param {string} request.orderBy
+ *   Order by parameters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apigateway.v1.Api|Api} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listApisAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listApisStream(
-    request?: protos.google.cloud.apigateway.v1.IListApisRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.apigateway.v1.IListApisRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listApis stream %j', request);
     return this.descriptors.page.listApis.createStream(
       this.innerApiCalls.listApis as GaxCall,
@@ -2913,52 +2091,51 @@ export class ApiGatewayServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listApis`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the API, of the form:
-   *   `projects/* /locations/global`
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {string} request.filter
-   *   Filter.
-   * @param {string} request.orderBy
-   *   Order by parameters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.apigateway.v1.Api|Api}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.list_apis.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_ListApis_async
-   */
+/**
+ * Equivalent to `listApis`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the API, of the form:
+ *   `projects/* /locations/global`
+ * @param {number} request.pageSize
+ *   Page size.
+ * @param {string} request.pageToken
+ *   Page token.
+ * @param {string} request.filter
+ *   Filter.
+ * @param {string} request.orderBy
+ *   Order by parameters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apigateway.v1.Api|Api}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.list_apis.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_ListApis_async
+ */
   listApisAsync(
-    request?: protos.google.cloud.apigateway.v1.IListApisRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.apigateway.v1.IApi> {
+      request?: protos.google.cloud.apigateway.v1.IListApisRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apigateway.v1.IApi>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listApis iterate %j', request);
     return this.descriptors.page.listApis.asyncIterate(
       this.innerApiCalls['listApis'] as GaxCall,
@@ -2966,117 +2143,92 @@ export class ApiGatewayServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.apigateway.v1.IApi>;
   }
-  /**
-   * Lists ApiConfigs in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the API Config, of the form:
-   *   `projects/* /locations/global/apis/*`
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {string} request.filter
-   *   Filter.
-   * @param {string} request.orderBy
-   *   Order by parameters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.apigateway.v1.ApiConfig|ApiConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listApiConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists ApiConfigs in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the API Config, of the form:
+ *   `projects/* /locations/global/apis/*`
+ * @param {number} request.pageSize
+ *   Page size.
+ * @param {string} request.pageToken
+ *   Page token.
+ * @param {string} request.filter
+ *   Filter.
+ * @param {string} request.orderBy
+ *   Order by parameters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apigateway.v1.ApiConfig|ApiConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listApiConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listApiConfigs(
-    request?: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IApiConfig[],
-      protos.google.cloud.apigateway.v1.IListApiConfigsRequest | null,
-      protos.google.cloud.apigateway.v1.IListApiConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IApiConfig[],
+        protos.google.cloud.apigateway.v1.IListApiConfigsRequest|null,
+        protos.google.cloud.apigateway.v1.IListApiConfigsResponse
+      ]>;
   listApiConfigs(
-    request: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
-      | protos.google.cloud.apigateway.v1.IListApiConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apigateway.v1.IApiConfig
-    >
-  ): void;
-  listApiConfigs(
-    request: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
-      | protos.google.cloud.apigateway.v1.IListApiConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apigateway.v1.IApiConfig
-    >
-  ): void;
-  listApiConfigs(
-    request?: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
-          | protos.google.cloud.apigateway.v1.IListApiConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apigateway.v1.IApiConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
-      | protos.google.cloud.apigateway.v1.IListApiConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apigateway.v1.IApiConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IApiConfig[],
-      protos.google.cloud.apigateway.v1.IListApiConfigsRequest | null,
-      protos.google.cloud.apigateway.v1.IListApiConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.apigateway.v1.IListApiConfigsResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IApiConfig>): void;
+  listApiConfigs(
+      request: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
+          protos.google.cloud.apigateway.v1.IListApiConfigsResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IApiConfig>): void;
+  listApiConfigs(
+      request?: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
+          protos.google.cloud.apigateway.v1.IListApiConfigsResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IApiConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
+          protos.google.cloud.apigateway.v1.IListApiConfigsResponse|null|undefined,
+          protos.google.cloud.apigateway.v1.IApiConfig>):
+      Promise<[
+        protos.google.cloud.apigateway.v1.IApiConfig[],
+        protos.google.cloud.apigateway.v1.IListApiConfigsRequest|null,
+        protos.google.cloud.apigateway.v1.IListApiConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
-          | protos.google.cloud.apigateway.v1.IListApiConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apigateway.v1.IApiConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
+      protos.google.cloud.apigateway.v1.IListApiConfigsResponse|null|undefined,
+      protos.google.cloud.apigateway.v1.IApiConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listApiConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3085,61 +2237,58 @@ export class ApiGatewayServiceClient {
     this._log.info('listApiConfigs request %j', request);
     return this.innerApiCalls
       .listApiConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.apigateway.v1.IApiConfig[],
-          protos.google.cloud.apigateway.v1.IListApiConfigsRequest | null,
-          protos.google.cloud.apigateway.v1.IListApiConfigsResponse,
-        ]) => {
-          this._log.info('listApiConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apigateway.v1.IApiConfig[],
+        protos.google.cloud.apigateway.v1.IListApiConfigsRequest|null,
+        protos.google.cloud.apigateway.v1.IListApiConfigsResponse
+      ]) => {
+        this._log.info('listApiConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listApiConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the API Config, of the form:
-   *   `projects/* /locations/global/apis/*`
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {string} request.filter
-   *   Filter.
-   * @param {string} request.orderBy
-   *   Order by parameters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.apigateway.v1.ApiConfig|ApiConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listApiConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listApiConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the API Config, of the form:
+ *   `projects/* /locations/global/apis/*`
+ * @param {number} request.pageSize
+ *   Page size.
+ * @param {string} request.pageToken
+ *   Page token.
+ * @param {string} request.filter
+ *   Filter.
+ * @param {string} request.orderBy
+ *   Order by parameters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apigateway.v1.ApiConfig|ApiConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listApiConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listApiConfigsStream(
-    request?: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listApiConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listApiConfigs stream %j', request);
     return this.descriptors.page.listApiConfigs.createStream(
       this.innerApiCalls.listApiConfigs as GaxCall,
@@ -3148,52 +2297,51 @@ export class ApiGatewayServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listApiConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the API Config, of the form:
-   *   `projects/* /locations/global/apis/*`
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {string} request.filter
-   *   Filter.
-   * @param {string} request.orderBy
-   *   Order by parameters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.apigateway.v1.ApiConfig|ApiConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_gateway_service.list_api_configs.js</caption>
-   * region_tag:apigateway_v1_generated_ApiGatewayService_ListApiConfigs_async
-   */
+/**
+ * Equivalent to `listApiConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the API Config, of the form:
+ *   `projects/* /locations/global/apis/*`
+ * @param {number} request.pageSize
+ *   Page size.
+ * @param {string} request.pageToken
+ *   Page token.
+ * @param {string} request.filter
+ *   Filter.
+ * @param {string} request.orderBy
+ *   Order by parameters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apigateway.v1.ApiConfig|ApiConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_gateway_service.list_api_configs.js</caption>
+ * region_tag:apigateway_v1_generated_ApiGatewayService_ListApiConfigs_async
+ */
   listApiConfigsAsync(
-    request?: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.apigateway.v1.IApiConfig> {
+      request?: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apigateway.v1.IApiConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listApiConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listApiConfigs iterate %j', request);
     return this.descriptors.page.listApiConfigs.asyncIterate(
       this.innerApiCalls['listApiConfigs'] as GaxCall,
@@ -3212,7 +2360,7 @@ export class ApiGatewayServiceClient {
    * @param {string} api
    * @returns {string} Resource name string.
    */
-  apiPath(project: string, api: string) {
+  apiPath(project:string,api:string) {
     return this.pathTemplates.apiPathTemplate.render({
       project: project,
       api: api,
@@ -3249,7 +2397,7 @@ export class ApiGatewayServiceClient {
    * @param {string} api_config
    * @returns {string} Resource name string.
    */
-  apiConfigPath(project: string, api: string, apiConfig: string) {
+  apiConfigPath(project:string,api:string,apiConfig:string) {
     return this.pathTemplates.apiConfigPathTemplate.render({
       project: project,
       api: api,
@@ -3265,8 +2413,7 @@ export class ApiGatewayServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiConfigName(apiConfigName: string) {
-    return this.pathTemplates.apiConfigPathTemplate.match(apiConfigName)
-      .project;
+    return this.pathTemplates.apiConfigPathTemplate.match(apiConfigName).project;
   }
 
   /**
@@ -3288,8 +2435,7 @@ export class ApiGatewayServiceClient {
    * @returns {string} A string representing the api_config.
    */
   matchApiConfigFromApiConfigName(apiConfigName: string) {
-    return this.pathTemplates.apiConfigPathTemplate.match(apiConfigName)
-      .api_config;
+    return this.pathTemplates.apiConfigPathTemplate.match(apiConfigName).api_config;
   }
 
   /**
@@ -3300,7 +2446,7 @@ export class ApiGatewayServiceClient {
    * @param {string} gateway
    * @returns {string} Resource name string.
    */
-  gatewayPath(project: string, location: string, gateway: string) {
+  gatewayPath(project:string,location:string,gateway:string) {
     return this.pathTemplates.gatewayPathTemplate.render({
       project: project,
       location: location,

@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class VersionsClient {
    *     const client = new VersionsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof VersionsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'appengine.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class VersionsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class VersionsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -214,89 +187,55 @@ export class VersionsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listVersions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'versions'
-      ),
+      listVersions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'versions')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=apps/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=apps/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=apps/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=apps/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=apps/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=apps/*}/locations',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=apps/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=apps/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createVersionResponse = protoFilesRoot.lookup(
-      '.google.appengine.v1.Version'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.Version') as gax.protobuf.Type;
     const createVersionMetadata = protoFilesRoot.lookup(
-      '.google.appengine.v1.CreateVersionMetadataV1'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.CreateVersionMetadataV1') as gax.protobuf.Type;
     const updateVersionResponse = protoFilesRoot.lookup(
-      '.google.appengine.v1.Version'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.Version') as gax.protobuf.Type;
     const updateVersionMetadata = protoFilesRoot.lookup(
-      '.google.appengine.v1.OperationMetadataV1'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.OperationMetadataV1') as gax.protobuf.Type;
     const deleteVersionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteVersionMetadata = protoFilesRoot.lookup(
-      '.google.appengine.v1.OperationMetadataV1'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.OperationMetadataV1') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createVersion: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createVersionResponse.decode.bind(createVersionResponse),
-        createVersionMetadata.decode.bind(createVersionMetadata)
-      ),
+        createVersionMetadata.decode.bind(createVersionMetadata)),
       updateVersion: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateVersionResponse.decode.bind(updateVersionResponse),
-        updateVersionMetadata.decode.bind(updateVersionMetadata)
-      ),
+        updateVersionMetadata.decode.bind(updateVersionMetadata)),
       deleteVersion: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteVersionResponse.decode.bind(deleteVersionResponse),
-        deleteVersionMetadata.decode.bind(deleteVersionMetadata)
-      ),
+        deleteVersionMetadata.decode.bind(deleteVersionMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.appengine.v1.Versions',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.appengine.v1.Versions', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -327,39 +266,28 @@ export class VersionsClient {
     // Put together the "service stub" for
     // google.appengine.v1.Versions.
     this.versionsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.appengine.v1.Versions'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.appengine.v1.Versions') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.appengine.v1.Versions,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const versionsStubMethods = [
-      'listVersions',
-      'getVersion',
-      'createVersion',
-      'updateVersion',
-      'deleteVersion',
-    ];
+    const versionsStubMethods =
+        ['listVersions', 'getVersion', 'createVersion', 'updateVersion', 'deleteVersion'];
     for (const methodName of versionsStubMethods) {
       const callPromise = this.versionsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -384,14 +312,8 @@ export class VersionsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'appengine.googleapis.com';
   }
@@ -402,14 +324,8 @@ export class VersionsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'appengine.googleapis.com';
   }
@@ -443,7 +359,7 @@ export class VersionsClient {
     return [
       'https://www.googleapis.com/auth/appengine.admin',
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-platform.read-only',
+      'https://www.googleapis.com/auth/cloud-platform.read-only'
     ];
   }
 
@@ -453,9 +369,8 @@ export class VersionsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -466,771 +381,556 @@ export class VersionsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the specified Version resource.
-   * By default, only a `BASIC_VIEW` will be returned.
-   * Specify the `FULL_VIEW` parameter to get the full resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example:
-   *   `apps/myapp/services/default/versions/v1`.
-   * @param {google.appengine.v1.VersionView} request.view
-   *   Controls the set of fields returned in the `Get` response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.appengine.v1.Version|Version}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/versions.get_version.js</caption>
-   * region_tag:appengine_v1_generated_Versions_GetVersion_async
-   */
+/**
+ * Gets the specified Version resource.
+ * By default, only a `BASIC_VIEW` will be returned.
+ * Specify the `FULL_VIEW` parameter to get the full resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource requested. Example:
+ *   `apps/myapp/services/default/versions/v1`.
+ * @param {google.appengine.v1.VersionView} request.view
+ *   Controls the set of fields returned in the `Get` response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.appengine.v1.Version|Version}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/versions.get_version.js</caption>
+ * region_tag:appengine_v1_generated_Versions_GetVersion_async
+ */
   getVersion(
-    request?: protos.google.appengine.v1.IGetVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IVersion,
-      protos.google.appengine.v1.IGetVersionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IGetVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.appengine.v1.IVersion,
+        protos.google.appengine.v1.IGetVersionRequest|undefined, {}|undefined
+      ]>;
   getVersion(
-    request: protos.google.appengine.v1.IGetVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.appengine.v1.IVersion,
-      protos.google.appengine.v1.IGetVersionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getVersion(
-    request: protos.google.appengine.v1.IGetVersionRequest,
-    callback: Callback<
-      protos.google.appengine.v1.IVersion,
-      protos.google.appengine.v1.IGetVersionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getVersion(
-    request?: protos.google.appengine.v1.IGetVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.appengine.v1.IGetVersionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.appengine.v1.IVersion,
-          protos.google.appengine.v1.IGetVersionRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.appengine.v1.IVersion,
-      protos.google.appengine.v1.IGetVersionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.appengine.v1.IVersion,
-      protos.google.appengine.v1.IGetVersionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.appengine.v1.IGetVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getVersion(
+      request: protos.google.appengine.v1.IGetVersionRequest,
+      callback: Callback<
+          protos.google.appengine.v1.IVersion,
+          protos.google.appengine.v1.IGetVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getVersion(
+      request?: protos.google.appengine.v1.IGetVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.appengine.v1.IVersion,
+          protos.google.appengine.v1.IGetVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.appengine.v1.IVersion,
+          protos.google.appengine.v1.IGetVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.appengine.v1.IVersion,
+        protos.google.appengine.v1.IGetVersionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getVersion request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.appengine.v1.IVersion,
-          protos.google.appengine.v1.IGetVersionRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.appengine.v1.IVersion,
+        protos.google.appengine.v1.IGetVersionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getVersion(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.appengine.v1.IVersion,
-          protos.google.appengine.v1.IGetVersionRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getVersion response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getVersion(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.appengine.v1.IVersion,
+        protos.google.appengine.v1.IGetVersionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getVersion response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Deploys code and resource files to a new version.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent resource to create this version under. Example:
-   *   `apps/myapp/services/default`.
-   * @param {google.appengine.v1.Version} request.version
-   *   Application deployment configuration.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/versions.create_version.js</caption>
-   * region_tag:appengine_v1_generated_Versions_CreateVersion_async
-   */
+/**
+ * Deploys code and resource files to a new version.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent resource to create this version under. Example:
+ *   `apps/myapp/services/default`.
+ * @param {google.appengine.v1.Version} request.version
+ *   Application deployment configuration.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/versions.create_version.js</caption>
+ * region_tag:appengine_v1_generated_Versions_CreateVersion_async
+ */
   createVersion(
-    request?: protos.google.appengine.v1.ICreateVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IVersion,
-        protos.google.appengine.v1.ICreateVersionMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.ICreateVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.ICreateVersionMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createVersion(
-    request: protos.google.appengine.v1.ICreateVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IVersion,
-        protos.google.appengine.v1.ICreateVersionMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.ICreateVersionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.ICreateVersionMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createVersion(
-    request: protos.google.appengine.v1.ICreateVersionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IVersion,
-        protos.google.appengine.v1.ICreateVersionMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.ICreateVersionRequest,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.ICreateVersionMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createVersion(
-    request?: protos.google.appengine.v1.ICreateVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IVersion,
-            protos.google.appengine.v1.ICreateVersionMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.appengine.v1.IVersion,
-        protos.google.appengine.v1.ICreateVersionMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IVersion,
-        protos.google.appengine.v1.ICreateVersionMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.appengine.v1.ICreateVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.ICreateVersionMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.ICreateVersionMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.ICreateVersionMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IVersion,
-            protos.google.appengine.v1.ICreateVersionMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.ICreateVersionMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createVersion response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createVersion request %j', request);
-    return this.innerApiCalls
-      .createVersion(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.appengine.v1.IVersion,
-            protos.google.appengine.v1.ICreateVersionMetadataV1
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createVersion response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createVersion(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.ICreateVersionMetadataV1>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createVersion response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createVersion()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/versions.create_version.js</caption>
-   * region_tag:appengine_v1_generated_Versions_CreateVersion_async
-   */
-  async checkCreateVersionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.appengine.v1.Version,
-      protos.google.appengine.v1.CreateVersionMetadataV1
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createVersion()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/versions.create_version.js</caption>
+ * region_tag:appengine_v1_generated_Versions_CreateVersion_async
+ */
+  async checkCreateVersionProgress(name: string): Promise<LROperation<protos.google.appengine.v1.Version, protos.google.appengine.v1.CreateVersionMetadataV1>>{
     this._log.info('createVersion long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createVersion,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.appengine.v1.Version,
-      protos.google.appengine.v1.CreateVersionMetadataV1
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createVersion, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.appengine.v1.Version, protos.google.appengine.v1.CreateVersionMetadataV1>;
   }
-  /**
-   * Updates the specified Version resource.
-   * You can specify the following fields depending on the App Engine
-   * environment and type of scaling that the version resource uses:
-   *
-   * **Standard environment**
-   *
-   * * [`instance_class`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.instance_class)
-   *
-   * *automatic scaling* in the standard environment:
-   *
-   * * [`automatic_scaling.min_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
-   * * [`automatic_scaling.max_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
-   * * [`automaticScaling.standard_scheduler_settings.max_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings)
-   * * [`automaticScaling.standard_scheduler_settings.min_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings)
-   * * [`automaticScaling.standard_scheduler_settings.target_cpu_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings)
-   * * [`automaticScaling.standard_scheduler_settings.target_throughput_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings)
-   *
-   * *basic scaling* or *manual scaling* in the standard environment:
-   *
-   * * [`serving_status`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.serving_status)
-   * * [`manual_scaling.instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#manualscaling)
-   *
-   * **Flexible environment**
-   *
-   * * [`serving_status`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.serving_status)
-   *
-   * *automatic scaling* in the flexible environment:
-   *
-   * * [`automatic_scaling.min_total_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
-   * * [`automatic_scaling.max_total_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
-   * * [`automatic_scaling.cool_down_period_sec`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
-   * * [`automatic_scaling.cpu_utilization.target_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
-   *
-   * *manual scaling* in the flexible environment:
-   *
-   * * [`manual_scaling.instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#manualscaling)
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource to update. Example:
-   *   `apps/myapp/services/default/versions/1`.
-   * @param {google.appengine.v1.Version} request.version
-   *   A Version containing the updated resource. Only fields set in the field
-   *   mask will be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Standard field mask for the set of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/versions.update_version.js</caption>
-   * region_tag:appengine_v1_generated_Versions_UpdateVersion_async
-   */
+/**
+ * Updates the specified Version resource.
+ * You can specify the following fields depending on the App Engine
+ * environment and type of scaling that the version resource uses:
+ *
+ * **Standard environment**
+ *
+ * * [`instance_class`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.instance_class)
+ *
+ * *automatic scaling* in the standard environment:
+ *
+ * * [`automatic_scaling.min_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
+ * * [`automatic_scaling.max_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
+ * * [`automaticScaling.standard_scheduler_settings.max_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings)
+ * * [`automaticScaling.standard_scheduler_settings.min_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings)
+ * * [`automaticScaling.standard_scheduler_settings.target_cpu_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings)
+ * * [`automaticScaling.standard_scheduler_settings.target_throughput_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings)
+ *
+ * *basic scaling* or *manual scaling* in the standard environment:
+ *
+ * * [`serving_status`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.serving_status)
+ * * [`manual_scaling.instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#manualscaling)
+ *
+ * **Flexible environment**
+ *
+ * * [`serving_status`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.serving_status)
+ *
+ * *automatic scaling* in the flexible environment:
+ *
+ * * [`automatic_scaling.min_total_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
+ * * [`automatic_scaling.max_total_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
+ * * [`automatic_scaling.cool_down_period_sec`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
+ * * [`automatic_scaling.cpu_utilization.target_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling)
+ *
+ * *manual scaling* in the flexible environment:
+ *
+ * * [`manual_scaling.instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#manualscaling)
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource to update. Example:
+ *   `apps/myapp/services/default/versions/1`.
+ * @param {google.appengine.v1.Version} request.version
+ *   A Version containing the updated resource. Only fields set in the field
+ *   mask will be updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Standard field mask for the set of fields to be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/versions.update_version.js</caption>
+ * region_tag:appengine_v1_generated_Versions_UpdateVersion_async
+ */
   updateVersion(
-    request?: protos.google.appengine.v1.IUpdateVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IVersion,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IUpdateVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateVersion(
-    request: protos.google.appengine.v1.IUpdateVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IVersion,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IUpdateVersionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateVersion(
-    request: protos.google.appengine.v1.IUpdateVersionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IVersion,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IUpdateVersionRequest,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateVersion(
-    request?: protos.google.appengine.v1.IUpdateVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IVersion,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.appengine.v1.IVersion,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IVersion,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.appengine.v1.IUpdateVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IVersion,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateVersion response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateVersion request %j', request);
-    return this.innerApiCalls
-      .updateVersion(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.appengine.v1.IVersion,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateVersion response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateVersion(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.appengine.v1.IVersion, protos.google.appengine.v1.IOperationMetadataV1>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateVersion response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateVersion()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/versions.update_version.js</caption>
-   * region_tag:appengine_v1_generated_Versions_UpdateVersion_async
-   */
-  async checkUpdateVersionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.appengine.v1.Version,
-      protos.google.appengine.v1.OperationMetadataV1
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateVersion()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/versions.update_version.js</caption>
+ * region_tag:appengine_v1_generated_Versions_UpdateVersion_async
+ */
+  async checkUpdateVersionProgress(name: string): Promise<LROperation<protos.google.appengine.v1.Version, protos.google.appengine.v1.OperationMetadataV1>>{
     this._log.info('updateVersion long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateVersion,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.appengine.v1.Version,
-      protos.google.appengine.v1.OperationMetadataV1
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateVersion, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.appengine.v1.Version, protos.google.appengine.v1.OperationMetadataV1>;
   }
-  /**
-   * Deletes an existing Version resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example:
-   *   `apps/myapp/services/default/versions/v1`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/versions.delete_version.js</caption>
-   * region_tag:appengine_v1_generated_Versions_DeleteVersion_async
-   */
+/**
+ * Deletes an existing Version resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource requested. Example:
+ *   `apps/myapp/services/default/versions/v1`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/versions.delete_version.js</caption>
+ * region_tag:appengine_v1_generated_Versions_DeleteVersion_async
+ */
   deleteVersion(
-    request?: protos.google.appengine.v1.IDeleteVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IDeleteVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteVersion(
-    request: protos.google.appengine.v1.IDeleteVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IDeleteVersionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteVersion(
-    request: protos.google.appengine.v1.IDeleteVersionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IDeleteVersionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteVersion(
-    request?: protos.google.appengine.v1.IDeleteVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.appengine.v1.IDeleteVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteVersion response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteVersion request %j', request);
-    return this.innerApiCalls
-      .deleteVersion(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteVersion response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteVersion(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteVersion response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteVersion()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/versions.delete_version.js</caption>
-   * region_tag:appengine_v1_generated_Versions_DeleteVersion_async
-   */
-  async checkDeleteVersionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.appengine.v1.OperationMetadataV1
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteVersion()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/versions.delete_version.js</caption>
+ * region_tag:appengine_v1_generated_Versions_DeleteVersion_async
+ */
+  async checkDeleteVersionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.appengine.v1.OperationMetadataV1>>{
     this._log.info('deleteVersion long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteVersion,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.appengine.v1.OperationMetadataV1
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteVersion, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.appengine.v1.OperationMetadataV1>;
   }
-  /**
-   * Lists the versions of a service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent Service resource. Example:
-   *   `apps/myapp/services/default`.
-   * @param {google.appengine.v1.VersionView} request.view
-   *   Controls the set of fields returned in the `List` response.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.appengine.v1.Version|Version}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the versions of a service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent Service resource. Example:
+ *   `apps/myapp/services/default`.
+ * @param {google.appengine.v1.VersionView} request.view
+ *   Controls the set of fields returned in the `List` response.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.appengine.v1.Version|Version}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listVersions(
-    request?: protos.google.appengine.v1.IListVersionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IVersion[],
-      protos.google.appengine.v1.IListVersionsRequest | null,
-      protos.google.appengine.v1.IListVersionsResponse,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IListVersionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.appengine.v1.IVersion[],
+        protos.google.appengine.v1.IListVersionsRequest|null,
+        protos.google.appengine.v1.IListVersionsResponse
+      ]>;
   listVersions(
-    request: protos.google.appengine.v1.IListVersionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.appengine.v1.IListVersionsRequest,
-      protos.google.appengine.v1.IListVersionsResponse | null | undefined,
-      protos.google.appengine.v1.IVersion
-    >
-  ): void;
-  listVersions(
-    request: protos.google.appengine.v1.IListVersionsRequest,
-    callback: PaginationCallback<
-      protos.google.appengine.v1.IListVersionsRequest,
-      protos.google.appengine.v1.IListVersionsResponse | null | undefined,
-      protos.google.appengine.v1.IVersion
-    >
-  ): void;
-  listVersions(
-    request?: protos.google.appengine.v1.IListVersionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.appengine.v1.IListVersionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.appengine.v1.IListVersionsRequest,
-          protos.google.appengine.v1.IListVersionsResponse | null | undefined,
-          protos.google.appengine.v1.IVersion
-        >,
-    callback?: PaginationCallback<
-      protos.google.appengine.v1.IListVersionsRequest,
-      protos.google.appengine.v1.IListVersionsResponse | null | undefined,
-      protos.google.appengine.v1.IVersion
-    >
-  ): Promise<
-    [
-      protos.google.appengine.v1.IVersion[],
-      protos.google.appengine.v1.IListVersionsRequest | null,
-      protos.google.appengine.v1.IListVersionsResponse,
-    ]
-  > | void {
+          protos.google.appengine.v1.IListVersionsResponse|null|undefined,
+          protos.google.appengine.v1.IVersion>): void;
+  listVersions(
+      request: protos.google.appengine.v1.IListVersionsRequest,
+      callback: PaginationCallback<
+          protos.google.appengine.v1.IListVersionsRequest,
+          protos.google.appengine.v1.IListVersionsResponse|null|undefined,
+          protos.google.appengine.v1.IVersion>): void;
+  listVersions(
+      request?: protos.google.appengine.v1.IListVersionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.appengine.v1.IListVersionsRequest,
+          protos.google.appengine.v1.IListVersionsResponse|null|undefined,
+          protos.google.appengine.v1.IVersion>,
+      callback?: PaginationCallback<
+          protos.google.appengine.v1.IListVersionsRequest,
+          protos.google.appengine.v1.IListVersionsResponse|null|undefined,
+          protos.google.appengine.v1.IVersion>):
+      Promise<[
+        protos.google.appengine.v1.IVersion[],
+        protos.google.appengine.v1.IListVersionsRequest|null,
+        protos.google.appengine.v1.IListVersionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.appengine.v1.IListVersionsRequest,
-          protos.google.appengine.v1.IListVersionsResponse | null | undefined,
-          protos.google.appengine.v1.IVersion
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.appengine.v1.IListVersionsRequest,
+      protos.google.appengine.v1.IListVersionsResponse|null|undefined,
+      protos.google.appengine.v1.IVersion>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1239,59 +939,56 @@ export class VersionsClient {
     this._log.info('listVersions request %j', request);
     return this.innerApiCalls
       .listVersions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.appengine.v1.IVersion[],
-          protos.google.appengine.v1.IListVersionsRequest | null,
-          protos.google.appengine.v1.IListVersionsResponse,
-        ]) => {
-          this._log.info('listVersions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.appengine.v1.IVersion[],
+        protos.google.appengine.v1.IListVersionsRequest|null,
+        protos.google.appengine.v1.IListVersionsResponse
+      ]) => {
+        this._log.info('listVersions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listVersions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent Service resource. Example:
-   *   `apps/myapp/services/default`.
-   * @param {google.appengine.v1.VersionView} request.view
-   *   Controls the set of fields returned in the `List` response.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.appengine.v1.Version|Version} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listVersions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent Service resource. Example:
+ *   `apps/myapp/services/default`.
+ * @param {google.appengine.v1.VersionView} request.view
+ *   Controls the set of fields returned in the `List` response.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.appengine.v1.Version|Version} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listVersionsStream(
-    request?: protos.google.appengine.v1.IListVersionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.appengine.v1.IListVersionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listVersions stream %j', request);
     return this.descriptors.page.listVersions.createStream(
       this.innerApiCalls.listVersions as GaxCall,
@@ -1300,50 +997,49 @@ export class VersionsClient {
     );
   }
 
-  /**
-   * Equivalent to `listVersions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent Service resource. Example:
-   *   `apps/myapp/services/default`.
-   * @param {google.appengine.v1.VersionView} request.view
-   *   Controls the set of fields returned in the `List` response.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.appengine.v1.Version|Version}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/versions.list_versions.js</caption>
-   * region_tag:appengine_v1_generated_Versions_ListVersions_async
-   */
+/**
+ * Equivalent to `listVersions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent Service resource. Example:
+ *   `apps/myapp/services/default`.
+ * @param {google.appengine.v1.VersionView} request.view
+ *   Controls the set of fields returned in the `List` response.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.appengine.v1.Version|Version}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/versions.list_versions.js</caption>
+ * region_tag:appengine_v1_generated_Versions_ListVersions_async
+ */
   listVersionsAsync(
-    request?: protos.google.appengine.v1.IListVersionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.appengine.v1.IVersion> {
+      request?: protos.google.appengine.v1.IListVersionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.appengine.v1.IVersion>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listVersions iterate %j', request);
     return this.descriptors.page.listVersions.asyncIterate(
       this.innerApiCalls['listVersions'] as GaxCall,
@@ -1364,12 +1060,7 @@ export class VersionsClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(
-    app: string,
-    service: string,
-    version: string,
-    instance: string
-  ) {
+  instancePath(app:string,service:string,version:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       app: app,
       service: service,

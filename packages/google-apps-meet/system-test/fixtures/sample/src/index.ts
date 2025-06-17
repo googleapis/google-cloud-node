@@ -16,15 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  ConferenceRecordsServiceClient,
-  SpacesServiceClient,
-} from '@google-apps/meet';
+import {ConferenceRecordsServiceClient, SpacesServiceClient} from '@google-apps/meet';
 
 // check that the client class type name can be used
-function doStuffWithConferenceRecordsServiceClient(
-  client: ConferenceRecordsServiceClient
-) {
+function doStuffWithConferenceRecordsServiceClient(client: ConferenceRecordsServiceClient) {
   client.close();
 }
 function doStuffWithSpacesServiceClient(client: SpacesServiceClient) {

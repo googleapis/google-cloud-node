@@ -29,4827 +29,3714 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta1.ServiceUsageClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'serviceusage.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          serviceusageModule.v1beta1.ServiceUsageClient.servicePath;
-        assert.strictEqual(servicePath, 'serviceusage.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          serviceusageModule.v1beta1.ServiceUsageClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'serviceusage.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'serviceusage.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'serviceusage.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new serviceusageModule.v1beta1.ServiceUsageClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'serviceusage.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'serviceusage.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'serviceusage.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new serviceusageModule.v1beta1.ServiceUsageClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = serviceusageModule.v1beta1.ServiceUsageClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.serviceUsageStub, undefined);
-      await client.initialize();
-      assert(client.serviceUsageStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.serviceUsageStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.serviceUsageStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getService', () => {
-    it('invokes getService without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.Service()
-      );
-      client.innerApiCalls.getService = stubSimpleCall(expectedResponse);
-      const [response] = await client.getService(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getService without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.Service()
-      );
-      client.innerApiCalls.getService =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getService(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.serviceusage.v1beta1.IService | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getService with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getService = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getService(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getService with closed client', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getService(request), expectedError);
-      assert(stub.calledOnce);
-    });
-  });
-
-  describe('getConsumerQuotaMetric', () => {
-    it('invokes getConsumerQuotaMetric without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-      );
-      client.innerApiCalls.getConsumerQuotaMetric =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getConsumerQuotaMetric(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConsumerQuotaMetric without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-      );
-      client.innerApiCalls.getConsumerQuotaMetric =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getConsumerQuotaMetric(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConsumerQuotaMetric with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getConsumerQuotaMetric = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getConsumerQuotaMetric(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConsumerQuotaMetric with closed client', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getConsumerQuotaMetric(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getConsumerQuotaLimit', () => {
-    it('invokes getConsumerQuotaLimit without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ConsumerQuotaLimit()
-      );
-      client.innerApiCalls.getConsumerQuotaLimit =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getConsumerQuotaLimit(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConsumerQuotaLimit without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ConsumerQuotaLimit()
-      );
-      client.innerApiCalls.getConsumerQuotaLimit =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getConsumerQuotaLimit(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.serviceusage.v1beta1.IConsumerQuotaLimit | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConsumerQuotaLimit with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getConsumerQuotaLimit = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getConsumerQuotaLimit(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConsumerQuotaLimit with closed client', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getConsumerQuotaLimit(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('enableService', () => {
-    it('invokes enableService without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.EnableServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.enableService =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.enableService(request);
-      const [response] = await operation.promise();
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.enableService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableService without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.EnableServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.enableService =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.enableService(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.api.serviceusage.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.api.serviceusage.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.enableService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableService with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.EnableServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.enableService = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.enableService(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.enableService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableService with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.EnableServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.enableService = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.enableService(request);
-      await assert.rejects(operation.promise(), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.enableService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkEnableServiceProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkEnableServiceProgress(
-        expectedResponse.name
-      );
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkEnableServiceProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkEnableServiceProgress(''),
-        expectedError
-      );
-      assert(stub.calledOnce);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('disableService', () => {
-    it('invokes disableService without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DisableServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.disableService =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.disableService(request);
-      const [response] = await operation.promise();
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.disableService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableService without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DisableServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.disableService =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.disableService(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.api.serviceusage.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.api.serviceusage.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.disableService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableService with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DisableServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.disableService = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.disableService(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.disableService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableService with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DisableServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.disableService = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.disableService(request);
-      await assert.rejects(operation.promise(), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.disableService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDisableServiceProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDisableServiceProgress(
-        expectedResponse.name
-      );
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDisableServiceProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDisableServiceProgress(''),
-        expectedError
-      );
-      assert(stub.calledOnce);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('batchEnableServices', () => {
-    it('invokes batchEnableServices without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.BatchEnableServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.batchEnableServices =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.batchEnableServices(request);
-      const [response] = await operation.promise();
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchEnableServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchEnableServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchEnableServices without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.BatchEnableServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.batchEnableServices =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchEnableServices(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.api.serviceusage.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.api.serviceusage.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchEnableServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchEnableServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchEnableServices with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.BatchEnableServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchEnableServices = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.batchEnableServices(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.batchEnableServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchEnableServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchEnableServices with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.BatchEnableServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchEnableServices = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.batchEnableServices(request);
-      await assert.rejects(operation.promise(), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.batchEnableServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchEnableServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkBatchEnableServicesProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkBatchEnableServicesProgress(
-        expectedResponse.name
-      );
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkBatchEnableServicesProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkBatchEnableServicesProgress(''),
-        expectedError
-      );
-      assert(stub.calledOnce);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createAdminOverride', () => {
-    it('invokes createAdminOverride without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAdminOverride =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createAdminOverride(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAdminOverride without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAdminOverride =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createAdminOverride(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.api.serviceusage.v1beta1.IQuotaOverride,
-              protos.google.api.serviceusage.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.api.serviceusage.v1beta1.IQuotaOverride,
-        protos.google.api.serviceusage.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAdminOverride with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAdminOverride = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createAdminOverride(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAdminOverride with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAdminOverride = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createAdminOverride(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateAdminOverrideProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateAdminOverrideProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateAdminOverrideProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateAdminOverrideProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateAdminOverride', () => {
-    it('invokes updateAdminOverride without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAdminOverride =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateAdminOverride(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAdminOverride without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAdminOverride =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAdminOverride(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.api.serviceusage.v1beta1.IQuotaOverride,
-              protos.google.api.serviceusage.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.api.serviceusage.v1beta1.IQuotaOverride,
-        protos.google.api.serviceusage.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAdminOverride with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAdminOverride = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateAdminOverride(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAdminOverride with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAdminOverride = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateAdminOverride(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateAdminOverrideProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateAdminOverrideProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateAdminOverrideProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateAdminOverrideProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteAdminOverride', () => {
-    it('invokes deleteAdminOverride without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAdminOverride =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteAdminOverride(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAdminOverride without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAdminOverride =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAdminOverride(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.api.serviceusage.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.api.serviceusage.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAdminOverride with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAdminOverride = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteAdminOverride(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAdminOverride with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAdminOverride = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteAdminOverride(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAdminOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAdminOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteAdminOverrideProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteAdminOverrideProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteAdminOverrideProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteAdminOverrideProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('importAdminOverrides', () => {
-    it('invokes importAdminOverrides without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importAdminOverrides =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importAdminOverrides(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importAdminOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importAdminOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importAdminOverrides without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importAdminOverrides =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.importAdminOverrides(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.api.serviceusage.v1beta1.IImportAdminOverridesResponse,
-              protos.google.api.serviceusage.v1beta1.IImportAdminOverridesMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.api.serviceusage.v1beta1.IImportAdminOverridesResponse,
-        protos.google.api.serviceusage.v1beta1.IImportAdminOverridesMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importAdminOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importAdminOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importAdminOverrides with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importAdminOverrides = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.importAdminOverrides(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.importAdminOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importAdminOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importAdminOverrides with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importAdminOverrides = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.importAdminOverrides(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.importAdminOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importAdminOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkImportAdminOverridesProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkImportAdminOverridesProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkImportAdminOverridesProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkImportAdminOverridesProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createConsumerOverride', () => {
-    it('invokes createConsumerOverride without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createConsumerOverride =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createConsumerOverride(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createConsumerOverride without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createConsumerOverride =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createConsumerOverride(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.api.serviceusage.v1beta1.IQuotaOverride,
-              protos.google.api.serviceusage.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.api.serviceusage.v1beta1.IQuotaOverride,
-        protos.google.api.serviceusage.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createConsumerOverride with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createConsumerOverride = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createConsumerOverride(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createConsumerOverride with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createConsumerOverride = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createConsumerOverride(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateConsumerOverrideProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateConsumerOverrideProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateConsumerOverrideProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateConsumerOverrideProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateConsumerOverride', () => {
-    it('invokes updateConsumerOverride without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateConsumerOverride =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateConsumerOverride(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConsumerOverride without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateConsumerOverride =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateConsumerOverride(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.api.serviceusage.v1beta1.IQuotaOverride,
-              protos.google.api.serviceusage.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.api.serviceusage.v1beta1.IQuotaOverride,
-        protos.google.api.serviceusage.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConsumerOverride with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateConsumerOverride = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateConsumerOverride(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConsumerOverride with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateConsumerOverride = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateConsumerOverride(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateConsumerOverrideProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateConsumerOverrideProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateConsumerOverrideProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateConsumerOverrideProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteConsumerOverride', () => {
-    it('invokes deleteConsumerOverride without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteConsumerOverride =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteConsumerOverride(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConsumerOverride without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteConsumerOverride =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteConsumerOverride(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.api.serviceusage.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.api.serviceusage.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConsumerOverride with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteConsumerOverride = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteConsumerOverride(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConsumerOverride with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteConsumerOverride = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteConsumerOverride(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteConsumerOverride as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConsumerOverride as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteConsumerOverrideProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteConsumerOverrideProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteConsumerOverrideProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteConsumerOverrideProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('importConsumerOverrides', () => {
-    it('invokes importConsumerOverrides without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importConsumerOverrides =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importConsumerOverrides(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importConsumerOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importConsumerOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importConsumerOverrides without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importConsumerOverrides =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.importConsumerOverrides(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesResponse,
-              protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesResponse,
-        protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importConsumerOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importConsumerOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importConsumerOverrides with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importConsumerOverrides = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.importConsumerOverrides(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.importConsumerOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importConsumerOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importConsumerOverrides with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importConsumerOverrides = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.importConsumerOverrides(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.importConsumerOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importConsumerOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkImportConsumerOverridesProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkImportConsumerOverridesProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkImportConsumerOverridesProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkImportConsumerOverridesProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('generateServiceIdentity', () => {
-    it('invokes generateServiceIdentity without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.generateServiceIdentity =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.generateServiceIdentity(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateServiceIdentity as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateServiceIdentity as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateServiceIdentity without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.generateServiceIdentity =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.generateServiceIdentity(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.api.serviceusage.v1beta1.IServiceIdentity,
-              protos.google.protobuf.IEmpty
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.api.serviceusage.v1beta1.IServiceIdentity,
-        protos.google.protobuf.IEmpty
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateServiceIdentity as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateServiceIdentity as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateServiceIdentity with call error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.generateServiceIdentity = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.generateServiceIdentity(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.generateServiceIdentity as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateServiceIdentity as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateServiceIdentity with LRO error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.generateServiceIdentity = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.generateServiceIdentity(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.generateServiceIdentity as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateServiceIdentity as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkGenerateServiceIdentityProgress without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkGenerateServiceIdentityProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkGenerateServiceIdentityProgress with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkGenerateServiceIdentityProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listServices', () => {
-    it('invokes listServices without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-      ];
-      client.innerApiCalls.listServices = stubSimpleCall(expectedResponse);
-      const [response] = await client.listServices(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listServices without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-      ];
-      client.innerApiCalls.listServices =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listServices(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.serviceusage.v1beta1.IService[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listServices with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listServices = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listServices(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listServicesStream without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-      ];
-      client.descriptors.page.listServices.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listServicesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.serviceusage.v1beta1.Service[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.api.serviceusage.v1beta1.Service) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listServices, request)
-      );
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listServicesStream with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listServices.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listServicesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.serviceusage.v1beta1.Service[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.api.serviceusage.v1beta1.Service) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(stub.calledOnce);
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listServices, request)
-      );
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listServices without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.Service()
-        ),
-      ];
-      client.descriptors.page.listServices.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.api.serviceusage.v1beta1.IService[] = [];
-      const iterable = client.listServicesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listServices.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listServices.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listServices with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listServices.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listServicesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.api.serviceusage.v1beta1.IService[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = serviceusageModule.v1beta1.ServiceUsageClient.servicePath;
+                assert.strictEqual(servicePath, 'serviceusage.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = serviceusageModule.v1beta1.ServiceUsageClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'serviceusage.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listServices.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listServices.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listConsumerQuotaMetrics', () => {
-    it('invokes listConsumerQuotaMetrics without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-      ];
-      client.innerApiCalls.listConsumerQuotaMetrics =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listConsumerQuotaMetrics(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConsumerQuotaMetrics without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-      ];
-      client.innerApiCalls.listConsumerQuotaMetrics =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listConsumerQuotaMetrics(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConsumerQuotaMetrics with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listConsumerQuotaMetrics = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listConsumerQuotaMetrics(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConsumerQuotaMetricsStream without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-      ];
-      client.descriptors.page.listConsumerQuotaMetrics.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listConsumerQuotaMetricsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'serviceusage.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listConsumerQuotaMetrics
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listConsumerQuotaMetrics, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listConsumerQuotaMetrics
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('invokes listConsumerQuotaMetricsStream with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listConsumerQuotaMetrics.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listConsumerQuotaMetricsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'serviceusage.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listConsumerQuotaMetrics
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listConsumerQuotaMetrics, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listConsumerQuotaMetrics
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listConsumerQuotaMetrics without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
-        ),
-      ];
-      client.descriptors.page.listConsumerQuotaMetrics.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric[] =
-        [];
-      const iterable = client.listConsumerQuotaMetricsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listConsumerQuotaMetrics
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listConsumerQuotaMetrics
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new serviceusageModule.v1beta1.ServiceUsageClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'serviceusage.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listConsumerQuotaMetrics with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listConsumerQuotaMetrics.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listConsumerQuotaMetricsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new serviceusageModule.v1beta1.ServiceUsageClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'serviceusage.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listConsumerQuotaMetrics
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listConsumerQuotaMetrics
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new serviceusageModule.v1beta1.ServiceUsageClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listAdminOverrides', () => {
-    it('invokes listAdminOverrides without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-      ];
-      client.innerApiCalls.listAdminOverrides =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listAdminOverrides(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAdminOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAdminOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = serviceusageModule.v1beta1.ServiceUsageClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.serviceUsageStub, undefined);
+            await client.initialize();
+            assert(client.serviceUsageStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.serviceUsageStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.serviceUsageStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listAdminOverrides without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-      ];
-      client.innerApiCalls.listAdminOverrides =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAdminOverrides(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.api.serviceusage.v1beta1.IQuotaOverride[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getService', () => {
+        it('invokes getService without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.Service()
+            );
+            client.innerApiCalls.getService = stubSimpleCall(expectedResponse);
+            const [response] = await client.getService(request);
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getService without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.Service()
+            );
+            client.innerApiCalls.getService = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getService(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.serviceusage.v1beta1.IService|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getService with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getService = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getService(request), expectedError);
+            assert(stub.calledOnce);
+            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getService with closed client', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getService(request), expectedError);
+            assert(stub.calledOnce);
+        });
+    });
+
+    describe('getConsumerQuotaMetric', () => {
+        it('invokes getConsumerQuotaMetric without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
+            );
+            client.innerApiCalls.getConsumerQuotaMetric = stubSimpleCall(expectedResponse);
+            const [response] = await client.getConsumerQuotaMetric(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getConsumerQuotaMetric as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConsumerQuotaMetric as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConsumerQuotaMetric without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
+            );
+            client.innerApiCalls.getConsumerQuotaMetric = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getConsumerQuotaMetric(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getConsumerQuotaMetric as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConsumerQuotaMetric as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConsumerQuotaMetric with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getConsumerQuotaMetric = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getConsumerQuotaMetric(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getConsumerQuotaMetric as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConsumerQuotaMetric as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConsumerQuotaMetric with closed client', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getConsumerQuotaMetric(request), expectedError);
+        });
+    });
+
+    describe('getConsumerQuotaLimit', () => {
+        it('invokes getConsumerQuotaLimit without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ConsumerQuotaLimit()
+            );
+            client.innerApiCalls.getConsumerQuotaLimit = stubSimpleCall(expectedResponse);
+            const [response] = await client.getConsumerQuotaLimit(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getConsumerQuotaLimit as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConsumerQuotaLimit as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConsumerQuotaLimit without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ConsumerQuotaLimit()
+            );
+            client.innerApiCalls.getConsumerQuotaLimit = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getConsumerQuotaLimit(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.serviceusage.v1beta1.IConsumerQuotaLimit|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getConsumerQuotaLimit as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConsumerQuotaLimit as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConsumerQuotaLimit with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getConsumerQuotaLimit = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getConsumerQuotaLimit(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getConsumerQuotaLimit as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConsumerQuotaLimit as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConsumerQuotaLimit with closed client', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getConsumerQuotaLimit(request), expectedError);
+        });
+    });
+
+    describe('enableService', () => {
+        it('invokes enableService without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.EnableServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.enableService = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.enableService(request);
+            const [response] = await operation.promise();
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.enableService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enableService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enableService without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.EnableServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.enableService = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.enableService(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.api.serviceusage.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.api.serviceusage.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.enableService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enableService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enableService with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.EnableServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.enableService = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.enableService(request), expectedError);
+            assert(stub.calledOnce);
+            const actualRequest = (client.innerApiCalls.enableService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enableService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enableService with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.EnableServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.enableService = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.enableService(request);
+            await assert.rejects(operation.promise(), expectedError);
+            assert(stub.calledOnce);
+            const actualRequest = (client.innerApiCalls.enableService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enableService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkEnableServiceProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkEnableServiceProgress(expectedResponse.name);
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkEnableServiceProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkEnableServiceProgress(''), expectedError);
+            assert(stub.calledOnce);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('disableService', () => {
+        it('invokes disableService without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DisableServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.disableService = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.disableService(request);
+            const [response] = await operation.promise();
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.disableService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disableService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disableService without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DisableServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.disableService = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.disableService(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.api.serviceusage.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.api.serviceusage.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.disableService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disableService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disableService with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DisableServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.disableService = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.disableService(request), expectedError);
+            assert(stub.calledOnce);
+            const actualRequest = (client.innerApiCalls.disableService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disableService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disableService with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DisableServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.disableService = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.disableService(request);
+            await assert.rejects(operation.promise(), expectedError);
+            assert(stub.calledOnce);
+            const actualRequest = (client.innerApiCalls.disableService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disableService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDisableServiceProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDisableServiceProgress(expectedResponse.name);
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDisableServiceProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDisableServiceProgress(''), expectedError);
+            assert(stub.calledOnce);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('batchEnableServices', () => {
+        it('invokes batchEnableServices without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.BatchEnableServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.batchEnableServices = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.batchEnableServices(request);
+            const [response] = await operation.promise();
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchEnableServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchEnableServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchEnableServices without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.BatchEnableServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.batchEnableServices = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchEnableServices(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.api.serviceusage.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.api.serviceusage.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchEnableServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchEnableServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchEnableServices with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.BatchEnableServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchEnableServices = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.batchEnableServices(request), expectedError);
+            assert(stub.calledOnce);
+            const actualRequest = (client.innerApiCalls.batchEnableServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchEnableServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchEnableServices with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.BatchEnableServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchEnableServices = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.batchEnableServices(request);
+            await assert.rejects(operation.promise(), expectedError);
+            assert(stub.calledOnce);
+            const actualRequest = (client.innerApiCalls.batchEnableServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchEnableServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkBatchEnableServicesProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkBatchEnableServicesProgress(expectedResponse.name);
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkBatchEnableServicesProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkBatchEnableServicesProgress(''), expectedError);
+            assert(stub.calledOnce);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createAdminOverride', () => {
+        it('invokes createAdminOverride without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAdminOverride = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createAdminOverride(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAdminOverride without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAdminOverride = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAdminOverride(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.api.serviceusage.v1beta1.IQuotaOverride, protos.google.api.serviceusage.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.api.serviceusage.v1beta1.IQuotaOverride, protos.google.api.serviceusage.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAdminOverride with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAdminOverride = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createAdminOverride(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAdminOverride with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAdminOverride = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createAdminOverride(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateAdminOverrideProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateAdminOverrideProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateAdminOverrideProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateAdminOverrideProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateAdminOverride', () => {
+        it('invokes updateAdminOverride without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAdminOverride = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAdminOverride(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAdminOverride without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAdminOverride = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAdminOverride(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.api.serviceusage.v1beta1.IQuotaOverride, protos.google.api.serviceusage.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.api.serviceusage.v1beta1.IQuotaOverride, protos.google.api.serviceusage.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAdminOverride with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAdminOverride = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAdminOverride(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAdminOverride with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAdminOverride = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAdminOverride(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateAdminOverrideProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateAdminOverrideProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateAdminOverrideProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateAdminOverrideProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteAdminOverride', () => {
+        it('invokes deleteAdminOverride without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAdminOverride = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteAdminOverride(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAdminOverride without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAdminOverride = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAdminOverride(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.api.serviceusage.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.api.serviceusage.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAdminOverride with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAdminOverride = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteAdminOverride(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAdminOverride with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAdminOverride = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteAdminOverride(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAdminOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAdminOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteAdminOverrideProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteAdminOverrideProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteAdminOverrideProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteAdminOverrideProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('importAdminOverrides', () => {
+        it('invokes importAdminOverrides without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.importAdminOverrides = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.importAdminOverrides(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importAdminOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importAdminOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importAdminOverrides without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.importAdminOverrides = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.importAdminOverrides(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.api.serviceusage.v1beta1.IImportAdminOverridesResponse, protos.google.api.serviceusage.v1beta1.IImportAdminOverridesMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.api.serviceusage.v1beta1.IImportAdminOverridesResponse, protos.google.api.serviceusage.v1beta1.IImportAdminOverridesMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importAdminOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importAdminOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importAdminOverrides with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.importAdminOverrides = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.importAdminOverrides(request), expectedError);
+            const actualRequest = (client.innerApiCalls.importAdminOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importAdminOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importAdminOverrides with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.importAdminOverrides = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.importAdminOverrides(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.importAdminOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importAdminOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkImportAdminOverridesProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkImportAdminOverridesProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkImportAdminOverridesProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkImportAdminOverridesProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createConsumerOverride', () => {
+        it('invokes createConsumerOverride without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createConsumerOverride = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createConsumerOverride(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createConsumerOverride without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createConsumerOverride = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createConsumerOverride(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.api.serviceusage.v1beta1.IQuotaOverride, protos.google.api.serviceusage.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.api.serviceusage.v1beta1.IQuotaOverride, protos.google.api.serviceusage.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createConsumerOverride with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createConsumerOverride = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createConsumerOverride(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createConsumerOverride with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createConsumerOverride = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createConsumerOverride(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateConsumerOverrideProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateConsumerOverrideProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateConsumerOverrideProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateConsumerOverrideProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateConsumerOverride', () => {
+        it('invokes updateConsumerOverride without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateConsumerOverride = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateConsumerOverride(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateConsumerOverride without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateConsumerOverride = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateConsumerOverride(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.api.serviceusage.v1beta1.IQuotaOverride, protos.google.api.serviceusage.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.api.serviceusage.v1beta1.IQuotaOverride, protos.google.api.serviceusage.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateConsumerOverride with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateConsumerOverride = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateConsumerOverride(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateConsumerOverride with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateConsumerOverride = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateConsumerOverride(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateConsumerOverrideProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateConsumerOverrideProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateConsumerOverrideProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateConsumerOverrideProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteConsumerOverride', () => {
+        it('invokes deleteConsumerOverride without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteConsumerOverride = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteConsumerOverride(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConsumerOverride without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteConsumerOverride = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteConsumerOverride(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.api.serviceusage.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.api.serviceusage.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConsumerOverride with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteConsumerOverride = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteConsumerOverride(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConsumerOverride with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteConsumerOverride = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteConsumerOverride(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteConsumerOverride as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConsumerOverride as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteConsumerOverrideProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteConsumerOverrideProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteConsumerOverrideProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteConsumerOverrideProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('importConsumerOverrides', () => {
+        it('invokes importConsumerOverrides without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.importConsumerOverrides = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.importConsumerOverrides(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importConsumerOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importConsumerOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importConsumerOverrides without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.importConsumerOverrides = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.importConsumerOverrides(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesResponse, protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesResponse, protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importConsumerOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importConsumerOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importConsumerOverrides with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.importConsumerOverrides = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.importConsumerOverrides(request), expectedError);
+            const actualRequest = (client.innerApiCalls.importConsumerOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importConsumerOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes importConsumerOverrides with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.importConsumerOverrides = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.importConsumerOverrides(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.importConsumerOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importConsumerOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkImportConsumerOverridesProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkImportConsumerOverridesProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkImportConsumerOverridesProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkImportConsumerOverridesProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('generateServiceIdentity', () => {
+        it('invokes generateServiceIdentity without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.generateServiceIdentity = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.generateServiceIdentity(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateServiceIdentity as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateServiceIdentity as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateServiceIdentity without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.generateServiceIdentity = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.generateServiceIdentity(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.api.serviceusage.v1beta1.IServiceIdentity, protos.google.protobuf.IEmpty>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.api.serviceusage.v1beta1.IServiceIdentity, protos.google.protobuf.IEmpty>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateServiceIdentity as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateServiceIdentity as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateServiceIdentity with call error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.generateServiceIdentity = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.generateServiceIdentity(request), expectedError);
+            const actualRequest = (client.innerApiCalls.generateServiceIdentity as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateServiceIdentity as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateServiceIdentity with LRO error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.generateServiceIdentity = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.generateServiceIdentity(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.generateServiceIdentity as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateServiceIdentity as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkGenerateServiceIdentityProgress without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkGenerateServiceIdentityProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkGenerateServiceIdentityProgress with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkGenerateServiceIdentityProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listServices', () => {
+        it('invokes listServices without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+            ];
+            client.innerApiCalls.listServices = stubSimpleCall(expectedResponse);
+            const [response] = await client.listServices(request);
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServices without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+            ];
+            client.innerApiCalls.listServices = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listServices(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.serviceusage.v1beta1.IService[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServices with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listServices = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listServices(request), expectedError);
+            assert(stub.calledOnce);
+            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServicesStream without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+            ];
+            client.descriptors.page.listServices.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listServicesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.serviceusage.v1beta1.Service[] = [];
+                stream.on('data', (response: protos.google.api.serviceusage.v1beta1.Service) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listServices.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listServices, request));
+            assert(
+                (client.descriptors.page.listServices.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listServicesStream with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listServices.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listServicesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.serviceusage.v1beta1.Service[] = [];
+                stream.on('data', (response: protos.google.api.serviceusage.v1beta1.Service) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert(stub.calledOnce);
+            assert((client.descriptors.page.listServices.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listServices, request));
+            assert(
+                (client.descriptors.page.listServices.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listServices without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.Service()),
+            ];
+            client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.api.serviceusage.v1beta1.IService[] = [];
+            const iterable = client.listServicesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAdminOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAdminOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAdminOverrides with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAdminOverrides = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAdminOverrides(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAdminOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAdminOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAdminOverridesStream without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-      ];
-      client.descriptors.page.listAdminOverrides.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAdminOverridesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.serviceusage.v1beta1.QuotaOverride[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.api.serviceusage.v1beta1.QuotaOverride) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listServices with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listServicesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.api.serviceusage.v1beta1.IService[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAdminOverrides, request)
-      );
-      assert(
-        (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listAdminOverridesStream with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAdminOverrides.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAdminOverridesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.serviceusage.v1beta1.QuotaOverride[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.api.serviceusage.v1beta1.QuotaOverride) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listConsumerQuotaMetrics', () => {
+        it('invokes listConsumerQuotaMetrics without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+            ];
+            client.innerApiCalls.listConsumerQuotaMetrics = stubSimpleCall(expectedResponse);
+            const [response] = await client.listConsumerQuotaMetrics(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listConsumerQuotaMetrics as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConsumerQuotaMetrics as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listConsumerQuotaMetrics without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+            ];
+            client.innerApiCalls.listConsumerQuotaMetrics = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listConsumerQuotaMetrics(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listConsumerQuotaMetrics as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConsumerQuotaMetrics as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAdminOverrides, request)
-      );
-      assert(
-        (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listAdminOverrides without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-      ];
-      client.descriptors.page.listAdminOverrides.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.api.serviceusage.v1beta1.IQuotaOverride[] =
-        [];
-      const iterable = client.listAdminOverridesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listConsumerQuotaMetrics with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listConsumerQuotaMetrics = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listConsumerQuotaMetrics(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listConsumerQuotaMetrics as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConsumerQuotaMetrics as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listAdminOverrides with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAdminOverrides.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAdminOverridesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.api.serviceusage.v1beta1.IQuotaOverride[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listConsumerQuotaMetricsStream without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+            ];
+            client.descriptors.page.listConsumerQuotaMetrics.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listConsumerQuotaMetricsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric[] = [];
+                stream.on('data', (response: protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listConsumerQuotaMetrics.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listConsumerQuotaMetrics, request));
+            assert(
+                (client.descriptors.page.listConsumerQuotaMetrics.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listConsumerOverrides', () => {
-    it('invokes listConsumerOverrides without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-      ];
-      client.innerApiCalls.listConsumerOverrides =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listConsumerOverrides(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listConsumerOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConsumerOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listConsumerQuotaMetricsStream with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listConsumerQuotaMetrics.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listConsumerQuotaMetricsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric[] = [];
+                stream.on('data', (response: protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listConsumerQuotaMetrics.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listConsumerQuotaMetrics, request));
+            assert(
+                (client.descriptors.page.listConsumerQuotaMetrics.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listConsumerOverrides without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-      ];
-      client.innerApiCalls.listConsumerOverrides =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listConsumerOverrides(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.api.serviceusage.v1beta1.IQuotaOverride[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listConsumerQuotaMetrics without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()),
+            ];
+            client.descriptors.page.listConsumerQuotaMetrics.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric[] = [];
+            const iterable = client.listConsumerQuotaMetricsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listConsumerOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConsumerOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConsumerOverrides with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listConsumerOverrides = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listConsumerOverrides(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listConsumerOverrides as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConsumerOverrides as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConsumerOverridesStream without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-      ];
-      client.descriptors.page.listConsumerOverrides.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listConsumerOverridesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.serviceusage.v1beta1.QuotaOverride[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.api.serviceusage.v1beta1.QuotaOverride) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listConsumerQuotaMetrics.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listConsumerQuotaMetrics.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listConsumerQuotaMetrics with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listConsumerQuotaMetrics.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listConsumerQuotaMetricsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listConsumerQuotaMetrics.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listConsumerQuotaMetrics.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listConsumerOverrides
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listConsumerOverrides, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listConsumerOverrides
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listConsumerOverridesStream with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listConsumerOverrides.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listConsumerOverridesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.serviceusage.v1beta1.QuotaOverride[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.api.serviceusage.v1beta1.QuotaOverride) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listAdminOverrides', () => {
+        it('invokes listAdminOverrides without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListAdminOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+            ];
+            client.innerApiCalls.listAdminOverrides = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAdminOverrides(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAdminOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAdminOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listAdminOverrides without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListAdminOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+            ];
+            client.innerApiCalls.listAdminOverrides = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAdminOverrides(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.serviceusage.v1beta1.IQuotaOverride[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAdminOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAdminOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listConsumerOverrides
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listConsumerOverrides, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listConsumerOverrides
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listConsumerOverrides without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-        generateSampleMessage(
-          new protos.google.api.serviceusage.v1beta1.QuotaOverride()
-        ),
-      ];
-      client.descriptors.page.listConsumerOverrides.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.api.serviceusage.v1beta1.IQuotaOverride[] =
-        [];
-      const iterable = client.listConsumerOverridesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listConsumerOverrides
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listConsumerOverrides
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listAdminOverrides with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListAdminOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAdminOverrides = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAdminOverrides(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAdminOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAdminOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listConsumerOverrides with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listConsumerOverrides.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listConsumerOverridesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.api.serviceusage.v1beta1.IQuotaOverride[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listConsumerOverrides
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listConsumerOverrides
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes listAdminOverridesStream without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListAdminOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+            ];
+            client.descriptors.page.listAdminOverrides.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAdminOverridesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.serviceusage.v1beta1.QuotaOverride[] = [];
+                stream.on('data', (response: protos.google.api.serviceusage.v1beta1.QuotaOverride) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAdminOverrides.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAdminOverrides, request));
+            assert(
+                (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAdminOverridesStream with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListAdminOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAdminOverrides.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAdminOverridesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.serviceusage.v1beta1.QuotaOverride[] = [];
+                stream.on('data', (response: protos.google.api.serviceusage.v1beta1.QuotaOverride) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAdminOverrides.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAdminOverrides, request));
+            assert(
+                (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAdminOverrides without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListAdminOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+            ];
+            client.descriptors.page.listAdminOverrides.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.api.serviceusage.v1beta1.IQuotaOverride[] = [];
+            const iterable = client.listAdminOverridesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listAdminOverrides with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListAdminOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAdminOverrides.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAdminOverridesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.api.serviceusage.v1beta1.IQuotaOverride[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('listConsumerOverrides', () => {
+        it('invokes listConsumerOverrides without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+            ];
+            client.innerApiCalls.listConsumerOverrides = stubSimpleCall(expectedResponse);
+            const [response] = await client.listConsumerOverrides(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listConsumerOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConsumerOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listConsumerOverrides without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+            ];
+            client.innerApiCalls.listConsumerOverrides = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listConsumerOverrides(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.serviceusage.v1beta1.IQuotaOverride[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listConsumerOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConsumerOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listConsumerOverrides with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listConsumerOverrides = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listConsumerOverrides(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listConsumerOverrides as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConsumerOverrides as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listConsumerOverridesStream without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+            ];
+            client.descriptors.page.listConsumerOverrides.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listConsumerOverridesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.serviceusage.v1beta1.QuotaOverride[] = [];
+                stream.on('data', (response: protos.google.api.serviceusage.v1beta1.QuotaOverride) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listConsumerOverrides.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listConsumerOverrides, request));
+            assert(
+                (client.descriptors.page.listConsumerOverrides.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listConsumerOverridesStream with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listConsumerOverrides.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listConsumerOverridesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.serviceusage.v1beta1.QuotaOverride[] = [];
+                stream.on('data', (response: protos.google.api.serviceusage.v1beta1.QuotaOverride) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listConsumerOverrides.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listConsumerOverrides, request));
+            assert(
+                (client.descriptors.page.listConsumerOverrides.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listConsumerOverrides without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+              generateSampleMessage(new protos.google.api.serviceusage.v1beta1.QuotaOverride()),
+            ];
+            client.descriptors.page.listConsumerOverrides.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.api.serviceusage.v1beta1.IQuotaOverride[] = [];
+            const iterable = client.listConsumerOverridesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listConsumerOverrides.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listConsumerOverrides.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listConsumerOverrides with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listConsumerOverrides.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listConsumerOverridesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.api.serviceusage.v1beta1.IQuotaOverride[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listConsumerOverrides.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listConsumerOverrides.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
-    it('invokes deleteOperation with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new serviceusageModule.v1beta1.ServiceUsageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
 });

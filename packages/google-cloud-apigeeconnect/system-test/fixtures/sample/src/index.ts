@@ -16,10 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  ConnectionServiceClient,
-  TetherClient,
-} from '@google-cloud/apigee-connect';
+import {ConnectionServiceClient, TetherClient} from '@google-cloud/apigee-connect';
 
 // check that the client class type name can be used
 function doStuffWithConnectionServiceClient(client: ConnectionServiceClient) {

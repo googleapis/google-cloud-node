@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -105,36 +100,17 @@ export class UserServiceClient {
    *     const client = new UserServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof UserServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'admanager.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -143,9 +119,7 @@ export class UserServiceClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -171,7 +145,7 @@ export class UserServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -185,7 +159,10 @@ export class UserServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -258,11 +235,8 @@ export class UserServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.ads.admanager.v1.UserService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.ads.admanager.v1.UserService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -293,35 +267,31 @@ export class UserServiceClient {
     // Put together the "service stub" for
     // google.ads.admanager.v1.UserService.
     this.userServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.ads.admanager.v1.UserService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.ads.admanager.v1.UserService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.ads.admanager.v1.UserService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const userServiceStubMethods = ['getUser'];
+    const userServiceStubMethods =
+        ['getUser'];
     for (const methodName of userServiceStubMethods) {
       const callPromise = this.userServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -341,14 +311,8 @@ export class UserServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'admanager.googleapis.com';
   }
@@ -359,14 +323,8 @@ export class UserServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'admanager.googleapis.com';
   }
@@ -406,9 +364,8 @@ export class UserServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -419,117 +376,103 @@ export class UserServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * API to retrieve a User object.
-   *
-   * To get the current user, the resource name
-   * `networks/{networkCode}/users/me` can be used.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the User.
-   *   Format: `networks/{network_code}/users/{user_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.User|User}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/user_service.get_user.js</caption>
-   * region_tag:admanager_v1_generated_UserService_GetUser_async
-   */
+/**
+ * API to retrieve a User object.
+ *
+ * To get the current user, the resource name
+ * `networks/{networkCode}/users/me` can be used.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the User.
+ *   Format: `networks/{network_code}/users/{user_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.User|User}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/user_service.get_user.js</caption>
+ * region_tag:admanager_v1_generated_UserService_GetUser_async
+ */
   getUser(
-    request?: protos.google.ads.admanager.v1.IGetUserRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.IUser,
-      protos.google.ads.admanager.v1.IGetUserRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ads.admanager.v1.IGetUserRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IUser,
+        protos.google.ads.admanager.v1.IGetUserRequest|undefined, {}|undefined
+      ]>;
   getUser(
-    request: protos.google.ads.admanager.v1.IGetUserRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ads.admanager.v1.IUser,
-      protos.google.ads.admanager.v1.IGetUserRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getUser(
-    request: protos.google.ads.admanager.v1.IGetUserRequest,
-    callback: Callback<
-      protos.google.ads.admanager.v1.IUser,
-      protos.google.ads.admanager.v1.IGetUserRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getUser(
-    request?: protos.google.ads.admanager.v1.IGetUserRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ads.admanager.v1.IGetUserRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ads.admanager.v1.IUser,
-          protos.google.ads.admanager.v1.IGetUserRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ads.admanager.v1.IUser,
-      protos.google.ads.admanager.v1.IGetUserRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.IUser,
-      protos.google.ads.admanager.v1.IGetUserRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ads.admanager.v1.IGetUserRequest|null|undefined,
+          {}|null|undefined>): void;
+  getUser(
+      request: protos.google.ads.admanager.v1.IGetUserRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IUser,
+          protos.google.ads.admanager.v1.IGetUserRequest|null|undefined,
+          {}|null|undefined>): void;
+  getUser(
+      request?: protos.google.ads.admanager.v1.IGetUserRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IUser,
+          protos.google.ads.admanager.v1.IGetUserRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IUser,
+          protos.google.ads.admanager.v1.IGetUserRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IUser,
+        protos.google.ads.admanager.v1.IGetUserRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getUser request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ads.admanager.v1.IUser,
-          protos.google.ads.admanager.v1.IGetUserRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IUser,
+        protos.google.ads.admanager.v1.IGetUserRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getUser response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getUser(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ads.admanager.v1.IUser,
-          protos.google.ads.admanager.v1.IGetUserRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getUser response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getUser(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IUser,
+        protos.google.ads.admanager.v1.IGetUserRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getUser response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -543,7 +486,7 @@ export class UserServiceClient {
    * @param {string} ad_unit
    * @returns {string} Resource name string.
    */
-  adUnitPath(networkCode: string, adUnit: string) {
+  adUnitPath(networkCode:string,adUnit:string) {
     return this.pathTemplates.adUnitPathTemplate.render({
       network_code: networkCode,
       ad_unit: adUnit,
@@ -579,7 +522,7 @@ export class UserServiceClient {
    * @param {string} company
    * @returns {string} Resource name string.
    */
-  companyPath(networkCode: string, company: string) {
+  companyPath(networkCode:string,company:string) {
     return this.pathTemplates.companyPathTemplate.render({
       network_code: networkCode,
       company: company,
@@ -594,8 +537,7 @@ export class UserServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCompanyName(companyName: string) {
-    return this.pathTemplates.companyPathTemplate.match(companyName)
-      .network_code;
+    return this.pathTemplates.companyPathTemplate.match(companyName).network_code;
   }
 
   /**
@@ -616,7 +558,7 @@ export class UserServiceClient {
    * @param {string} contact
    * @returns {string} Resource name string.
    */
-  contactPath(networkCode: string, contact: string) {
+  contactPath(networkCode:string,contact:string) {
     return this.pathTemplates.contactPathTemplate.render({
       network_code: networkCode,
       contact: contact,
@@ -631,8 +573,7 @@ export class UserServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromContactName(contactName: string) {
-    return this.pathTemplates.contactPathTemplate.match(contactName)
-      .network_code;
+    return this.pathTemplates.contactPathTemplate.match(contactName).network_code;
   }
 
   /**
@@ -653,7 +594,7 @@ export class UserServiceClient {
    * @param {string} custom_field
    * @returns {string} Resource name string.
    */
-  customFieldPath(networkCode: string, customField: string) {
+  customFieldPath(networkCode:string,customField:string) {
     return this.pathTemplates.customFieldPathTemplate.render({
       network_code: networkCode,
       custom_field: customField,
@@ -668,8 +609,7 @@ export class UserServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCustomFieldName(customFieldName: string) {
-    return this.pathTemplates.customFieldPathTemplate.match(customFieldName)
-      .network_code;
+    return this.pathTemplates.customFieldPathTemplate.match(customFieldName).network_code;
   }
 
   /**
@@ -680,8 +620,7 @@ export class UserServiceClient {
    * @returns {string} A string representing the custom_field.
    */
   matchCustomFieldFromCustomFieldName(customFieldName: string) {
-    return this.pathTemplates.customFieldPathTemplate.match(customFieldName)
-      .custom_field;
+    return this.pathTemplates.customFieldPathTemplate.match(customFieldName).custom_field;
   }
 
   /**
@@ -691,7 +630,7 @@ export class UserServiceClient {
    * @param {string} custom_targeting_key
    * @returns {string} Resource name string.
    */
-  customTargetingKeyPath(networkCode: string, customTargetingKey: string) {
+  customTargetingKeyPath(networkCode:string,customTargetingKey:string) {
     return this.pathTemplates.customTargetingKeyPathTemplate.render({
       network_code: networkCode,
       custom_targeting_key: customTargetingKey,
@@ -706,9 +645,7 @@ export class UserServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCustomTargetingKeyName(customTargetingKeyName: string) {
-    return this.pathTemplates.customTargetingKeyPathTemplate.match(
-      customTargetingKeyName
-    ).network_code;
+    return this.pathTemplates.customTargetingKeyPathTemplate.match(customTargetingKeyName).network_code;
   }
 
   /**
@@ -718,12 +655,8 @@ export class UserServiceClient {
    *   A fully-qualified path representing CustomTargetingKey resource.
    * @returns {string} A string representing the custom_targeting_key.
    */
-  matchCustomTargetingKeyFromCustomTargetingKeyName(
-    customTargetingKeyName: string
-  ) {
-    return this.pathTemplates.customTargetingKeyPathTemplate.match(
-      customTargetingKeyName
-    ).custom_targeting_key;
+  matchCustomTargetingKeyFromCustomTargetingKeyName(customTargetingKeyName: string) {
+    return this.pathTemplates.customTargetingKeyPathTemplate.match(customTargetingKeyName).custom_targeting_key;
   }
 
   /**
@@ -734,11 +667,7 @@ export class UserServiceClient {
    * @param {string} custom_targeting_value
    * @returns {string} Resource name string.
    */
-  customTargetingValuePath(
-    networkCode: string,
-    customTargetingKey: string,
-    customTargetingValue: string
-  ) {
+  customTargetingValuePath(networkCode:string,customTargetingKey:string,customTargetingValue:string) {
     return this.pathTemplates.customTargetingValuePathTemplate.render({
       network_code: networkCode,
       custom_targeting_key: customTargetingKey,
@@ -753,12 +682,8 @@ export class UserServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromCustomTargetingValueName(
-    customTargetingValueName: string
-  ) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(
-      customTargetingValueName
-    ).network_code;
+  matchNetworkCodeFromCustomTargetingValueName(customTargetingValueName: string) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).network_code;
   }
 
   /**
@@ -768,12 +693,8 @@ export class UserServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the custom_targeting_key.
    */
-  matchCustomTargetingKeyFromCustomTargetingValueName(
-    customTargetingValueName: string
-  ) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(
-      customTargetingValueName
-    ).custom_targeting_key;
+  matchCustomTargetingKeyFromCustomTargetingValueName(customTargetingValueName: string) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).custom_targeting_key;
   }
 
   /**
@@ -783,12 +704,8 @@ export class UserServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the custom_targeting_value.
    */
-  matchCustomTargetingValueFromCustomTargetingValueName(
-    customTargetingValueName: string
-  ) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(
-      customTargetingValueName
-    ).custom_targeting_value;
+  matchCustomTargetingValueFromCustomTargetingValueName(customTargetingValueName: string) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).custom_targeting_value;
   }
 
   /**
@@ -798,7 +715,7 @@ export class UserServiceClient {
    * @param {string} entity_signals_mapping
    * @returns {string} Resource name string.
    */
-  entitySignalsMappingPath(networkCode: string, entitySignalsMapping: string) {
+  entitySignalsMappingPath(networkCode:string,entitySignalsMapping:string) {
     return this.pathTemplates.entitySignalsMappingPathTemplate.render({
       network_code: networkCode,
       entity_signals_mapping: entitySignalsMapping,
@@ -812,12 +729,8 @@ export class UserServiceClient {
    *   A fully-qualified path representing EntitySignalsMapping resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromEntitySignalsMappingName(
-    entitySignalsMappingName: string
-  ) {
-    return this.pathTemplates.entitySignalsMappingPathTemplate.match(
-      entitySignalsMappingName
-    ).network_code;
+  matchNetworkCodeFromEntitySignalsMappingName(entitySignalsMappingName: string) {
+    return this.pathTemplates.entitySignalsMappingPathTemplate.match(entitySignalsMappingName).network_code;
   }
 
   /**
@@ -827,12 +740,8 @@ export class UserServiceClient {
    *   A fully-qualified path representing EntitySignalsMapping resource.
    * @returns {string} A string representing the entity_signals_mapping.
    */
-  matchEntitySignalsMappingFromEntitySignalsMappingName(
-    entitySignalsMappingName: string
-  ) {
-    return this.pathTemplates.entitySignalsMappingPathTemplate.match(
-      entitySignalsMappingName
-    ).entity_signals_mapping;
+  matchEntitySignalsMappingFromEntitySignalsMappingName(entitySignalsMappingName: string) {
+    return this.pathTemplates.entitySignalsMappingPathTemplate.match(entitySignalsMappingName).entity_signals_mapping;
   }
 
   /**
@@ -842,7 +751,7 @@ export class UserServiceClient {
    * @param {string} label
    * @returns {string} Resource name string.
    */
-  labelPath(networkCode: string, label: string) {
+  labelPath(networkCode:string,label:string) {
     return this.pathTemplates.labelPathTemplate.render({
       network_code: networkCode,
       label: label,
@@ -877,7 +786,7 @@ export class UserServiceClient {
    * @param {string} network_code
    * @returns {string} Resource name string.
    */
-  networkPath(networkCode: string) {
+  networkPath(networkCode:string) {
     return this.pathTemplates.networkPathTemplate.render({
       network_code: networkCode,
     });
@@ -891,8 +800,7 @@ export class UserServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromNetworkName(networkName: string) {
-    return this.pathTemplates.networkPathTemplate.match(networkName)
-      .network_code;
+    return this.pathTemplates.networkPathTemplate.match(networkName).network_code;
   }
 
   /**
@@ -902,7 +810,7 @@ export class UserServiceClient {
    * @param {string} order
    * @returns {string} Resource name string.
    */
-  orderPath(networkCode: string, order: string) {
+  orderPath(networkCode:string,order:string) {
     return this.pathTemplates.orderPathTemplate.render({
       network_code: networkCode,
       order: order,
@@ -938,7 +846,7 @@ export class UserServiceClient {
    * @param {string} placement
    * @returns {string} Resource name string.
    */
-  placementPath(networkCode: string, placement: string) {
+  placementPath(networkCode:string,placement:string) {
     return this.pathTemplates.placementPathTemplate.render({
       network_code: networkCode,
       placement: placement,
@@ -953,8 +861,7 @@ export class UserServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromPlacementName(placementName: string) {
-    return this.pathTemplates.placementPathTemplate.match(placementName)
-      .network_code;
+    return this.pathTemplates.placementPathTemplate.match(placementName).network_code;
   }
 
   /**
@@ -965,8 +872,7 @@ export class UserServiceClient {
    * @returns {string} A string representing the placement.
    */
   matchPlacementFromPlacementName(placementName: string) {
-    return this.pathTemplates.placementPathTemplate.match(placementName)
-      .placement;
+    return this.pathTemplates.placementPathTemplate.match(placementName).placement;
   }
 
   /**
@@ -976,7 +882,7 @@ export class UserServiceClient {
    * @param {string} report
    * @returns {string} Resource name string.
    */
-  reportPath(networkCode: string, report: string) {
+  reportPath(networkCode:string,report:string) {
     return this.pathTemplates.reportPathTemplate.render({
       network_code: networkCode,
       report: report,
@@ -1012,7 +918,7 @@ export class UserServiceClient {
    * @param {string} role
    * @returns {string} Resource name string.
    */
-  rolePath(networkCode: string, role: string) {
+  rolePath(networkCode:string,role:string) {
     return this.pathTemplates.rolePathTemplate.render({
       network_code: networkCode,
       role: role,
@@ -1048,7 +954,7 @@ export class UserServiceClient {
    * @param {string} taxonomy_category
    * @returns {string} Resource name string.
    */
-  taxonomyCategoryPath(networkCode: string, taxonomyCategory: string) {
+  taxonomyCategoryPath(networkCode:string,taxonomyCategory:string) {
     return this.pathTemplates.taxonomyCategoryPathTemplate.render({
       network_code: networkCode,
       taxonomy_category: taxonomyCategory,
@@ -1063,9 +969,7 @@ export class UserServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromTaxonomyCategoryName(taxonomyCategoryName: string) {
-    return this.pathTemplates.taxonomyCategoryPathTemplate.match(
-      taxonomyCategoryName
-    ).network_code;
+    return this.pathTemplates.taxonomyCategoryPathTemplate.match(taxonomyCategoryName).network_code;
   }
 
   /**
@@ -1076,9 +980,7 @@ export class UserServiceClient {
    * @returns {string} A string representing the taxonomy_category.
    */
   matchTaxonomyCategoryFromTaxonomyCategoryName(taxonomyCategoryName: string) {
-    return this.pathTemplates.taxonomyCategoryPathTemplate.match(
-      taxonomyCategoryName
-    ).taxonomy_category;
+    return this.pathTemplates.taxonomyCategoryPathTemplate.match(taxonomyCategoryName).taxonomy_category;
   }
 
   /**
@@ -1088,7 +990,7 @@ export class UserServiceClient {
    * @param {string} team
    * @returns {string} Resource name string.
    */
-  teamPath(networkCode: string, team: string) {
+  teamPath(networkCode:string,team:string) {
     return this.pathTemplates.teamPathTemplate.render({
       network_code: networkCode,
       team: team,
@@ -1124,7 +1026,7 @@ export class UserServiceClient {
    * @param {string} user
    * @returns {string} Resource name string.
    */
-  userPath(networkCode: string, user: string) {
+  userPath(networkCode:string,user:string) {
     return this.pathTemplates.userPathTemplate.render({
       network_code: networkCode,
       user: user,

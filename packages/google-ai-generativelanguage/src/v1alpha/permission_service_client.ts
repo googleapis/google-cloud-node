@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class PermissionServiceClient {
    *     const client = new PermissionServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PermissionServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class PermissionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class PermissionServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -208,19 +183,25 @@ export class PermissionServiceClient {
       chunkPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}/chunks/{chunk}'
       ),
-      corpusPathTemplate: new this._gaxModule.PathTemplate('corpora/{corpus}'),
-      corpusPermissionPathTemplate: new this._gaxModule.PathTemplate(
+      corpusPathTemplate: new this._gaxModule.PathTemplate(
+        'corpora/{corpus}'
+      ),
+      corpusPermissionsPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/permissions/{permission}'
       ),
       documentPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}'
       ),
-      filePathTemplate: new this._gaxModule.PathTemplate('files/{file}'),
-      modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
+      filePathTemplate: new this._gaxModule.PathTemplate(
+        'files/{file}'
+      ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'models/{model}'
+      ),
       tunedModelPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}'
       ),
-      tunedModelPermissionPathTemplate: new this._gaxModule.PathTemplate(
+      tunedModelPermissionsPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}/permissions/{permission}'
       ),
     };
@@ -229,20 +210,14 @@ export class PermissionServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listPermissions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'permissions'
-      ),
+      listPermissions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'permissions')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.ai.generativelanguage.v1alpha.PermissionService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.ai.generativelanguage.v1alpha.PermissionService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -273,43 +248,32 @@ export class PermissionServiceClient {
     // Put together the "service stub" for
     // google.ai.generativelanguage.v1alpha.PermissionService.
     this.permissionServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.ai.generativelanguage.v1alpha.PermissionService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.ai.generativelanguage.v1alpha
-            .PermissionService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.ai.generativelanguage.v1alpha.PermissionService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.ai.generativelanguage.v1alpha.PermissionService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const permissionServiceStubMethods = [
-      'createPermission',
-      'getPermission',
-      'listPermissions',
-      'updatePermission',
-      'deletePermission',
-      'transferOwnership',
-    ];
+    const permissionServiceStubMethods =
+        ['createPermission', 'getPermission', 'listPermissions', 'updatePermission', 'deletePermission', 'transferOwnership'];
     for (const methodName of permissionServiceStubMethods) {
       const callPromise = this.permissionServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -329,14 +293,8 @@ export class PermissionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -347,14 +305,8 @@ export class PermissionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -394,9 +346,8 @@ export class PermissionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -407,786 +358,596 @@ export class PermissionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Create a permission to a specific resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the `Permission`.
-   *   Formats:
-   *      `tunedModels/{tuned_model}`
-   *      `corpora/{corpus}`
-   * @param {google.ai.generativelanguage.v1alpha.Permission} request.permission
-   *   Required. The permission to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/permission_service.create_permission.js</caption>
-   * region_tag:generativelanguage_v1alpha_generated_PermissionService_CreatePermission_async
-   */
+/**
+ * Create a permission to a specific resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the `Permission`.
+ *   Formats:
+ *      `tunedModels/{tuned_model}`
+ *      `corpora/{corpus}`
+ * @param {google.ai.generativelanguage.v1alpha.Permission} request.permission
+ *   Required. The permission to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/permission_service.create_permission.js</caption>
+ * region_tag:generativelanguage_v1alpha_generated_PermissionService_CreatePermission_async
+ */
   createPermission(
-    request?: protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      (
-        | protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest|undefined, {}|undefined
+      ]>;
   createPermission(
-    request: protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      | protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPermission(
-    request: protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      | protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPermission(
-    request?: protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1alpha.IPermission,
-          | protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      | protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      (
-        | protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPermission(
+      request: protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPermission(
+      request?: protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createPermission request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1alpha.IPermission,
-          | protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createPermission response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createPermission(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1alpha.IPermission,
-          (
-            | protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createPermission response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createPermission(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createPermission response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets information about a specific Permission.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the permission.
-   *
-   *   Formats:
-   *      `tunedModels/{tuned_model}/permissions/{permission}`
-   *      `corpora/{corpus}/permissions/{permission}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/permission_service.get_permission.js</caption>
-   * region_tag:generativelanguage_v1alpha_generated_PermissionService_GetPermission_async
-   */
+/**
+ * Gets information about a specific Permission.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the permission.
+ *
+ *   Formats:
+ *      `tunedModels/{tuned_model}/permissions/{permission}`
+ *      `corpora/{corpus}/permissions/{permission}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/permission_service.get_permission.js</caption>
+ * region_tag:generativelanguage_v1alpha_generated_PermissionService_GetPermission_async
+ */
   getPermission(
-    request?: protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      (
-        | protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest|undefined, {}|undefined
+      ]>;
   getPermission(
-    request: protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      | protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPermission(
-    request: protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      | protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPermission(
-    request?: protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1alpha.IPermission,
-          | protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      | protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      (
-        | protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPermission(
+      request: protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPermission(
+      request?: protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPermission request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1alpha.IPermission,
-          | protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPermission response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPermission(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1alpha.IPermission,
-          (
-            | protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getPermission response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPermission(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPermission response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the permission.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.ai.generativelanguage.v1alpha.Permission} request.permission
-   *   Required. The permission to update.
-   *
-   *   The permission's `name` field is used to identify the permission to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to update. Accepted ones:
-   *    - role (`Permission.role` field)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/permission_service.update_permission.js</caption>
-   * region_tag:generativelanguage_v1alpha_generated_PermissionService_UpdatePermission_async
-   */
+/**
+ * Updates the permission.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.ai.generativelanguage.v1alpha.Permission} request.permission
+ *   Required. The permission to update.
+ *
+ *   The permission's `name` field is used to identify the permission to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update. Accepted ones:
+ *    - role (`Permission.role` field)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/permission_service.update_permission.js</caption>
+ * region_tag:generativelanguage_v1alpha_generated_PermissionService_UpdatePermission_async
+ */
   updatePermission(
-    request?: protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      (
-        | protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest|undefined, {}|undefined
+      ]>;
   updatePermission(
-    request: protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      | protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePermission(
-    request: protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      | protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePermission(
-    request?: protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1alpha.IPermission,
-          | protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      | protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.IPermission,
-      (
-        | protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePermission(
+      request: protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePermission(
+      request?: protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'permission.name': request.permission!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'permission.name': request.permission!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updatePermission request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1alpha.IPermission,
-          | protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updatePermission response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updatePermission(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1alpha.IPermission,
-          (
-            | protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updatePermission response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updatePermission(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1alpha.IPermission,
+        protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updatePermission response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the permission.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the permission.
-   *   Formats:
-   *      `tunedModels/{tuned_model}/permissions/{permission}`
-   *      `corpora/{corpus}/permissions/{permission}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/permission_service.delete_permission.js</caption>
-   * region_tag:generativelanguage_v1alpha_generated_PermissionService_DeletePermission_async
-   */
+/**
+ * Deletes the permission.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the permission.
+ *   Formats:
+ *      `tunedModels/{tuned_model}/permissions/{permission}`
+ *      `corpora/{corpus}/permissions/{permission}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/permission_service.delete_permission.js</caption>
+ * region_tag:generativelanguage_v1alpha_generated_PermissionService_DeletePermission_async
+ */
   deletePermission(
-    request?: protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest|undefined, {}|undefined
+      ]>;
   deletePermission(
-    request: protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePermission(
-    request: protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePermission(
-    request?: protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePermission(
+      request: protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePermission(
+      request?: protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deletePermission request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deletePermission response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deletePermission(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePermission response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deletePermission(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deletePermission response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Transfers ownership of the tuned model.
-   * This is the only way to change ownership of the tuned model.
-   * The current owner will be downgraded to writer role.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the tuned model to transfer ownership.
-   *
-   *   Format: `tunedModels/my-model-id`
-   * @param {string} request.emailAddress
-   *   Required. The email address of the user to whom the tuned model is being
-   *   transferred to.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1alpha.TransferOwnershipResponse|TransferOwnershipResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/permission_service.transfer_ownership.js</caption>
-   * region_tag:generativelanguage_v1alpha_generated_PermissionService_TransferOwnership_async
-   */
+/**
+ * Transfers ownership of the tuned model.
+ * This is the only way to change ownership of the tuned model.
+ * The current owner will be downgraded to writer role.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the tuned model to transfer ownership.
+ *
+ *   Format: `tunedModels/my-model-id`
+ * @param {string} request.emailAddress
+ *   Required. The email address of the user to whom the tuned model is being
+ *   transferred to.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1alpha.TransferOwnershipResponse|TransferOwnershipResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/permission_service.transfer_ownership.js</caption>
+ * region_tag:generativelanguage_v1alpha_generated_PermissionService_TransferOwnership_async
+ */
   transferOwnership(
-    request?: protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
-      (
-        | protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
+        protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest|undefined, {}|undefined
+      ]>;
   transferOwnership(
-    request: protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
-      | protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  transferOwnership(
-    request: protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
-      | protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  transferOwnership(
-    request?: protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
-          | protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
-      | protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
-      (
-        | protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest|null|undefined,
+          {}|null|undefined>): void;
+  transferOwnership(
+      request: protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
+          protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest|null|undefined,
+          {}|null|undefined>): void;
+  transferOwnership(
+      request?: protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
+          protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
+          protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
+        protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('transferOwnership request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
-          | protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
+        protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('transferOwnership response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .transferOwnership(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
-          (
-            | protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('transferOwnership response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.transferOwnership(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
+        protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('transferOwnership response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists permissions for the specific resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the permissions.
-   *   Formats:
-   *      `tunedModels/{tuned_model}`
-   *      `corpora/{corpus}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Permission`s to return (per page).
-   *   The service may return fewer permissions.
-   *
-   *   If unspecified, at most 10 permissions will be returned.
-   *   This method returns at most 1000 permissions per page, even if you pass
-   *   larger page_size.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListPermissions` call.
-   *
-   *   Provide the `page_token` returned by one request as an argument to the
-   *   next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListPermissions`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPermissionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists permissions for the specific resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the permissions.
+ *   Formats:
+ *      `tunedModels/{tuned_model}`
+ *      `corpora/{corpus}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Permission`s to return (per page).
+ *   The service may return fewer permissions.
+ *
+ *   If unspecified, at most 10 permissions will be returned.
+ *   This method returns at most 1000 permissions per page, even if you pass
+ *   larger page_size.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListPermissions` call.
+ *
+ *   Provide the `page_token` returned by one request as an argument to the
+ *   next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListPermissions`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPermissionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPermissions(
-    request?: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.IPermission[],
-      protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest | null,
-      protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.IPermission[],
+        protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest|null,
+        protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse
+      ]>;
   listPermissions(
-    request: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
-      | protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1alpha.IPermission
-    >
-  ): void;
-  listPermissions(
-    request: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
-    callback: PaginationCallback<
-      protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
-      | protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1alpha.IPermission
-    >
-  ): void;
-  listPermissions(
-    request?: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
-          | protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse
-          | null
-          | undefined,
-          protos.google.ai.generativelanguage.v1alpha.IPermission
-        >,
-    callback?: PaginationCallback<
-      protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
-      | protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1alpha.IPermission
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.IPermission[],
-      protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest | null,
-      protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1alpha.IPermission>): void;
+  listPermissions(
+      request: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
+      callback: PaginationCallback<
+          protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
+          protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1alpha.IPermission>): void;
+  listPermissions(
+      request?: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
+          protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1alpha.IPermission>,
+      callback?: PaginationCallback<
+          protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
+          protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1alpha.IPermission>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.IPermission[],
+        protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest|null,
+        protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
-          | protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse
-          | null
-          | undefined,
-          protos.google.ai.generativelanguage.v1alpha.IPermission
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
+      protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse|null|undefined,
+      protos.google.ai.generativelanguage.v1alpha.IPermission>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPermissions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1195,70 +956,67 @@ export class PermissionServiceClient {
     this._log.info('listPermissions request %j', request);
     return this.innerApiCalls
       .listPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.ai.generativelanguage.v1alpha.IPermission[],
-          protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest | null,
-          protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse,
-        ]) => {
-          this._log.info('listPermissions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.ai.generativelanguage.v1alpha.IPermission[],
+        protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest|null,
+        protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse
+      ]) => {
+        this._log.info('listPermissions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPermissions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the permissions.
-   *   Formats:
-   *      `tunedModels/{tuned_model}`
-   *      `corpora/{corpus}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Permission`s to return (per page).
-   *   The service may return fewer permissions.
-   *
-   *   If unspecified, at most 10 permissions will be returned.
-   *   This method returns at most 1000 permissions per page, even if you pass
-   *   larger page_size.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListPermissions` call.
-   *
-   *   Provide the `page_token` returned by one request as an argument to the
-   *   next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListPermissions`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPermissionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPermissions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the permissions.
+ *   Formats:
+ *      `tunedModels/{tuned_model}`
+ *      `corpora/{corpus}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Permission`s to return (per page).
+ *   The service may return fewer permissions.
+ *
+ *   If unspecified, at most 10 permissions will be returned.
+ *   This method returns at most 1000 permissions per page, even if you pass
+ *   larger page_size.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListPermissions` call.
+ *
+ *   Provide the `page_token` returned by one request as an argument to the
+ *   next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListPermissions`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPermissionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPermissionsStream(
-    request?: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPermissions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPermissions stream %j', request);
     return this.descriptors.page.listPermissions.createStream(
       this.innerApiCalls.listPermissions as GaxCall,
@@ -1267,61 +1025,60 @@ export class PermissionServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listPermissions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the permissions.
-   *   Formats:
-   *      `tunedModels/{tuned_model}`
-   *      `corpora/{corpus}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Permission`s to return (per page).
-   *   The service may return fewer permissions.
-   *
-   *   If unspecified, at most 10 permissions will be returned.
-   *   This method returns at most 1000 permissions per page, even if you pass
-   *   larger page_size.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListPermissions` call.
-   *
-   *   Provide the `page_token` returned by one request as an argument to the
-   *   next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListPermissions`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/permission_service.list_permissions.js</caption>
-   * region_tag:generativelanguage_v1alpha_generated_PermissionService_ListPermissions_async
-   */
+/**
+ * Equivalent to `listPermissions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the permissions.
+ *   Formats:
+ *      `tunedModels/{tuned_model}`
+ *      `corpora/{corpus}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Permission`s to return (per page).
+ *   The service may return fewer permissions.
+ *
+ *   If unspecified, at most 10 permissions will be returned.
+ *   This method returns at most 1000 permissions per page, even if you pass
+ *   larger page_size.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListPermissions` call.
+ *
+ *   Provide the `page_token` returned by one request as an argument to the
+ *   next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListPermissions`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.ai.generativelanguage.v1alpha.Permission|Permission}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/permission_service.list_permissions.js</caption>
+ * region_tag:generativelanguage_v1alpha_generated_PermissionService_ListPermissions_async
+ */
   listPermissionsAsync(
-    request?: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.ai.generativelanguage.v1alpha.IPermission> {
+      request?: protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.ai.generativelanguage.v1alpha.IPermission>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPermissions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPermissions iterate %j', request);
     return this.descriptors.page.listPermissions.asyncIterate(
       this.innerApiCalls['listPermissions'] as GaxCall,
@@ -1339,7 +1096,7 @@ export class PermissionServiceClient {
    * @param {string} id
    * @returns {string} Resource name string.
    */
-  cachedContentPath(id: string) {
+  cachedContentPath(id:string) {
     return this.pathTemplates.cachedContentPathTemplate.render({
       id: id,
     });
@@ -1353,8 +1110,7 @@ export class PermissionServiceClient {
    * @returns {string} A string representing the id.
    */
   matchIdFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
-      .id;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).id;
   }
 
   /**
@@ -1365,7 +1121,7 @@ export class PermissionServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  chunkPath(corpus: string, document: string, chunk: string) {
+  chunkPath(corpus:string,document:string,chunk:string) {
     return this.pathTemplates.chunkPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -1412,7 +1168,7 @@ export class PermissionServiceClient {
    * @param {string} corpus
    * @returns {string} Resource name string.
    */
-  corpusPath(corpus: string) {
+  corpusPath(corpus:string) {
     return this.pathTemplates.corpusPathTemplate.render({
       corpus: corpus,
     });
@@ -1430,43 +1186,39 @@ export class PermissionServiceClient {
   }
 
   /**
-   * Return a fully-qualified corpusPermission resource name string.
+   * Return a fully-qualified corpusPermissions resource name string.
    *
    * @param {string} corpus
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  corpusPermissionPath(corpus: string, permission: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.render({
+  corpusPermissionsPath(corpus:string,permission:string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.render({
       corpus: corpus,
       permission: permission,
     });
   }
 
   /**
-   * Parse the corpus from CorpusPermission resource.
+   * Parse the corpus from CorpusPermissions resource.
    *
-   * @param {string} corpusPermissionName
-   *   A fully-qualified path representing corpus_permission resource.
+   * @param {string} corpusPermissionsName
+   *   A fully-qualified path representing corpus_permissions resource.
    * @returns {string} A string representing the corpus.
    */
-  matchCorpusFromCorpusPermissionName(corpusPermissionName: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.match(
-      corpusPermissionName
-    ).corpus;
+  matchCorpusFromCorpusPermissionsName(corpusPermissionsName: string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).corpus;
   }
 
   /**
-   * Parse the permission from CorpusPermission resource.
+   * Parse the permission from CorpusPermissions resource.
    *
-   * @param {string} corpusPermissionName
-   *   A fully-qualified path representing corpus_permission resource.
+   * @param {string} corpusPermissionsName
+   *   A fully-qualified path representing corpus_permissions resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromCorpusPermissionName(corpusPermissionName: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.match(
-      corpusPermissionName
-    ).permission;
+  matchPermissionFromCorpusPermissionsName(corpusPermissionsName: string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).permission;
   }
 
   /**
@@ -1476,7 +1228,7 @@ export class PermissionServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  documentPath(corpus: string, document: string) {
+  documentPath(corpus:string,document:string) {
     return this.pathTemplates.documentPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -1511,7 +1263,7 @@ export class PermissionServiceClient {
    * @param {string} file
    * @returns {string} Resource name string.
    */
-  filePath(file: string) {
+  filePath(file:string) {
     return this.pathTemplates.filePathTemplate.render({
       file: file,
     });
@@ -1534,7 +1286,7 @@ export class PermissionServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(model: string) {
+  modelPath(model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       model: model,
     });
@@ -1557,7 +1309,7 @@ export class PermissionServiceClient {
    * @param {string} tuned_model
    * @returns {string} Resource name string.
    */
-  tunedModelPath(tunedModel: string) {
+  tunedModelPath(tunedModel:string) {
     return this.pathTemplates.tunedModelPathTemplate.render({
       tuned_model: tunedModel,
     });
@@ -1571,52 +1323,43 @@ export class PermissionServiceClient {
    * @returns {string} A string representing the tuned_model.
    */
   matchTunedModelFromTunedModelName(tunedModelName: string) {
-    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName)
-      .tuned_model;
+    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName).tuned_model;
   }
 
   /**
-   * Return a fully-qualified tunedModelPermission resource name string.
+   * Return a fully-qualified tunedModelPermissions resource name string.
    *
    * @param {string} tuned_model
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  tunedModelPermissionPath(tunedModel: string, permission: string) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.render({
+  tunedModelPermissionsPath(tunedModel:string,permission:string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.render({
       tuned_model: tunedModel,
       permission: permission,
     });
   }
 
   /**
-   * Parse the tuned_model from TunedModelPermission resource.
+   * Parse the tuned_model from TunedModelPermissions resource.
    *
-   * @param {string} tunedModelPermissionName
-   *   A fully-qualified path representing tuned_model_permission resource.
+   * @param {string} tunedModelPermissionsName
+   *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the tuned_model.
    */
-  matchTunedModelFromTunedModelPermissionName(
-    tunedModelPermissionName: string
-  ) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.match(
-      tunedModelPermissionName
-    ).tuned_model;
+  matchTunedModelFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).tuned_model;
   }
 
   /**
-   * Parse the permission from TunedModelPermission resource.
+   * Parse the permission from TunedModelPermissions resource.
    *
-   * @param {string} tunedModelPermissionName
-   *   A fully-qualified path representing tuned_model_permission resource.
+   * @param {string} tunedModelPermissionsName
+   *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromTunedModelPermissionName(
-    tunedModelPermissionName: string
-  ) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.match(
-      tunedModelPermissionName
-    ).permission;
+  matchPermissionFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).permission;
   }
 
   /**

@@ -1,1 +1,0 @@
-Admanager: Nodejs Client

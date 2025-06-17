@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class ServicesClient {
    *     const client = new ServicesClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ServicesClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'appengine.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class ServicesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class ServicesClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -214,78 +187,47 @@ export class ServicesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listServices: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'services'
-      ),
+      listServices:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'services')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=apps/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=apps/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=apps/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=apps/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=apps/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=apps/*}/locations',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=apps/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=apps/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const updateServiceResponse = protoFilesRoot.lookup(
-      '.google.appengine.v1.Service'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.Service') as gax.protobuf.Type;
     const updateServiceMetadata = protoFilesRoot.lookup(
-      '.google.appengine.v1.OperationMetadataV1'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.OperationMetadataV1') as gax.protobuf.Type;
     const deleteServiceResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteServiceMetadata = protoFilesRoot.lookup(
-      '.google.appengine.v1.OperationMetadataV1'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.OperationMetadataV1') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       updateService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateServiceResponse.decode.bind(updateServiceResponse),
-        updateServiceMetadata.decode.bind(updateServiceMetadata)
-      ),
+        updateServiceMetadata.decode.bind(updateServiceMetadata)),
       deleteService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteServiceResponse.decode.bind(deleteServiceResponse),
-        deleteServiceMetadata.decode.bind(deleteServiceMetadata)
-      ),
+        deleteServiceMetadata.decode.bind(deleteServiceMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.appengine.v1.Services',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.appengine.v1.Services', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -316,38 +258,28 @@ export class ServicesClient {
     // Put together the "service stub" for
     // google.appengine.v1.Services.
     this.servicesStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.appengine.v1.Services'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.appengine.v1.Services') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.appengine.v1.Services,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const servicesStubMethods = [
-      'listServices',
-      'getService',
-      'updateService',
-      'deleteService',
-    ];
+    const servicesStubMethods =
+        ['listServices', 'getService', 'updateService', 'deleteService'];
     for (const methodName of servicesStubMethods) {
       const callPromise = this.servicesStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -372,14 +304,8 @@ export class ServicesClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'appengine.googleapis.com';
   }
@@ -390,14 +316,8 @@ export class ServicesClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'appengine.googleapis.com';
   }
@@ -431,7 +351,7 @@ export class ServicesClient {
     return [
       'https://www.googleapis.com/auth/appengine.admin',
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-platform.read-only',
+      'https://www.googleapis.com/auth/cloud-platform.read-only'
     ];
   }
 
@@ -441,9 +361,8 @@ export class ServicesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -454,567 +373,414 @@ export class ServicesClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the current configuration of the specified service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example: `apps/myapp/services/default`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.appengine.v1.Service|Service}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/services.get_service.js</caption>
-   * region_tag:appengine_v1_generated_Services_GetService_async
-   */
+/**
+ * Gets the current configuration of the specified service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource requested. Example: `apps/myapp/services/default`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.appengine.v1.Service|Service}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/services.get_service.js</caption>
+ * region_tag:appengine_v1_generated_Services_GetService_async
+ */
   getService(
-    request?: protos.google.appengine.v1.IGetServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IService,
-      protos.google.appengine.v1.IGetServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IGetServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.appengine.v1.IService,
+        protos.google.appengine.v1.IGetServiceRequest|undefined, {}|undefined
+      ]>;
   getService(
-    request: protos.google.appengine.v1.IGetServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.appengine.v1.IService,
-      protos.google.appengine.v1.IGetServiceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getService(
-    request: protos.google.appengine.v1.IGetServiceRequest,
-    callback: Callback<
-      protos.google.appengine.v1.IService,
-      protos.google.appengine.v1.IGetServiceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getService(
-    request?: protos.google.appengine.v1.IGetServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.appengine.v1.IGetServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.appengine.v1.IService,
-          protos.google.appengine.v1.IGetServiceRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.appengine.v1.IService,
-      protos.google.appengine.v1.IGetServiceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.appengine.v1.IService,
-      protos.google.appengine.v1.IGetServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.appengine.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getService(
+      request: protos.google.appengine.v1.IGetServiceRequest,
+      callback: Callback<
+          protos.google.appengine.v1.IService,
+          protos.google.appengine.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getService(
+      request?: protos.google.appengine.v1.IGetServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.appengine.v1.IService,
+          protos.google.appengine.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.appengine.v1.IService,
+          protos.google.appengine.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.appengine.v1.IService,
+        protos.google.appengine.v1.IGetServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.appengine.v1.IService,
-          protos.google.appengine.v1.IGetServiceRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.appengine.v1.IService,
+        protos.google.appengine.v1.IGetServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.appengine.v1.IService,
-          protos.google.appengine.v1.IGetServiceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.appengine.v1.IService,
+        protos.google.appengine.v1.IGetServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Updates the configuration of the specified service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource to update. Example: `apps/myapp/services/default`.
-   * @param {google.appengine.v1.Service} request.service
-   *   A Service resource containing the updated service. Only fields set in the
-   *   field mask will be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Standard field mask for the set of fields to be updated.
-   * @param {boolean} request.migrateTraffic
-   *   Set to `true` to gradually shift traffic to one or more versions that you
-   *   specify. By default, traffic is shifted immediately.
-   *   For gradual traffic migration, the target versions
-   *   must be located within instances that are configured for both
-   *   [warmup requests](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#InboundServiceType)
-   *   and
-   *   [automatic scaling](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#AutomaticScaling).
-   *   You must specify the
-   *   [`shardBy`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services#ShardBy)
-   *   field in the Service resource. Gradual traffic migration is not
-   *   supported in the App Engine flexible environment. For examples, see
-   *   [Migrating and Splitting Traffic](https://cloud.google.com/appengine/docs/admin-api/migrating-splitting-traffic).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/services.update_service.js</caption>
-   * region_tag:appengine_v1_generated_Services_UpdateService_async
-   */
+/**
+ * Updates the configuration of the specified service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource to update. Example: `apps/myapp/services/default`.
+ * @param {google.appengine.v1.Service} request.service
+ *   A Service resource containing the updated service. Only fields set in the
+ *   field mask will be updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Standard field mask for the set of fields to be updated.
+ * @param {boolean} request.migrateTraffic
+ *   Set to `true` to gradually shift traffic to one or more versions that you
+ *   specify. By default, traffic is shifted immediately.
+ *   For gradual traffic migration, the target versions
+ *   must be located within instances that are configured for both
+ *   [warmup requests](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#InboundServiceType)
+ *   and
+ *   [automatic scaling](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#AutomaticScaling).
+ *   You must specify the
+ *   [`shardBy`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services#ShardBy)
+ *   field in the Service resource. Gradual traffic migration is not
+ *   supported in the App Engine flexible environment. For examples, see
+ *   [Migrating and Splitting Traffic](https://cloud.google.com/appengine/docs/admin-api/migrating-splitting-traffic).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/services.update_service.js</caption>
+ * region_tag:appengine_v1_generated_Services_UpdateService_async
+ */
   updateService(
-    request?: protos.google.appengine.v1.IUpdateServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IService,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IUpdateServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IService, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateService(
-    request: protos.google.appengine.v1.IUpdateServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IService,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IUpdateServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IService, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateService(
-    request: protos.google.appengine.v1.IUpdateServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IService,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IUpdateServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IService, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateService(
-    request?: protos.google.appengine.v1.IUpdateServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IService,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.appengine.v1.IService,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IService,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.appengine.v1.IUpdateServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.appengine.v1.IService, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.appengine.v1.IService, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IService, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IService,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.appengine.v1.IService, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateService request %j', request);
-    return this.innerApiCalls
-      .updateService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.appengine.v1.IService,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.appengine.v1.IService, protos.google.appengine.v1.IOperationMetadataV1>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/services.update_service.js</caption>
-   * region_tag:appengine_v1_generated_Services_UpdateService_async
-   */
-  async checkUpdateServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.appengine.v1.Service,
-      protos.google.appengine.v1.OperationMetadataV1
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/services.update_service.js</caption>
+ * region_tag:appengine_v1_generated_Services_UpdateService_async
+ */
+  async checkUpdateServiceProgress(name: string): Promise<LROperation<protos.google.appengine.v1.Service, protos.google.appengine.v1.OperationMetadataV1>>{
     this._log.info('updateService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.appengine.v1.Service,
-      protos.google.appengine.v1.OperationMetadataV1
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.appengine.v1.Service, protos.google.appengine.v1.OperationMetadataV1>;
   }
-  /**
-   * Deletes the specified service and all enclosed versions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example: `apps/myapp/services/default`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/services.delete_service.js</caption>
-   * region_tag:appengine_v1_generated_Services_DeleteService_async
-   */
+/**
+ * Deletes the specified service and all enclosed versions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource requested. Example: `apps/myapp/services/default`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/services.delete_service.js</caption>
+ * region_tag:appengine_v1_generated_Services_DeleteService_async
+ */
   deleteService(
-    request?: protos.google.appengine.v1.IDeleteServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IDeleteServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteService(
-    request: protos.google.appengine.v1.IDeleteServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IDeleteServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteService(
-    request: protos.google.appengine.v1.IDeleteServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IDeleteServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteService(
-    request?: protos.google.appengine.v1.IDeleteServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.appengine.v1.IDeleteServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteService request %j', request);
-    return this.innerApiCalls
-      .deleteService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/services.delete_service.js</caption>
-   * region_tag:appengine_v1_generated_Services_DeleteService_async
-   */
-  async checkDeleteServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.appengine.v1.OperationMetadataV1
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/services.delete_service.js</caption>
+ * region_tag:appengine_v1_generated_Services_DeleteService_async
+ */
+  async checkDeleteServiceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.appengine.v1.OperationMetadataV1>>{
     this._log.info('deleteService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.appengine.v1.OperationMetadataV1
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.appengine.v1.OperationMetadataV1>;
   }
-  /**
-   * Lists all the services in the application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent Application resource. Example: `apps/myapp`.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.appengine.v1.Service|Service}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the services in the application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent Application resource. Example: `apps/myapp`.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.appengine.v1.Service|Service}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServices(
-    request?: protos.google.appengine.v1.IListServicesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IService[],
-      protos.google.appengine.v1.IListServicesRequest | null,
-      protos.google.appengine.v1.IListServicesResponse,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IListServicesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.appengine.v1.IService[],
+        protos.google.appengine.v1.IListServicesRequest|null,
+        protos.google.appengine.v1.IListServicesResponse
+      ]>;
   listServices(
-    request: protos.google.appengine.v1.IListServicesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.appengine.v1.IListServicesRequest,
-      protos.google.appengine.v1.IListServicesResponse | null | undefined,
-      protos.google.appengine.v1.IService
-    >
-  ): void;
-  listServices(
-    request: protos.google.appengine.v1.IListServicesRequest,
-    callback: PaginationCallback<
-      protos.google.appengine.v1.IListServicesRequest,
-      protos.google.appengine.v1.IListServicesResponse | null | undefined,
-      protos.google.appengine.v1.IService
-    >
-  ): void;
-  listServices(
-    request?: protos.google.appengine.v1.IListServicesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.appengine.v1.IListServicesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.appengine.v1.IListServicesRequest,
-          protos.google.appengine.v1.IListServicesResponse | null | undefined,
-          protos.google.appengine.v1.IService
-        >,
-    callback?: PaginationCallback<
-      protos.google.appengine.v1.IListServicesRequest,
-      protos.google.appengine.v1.IListServicesResponse | null | undefined,
-      protos.google.appengine.v1.IService
-    >
-  ): Promise<
-    [
-      protos.google.appengine.v1.IService[],
-      protos.google.appengine.v1.IListServicesRequest | null,
-      protos.google.appengine.v1.IListServicesResponse,
-    ]
-  > | void {
+          protos.google.appengine.v1.IListServicesResponse|null|undefined,
+          protos.google.appengine.v1.IService>): void;
+  listServices(
+      request: protos.google.appengine.v1.IListServicesRequest,
+      callback: PaginationCallback<
+          protos.google.appengine.v1.IListServicesRequest,
+          protos.google.appengine.v1.IListServicesResponse|null|undefined,
+          protos.google.appengine.v1.IService>): void;
+  listServices(
+      request?: protos.google.appengine.v1.IListServicesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.appengine.v1.IListServicesRequest,
+          protos.google.appengine.v1.IListServicesResponse|null|undefined,
+          protos.google.appengine.v1.IService>,
+      callback?: PaginationCallback<
+          protos.google.appengine.v1.IListServicesRequest,
+          protos.google.appengine.v1.IListServicesResponse|null|undefined,
+          protos.google.appengine.v1.IService>):
+      Promise<[
+        protos.google.appengine.v1.IService[],
+        protos.google.appengine.v1.IListServicesRequest|null,
+        protos.google.appengine.v1.IListServicesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.appengine.v1.IListServicesRequest,
-          protos.google.appengine.v1.IListServicesResponse | null | undefined,
-          protos.google.appengine.v1.IService
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.appengine.v1.IListServicesRequest,
+      protos.google.appengine.v1.IListServicesResponse|null|undefined,
+      protos.google.appengine.v1.IService>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1023,56 +789,53 @@ export class ServicesClient {
     this._log.info('listServices request %j', request);
     return this.innerApiCalls
       .listServices(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.appengine.v1.IService[],
-          protos.google.appengine.v1.IListServicesRequest | null,
-          protos.google.appengine.v1.IListServicesResponse,
-        ]) => {
-          this._log.info('listServices values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.appengine.v1.IService[],
+        protos.google.appengine.v1.IListServicesRequest|null,
+        protos.google.appengine.v1.IListServicesResponse
+      ]) => {
+        this._log.info('listServices values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listServices`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent Application resource. Example: `apps/myapp`.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.appengine.v1.Service|Service} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listServices`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent Application resource. Example: `apps/myapp`.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.appengine.v1.Service|Service} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServicesStream(
-    request?: protos.google.appengine.v1.IListServicesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.appengine.v1.IListServicesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
@@ -1081,47 +844,46 @@ export class ServicesClient {
     );
   }
 
-  /**
-   * Equivalent to `listServices`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent Application resource. Example: `apps/myapp`.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.appengine.v1.Service|Service}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/services.list_services.js</caption>
-   * region_tag:appengine_v1_generated_Services_ListServices_async
-   */
+/**
+ * Equivalent to `listServices`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent Application resource. Example: `apps/myapp`.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.appengine.v1.Service|Service}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/services.list_services.js</caption>
+ * region_tag:appengine_v1_generated_Services_ListServices_async
+ */
   listServicesAsync(
-    request?: protos.google.appengine.v1.IListServicesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.appengine.v1.IService> {
+      request?: protos.google.appengine.v1.IListServicesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.appengine.v1.IService>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
@@ -1142,12 +904,7 @@ export class ServicesClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(
-    app: string,
-    service: string,
-    version: string,
-    instance: string
-  ) {
+  instancePath(app:string,service:string,version:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       app: app,
       service: service,

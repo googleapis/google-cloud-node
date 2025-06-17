@@ -1693,6 +1693,9 @@ export namespace google {
                     /** Properties of a Subscription. */
                     interface ISubscription {
 
+                        /** Subscription driveOptions */
+                        driveOptions?: (google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions|null);
+
                         /** Subscription expireTime */
                         expireTime?: (google.protobuf.ITimestamp|null);
 
@@ -1748,6 +1751,9 @@ export namespace google {
                          */
                         constructor(properties?: google.apps.events.subscriptions.v1beta.ISubscription);
 
+                        /** Subscription driveOptions. */
+                        public driveOptions?: (google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions|null);
+
                         /** Subscription expireTime. */
                         public expireTime?: (google.protobuf.ITimestamp|null);
 
@@ -1792,6 +1798,9 @@ export namespace google {
 
                         /** Subscription etag. */
                         public etag: string;
+
+                        /** Subscription subscriptionOptions. */
+                        public subscriptionOptions?: "driveOptions";
 
                         /** Subscription expiration. */
                         public expiration?: ("expireTime"|"ttl");
@@ -1875,6 +1884,103 @@ export namespace google {
                     }
 
                     namespace Subscription {
+
+                        /** Properties of a DriveOptions. */
+                        interface IDriveOptions {
+
+                            /** DriveOptions includeDescendants */
+                            includeDescendants?: (boolean|null);
+                        }
+
+                        /** Represents a DriveOptions. */
+                        class DriveOptions implements IDriveOptions {
+
+                            /**
+                             * Constructs a new DriveOptions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions);
+
+                            /** DriveOptions includeDescendants. */
+                            public includeDescendants: boolean;
+
+                            /**
+                             * Creates a new DriveOptions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DriveOptions instance
+                             */
+                            public static create(properties?: google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions): google.apps.events.subscriptions.v1beta.Subscription.DriveOptions;
+
+                            /**
+                             * Encodes the specified DriveOptions message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.verify|verify} messages.
+                             * @param message DriveOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DriveOptions message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.verify|verify} messages.
+                             * @param message DriveOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DriveOptions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DriveOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.events.subscriptions.v1beta.Subscription.DriveOptions;
+
+                            /**
+                             * Decodes a DriveOptions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DriveOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.events.subscriptions.v1beta.Subscription.DriveOptions;
+
+                            /**
+                             * Verifies a DriveOptions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DriveOptions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DriveOptions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.apps.events.subscriptions.v1beta.Subscription.DriveOptions;
+
+                            /**
+                             * Creates a plain object from a DriveOptions message. Also converts values to other types if specified.
+                             * @param message DriveOptions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.apps.events.subscriptions.v1beta.Subscription.DriveOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DriveOptions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DriveOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
 
                         /** State enum. */
                         enum State {

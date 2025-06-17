@@ -16,17 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  CacheServiceClient,
-  DiscussServiceClient,
-  FileServiceClient,
-  GenerativeServiceClient,
-  ModelServiceClient,
-  PermissionServiceClient,
-  PredictionServiceClient,
-  RetrieverServiceClient,
-  TextServiceClient,
-} from '@google-ai/generativelanguage';
+import {CacheServiceClient, DiscussServiceClient, FileServiceClient, GenerativeServiceClient, ModelServiceClient, PermissionServiceClient, PredictionServiceClient, RetrieverServiceClient, TextServiceClient} from '@google-ai/generativelanguage';
 
 // check that the client class type name can be used
 function doStuffWithCacheServiceClient(client: CacheServiceClient) {

@@ -19,9 +19,7 @@
 import {SubscriptionsServiceClient} from '@google-cloud/subscriptions';
 
 // check that the client class type name can be used
-function doStuffWithSubscriptionsServiceClient(
-  client: SubscriptionsServiceClient
-) {
+function doStuffWithSubscriptionsServiceClient(client: SubscriptionsServiceClient) {
   client.close();
 }
 

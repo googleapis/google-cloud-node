@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -118,41 +111,20 @@ export class TablesServiceClient {
    *     const client = new TablesServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof TablesServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'area120tables.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -178,7 +150,7 @@ export class TablesServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -192,7 +164,10 @@ export class TablesServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -216,7 +191,9 @@ export class TablesServiceClient {
       rowPathTemplate: new this._gaxModule.PathTemplate(
         'tables/{table}/rows/{row}'
       ),
-      tablePathTemplate: new this._gaxModule.PathTemplate('tables/{table}'),
+      tablePathTemplate: new this._gaxModule.PathTemplate(
+        'tables/{table}'
+      ),
       workspacePathTemplate: new this._gaxModule.PathTemplate(
         'workspaces/{workspace}'
       ),
@@ -226,30 +203,18 @@ export class TablesServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listTables: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'tables'
-      ),
-      listWorkspaces: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'workspaces'
-      ),
-      listRows: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'rows'
-      ),
+      listTables:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tables'),
+      listWorkspaces:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workspaces'),
+      listRows:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rows')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.area120.tables.v1alpha1.TablesService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.area120.tables.v1alpha1.TablesService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -280,48 +245,32 @@ export class TablesServiceClient {
     // Put together the "service stub" for
     // google.area120.tables.v1alpha1.TablesService.
     this.tablesServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.area120.tables.v1alpha1.TablesService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.area120.tables.v1alpha1.TablesService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.area120.tables.v1alpha1.TablesService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const tablesServiceStubMethods = [
-      'getTable',
-      'listTables',
-      'getWorkspace',
-      'listWorkspaces',
-      'getRow',
-      'listRows',
-      'createRow',
-      'batchCreateRows',
-      'updateRow',
-      'batchUpdateRows',
-      'deleteRow',
-      'batchDeleteRows',
-    ];
+    const tablesServiceStubMethods =
+        ['getTable', 'listTables', 'getWorkspace', 'listWorkspaces', 'getRow', 'listRows', 'createRow', 'batchCreateRows', 'updateRow', 'batchUpdateRows', 'deleteRow', 'batchDeleteRows'];
     for (const methodName of tablesServiceStubMethods) {
       const callPromise = this.tablesServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -341,14 +290,8 @@ export class TablesServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'area120tables.googleapis.com';
   }
@@ -359,14 +302,8 @@ export class TablesServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'area120tables.googleapis.com';
   }
@@ -403,7 +340,7 @@ export class TablesServiceClient {
       'https://www.googleapis.com/auth/drive.readonly',
       'https://www.googleapis.com/auth/spreadsheets',
       'https://www.googleapis.com/auth/spreadsheets.readonly',
-      'https://www.googleapis.com/auth/tables',
+      'https://www.googleapis.com/auth/tables'
     ];
   }
 
@@ -413,9 +350,8 @@ export class TablesServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -426,1211 +362,969 @@ export class TablesServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a table. Returns NOT_FOUND if the table does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the table to retrieve.
-   *   Format: tables/{table}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.Table|Table}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.get_table.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_GetTable_async
-   */
+/**
+ * Gets a table. Returns NOT_FOUND if the table does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the table to retrieve.
+ *   Format: tables/{table}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.Table|Table}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.get_table.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_GetTable_async
+ */
   getTable(
-    request?: protos.google.area120.tables.v1alpha1.IGetTableRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.ITable,
-      protos.google.area120.tables.v1alpha1.IGetTableRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.IGetTableRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.ITable,
+        protos.google.area120.tables.v1alpha1.IGetTableRequest|undefined, {}|undefined
+      ]>;
   getTable(
-    request: protos.google.area120.tables.v1alpha1.IGetTableRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.ITable,
-      protos.google.area120.tables.v1alpha1.IGetTableRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTable(
-    request: protos.google.area120.tables.v1alpha1.IGetTableRequest,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.ITable,
-      protos.google.area120.tables.v1alpha1.IGetTableRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTable(
-    request?: protos.google.area120.tables.v1alpha1.IGetTableRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.area120.tables.v1alpha1.IGetTableRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.area120.tables.v1alpha1.ITable,
-          | protos.google.area120.tables.v1alpha1.IGetTableRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.area120.tables.v1alpha1.ITable,
-      protos.google.area120.tables.v1alpha1.IGetTableRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.ITable,
-      protos.google.area120.tables.v1alpha1.IGetTableRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.IGetTableRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTable(
+      request: protos.google.area120.tables.v1alpha1.IGetTableRequest,
+      callback: Callback<
+          protos.google.area120.tables.v1alpha1.ITable,
+          protos.google.area120.tables.v1alpha1.IGetTableRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTable(
+      request?: protos.google.area120.tables.v1alpha1.IGetTableRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.area120.tables.v1alpha1.ITable,
+          protos.google.area120.tables.v1alpha1.IGetTableRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.area120.tables.v1alpha1.ITable,
+          protos.google.area120.tables.v1alpha1.IGetTableRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.ITable,
+        protos.google.area120.tables.v1alpha1.IGetTableRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getTable request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.area120.tables.v1alpha1.ITable,
-          | protos.google.area120.tables.v1alpha1.IGetTableRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.area120.tables.v1alpha1.ITable,
+        protos.google.area120.tables.v1alpha1.IGetTableRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTable response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getTable(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.area120.tables.v1alpha1.ITable,
-          protos.google.area120.tables.v1alpha1.IGetTableRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getTable response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getTable(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.area120.tables.v1alpha1.ITable,
+        protos.google.area120.tables.v1alpha1.IGetTableRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTable response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a workspace. Returns NOT_FOUND if the workspace does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the workspace to retrieve.
-   *   Format: workspaces/{workspace}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.Workspace|Workspace}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.get_workspace.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_GetWorkspace_async
-   */
+/**
+ * Gets a workspace. Returns NOT_FOUND if the workspace does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the workspace to retrieve.
+ *   Format: workspaces/{workspace}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.Workspace|Workspace}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.get_workspace.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_GetWorkspace_async
+ */
   getWorkspace(
-    request?: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IWorkspace,
-      protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IWorkspace,
+        protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest|undefined, {}|undefined
+      ]>;
   getWorkspace(
-    request: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IWorkspace,
-      | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkspace(
-    request: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IWorkspace,
-      | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkspace(
-    request?: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.area120.tables.v1alpha1.IWorkspace,
-          | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.area120.tables.v1alpha1.IWorkspace,
-      | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IWorkspace,
-      protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkspace(
+      request: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
+      callback: Callback<
+          protos.google.area120.tables.v1alpha1.IWorkspace,
+          protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkspace(
+      request?: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.area120.tables.v1alpha1.IWorkspace,
+          protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.area120.tables.v1alpha1.IWorkspace,
+          protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IWorkspace,
+        protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getWorkspace request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.area120.tables.v1alpha1.IWorkspace,
-          | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.area120.tables.v1alpha1.IWorkspace,
+        protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getWorkspace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getWorkspace(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.area120.tables.v1alpha1.IWorkspace,
-          (
-            | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getWorkspace response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getWorkspace(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.area120.tables.v1alpha1.IWorkspace,
+        protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getWorkspace response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a row. Returns NOT_FOUND if the row does not exist in the table.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the row to retrieve.
-   *   Format: tables/{table}/rows/{row}
-   * @param {google.area120.tables.v1alpha1.View} [request.view]
-   *   Optional. Column key to use for values in the row.
-   *   Defaults to user entered name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.Row|Row}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.get_row.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_GetRow_async
-   */
+/**
+ * Gets a row. Returns NOT_FOUND if the row does not exist in the table.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the row to retrieve.
+ *   Format: tables/{table}/rows/{row}
+ * @param {google.area120.tables.v1alpha1.View} [request.view]
+ *   Optional. Column key to use for values in the row.
+ *   Defaults to user entered name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.Row|Row}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.get_row.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_GetRow_async
+ */
   getRow(
-    request?: protos.google.area120.tables.v1alpha1.IGetRowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IRow,
-      protos.google.area120.tables.v1alpha1.IGetRowRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.IGetRowRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.IGetRowRequest|undefined, {}|undefined
+      ]>;
   getRow(
-    request: protos.google.area120.tables.v1alpha1.IGetRowRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IRow,
-      protos.google.area120.tables.v1alpha1.IGetRowRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRow(
-    request: protos.google.area120.tables.v1alpha1.IGetRowRequest,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IRow,
-      protos.google.area120.tables.v1alpha1.IGetRowRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRow(
-    request?: protos.google.area120.tables.v1alpha1.IGetRowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.area120.tables.v1alpha1.IGetRowRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.area120.tables.v1alpha1.IRow,
-          | protos.google.area120.tables.v1alpha1.IGetRowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.area120.tables.v1alpha1.IRow,
-      protos.google.area120.tables.v1alpha1.IGetRowRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IRow,
-      protos.google.area120.tables.v1alpha1.IGetRowRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.IGetRowRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRow(
+      request: protos.google.area120.tables.v1alpha1.IGetRowRequest,
+      callback: Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.IGetRowRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRow(
+      request?: protos.google.area120.tables.v1alpha1.IGetRowRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.IGetRowRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.IGetRowRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.IGetRowRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRow request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.area120.tables.v1alpha1.IRow,
-          | protos.google.area120.tables.v1alpha1.IGetRowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.IGetRowRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRow(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.area120.tables.v1alpha1.IRow,
-          protos.google.area120.tables.v1alpha1.IGetRowRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getRow response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRow(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.IGetRowRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRow response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a row.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent table where this row will be created.
-   *   Format: tables/{table}
-   * @param {google.area120.tables.v1alpha1.Row} request.row
-   *   Required. The row to create.
-   * @param {google.area120.tables.v1alpha1.View} [request.view]
-   *   Optional. Column key to use for values in the row.
-   *   Defaults to user entered name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.Row|Row}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.create_row.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_CreateRow_async
-   */
+/**
+ * Creates a row.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent table where this row will be created.
+ *   Format: tables/{table}
+ * @param {google.area120.tables.v1alpha1.Row} request.row
+ *   Required. The row to create.
+ * @param {google.area120.tables.v1alpha1.View} [request.view]
+ *   Optional. Column key to use for values in the row.
+ *   Defaults to user entered name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.Row|Row}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.create_row.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_CreateRow_async
+ */
   createRow(
-    request?: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IRow,
-      protos.google.area120.tables.v1alpha1.ICreateRowRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.ICreateRowRequest|undefined, {}|undefined
+      ]>;
   createRow(
-    request: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IRow,
-      | protos.google.area120.tables.v1alpha1.ICreateRowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createRow(
-    request: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IRow,
-      | protos.google.area120.tables.v1alpha1.ICreateRowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createRow(
-    request?: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.area120.tables.v1alpha1.IRow,
-          | protos.google.area120.tables.v1alpha1.ICreateRowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.area120.tables.v1alpha1.IRow,
-      | protos.google.area120.tables.v1alpha1.ICreateRowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IRow,
-      protos.google.area120.tables.v1alpha1.ICreateRowRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.ICreateRowRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRow(
+      request: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
+      callback: Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.ICreateRowRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRow(
+      request?: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.ICreateRowRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.ICreateRowRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.ICreateRowRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createRow request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.area120.tables.v1alpha1.IRow,
-          | protos.google.area120.tables.v1alpha1.ICreateRowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.ICreateRowRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createRow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createRow(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.area120.tables.v1alpha1.IRow,
-          protos.google.area120.tables.v1alpha1.ICreateRowRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createRow response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createRow(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.ICreateRowRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createRow response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates multiple rows.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent table where the rows will be created.
-   *   Format: tables/{table}
-   * @param {number[]} request.requests
-   *   Required. The request message specifying the rows to create.
-   *
-   *   A maximum of 500 rows can be created in a single batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.BatchCreateRowsResponse|BatchCreateRowsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.batch_create_rows.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_BatchCreateRows_async
-   */
+/**
+ * Creates multiple rows.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent table where the rows will be created.
+ *   Format: tables/{table}
+ * @param {number[]} request.requests
+ *   Required. The request message specifying the rows to create.
+ *
+ *   A maximum of 500 rows can be created in a single batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.BatchCreateRowsResponse|BatchCreateRowsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.batch_create_rows.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_BatchCreateRows_async
+ */
   batchCreateRows(
-    request?: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
-      protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
+        protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest|undefined, {}|undefined
+      ]>;
   batchCreateRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
-      | protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchCreateRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
-      | protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchCreateRows(
-    request?: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
-          | protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
-      | protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
-      protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateRows(
+      request: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
+      callback: Callback<
+          protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
+          protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateRows(
+      request?: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
+          protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
+          protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
+        protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchCreateRows request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
-          | protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
+        protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchCreateRows response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchCreateRows(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
-          (
-            | protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchCreateRows response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchCreateRows(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
+        protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchCreateRows response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a row.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.area120.tables.v1alpha1.Row} request.row
-   *   Required. The row to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to update.
-   * @param {google.area120.tables.v1alpha1.View} [request.view]
-   *   Optional. Column key to use for values in the row.
-   *   Defaults to user entered name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.Row|Row}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.update_row.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_UpdateRow_async
-   */
+/**
+ * Updates a row.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.area120.tables.v1alpha1.Row} request.row
+ *   Required. The row to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to update.
+ * @param {google.area120.tables.v1alpha1.View} [request.view]
+ *   Optional. Column key to use for values in the row.
+ *   Defaults to user entered name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.Row|Row}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.update_row.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_UpdateRow_async
+ */
   updateRow(
-    request?: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IRow,
-      protos.google.area120.tables.v1alpha1.IUpdateRowRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.IUpdateRowRequest|undefined, {}|undefined
+      ]>;
   updateRow(
-    request: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IRow,
-      | protos.google.area120.tables.v1alpha1.IUpdateRowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRow(
-    request: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IRow,
-      | protos.google.area120.tables.v1alpha1.IUpdateRowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRow(
-    request?: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.area120.tables.v1alpha1.IRow,
-          | protos.google.area120.tables.v1alpha1.IUpdateRowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.area120.tables.v1alpha1.IRow,
-      | protos.google.area120.tables.v1alpha1.IUpdateRowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IRow,
-      protos.google.area120.tables.v1alpha1.IUpdateRowRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.IUpdateRowRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRow(
+      request: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
+      callback: Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.IUpdateRowRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRow(
+      request?: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.IUpdateRowRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.IUpdateRowRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.IUpdateRowRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'row.name': request.row!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'row.name': request.row!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateRow request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.area120.tables.v1alpha1.IRow,
-          | protos.google.area120.tables.v1alpha1.IUpdateRowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.IUpdateRowRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateRow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateRow(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.area120.tables.v1alpha1.IRow,
-          protos.google.area120.tables.v1alpha1.IUpdateRowRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateRow response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateRow(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.area120.tables.v1alpha1.IRow,
+        protos.google.area120.tables.v1alpha1.IUpdateRowRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateRow response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates multiple rows.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent table shared by all rows being updated.
-   *   Format: tables/{table}
-   * @param {number[]} request.requests
-   *   Required. The request messages specifying the rows to update.
-   *
-   *   A maximum of 500 rows can be modified in a single batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.BatchUpdateRowsResponse|BatchUpdateRowsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.batch_update_rows.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_BatchUpdateRows_async
-   */
+/**
+ * Updates multiple rows.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent table shared by all rows being updated.
+ *   Format: tables/{table}
+ * @param {number[]} request.requests
+ *   Required. The request messages specifying the rows to update.
+ *
+ *   A maximum of 500 rows can be modified in a single batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.area120.tables.v1alpha1.BatchUpdateRowsResponse|BatchUpdateRowsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.batch_update_rows.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_BatchUpdateRows_async
+ */
   batchUpdateRows(
-    request?: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
-      protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
+        protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest|undefined, {}|undefined
+      ]>;
   batchUpdateRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
-      | protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdateRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
-    callback: Callback<
-      protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
-      | protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdateRows(
-    request?: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
-          | protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
-      | protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
-      protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateRows(
+      request: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
+      callback: Callback<
+          protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
+          protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateRows(
+      request?: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
+          protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
+          protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
+        protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchUpdateRows request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
-          | protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
+        protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchUpdateRows response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchUpdateRows(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
-          (
-            | protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchUpdateRows response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchUpdateRows(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
+        protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchUpdateRows response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a row.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the row to delete.
-   *   Format: tables/{table}/rows/{row}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.delete_row.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_DeleteRow_async
-   */
+/**
+ * Deletes a row.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the row to delete.
+ *   Format: tables/{table}/rows/{row}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.delete_row.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_DeleteRow_async
+ */
   deleteRow(
-    request?: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.area120.tables.v1alpha1.IDeleteRowRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.area120.tables.v1alpha1.IDeleteRowRequest|undefined, {}|undefined
+      ]>;
   deleteRow(
-    request: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.area120.tables.v1alpha1.IDeleteRowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRow(
-    request: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.area120.tables.v1alpha1.IDeleteRowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRow(
-    request?: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.area120.tables.v1alpha1.IDeleteRowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.area120.tables.v1alpha1.IDeleteRowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.area120.tables.v1alpha1.IDeleteRowRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.IDeleteRowRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRow(
+      request: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.area120.tables.v1alpha1.IDeleteRowRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRow(
+      request?: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.area120.tables.v1alpha1.IDeleteRowRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.area120.tables.v1alpha1.IDeleteRowRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.area120.tables.v1alpha1.IDeleteRowRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteRow request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.area120.tables.v1alpha1.IDeleteRowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.area120.tables.v1alpha1.IDeleteRowRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteRow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteRow(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.area120.tables.v1alpha1.IDeleteRowRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteRow response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteRow(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.area120.tables.v1alpha1.IDeleteRowRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteRow response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes multiple rows.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent table shared by all rows being deleted.
-   *   Format: tables/{table}
-   * @param {string[]} request.names
-   *   Required. The names of the rows to delete. All rows must belong to the parent table
-   *   or else the entire batch will fail. A maximum of 500 rows can be deleted
-   *   in a batch.
-   *   Format: tables/{table}/rows/{row}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.batch_delete_rows.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_BatchDeleteRows_async
-   */
+/**
+ * Deletes multiple rows.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent table shared by all rows being deleted.
+ *   Format: tables/{table}
+ * @param {string[]} request.names
+ *   Required. The names of the rows to delete. All rows must belong to the parent table
+ *   or else the entire batch will fail. A maximum of 500 rows can be deleted
+ *   in a batch.
+ *   Format: tables/{table}/rows/{row}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.batch_delete_rows.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_BatchDeleteRows_async
+ */
   batchDeleteRows(
-    request?: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest|undefined, {}|undefined
+      ]>;
   batchDeleteRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchDeleteRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchDeleteRows(
-    request?: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteRows(
+      request: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteRows(
+      request?: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchDeleteRows request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchDeleteRows response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchDeleteRows(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchDeleteRows response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchDeleteRows(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchDeleteRows response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists tables for the user.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.pageSize
-   *   The maximum number of tables to return. The service may return fewer than
-   *   this value.
-   *
-   *   If unspecified, at most 20 tables are returned. The maximum value is 100;
-   *   values above 100 are coerced to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListTables` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListTables` must match
-   *   the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.area120.tables.v1alpha1.Table|Table}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTablesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists tables for the user.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} request.pageSize
+ *   The maximum number of tables to return. The service may return fewer than
+ *   this value.
+ *
+ *   If unspecified, at most 20 tables are returned. The maximum value is 100;
+ *   values above 100 are coerced to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListTables` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListTables` must match
+ *   the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.area120.tables.v1alpha1.Table|Table}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTablesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTables(
-    request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.ITable[],
-      protos.google.area120.tables.v1alpha1.IListTablesRequest | null,
-      protos.google.area120.tables.v1alpha1.IListTablesResponse,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.ITable[],
+        protos.google.area120.tables.v1alpha1.IListTablesRequest|null,
+        protos.google.area120.tables.v1alpha1.IListTablesResponse
+      ]>;
   listTables(
-    request: protos.google.area120.tables.v1alpha1.IListTablesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.area120.tables.v1alpha1.IListTablesRequest,
-      | protos.google.area120.tables.v1alpha1.IListTablesResponse
-      | null
-      | undefined,
-      protos.google.area120.tables.v1alpha1.ITable
-    >
-  ): void;
-  listTables(
-    request: protos.google.area120.tables.v1alpha1.IListTablesRequest,
-    callback: PaginationCallback<
-      protos.google.area120.tables.v1alpha1.IListTablesRequest,
-      | protos.google.area120.tables.v1alpha1.IListTablesResponse
-      | null
-      | undefined,
-      protos.google.area120.tables.v1alpha1.ITable
-    >
-  ): void;
-  listTables(
-    request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.area120.tables.v1alpha1.IListTablesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.area120.tables.v1alpha1.IListTablesRequest,
-          | protos.google.area120.tables.v1alpha1.IListTablesResponse
-          | null
-          | undefined,
-          protos.google.area120.tables.v1alpha1.ITable
-        >,
-    callback?: PaginationCallback<
-      protos.google.area120.tables.v1alpha1.IListTablesRequest,
-      | protos.google.area120.tables.v1alpha1.IListTablesResponse
-      | null
-      | undefined,
-      protos.google.area120.tables.v1alpha1.ITable
-    >
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.ITable[],
-      protos.google.area120.tables.v1alpha1.IListTablesRequest | null,
-      protos.google.area120.tables.v1alpha1.IListTablesResponse,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.IListTablesResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.ITable>): void;
+  listTables(
+      request: protos.google.area120.tables.v1alpha1.IListTablesRequest,
+      callback: PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListTablesRequest,
+          protos.google.area120.tables.v1alpha1.IListTablesResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.ITable>): void;
+  listTables(
+      request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListTablesRequest,
+          protos.google.area120.tables.v1alpha1.IListTablesResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.ITable>,
+      callback?: PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListTablesRequest,
+          protos.google.area120.tables.v1alpha1.IListTablesResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.ITable>):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.ITable[],
+        protos.google.area120.tables.v1alpha1.IListTablesRequest|null,
+        protos.google.area120.tables.v1alpha1.IListTablesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.area120.tables.v1alpha1.IListTablesRequest,
-          | protos.google.area120.tables.v1alpha1.IListTablesResponse
-          | null
-          | undefined,
-          protos.google.area120.tables.v1alpha1.ITable
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.area120.tables.v1alpha1.IListTablesRequest,
+      protos.google.area120.tables.v1alpha1.IListTablesResponse|null|undefined,
+      protos.google.area120.tables.v1alpha1.ITable>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTables values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1639,58 +1333,54 @@ export class TablesServiceClient {
     this._log.info('listTables request %j', request);
     return this.innerApiCalls
       .listTables(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.area120.tables.v1alpha1.ITable[],
-          protos.google.area120.tables.v1alpha1.IListTablesRequest | null,
-          protos.google.area120.tables.v1alpha1.IListTablesResponse,
-        ]) => {
-          this._log.info('listTables values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.area120.tables.v1alpha1.ITable[],
+        protos.google.area120.tables.v1alpha1.IListTablesRequest|null,
+        protos.google.area120.tables.v1alpha1.IListTablesResponse
+      ]) => {
+        this._log.info('listTables values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listTables`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.pageSize
-   *   The maximum number of tables to return. The service may return fewer than
-   *   this value.
-   *
-   *   If unspecified, at most 20 tables are returned. The maximum value is 100;
-   *   values above 100 are coerced to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListTables` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListTables` must match
-   *   the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.area120.tables.v1alpha1.Table|Table} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTablesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listTables`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} request.pageSize
+ *   The maximum number of tables to return. The service may return fewer than
+ *   this value.
+ *
+ *   If unspecified, at most 20 tables are returned. The maximum value is 100;
+ *   values above 100 are coerced to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListTables` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListTables` must match
+ *   the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.area120.tables.v1alpha1.Table|Table} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTablesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTablesStream(
-    request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTables'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTables stream %j', request);
     return this.descriptors.page.listTables.createStream(
       this.innerApiCalls.listTables as GaxCall,
@@ -1699,49 +1389,47 @@ export class TablesServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listTables`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.pageSize
-   *   The maximum number of tables to return. The service may return fewer than
-   *   this value.
-   *
-   *   If unspecified, at most 20 tables are returned. The maximum value is 100;
-   *   values above 100 are coerced to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListTables` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListTables` must match
-   *   the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.area120.tables.v1alpha1.Table|Table}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.list_tables.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_ListTables_async
-   */
+/**
+ * Equivalent to `listTables`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} request.pageSize
+ *   The maximum number of tables to return. The service may return fewer than
+ *   this value.
+ *
+ *   If unspecified, at most 20 tables are returned. The maximum value is 100;
+ *   values above 100 are coerced to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListTables` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListTables` must match
+ *   the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.area120.tables.v1alpha1.Table|Table}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.list_tables.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_ListTables_async
+ */
   listTablesAsync(
-    request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.area120.tables.v1alpha1.ITable> {
+      request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.area120.tables.v1alpha1.ITable>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTables'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTables iterate %j', request);
     return this.descriptors.page.listTables.asyncIterate(
       this.innerApiCalls['listTables'] as GaxCall,
@@ -1749,114 +1437,88 @@ export class TablesServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.area120.tables.v1alpha1.ITable>;
   }
-  /**
-   * Lists workspaces for the user.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.pageSize
-   *   The maximum number of workspaces to return. The service may return fewer
-   *   than this value.
-   *
-   *   If unspecified, at most 10 workspaces are returned. The maximum value is
-   *   25; values above 25 are coerced to 25.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListWorkspaces` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkspaces` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.area120.tables.v1alpha1.Workspace|Workspace}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listWorkspacesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists workspaces for the user.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} request.pageSize
+ *   The maximum number of workspaces to return. The service may return fewer
+ *   than this value.
+ *
+ *   If unspecified, at most 10 workspaces are returned. The maximum value is
+ *   25; values above 25 are coerced to 25.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListWorkspaces` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkspaces` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.area120.tables.v1alpha1.Workspace|Workspace}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listWorkspacesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkspaces(
-    request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IWorkspace[],
-      protos.google.area120.tables.v1alpha1.IListWorkspacesRequest | null,
-      protos.google.area120.tables.v1alpha1.IListWorkspacesResponse,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IWorkspace[],
+        protos.google.area120.tables.v1alpha1.IListWorkspacesRequest|null,
+        protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+      ]>;
   listWorkspaces(
-    request: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
-      | protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
-      | null
-      | undefined,
-      protos.google.area120.tables.v1alpha1.IWorkspace
-    >
-  ): void;
-  listWorkspaces(
-    request: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
-    callback: PaginationCallback<
-      protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
-      | protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
-      | null
-      | undefined,
-      protos.google.area120.tables.v1alpha1.IWorkspace
-    >
-  ): void;
-  listWorkspaces(
-    request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
-          | protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
-          | null
-          | undefined,
-          protos.google.area120.tables.v1alpha1.IWorkspace
-        >,
-    callback?: PaginationCallback<
-      protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
-      | protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
-      | null
-      | undefined,
-      protos.google.area120.tables.v1alpha1.IWorkspace
-    >
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IWorkspace[],
-      protos.google.area120.tables.v1alpha1.IListWorkspacesRequest | null,
-      protos.google.area120.tables.v1alpha1.IListWorkspacesResponse,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.IListWorkspacesResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.IWorkspace>): void;
+  listWorkspaces(
+      request: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+      callback: PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+          protos.google.area120.tables.v1alpha1.IListWorkspacesResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.IWorkspace>): void;
+  listWorkspaces(
+      request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+          protos.google.area120.tables.v1alpha1.IListWorkspacesResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.IWorkspace>,
+      callback?: PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+          protos.google.area120.tables.v1alpha1.IListWorkspacesResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.IWorkspace>):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IWorkspace[],
+        protos.google.area120.tables.v1alpha1.IListWorkspacesRequest|null,
+        protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
-          | protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
-          | null
-          | undefined,
-          protos.google.area120.tables.v1alpha1.IWorkspace
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+      protos.google.area120.tables.v1alpha1.IListWorkspacesResponse|null|undefined,
+      protos.google.area120.tables.v1alpha1.IWorkspace>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listWorkspaces values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1865,58 +1527,54 @@ export class TablesServiceClient {
     this._log.info('listWorkspaces request %j', request);
     return this.innerApiCalls
       .listWorkspaces(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.area120.tables.v1alpha1.IWorkspace[],
-          protos.google.area120.tables.v1alpha1.IListWorkspacesRequest | null,
-          protos.google.area120.tables.v1alpha1.IListWorkspacesResponse,
-        ]) => {
-          this._log.info('listWorkspaces values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.area120.tables.v1alpha1.IWorkspace[],
+        protos.google.area120.tables.v1alpha1.IListWorkspacesRequest|null,
+        protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+      ]) => {
+        this._log.info('listWorkspaces values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listWorkspaces`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.pageSize
-   *   The maximum number of workspaces to return. The service may return fewer
-   *   than this value.
-   *
-   *   If unspecified, at most 10 workspaces are returned. The maximum value is
-   *   25; values above 25 are coerced to 25.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListWorkspaces` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkspaces` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.area120.tables.v1alpha1.Workspace|Workspace} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listWorkspacesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listWorkspaces`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} request.pageSize
+ *   The maximum number of workspaces to return. The service may return fewer
+ *   than this value.
+ *
+ *   If unspecified, at most 10 workspaces are returned. The maximum value is
+ *   25; values above 25 are coerced to 25.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListWorkspaces` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkspaces` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.area120.tables.v1alpha1.Workspace|Workspace} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listWorkspacesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkspacesStream(
-    request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkspaces stream %j', request);
     return this.descriptors.page.listWorkspaces.createStream(
       this.innerApiCalls.listWorkspaces as GaxCall,
@@ -1925,49 +1583,47 @@ export class TablesServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listWorkspaces`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.pageSize
-   *   The maximum number of workspaces to return. The service may return fewer
-   *   than this value.
-   *
-   *   If unspecified, at most 10 workspaces are returned. The maximum value is
-   *   25; values above 25 are coerced to 25.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListWorkspaces` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkspaces` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.area120.tables.v1alpha1.Workspace|Workspace}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.list_workspaces.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_ListWorkspaces_async
-   */
+/**
+ * Equivalent to `listWorkspaces`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} request.pageSize
+ *   The maximum number of workspaces to return. The service may return fewer
+ *   than this value.
+ *
+ *   If unspecified, at most 10 workspaces are returned. The maximum value is
+ *   25; values above 25 are coerced to 25.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListWorkspaces` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkspaces` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.area120.tables.v1alpha1.Workspace|Workspace}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.list_workspaces.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_ListWorkspaces_async
+ */
   listWorkspacesAsync(
-    request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.area120.tables.v1alpha1.IWorkspace> {
+      request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.area120.tables.v1alpha1.IWorkspace>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkspaces iterate %j', request);
     return this.descriptors.page.listWorkspaces.asyncIterate(
       this.innerApiCalls['listWorkspaces'] as GaxCall,
@@ -1975,128 +1631,103 @@ export class TablesServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.area120.tables.v1alpha1.IWorkspace>;
   }
-  /**
-   * Lists rows in a table. Returns NOT_FOUND if the table does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent table.
-   *   Format: tables/{table}
-   * @param {number} request.pageSize
-   *   The maximum number of rows to return. The service may return fewer than
-   *   this value.
-   *
-   *   If unspecified, at most 50 rows are returned. The maximum value is 1,000;
-   *   values above 1,000 are coerced to 1,000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRows` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRows` must match
-   *   the call that provided the page token.
-   * @param {google.area120.tables.v1alpha1.View} [request.view]
-   *   Optional. Column key to use for values in the row.
-   *   Defaults to user entered name.
-   * @param {string} [request.filter]
-   *   Optional. Raw text query to search for in rows of the table.
-   *   Special characters must be escaped. Logical operators and field specific
-   *   filtering not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.area120.tables.v1alpha1.Row|Row}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRowsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists rows in a table. Returns NOT_FOUND if the table does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent table.
+ *   Format: tables/{table}
+ * @param {number} request.pageSize
+ *   The maximum number of rows to return. The service may return fewer than
+ *   this value.
+ *
+ *   If unspecified, at most 50 rows are returned. The maximum value is 1,000;
+ *   values above 1,000 are coerced to 1,000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRows` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRows` must match
+ *   the call that provided the page token.
+ * @param {google.area120.tables.v1alpha1.View} [request.view]
+ *   Optional. Column key to use for values in the row.
+ *   Defaults to user entered name.
+ * @param {string} [request.filter]
+ *   Optional. Raw text query to search for in rows of the table.
+ *   Special characters must be escaped. Logical operators and field specific
+ *   filtering not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.area120.tables.v1alpha1.Row|Row}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRowsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRows(
-    request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IRow[],
-      protos.google.area120.tables.v1alpha1.IListRowsRequest | null,
-      protos.google.area120.tables.v1alpha1.IListRowsResponse,
-    ]
-  >;
+      request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IRow[],
+        protos.google.area120.tables.v1alpha1.IListRowsRequest|null,
+        protos.google.area120.tables.v1alpha1.IListRowsResponse
+      ]>;
   listRows(
-    request: protos.google.area120.tables.v1alpha1.IListRowsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.area120.tables.v1alpha1.IListRowsRequest,
-      | protos.google.area120.tables.v1alpha1.IListRowsResponse
-      | null
-      | undefined,
-      protos.google.area120.tables.v1alpha1.IRow
-    >
-  ): void;
-  listRows(
-    request: protos.google.area120.tables.v1alpha1.IListRowsRequest,
-    callback: PaginationCallback<
-      protos.google.area120.tables.v1alpha1.IListRowsRequest,
-      | protos.google.area120.tables.v1alpha1.IListRowsResponse
-      | null
-      | undefined,
-      protos.google.area120.tables.v1alpha1.IRow
-    >
-  ): void;
-  listRows(
-    request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.area120.tables.v1alpha1.IListRowsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.area120.tables.v1alpha1.IListRowsRequest,
-          | protos.google.area120.tables.v1alpha1.IListRowsResponse
-          | null
-          | undefined,
-          protos.google.area120.tables.v1alpha1.IRow
-        >,
-    callback?: PaginationCallback<
-      protos.google.area120.tables.v1alpha1.IListRowsRequest,
-      | protos.google.area120.tables.v1alpha1.IListRowsResponse
-      | null
-      | undefined,
-      protos.google.area120.tables.v1alpha1.IRow
-    >
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IRow[],
-      protos.google.area120.tables.v1alpha1.IListRowsRequest | null,
-      protos.google.area120.tables.v1alpha1.IListRowsResponse,
-    ]
-  > | void {
+          protos.google.area120.tables.v1alpha1.IListRowsResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.IRow>): void;
+  listRows(
+      request: protos.google.area120.tables.v1alpha1.IListRowsRequest,
+      callback: PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListRowsRequest,
+          protos.google.area120.tables.v1alpha1.IListRowsResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.IRow>): void;
+  listRows(
+      request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListRowsRequest,
+          protos.google.area120.tables.v1alpha1.IListRowsResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.IRow>,
+      callback?: PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListRowsRequest,
+          protos.google.area120.tables.v1alpha1.IListRowsResponse|null|undefined,
+          protos.google.area120.tables.v1alpha1.IRow>):
+      Promise<[
+        protos.google.area120.tables.v1alpha1.IRow[],
+        protos.google.area120.tables.v1alpha1.IListRowsRequest|null,
+        protos.google.area120.tables.v1alpha1.IListRowsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.area120.tables.v1alpha1.IListRowsRequest,
-          | protos.google.area120.tables.v1alpha1.IListRowsResponse
-          | null
-          | undefined,
-          protos.google.area120.tables.v1alpha1.IRow
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.area120.tables.v1alpha1.IListRowsRequest,
+      protos.google.area120.tables.v1alpha1.IListRowsResponse|null|undefined,
+      protos.google.area120.tables.v1alpha1.IRow>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRows values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2105,72 +1736,69 @@ export class TablesServiceClient {
     this._log.info('listRows request %j', request);
     return this.innerApiCalls
       .listRows(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.area120.tables.v1alpha1.IRow[],
-          protos.google.area120.tables.v1alpha1.IListRowsRequest | null,
-          protos.google.area120.tables.v1alpha1.IListRowsResponse,
-        ]) => {
-          this._log.info('listRows values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.area120.tables.v1alpha1.IRow[],
+        protos.google.area120.tables.v1alpha1.IListRowsRequest|null,
+        protos.google.area120.tables.v1alpha1.IListRowsResponse
+      ]) => {
+        this._log.info('listRows values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRows`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent table.
-   *   Format: tables/{table}
-   * @param {number} request.pageSize
-   *   The maximum number of rows to return. The service may return fewer than
-   *   this value.
-   *
-   *   If unspecified, at most 50 rows are returned. The maximum value is 1,000;
-   *   values above 1,000 are coerced to 1,000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRows` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRows` must match
-   *   the call that provided the page token.
-   * @param {google.area120.tables.v1alpha1.View} [request.view]
-   *   Optional. Column key to use for values in the row.
-   *   Defaults to user entered name.
-   * @param {string} [request.filter]
-   *   Optional. Raw text query to search for in rows of the table.
-   *   Special characters must be escaped. Logical operators and field specific
-   *   filtering not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.area120.tables.v1alpha1.Row|Row} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRowsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRows`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent table.
+ *   Format: tables/{table}
+ * @param {number} request.pageSize
+ *   The maximum number of rows to return. The service may return fewer than
+ *   this value.
+ *
+ *   If unspecified, at most 50 rows are returned. The maximum value is 1,000;
+ *   values above 1,000 are coerced to 1,000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRows` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRows` must match
+ *   the call that provided the page token.
+ * @param {google.area120.tables.v1alpha1.View} [request.view]
+ *   Optional. Column key to use for values in the row.
+ *   Defaults to user entered name.
+ * @param {string} [request.filter]
+ *   Optional. Raw text query to search for in rows of the table.
+ *   Special characters must be escaped. Logical operators and field specific
+ *   filtering not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.area120.tables.v1alpha1.Row|Row} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRowsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRowsStream(
-    request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRows stream %j', request);
     return this.descriptors.page.listRows.createStream(
       this.innerApiCalls.listRows as GaxCall,
@@ -2179,63 +1807,62 @@ export class TablesServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listRows`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent table.
-   *   Format: tables/{table}
-   * @param {number} request.pageSize
-   *   The maximum number of rows to return. The service may return fewer than
-   *   this value.
-   *
-   *   If unspecified, at most 50 rows are returned. The maximum value is 1,000;
-   *   values above 1,000 are coerced to 1,000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRows` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRows` must match
-   *   the call that provided the page token.
-   * @param {google.area120.tables.v1alpha1.View} [request.view]
-   *   Optional. Column key to use for values in the row.
-   *   Defaults to user entered name.
-   * @param {string} [request.filter]
-   *   Optional. Raw text query to search for in rows of the table.
-   *   Special characters must be escaped. Logical operators and field specific
-   *   filtering not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.area120.tables.v1alpha1.Row|Row}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/tables_service.list_rows.js</caption>
-   * region_tag:area120tables_v1alpha1_generated_TablesService_ListRows_async
-   */
+/**
+ * Equivalent to `listRows`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent table.
+ *   Format: tables/{table}
+ * @param {number} request.pageSize
+ *   The maximum number of rows to return. The service may return fewer than
+ *   this value.
+ *
+ *   If unspecified, at most 50 rows are returned. The maximum value is 1,000;
+ *   values above 1,000 are coerced to 1,000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRows` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRows` must match
+ *   the call that provided the page token.
+ * @param {google.area120.tables.v1alpha1.View} [request.view]
+ *   Optional. Column key to use for values in the row.
+ *   Defaults to user entered name.
+ * @param {string} [request.filter]
+ *   Optional. Raw text query to search for in rows of the table.
+ *   Special characters must be escaped. Logical operators and field specific
+ *   filtering not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.area120.tables.v1alpha1.Row|Row}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/tables_service.list_rows.js</caption>
+ * region_tag:area120tables_v1alpha1_generated_TablesService_ListRows_async
+ */
   listRowsAsync(
-    request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.area120.tables.v1alpha1.IRow> {
+      request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.area120.tables.v1alpha1.IRow>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRows iterate %j', request);
     return this.descriptors.page.listRows.asyncIterate(
       this.innerApiCalls['listRows'] as GaxCall,
@@ -2254,7 +1881,7 @@ export class TablesServiceClient {
    * @param {string} row
    * @returns {string} Resource name string.
    */
-  rowPath(table: string, row: string) {
+  rowPath(table:string,row:string) {
     return this.pathTemplates.rowPathTemplate.render({
       table: table,
       row: row,
@@ -2289,7 +1916,7 @@ export class TablesServiceClient {
    * @param {string} table
    * @returns {string} Resource name string.
    */
-  tablePath(table: string) {
+  tablePath(table:string) {
     return this.pathTemplates.tablePathTemplate.render({
       table: table,
     });
@@ -2312,7 +1939,7 @@ export class TablesServiceClient {
    * @param {string} workspace
    * @returns {string} Resource name string.
    */
-  workspacePath(workspace: string) {
+  workspacePath(workspace:string) {
     return this.pathTemplates.workspacePathTemplate.render({
       workspace: workspace,
     });
@@ -2326,8 +1953,7 @@ export class TablesServiceClient {
    * @returns {string} A string representing the workspace.
    */
   matchWorkspaceFromWorkspaceName(workspaceName: string) {
-    return this.pathTemplates.workspacePathTemplate.match(workspaceName)
-      .workspace;
+    return this.pathTemplates.workspacePathTemplate.match(workspaceName).workspace;
   }
 
   /**

@@ -16,10 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  ProvisioningClient,
-  RegistryClient,
-} from '@google-cloud/apigee-registry';
+import {ProvisioningClient, RegistryClient} from '@google-cloud/apigee-registry';
 
 // check that the client class type name can be used
 function doStuffWithProvisioningClient(client: ProvisioningClient) {

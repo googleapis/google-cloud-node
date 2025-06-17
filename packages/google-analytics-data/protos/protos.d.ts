@@ -2917,6 +2917,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -3168,7 +3171,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -3199,7 +3202,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -4235,7 +4238,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -4251,7 +4254,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -5011,12 +5014,6 @@ export namespace google {
                     /** RecurringAudienceList webhookNotification. */
                     public webhookNotification?: (google.analytics.data.v1alpha.IWebhookNotification|null);
 
-                    /** RecurringAudienceList _activeDaysRemaining. */
-                    public _activeDaysRemaining?: "activeDaysRemaining";
-
-                    /** RecurringAudienceList _webhookNotification. */
-                    public _webhookNotification?: "webhookNotification";
-
                     /**
                      * Creates a new RecurringAudienceList instance using the specified properties.
                      * @param [properties] Properties to set
@@ -5119,12 +5116,6 @@ export namespace google {
 
                     /** WebhookNotification channelToken. */
                     public channelToken?: (string|null);
-
-                    /** WebhookNotification _uri. */
-                    public _uri?: "uri";
-
-                    /** WebhookNotification _channelToken. */
-                    public _channelToken?: "channelToken";
 
                     /**
                      * Creates a new WebhookNotification instance using the specified properties.
@@ -5434,9 +5425,6 @@ export namespace google {
 
                     /** ListRecurringAudienceListsResponse nextPageToken. */
                     public nextPageToken?: (string|null);
-
-                    /** ListRecurringAudienceListsResponse _nextPageToken. */
-                    public _nextPageToken?: "nextPageToken";
 
                     /**
                      * Creates a new ListRecurringAudienceListsResponse instance using the specified properties.
@@ -5959,9 +5947,6 @@ export namespace google {
                     /** ListAudienceListsResponse nextPageToken. */
                     public nextPageToken?: (string|null);
 
-                    /** ListAudienceListsResponse _nextPageToken. */
-                    public _nextPageToken?: "nextPageToken";
-
                     /**
                      * Creates a new ListAudienceListsResponse instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6227,27 +6212,6 @@ export namespace google {
 
                     /** AudienceList webhookNotification. */
                     public webhookNotification?: (google.analytics.data.v1alpha.IWebhookNotification|null);
-
-                    /** AudienceList _state. */
-                    public _state?: "state";
-
-                    /** AudienceList _beginCreatingTime. */
-                    public _beginCreatingTime?: "beginCreatingTime";
-
-                    /** AudienceList _rowCount. */
-                    public _rowCount?: "rowCount";
-
-                    /** AudienceList _errorMessage. */
-                    public _errorMessage?: "errorMessage";
-
-                    /** AudienceList _percentageCompleted. */
-                    public _percentageCompleted?: "percentageCompleted";
-
-                    /** AudienceList _recurringAudienceList. */
-                    public _recurringAudienceList?: "recurringAudienceList";
-
-                    /** AudienceList _webhookNotification. */
-                    public _webhookNotification?: "webhookNotification";
 
                     /**
                      * Creates a new AudienceList instance using the specified properties.
@@ -6569,12 +6533,6 @@ export namespace google {
                     /** QueryAudienceListResponse rowCount. */
                     public rowCount?: (number|null);
 
-                    /** QueryAudienceListResponse _audienceList. */
-                    public _audienceList?: "audienceList";
-
-                    /** QueryAudienceListResponse _rowCount. */
-                    public _rowCount?: "rowCount";
-
                     /**
                      * Creates a new QueryAudienceListResponse instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6798,18 +6756,6 @@ export namespace google {
 
                     /** SheetExportAudienceListResponse audienceList. */
                     public audienceList?: (google.analytics.data.v1alpha.IAudienceList|null);
-
-                    /** SheetExportAudienceListResponse _spreadsheetUri. */
-                    public _spreadsheetUri?: "spreadsheetUri";
-
-                    /** SheetExportAudienceListResponse _spreadsheetId. */
-                    public _spreadsheetId?: "spreadsheetId";
-
-                    /** SheetExportAudienceListResponse _rowCount. */
-                    public _rowCount?: "rowCount";
-
-                    /** SheetExportAudienceListResponse _audienceList. */
-                    public _audienceList?: "audienceList";
 
                     /**
                      * Creates a new SheetExportAudienceListResponse instance using the specified properties.
@@ -7661,9 +7607,6 @@ export namespace google {
                         /** ReportDefinition samplingLevel. */
                         public samplingLevel?: (google.analytics.data.v1alpha.SamplingLevel|keyof typeof google.analytics.data.v1alpha.SamplingLevel|null);
 
-                        /** ReportDefinition _samplingLevel. */
-                        public _samplingLevel?: "samplingLevel";
-
                         /**
                          * Creates a new ReportDefinition instance using the specified properties.
                          * @param [properties] Properties to set
@@ -7790,21 +7733,6 @@ export namespace google {
 
                         /** ReportMetadata totalRowCount. */
                         public totalRowCount?: (number|null);
-
-                        /** ReportMetadata _state. */
-                        public _state?: "state";
-
-                        /** ReportMetadata _beginCreatingTime. */
-                        public _beginCreatingTime?: "beginCreatingTime";
-
-                        /** ReportMetadata _taskRowCount. */
-                        public _taskRowCount?: "taskRowCount";
-
-                        /** ReportMetadata _errorMessage. */
-                        public _errorMessage?: "errorMessage";
-
-                        /** ReportMetadata _totalRowCount. */
-                        public _totalRowCount?: "totalRowCount";
 
                         /**
                          * Creates a new ReportMetadata instance using the specified properties.
@@ -8568,9 +8496,6 @@ export namespace google {
 
                     /** ListReportTasksResponse nextPageToken. */
                     public nextPageToken?: (string|null);
-
-                    /** ListReportTasksResponse _nextPageToken. */
-                    public _nextPageToken?: "nextPageToken";
 
                     /**
                      * Creates a new ListReportTasksResponse instance using the specified properties.
@@ -11089,21 +11014,6 @@ export namespace google {
                     /** ResponseMetaData samplingMetadatas. */
                     public samplingMetadatas: google.analytics.data.v1alpha.ISamplingMetadata[];
 
-                    /** ResponseMetaData _schemaRestrictionResponse. */
-                    public _schemaRestrictionResponse?: "schemaRestrictionResponse";
-
-                    /** ResponseMetaData _currencyCode. */
-                    public _currencyCode?: "currencyCode";
-
-                    /** ResponseMetaData _timeZone. */
-                    public _timeZone?: "timeZone";
-
-                    /** ResponseMetaData _emptyReason. */
-                    public _emptyReason?: "emptyReason";
-
-                    /** ResponseMetaData _subjectToThresholding. */
-                    public _subjectToThresholding?: "subjectToThresholding";
-
                     /**
                      * Creates a new ResponseMetaData instance using the specified properties.
                      * @param [properties] Properties to set
@@ -11307,9 +11217,6 @@ export namespace google {
 
                             /** ActiveMetricRestriction restrictedMetricTypes. */
                             public restrictedMetricTypes: google.analytics.data.v1alpha.RestrictedMetricType[];
-
-                            /** ActiveMetricRestriction _metricName. */
-                            public _metricName?: "metricName";
 
                             /**
                              * Creates a new ActiveMetricRestriction instance using the specified properties.
@@ -12149,9 +12056,6 @@ export namespace google {
                     /** FunnelBreakdown limit. */
                     public limit?: (number|Long|string|null);
 
-                    /** FunnelBreakdown _limit. */
-                    public _limit?: "limit";
-
                     /**
                      * Creates a new FunnelBreakdown instance using the specified properties.
                      * @param [properties] Properties to set
@@ -12254,9 +12158,6 @@ export namespace google {
 
                     /** FunnelNextAction limit. */
                     public limit?: (number|Long|string|null);
-
-                    /** FunnelNextAction _limit. */
-                    public _limit?: "limit";
 
                     /**
                      * Creates a new FunnelNextAction instance using the specified properties.
@@ -12475,9 +12376,6 @@ export namespace google {
 
                     /** FunnelStep filterExpression. */
                     public filterExpression?: (google.analytics.data.v1alpha.IFunnelFilterExpression|null);
-
-                    /** FunnelStep _withinDurationFromPriorStep. */
-                    public _withinDurationFromPriorStep?: "withinDurationFromPriorStep";
 
                     /**
                      * Creates a new FunnelStep instance using the specified properties.
@@ -14643,9 +14541,6 @@ export namespace google {
                     /** SegmentFilterScoping atAnyPointInTime. */
                     public atAnyPointInTime?: (boolean|null);
 
-                    /** SegmentFilterScoping _atAnyPointInTime. */
-                    public _atAnyPointInTime?: "atAnyPointInTime";
-
                     /**
                      * Creates a new SegmentFilterScoping instance using the specified properties.
                      * @param [properties] Properties to set
@@ -14748,12 +14643,6 @@ export namespace google {
 
                     /** SegmentEventFilter segmentParameterFilterExpression. */
                     public segmentParameterFilterExpression?: (google.analytics.data.v1alpha.ISegmentParameterFilterExpression|null);
-
-                    /** SegmentEventFilter _eventName. */
-                    public _eventName?: "eventName";
-
-                    /** SegmentEventFilter _segmentParameterFilterExpression. */
-                    public _segmentParameterFilterExpression?: "segmentParameterFilterExpression";
 
                     /**
                      * Creates a new SegmentEventFilter instance using the specified properties.
@@ -15206,9 +15095,6 @@ export namespace google {
                     /** SegmentParameterFilterScoping inAnyNDayPeriod. */
                     public inAnyNDayPeriod?: (number|Long|string|null);
 
-                    /** SegmentParameterFilterScoping _inAnyNDayPeriod. */
-                    public _inAnyNDayPeriod?: "inAnyNDayPeriod";
-
                     /**
                      * Creates a new SegmentParameterFilterScoping instance using the specified properties.
                      * @param [properties] Properties to set
@@ -15656,12 +15542,6 @@ export namespace google {
 
                     /** FunnelEventFilter funnelParameterFilterExpression. */
                     public funnelParameterFilterExpression?: (google.analytics.data.v1alpha.IFunnelParameterFilterExpression|null);
-
-                    /** FunnelEventFilter _eventName. */
-                    public _eventName?: "eventName";
-
-                    /** FunnelEventFilter _funnelParameterFilterExpression. */
-                    public _funnelParameterFilterExpression?: "funnelParameterFilterExpression";
 
                     /**
                      * Creates a new FunnelEventFilter instance using the specified properties.
@@ -18604,9 +18484,6 @@ export namespace google {
                     /** ListAudienceExportsResponse nextPageToken. */
                     public nextPageToken?: (string|null);
 
-                    /** ListAudienceExportsResponse _nextPageToken. */
-                    public _nextPageToken?: "nextPageToken";
-
                     /**
                      * Creates a new ListAudienceExportsResponse instance using the specified properties.
                      * @param [properties] Properties to set
@@ -18860,21 +18737,6 @@ export namespace google {
 
                     /** AudienceExport percentageCompleted. */
                     public percentageCompleted?: (number|null);
-
-                    /** AudienceExport _state. */
-                    public _state?: "state";
-
-                    /** AudienceExport _beginCreatingTime. */
-                    public _beginCreatingTime?: "beginCreatingTime";
-
-                    /** AudienceExport _rowCount. */
-                    public _rowCount?: "rowCount";
-
-                    /** AudienceExport _errorMessage. */
-                    public _errorMessage?: "errorMessage";
-
-                    /** AudienceExport _percentageCompleted. */
-                    public _percentageCompleted?: "percentageCompleted";
 
                     /**
                      * Creates a new AudienceExport instance using the specified properties.
@@ -19195,12 +19057,6 @@ export namespace google {
 
                     /** QueryAudienceExportResponse rowCount. */
                     public rowCount?: (number|null);
-
-                    /** QueryAudienceExportResponse _audienceExport. */
-                    public _audienceExport?: "audienceExport";
-
-                    /** QueryAudienceExportResponse _rowCount. */
-                    public _rowCount?: "rowCount";
 
                     /**
                      * Creates a new QueryAudienceExportResponse instance using the specified properties.
@@ -19713,12 +19569,6 @@ export namespace google {
 
                     /** MinuteRange name. */
                     public name: string;
-
-                    /** MinuteRange _startMinutesAgo. */
-                    public _startMinutesAgo?: "startMinutesAgo";
-
-                    /** MinuteRange _endMinutesAgo. */
-                    public _endMinutesAgo?: "endMinutesAgo";
 
                     /**
                      * Creates a new MinuteRange instance using the specified properties.
@@ -20355,9 +20205,6 @@ export namespace google {
 
                     /** Comparison comparison. */
                     public comparison?: (string|null);
-
-                    /** Comparison _name. */
-                    public _name?: "name";
 
                     /** Comparison oneComparison. */
                     public oneComparison?: ("dimensionFilter"|"comparison");
@@ -22476,21 +22323,6 @@ export namespace google {
                     /** ResponseMetaData samplingMetadatas. */
                     public samplingMetadatas: google.analytics.data.v1beta.ISamplingMetadata[];
 
-                    /** ResponseMetaData _schemaRestrictionResponse. */
-                    public _schemaRestrictionResponse?: "schemaRestrictionResponse";
-
-                    /** ResponseMetaData _currencyCode. */
-                    public _currencyCode?: "currencyCode";
-
-                    /** ResponseMetaData _timeZone. */
-                    public _timeZone?: "timeZone";
-
-                    /** ResponseMetaData _emptyReason. */
-                    public _emptyReason?: "emptyReason";
-
-                    /** ResponseMetaData _subjectToThresholding. */
-                    public _subjectToThresholding?: "subjectToThresholding";
-
                     /**
                      * Creates a new ResponseMetaData instance using the specified properties.
                      * @param [properties] Properties to set
@@ -22694,9 +22526,6 @@ export namespace google {
 
                             /** ActiveMetricRestriction restrictedMetricTypes. */
                             public restrictedMetricTypes: google.analytics.data.v1beta.RestrictedMetricType[];
-
-                            /** ActiveMetricRestriction _metricName. */
-                            public _metricName?: "metricName";
 
                             /**
                              * Creates a new ActiveMetricRestriction instance using the specified properties.
@@ -23842,12 +23671,6 @@ export namespace google {
                     /** QuotaStatus remaining. */
                     public remaining?: (number|null);
 
-                    /** QuotaStatus _consumed. */
-                    public _consumed?: "consumed";
-
-                    /** QuotaStatus _remaining. */
-                    public _remaining?: "remaining";
-
                     /**
                      * Creates a new QuotaStatus instance using the specified properties.
                      * @param [properties] Properties to set
@@ -24342,12 +24165,6 @@ export namespace google {
                     /** DimensionCompatibility compatibility. */
                     public compatibility?: (google.analytics.data.v1beta.Compatibility|keyof typeof google.analytics.data.v1beta.Compatibility|null);
 
-                    /** DimensionCompatibility _dimensionMetadata. */
-                    public _dimensionMetadata?: "dimensionMetadata";
-
-                    /** DimensionCompatibility _compatibility. */
-                    public _compatibility?: "compatibility";
-
                     /**
                      * Creates a new DimensionCompatibility instance using the specified properties.
                      * @param [properties] Properties to set
@@ -24450,12 +24267,6 @@ export namespace google {
 
                     /** MetricCompatibility compatibility. */
                     public compatibility?: (google.analytics.data.v1beta.Compatibility|keyof typeof google.analytics.data.v1beta.Compatibility|null);
-
-                    /** MetricCompatibility _metricMetadata. */
-                    public _metricMetadata?: "metricMetadata";
-
-                    /** MetricCompatibility _compatibility. */
-                    public _compatibility?: "compatibility";
 
                     /**
                      * Creates a new MetricCompatibility instance using the specified properties.
@@ -25233,6 +25044,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -25273,6 +25087,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.

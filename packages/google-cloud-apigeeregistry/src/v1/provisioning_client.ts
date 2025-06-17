@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -115,41 +104,20 @@ export class ProvisioningClient {
    *     const client = new ProvisioningClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ProvisioningClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'apigeeregistry.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -175,7 +143,7 @@ export class ProvisioningClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -188,14 +156,18 @@ export class ProvisioningClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -237,214 +209,60 @@ export class ProvisioningClient {
       projectLocationApiArtifactPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apis/{api}/artifacts/{artifact}'
       ),
-      projectLocationApiDeploymentArtifactPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/apis/{api}/deployments/{deployment}/artifacts/{artifact}'
-        ),
-      projectLocationApiVersionArtifactPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/apis/{api}/versions/{version}/artifacts/{artifact}'
-        ),
-      projectLocationApiVersionSpecArtifactPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}/artifacts/{artifact}'
-        ),
+      projectLocationApiDeploymentArtifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/apis/{api}/deployments/{deployment}/artifacts/{artifact}'
+      ),
+      projectLocationApiVersionArtifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/artifacts/{artifact}'
+      ),
+      projectLocationApiVersionSpecArtifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}/artifacts/{artifact}'
+      ),
       projectLocationArtifactPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/artifacts/{artifact}'
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*/apis/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1/{resource=projects/*/locations/*/apis/*/deployments/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/apis/*/versions/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/artifacts/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/apis/*/artifacts/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/artifacts/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*/artifacts/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/instances/*}:getIamPolicy',
-            },
-            {get: '/v1/{resource=projects/*/locations/*/runtime}:getIamPolicy'},
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*/apis/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/deployments/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/artifacts/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/artifacts/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/artifacts/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*/artifacts/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/instances/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/runtime}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/apis/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/deployments/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/artifacts/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/artifacts/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/artifacts/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*/artifacts/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/instances/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/runtime}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/apis/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/apis/*/deployments/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/apis/*/versions/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/artifacts/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/apis/*/artifacts/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/artifacts/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*/artifacts/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/instances/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/runtime}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/apis/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/apis/*/deployments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/artifacts/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/artifacts/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/artifacts/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*/artifacts/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/instances/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/runtime}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/apis/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/apis/*/deployments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/artifacts/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/artifacts/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/artifacts/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/apis/*/versions/*/specs/*/artifacts/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/instances/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/runtime}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.apigeeregistry.v1.Instance'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigeeregistry.v1.Instance') as gax.protobuf.Type;
     const createInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apigeeregistry.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigeeregistry.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteInstanceResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.apigeeregistry.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.apigeeregistry.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createInstanceResponse.decode.bind(createInstanceResponse),
-        createInstanceMetadata.decode.bind(createInstanceMetadata)
-      ),
+        createInstanceMetadata.decode.bind(createInstanceMetadata)),
       deleteInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteInstanceResponse.decode.bind(deleteInstanceResponse),
-        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)
-      ),
+        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.apigeeregistry.v1.Provisioning',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.apigeeregistry.v1.Provisioning', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -475,39 +293,32 @@ export class ProvisioningClient {
     // Put together the "service stub" for
     // google.cloud.apigeeregistry.v1.Provisioning.
     this.provisioningStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.apigeeregistry.v1.Provisioning'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.apigeeregistry.v1.Provisioning') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.apigeeregistry.v1.Provisioning,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const provisioningStubMethods = [
-      'createInstance',
-      'deleteInstance',
-      'getInstance',
-    ];
+    const provisioningStubMethods =
+        ['createInstance', 'deleteInstance', 'getInstance'];
     for (const methodName of provisioningStubMethods) {
       const callPromise = this.provisioningStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -527,14 +338,8 @@ export class ProvisioningClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apigeeregistry.googleapis.com';
   }
@@ -545,14 +350,8 @@ export class ProvisioningClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apigeeregistry.googleapis.com';
   }
@@ -583,7 +382,9 @@ export class ProvisioningClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -592,9 +393,8 @@ export class ProvisioningClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -605,495 +405,347 @@ export class ProvisioningClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single Instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Instance to retrieve.
-   *   Format: `projects/* /locations/* /instances/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apigeeregistry.v1.Instance|Instance}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/provisioning.get_instance.js</caption>
-   * region_tag:apigeeregistry_v1_generated_Provisioning_GetInstance_async
-   */
+/**
+ * Gets details of a single Instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Instance to retrieve.
+ *   Format: `projects/* /locations/* /instances/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apigeeregistry.v1.Instance|Instance}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/provisioning.get_instance.js</caption>
+ * region_tag:apigeeregistry_v1_generated_Provisioning_GetInstance_async
+ */
   getInstance(
-    request?: protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apigeeregistry.v1.IInstance,
-      protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apigeeregistry.v1.IInstance,
+        protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest|undefined, {}|undefined
+      ]>;
   getInstance(
-    request: protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apigeeregistry.v1.IInstance,
-      | protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInstance(
-    request: protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.apigeeregistry.v1.IInstance,
-      | protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInstance(
-    request?: protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apigeeregistry.v1.IInstance,
-          | protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apigeeregistry.v1.IInstance,
-      | protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apigeeregistry.v1.IInstance,
-      protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInstance(
+      request: protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.apigeeregistry.v1.IInstance,
+          protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInstance(
+      request?: protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apigeeregistry.v1.IInstance,
+          protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apigeeregistry.v1.IInstance,
+          protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apigeeregistry.v1.IInstance,
+        protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getInstance request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apigeeregistry.v1.IInstance,
-          | protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apigeeregistry.v1.IInstance,
+        protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apigeeregistry.v1.IInstance,
-          protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getInstance response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getInstance(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apigeeregistry.v1.IInstance,
+        protos.google.cloud.apigeeregistry.v1.IGetInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getInstance response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Provisions instance resources for the Registry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the Instance, of the form: `projects/* /locations/*`
-   * @param {string} request.instanceId
-   *   Required. Identifier to assign to the Instance. Must be unique within scope of the
-   *   parent resource.
-   * @param {google.cloud.apigeeregistry.v1.Instance} request.instance
-   *   Required. The Instance.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/provisioning.create_instance.js</caption>
-   * region_tag:apigeeregistry_v1_generated_Provisioning_CreateInstance_async
-   */
+/**
+ * Provisions instance resources for the Registry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource of the Instance, of the form: `projects/* /locations/*`
+ * @param {string} request.instanceId
+ *   Required. Identifier to assign to the Instance. Must be unique within scope of the
+ *   parent resource.
+ * @param {google.cloud.apigeeregistry.v1.Instance} request.instance
+ *   Required. The Instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/provisioning.create_instance.js</caption>
+ * region_tag:apigeeregistry_v1_generated_Provisioning_CreateInstance_async
+ */
   createInstance(
-    request?: protos.google.cloud.apigeeregistry.v1.ICreateInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigeeregistry.v1.IInstance,
-        protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigeeregistry.v1.ICreateInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apigeeregistry.v1.IInstance, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createInstance(
-    request: protos.google.cloud.apigeeregistry.v1.ICreateInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigeeregistry.v1.IInstance,
-        protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigeeregistry.v1.ICreateInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigeeregistry.v1.IInstance, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createInstance(
-    request: protos.google.cloud.apigeeregistry.v1.ICreateInstanceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.apigeeregistry.v1.IInstance,
-        protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigeeregistry.v1.ICreateInstanceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apigeeregistry.v1.IInstance, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createInstance(
-    request?: protos.google.cloud.apigeeregistry.v1.ICreateInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigeeregistry.v1.IInstance,
-            protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.apigeeregistry.v1.IInstance,
-        protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.apigeeregistry.v1.IInstance,
-        protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apigeeregistry.v1.ICreateInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apigeeregistry.v1.IInstance, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apigeeregistry.v1.IInstance, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apigeeregistry.v1.IInstance, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.apigeeregistry.v1.IInstance,
-            protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apigeeregistry.v1.IInstance, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createInstance request %j', request);
-    return this.innerApiCalls
-      .createInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.apigeeregistry.v1.IInstance,
-            protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createInstance response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createInstance(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apigeeregistry.v1.IInstance, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createInstance response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createInstance()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/provisioning.create_instance.js</caption>
-   * region_tag:apigeeregistry_v1_generated_Provisioning_CreateInstance_async
-   */
-  async checkCreateInstanceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.apigeeregistry.v1.Instance,
-      protos.google.cloud.apigeeregistry.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createInstance()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/provisioning.create_instance.js</caption>
+ * region_tag:apigeeregistry_v1_generated_Provisioning_CreateInstance_async
+ */
+  async checkCreateInstanceProgress(name: string): Promise<LROperation<protos.google.cloud.apigeeregistry.v1.Instance, protos.google.cloud.apigeeregistry.v1.OperationMetadata>>{
     this._log.info('createInstance long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createInstance,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.apigeeregistry.v1.Instance,
-      protos.google.cloud.apigeeregistry.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createInstance, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apigeeregistry.v1.Instance, protos.google.cloud.apigeeregistry.v1.OperationMetadata>;
   }
-  /**
-   * Deletes the Registry instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Instance to delete.
-   *   Format: `projects/* /locations/* /instances/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/provisioning.delete_instance.js</caption>
-   * region_tag:apigeeregistry_v1_generated_Provisioning_DeleteInstance_async
-   */
+/**
+ * Deletes the Registry instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Instance to delete.
+ *   Format: `projects/* /locations/* /instances/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/provisioning.delete_instance.js</caption>
+ * region_tag:apigeeregistry_v1_generated_Provisioning_DeleteInstance_async
+ */
   deleteInstance(
-    request?: protos.google.cloud.apigeeregistry.v1.IDeleteInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apigeeregistry.v1.IDeleteInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteInstance(
-    request: protos.google.cloud.apigeeregistry.v1.IDeleteInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigeeregistry.v1.IDeleteInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteInstance(
-    request: protos.google.cloud.apigeeregistry.v1.IDeleteInstanceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.apigeeregistry.v1.IDeleteInstanceRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteInstance(
-    request?: protos.google.cloud.apigeeregistry.v1.IDeleteInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.apigeeregistry.v1.IDeleteInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteInstance request %j', request);
-    return this.innerApiCalls
-      .deleteInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.apigeeregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteInstance response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteInstance(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apigeeregistry.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteInstance response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteInstance()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/provisioning.delete_instance.js</caption>
-   * region_tag:apigeeregistry_v1_generated_Provisioning_DeleteInstance_async
-   */
-  async checkDeleteInstanceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apigeeregistry.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteInstance()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/provisioning.delete_instance.js</caption>
+ * region_tag:apigeeregistry_v1_generated_Provisioning_DeleteInstance_async
+ */
+  async checkDeleteInstanceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.apigeeregistry.v1.OperationMetadata>>{
     this._log.info('deleteInstance long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteInstance,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.apigeeregistry.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteInstance, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.apigeeregistry.v1.OperationMetadata>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -1108,39 +760,39 @@ export class ProvisioningClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -1155,40 +807,40 @@ export class ProvisioningClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -1203,11 +855,11 @@ export class ProvisioningClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1247,7 +899,7 @@ export class ProvisioningClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1285,7 +937,7 @@ export class ProvisioningClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1330,20 +982,20 @@ export class ProvisioningClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1380,13 +1032,13 @@ export class ProvisioningClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1420,7 +1072,7 @@ export class ProvisioningClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1435,20 +1087,20 @@ export class ProvisioningClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1492,20 +1144,20 @@ export class ProvisioningClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1521,7 +1173,7 @@ export class ProvisioningClient {
    * @param {string} api
    * @returns {string} Resource name string.
    */
-  apiPath(project: string, location: string, api: string) {
+  apiPath(project:string,location:string,api:string) {
     return this.pathTemplates.apiPathTemplate.render({
       project: project,
       location: location,
@@ -1571,12 +1223,7 @@ export class ProvisioningClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  apiDeploymentPath(
-    project: string,
-    location: string,
-    api: string,
-    deployment: string
-  ) {
+  apiDeploymentPath(project:string,location:string,api:string,deployment:string) {
     return this.pathTemplates.apiDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1593,8 +1240,7 @@ export class ProvisioningClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiDeploymentName(apiDeploymentName: string) {
-    return this.pathTemplates.apiDeploymentPathTemplate.match(apiDeploymentName)
-      .project;
+    return this.pathTemplates.apiDeploymentPathTemplate.match(apiDeploymentName).project;
   }
 
   /**
@@ -1605,8 +1251,7 @@ export class ProvisioningClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiDeploymentName(apiDeploymentName: string) {
-    return this.pathTemplates.apiDeploymentPathTemplate.match(apiDeploymentName)
-      .location;
+    return this.pathTemplates.apiDeploymentPathTemplate.match(apiDeploymentName).location;
   }
 
   /**
@@ -1617,8 +1262,7 @@ export class ProvisioningClient {
    * @returns {string} A string representing the api.
    */
   matchApiFromApiDeploymentName(apiDeploymentName: string) {
-    return this.pathTemplates.apiDeploymentPathTemplate.match(apiDeploymentName)
-      .api;
+    return this.pathTemplates.apiDeploymentPathTemplate.match(apiDeploymentName).api;
   }
 
   /**
@@ -1629,8 +1273,7 @@ export class ProvisioningClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromApiDeploymentName(apiDeploymentName: string) {
-    return this.pathTemplates.apiDeploymentPathTemplate.match(apiDeploymentName)
-      .deployment;
+    return this.pathTemplates.apiDeploymentPathTemplate.match(apiDeploymentName).deployment;
   }
 
   /**
@@ -1643,13 +1286,7 @@ export class ProvisioningClient {
    * @param {string} spec
    * @returns {string} Resource name string.
    */
-  apiSpecPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    spec: string
-  ) {
+  apiSpecPath(project:string,location:string,api:string,version:string,spec:string) {
     return this.pathTemplates.apiSpecPathTemplate.render({
       project: project,
       location: location,
@@ -1723,12 +1360,7 @@ export class ProvisioningClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  apiVersionPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string
-  ) {
+  apiVersionPath(project:string,location:string,api:string,version:string) {
     return this.pathTemplates.apiVersionPathTemplate.render({
       project: project,
       location: location,
@@ -1745,8 +1377,7 @@ export class ProvisioningClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiVersionName(apiVersionName: string) {
-    return this.pathTemplates.apiVersionPathTemplate.match(apiVersionName)
-      .project;
+    return this.pathTemplates.apiVersionPathTemplate.match(apiVersionName).project;
   }
 
   /**
@@ -1757,8 +1388,7 @@ export class ProvisioningClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiVersionName(apiVersionName: string) {
-    return this.pathTemplates.apiVersionPathTemplate.match(apiVersionName)
-      .location;
+    return this.pathTemplates.apiVersionPathTemplate.match(apiVersionName).location;
   }
 
   /**
@@ -1780,8 +1410,7 @@ export class ProvisioningClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromApiVersionName(apiVersionName: string) {
-    return this.pathTemplates.apiVersionPathTemplate.match(apiVersionName)
-      .version;
+    return this.pathTemplates.apiVersionPathTemplate.match(apiVersionName).version;
   }
 
   /**
@@ -1792,7 +1421,7 @@ export class ProvisioningClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project: string, location: string, instance: string) {
+  instancePath(project:string,location:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -1840,7 +1469,7 @@ export class ProvisioningClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1878,12 +1507,7 @@ export class ProvisioningClient {
    * @param {string} artifact
    * @returns {string} Resource name string.
    */
-  projectLocationApiArtifactPath(
-    project: string,
-    location: string,
-    api: string,
-    artifact: string
-  ) {
+  projectLocationApiArtifactPath(project:string,location:string,api:string,artifact:string) {
     return this.pathTemplates.projectLocationApiArtifactPathTemplate.render({
       project: project,
       location: location,
@@ -1899,12 +1523,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_artifact resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationApiArtifactName(
-    projectLocationApiArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiArtifactPathTemplate.match(
-      projectLocationApiArtifactName
-    ).project;
+  matchProjectFromProjectLocationApiArtifactName(projectLocationApiArtifactName: string) {
+    return this.pathTemplates.projectLocationApiArtifactPathTemplate.match(projectLocationApiArtifactName).project;
   }
 
   /**
@@ -1914,12 +1534,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_artifact resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationApiArtifactName(
-    projectLocationApiArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiArtifactPathTemplate.match(
-      projectLocationApiArtifactName
-    ).location;
+  matchLocationFromProjectLocationApiArtifactName(projectLocationApiArtifactName: string) {
+    return this.pathTemplates.projectLocationApiArtifactPathTemplate.match(projectLocationApiArtifactName).location;
   }
 
   /**
@@ -1929,12 +1545,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_artifact resource.
    * @returns {string} A string representing the api.
    */
-  matchApiFromProjectLocationApiArtifactName(
-    projectLocationApiArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiArtifactPathTemplate.match(
-      projectLocationApiArtifactName
-    ).api;
+  matchApiFromProjectLocationApiArtifactName(projectLocationApiArtifactName: string) {
+    return this.pathTemplates.projectLocationApiArtifactPathTemplate.match(projectLocationApiArtifactName).api;
   }
 
   /**
@@ -1944,12 +1556,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_artifact resource.
    * @returns {string} A string representing the artifact.
    */
-  matchArtifactFromProjectLocationApiArtifactName(
-    projectLocationApiArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiArtifactPathTemplate.match(
-      projectLocationApiArtifactName
-    ).artifact;
+  matchArtifactFromProjectLocationApiArtifactName(projectLocationApiArtifactName: string) {
+    return this.pathTemplates.projectLocationApiArtifactPathTemplate.match(projectLocationApiArtifactName).artifact;
   }
 
   /**
@@ -1962,22 +1570,14 @@ export class ProvisioningClient {
    * @param {string} artifact
    * @returns {string} Resource name string.
    */
-  projectLocationApiDeploymentArtifactPath(
-    project: string,
-    location: string,
-    api: string,
-    deployment: string,
-    artifact: string
-  ) {
-    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        api: api,
-        deployment: deployment,
-        artifact: artifact,
-      }
-    );
+  projectLocationApiDeploymentArtifactPath(project:string,location:string,api:string,deployment:string,artifact:string) {
+    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.render({
+      project: project,
+      location: location,
+      api: api,
+      deployment: deployment,
+      artifact: artifact,
+    });
   }
 
   /**
@@ -1987,12 +1587,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_deployment_artifact resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationApiDeploymentArtifactName(
-    projectLocationApiDeploymentArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.match(
-      projectLocationApiDeploymentArtifactName
-    ).project;
+  matchProjectFromProjectLocationApiDeploymentArtifactName(projectLocationApiDeploymentArtifactName: string) {
+    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.match(projectLocationApiDeploymentArtifactName).project;
   }
 
   /**
@@ -2002,12 +1598,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_deployment_artifact resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationApiDeploymentArtifactName(
-    projectLocationApiDeploymentArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.match(
-      projectLocationApiDeploymentArtifactName
-    ).location;
+  matchLocationFromProjectLocationApiDeploymentArtifactName(projectLocationApiDeploymentArtifactName: string) {
+    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.match(projectLocationApiDeploymentArtifactName).location;
   }
 
   /**
@@ -2017,12 +1609,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_deployment_artifact resource.
    * @returns {string} A string representing the api.
    */
-  matchApiFromProjectLocationApiDeploymentArtifactName(
-    projectLocationApiDeploymentArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.match(
-      projectLocationApiDeploymentArtifactName
-    ).api;
+  matchApiFromProjectLocationApiDeploymentArtifactName(projectLocationApiDeploymentArtifactName: string) {
+    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.match(projectLocationApiDeploymentArtifactName).api;
   }
 
   /**
@@ -2032,12 +1620,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_deployment_artifact resource.
    * @returns {string} A string representing the deployment.
    */
-  matchDeploymentFromProjectLocationApiDeploymentArtifactName(
-    projectLocationApiDeploymentArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.match(
-      projectLocationApiDeploymentArtifactName
-    ).deployment;
+  matchDeploymentFromProjectLocationApiDeploymentArtifactName(projectLocationApiDeploymentArtifactName: string) {
+    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.match(projectLocationApiDeploymentArtifactName).deployment;
   }
 
   /**
@@ -2047,12 +1631,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_deployment_artifact resource.
    * @returns {string} A string representing the artifact.
    */
-  matchArtifactFromProjectLocationApiDeploymentArtifactName(
-    projectLocationApiDeploymentArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.match(
-      projectLocationApiDeploymentArtifactName
-    ).artifact;
+  matchArtifactFromProjectLocationApiDeploymentArtifactName(projectLocationApiDeploymentArtifactName: string) {
+    return this.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.match(projectLocationApiDeploymentArtifactName).artifact;
   }
 
   /**
@@ -2065,22 +1645,14 @@ export class ProvisioningClient {
    * @param {string} artifact
    * @returns {string} Resource name string.
    */
-  projectLocationApiVersionArtifactPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    artifact: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        api: api,
-        version: version,
-        artifact: artifact,
-      }
-    );
+  projectLocationApiVersionArtifactPath(project:string,location:string,api:string,version:string,artifact:string) {
+    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.render({
+      project: project,
+      location: location,
+      api: api,
+      version: version,
+      artifact: artifact,
+    });
   }
 
   /**
@@ -2090,12 +1662,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_version_artifact resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationApiVersionArtifactName(
-    projectLocationApiVersionArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.match(
-      projectLocationApiVersionArtifactName
-    ).project;
+  matchProjectFromProjectLocationApiVersionArtifactName(projectLocationApiVersionArtifactName: string) {
+    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.match(projectLocationApiVersionArtifactName).project;
   }
 
   /**
@@ -2105,12 +1673,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_version_artifact resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationApiVersionArtifactName(
-    projectLocationApiVersionArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.match(
-      projectLocationApiVersionArtifactName
-    ).location;
+  matchLocationFromProjectLocationApiVersionArtifactName(projectLocationApiVersionArtifactName: string) {
+    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.match(projectLocationApiVersionArtifactName).location;
   }
 
   /**
@@ -2120,12 +1684,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_version_artifact resource.
    * @returns {string} A string representing the api.
    */
-  matchApiFromProjectLocationApiVersionArtifactName(
-    projectLocationApiVersionArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.match(
-      projectLocationApiVersionArtifactName
-    ).api;
+  matchApiFromProjectLocationApiVersionArtifactName(projectLocationApiVersionArtifactName: string) {
+    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.match(projectLocationApiVersionArtifactName).api;
   }
 
   /**
@@ -2135,12 +1695,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_version_artifact resource.
    * @returns {string} A string representing the version.
    */
-  matchVersionFromProjectLocationApiVersionArtifactName(
-    projectLocationApiVersionArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.match(
-      projectLocationApiVersionArtifactName
-    ).version;
+  matchVersionFromProjectLocationApiVersionArtifactName(projectLocationApiVersionArtifactName: string) {
+    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.match(projectLocationApiVersionArtifactName).version;
   }
 
   /**
@@ -2150,12 +1706,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_version_artifact resource.
    * @returns {string} A string representing the artifact.
    */
-  matchArtifactFromProjectLocationApiVersionArtifactName(
-    projectLocationApiVersionArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.match(
-      projectLocationApiVersionArtifactName
-    ).artifact;
+  matchArtifactFromProjectLocationApiVersionArtifactName(projectLocationApiVersionArtifactName: string) {
+    return this.pathTemplates.projectLocationApiVersionArtifactPathTemplate.match(projectLocationApiVersionArtifactName).artifact;
   }
 
   /**
@@ -2169,24 +1721,15 @@ export class ProvisioningClient {
    * @param {string} artifact
    * @returns {string} Resource name string.
    */
-  projectLocationApiVersionSpecArtifactPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    spec: string,
-    artifact: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        api: api,
-        version: version,
-        spec: spec,
-        artifact: artifact,
-      }
-    );
+  projectLocationApiVersionSpecArtifactPath(project:string,location:string,api:string,version:string,spec:string,artifact:string) {
+    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.render({
+      project: project,
+      location: location,
+      api: api,
+      version: version,
+      spec: spec,
+      artifact: artifact,
+    });
   }
 
   /**
@@ -2196,12 +1739,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_version_spec_artifact resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationApiVersionSpecArtifactName(
-    projectLocationApiVersionSpecArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(
-      projectLocationApiVersionSpecArtifactName
-    ).project;
+  matchProjectFromProjectLocationApiVersionSpecArtifactName(projectLocationApiVersionSpecArtifactName: string) {
+    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(projectLocationApiVersionSpecArtifactName).project;
   }
 
   /**
@@ -2211,12 +1750,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_version_spec_artifact resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationApiVersionSpecArtifactName(
-    projectLocationApiVersionSpecArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(
-      projectLocationApiVersionSpecArtifactName
-    ).location;
+  matchLocationFromProjectLocationApiVersionSpecArtifactName(projectLocationApiVersionSpecArtifactName: string) {
+    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(projectLocationApiVersionSpecArtifactName).location;
   }
 
   /**
@@ -2226,12 +1761,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_version_spec_artifact resource.
    * @returns {string} A string representing the api.
    */
-  matchApiFromProjectLocationApiVersionSpecArtifactName(
-    projectLocationApiVersionSpecArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(
-      projectLocationApiVersionSpecArtifactName
-    ).api;
+  matchApiFromProjectLocationApiVersionSpecArtifactName(projectLocationApiVersionSpecArtifactName: string) {
+    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(projectLocationApiVersionSpecArtifactName).api;
   }
 
   /**
@@ -2241,12 +1772,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_version_spec_artifact resource.
    * @returns {string} A string representing the version.
    */
-  matchVersionFromProjectLocationApiVersionSpecArtifactName(
-    projectLocationApiVersionSpecArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(
-      projectLocationApiVersionSpecArtifactName
-    ).version;
+  matchVersionFromProjectLocationApiVersionSpecArtifactName(projectLocationApiVersionSpecArtifactName: string) {
+    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(projectLocationApiVersionSpecArtifactName).version;
   }
 
   /**
@@ -2256,12 +1783,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_version_spec_artifact resource.
    * @returns {string} A string representing the spec.
    */
-  matchSpecFromProjectLocationApiVersionSpecArtifactName(
-    projectLocationApiVersionSpecArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(
-      projectLocationApiVersionSpecArtifactName
-    ).spec;
+  matchSpecFromProjectLocationApiVersionSpecArtifactName(projectLocationApiVersionSpecArtifactName: string) {
+    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(projectLocationApiVersionSpecArtifactName).spec;
   }
 
   /**
@@ -2271,12 +1794,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_api_version_spec_artifact resource.
    * @returns {string} A string representing the artifact.
    */
-  matchArtifactFromProjectLocationApiVersionSpecArtifactName(
-    projectLocationApiVersionSpecArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(
-      projectLocationApiVersionSpecArtifactName
-    ).artifact;
+  matchArtifactFromProjectLocationApiVersionSpecArtifactName(projectLocationApiVersionSpecArtifactName: string) {
+    return this.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match(projectLocationApiVersionSpecArtifactName).artifact;
   }
 
   /**
@@ -2287,11 +1806,7 @@ export class ProvisioningClient {
    * @param {string} artifact
    * @returns {string} Resource name string.
    */
-  projectLocationArtifactPath(
-    project: string,
-    location: string,
-    artifact: string
-  ) {
+  projectLocationArtifactPath(project:string,location:string,artifact:string) {
     return this.pathTemplates.projectLocationArtifactPathTemplate.render({
       project: project,
       location: location,
@@ -2306,12 +1821,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_artifact resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationArtifactName(
-    projectLocationArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationArtifactPathTemplate.match(
-      projectLocationArtifactName
-    ).project;
+  matchProjectFromProjectLocationArtifactName(projectLocationArtifactName: string) {
+    return this.pathTemplates.projectLocationArtifactPathTemplate.match(projectLocationArtifactName).project;
   }
 
   /**
@@ -2321,12 +1832,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_artifact resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationArtifactName(
-    projectLocationArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationArtifactPathTemplate.match(
-      projectLocationArtifactName
-    ).location;
+  matchLocationFromProjectLocationArtifactName(projectLocationArtifactName: string) {
+    return this.pathTemplates.projectLocationArtifactPathTemplate.match(projectLocationArtifactName).location;
   }
 
   /**
@@ -2336,12 +1843,8 @@ export class ProvisioningClient {
    *   A fully-qualified path representing project_location_artifact resource.
    * @returns {string} A string representing the artifact.
    */
-  matchArtifactFromProjectLocationArtifactName(
-    projectLocationArtifactName: string
-  ) {
-    return this.pathTemplates.projectLocationArtifactPathTemplate.match(
-      projectLocationArtifactName
-    ).artifact;
+  matchArtifactFromProjectLocationArtifactName(projectLocationArtifactName: string) {
+    return this.pathTemplates.projectLocationArtifactPathTemplate.match(projectLocationArtifactName).artifact;
   }
 
   /**
@@ -2356,12 +1859,8 @@ export class ProvisioningClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

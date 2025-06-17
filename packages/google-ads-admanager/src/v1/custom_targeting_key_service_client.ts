@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,37 +100,17 @@ export class CustomTargetingKeyServiceClient {
    *     const client = new CustomTargetingKeyServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof CustomTargetingKeyServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof CustomTargetingKeyServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'admanager.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -146,9 +119,7 @@ export class CustomTargetingKeyServiceClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -174,7 +145,7 @@ export class CustomTargetingKeyServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -188,7 +159,10 @@ export class CustomTargetingKeyServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -263,20 +237,14 @@ export class CustomTargetingKeyServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCustomTargetingKeys: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'customTargetingKeys'
-      ),
+      listCustomTargetingKeys:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'customTargetingKeys')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.ads.admanager.v1.CustomTargetingKeyService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.ads.admanager.v1.CustomTargetingKeyService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -307,39 +275,32 @@ export class CustomTargetingKeyServiceClient {
     // Put together the "service stub" for
     // google.ads.admanager.v1.CustomTargetingKeyService.
     this.customTargetingKeyServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.ads.admanager.v1.CustomTargetingKeyService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.ads.admanager.v1
-            .CustomTargetingKeyService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.ads.admanager.v1.CustomTargetingKeyService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.ads.admanager.v1.CustomTargetingKeyService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const customTargetingKeyServiceStubMethods = [
-      'getCustomTargetingKey',
-      'listCustomTargetingKeys',
-    ];
+    const customTargetingKeyServiceStubMethods =
+        ['getCustomTargetingKey', 'listCustomTargetingKeys'];
     for (const methodName of customTargetingKeyServiceStubMethods) {
       const callPromise = this.customTargetingKeyServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -359,14 +320,8 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'admanager.googleapis.com';
   }
@@ -377,14 +332,8 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'admanager.googleapis.com';
   }
@@ -424,9 +373,8 @@ export class CustomTargetingKeyServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -437,254 +385,202 @@ export class CustomTargetingKeyServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * API to retrieve a `CustomTargetingKey` object.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the CustomTargetingKey.
-   *   Format:
-   *   `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.CustomTargetingKey|CustomTargetingKey}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/custom_targeting_key_service.get_custom_targeting_key.js</caption>
-   * region_tag:admanager_v1_generated_CustomTargetingKeyService_GetCustomTargetingKey_async
-   */
+/**
+ * API to retrieve a `CustomTargetingKey` object.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the CustomTargetingKey.
+ *   Format:
+ *   `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.CustomTargetingKey|CustomTargetingKey}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/custom_targeting_key_service.get_custom_targeting_key.js</caption>
+ * region_tag:admanager_v1_generated_CustomTargetingKeyService_GetCustomTargetingKey_async
+ */
   getCustomTargetingKey(
-    request?: protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.ICustomTargetingKey,
-      protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest|undefined, {}|undefined
+      ]>;
   getCustomTargetingKey(
-    request: protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ads.admanager.v1.ICustomTargetingKey,
-      | protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCustomTargetingKey(
-    request: protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest,
-    callback: Callback<
-      protos.google.ads.admanager.v1.ICustomTargetingKey,
-      | protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCustomTargetingKey(
-    request?: protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ads.admanager.v1.ICustomTargetingKey,
-          | protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ads.admanager.v1.ICustomTargetingKey,
-      | protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.ICustomTargetingKey,
-      protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCustomTargetingKey(
+      request: protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCustomTargetingKey(
+      request?: protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCustomTargetingKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ads.admanager.v1.ICustomTargetingKey,
-          | protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCustomTargetingKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCustomTargetingKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ads.admanager.v1.ICustomTargetingKey,
-          (
-            | protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCustomTargetingKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCustomTargetingKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCustomTargetingKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * API to retrieve a list of `CustomTargetingKey` objects.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of CustomTargetingKeys.
-   *   Format: `networks/{network_code}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `CustomTargetingKeys` to return. The
-   *   service may return fewer than this value. If unspecified, at most 50
-   *   `CustomTargetingKeys` will be returned. The maximum value is 1000; values
-   *   above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListCustomTargetingKeys`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListCustomTargetingKeys`
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Expression to filter the response.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters
-   * @param {string} [request.orderBy]
-   *   Optional. Expression to specify sorting order.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters#order
-   * @param {number} [request.skip]
-   *   Optional. Number of individual resources to skip while paginating.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.CustomTargetingKey|CustomTargetingKey}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCustomTargetingKeysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * API to retrieve a list of `CustomTargetingKey` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of CustomTargetingKeys.
+ *   Format: `networks/{network_code}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `CustomTargetingKeys` to return. The
+ *   service may return fewer than this value. If unspecified, at most 50
+ *   `CustomTargetingKeys` will be returned. The maximum value is 1000; values
+ *   above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListCustomTargetingKeys`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListCustomTargetingKeys`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Expression to filter the response.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters
+ * @param {string} [request.orderBy]
+ *   Optional. Expression to specify sorting order.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters#order
+ * @param {number} [request.skip]
+ *   Optional. Number of individual resources to skip while paginating.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.CustomTargetingKey|CustomTargetingKey}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCustomTargetingKeysAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCustomTargetingKeys(
-    request?: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.ICustomTargetingKey[],
-      protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest | null,
-      protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse,
-    ]
-  >;
+      request?: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.ICustomTargetingKey[],
+        protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest|null,
+        protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse
+      ]>;
   listCustomTargetingKeys(
-    request: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
-      | protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse
-      | null
-      | undefined,
-      protos.google.ads.admanager.v1.ICustomTargetingKey
-    >
-  ): void;
-  listCustomTargetingKeys(
-    request: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
-    callback: PaginationCallback<
-      protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
-      | protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse
-      | null
-      | undefined,
-      protos.google.ads.admanager.v1.ICustomTargetingKey
-    >
-  ): void;
-  listCustomTargetingKeys(
-    request?: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
-          | protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse
-          | null
-          | undefined,
-          protos.google.ads.admanager.v1.ICustomTargetingKey
-        >,
-    callback?: PaginationCallback<
-      protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
-      | protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse
-      | null
-      | undefined,
-      protos.google.ads.admanager.v1.ICustomTargetingKey
-    >
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.ICustomTargetingKey[],
-      protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest | null,
-      protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse,
-    ]
-  > | void {
+          protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse|null|undefined,
+          protos.google.ads.admanager.v1.ICustomTargetingKey>): void;
+  listCustomTargetingKeys(
+      request: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
+      callback: PaginationCallback<
+          protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
+          protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse|null|undefined,
+          protos.google.ads.admanager.v1.ICustomTargetingKey>): void;
+  listCustomTargetingKeys(
+      request?: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
+          protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse|null|undefined,
+          protos.google.ads.admanager.v1.ICustomTargetingKey>,
+      callback?: PaginationCallback<
+          protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
+          protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse|null|undefined,
+          protos.google.ads.admanager.v1.ICustomTargetingKey>):
+      Promise<[
+        protos.google.ads.admanager.v1.ICustomTargetingKey[],
+        protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest|null,
+        protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
-          | protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse
-          | null
-          | undefined,
-          protos.google.ads.admanager.v1.ICustomTargetingKey
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
+      protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse|null|undefined,
+      protos.google.ads.admanager.v1.ICustomTargetingKey>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCustomTargetingKeys values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -693,74 +589,71 @@ export class CustomTargetingKeyServiceClient {
     this._log.info('listCustomTargetingKeys request %j', request);
     return this.innerApiCalls
       .listCustomTargetingKeys(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.ads.admanager.v1.ICustomTargetingKey[],
-          protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest | null,
-          protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse,
-        ]) => {
-          this._log.info('listCustomTargetingKeys values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.ads.admanager.v1.ICustomTargetingKey[],
+        protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest|null,
+        protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse
+      ]) => {
+        this._log.info('listCustomTargetingKeys values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCustomTargetingKeys`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of CustomTargetingKeys.
-   *   Format: `networks/{network_code}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `CustomTargetingKeys` to return. The
-   *   service may return fewer than this value. If unspecified, at most 50
-   *   `CustomTargetingKeys` will be returned. The maximum value is 1000; values
-   *   above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListCustomTargetingKeys`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListCustomTargetingKeys`
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Expression to filter the response.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters
-   * @param {string} [request.orderBy]
-   *   Optional. Expression to specify sorting order.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters#order
-   * @param {number} [request.skip]
-   *   Optional. Number of individual resources to skip while paginating.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.CustomTargetingKey|CustomTargetingKey} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCustomTargetingKeysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCustomTargetingKeys`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of CustomTargetingKeys.
+ *   Format: `networks/{network_code}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `CustomTargetingKeys` to return. The
+ *   service may return fewer than this value. If unspecified, at most 50
+ *   `CustomTargetingKeys` will be returned. The maximum value is 1000; values
+ *   above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListCustomTargetingKeys`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListCustomTargetingKeys`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Expression to filter the response.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters
+ * @param {string} [request.orderBy]
+ *   Optional. Expression to specify sorting order.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters#order
+ * @param {number} [request.skip]
+ *   Optional. Number of individual resources to skip while paginating.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.CustomTargetingKey|CustomTargetingKey} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCustomTargetingKeysAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCustomTargetingKeysStream(
-    request?: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCustomTargetingKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCustomTargetingKeys stream %j', request);
     return this.descriptors.page.listCustomTargetingKeys.createStream(
       this.innerApiCalls.listCustomTargetingKeys as GaxCall,
@@ -769,65 +662,64 @@ export class CustomTargetingKeyServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listCustomTargetingKeys`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of CustomTargetingKeys.
-   *   Format: `networks/{network_code}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `CustomTargetingKeys` to return. The
-   *   service may return fewer than this value. If unspecified, at most 50
-   *   `CustomTargetingKeys` will be returned. The maximum value is 1000; values
-   *   above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListCustomTargetingKeys`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListCustomTargetingKeys`
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Expression to filter the response.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters
-   * @param {string} [request.orderBy]
-   *   Optional. Expression to specify sorting order.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters#order
-   * @param {number} [request.skip]
-   *   Optional. Number of individual resources to skip while paginating.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.ads.admanager.v1.CustomTargetingKey|CustomTargetingKey}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/custom_targeting_key_service.list_custom_targeting_keys.js</caption>
-   * region_tag:admanager_v1_generated_CustomTargetingKeyService_ListCustomTargetingKeys_async
-   */
+/**
+ * Equivalent to `listCustomTargetingKeys`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of CustomTargetingKeys.
+ *   Format: `networks/{network_code}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `CustomTargetingKeys` to return. The
+ *   service may return fewer than this value. If unspecified, at most 50
+ *   `CustomTargetingKeys` will be returned. The maximum value is 1000; values
+ *   above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListCustomTargetingKeys`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListCustomTargetingKeys`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Expression to filter the response.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters
+ * @param {string} [request.orderBy]
+ *   Optional. Expression to specify sorting order.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters#order
+ * @param {number} [request.skip]
+ *   Optional. Number of individual resources to skip while paginating.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.ads.admanager.v1.CustomTargetingKey|CustomTargetingKey}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/custom_targeting_key_service.list_custom_targeting_keys.js</caption>
+ * region_tag:admanager_v1_generated_CustomTargetingKeyService_ListCustomTargetingKeys_async
+ */
   listCustomTargetingKeysAsync(
-    request?: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.ads.admanager.v1.ICustomTargetingKey> {
+      request?: protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.ads.admanager.v1.ICustomTargetingKey>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCustomTargetingKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCustomTargetingKeys iterate %j', request);
     return this.descriptors.page.listCustomTargetingKeys.asyncIterate(
       this.innerApiCalls['listCustomTargetingKeys'] as GaxCall,
@@ -846,7 +738,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} ad_unit
    * @returns {string} Resource name string.
    */
-  adUnitPath(networkCode: string, adUnit: string) {
+  adUnitPath(networkCode:string,adUnit:string) {
     return this.pathTemplates.adUnitPathTemplate.render({
       network_code: networkCode,
       ad_unit: adUnit,
@@ -882,7 +774,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} company
    * @returns {string} Resource name string.
    */
-  companyPath(networkCode: string, company: string) {
+  companyPath(networkCode:string,company:string) {
     return this.pathTemplates.companyPathTemplate.render({
       network_code: networkCode,
       company: company,
@@ -897,8 +789,7 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCompanyName(companyName: string) {
-    return this.pathTemplates.companyPathTemplate.match(companyName)
-      .network_code;
+    return this.pathTemplates.companyPathTemplate.match(companyName).network_code;
   }
 
   /**
@@ -919,7 +810,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} contact
    * @returns {string} Resource name string.
    */
-  contactPath(networkCode: string, contact: string) {
+  contactPath(networkCode:string,contact:string) {
     return this.pathTemplates.contactPathTemplate.render({
       network_code: networkCode,
       contact: contact,
@@ -934,8 +825,7 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromContactName(contactName: string) {
-    return this.pathTemplates.contactPathTemplate.match(contactName)
-      .network_code;
+    return this.pathTemplates.contactPathTemplate.match(contactName).network_code;
   }
 
   /**
@@ -956,7 +846,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} custom_field
    * @returns {string} Resource name string.
    */
-  customFieldPath(networkCode: string, customField: string) {
+  customFieldPath(networkCode:string,customField:string) {
     return this.pathTemplates.customFieldPathTemplate.render({
       network_code: networkCode,
       custom_field: customField,
@@ -971,8 +861,7 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCustomFieldName(customFieldName: string) {
-    return this.pathTemplates.customFieldPathTemplate.match(customFieldName)
-      .network_code;
+    return this.pathTemplates.customFieldPathTemplate.match(customFieldName).network_code;
   }
 
   /**
@@ -983,8 +872,7 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} A string representing the custom_field.
    */
   matchCustomFieldFromCustomFieldName(customFieldName: string) {
-    return this.pathTemplates.customFieldPathTemplate.match(customFieldName)
-      .custom_field;
+    return this.pathTemplates.customFieldPathTemplate.match(customFieldName).custom_field;
   }
 
   /**
@@ -994,7 +882,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} custom_targeting_key
    * @returns {string} Resource name string.
    */
-  customTargetingKeyPath(networkCode: string, customTargetingKey: string) {
+  customTargetingKeyPath(networkCode:string,customTargetingKey:string) {
     return this.pathTemplates.customTargetingKeyPathTemplate.render({
       network_code: networkCode,
       custom_targeting_key: customTargetingKey,
@@ -1009,9 +897,7 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCustomTargetingKeyName(customTargetingKeyName: string) {
-    return this.pathTemplates.customTargetingKeyPathTemplate.match(
-      customTargetingKeyName
-    ).network_code;
+    return this.pathTemplates.customTargetingKeyPathTemplate.match(customTargetingKeyName).network_code;
   }
 
   /**
@@ -1021,12 +907,8 @@ export class CustomTargetingKeyServiceClient {
    *   A fully-qualified path representing CustomTargetingKey resource.
    * @returns {string} A string representing the custom_targeting_key.
    */
-  matchCustomTargetingKeyFromCustomTargetingKeyName(
-    customTargetingKeyName: string
-  ) {
-    return this.pathTemplates.customTargetingKeyPathTemplate.match(
-      customTargetingKeyName
-    ).custom_targeting_key;
+  matchCustomTargetingKeyFromCustomTargetingKeyName(customTargetingKeyName: string) {
+    return this.pathTemplates.customTargetingKeyPathTemplate.match(customTargetingKeyName).custom_targeting_key;
   }
 
   /**
@@ -1037,11 +919,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} custom_targeting_value
    * @returns {string} Resource name string.
    */
-  customTargetingValuePath(
-    networkCode: string,
-    customTargetingKey: string,
-    customTargetingValue: string
-  ) {
+  customTargetingValuePath(networkCode:string,customTargetingKey:string,customTargetingValue:string) {
     return this.pathTemplates.customTargetingValuePathTemplate.render({
       network_code: networkCode,
       custom_targeting_key: customTargetingKey,
@@ -1056,12 +934,8 @@ export class CustomTargetingKeyServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromCustomTargetingValueName(
-    customTargetingValueName: string
-  ) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(
-      customTargetingValueName
-    ).network_code;
+  matchNetworkCodeFromCustomTargetingValueName(customTargetingValueName: string) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).network_code;
   }
 
   /**
@@ -1071,12 +945,8 @@ export class CustomTargetingKeyServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the custom_targeting_key.
    */
-  matchCustomTargetingKeyFromCustomTargetingValueName(
-    customTargetingValueName: string
-  ) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(
-      customTargetingValueName
-    ).custom_targeting_key;
+  matchCustomTargetingKeyFromCustomTargetingValueName(customTargetingValueName: string) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).custom_targeting_key;
   }
 
   /**
@@ -1086,12 +956,8 @@ export class CustomTargetingKeyServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the custom_targeting_value.
    */
-  matchCustomTargetingValueFromCustomTargetingValueName(
-    customTargetingValueName: string
-  ) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(
-      customTargetingValueName
-    ).custom_targeting_value;
+  matchCustomTargetingValueFromCustomTargetingValueName(customTargetingValueName: string) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).custom_targeting_value;
   }
 
   /**
@@ -1101,7 +967,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} entity_signals_mapping
    * @returns {string} Resource name string.
    */
-  entitySignalsMappingPath(networkCode: string, entitySignalsMapping: string) {
+  entitySignalsMappingPath(networkCode:string,entitySignalsMapping:string) {
     return this.pathTemplates.entitySignalsMappingPathTemplate.render({
       network_code: networkCode,
       entity_signals_mapping: entitySignalsMapping,
@@ -1115,12 +981,8 @@ export class CustomTargetingKeyServiceClient {
    *   A fully-qualified path representing EntitySignalsMapping resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromEntitySignalsMappingName(
-    entitySignalsMappingName: string
-  ) {
-    return this.pathTemplates.entitySignalsMappingPathTemplate.match(
-      entitySignalsMappingName
-    ).network_code;
+  matchNetworkCodeFromEntitySignalsMappingName(entitySignalsMappingName: string) {
+    return this.pathTemplates.entitySignalsMappingPathTemplate.match(entitySignalsMappingName).network_code;
   }
 
   /**
@@ -1130,12 +992,8 @@ export class CustomTargetingKeyServiceClient {
    *   A fully-qualified path representing EntitySignalsMapping resource.
    * @returns {string} A string representing the entity_signals_mapping.
    */
-  matchEntitySignalsMappingFromEntitySignalsMappingName(
-    entitySignalsMappingName: string
-  ) {
-    return this.pathTemplates.entitySignalsMappingPathTemplate.match(
-      entitySignalsMappingName
-    ).entity_signals_mapping;
+  matchEntitySignalsMappingFromEntitySignalsMappingName(entitySignalsMappingName: string) {
+    return this.pathTemplates.entitySignalsMappingPathTemplate.match(entitySignalsMappingName).entity_signals_mapping;
   }
 
   /**
@@ -1145,7 +1003,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} label
    * @returns {string} Resource name string.
    */
-  labelPath(networkCode: string, label: string) {
+  labelPath(networkCode:string,label:string) {
     return this.pathTemplates.labelPathTemplate.render({
       network_code: networkCode,
       label: label,
@@ -1180,7 +1038,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} network_code
    * @returns {string} Resource name string.
    */
-  networkPath(networkCode: string) {
+  networkPath(networkCode:string) {
     return this.pathTemplates.networkPathTemplate.render({
       network_code: networkCode,
     });
@@ -1194,8 +1052,7 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromNetworkName(networkName: string) {
-    return this.pathTemplates.networkPathTemplate.match(networkName)
-      .network_code;
+    return this.pathTemplates.networkPathTemplate.match(networkName).network_code;
   }
 
   /**
@@ -1205,7 +1062,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} order
    * @returns {string} Resource name string.
    */
-  orderPath(networkCode: string, order: string) {
+  orderPath(networkCode:string,order:string) {
     return this.pathTemplates.orderPathTemplate.render({
       network_code: networkCode,
       order: order,
@@ -1241,7 +1098,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} placement
    * @returns {string} Resource name string.
    */
-  placementPath(networkCode: string, placement: string) {
+  placementPath(networkCode:string,placement:string) {
     return this.pathTemplates.placementPathTemplate.render({
       network_code: networkCode,
       placement: placement,
@@ -1256,8 +1113,7 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromPlacementName(placementName: string) {
-    return this.pathTemplates.placementPathTemplate.match(placementName)
-      .network_code;
+    return this.pathTemplates.placementPathTemplate.match(placementName).network_code;
   }
 
   /**
@@ -1268,8 +1124,7 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} A string representing the placement.
    */
   matchPlacementFromPlacementName(placementName: string) {
-    return this.pathTemplates.placementPathTemplate.match(placementName)
-      .placement;
+    return this.pathTemplates.placementPathTemplate.match(placementName).placement;
   }
 
   /**
@@ -1279,7 +1134,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} report
    * @returns {string} Resource name string.
    */
-  reportPath(networkCode: string, report: string) {
+  reportPath(networkCode:string,report:string) {
     return this.pathTemplates.reportPathTemplate.render({
       network_code: networkCode,
       report: report,
@@ -1315,7 +1170,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} role
    * @returns {string} Resource name string.
    */
-  rolePath(networkCode: string, role: string) {
+  rolePath(networkCode:string,role:string) {
     return this.pathTemplates.rolePathTemplate.render({
       network_code: networkCode,
       role: role,
@@ -1351,7 +1206,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} taxonomy_category
    * @returns {string} Resource name string.
    */
-  taxonomyCategoryPath(networkCode: string, taxonomyCategory: string) {
+  taxonomyCategoryPath(networkCode:string,taxonomyCategory:string) {
     return this.pathTemplates.taxonomyCategoryPathTemplate.render({
       network_code: networkCode,
       taxonomy_category: taxonomyCategory,
@@ -1366,9 +1221,7 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromTaxonomyCategoryName(taxonomyCategoryName: string) {
-    return this.pathTemplates.taxonomyCategoryPathTemplate.match(
-      taxonomyCategoryName
-    ).network_code;
+    return this.pathTemplates.taxonomyCategoryPathTemplate.match(taxonomyCategoryName).network_code;
   }
 
   /**
@@ -1379,9 +1232,7 @@ export class CustomTargetingKeyServiceClient {
    * @returns {string} A string representing the taxonomy_category.
    */
   matchTaxonomyCategoryFromTaxonomyCategoryName(taxonomyCategoryName: string) {
-    return this.pathTemplates.taxonomyCategoryPathTemplate.match(
-      taxonomyCategoryName
-    ).taxonomy_category;
+    return this.pathTemplates.taxonomyCategoryPathTemplate.match(taxonomyCategoryName).taxonomy_category;
   }
 
   /**
@@ -1391,7 +1242,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} team
    * @returns {string} Resource name string.
    */
-  teamPath(networkCode: string, team: string) {
+  teamPath(networkCode:string,team:string) {
     return this.pathTemplates.teamPathTemplate.render({
       network_code: networkCode,
       team: team,
@@ -1427,7 +1278,7 @@ export class CustomTargetingKeyServiceClient {
    * @param {string} user
    * @returns {string} Resource name string.
    */
-  userPath(networkCode: string, user: string) {
+  userPath(networkCode:string,user:string) {
     return this.pathTemplates.userPathTemplate.render({
       network_code: networkCode,
       user: user,

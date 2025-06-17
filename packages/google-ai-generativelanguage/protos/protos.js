@@ -153,12 +153,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CitationMetadata.decode = function decode(reader, length) {
+                        CitationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.CitationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.citationSources && message.citationSources.length))
@@ -352,45 +354,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * CitationSource _startIndex.
-                         * @member {"startIndex"|undefined} _startIndex
-                         * @memberof google.ai.generativelanguage.v1.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_startIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["startIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _endIndex.
-                         * @member {"endIndex"|undefined} _endIndex
-                         * @memberof google.ai.generativelanguage.v1.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_endIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["endIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _uri.
-                         * @member {"uri"|undefined} _uri
-                         * @memberof google.ai.generativelanguage.v1.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_uri", {
                             get: $util.oneOfGetter($oneOfFields = ["uri"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _license.
-                         * @member {"license"|undefined} _license
-                         * @memberof google.ai.generativelanguage.v1.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_license", {
                             get: $util.oneOfGetter($oneOfFields = ["license"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -455,12 +437,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CitationSource.decode = function decode(reader, length) {
+                        CitationSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.CitationSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startIndex = reader.int32();
@@ -745,12 +729,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Content.decode = function decode(reader, length) {
+                        Content.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.Content();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.parts && message.parts.length))
@@ -1005,12 +991,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Part.decode = function decode(reader, length) {
+                        Part.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.Part();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.text = reader.string();
@@ -1247,12 +1235,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Blob.decode = function decode(reader, length) {
+                        Blob.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.Blob();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.mimeType = reader.string();
@@ -1483,12 +1473,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ModalityTokenCount.decode = function decode(reader, length) {
+                        ModalityTokenCount.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.ModalityTokenCount();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.modality = reader.int32();
@@ -1945,12 +1937,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateContentRequest _generationConfig.
-                         * @member {"generationConfig"|undefined} _generationConfig
-                         * @memberof google.ai.generativelanguage.v1.GenerateContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateContentRequest.prototype, "_generationConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["generationConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -2017,12 +2004,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateContentRequest.decode = function decode(reader, length) {
+                        GenerateContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.GenerateContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -2357,122 +2346,67 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerationConfig _candidateCount.
-                         * @member {"candidateCount"|undefined} _candidateCount
-                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_candidateCount", {
                             get: $util.oneOfGetter($oneOfFields = ["candidateCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _maxOutputTokens.
-                         * @member {"maxOutputTokens"|undefined} _maxOutputTokens
-                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_maxOutputTokens", {
                             get: $util.oneOfGetter($oneOfFields = ["maxOutputTokens"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _seed.
-                         * @member {"seed"|undefined} _seed
-                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_seed", {
                             get: $util.oneOfGetter($oneOfFields = ["seed"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _presencePenalty.
-                         * @member {"presencePenalty"|undefined} _presencePenalty
-                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_presencePenalty", {
                             get: $util.oneOfGetter($oneOfFields = ["presencePenalty"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _frequencyPenalty.
-                         * @member {"frequencyPenalty"|undefined} _frequencyPenalty
-                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_frequencyPenalty", {
                             get: $util.oneOfGetter($oneOfFields = ["frequencyPenalty"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _responseLogprobs.
-                         * @member {"responseLogprobs"|undefined} _responseLogprobs
-                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_responseLogprobs", {
                             get: $util.oneOfGetter($oneOfFields = ["responseLogprobs"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _logprobs.
-                         * @member {"logprobs"|undefined} _logprobs
-                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_logprobs", {
                             get: $util.oneOfGetter($oneOfFields = ["logprobs"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _enableEnhancedCivicAnswers.
-                         * @member {"enableEnhancedCivicAnswers"|undefined} _enableEnhancedCivicAnswers
-                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_enableEnhancedCivicAnswers", {
                             get: $util.oneOfGetter($oneOfFields = ["enableEnhancedCivicAnswers"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -2554,12 +2488,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerationConfig.decode = function decode(reader, length) {
+                        GenerationConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.GenerationConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.candidateCount = reader.int32();
@@ -2983,12 +2919,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateContentResponse.decode = function decode(reader, length) {
+                        GenerateContentResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.GenerateContentResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.candidates && message.candidates.length))
@@ -3263,12 +3201,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PromptFeedback.decode = function decode(reader, length) {
+                            PromptFeedback.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.GenerateContentResponse.PromptFeedback();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.blockReason = reader.int32();
@@ -3655,12 +3595,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UsageMetadata.decode = function decode(reader, length) {
+                            UsageMetadata.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.promptTokenCount = reader.int32();
@@ -4059,12 +4001,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Candidate _index.
-                         * @member {"index"|undefined} _index
-                         * @memberof google.ai.generativelanguage.v1.Candidate
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Candidate.prototype, "_index", {
                             get: $util.oneOfGetter($oneOfFields = ["index"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -4140,12 +4077,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Candidate.decode = function decode(reader, length) {
+                        Candidate.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.Candidate();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.index = reader.int32();
@@ -4603,12 +4542,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LogprobsResult.decode = function decode(reader, length) {
+                        LogprobsResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.LogprobsResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.topCandidates && message.topCandidates.length))
@@ -4822,34 +4763,19 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * Candidate _token.
-                             * @member {"token"|undefined} _token
-                             * @memberof google.ai.generativelanguage.v1.LogprobsResult.Candidate
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Candidate.prototype, "_token", {
                                 get: $util.oneOfGetter($oneOfFields = ["token"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Candidate _tokenId.
-                             * @member {"tokenId"|undefined} _tokenId
-                             * @memberof google.ai.generativelanguage.v1.LogprobsResult.Candidate
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Candidate.prototype, "_tokenId", {
                                 get: $util.oneOfGetter($oneOfFields = ["tokenId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Candidate _logProbability.
-                             * @member {"logProbability"|undefined} _logProbability
-                             * @memberof google.ai.generativelanguage.v1.LogprobsResult.Candidate
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Candidate.prototype, "_logProbability", {
                                 get: $util.oneOfGetter($oneOfFields = ["logProbability"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -4912,12 +4838,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Candidate.decode = function decode(reader, length) {
+                            Candidate.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.LogprobsResult.Candidate();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.token = reader.string();
@@ -5153,12 +5081,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            TopCandidates.decode = function decode(reader, length) {
+                            TopCandidates.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.LogprobsResult.TopCandidates();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.candidates && message.candidates.length))
@@ -5378,12 +5308,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RetrievalMetadata.decode = function decode(reader, length) {
+                        RetrievalMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.RetrievalMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.googleSearchDynamicRetrievalScore = reader.float();
@@ -5570,23 +5502,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GroundingMetadata _searchEntryPoint.
-                         * @member {"searchEntryPoint"|undefined} _searchEntryPoint
-                         * @memberof google.ai.generativelanguage.v1.GroundingMetadata
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingMetadata.prototype, "_searchEntryPoint", {
                             get: $util.oneOfGetter($oneOfFields = ["searchEntryPoint"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GroundingMetadata _retrievalMetadata.
-                         * @member {"retrievalMetadata"|undefined} _retrievalMetadata
-                         * @memberof google.ai.generativelanguage.v1.GroundingMetadata
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingMetadata.prototype, "_retrievalMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["retrievalMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -5656,12 +5578,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingMetadata.decode = function decode(reader, length) {
+                        GroundingMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.GroundingMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.searchEntryPoint = $root.google.ai.generativelanguage.v1.SearchEntryPoint.decode(reader, reader.uint32());
@@ -5992,12 +5916,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchEntryPoint.decode = function decode(reader, length) {
+                        SearchEntryPoint.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.SearchEntryPoint();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.renderedContent = reader.string();
@@ -6231,12 +6157,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingChunk.decode = function decode(reader, length) {
+                        GroundingChunk.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.GroundingChunk();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.web = $root.google.ai.generativelanguage.v1.GroundingChunk.Web.decode(reader, reader.uint32());
@@ -6400,23 +6328,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * Web _uri.
-                             * @member {"uri"|undefined} _uri
-                             * @memberof google.ai.generativelanguage.v1.GroundingChunk.Web
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Web.prototype, "_uri", {
                                 get: $util.oneOfGetter($oneOfFields = ["uri"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Web _title.
-                             * @member {"title"|undefined} _title
-                             * @memberof google.ai.generativelanguage.v1.GroundingChunk.Web
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Web.prototype, "_title", {
                                 get: $util.oneOfGetter($oneOfFields = ["title"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -6477,12 +6395,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Web.decode = function decode(reader, length) {
+                            Web.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.GroundingChunk.Web();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.uri = reader.string();
@@ -6736,12 +6656,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Segment.decode = function decode(reader, length) {
+                        Segment.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.Segment();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.partIndex = reader.int32();
@@ -6946,12 +6868,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GroundingSupport _segment.
-                         * @member {"segment"|undefined} _segment
-                         * @memberof google.ai.generativelanguage.v1.GroundingSupport
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingSupport.prototype, "_segment", {
                             get: $util.oneOfGetter($oneOfFields = ["segment"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -7022,12 +6939,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingSupport.decode = function decode(reader, length) {
+                        GroundingSupport.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.GroundingSupport();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.segment = $root.google.ai.generativelanguage.v1.Segment.decode(reader, reader.uint32());
@@ -7285,34 +7204,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * EmbedContentRequest _taskType.
-                         * @member {"taskType"|undefined} _taskType
-                         * @memberof google.ai.generativelanguage.v1.EmbedContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedContentRequest.prototype, "_taskType", {
                             get: $util.oneOfGetter($oneOfFields = ["taskType"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * EmbedContentRequest _title.
-                         * @member {"title"|undefined} _title
-                         * @memberof google.ai.generativelanguage.v1.EmbedContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedContentRequest.prototype, "_title", {
                             get: $util.oneOfGetter($oneOfFields = ["title"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * EmbedContentRequest _outputDimensionality.
-                         * @member {"outputDimensionality"|undefined} _outputDimensionality
-                         * @memberof google.ai.generativelanguage.v1.EmbedContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedContentRequest.prototype, "_outputDimensionality", {
                             get: $util.oneOfGetter($oneOfFields = ["outputDimensionality"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -7379,12 +7283,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedContentRequest.decode = function decode(reader, length) {
+                        EmbedContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.EmbedContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -7708,12 +7614,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentEmbedding.decode = function decode(reader, length) {
+                        ContentEmbedding.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.ContentEmbedding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.values && message.values.length))
@@ -7930,12 +7838,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedContentResponse.decode = function decode(reader, length) {
+                        EmbedContentResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.EmbedContentResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.embedding = $root.google.ai.generativelanguage.v1.ContentEmbedding.decode(reader, reader.uint32());
@@ -8151,12 +8061,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedContentsRequest.decode = function decode(reader, length) {
+                        BatchEmbedContentsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.BatchEmbedContentsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -8388,12 +8300,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedContentsResponse.decode = function decode(reader, length) {
+                        BatchEmbedContentsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.BatchEmbedContentsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.embeddings && message.embeddings.length))
@@ -8634,12 +8548,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTokensRequest.decode = function decode(reader, length) {
+                        CountTokensRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.CountTokensRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -8913,12 +8829,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTokensResponse.decode = function decode(reader, length) {
+                        CountTokensResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.CountTokensResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.totalTokens = reader.int32();
@@ -9236,12 +9154,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetyRating.decode = function decode(reader, length) {
+                        SafetyRating.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.SafetyRating();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.category = reader.int32();
@@ -9598,12 +9518,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetySetting.decode = function decode(reader, length) {
+                        SafetySetting.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.SafetySetting();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.category = reader.int32();
@@ -9994,45 +9916,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Model _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _maxTemperature.
-                         * @member {"maxTemperature"|undefined} _maxTemperature
-                         * @memberof google.ai.generativelanguage.v1.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_maxTemperature", {
                             get: $util.oneOfGetter($oneOfFields = ["maxTemperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -10114,12 +10016,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Model.decode = function decode(reader, length) {
+                        Model.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.Model();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -10583,12 +10487,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetModelRequest.decode = function decode(reader, length) {
+                        GetModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.GetModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -10797,12 +10703,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListModelsRequest.decode = function decode(reader, length) {
+                        ListModelsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.ListModelsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.pageSize = reader.int32();
@@ -11026,12 +10934,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListModelsResponse.decode = function decode(reader, length) {
+                        ListModelsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.ListModelsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.models && message.models.length))
@@ -11484,12 +11394,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCachedContentsRequest.decode = function decode(reader, length) {
+                        ListCachedContentsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListCachedContentsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -11713,12 +11625,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCachedContentsResponse.decode = function decode(reader, length) {
+                        ListCachedContentsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListCachedContentsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.cachedContents && message.cachedContents.length))
@@ -11948,12 +11862,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateCachedContentRequest.decode = function decode(reader, length) {
+                        CreateCachedContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CreateCachedContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cachedContent = $root.google.ai.generativelanguage.v1alpha.CachedContent.decode(reader, reader.uint32());
@@ -12156,12 +12072,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetCachedContentRequest.decode = function decode(reader, length) {
+                        GetCachedContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GetCachedContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -12370,12 +12288,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCachedContentRequest.decode = function decode(reader, length) {
+                        UpdateCachedContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.UpdateCachedContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cachedContent = $root.google.ai.generativelanguage.v1alpha.CachedContent.decode(reader, reader.uint32());
@@ -12596,12 +12516,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteCachedContentRequest.decode = function decode(reader, length) {
+                        DeleteCachedContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.DeleteCachedContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -12861,56 +12783,31 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CachedContent _name.
-                         * @member {"name"|undefined} _name
-                         * @memberof google.ai.generativelanguage.v1alpha.CachedContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CachedContent.prototype, "_name", {
                             get: $util.oneOfGetter($oneOfFields = ["name"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CachedContent _displayName.
-                         * @member {"displayName"|undefined} _displayName
-                         * @memberof google.ai.generativelanguage.v1alpha.CachedContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CachedContent.prototype, "_displayName", {
                             get: $util.oneOfGetter($oneOfFields = ["displayName"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CachedContent _model.
-                         * @member {"model"|undefined} _model
-                         * @memberof google.ai.generativelanguage.v1alpha.CachedContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CachedContent.prototype, "_model", {
                             get: $util.oneOfGetter($oneOfFields = ["model"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CachedContent _systemInstruction.
-                         * @member {"systemInstruction"|undefined} _systemInstruction
-                         * @memberof google.ai.generativelanguage.v1alpha.CachedContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CachedContent.prototype, "_systemInstruction", {
                             get: $util.oneOfGetter($oneOfFields = ["systemInstruction"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CachedContent _toolConfig.
-                         * @member {"toolConfig"|undefined} _toolConfig
-                         * @memberof google.ai.generativelanguage.v1alpha.CachedContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CachedContent.prototype, "_toolConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["toolConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -12993,12 +12890,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CachedContent.decode = function decode(reader, length) {
+                        CachedContent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CachedContent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 9: {
                                         message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -13436,12 +13335,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UsageMetadata.decode = function decode(reader, length) {
+                            UsageMetadata.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CachedContent.UsageMetadata();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.totalTokenCount = reader.int32();
@@ -13679,12 +13580,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Content.decode = function decode(reader, length) {
+                        Content.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Content();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.parts && message.parts.length))
@@ -13994,12 +13897,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Part.decode = function decode(reader, length) {
+                        Part.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Part();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.text = reader.string();
@@ -14356,12 +14261,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Blob.decode = function decode(reader, length) {
+                        Blob.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Blob();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.mimeType = reader.string();
@@ -14592,12 +14499,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FileData.decode = function decode(reader, length) {
+                        FileData.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.FileData();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.mimeType = reader.string();
@@ -14819,12 +14728,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExecutableCode.decode = function decode(reader, length) {
+                        ExecutableCode.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ExecutableCode();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.language = reader.int32();
@@ -15079,12 +14990,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CodeExecutionResult.decode = function decode(reader, length) {
+                        CodeExecutionResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CodeExecutionResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.outcome = reader.int32();
@@ -15377,12 +15290,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Tool.decode = function decode(reader, length) {
+                        Tool.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Tool();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.functionDeclarations && message.functionDeclarations.length))
@@ -15638,12 +15553,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GoogleSearch.decode = function decode(reader, length) {
+                            GoogleSearch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Tool.GoogleSearch();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -15827,12 +15744,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GoogleSearchRetrieval.decode = function decode(reader, length) {
+                        GoogleSearchRetrieval.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GoogleSearchRetrieval();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dynamicRetrievalConfig = $root.google.ai.generativelanguage.v1alpha.DynamicRetrievalConfig.decode(reader, reader.uint32());
@@ -15994,12 +15913,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * DynamicRetrievalConfig _dynamicThreshold.
-                         * @member {"dynamicThreshold"|undefined} _dynamicThreshold
-                         * @memberof google.ai.generativelanguage.v1alpha.DynamicRetrievalConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(DynamicRetrievalConfig.prototype, "_dynamicThreshold", {
                             get: $util.oneOfGetter($oneOfFields = ["dynamicThreshold"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -16060,12 +15974,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DynamicRetrievalConfig.decode = function decode(reader, length) {
+                        DynamicRetrievalConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.DynamicRetrievalConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.mode = reader.int32();
@@ -16302,12 +16218,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CodeExecution.decode = function decode(reader, length) {
+                        CodeExecution.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CodeExecution();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -16488,12 +16406,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ToolConfig.decode = function decode(reader, length) {
+                        ToolConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ToolConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.functionCallingConfig = $root.google.ai.generativelanguage.v1alpha.FunctionCallingConfig.decode(reader, reader.uint32());
@@ -16709,12 +16629,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FunctionCallingConfig.decode = function decode(reader, length) {
+                        FunctionCallingConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.FunctionCallingConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.mode = reader.int32();
@@ -16963,23 +16885,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * FunctionDeclaration _parameters.
-                         * @member {"parameters"|undefined} _parameters
-                         * @memberof google.ai.generativelanguage.v1alpha.FunctionDeclaration
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FunctionDeclaration.prototype, "_parameters", {
                             get: $util.oneOfGetter($oneOfFields = ["parameters"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * FunctionDeclaration _response.
-                         * @member {"response"|undefined} _response
-                         * @memberof google.ai.generativelanguage.v1alpha.FunctionDeclaration
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FunctionDeclaration.prototype, "_response", {
                             get: $util.oneOfGetter($oneOfFields = ["response"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -17044,12 +16956,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FunctionDeclaration.decode = function decode(reader, length) {
+                        FunctionDeclaration.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.FunctionDeclaration();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -17273,12 +17187,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * FunctionCall _args.
-                         * @member {"args"|undefined} _args
-                         * @memberof google.ai.generativelanguage.v1alpha.FunctionCall
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FunctionCall.prototype, "_args", {
                             get: $util.oneOfGetter($oneOfFields = ["args"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -17341,12 +17250,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FunctionCall.decode = function decode(reader, length) {
+                        FunctionCall.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.FunctionCall();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.id = reader.string();
@@ -17602,12 +17513,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FunctionResponse.decode = function decode(reader, length) {
+                        FunctionResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.FunctionResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.id = reader.string();
@@ -17869,12 +17782,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Schema _items.
-                         * @member {"items"|undefined} _items
-                         * @memberof google.ai.generativelanguage.v1alpha.Schema
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Schema.prototype, "_items", {
                             get: $util.oneOfGetter($oneOfFields = ["items"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -17956,12 +17864,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Schema.decode = function decode(reader, length) {
+                        Schema.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Schema(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.type = reader.int32();
@@ -18431,12 +18341,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingPassage.decode = function decode(reader, length) {
+                        GroundingPassage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GroundingPassage();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.id = reader.string();
@@ -18654,12 +18566,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingPassages.decode = function decode(reader, length) {
+                        GroundingPassages.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GroundingPassages();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.passages && message.passages.length))
@@ -18878,12 +18792,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CitationMetadata.decode = function decode(reader, length) {
+                        CitationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CitationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.citationSources && message.citationSources.length))
@@ -19077,45 +18993,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * CitationSource _startIndex.
-                         * @member {"startIndex"|undefined} _startIndex
-                         * @memberof google.ai.generativelanguage.v1alpha.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_startIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["startIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _endIndex.
-                         * @member {"endIndex"|undefined} _endIndex
-                         * @memberof google.ai.generativelanguage.v1alpha.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_endIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["endIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _uri.
-                         * @member {"uri"|undefined} _uri
-                         * @memberof google.ai.generativelanguage.v1alpha.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_uri", {
                             get: $util.oneOfGetter($oneOfFields = ["uri"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _license.
-                         * @member {"license"|undefined} _license
-                         * @memberof google.ai.generativelanguage.v1alpha.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_license", {
                             get: $util.oneOfGetter($oneOfFields = ["license"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -19180,12 +19076,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CitationSource.decode = function decode(reader, length) {
+                        CitationSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CitationSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startIndex = reader.int32();
@@ -19531,45 +19429,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateMessageRequest _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _candidateCount.
-                         * @member {"candidateCount"|undefined} _candidateCount
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_candidateCount", {
                             get: $util.oneOfGetter($oneOfFields = ["candidateCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -19638,12 +19516,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateMessageRequest.decode = function decode(reader, length) {
+                        GenerateMessageRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerateMessageRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -19952,12 +19832,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateMessageResponse.decode = function decode(reader, length) {
+                        GenerateMessageResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerateMessageResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.candidates && message.candidates.length))
@@ -20205,12 +20087,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Message _citationMetadata.
-                         * @member {"citationMetadata"|undefined} _citationMetadata
-                         * @memberof google.ai.generativelanguage.v1alpha.Message
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Message.prototype, "_citationMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["citationMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -20273,12 +20150,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Message.decode = function decode(reader, length) {
+                        Message.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Message();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.author = reader.string();
@@ -20538,12 +20417,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MessagePrompt.decode = function decode(reader, length) {
+                        MessagePrompt.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.MessagePrompt();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.context = reader.string();
@@ -20816,12 +20697,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Example.decode = function decode(reader, length) {
+                        Example.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Example();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.input = $root.google.ai.generativelanguage.v1alpha.Message.decode(reader, reader.uint32());
@@ -21053,12 +20936,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountMessageTokensRequest.decode = function decode(reader, length) {
+                        CountMessageTokensRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CountMessageTokensRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -21274,12 +21159,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountMessageTokensResponse.decode = function decode(reader, length) {
+                        CountMessageTokensResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CountMessageTokensResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tokenCount = reader.int32();
@@ -21470,12 +21357,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * ContentFilter _message.
-                         * @member {"message"|undefined} _message
-                         * @memberof google.ai.generativelanguage.v1alpha.ContentFilter
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ContentFilter.prototype, "_message", {
                             get: $util.oneOfGetter($oneOfFields = ["message"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -21536,12 +21418,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentFilter.decode = function decode(reader, length) {
+                        ContentFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ContentFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.reason = reader.int32();
@@ -21807,12 +21691,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetyFeedback.decode = function decode(reader, length) {
+                        SafetyFeedback.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.SafetyFeedback();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.rating = $root.google.ai.generativelanguage.v1alpha.SafetyRating.decode(reader, reader.uint32());
@@ -22055,12 +21941,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetyRating.decode = function decode(reader, length) {
+                        SafetyRating.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.SafetyRating();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.category = reader.int32();
@@ -22417,12 +22305,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetySetting.decode = function decode(reader, length) {
+                        SafetySetting.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.SafetySetting();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.category = reader.int32();
@@ -22898,12 +22788,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        File.decode = function decode(reader, length) {
+                        File.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.File();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 12: {
                                         message.videoMetadata = $root.google.ai.generativelanguage.v1alpha.VideoMetadata.decode(reader, reader.uint32());
@@ -23335,12 +23227,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VideoMetadata.decode = function decode(reader, length) {
+                        VideoMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.VideoMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.videoDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -23710,12 +23604,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateFileRequest.decode = function decode(reader, length) {
+                        CreateFileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CreateFileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.file = $root.google.ai.generativelanguage.v1alpha.File.decode(reader, reader.uint32());
@@ -23918,12 +23814,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateFileResponse.decode = function decode(reader, length) {
+                        CreateFileResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CreateFileResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.file = $root.google.ai.generativelanguage.v1alpha.File.decode(reader, reader.uint32());
@@ -24137,12 +24035,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFilesRequest.decode = function decode(reader, length) {
+                        ListFilesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListFilesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -24366,12 +24266,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFilesResponse.decode = function decode(reader, length) {
+                        ListFilesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListFilesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.files && message.files.length))
@@ -24601,12 +24503,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetFileRequest.decode = function decode(reader, length) {
+                        GetFileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GetFileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -24804,12 +24708,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteFileRequest.decode = function decode(reader, length) {
+                        DeleteFileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.DeleteFileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -25315,34 +25221,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateContentRequest _systemInstruction.
-                         * @member {"systemInstruction"|undefined} _systemInstruction
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateContentRequest.prototype, "_systemInstruction", {
                             get: $util.oneOfGetter($oneOfFields = ["systemInstruction"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateContentRequest _generationConfig.
-                         * @member {"generationConfig"|undefined} _generationConfig
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateContentRequest.prototype, "_generationConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["generationConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateContentRequest _cachedContent.
-                         * @member {"cachedContent"|undefined} _cachedContent
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateContentRequest.prototype, "_cachedContent", {
                             get: $util.oneOfGetter($oneOfFields = ["cachedContent"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -25418,12 +25309,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateContentRequest.decode = function decode(reader, length) {
+                        GenerateContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerateContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -25745,12 +25638,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * PrebuiltVoiceConfig _voiceName.
-                         * @member {"voiceName"|undefined} _voiceName
-                         * @memberof google.ai.generativelanguage.v1alpha.PrebuiltVoiceConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PrebuiltVoiceConfig.prototype, "_voiceName", {
                             get: $util.oneOfGetter($oneOfFields = ["voiceName"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -25809,12 +25697,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PrebuiltVoiceConfig.decode = function decode(reader, length) {
+                        PrebuiltVoiceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.PrebuiltVoiceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.voiceName = reader.string();
@@ -26030,12 +25920,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VoiceConfig.decode = function decode(reader, length) {
+                        VoiceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.VoiceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.prebuiltVoiceConfig = $root.google.ai.generativelanguage.v1alpha.PrebuiltVoiceConfig.decode(reader, reader.uint32());
@@ -26243,12 +26135,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SpeechConfig.decode = function decode(reader, length) {
+                        SpeechConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.SpeechConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.voiceConfig = $root.google.ai.generativelanguage.v1alpha.VoiceConfig.decode(reader, reader.uint32());
@@ -26529,122 +26423,67 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerationConfig _candidateCount.
-                         * @member {"candidateCount"|undefined} _candidateCount
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_candidateCount", {
                             get: $util.oneOfGetter($oneOfFields = ["candidateCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _maxOutputTokens.
-                         * @member {"maxOutputTokens"|undefined} _maxOutputTokens
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_maxOutputTokens", {
                             get: $util.oneOfGetter($oneOfFields = ["maxOutputTokens"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _presencePenalty.
-                         * @member {"presencePenalty"|undefined} _presencePenalty
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_presencePenalty", {
                             get: $util.oneOfGetter($oneOfFields = ["presencePenalty"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _frequencyPenalty.
-                         * @member {"frequencyPenalty"|undefined} _frequencyPenalty
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_frequencyPenalty", {
                             get: $util.oneOfGetter($oneOfFields = ["frequencyPenalty"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _responseLogprobs.
-                         * @member {"responseLogprobs"|undefined} _responseLogprobs
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_responseLogprobs", {
                             get: $util.oneOfGetter($oneOfFields = ["responseLogprobs"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _logprobs.
-                         * @member {"logprobs"|undefined} _logprobs
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_logprobs", {
                             get: $util.oneOfGetter($oneOfFields = ["logprobs"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _enableEnhancedCivicAnswers.
-                         * @member {"enableEnhancedCivicAnswers"|undefined} _enableEnhancedCivicAnswers
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_enableEnhancedCivicAnswers", {
                             get: $util.oneOfGetter($oneOfFields = ["enableEnhancedCivicAnswers"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _speechConfig.
-                         * @member {"speechConfig"|undefined} _speechConfig
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_speechConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["speechConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -26736,12 +26575,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerationConfig.decode = function decode(reader, length) {
+                        GenerationConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerationConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.candidateCount = reader.int32();
@@ -27233,23 +27074,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * SemanticRetrieverConfig _maxChunksCount.
-                         * @member {"maxChunksCount"|undefined} _maxChunksCount
-                         * @memberof google.ai.generativelanguage.v1alpha.SemanticRetrieverConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(SemanticRetrieverConfig.prototype, "_maxChunksCount", {
                             get: $util.oneOfGetter($oneOfFields = ["maxChunksCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * SemanticRetrieverConfig _minimumRelevanceScore.
-                         * @member {"minimumRelevanceScore"|undefined} _minimumRelevanceScore
-                         * @memberof google.ai.generativelanguage.v1alpha.SemanticRetrieverConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(SemanticRetrieverConfig.prototype, "_minimumRelevanceScore", {
                             get: $util.oneOfGetter($oneOfFields = ["minimumRelevanceScore"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -27317,12 +27148,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SemanticRetrieverConfig.decode = function decode(reader, length) {
+                        SemanticRetrieverConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.SemanticRetrieverConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.source = reader.string();
@@ -27638,12 +27471,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateContentResponse.decode = function decode(reader, length) {
+                        GenerateContentResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerateContentResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.candidates && message.candidates.length))
@@ -27918,12 +27753,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PromptFeedback.decode = function decode(reader, length) {
+                            PromptFeedback.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerateContentResponse.PromptFeedback();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.blockReason = reader.int32();
@@ -28247,12 +28084,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UsageMetadata.decode = function decode(reader, length) {
+                            UsageMetadata.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerateContentResponse.UsageMetadata();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.promptTokenCount = reader.int32();
@@ -28523,12 +28362,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Candidate _index.
-                         * @member {"index"|undefined} _index
-                         * @memberof google.ai.generativelanguage.v1alpha.Candidate
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Candidate.prototype, "_index", {
                             get: $util.oneOfGetter($oneOfFields = ["index"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -28607,12 +28441,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Candidate.decode = function decode(reader, length) {
+                        Candidate.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Candidate();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.index = reader.int32();
@@ -29102,12 +28938,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LogprobsResult.decode = function decode(reader, length) {
+                        LogprobsResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.LogprobsResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.topCandidates && message.topCandidates.length))
@@ -29321,34 +29159,19 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * Candidate _token.
-                             * @member {"token"|undefined} _token
-                             * @memberof google.ai.generativelanguage.v1alpha.LogprobsResult.Candidate
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Candidate.prototype, "_token", {
                                 get: $util.oneOfGetter($oneOfFields = ["token"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Candidate _tokenId.
-                             * @member {"tokenId"|undefined} _tokenId
-                             * @memberof google.ai.generativelanguage.v1alpha.LogprobsResult.Candidate
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Candidate.prototype, "_tokenId", {
                                 get: $util.oneOfGetter($oneOfFields = ["tokenId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Candidate _logProbability.
-                             * @member {"logProbability"|undefined} _logProbability
-                             * @memberof google.ai.generativelanguage.v1alpha.LogprobsResult.Candidate
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Candidate.prototype, "_logProbability", {
                                 get: $util.oneOfGetter($oneOfFields = ["logProbability"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -29411,12 +29234,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Candidate.decode = function decode(reader, length) {
+                            Candidate.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.LogprobsResult.Candidate();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.token = reader.string();
@@ -29652,12 +29477,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            TopCandidates.decode = function decode(reader, length) {
+                            TopCandidates.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.LogprobsResult.TopCandidates();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.candidates && message.candidates.length))
@@ -29902,12 +29729,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AttributionSourceId.decode = function decode(reader, length) {
+                        AttributionSourceId.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.AttributionSourceId();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.groundingPassage = $root.google.ai.generativelanguage.v1alpha.AttributionSourceId.GroundingPassageId.decode(reader, reader.uint32());
@@ -30147,12 +29976,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GroundingPassageId.decode = function decode(reader, length) {
+                            GroundingPassageId.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.AttributionSourceId.GroundingPassageId();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.passageId = reader.string();
@@ -30374,12 +30205,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SemanticRetrieverChunk.decode = function decode(reader, length) {
+                            SemanticRetrieverChunk.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.AttributionSourceId.SemanticRetrieverChunk();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.source = reader.string();
@@ -30604,12 +30437,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingAttribution.decode = function decode(reader, length) {
+                        GroundingAttribution.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GroundingAttribution();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.sourceId = $root.google.ai.generativelanguage.v1alpha.AttributionSourceId.decode(reader, reader.uint32());
@@ -30830,12 +30665,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RetrievalMetadata.decode = function decode(reader, length) {
+                        RetrievalMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.RetrievalMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.googleSearchDynamicRetrievalScore = reader.float();
@@ -31022,23 +30859,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GroundingMetadata _searchEntryPoint.
-                         * @member {"searchEntryPoint"|undefined} _searchEntryPoint
-                         * @memberof google.ai.generativelanguage.v1alpha.GroundingMetadata
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingMetadata.prototype, "_searchEntryPoint", {
                             get: $util.oneOfGetter($oneOfFields = ["searchEntryPoint"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GroundingMetadata _retrievalMetadata.
-                         * @member {"retrievalMetadata"|undefined} _retrievalMetadata
-                         * @memberof google.ai.generativelanguage.v1alpha.GroundingMetadata
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingMetadata.prototype, "_retrievalMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["retrievalMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -31108,12 +30935,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingMetadata.decode = function decode(reader, length) {
+                        GroundingMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GroundingMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.searchEntryPoint = $root.google.ai.generativelanguage.v1alpha.SearchEntryPoint.decode(reader, reader.uint32());
@@ -31444,12 +31273,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchEntryPoint.decode = function decode(reader, length) {
+                        SearchEntryPoint.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.SearchEntryPoint();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.renderedContent = reader.string();
@@ -31683,12 +31514,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingChunk.decode = function decode(reader, length) {
+                        GroundingChunk.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GroundingChunk();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.web = $root.google.ai.generativelanguage.v1alpha.GroundingChunk.Web.decode(reader, reader.uint32());
@@ -31852,23 +31685,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * Web _uri.
-                             * @member {"uri"|undefined} _uri
-                             * @memberof google.ai.generativelanguage.v1alpha.GroundingChunk.Web
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Web.prototype, "_uri", {
                                 get: $util.oneOfGetter($oneOfFields = ["uri"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Web _title.
-                             * @member {"title"|undefined} _title
-                             * @memberof google.ai.generativelanguage.v1alpha.GroundingChunk.Web
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Web.prototype, "_title", {
                                 get: $util.oneOfGetter($oneOfFields = ["title"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -31929,12 +31752,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Web.decode = function decode(reader, length) {
+                            Web.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GroundingChunk.Web();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.uri = reader.string();
@@ -32188,12 +32013,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Segment.decode = function decode(reader, length) {
+                        Segment.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Segment();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.partIndex = reader.int32();
@@ -32398,12 +32225,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GroundingSupport _segment.
-                         * @member {"segment"|undefined} _segment
-                         * @memberof google.ai.generativelanguage.v1alpha.GroundingSupport
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingSupport.prototype, "_segment", {
                             get: $util.oneOfGetter($oneOfFields = ["segment"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -32474,12 +32296,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingSupport.decode = function decode(reader, length) {
+                        GroundingSupport.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GroundingSupport();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.segment = $root.google.ai.generativelanguage.v1alpha.Segment.decode(reader, reader.uint32());
@@ -32768,12 +32592,7 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateAnswerRequest _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateAnswerRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateAnswerRequest.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -32846,12 +32665,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateAnswerRequest.decode = function decode(reader, length) {
+                        GenerateAnswerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerateAnswerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 6: {
                                         message.inlinePassages = $root.google.ai.generativelanguage.v1alpha.GroundingPassages.decode(reader, reader.uint32());
@@ -33204,23 +33025,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateAnswerResponse _answerableProbability.
-                         * @member {"answerableProbability"|undefined} _answerableProbability
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateAnswerResponse
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateAnswerResponse.prototype, "_answerableProbability", {
                             get: $util.oneOfGetter($oneOfFields = ["answerableProbability"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateAnswerResponse _inputFeedback.
-                         * @member {"inputFeedback"|undefined} _inputFeedback
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateAnswerResponse
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateAnswerResponse.prototype, "_inputFeedback", {
                             get: $util.oneOfGetter($oneOfFields = ["inputFeedback"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -33283,12 +33094,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateAnswerResponse.decode = function decode(reader, length) {
+                        GenerateAnswerResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerateAnswerResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.answer = $root.google.ai.generativelanguage.v1alpha.Candidate.decode(reader, reader.uint32());
@@ -33487,12 +33300,7 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * InputFeedback _blockReason.
-                             * @member {"blockReason"|undefined} _blockReason
-                             * @memberof google.ai.generativelanguage.v1alpha.GenerateAnswerResponse.InputFeedback
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(InputFeedback.prototype, "_blockReason", {
                                 get: $util.oneOfGetter($oneOfFields = ["blockReason"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -33554,12 +33362,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            InputFeedback.decode = function decode(reader, length) {
+                            InputFeedback.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerateAnswerResponse.InputFeedback();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.blockReason = reader.int32();
@@ -33822,34 +33632,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * EmbedContentRequest _taskType.
-                         * @member {"taskType"|undefined} _taskType
-                         * @memberof google.ai.generativelanguage.v1alpha.EmbedContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedContentRequest.prototype, "_taskType", {
                             get: $util.oneOfGetter($oneOfFields = ["taskType"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * EmbedContentRequest _title.
-                         * @member {"title"|undefined} _title
-                         * @memberof google.ai.generativelanguage.v1alpha.EmbedContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedContentRequest.prototype, "_title", {
                             get: $util.oneOfGetter($oneOfFields = ["title"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * EmbedContentRequest _outputDimensionality.
-                         * @member {"outputDimensionality"|undefined} _outputDimensionality
-                         * @memberof google.ai.generativelanguage.v1alpha.EmbedContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedContentRequest.prototype, "_outputDimensionality", {
                             get: $util.oneOfGetter($oneOfFields = ["outputDimensionality"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -33916,12 +33711,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedContentRequest.decode = function decode(reader, length) {
+                        EmbedContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.EmbedContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -34240,12 +34037,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentEmbedding.decode = function decode(reader, length) {
+                        ContentEmbedding.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ContentEmbedding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.values && message.values.length))
@@ -34462,12 +34261,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedContentResponse.decode = function decode(reader, length) {
+                        EmbedContentResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.EmbedContentResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.embedding = $root.google.ai.generativelanguage.v1alpha.ContentEmbedding.decode(reader, reader.uint32());
@@ -34683,12 +34484,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedContentsRequest.decode = function decode(reader, length) {
+                        BatchEmbedContentsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BatchEmbedContentsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -34920,12 +34723,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedContentsResponse.decode = function decode(reader, length) {
+                        BatchEmbedContentsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BatchEmbedContentsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.embeddings && message.embeddings.length))
@@ -35166,12 +34971,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTokensRequest.decode = function decode(reader, length) {
+                        CountTokensRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CountTokensRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -35430,12 +35237,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTokensResponse.decode = function decode(reader, length) {
+                        CountTokensResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CountTokensResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.totalTokens = reader.int32();
@@ -35681,12 +35490,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentSetup.decode = function decode(reader, length) {
+                        BidiGenerateContentSetup.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentSetup();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -35964,12 +35775,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentClientContent.decode = function decode(reader, length) {
+                        BidiGenerateContentClientContent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentClientContent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.turns && message.turns.length))
@@ -36201,12 +36014,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentRealtimeInput.decode = function decode(reader, length) {
+                        BidiGenerateContentRealtimeInput.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentRealtimeInput();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.mediaChunks && message.mediaChunks.length))
@@ -36425,12 +36240,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentToolResponse.decode = function decode(reader, length) {
+                        BidiGenerateContentToolResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentToolResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.functionResponses && message.functionResponses.length))
@@ -36694,12 +36511,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentClientMessage.decode = function decode(reader, length) {
+                        BidiGenerateContentClientMessage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentClientMessage();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.setup = $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentSetup.decode(reader, reader.uint32());
@@ -36968,12 +36787,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentSetupComplete.decode = function decode(reader, length) {
+                        BidiGenerateContentSetupComplete.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentSetupComplete();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -37131,12 +36952,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * BidiGenerateContentServerContent _modelTurn.
-                         * @member {"modelTurn"|undefined} _modelTurn
-                         * @memberof google.ai.generativelanguage.v1alpha.BidiGenerateContentServerContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(BidiGenerateContentServerContent.prototype, "_modelTurn", {
                             get: $util.oneOfGetter($oneOfFields = ["modelTurn"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -37201,12 +37017,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentServerContent.decode = function decode(reader, length) {
+                        BidiGenerateContentServerContent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentServerContent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.modelTurn = $root.google.ai.generativelanguage.v1alpha.Content.decode(reader, reader.uint32());
@@ -37459,12 +37277,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentToolCall.decode = function decode(reader, length) {
+                        BidiGenerateContentToolCall.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentToolCall();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         if (!(message.functionCalls && message.functionCalls.length))
@@ -37683,12 +37503,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentToolCallCancellation.decode = function decode(reader, length) {
+                        BidiGenerateContentToolCallCancellation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentToolCallCancellation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.ids && message.ids.length))
@@ -37947,12 +37769,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentServerMessage.decode = function decode(reader, length) {
+                        BidiGenerateContentServerMessage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentServerMessage();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.setupComplete = $root.google.ai.generativelanguage.v1alpha.BidiGenerateContentSetupComplete.decode(reader, reader.uint32());
@@ -38265,12 +38089,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Corpus.decode = function decode(reader, length) {
+                        Corpus.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Corpus();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -38561,12 +38387,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Document.decode = function decode(reader, length) {
+                        Document.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Document();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -38845,12 +38673,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StringList.decode = function decode(reader, length) {
+                        StringList.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.StringList();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.values && message.values.length))
@@ -39109,12 +38939,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CustomMetadata.decode = function decode(reader, length) {
+                        CustomMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CustomMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.stringValue = reader.string();
@@ -39384,12 +39216,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MetadataFilter.decode = function decode(reader, length) {
+                        MetadataFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.MetadataFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.key = reader.string();
@@ -39655,12 +39489,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Condition.decode = function decode(reader, length) {
+                        Condition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Condition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.stringValue = reader.string();
@@ -40032,12 +39868,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Chunk.decode = function decode(reader, length) {
+                        Chunk.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Chunk();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -40392,12 +40230,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ChunkData.decode = function decode(reader, length) {
+                        ChunkData.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ChunkData();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.stringValue = reader.string();
@@ -40649,45 +40489,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Model _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1alpha.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _maxTemperature.
-                         * @member {"maxTemperature"|undefined} _maxTemperature
-                         * @memberof google.ai.generativelanguage.v1alpha.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_maxTemperature", {
                             get: $util.oneOfGetter($oneOfFields = ["maxTemperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1alpha.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1alpha.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -40769,12 +40589,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Model.decode = function decode(reader, length) {
+                        Model.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Model();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -41403,12 +41225,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetModelRequest.decode = function decode(reader, length) {
+                        GetModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GetModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -41617,12 +41441,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListModelsRequest.decode = function decode(reader, length) {
+                        ListModelsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListModelsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.pageSize = reader.int32();
@@ -41846,12 +41672,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListModelsResponse.decode = function decode(reader, length) {
+                        ListModelsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListModelsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.models && message.models.length))
@@ -42081,12 +41909,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetTunedModelRequest.decode = function decode(reader, length) {
+                        GetTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GetTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -42306,12 +42136,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTunedModelsRequest.decode = function decode(reader, length) {
+                        ListTunedModelsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListTunedModelsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -42547,12 +42379,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTunedModelsResponse.decode = function decode(reader, length) {
+                        ListTunedModelsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListTunedModelsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.tunedModels && message.tunedModels.length))
@@ -42741,12 +42575,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * CreateTunedModelRequest _tunedModelId.
-                         * @member {"tunedModelId"|undefined} _tunedModelId
-                         * @memberof google.ai.generativelanguage.v1alpha.CreateTunedModelRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CreateTunedModelRequest.prototype, "_tunedModelId", {
                             get: $util.oneOfGetter($oneOfFields = ["tunedModelId"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -42807,12 +42636,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateTunedModelRequest.decode = function decode(reader, length) {
+                        CreateTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CreateTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tunedModelId = reader.string();
@@ -43078,12 +42909,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateTunedModelMetadata.decode = function decode(reader, length) {
+                        CreateTunedModelMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CreateTunedModelMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 5: {
                                         message.tunedModel = reader.string();
@@ -43361,12 +43194,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateTunedModelRequest.decode = function decode(reader, length) {
+                        UpdateTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.UpdateTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tunedModel = $root.google.ai.generativelanguage.v1alpha.TunedModel.decode(reader, reader.uint32());
@@ -43587,12 +43422,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteTunedModelRequest.decode = function decode(reader, length) {
+                        DeleteTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.DeleteTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -43860,34 +43697,19 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * TunedModel _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1alpha.TunedModel
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TunedModel.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * TunedModel _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1alpha.TunedModel
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TunedModel.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * TunedModel _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1alpha.TunedModel
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TunedModel.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -43974,12 +43796,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TunedModel.decode = function decode(reader, length) {
+                        TunedModel.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TunedModel();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.tunedModelSource = $root.google.ai.generativelanguage.v1alpha.TunedModelSource.decode(reader, reader.uint32());
@@ -44454,12 +44278,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TunedModelSource.decode = function decode(reader, length) {
+                        TunedModelSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TunedModelSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tunedModel = reader.string();
@@ -44716,12 +44542,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningTask.decode = function decode(reader, length) {
+                        TuningTask.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TuningTask();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -44996,23 +44824,13 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Hyperparameters _epochCount.
-                         * @member {"epochCount"|undefined} _epochCount
-                         * @memberof google.ai.generativelanguage.v1alpha.Hyperparameters
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Hyperparameters.prototype, "_epochCount", {
                             get: $util.oneOfGetter($oneOfFields = ["epochCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Hyperparameters _batchSize.
-                         * @member {"batchSize"|undefined} _batchSize
-                         * @memberof google.ai.generativelanguage.v1alpha.Hyperparameters
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Hyperparameters.prototype, "_batchSize", {
                             get: $util.oneOfGetter($oneOfFields = ["batchSize"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -45077,12 +44895,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Hyperparameters.decode = function decode(reader, length) {
+                        Hyperparameters.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Hyperparameters();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 16: {
                                         message.learningRate = reader.float();
@@ -45348,12 +45168,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Dataset.decode = function decode(reader, length) {
+                        Dataset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Dataset();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.examples = $root.google.ai.generativelanguage.v1alpha.TuningExamples.decode(reader, reader.uint32());
@@ -45576,12 +45398,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningExamples.decode = function decode(reader, length) {
+                        TuningExamples.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TuningExamples();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.examples && message.examples.length))
@@ -45844,12 +45668,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningPart.decode = function decode(reader, length) {
+                        TuningPart.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TuningPart();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.text = reader.string();
@@ -46064,12 +45890,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningContent.decode = function decode(reader, length) {
+                        TuningContent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TuningContent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.parts && message.parts.length))
@@ -46259,12 +46087,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * TuningMultiturnExample _systemInstruction.
-                         * @member {"systemInstruction"|undefined} _systemInstruction
-                         * @memberof google.ai.generativelanguage.v1alpha.TuningMultiturnExample
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TuningMultiturnExample.prototype, "_systemInstruction", {
                             get: $util.oneOfGetter($oneOfFields = ["systemInstruction"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -46326,12 +46149,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningMultiturnExample.decode = function decode(reader, length) {
+                        TuningMultiturnExample.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TuningMultiturnExample();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 8: {
                                         message.systemInstruction = $root.google.ai.generativelanguage.v1alpha.TuningContent.decode(reader, reader.uint32());
@@ -46596,12 +46421,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningExample.decode = function decode(reader, length) {
+                        TuningExample.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TuningExample();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.textInput = reader.string();
@@ -46849,12 +46676,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningSnapshot.decode = function decode(reader, length) {
+                        TuningSnapshot.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TuningSnapshot();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.step = reader.int32();
@@ -47071,34 +46900,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Permission _granteeType.
-                         * @member {"granteeType"|undefined} _granteeType
-                         * @memberof google.ai.generativelanguage.v1alpha.Permission
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Permission.prototype, "_granteeType", {
                             get: $util.oneOfGetter($oneOfFields = ["granteeType"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Permission _emailAddress.
-                         * @member {"emailAddress"|undefined} _emailAddress
-                         * @memberof google.ai.generativelanguage.v1alpha.Permission
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Permission.prototype, "_emailAddress", {
                             get: $util.oneOfGetter($oneOfFields = ["emailAddress"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Permission _role.
-                         * @member {"role"|undefined} _role
-                         * @memberof google.ai.generativelanguage.v1alpha.Permission
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Permission.prototype, "_role", {
                             get: $util.oneOfGetter($oneOfFields = ["role"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -47163,12 +46977,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Permission.decode = function decode(reader, length) {
+                        Permission.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Permission();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -47753,12 +47569,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreatePermissionRequest.decode = function decode(reader, length) {
+                        CreatePermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CreatePermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -47974,12 +47792,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetPermissionRequest.decode = function decode(reader, length) {
+                        GetPermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GetPermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -48199,12 +48019,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPermissionsRequest.decode = function decode(reader, length) {
+                        ListPermissionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListPermissionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -48440,12 +48262,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPermissionsResponse.decode = function decode(reader, length) {
+                        ListPermissionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListPermissionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.permissions && message.permissions.length))
@@ -48686,12 +48510,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdatePermissionRequest.decode = function decode(reader, length) {
+                        UpdatePermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.UpdatePermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.permission = $root.google.ai.generativelanguage.v1alpha.Permission.decode(reader, reader.uint32());
@@ -48912,12 +48738,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeletePermissionRequest.decode = function decode(reader, length) {
+                        DeletePermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.DeletePermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -49126,12 +48954,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferOwnershipRequest.decode = function decode(reader, length) {
+                        TransferOwnershipRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TransferOwnershipRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -49331,12 +49161,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferOwnershipResponse.decode = function decode(reader, length) {
+                        TransferOwnershipResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TransferOwnershipResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -49609,12 +49441,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PredictRequest.decode = function decode(reader, length) {
+                        PredictRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.PredictRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -49864,12 +49698,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PredictResponse.decode = function decode(reader, length) {
+                        PredictResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.PredictResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.predictions && message.predictions.length))
@@ -50781,12 +50617,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateCorpusRequest.decode = function decode(reader, length) {
+                        CreateCorpusRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CreateCorpusRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.corpus = $root.google.ai.generativelanguage.v1alpha.Corpus.decode(reader, reader.uint32());
@@ -50989,12 +50827,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetCorpusRequest.decode = function decode(reader, length) {
+                        GetCorpusRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GetCorpusRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -51203,12 +51043,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCorpusRequest.decode = function decode(reader, length) {
+                        UpdateCorpusRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.UpdateCorpusRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.corpus = $root.google.ai.generativelanguage.v1alpha.Corpus.decode(reader, reader.uint32());
@@ -51440,12 +51282,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteCorpusRequest.decode = function decode(reader, length) {
+                        DeleteCorpusRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.DeleteCorpusRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -51667,12 +51511,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCorporaRequest.decode = function decode(reader, length) {
+                        ListCorporaRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListCorporaRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -51896,12 +51742,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCorporaResponse.decode = function decode(reader, length) {
+                        ListCorporaResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListCorporaResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.corpora && message.corpora.length))
@@ -52166,12 +52014,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryCorpusRequest.decode = function decode(reader, length) {
+                        QueryCorpusRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.QueryCorpusRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -52428,12 +52278,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryCorpusResponse.decode = function decode(reader, length) {
+                        QueryCorpusResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.QueryCorpusResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.relevantChunks && message.relevantChunks.length))
@@ -52661,12 +52513,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RelevantChunk.decode = function decode(reader, length) {
+                        RelevantChunk.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.RelevantChunk();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.chunkRelevanceScore = reader.float();
@@ -52893,12 +52747,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateDocumentRequest.decode = function decode(reader, length) {
+                        CreateDocumentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CreateDocumentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -53114,12 +52970,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDocumentRequest.decode = function decode(reader, length) {
+                        GetDocumentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GetDocumentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -53328,12 +53186,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateDocumentRequest.decode = function decode(reader, length) {
+                        UpdateDocumentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.UpdateDocumentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.document = $root.google.ai.generativelanguage.v1alpha.Document.decode(reader, reader.uint32());
@@ -53565,12 +53425,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteDocumentRequest.decode = function decode(reader, length) {
+                        DeleteDocumentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.DeleteDocumentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -53803,12 +53665,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDocumentsRequest.decode = function decode(reader, length) {
+                        ListDocumentsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListDocumentsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -54044,12 +53908,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDocumentsResponse.decode = function decode(reader, length) {
+                        ListDocumentsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListDocumentsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.documents && message.documents.length))
@@ -54314,12 +54180,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryDocumentRequest.decode = function decode(reader, length) {
+                        QueryDocumentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.QueryDocumentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -54576,12 +54444,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryDocumentResponse.decode = function decode(reader, length) {
+                        QueryDocumentResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.QueryDocumentResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.relevantChunks && message.relevantChunks.length))
@@ -54809,12 +54679,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateChunkRequest.decode = function decode(reader, length) {
+                        CreateChunkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CreateChunkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -55043,12 +54915,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchCreateChunksRequest.decode = function decode(reader, length) {
+                        BatchCreateChunksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BatchCreateChunksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -55280,12 +55154,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchCreateChunksResponse.decode = function decode(reader, length) {
+                        BatchCreateChunksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BatchCreateChunksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.chunks && message.chunks.length))
@@ -55502,12 +55378,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetChunkRequest.decode = function decode(reader, length) {
+                        GetChunkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GetChunkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -55716,12 +55594,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateChunkRequest.decode = function decode(reader, length) {
+                        UpdateChunkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.UpdateChunkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.chunk = $root.google.ai.generativelanguage.v1alpha.Chunk.decode(reader, reader.uint32());
@@ -55955,12 +55835,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchUpdateChunksRequest.decode = function decode(reader, length) {
+                        BatchUpdateChunksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BatchUpdateChunksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -56192,12 +56074,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchUpdateChunksResponse.decode = function decode(reader, length) {
+                        BatchUpdateChunksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BatchUpdateChunksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.chunks && message.chunks.length))
@@ -56414,12 +56298,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteChunkRequest.decode = function decode(reader, length) {
+                        DeleteChunkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.DeleteChunkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -56630,12 +56516,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchDeleteChunksRequest.decode = function decode(reader, length) {
+                        BatchDeleteChunksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BatchDeleteChunksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -56887,12 +56775,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListChunksRequest.decode = function decode(reader, length) {
+                        ListChunksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListChunksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -57128,12 +57018,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListChunksResponse.decode = function decode(reader, length) {
+                        ListChunksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.ListChunksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.chunks && message.chunks.length))
@@ -57554,56 +57446,31 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateTextRequest _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _candidateCount.
-                         * @member {"candidateCount"|undefined} _candidateCount
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_candidateCount", {
                             get: $util.oneOfGetter($oneOfFields = ["candidateCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _maxOutputTokens.
-                         * @member {"maxOutputTokens"|undefined} _maxOutputTokens
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_maxOutputTokens", {
                             get: $util.oneOfGetter($oneOfFields = ["maxOutputTokens"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1alpha.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -57680,12 +57547,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateTextRequest.decode = function decode(reader, length) {
+                        GenerateTextRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerateTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -58069,12 +57938,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateTextResponse.decode = function decode(reader, length) {
+                        GenerateTextResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.GenerateTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.candidates && message.candidates.length))
@@ -58354,12 +58225,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextPrompt.decode = function decode(reader, length) {
+                        TextPrompt.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TextPrompt();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
@@ -58526,12 +58399,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * TextCompletion _citationMetadata.
-                         * @member {"citationMetadata"|undefined} _citationMetadata
-                         * @memberof google.ai.generativelanguage.v1alpha.TextCompletion
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TextCompletion.prototype, "_citationMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["citationMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -58595,12 +58463,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextCompletion.decode = function decode(reader, length) {
+                        TextCompletion.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.TextCompletion();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.output = reader.string();
@@ -58864,12 +58734,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedTextRequest.decode = function decode(reader, length) {
+                        EmbedTextRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.EmbedTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -59030,12 +58902,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * EmbedTextResponse _embedding.
-                         * @member {"embedding"|undefined} _embedding
-                         * @memberof google.ai.generativelanguage.v1alpha.EmbedTextResponse
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedTextResponse.prototype, "_embedding", {
                             get: $util.oneOfGetter($oneOfFields = ["embedding"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -59094,12 +58961,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedTextResponse.decode = function decode(reader, length) {
+                        EmbedTextResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.EmbedTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.embedding = $root.google.ai.generativelanguage.v1alpha.Embedding.decode(reader, reader.uint32());
@@ -59333,12 +59202,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedTextRequest.decode = function decode(reader, length) {
+                        BatchEmbedTextRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BatchEmbedTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -59597,12 +59468,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedTextResponse.decode = function decode(reader, length) {
+                        BatchEmbedTextResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.BatchEmbedTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.embeddings && message.embeddings.length))
@@ -59824,12 +59697,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Embedding.decode = function decode(reader, length) {
+                        Embedding.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.Embedding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.value && message.value.length))
@@ -60057,12 +59932,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTextTokensRequest.decode = function decode(reader, length) {
+                        CountTextTokensRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CountTextTokensRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -60278,12 +60155,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTextTokensResponse.decode = function decode(reader, length) {
+                        CountTextTokensResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1alpha.CountTextTokensResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tokenCount = reader.int32();
@@ -60704,12 +60583,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCachedContentsRequest.decode = function decode(reader, length) {
+                        ListCachedContentsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListCachedContentsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -60933,12 +60814,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCachedContentsResponse.decode = function decode(reader, length) {
+                        ListCachedContentsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListCachedContentsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.cachedContents && message.cachedContents.length))
@@ -61168,12 +61051,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateCachedContentRequest.decode = function decode(reader, length) {
+                        CreateCachedContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CreateCachedContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cachedContent = $root.google.ai.generativelanguage.v1beta.CachedContent.decode(reader, reader.uint32());
@@ -61376,12 +61261,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetCachedContentRequest.decode = function decode(reader, length) {
+                        GetCachedContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GetCachedContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -61590,12 +61477,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCachedContentRequest.decode = function decode(reader, length) {
+                        UpdateCachedContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cachedContent = $root.google.ai.generativelanguage.v1beta.CachedContent.decode(reader, reader.uint32());
@@ -61816,12 +61705,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteCachedContentRequest.decode = function decode(reader, length) {
+                        DeleteCachedContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -62081,56 +61972,31 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CachedContent _name.
-                         * @member {"name"|undefined} _name
-                         * @memberof google.ai.generativelanguage.v1beta.CachedContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CachedContent.prototype, "_name", {
                             get: $util.oneOfGetter($oneOfFields = ["name"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CachedContent _displayName.
-                         * @member {"displayName"|undefined} _displayName
-                         * @memberof google.ai.generativelanguage.v1beta.CachedContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CachedContent.prototype, "_displayName", {
                             get: $util.oneOfGetter($oneOfFields = ["displayName"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CachedContent _model.
-                         * @member {"model"|undefined} _model
-                         * @memberof google.ai.generativelanguage.v1beta.CachedContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CachedContent.prototype, "_model", {
                             get: $util.oneOfGetter($oneOfFields = ["model"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CachedContent _systemInstruction.
-                         * @member {"systemInstruction"|undefined} _systemInstruction
-                         * @memberof google.ai.generativelanguage.v1beta.CachedContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CachedContent.prototype, "_systemInstruction", {
                             get: $util.oneOfGetter($oneOfFields = ["systemInstruction"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CachedContent _toolConfig.
-                         * @member {"toolConfig"|undefined} _toolConfig
-                         * @memberof google.ai.generativelanguage.v1beta.CachedContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CachedContent.prototype, "_toolConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["toolConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -62213,12 +62079,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CachedContent.decode = function decode(reader, length) {
+                        CachedContent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CachedContent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 9: {
                                         message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -62656,12 +62524,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UsageMetadata.decode = function decode(reader, length) {
+                            UsageMetadata.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CachedContent.UsageMetadata();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.totalTokenCount = reader.int32();
@@ -62923,12 +62793,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Content.decode = function decode(reader, length) {
+                        Content.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Content();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.parts && message.parts.length))
@@ -63249,12 +63121,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Part.decode = function decode(reader, length) {
+                        Part.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Part();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.text = reader.string();
@@ -63624,12 +63498,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Blob.decode = function decode(reader, length) {
+                        Blob.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Blob();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.mimeType = reader.string();
@@ -63860,12 +63736,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FileData.decode = function decode(reader, length) {
+                        FileData.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FileData();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.mimeType = reader.string();
@@ -64087,12 +63965,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExecutableCode.decode = function decode(reader, length) {
+                        ExecutableCode.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ExecutableCode();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.language = reader.int32();
@@ -64347,12 +64227,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CodeExecutionResult.decode = function decode(reader, length) {
+                        CodeExecutionResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CodeExecutionResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.outcome = reader.int32();
@@ -64645,12 +64527,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Tool.decode = function decode(reader, length) {
+                        Tool.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Tool();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.functionDeclarations && message.functionDeclarations.length))
@@ -64906,12 +64790,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GoogleSearch.decode = function decode(reader, length) {
+                            GoogleSearch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -65095,12 +64981,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GoogleSearchRetrieval.decode = function decode(reader, length) {
+                        GoogleSearchRetrieval.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GoogleSearchRetrieval();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dynamicRetrievalConfig = $root.google.ai.generativelanguage.v1beta.DynamicRetrievalConfig.decode(reader, reader.uint32());
@@ -65262,12 +65150,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * DynamicRetrievalConfig _dynamicThreshold.
-                         * @member {"dynamicThreshold"|undefined} _dynamicThreshold
-                         * @memberof google.ai.generativelanguage.v1beta.DynamicRetrievalConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(DynamicRetrievalConfig.prototype, "_dynamicThreshold", {
                             get: $util.oneOfGetter($oneOfFields = ["dynamicThreshold"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -65328,12 +65211,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DynamicRetrievalConfig.decode = function decode(reader, length) {
+                        DynamicRetrievalConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DynamicRetrievalConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.mode = reader.int32();
@@ -65570,12 +65455,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CodeExecution.decode = function decode(reader, length) {
+                        CodeExecution.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CodeExecution();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -65756,12 +65643,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ToolConfig.decode = function decode(reader, length) {
+                        ToolConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ToolConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.functionCallingConfig = $root.google.ai.generativelanguage.v1beta.FunctionCallingConfig.decode(reader, reader.uint32());
@@ -65977,12 +65866,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FunctionCallingConfig.decode = function decode(reader, length) {
+                        FunctionCallingConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FunctionCallingConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.mode = reader.int32();
@@ -66238,23 +66129,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * FunctionDeclaration _parameters.
-                         * @member {"parameters"|undefined} _parameters
-                         * @memberof google.ai.generativelanguage.v1beta.FunctionDeclaration
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FunctionDeclaration.prototype, "_parameters", {
                             get: $util.oneOfGetter($oneOfFields = ["parameters"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * FunctionDeclaration _response.
-                         * @member {"response"|undefined} _response
-                         * @memberof google.ai.generativelanguage.v1beta.FunctionDeclaration
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FunctionDeclaration.prototype, "_response", {
                             get: $util.oneOfGetter($oneOfFields = ["response"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -66319,12 +66200,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FunctionDeclaration.decode = function decode(reader, length) {
+                        FunctionDeclaration.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FunctionDeclaration();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -66548,12 +66431,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * FunctionCall _args.
-                         * @member {"args"|undefined} _args
-                         * @memberof google.ai.generativelanguage.v1beta.FunctionCall
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FunctionCall.prototype, "_args", {
                             get: $util.oneOfGetter($oneOfFields = ["args"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -66616,12 +66494,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FunctionCall.decode = function decode(reader, length) {
+                        FunctionCall.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FunctionCall();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.id = reader.string();
@@ -66877,12 +66757,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FunctionResponse.decode = function decode(reader, length) {
+                        FunctionResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FunctionResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.id = reader.string();
@@ -67200,34 +67082,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Schema _items.
-                         * @member {"items"|undefined} _items
-                         * @memberof google.ai.generativelanguage.v1beta.Schema
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Schema.prototype, "_items", {
                             get: $util.oneOfGetter($oneOfFields = ["items"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Schema _minimum.
-                         * @member {"minimum"|undefined} _minimum
-                         * @memberof google.ai.generativelanguage.v1beta.Schema
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Schema.prototype, "_minimum", {
                             get: $util.oneOfGetter($oneOfFields = ["minimum"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Schema _maximum.
-                         * @member {"maximum"|undefined} _maximum
-                         * @memberof google.ai.generativelanguage.v1beta.Schema
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Schema.prototype, "_maximum", {
                             get: $util.oneOfGetter($oneOfFields = ["maximum"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -67323,12 +67190,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Schema.decode = function decode(reader, length) {
+                        Schema.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Schema(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.type = reader.int32();
@@ -67921,12 +67790,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingPassage.decode = function decode(reader, length) {
+                        GroundingPassage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingPassage();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.id = reader.string();
@@ -68144,12 +68015,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingPassages.decode = function decode(reader, length) {
+                        GroundingPassages.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingPassages();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.passages && message.passages.length))
@@ -68377,12 +68250,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ModalityTokenCount.decode = function decode(reader, length) {
+                        ModalityTokenCount.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ModalityTokenCount();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.modality = reader.int32();
@@ -68634,12 +68509,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CitationMetadata.decode = function decode(reader, length) {
+                        CitationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CitationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.citationSources && message.citationSources.length))
@@ -68833,45 +68710,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * CitationSource _startIndex.
-                         * @member {"startIndex"|undefined} _startIndex
-                         * @memberof google.ai.generativelanguage.v1beta.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_startIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["startIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _endIndex.
-                         * @member {"endIndex"|undefined} _endIndex
-                         * @memberof google.ai.generativelanguage.v1beta.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_endIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["endIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _uri.
-                         * @member {"uri"|undefined} _uri
-                         * @memberof google.ai.generativelanguage.v1beta.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_uri", {
                             get: $util.oneOfGetter($oneOfFields = ["uri"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _license.
-                         * @member {"license"|undefined} _license
-                         * @memberof google.ai.generativelanguage.v1beta.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_license", {
                             get: $util.oneOfGetter($oneOfFields = ["license"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -68936,12 +68793,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CitationSource.decode = function decode(reader, length) {
+                        CitationSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CitationSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startIndex = reader.int32();
@@ -69287,45 +69146,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateMessageRequest _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _candidateCount.
-                         * @member {"candidateCount"|undefined} _candidateCount
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_candidateCount", {
                             get: $util.oneOfGetter($oneOfFields = ["candidateCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -69394,12 +69233,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateMessageRequest.decode = function decode(reader, length) {
+                        GenerateMessageRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateMessageRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -69708,12 +69549,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateMessageResponse.decode = function decode(reader, length) {
+                        GenerateMessageResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateMessageResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.candidates && message.candidates.length))
@@ -69961,12 +69804,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Message _citationMetadata.
-                         * @member {"citationMetadata"|undefined} _citationMetadata
-                         * @memberof google.ai.generativelanguage.v1beta.Message
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Message.prototype, "_citationMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["citationMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -70029,12 +69867,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Message.decode = function decode(reader, length) {
+                        Message.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Message();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.author = reader.string();
@@ -70294,12 +70134,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MessagePrompt.decode = function decode(reader, length) {
+                        MessagePrompt.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.MessagePrompt();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.context = reader.string();
@@ -70572,12 +70414,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Example.decode = function decode(reader, length) {
+                        Example.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Example();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.input = $root.google.ai.generativelanguage.v1beta.Message.decode(reader, reader.uint32());
@@ -70809,12 +70653,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountMessageTokensRequest.decode = function decode(reader, length) {
+                        CountMessageTokensRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CountMessageTokensRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -71030,12 +70876,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountMessageTokensResponse.decode = function decode(reader, length) {
+                        CountMessageTokensResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CountMessageTokensResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tokenCount = reader.int32();
@@ -71226,12 +71074,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * ContentFilter _message.
-                         * @member {"message"|undefined} _message
-                         * @memberof google.ai.generativelanguage.v1beta.ContentFilter
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ContentFilter.prototype, "_message", {
                             get: $util.oneOfGetter($oneOfFields = ["message"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -71292,12 +71135,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentFilter.decode = function decode(reader, length) {
+                        ContentFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ContentFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.reason = reader.int32();
@@ -71563,12 +71408,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetyFeedback.decode = function decode(reader, length) {
+                        SafetyFeedback.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.SafetyFeedback();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.rating = $root.google.ai.generativelanguage.v1beta.SafetyRating.decode(reader, reader.uint32());
@@ -71811,12 +71658,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetyRating.decode = function decode(reader, length) {
+                        SafetyRating.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.SafetyRating();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.category = reader.int32();
@@ -72173,12 +72022,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetySetting.decode = function decode(reader, length) {
+                        SafetySetting.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.SafetySetting();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.category = reader.int32();
@@ -72676,12 +72527,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        File.decode = function decode(reader, length) {
+                        File.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.File();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 12: {
                                         message.videoMetadata = $root.google.ai.generativelanguage.v1beta.VideoMetadata.decode(reader, reader.uint32());
@@ -73177,12 +73030,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VideoMetadata.decode = function decode(reader, length) {
+                        VideoMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.VideoMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.videoDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -73585,12 +73440,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateFileRequest.decode = function decode(reader, length) {
+                        CreateFileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CreateFileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.file = $root.google.ai.generativelanguage.v1beta.File.decode(reader, reader.uint32());
@@ -73793,12 +73650,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateFileResponse.decode = function decode(reader, length) {
+                        CreateFileResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CreateFileResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.file = $root.google.ai.generativelanguage.v1beta.File.decode(reader, reader.uint32());
@@ -74012,12 +73871,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFilesRequest.decode = function decode(reader, length) {
+                        ListFilesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListFilesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -74241,12 +74102,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFilesResponse.decode = function decode(reader, length) {
+                        ListFilesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListFilesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.files && message.files.length))
@@ -74476,12 +74339,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetFileRequest.decode = function decode(reader, length) {
+                        GetFileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GetFileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -74679,12 +74544,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteFileRequest.decode = function decode(reader, length) {
+                        DeleteFileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DeleteFileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -74882,12 +74749,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DownloadFileRequest.decode = function decode(reader, length) {
+                        DownloadFileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DownloadFileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -75074,12 +74943,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DownloadFileResponse.decode = function decode(reader, length) {
+                        DownloadFileResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DownloadFileResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -75570,34 +75441,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateContentRequest _systemInstruction.
-                         * @member {"systemInstruction"|undefined} _systemInstruction
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateContentRequest.prototype, "_systemInstruction", {
                             get: $util.oneOfGetter($oneOfFields = ["systemInstruction"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateContentRequest _generationConfig.
-                         * @member {"generationConfig"|undefined} _generationConfig
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateContentRequest.prototype, "_generationConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["generationConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateContentRequest _cachedContent.
-                         * @member {"cachedContent"|undefined} _cachedContent
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateContentRequest.prototype, "_cachedContent", {
                             get: $util.oneOfGetter($oneOfFields = ["cachedContent"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -75673,12 +75529,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateContentRequest.decode = function decode(reader, length) {
+                        GenerateContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -76000,12 +75858,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * PrebuiltVoiceConfig _voiceName.
-                         * @member {"voiceName"|undefined} _voiceName
-                         * @memberof google.ai.generativelanguage.v1beta.PrebuiltVoiceConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PrebuiltVoiceConfig.prototype, "_voiceName", {
                             get: $util.oneOfGetter($oneOfFields = ["voiceName"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -76064,12 +75917,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PrebuiltVoiceConfig.decode = function decode(reader, length) {
+                        PrebuiltVoiceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.PrebuiltVoiceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.voiceName = reader.string();
@@ -76285,12 +76140,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VoiceConfig.decode = function decode(reader, length) {
+                        VoiceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.VoiceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.prebuiltVoiceConfig = $root.google.ai.generativelanguage.v1beta.PrebuiltVoiceConfig.decode(reader, reader.uint32());
@@ -76509,12 +76366,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SpeechConfig.decode = function decode(reader, length) {
+                        SpeechConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.SpeechConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.voiceConfig = $root.google.ai.generativelanguage.v1beta.VoiceConfig.decode(reader, reader.uint32());
@@ -76689,23 +76548,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * ThinkingConfig _includeThoughts.
-                         * @member {"includeThoughts"|undefined} _includeThoughts
-                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ThinkingConfig.prototype, "_includeThoughts", {
                             get: $util.oneOfGetter($oneOfFields = ["includeThoughts"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * ThinkingConfig _thinkingBudget.
-                         * @member {"thinkingBudget"|undefined} _thinkingBudget
-                         * @memberof google.ai.generativelanguage.v1beta.ThinkingConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ThinkingConfig.prototype, "_thinkingBudget", {
                             get: $util.oneOfGetter($oneOfFields = ["thinkingBudget"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -76766,12 +76615,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ThinkingConfig.decode = function decode(reader, length) {
+                        ThinkingConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ThinkingConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeThoughts = reader.bool();
@@ -77094,155 +76945,85 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerationConfig _candidateCount.
-                         * @member {"candidateCount"|undefined} _candidateCount
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_candidateCount", {
                             get: $util.oneOfGetter($oneOfFields = ["candidateCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _maxOutputTokens.
-                         * @member {"maxOutputTokens"|undefined} _maxOutputTokens
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_maxOutputTokens", {
                             get: $util.oneOfGetter($oneOfFields = ["maxOutputTokens"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _seed.
-                         * @member {"seed"|undefined} _seed
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_seed", {
                             get: $util.oneOfGetter($oneOfFields = ["seed"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _presencePenalty.
-                         * @member {"presencePenalty"|undefined} _presencePenalty
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_presencePenalty", {
                             get: $util.oneOfGetter($oneOfFields = ["presencePenalty"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _frequencyPenalty.
-                         * @member {"frequencyPenalty"|undefined} _frequencyPenalty
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_frequencyPenalty", {
                             get: $util.oneOfGetter($oneOfFields = ["frequencyPenalty"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _responseLogprobs.
-                         * @member {"responseLogprobs"|undefined} _responseLogprobs
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_responseLogprobs", {
                             get: $util.oneOfGetter($oneOfFields = ["responseLogprobs"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _logprobs.
-                         * @member {"logprobs"|undefined} _logprobs
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_logprobs", {
                             get: $util.oneOfGetter($oneOfFields = ["logprobs"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _enableEnhancedCivicAnswers.
-                         * @member {"enableEnhancedCivicAnswers"|undefined} _enableEnhancedCivicAnswers
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_enableEnhancedCivicAnswers", {
                             get: $util.oneOfGetter($oneOfFields = ["enableEnhancedCivicAnswers"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _speechConfig.
-                         * @member {"speechConfig"|undefined} _speechConfig
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_speechConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["speechConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _thinkingConfig.
-                         * @member {"thinkingConfig"|undefined} _thinkingConfig
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_thinkingConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["thinkingConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerationConfig _mediaResolution.
-                         * @member {"mediaResolution"|undefined} _mediaResolution
-                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_mediaResolution", {
                             get: $util.oneOfGetter($oneOfFields = ["mediaResolution"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -77340,12 +77121,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerationConfig.decode = function decode(reader, length) {
+                        GenerationConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerationConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.candidateCount = reader.int32();
@@ -77938,23 +77721,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * SemanticRetrieverConfig _maxChunksCount.
-                         * @member {"maxChunksCount"|undefined} _maxChunksCount
-                         * @memberof google.ai.generativelanguage.v1beta.SemanticRetrieverConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(SemanticRetrieverConfig.prototype, "_maxChunksCount", {
                             get: $util.oneOfGetter($oneOfFields = ["maxChunksCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * SemanticRetrieverConfig _minimumRelevanceScore.
-                         * @member {"minimumRelevanceScore"|undefined} _minimumRelevanceScore
-                         * @memberof google.ai.generativelanguage.v1beta.SemanticRetrieverConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(SemanticRetrieverConfig.prototype, "_minimumRelevanceScore", {
                             get: $util.oneOfGetter($oneOfFields = ["minimumRelevanceScore"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -78022,12 +77795,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SemanticRetrieverConfig.decode = function decode(reader, length) {
+                        SemanticRetrieverConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.SemanticRetrieverConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.source = reader.string();
@@ -78343,12 +78118,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateContentResponse.decode = function decode(reader, length) {
+                        GenerateContentResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateContentResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.candidates && message.candidates.length))
@@ -78623,12 +78400,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PromptFeedback.decode = function decode(reader, length) {
+                            PromptFeedback.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateContentResponse.PromptFeedback();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.blockReason = reader.int32();
@@ -79026,12 +78805,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UsageMetadata.decode = function decode(reader, length) {
+                            UsageMetadata.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.promptTokenCount = reader.int32();
@@ -79452,12 +79233,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Candidate _index.
-                         * @member {"index"|undefined} _index
-                         * @memberof google.ai.generativelanguage.v1beta.Candidate
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Candidate.prototype, "_index", {
                             get: $util.oneOfGetter($oneOfFields = ["index"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -79536,12 +79312,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Candidate.decode = function decode(reader, length) {
+                        Candidate.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Candidate();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.index = reader.int32();
@@ -80031,12 +79809,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LogprobsResult.decode = function decode(reader, length) {
+                        LogprobsResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.LogprobsResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.topCandidates && message.topCandidates.length))
@@ -80250,34 +80030,19 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * Candidate _token.
-                             * @member {"token"|undefined} _token
-                             * @memberof google.ai.generativelanguage.v1beta.LogprobsResult.Candidate
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Candidate.prototype, "_token", {
                                 get: $util.oneOfGetter($oneOfFields = ["token"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Candidate _tokenId.
-                             * @member {"tokenId"|undefined} _tokenId
-                             * @memberof google.ai.generativelanguage.v1beta.LogprobsResult.Candidate
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Candidate.prototype, "_tokenId", {
                                 get: $util.oneOfGetter($oneOfFields = ["tokenId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Candidate _logProbability.
-                             * @member {"logProbability"|undefined} _logProbability
-                             * @memberof google.ai.generativelanguage.v1beta.LogprobsResult.Candidate
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Candidate.prototype, "_logProbability", {
                                 get: $util.oneOfGetter($oneOfFields = ["logProbability"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -80340,12 +80105,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Candidate.decode = function decode(reader, length) {
+                            Candidate.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.LogprobsResult.Candidate();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.token = reader.string();
@@ -80581,12 +80348,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            TopCandidates.decode = function decode(reader, length) {
+                            TopCandidates.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.LogprobsResult.TopCandidates();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.candidates && message.candidates.length))
@@ -80831,12 +80600,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AttributionSourceId.decode = function decode(reader, length) {
+                        AttributionSourceId.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.AttributionSourceId();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.groundingPassage = $root.google.ai.generativelanguage.v1beta.AttributionSourceId.GroundingPassageId.decode(reader, reader.uint32());
@@ -81076,12 +80847,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GroundingPassageId.decode = function decode(reader, length) {
+                            GroundingPassageId.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.AttributionSourceId.GroundingPassageId();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.passageId = reader.string();
@@ -81303,12 +81076,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SemanticRetrieverChunk.decode = function decode(reader, length) {
+                            SemanticRetrieverChunk.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.AttributionSourceId.SemanticRetrieverChunk();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.source = reader.string();
@@ -81533,12 +81308,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingAttribution.decode = function decode(reader, length) {
+                        GroundingAttribution.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingAttribution();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.sourceId = $root.google.ai.generativelanguage.v1beta.AttributionSourceId.decode(reader, reader.uint32());
@@ -81759,12 +81536,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RetrievalMetadata.decode = function decode(reader, length) {
+                        RetrievalMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.RetrievalMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.googleSearchDynamicRetrievalScore = reader.float();
@@ -81951,23 +81730,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GroundingMetadata _searchEntryPoint.
-                         * @member {"searchEntryPoint"|undefined} _searchEntryPoint
-                         * @memberof google.ai.generativelanguage.v1beta.GroundingMetadata
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingMetadata.prototype, "_searchEntryPoint", {
                             get: $util.oneOfGetter($oneOfFields = ["searchEntryPoint"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GroundingMetadata _retrievalMetadata.
-                         * @member {"retrievalMetadata"|undefined} _retrievalMetadata
-                         * @memberof google.ai.generativelanguage.v1beta.GroundingMetadata
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingMetadata.prototype, "_retrievalMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["retrievalMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -82037,12 +81806,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingMetadata.decode = function decode(reader, length) {
+                        GroundingMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.searchEntryPoint = $root.google.ai.generativelanguage.v1beta.SearchEntryPoint.decode(reader, reader.uint32());
@@ -82373,12 +82144,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchEntryPoint.decode = function decode(reader, length) {
+                        SearchEntryPoint.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.SearchEntryPoint();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.renderedContent = reader.string();
@@ -82612,12 +82385,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingChunk.decode = function decode(reader, length) {
+                        GroundingChunk.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.web = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Web.decode(reader, reader.uint32());
@@ -82781,23 +82556,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * Web _uri.
-                             * @member {"uri"|undefined} _uri
-                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Web
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Web.prototype, "_uri", {
                                 get: $util.oneOfGetter($oneOfFields = ["uri"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Web _title.
-                             * @member {"title"|undefined} _title
-                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Web
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Web.prototype, "_title", {
                                 get: $util.oneOfGetter($oneOfFields = ["title"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -82858,12 +82623,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Web.decode = function decode(reader, length) {
+                            Web.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Web();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.uri = reader.string();
@@ -83117,12 +82884,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Segment.decode = function decode(reader, length) {
+                        Segment.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Segment();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.partIndex = reader.int32();
@@ -83327,12 +83096,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GroundingSupport _segment.
-                         * @member {"segment"|undefined} _segment
-                         * @memberof google.ai.generativelanguage.v1beta.GroundingSupport
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingSupport.prototype, "_segment", {
                             get: $util.oneOfGetter($oneOfFields = ["segment"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -83403,12 +83167,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroundingSupport.decode = function decode(reader, length) {
+                        GroundingSupport.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingSupport();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.segment = $root.google.ai.generativelanguage.v1beta.Segment.decode(reader, reader.uint32());
@@ -83697,12 +83463,7 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateAnswerRequest _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateAnswerRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateAnswerRequest.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -83775,12 +83536,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateAnswerRequest.decode = function decode(reader, length) {
+                        GenerateAnswerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateAnswerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 6: {
                                         message.inlinePassages = $root.google.ai.generativelanguage.v1beta.GroundingPassages.decode(reader, reader.uint32());
@@ -84133,23 +83896,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateAnswerResponse _answerableProbability.
-                         * @member {"answerableProbability"|undefined} _answerableProbability
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateAnswerResponse
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateAnswerResponse.prototype, "_answerableProbability", {
                             get: $util.oneOfGetter($oneOfFields = ["answerableProbability"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateAnswerResponse _inputFeedback.
-                         * @member {"inputFeedback"|undefined} _inputFeedback
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateAnswerResponse
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateAnswerResponse.prototype, "_inputFeedback", {
                             get: $util.oneOfGetter($oneOfFields = ["inputFeedback"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -84212,12 +83965,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateAnswerResponse.decode = function decode(reader, length) {
+                        GenerateAnswerResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateAnswerResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.answer = $root.google.ai.generativelanguage.v1beta.Candidate.decode(reader, reader.uint32());
@@ -84416,12 +84171,7 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * InputFeedback _blockReason.
-                             * @member {"blockReason"|undefined} _blockReason
-                             * @memberof google.ai.generativelanguage.v1beta.GenerateAnswerResponse.InputFeedback
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(InputFeedback.prototype, "_blockReason", {
                                 get: $util.oneOfGetter($oneOfFields = ["blockReason"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -84483,12 +84233,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            InputFeedback.decode = function decode(reader, length) {
+                            InputFeedback.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateAnswerResponse.InputFeedback();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.blockReason = reader.int32();
@@ -84751,34 +84503,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * EmbedContentRequest _taskType.
-                         * @member {"taskType"|undefined} _taskType
-                         * @memberof google.ai.generativelanguage.v1beta.EmbedContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedContentRequest.prototype, "_taskType", {
                             get: $util.oneOfGetter($oneOfFields = ["taskType"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * EmbedContentRequest _title.
-                         * @member {"title"|undefined} _title
-                         * @memberof google.ai.generativelanguage.v1beta.EmbedContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedContentRequest.prototype, "_title", {
                             get: $util.oneOfGetter($oneOfFields = ["title"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * EmbedContentRequest _outputDimensionality.
-                         * @member {"outputDimensionality"|undefined} _outputDimensionality
-                         * @memberof google.ai.generativelanguage.v1beta.EmbedContentRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedContentRequest.prototype, "_outputDimensionality", {
                             get: $util.oneOfGetter($oneOfFields = ["outputDimensionality"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -84845,12 +84582,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedContentRequest.decode = function decode(reader, length) {
+                        EmbedContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.EmbedContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -85174,12 +84913,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentEmbedding.decode = function decode(reader, length) {
+                        ContentEmbedding.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ContentEmbedding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.values && message.values.length))
@@ -85396,12 +85137,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedContentResponse.decode = function decode(reader, length) {
+                        EmbedContentResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.EmbedContentResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.embedding = $root.google.ai.generativelanguage.v1beta.ContentEmbedding.decode(reader, reader.uint32());
@@ -85617,12 +85360,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedContentsRequest.decode = function decode(reader, length) {
+                        BatchEmbedContentsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BatchEmbedContentsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -85854,12 +85599,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedContentsResponse.decode = function decode(reader, length) {
+                        BatchEmbedContentsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BatchEmbedContentsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.embeddings && message.embeddings.length))
@@ -86100,12 +85847,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTokensRequest.decode = function decode(reader, length) {
+                        CountTokensRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CountTokensRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -86390,12 +86139,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTokensResponse.decode = function decode(reader, length) {
+                        CountTokensResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CountTokensResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.totalTokens = reader.int32();
@@ -86638,23 +86389,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * RealtimeInputConfig _activityHandling.
-                         * @member {"activityHandling"|undefined} _activityHandling
-                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(RealtimeInputConfig.prototype, "_activityHandling", {
                             get: $util.oneOfGetter($oneOfFields = ["activityHandling"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * RealtimeInputConfig _turnCoverage.
-                         * @member {"turnCoverage"|undefined} _turnCoverage
-                         * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(RealtimeInputConfig.prototype, "_turnCoverage", {
                             get: $util.oneOfGetter($oneOfFields = ["turnCoverage"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -86717,12 +86458,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RealtimeInputConfig.decode = function decode(reader, length) {
+                        RealtimeInputConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.automaticActivityDetection = $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection.decode(reader, reader.uint32());
@@ -86989,56 +86732,31 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * AutomaticActivityDetection _disabled.
-                             * @member {"disabled"|undefined} _disabled
-                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(AutomaticActivityDetection.prototype, "_disabled", {
                                 get: $util.oneOfGetter($oneOfFields = ["disabled"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * AutomaticActivityDetection _startOfSpeechSensitivity.
-                             * @member {"startOfSpeechSensitivity"|undefined} _startOfSpeechSensitivity
-                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(AutomaticActivityDetection.prototype, "_startOfSpeechSensitivity", {
                                 get: $util.oneOfGetter($oneOfFields = ["startOfSpeechSensitivity"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * AutomaticActivityDetection _prefixPaddingMs.
-                             * @member {"prefixPaddingMs"|undefined} _prefixPaddingMs
-                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(AutomaticActivityDetection.prototype, "_prefixPaddingMs", {
                                 get: $util.oneOfGetter($oneOfFields = ["prefixPaddingMs"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * AutomaticActivityDetection _endOfSpeechSensitivity.
-                             * @member {"endOfSpeechSensitivity"|undefined} _endOfSpeechSensitivity
-                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(AutomaticActivityDetection.prototype, "_endOfSpeechSensitivity", {
                                 get: $util.oneOfGetter($oneOfFields = ["endOfSpeechSensitivity"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * AutomaticActivityDetection _silenceDurationMs.
-                             * @member {"silenceDurationMs"|undefined} _silenceDurationMs
-                             * @memberof google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(AutomaticActivityDetection.prototype, "_silenceDurationMs", {
                                 get: $util.oneOfGetter($oneOfFields = ["silenceDurationMs"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -87105,12 +86823,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            AutomaticActivityDetection.decode = function decode(reader, length) {
+                            AutomaticActivityDetection.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.RealtimeInputConfig.AutomaticActivityDetection();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 2: {
                                             message.disabled = reader.bool();
@@ -87441,12 +87161,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * SessionResumptionConfig _handle.
-                         * @member {"handle"|undefined} _handle
-                         * @memberof google.ai.generativelanguage.v1beta.SessionResumptionConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(SessionResumptionConfig.prototype, "_handle", {
                             get: $util.oneOfGetter($oneOfFields = ["handle"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -87505,12 +87220,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SessionResumptionConfig.decode = function decode(reader, length) {
+                        SessionResumptionConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.SessionResumptionConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.handle = reader.string();
@@ -87682,12 +87399,7 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * ContextWindowCompressionConfig _triggerTokens.
-                         * @member {"triggerTokens"|undefined} _triggerTokens
-                         * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ContextWindowCompressionConfig.prototype, "_triggerTokens", {
                             get: $util.oneOfGetter($oneOfFields = ["triggerTokens"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -87748,12 +87460,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContextWindowCompressionConfig.decode = function decode(reader, length) {
+                        ContextWindowCompressionConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.slidingWindow = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow.decode(reader, reader.uint32());
@@ -87934,12 +87648,7 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * SlidingWindow _targetTokens.
-                             * @member {"targetTokens"|undefined} _targetTokens
-                             * @memberof google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(SlidingWindow.prototype, "_targetTokens", {
                                 get: $util.oneOfGetter($oneOfFields = ["targetTokens"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -87998,12 +87707,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SlidingWindow.decode = function decode(reader, length) {
+                            SlidingWindow.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.SlidingWindow();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.targetTokens = reader.int64();
@@ -88207,12 +87918,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AudioTranscriptionConfig.decode = function decode(reader, length) {
+                        AudioTranscriptionConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -88472,12 +88185,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentSetup.decode = function decode(reader, length) {
+                        BidiGenerateContentSetup.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetup();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -88823,12 +88538,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentClientContent.decode = function decode(reader, length) {
+                        BidiGenerateContentClientContent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientContent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.turns && message.turns.length))
@@ -89063,23 +88780,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * BidiGenerateContentRealtimeInput _audioStreamEnd.
-                         * @member {"audioStreamEnd"|undefined} _audioStreamEnd
-                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(BidiGenerateContentRealtimeInput.prototype, "_audioStreamEnd", {
                             get: $util.oneOfGetter($oneOfFields = ["audioStreamEnd"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * BidiGenerateContentRealtimeInput _text.
-                         * @member {"text"|undefined} _text
-                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(BidiGenerateContentRealtimeInput.prototype, "_text", {
                             get: $util.oneOfGetter($oneOfFields = ["text"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -89151,12 +88858,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentRealtimeInput.decode = function decode(reader, length) {
+                        BidiGenerateContentRealtimeInput.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.mediaChunks && message.mediaChunks.length))
@@ -89462,12 +89171,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ActivityStart.decode = function decode(reader, length) {
+                            ActivityStart.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityStart();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -89637,12 +89348,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ActivityEnd.decode = function decode(reader, length) {
+                            ActivityEnd.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.ActivityEnd();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -89828,12 +89541,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentToolResponse.decode = function decode(reader, length) {
+                        BidiGenerateContentToolResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.functionResponses && message.functionResponses.length))
@@ -90097,12 +89812,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentClientMessage.decode = function decode(reader, length) {
+                        BidiGenerateContentClientMessage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.setup = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.decode(reader, reader.uint32());
@@ -90371,12 +90088,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentSetupComplete.decode = function decode(reader, length) {
+                        BidiGenerateContentSetupComplete.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -90552,12 +90271,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * BidiGenerateContentServerContent _modelTurn.
-                         * @member {"modelTurn"|undefined} _modelTurn
-                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(BidiGenerateContentServerContent.prototype, "_modelTurn", {
                             get: $util.oneOfGetter($oneOfFields = ["modelTurn"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -90626,12 +90340,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentServerContent.decode = function decode(reader, length) {
+                        BidiGenerateContentServerContent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.modelTurn = $root.google.ai.generativelanguage.v1beta.Content.decode(reader, reader.uint32());
@@ -90913,12 +90629,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentToolCall.decode = function decode(reader, length) {
+                        BidiGenerateContentToolCall.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCall();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         if (!(message.functionCalls && message.functionCalls.length))
@@ -91137,12 +90855,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentToolCallCancellation.decode = function decode(reader, length) {
+                        BidiGenerateContentToolCallCancellation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentToolCallCancellation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.ids && message.ids.length))
@@ -91354,12 +91074,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GoAway.decode = function decode(reader, length) {
+                        GoAway.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GoAway();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.timeLeft = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -91573,12 +91295,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SessionResumptionUpdate.decode = function decode(reader, length) {
+                        SessionResumptionUpdate.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.SessionResumptionUpdate();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.newHandle = reader.string();
@@ -91789,12 +91513,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentTranscription.decode = function decode(reader, length) {
+                        BidiGenerateContentTranscription.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
@@ -92072,12 +91798,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BidiGenerateContentServerMessage.decode = function decode(reader, length) {
+                        BidiGenerateContentServerMessage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.setupComplete = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentSetupComplete.decode(reader, reader.uint32());
@@ -92530,12 +92258,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UsageMetadata.decode = function decode(reader, length) {
+                        UsageMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.UsageMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.promptTokenCount = reader.int32();
@@ -92953,12 +92683,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Corpus.decode = function decode(reader, length) {
+                        Corpus.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Corpus();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -93249,12 +92981,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Document.decode = function decode(reader, length) {
+                        Document.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Document();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -93533,12 +93267,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StringList.decode = function decode(reader, length) {
+                        StringList.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.StringList();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.values && message.values.length))
@@ -93797,12 +93533,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CustomMetadata.decode = function decode(reader, length) {
+                        CustomMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CustomMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.stringValue = reader.string();
@@ -94072,12 +93810,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MetadataFilter.decode = function decode(reader, length) {
+                        MetadataFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.MetadataFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.key = reader.string();
@@ -94343,12 +94083,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Condition.decode = function decode(reader, length) {
+                        Condition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Condition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.stringValue = reader.string();
@@ -94720,12 +94462,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Chunk.decode = function decode(reader, length) {
+                        Chunk.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Chunk();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -95080,12 +94824,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ChunkData.decode = function decode(reader, length) {
+                        ChunkData.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ChunkData();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.stringValue = reader.string();
@@ -95337,45 +95083,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Model _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _maxTemperature.
-                         * @member {"maxTemperature"|undefined} _maxTemperature
-                         * @memberof google.ai.generativelanguage.v1beta.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_maxTemperature", {
                             get: $util.oneOfGetter($oneOfFields = ["maxTemperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -95457,12 +95183,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Model.decode = function decode(reader, length) {
+                        Model.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Model();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -96091,12 +95819,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetModelRequest.decode = function decode(reader, length) {
+                        GetModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GetModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -96305,12 +96035,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListModelsRequest.decode = function decode(reader, length) {
+                        ListModelsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListModelsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.pageSize = reader.int32();
@@ -96534,12 +96266,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListModelsResponse.decode = function decode(reader, length) {
+                        ListModelsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListModelsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.models && message.models.length))
@@ -96769,12 +96503,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetTunedModelRequest.decode = function decode(reader, length) {
+                        GetTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GetTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -96994,12 +96730,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTunedModelsRequest.decode = function decode(reader, length) {
+                        ListTunedModelsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListTunedModelsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -97235,12 +96973,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTunedModelsResponse.decode = function decode(reader, length) {
+                        ListTunedModelsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListTunedModelsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.tunedModels && message.tunedModels.length))
@@ -97429,12 +97169,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * CreateTunedModelRequest _tunedModelId.
-                         * @member {"tunedModelId"|undefined} _tunedModelId
-                         * @memberof google.ai.generativelanguage.v1beta.CreateTunedModelRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CreateTunedModelRequest.prototype, "_tunedModelId", {
                             get: $util.oneOfGetter($oneOfFields = ["tunedModelId"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -97495,12 +97230,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateTunedModelRequest.decode = function decode(reader, length) {
+                        CreateTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CreateTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tunedModelId = reader.string();
@@ -97766,12 +97503,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateTunedModelMetadata.decode = function decode(reader, length) {
+                        CreateTunedModelMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CreateTunedModelMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 5: {
                                         message.tunedModel = reader.string();
@@ -98049,12 +97788,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateTunedModelRequest.decode = function decode(reader, length) {
+                        UpdateTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.UpdateTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tunedModel = $root.google.ai.generativelanguage.v1beta.TunedModel.decode(reader, reader.uint32());
@@ -98275,12 +98016,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteTunedModelRequest.decode = function decode(reader, length) {
+                        DeleteTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DeleteTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -98548,34 +98291,19 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * TunedModel _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta.TunedModel
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TunedModel.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * TunedModel _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta.TunedModel
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TunedModel.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * TunedModel _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta.TunedModel
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TunedModel.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -98662,12 +98390,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TunedModel.decode = function decode(reader, length) {
+                        TunedModel.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.TunedModel();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.tunedModelSource = $root.google.ai.generativelanguage.v1beta.TunedModelSource.decode(reader, reader.uint32());
@@ -99142,12 +98872,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TunedModelSource.decode = function decode(reader, length) {
+                        TunedModelSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.TunedModelSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tunedModel = reader.string();
@@ -99404,12 +99136,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningTask.decode = function decode(reader, length) {
+                        TuningTask.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.TuningTask();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -99684,23 +99418,13 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Hyperparameters _epochCount.
-                         * @member {"epochCount"|undefined} _epochCount
-                         * @memberof google.ai.generativelanguage.v1beta.Hyperparameters
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Hyperparameters.prototype, "_epochCount", {
                             get: $util.oneOfGetter($oneOfFields = ["epochCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Hyperparameters _batchSize.
-                         * @member {"batchSize"|undefined} _batchSize
-                         * @memberof google.ai.generativelanguage.v1beta.Hyperparameters
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Hyperparameters.prototype, "_batchSize", {
                             get: $util.oneOfGetter($oneOfFields = ["batchSize"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -99765,12 +99489,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Hyperparameters.decode = function decode(reader, length) {
+                        Hyperparameters.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Hyperparameters();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 16: {
                                         message.learningRate = reader.float();
@@ -100036,12 +99762,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Dataset.decode = function decode(reader, length) {
+                        Dataset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Dataset();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.examples = $root.google.ai.generativelanguage.v1beta.TuningExamples.decode(reader, reader.uint32());
@@ -100251,12 +99979,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningExamples.decode = function decode(reader, length) {
+                        TuningExamples.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.TuningExamples();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.examples && message.examples.length))
@@ -100498,12 +100228,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningExample.decode = function decode(reader, length) {
+                        TuningExample.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.TuningExample();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.textInput = reader.string();
@@ -100751,12 +100483,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningSnapshot.decode = function decode(reader, length) {
+                        TuningSnapshot.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.TuningSnapshot();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.step = reader.int32();
@@ -100973,34 +100707,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Permission _granteeType.
-                         * @member {"granteeType"|undefined} _granteeType
-                         * @memberof google.ai.generativelanguage.v1beta.Permission
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Permission.prototype, "_granteeType", {
                             get: $util.oneOfGetter($oneOfFields = ["granteeType"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Permission _emailAddress.
-                         * @member {"emailAddress"|undefined} _emailAddress
-                         * @memberof google.ai.generativelanguage.v1beta.Permission
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Permission.prototype, "_emailAddress", {
                             get: $util.oneOfGetter($oneOfFields = ["emailAddress"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Permission _role.
-                         * @member {"role"|undefined} _role
-                         * @memberof google.ai.generativelanguage.v1beta.Permission
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Permission.prototype, "_role", {
                             get: $util.oneOfGetter($oneOfFields = ["role"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -101065,12 +100784,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Permission.decode = function decode(reader, length) {
+                        Permission.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Permission();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -101655,12 +101376,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreatePermissionRequest.decode = function decode(reader, length) {
+                        CreatePermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CreatePermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -101876,12 +101599,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetPermissionRequest.decode = function decode(reader, length) {
+                        GetPermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GetPermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -102101,12 +101826,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPermissionsRequest.decode = function decode(reader, length) {
+                        ListPermissionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListPermissionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -102342,12 +102069,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPermissionsResponse.decode = function decode(reader, length) {
+                        ListPermissionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListPermissionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.permissions && message.permissions.length))
@@ -102588,12 +102317,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdatePermissionRequest.decode = function decode(reader, length) {
+                        UpdatePermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.UpdatePermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.permission = $root.google.ai.generativelanguage.v1beta.Permission.decode(reader, reader.uint32());
@@ -102814,12 +102545,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeletePermissionRequest.decode = function decode(reader, length) {
+                        DeletePermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DeletePermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -103028,12 +102761,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferOwnershipRequest.decode = function decode(reader, length) {
+                        TransferOwnershipRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.TransferOwnershipRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -103233,12 +102968,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferOwnershipResponse.decode = function decode(reader, length) {
+                        TransferOwnershipResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.TransferOwnershipResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -103544,12 +103281,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PredictRequest.decode = function decode(reader, length) {
+                        PredictRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.PredictRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -103821,12 +103560,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PredictLongRunningRequest.decode = function decode(reader, length) {
+                        PredictLongRunningRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -104076,12 +103817,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PredictResponse.decode = function decode(reader, length) {
+                        PredictResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.PredictResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.predictions && message.predictions.length))
@@ -104312,12 +104055,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PredictLongRunningResponse.decode = function decode(reader, length) {
+                        PredictLongRunningResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.decode(reader, reader.uint32());
@@ -104514,12 +104259,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PredictLongRunningMetadata.decode = function decode(reader, length) {
+                        PredictLongRunningMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -104714,12 +104461,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Media.decode = function decode(reader, length) {
+                        Media.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Media();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.video = $root.google.ai.generativelanguage.v1beta.Video.decode(reader, reader.uint32());
@@ -104952,12 +104701,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Video.decode = function decode(reader, length) {
+                        Video.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Video();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.video = reader.bytes();
@@ -105206,12 +104957,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateVideoResponse.decode = function decode(reader, length) {
+                        GenerateVideoResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.generatedSamples && message.generatedSamples.length))
@@ -106163,12 +105916,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateCorpusRequest.decode = function decode(reader, length) {
+                        CreateCorpusRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CreateCorpusRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.corpus = $root.google.ai.generativelanguage.v1beta.Corpus.decode(reader, reader.uint32());
@@ -106371,12 +106126,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetCorpusRequest.decode = function decode(reader, length) {
+                        GetCorpusRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GetCorpusRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -106585,12 +106342,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCorpusRequest.decode = function decode(reader, length) {
+                        UpdateCorpusRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.UpdateCorpusRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.corpus = $root.google.ai.generativelanguage.v1beta.Corpus.decode(reader, reader.uint32());
@@ -106822,12 +106581,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteCorpusRequest.decode = function decode(reader, length) {
+                        DeleteCorpusRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DeleteCorpusRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -107049,12 +106810,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCorporaRequest.decode = function decode(reader, length) {
+                        ListCorporaRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListCorporaRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -107278,12 +107041,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCorporaResponse.decode = function decode(reader, length) {
+                        ListCorporaResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListCorporaResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.corpora && message.corpora.length))
@@ -107548,12 +107313,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryCorpusRequest.decode = function decode(reader, length) {
+                        QueryCorpusRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.QueryCorpusRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -107810,12 +107577,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryCorpusResponse.decode = function decode(reader, length) {
+                        QueryCorpusResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.QueryCorpusResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.relevantChunks && message.relevantChunks.length))
@@ -108043,12 +107812,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RelevantChunk.decode = function decode(reader, length) {
+                        RelevantChunk.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.RelevantChunk();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.chunkRelevanceScore = reader.float();
@@ -108275,12 +108046,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateDocumentRequest.decode = function decode(reader, length) {
+                        CreateDocumentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CreateDocumentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -108496,12 +108269,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDocumentRequest.decode = function decode(reader, length) {
+                        GetDocumentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GetDocumentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -108710,12 +108485,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateDocumentRequest.decode = function decode(reader, length) {
+                        UpdateDocumentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.UpdateDocumentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.document = $root.google.ai.generativelanguage.v1beta.Document.decode(reader, reader.uint32());
@@ -108947,12 +108724,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteDocumentRequest.decode = function decode(reader, length) {
+                        DeleteDocumentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DeleteDocumentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -109185,12 +108964,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDocumentsRequest.decode = function decode(reader, length) {
+                        ListDocumentsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListDocumentsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -109426,12 +109207,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDocumentsResponse.decode = function decode(reader, length) {
+                        ListDocumentsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListDocumentsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.documents && message.documents.length))
@@ -109696,12 +109479,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryDocumentRequest.decode = function decode(reader, length) {
+                        QueryDocumentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.QueryDocumentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -109958,12 +109743,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryDocumentResponse.decode = function decode(reader, length) {
+                        QueryDocumentResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.QueryDocumentResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.relevantChunks && message.relevantChunks.length))
@@ -110191,12 +109978,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateChunkRequest.decode = function decode(reader, length) {
+                        CreateChunkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CreateChunkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -110425,12 +110214,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchCreateChunksRequest.decode = function decode(reader, length) {
+                        BatchCreateChunksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BatchCreateChunksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -110662,12 +110453,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchCreateChunksResponse.decode = function decode(reader, length) {
+                        BatchCreateChunksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BatchCreateChunksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.chunks && message.chunks.length))
@@ -110884,12 +110677,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetChunkRequest.decode = function decode(reader, length) {
+                        GetChunkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GetChunkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -111098,12 +110893,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateChunkRequest.decode = function decode(reader, length) {
+                        UpdateChunkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.UpdateChunkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.chunk = $root.google.ai.generativelanguage.v1beta.Chunk.decode(reader, reader.uint32());
@@ -111337,12 +111134,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchUpdateChunksRequest.decode = function decode(reader, length) {
+                        BatchUpdateChunksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BatchUpdateChunksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -111574,12 +111373,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchUpdateChunksResponse.decode = function decode(reader, length) {
+                        BatchUpdateChunksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BatchUpdateChunksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.chunks && message.chunks.length))
@@ -111796,12 +111597,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteChunkRequest.decode = function decode(reader, length) {
+                        DeleteChunkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.DeleteChunkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -112012,12 +111815,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchDeleteChunksRequest.decode = function decode(reader, length) {
+                        BatchDeleteChunksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BatchDeleteChunksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -112269,12 +112074,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListChunksRequest.decode = function decode(reader, length) {
+                        ListChunksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListChunksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -112510,12 +112317,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListChunksResponse.decode = function decode(reader, length) {
+                        ListChunksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ListChunksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.chunks && message.chunks.length))
@@ -112936,56 +112745,31 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateTextRequest _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _candidateCount.
-                         * @member {"candidateCount"|undefined} _candidateCount
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_candidateCount", {
                             get: $util.oneOfGetter($oneOfFields = ["candidateCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _maxOutputTokens.
-                         * @member {"maxOutputTokens"|undefined} _maxOutputTokens
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_maxOutputTokens", {
                             get: $util.oneOfGetter($oneOfFields = ["maxOutputTokens"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -113062,12 +112846,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateTextRequest.decode = function decode(reader, length) {
+                        GenerateTextRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -113451,12 +113237,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateTextResponse.decode = function decode(reader, length) {
+                        GenerateTextResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.candidates && message.candidates.length))
@@ -113736,12 +113524,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextPrompt.decode = function decode(reader, length) {
+                        TextPrompt.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.TextPrompt();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
@@ -113908,12 +113698,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * TextCompletion _citationMetadata.
-                         * @member {"citationMetadata"|undefined} _citationMetadata
-                         * @memberof google.ai.generativelanguage.v1beta.TextCompletion
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TextCompletion.prototype, "_citationMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["citationMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -113977,12 +113762,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextCompletion.decode = function decode(reader, length) {
+                        TextCompletion.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.TextCompletion();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.output = reader.string();
@@ -114246,12 +114033,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedTextRequest.decode = function decode(reader, length) {
+                        EmbedTextRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.EmbedTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -114412,12 +114201,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * EmbedTextResponse _embedding.
-                         * @member {"embedding"|undefined} _embedding
-                         * @memberof google.ai.generativelanguage.v1beta.EmbedTextResponse
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedTextResponse.prototype, "_embedding", {
                             get: $util.oneOfGetter($oneOfFields = ["embedding"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -114476,12 +114260,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedTextResponse.decode = function decode(reader, length) {
+                        EmbedTextResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.EmbedTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.embedding = $root.google.ai.generativelanguage.v1beta.Embedding.decode(reader, reader.uint32());
@@ -114715,12 +114501,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedTextRequest.decode = function decode(reader, length) {
+                        BatchEmbedTextRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BatchEmbedTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -114979,12 +114767,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedTextResponse.decode = function decode(reader, length) {
+                        BatchEmbedTextResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.BatchEmbedTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.embeddings && message.embeddings.length))
@@ -115206,12 +114996,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Embedding.decode = function decode(reader, length) {
+                        Embedding.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Embedding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.value && message.value.length))
@@ -115439,12 +115231,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTextTokensRequest.decode = function decode(reader, length) {
+                        CountTextTokensRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CountTextTokensRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -115660,12 +115454,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTextTokensResponse.decode = function decode(reader, length) {
+                        CountTextTokensResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.CountTextTokensResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tokenCount = reader.int32();
@@ -115877,12 +115673,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CitationMetadata.decode = function decode(reader, length) {
+                        CitationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.CitationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.citationSources && message.citationSources.length))
@@ -116076,45 +115874,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * CitationSource _startIndex.
-                         * @member {"startIndex"|undefined} _startIndex
-                         * @memberof google.ai.generativelanguage.v1beta2.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_startIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["startIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _endIndex.
-                         * @member {"endIndex"|undefined} _endIndex
-                         * @memberof google.ai.generativelanguage.v1beta2.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_endIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["endIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _uri.
-                         * @member {"uri"|undefined} _uri
-                         * @memberof google.ai.generativelanguage.v1beta2.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_uri", {
                             get: $util.oneOfGetter($oneOfFields = ["uri"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _license.
-                         * @member {"license"|undefined} _license
-                         * @memberof google.ai.generativelanguage.v1beta2.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_license", {
                             get: $util.oneOfGetter($oneOfFields = ["license"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -116179,12 +115957,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CitationSource.decode = function decode(reader, length) {
+                        CitationSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.CitationSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startIndex = reader.int32();
@@ -116530,45 +116310,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateMessageRequest _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta2.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _candidateCount.
-                         * @member {"candidateCount"|undefined} _candidateCount
-                         * @memberof google.ai.generativelanguage.v1beta2.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_candidateCount", {
                             get: $util.oneOfGetter($oneOfFields = ["candidateCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta2.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta2.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -116637,12 +116397,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateMessageRequest.decode = function decode(reader, length) {
+                        GenerateMessageRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.GenerateMessageRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -116951,12 +116713,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateMessageResponse.decode = function decode(reader, length) {
+                        GenerateMessageResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.GenerateMessageResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.candidates && message.candidates.length))
@@ -117204,12 +116968,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Message _citationMetadata.
-                         * @member {"citationMetadata"|undefined} _citationMetadata
-                         * @memberof google.ai.generativelanguage.v1beta2.Message
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Message.prototype, "_citationMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["citationMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -117272,12 +117031,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Message.decode = function decode(reader, length) {
+                        Message.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.Message();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.author = reader.string();
@@ -117537,12 +117298,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MessagePrompt.decode = function decode(reader, length) {
+                        MessagePrompt.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.MessagePrompt();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.context = reader.string();
@@ -117815,12 +117578,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Example.decode = function decode(reader, length) {
+                        Example.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.Example();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.input = $root.google.ai.generativelanguage.v1beta2.Message.decode(reader, reader.uint32());
@@ -118052,12 +117817,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountMessageTokensRequest.decode = function decode(reader, length) {
+                        CountMessageTokensRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.CountMessageTokensRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -118273,12 +118040,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountMessageTokensResponse.decode = function decode(reader, length) {
+                        CountMessageTokensResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.CountMessageTokensResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tokenCount = reader.int32();
@@ -118459,12 +118228,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * ContentFilter _message.
-                         * @member {"message"|undefined} _message
-                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ContentFilter.prototype, "_message", {
                             get: $util.oneOfGetter($oneOfFields = ["message"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -118525,12 +118289,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentFilter.decode = function decode(reader, length) {
+                        ContentFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.ContentFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.reason = reader.int32();
@@ -118796,12 +118562,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetyFeedback.decode = function decode(reader, length) {
+                        SafetyFeedback.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.SafetyFeedback();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.rating = $root.google.ai.generativelanguage.v1beta2.SafetyRating.decode(reader, reader.uint32());
@@ -119033,12 +118801,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetyRating.decode = function decode(reader, length) {
+                        SafetyRating.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.SafetyRating();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.category = reader.int32();
@@ -119358,12 +119128,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetySetting.decode = function decode(reader, length) {
+                        SafetySetting.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.SafetySetting();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.category = reader.int32();
@@ -119706,34 +119478,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Model _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta2.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta2.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta2.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -119813,12 +119570,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Model.decode = function decode(reader, length) {
+                        Model.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.Model();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -120266,12 +120025,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetModelRequest.decode = function decode(reader, length) {
+                        GetModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.GetModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -120480,12 +120241,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListModelsRequest.decode = function decode(reader, length) {
+                        ListModelsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.ListModelsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.pageSize = reader.int32();
@@ -120709,12 +120472,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListModelsResponse.decode = function decode(reader, length) {
+                        ListModelsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.ListModelsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.models && message.models.length))
@@ -121069,56 +120834,31 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateTextRequest _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta2.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _candidateCount.
-                         * @member {"candidateCount"|undefined} _candidateCount
-                         * @memberof google.ai.generativelanguage.v1beta2.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_candidateCount", {
                             get: $util.oneOfGetter($oneOfFields = ["candidateCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _maxOutputTokens.
-                         * @member {"maxOutputTokens"|undefined} _maxOutputTokens
-                         * @memberof google.ai.generativelanguage.v1beta2.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_maxOutputTokens", {
                             get: $util.oneOfGetter($oneOfFields = ["maxOutputTokens"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta2.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta2.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -121195,12 +120935,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateTextRequest.decode = function decode(reader, length) {
+                        GenerateTextRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.GenerateTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -121584,12 +121326,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateTextResponse.decode = function decode(reader, length) {
+                        GenerateTextResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.GenerateTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.candidates && message.candidates.length))
@@ -121869,12 +121613,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextPrompt.decode = function decode(reader, length) {
+                        TextPrompt.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.TextPrompt();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
@@ -122041,12 +121787,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * TextCompletion _citationMetadata.
-                         * @member {"citationMetadata"|undefined} _citationMetadata
-                         * @memberof google.ai.generativelanguage.v1beta2.TextCompletion
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TextCompletion.prototype, "_citationMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["citationMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -122110,12 +121851,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextCompletion.decode = function decode(reader, length) {
+                        TextCompletion.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.TextCompletion();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.output = reader.string();
@@ -122379,12 +122122,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedTextRequest.decode = function decode(reader, length) {
+                        EmbedTextRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.EmbedTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -122545,12 +122290,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * EmbedTextResponse _embedding.
-                         * @member {"embedding"|undefined} _embedding
-                         * @memberof google.ai.generativelanguage.v1beta2.EmbedTextResponse
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedTextResponse.prototype, "_embedding", {
                             get: $util.oneOfGetter($oneOfFields = ["embedding"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -122609,12 +122349,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedTextResponse.decode = function decode(reader, length) {
+                        EmbedTextResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.EmbedTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.embedding = $root.google.ai.generativelanguage.v1beta2.Embedding.decode(reader, reader.uint32());
@@ -122827,12 +122569,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Embedding.decode = function decode(reader, length) {
+                        Embedding.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.Embedding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.value && message.value.length))
@@ -123063,12 +122807,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CitationMetadata.decode = function decode(reader, length) {
+                        CitationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.CitationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.citationSources && message.citationSources.length))
@@ -123262,45 +123008,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * CitationSource _startIndex.
-                         * @member {"startIndex"|undefined} _startIndex
-                         * @memberof google.ai.generativelanguage.v1beta3.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_startIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["startIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _endIndex.
-                         * @member {"endIndex"|undefined} _endIndex
-                         * @memberof google.ai.generativelanguage.v1beta3.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_endIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["endIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _uri.
-                         * @member {"uri"|undefined} _uri
-                         * @memberof google.ai.generativelanguage.v1beta3.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_uri", {
                             get: $util.oneOfGetter($oneOfFields = ["uri"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * CitationSource _license.
-                         * @member {"license"|undefined} _license
-                         * @memberof google.ai.generativelanguage.v1beta3.CitationSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CitationSource.prototype, "_license", {
                             get: $util.oneOfGetter($oneOfFields = ["license"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -123365,12 +123091,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CitationSource.decode = function decode(reader, length) {
+                        CitationSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.CitationSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startIndex = reader.int32();
@@ -123716,45 +123444,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateMessageRequest _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta3.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _candidateCount.
-                         * @member {"candidateCount"|undefined} _candidateCount
-                         * @memberof google.ai.generativelanguage.v1beta3.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_candidateCount", {
                             get: $util.oneOfGetter($oneOfFields = ["candidateCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta3.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateMessageRequest _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta3.GenerateMessageRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateMessageRequest.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -123823,12 +123531,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateMessageRequest.decode = function decode(reader, length) {
+                        GenerateMessageRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.GenerateMessageRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -124137,12 +123847,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateMessageResponse.decode = function decode(reader, length) {
+                        GenerateMessageResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.GenerateMessageResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.candidates && message.candidates.length))
@@ -124390,12 +124102,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Message _citationMetadata.
-                         * @member {"citationMetadata"|undefined} _citationMetadata
-                         * @memberof google.ai.generativelanguage.v1beta3.Message
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Message.prototype, "_citationMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["citationMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -124458,12 +124165,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Message.decode = function decode(reader, length) {
+                        Message.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.Message();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.author = reader.string();
@@ -124723,12 +124432,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MessagePrompt.decode = function decode(reader, length) {
+                        MessagePrompt.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.MessagePrompt();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.context = reader.string();
@@ -125001,12 +124712,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Example.decode = function decode(reader, length) {
+                        Example.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.Example();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.input = $root.google.ai.generativelanguage.v1beta3.Message.decode(reader, reader.uint32());
@@ -125238,12 +124951,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountMessageTokensRequest.decode = function decode(reader, length) {
+                        CountMessageTokensRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.CountMessageTokensRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -125459,12 +125174,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountMessageTokensResponse.decode = function decode(reader, length) {
+                        CountMessageTokensResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.CountMessageTokensResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tokenCount = reader.int32();
@@ -125645,12 +125362,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * ContentFilter _message.
-                         * @member {"message"|undefined} _message
-                         * @memberof google.ai.generativelanguage.v1beta3.ContentFilter
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ContentFilter.prototype, "_message", {
                             get: $util.oneOfGetter($oneOfFields = ["message"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -125711,12 +125423,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentFilter.decode = function decode(reader, length) {
+                        ContentFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.ContentFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.reason = reader.int32();
@@ -125982,12 +125696,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetyFeedback.decode = function decode(reader, length) {
+                        SafetyFeedback.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.SafetyFeedback();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.rating = $root.google.ai.generativelanguage.v1beta3.SafetyRating.decode(reader, reader.uint32());
@@ -126219,12 +125935,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetyRating.decode = function decode(reader, length) {
+                        SafetyRating.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.SafetyRating();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.category = reader.int32();
@@ -126544,12 +126262,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SafetySetting.decode = function decode(reader, length) {
+                        SafetySetting.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.SafetySetting();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.category = reader.int32();
@@ -126899,34 +126619,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Model _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta3.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta3.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Model _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta3.Model
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Model.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -127006,12 +126711,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Model.decode = function decode(reader, length) {
+                        Model.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.Model();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -127624,12 +127331,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetModelRequest.decode = function decode(reader, length) {
+                        GetModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.GetModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -127838,12 +127547,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListModelsRequest.decode = function decode(reader, length) {
+                        ListModelsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.ListModelsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.pageSize = reader.int32();
@@ -128067,12 +127778,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListModelsResponse.decode = function decode(reader, length) {
+                        ListModelsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.ListModelsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.models && message.models.length))
@@ -128302,12 +128015,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetTunedModelRequest.decode = function decode(reader, length) {
+                        GetTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.GetTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -128516,12 +128231,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTunedModelsRequest.decode = function decode(reader, length) {
+                        ListTunedModelsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.ListTunedModelsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -128745,12 +128462,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTunedModelsResponse.decode = function decode(reader, length) {
+                        ListTunedModelsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.ListTunedModelsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.tunedModels && message.tunedModels.length))
@@ -128939,12 +128658,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * CreateTunedModelRequest _tunedModelId.
-                         * @member {"tunedModelId"|undefined} _tunedModelId
-                         * @memberof google.ai.generativelanguage.v1beta3.CreateTunedModelRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CreateTunedModelRequest.prototype, "_tunedModelId", {
                             get: $util.oneOfGetter($oneOfFields = ["tunedModelId"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -129005,12 +128719,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateTunedModelRequest.decode = function decode(reader, length) {
+                        CreateTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.CreateTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tunedModelId = reader.string();
@@ -129276,12 +128992,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateTunedModelMetadata.decode = function decode(reader, length) {
+                        CreateTunedModelMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.CreateTunedModelMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 5: {
                                         message.tunedModel = reader.string();
@@ -129559,12 +129277,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateTunedModelRequest.decode = function decode(reader, length) {
+                        UpdateTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.UpdateTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tunedModel = $root.google.ai.generativelanguage.v1beta3.TunedModel.decode(reader, reader.uint32());
@@ -129785,12 +129505,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteTunedModelRequest.decode = function decode(reader, length) {
+                        DeleteTunedModelRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.DeleteTunedModelRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -130048,34 +129770,19 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * TunedModel _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta3.TunedModel
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TunedModel.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * TunedModel _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta3.TunedModel
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TunedModel.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * TunedModel _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta3.TunedModel
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TunedModel.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -130156,12 +129863,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TunedModel.decode = function decode(reader, length) {
+                        TunedModel.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.TunedModel();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.tunedModelSource = $root.google.ai.generativelanguage.v1beta3.TunedModelSource.decode(reader, reader.uint32());
@@ -130594,12 +130303,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TunedModelSource.decode = function decode(reader, length) {
+                        TunedModelSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.TunedModelSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tunedModel = reader.string();
@@ -130856,12 +130567,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningTask.decode = function decode(reader, length) {
+                        TuningTask.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.TuningTask();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -131116,34 +130829,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Hyperparameters _epochCount.
-                         * @member {"epochCount"|undefined} _epochCount
-                         * @memberof google.ai.generativelanguage.v1beta3.Hyperparameters
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Hyperparameters.prototype, "_epochCount", {
                             get: $util.oneOfGetter($oneOfFields = ["epochCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Hyperparameters _batchSize.
-                         * @member {"batchSize"|undefined} _batchSize
-                         * @memberof google.ai.generativelanguage.v1beta3.Hyperparameters
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Hyperparameters.prototype, "_batchSize", {
                             get: $util.oneOfGetter($oneOfFields = ["batchSize"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Hyperparameters _learningRate.
-                         * @member {"learningRate"|undefined} _learningRate
-                         * @memberof google.ai.generativelanguage.v1beta3.Hyperparameters
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Hyperparameters.prototype, "_learningRate", {
                             get: $util.oneOfGetter($oneOfFields = ["learningRate"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -131206,12 +130904,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Hyperparameters.decode = function decode(reader, length) {
+                        Hyperparameters.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.Hyperparameters();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 14: {
                                         message.epochCount = reader.int32();
@@ -131459,12 +131159,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Dataset.decode = function decode(reader, length) {
+                        Dataset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.Dataset();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.examples = $root.google.ai.generativelanguage.v1beta3.TuningExamples.decode(reader, reader.uint32());
@@ -131674,12 +131376,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningExamples.decode = function decode(reader, length) {
+                        TuningExamples.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.TuningExamples();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.examples && message.examples.length))
@@ -131921,12 +131625,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningExample.decode = function decode(reader, length) {
+                        TuningExample.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.TuningExample();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.textInput = reader.string();
@@ -132174,12 +131880,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TuningSnapshot.decode = function decode(reader, length) {
+                        TuningSnapshot.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.TuningSnapshot();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.step = reader.int32();
@@ -132396,34 +132104,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Permission _granteeType.
-                         * @member {"granteeType"|undefined} _granteeType
-                         * @memberof google.ai.generativelanguage.v1beta3.Permission
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Permission.prototype, "_granteeType", {
                             get: $util.oneOfGetter($oneOfFields = ["granteeType"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Permission _emailAddress.
-                         * @member {"emailAddress"|undefined} _emailAddress
-                         * @memberof google.ai.generativelanguage.v1beta3.Permission
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Permission.prototype, "_emailAddress", {
                             get: $util.oneOfGetter($oneOfFields = ["emailAddress"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Permission _role.
-                         * @member {"role"|undefined} _role
-                         * @memberof google.ai.generativelanguage.v1beta3.Permission
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Permission.prototype, "_role", {
                             get: $util.oneOfGetter($oneOfFields = ["role"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -132488,12 +132181,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Permission.decode = function decode(reader, length) {
+                        Permission.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.Permission();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -133078,12 +132773,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreatePermissionRequest.decode = function decode(reader, length) {
+                        CreatePermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.CreatePermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -133299,12 +132996,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetPermissionRequest.decode = function decode(reader, length) {
+                        GetPermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.GetPermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -133524,12 +133223,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPermissionsRequest.decode = function decode(reader, length) {
+                        ListPermissionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.ListPermissionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -133765,12 +133466,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPermissionsResponse.decode = function decode(reader, length) {
+                        ListPermissionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.ListPermissionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.permissions && message.permissions.length))
@@ -134011,12 +133714,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdatePermissionRequest.decode = function decode(reader, length) {
+                        UpdatePermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.UpdatePermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.permission = $root.google.ai.generativelanguage.v1beta3.Permission.decode(reader, reader.uint32());
@@ -134237,12 +133942,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeletePermissionRequest.decode = function decode(reader, length) {
+                        DeletePermissionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.DeletePermissionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -134451,12 +134158,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferOwnershipRequest.decode = function decode(reader, length) {
+                        TransferOwnershipRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.TransferOwnershipRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -134656,12 +134365,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferOwnershipResponse.decode = function decode(reader, length) {
+                        TransferOwnershipResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.TransferOwnershipResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -135033,56 +134744,31 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GenerateTextRequest _temperature.
-                         * @member {"temperature"|undefined} _temperature
-                         * @memberof google.ai.generativelanguage.v1beta3.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_temperature", {
                             get: $util.oneOfGetter($oneOfFields = ["temperature"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _candidateCount.
-                         * @member {"candidateCount"|undefined} _candidateCount
-                         * @memberof google.ai.generativelanguage.v1beta3.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_candidateCount", {
                             get: $util.oneOfGetter($oneOfFields = ["candidateCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _maxOutputTokens.
-                         * @member {"maxOutputTokens"|undefined} _maxOutputTokens
-                         * @memberof google.ai.generativelanguage.v1beta3.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_maxOutputTokens", {
                             get: $util.oneOfGetter($oneOfFields = ["maxOutputTokens"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _topP.
-                         * @member {"topP"|undefined} _topP
-                         * @memberof google.ai.generativelanguage.v1beta3.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_topP", {
                             get: $util.oneOfGetter($oneOfFields = ["topP"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GenerateTextRequest _topK.
-                         * @member {"topK"|undefined} _topK
-                         * @memberof google.ai.generativelanguage.v1beta3.GenerateTextRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerateTextRequest.prototype, "_topK", {
                             get: $util.oneOfGetter($oneOfFields = ["topK"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -135159,12 +134845,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateTextRequest.decode = function decode(reader, length) {
+                        GenerateTextRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.GenerateTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -135548,12 +135236,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateTextResponse.decode = function decode(reader, length) {
+                        GenerateTextResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.GenerateTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.candidates && message.candidates.length))
@@ -135833,12 +135523,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextPrompt.decode = function decode(reader, length) {
+                        TextPrompt.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.TextPrompt();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
@@ -136005,12 +135697,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * TextCompletion _citationMetadata.
-                         * @member {"citationMetadata"|undefined} _citationMetadata
-                         * @memberof google.ai.generativelanguage.v1beta3.TextCompletion
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TextCompletion.prototype, "_citationMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["citationMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -136074,12 +135761,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextCompletion.decode = function decode(reader, length) {
+                        TextCompletion.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.TextCompletion();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.output = reader.string();
@@ -136343,12 +136032,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedTextRequest.decode = function decode(reader, length) {
+                        EmbedTextRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.EmbedTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -136509,12 +136200,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * EmbedTextResponse _embedding.
-                         * @member {"embedding"|undefined} _embedding
-                         * @memberof google.ai.generativelanguage.v1beta3.EmbedTextResponse
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EmbedTextResponse.prototype, "_embedding", {
                             get: $util.oneOfGetter($oneOfFields = ["embedding"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -136573,12 +136259,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EmbedTextResponse.decode = function decode(reader, length) {
+                        EmbedTextResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.EmbedTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.embedding = $root.google.ai.generativelanguage.v1beta3.Embedding.decode(reader, reader.uint32());
@@ -136799,12 +136487,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedTextRequest.decode = function decode(reader, length) {
+                        BatchEmbedTextRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.BatchEmbedTextRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -137031,12 +136721,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchEmbedTextResponse.decode = function decode(reader, length) {
+                        BatchEmbedTextResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.BatchEmbedTextResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.embeddings && message.embeddings.length))
@@ -137258,12 +136950,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Embedding.decode = function decode(reader, length) {
+                        Embedding.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.Embedding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.value && message.value.length))
@@ -137491,12 +137185,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTextTokensRequest.decode = function decode(reader, length) {
+                        CountTextTokensRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.CountTextTokensRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.model = reader.string();
@@ -137712,12 +137408,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CountTextTokensResponse.decode = function decode(reader, length) {
+                        CountTextTokensResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta3.CountTextTokensResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tokenCount = reader.int32();
@@ -137974,12 +137672,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -138324,12 +138024,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -138708,12 +138410,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -138940,12 +138644,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -139309,12 +139015,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -139653,6 +139361,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -139754,6 +139463,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -139800,6 +139517,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -139827,12 +139546,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -139878,6 +139599,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -139972,6 +139697,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -140066,6 +139794,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -140095,6 +139825,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -140125,6 +139856,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -140266,12 +139999,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -140533,12 +140268,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -140741,12 +140478,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -140949,12 +140688,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -141157,12 +140898,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -141430,12 +141173,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -141809,12 +141554,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -142017,12 +141764,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -142249,12 +141998,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -142527,12 +142278,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -142926,12 +142679,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -143321,12 +143076,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -143551,12 +143308,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -143951,12 +143710,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -144618,12 +144379,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -145103,12 +144866,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -145347,12 +145112,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -145603,12 +145370,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -145948,12 +145717,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -146327,12 +146098,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -146852,12 +146625,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -147123,12 +146898,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -147442,12 +147219,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -147683,12 +147462,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -147940,12 +147721,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -148248,12 +148031,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -148752,12 +148537,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -149372,12 +149159,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -149820,12 +149609,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -149855,12 +149641,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -150586,12 +150374,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -150882,12 +150672,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -151168,12 +150960,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -151480,12 +151274,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -151671,6 +151467,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -151730,6 +151527,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -151764,6 +151569,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -151791,12 +151598,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -151818,6 +151627,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -151878,6 +151691,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -151914,6 +151730,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -151937,6 +151755,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -151951,6 +151770,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -152138,12 +151959,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -152572,12 +152395,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -152911,12 +152736,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -153187,12 +153014,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -153722,12 +153551,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -154106,12 +153937,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -154396,12 +154229,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -154671,12 +154506,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -154982,12 +154819,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -155250,12 +155089,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -155576,12 +155417,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -155810,12 +155653,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Struct.decode = function decode(reader, length) {
+                Struct.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (message.fields === $util.emptyObject)
@@ -156120,12 +155965,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Value.decode = function decode(reader, length) {
+                Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.nullValue = reader.int32();
@@ -156457,12 +156304,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListValue.decode = function decode(reader, length) {
+                ListValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.values && message.values.length))
@@ -156690,12 +156539,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -156909,12 +156760,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -157097,12 +156950,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -157325,12 +157180,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -157586,12 +157443,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();
@@ -158104,12 +157963,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length) {
+                Operation.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -158384,12 +158245,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length) {
+                GetOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -158620,12 +158483,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length) {
+                ListOperationsRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 4: {
                                 message.name = reader.string();
@@ -158873,12 +158738,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length) {
+                ListOperationsResponse.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.operations && message.operations.length))
@@ -159108,12 +158975,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length) {
+                CancelOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -159311,12 +159180,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length) {
+                DeleteOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -159525,12 +159396,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length) {
+                WaitOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -159757,12 +159630,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length) {
+                OperationInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.responseType = reader.string();

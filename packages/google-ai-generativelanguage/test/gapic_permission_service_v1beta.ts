@@ -29,1801 +29,1335 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta.PermissionServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new permissionserviceModule.v1beta.PermissionServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'generativelanguage.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new permissionserviceModule.v1beta.PermissionServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          permissionserviceModule.v1beta.PermissionServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'generativelanguage.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          permissionserviceModule.v1beta.PermissionServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'generativelanguage.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {universeDomain: 'example.com'}
-      );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'generativelanguage.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {universe_domain: 'example.com'}
-      );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'generativelanguage.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new permissionserviceModule.v1beta.PermissionServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'generativelanguage.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'generativelanguage.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new permissionserviceModule.v1beta.PermissionServiceClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = permissionserviceModule.v1beta.PermissionServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'generativelanguage.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'generativelanguage.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = permissionserviceModule.v1beta.PermissionServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'generativelanguage.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'generativelanguage.example.com');
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new permissionserviceModule.v1beta.PermissionServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'generativelanguage.example.com');
         });
-      });
-    });
 
-    it('has port', () => {
-      const port = permissionserviceModule.v1beta.PermissionServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new permissionserviceModule.v1beta.PermissionServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'generativelanguage.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('should create a client with no option', () => {
-      const client =
-        new permissionserviceModule.v1beta.PermissionServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          fallback: true,
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new permissionserviceModule.v1beta.PermissionServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'generativelanguage.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      );
-      assert(client);
-    });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new permissionserviceModule.v1beta.PermissionServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.permissionServiceStub, undefined);
-      await client.initialize();
-      assert(client.permissionServiceStub);
-    });
+        it('has port', () => {
+            const port = permissionserviceModule.v1beta.PermissionServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-    it('has close method for the initialized client', done => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.permissionServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('should create a client with no option', () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.permissionServiceStub, undefined);
+            await client.initialize();
+            assert(client.permissionServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.permissionServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.permissionServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.permissionServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('createPermission', () => {
+        it('invokes createPermission without error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.CreatePermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.CreatePermissionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.Permission()
+            );
+            client.innerApiCalls.createPermission = stubSimpleCall(expectedResponse);
+            const [response] = await client.createPermission(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPermission without error using callback', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.CreatePermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.CreatePermissionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.Permission()
+            );
+            client.innerApiCalls.createPermission = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPermission(
+                    request,
+                    (err?: Error|null, result?: protos.google.ai.generativelanguage.v1beta.IPermission|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPermission with error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.CreatePermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.CreatePermissionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPermission = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createPermission(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPermission with closed client', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.CreatePermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.CreatePermissionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createPermission(request), expectedError);
         });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+    describe('getPermission', () => {
+        it('invokes getPermission without error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.GetPermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.GetPermissionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.Permission()
+            );
+            client.innerApiCalls.getPermission = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPermission(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('createPermission', () => {
-    it('invokes createPermission without error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.CreatePermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.CreatePermissionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.Permission()
-      );
-      client.innerApiCalls.createPermission = stubSimpleCall(expectedResponse);
-      const [response] = await client.createPermission(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes getPermission without error using callback', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.GetPermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.GetPermissionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.Permission()
+            );
+            client.innerApiCalls.getPermission = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPermission(
+                    request,
+                    (err?: Error|null, result?: protos.google.ai.generativelanguage.v1beta.IPermission|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPermission with error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.GetPermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.GetPermissionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPermission = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPermission(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPermission with closed client', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.GetPermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.GetPermissionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPermission(request), expectedError);
+        });
     });
 
-    it('invokes createPermission without error using callback', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.CreatePermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.CreatePermissionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.Permission()
-      );
-      client.innerApiCalls.createPermission =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createPermission(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.ai.generativelanguage.v1beta.IPermission | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('updatePermission', () => {
+        it('invokes updatePermission without error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.UpdatePermissionRequest()
+            );
+            request.permission ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.UpdatePermissionRequest', ['permission', 'name']);
+            request.permission.name = defaultValue1;
+            const expectedHeaderRequestParams = `permission.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.Permission()
+            );
+            client.innerApiCalls.updatePermission = stubSimpleCall(expectedResponse);
+            const [response] = await client.updatePermission(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePermission without error using callback', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.UpdatePermissionRequest()
+            );
+            request.permission ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.UpdatePermissionRequest', ['permission', 'name']);
+            request.permission.name = defaultValue1;
+            const expectedHeaderRequestParams = `permission.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.Permission()
+            );
+            client.innerApiCalls.updatePermission = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updatePermission(
+                    request,
+                    (err?: Error|null, result?: protos.google.ai.generativelanguage.v1beta.IPermission|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePermission with error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.UpdatePermissionRequest()
+            );
+            request.permission ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.UpdatePermissionRequest', ['permission', 'name']);
+            request.permission.name = defaultValue1;
+            const expectedHeaderRequestParams = `permission.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePermission = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updatePermission(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePermission with closed client', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.UpdatePermissionRequest()
+            );
+            request.permission ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.UpdatePermissionRequest', ['permission', 'name']);
+            request.permission.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updatePermission(request), expectedError);
+        });
+    });
+
+    describe('deletePermission', () => {
+        it('invokes deletePermission without error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.DeletePermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.DeletePermissionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePermission = stubSimpleCall(expectedResponse);
+            const [response] = await client.deletePermission(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePermission without error using callback', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.DeletePermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.DeletePermissionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePermission = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deletePermission(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePermission with error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.DeletePermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.DeletePermissionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePermission = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deletePermission(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePermission as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePermission as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePermission with closed client', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.DeletePermissionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.DeletePermissionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deletePermission(request), expectedError);
+        });
+    });
+
+    describe('transferOwnership', () => {
+        it('invokes transferOwnership without error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.TransferOwnershipRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.TransferOwnershipRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.TransferOwnershipResponse()
+            );
+            client.innerApiCalls.transferOwnership = stubSimpleCall(expectedResponse);
+            const [response] = await client.transferOwnership(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.transferOwnership as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.transferOwnership as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes transferOwnership without error using callback', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.TransferOwnershipRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.TransferOwnershipRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.TransferOwnershipResponse()
+            );
+            client.innerApiCalls.transferOwnership = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.transferOwnership(
+                    request,
+                    (err?: Error|null, result?: protos.google.ai.generativelanguage.v1beta.ITransferOwnershipResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.transferOwnership as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.transferOwnership as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes transferOwnership with error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.TransferOwnershipRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.TransferOwnershipRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.transferOwnership = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.transferOwnership(request), expectedError);
+            const actualRequest = (client.innerApiCalls.transferOwnership as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.transferOwnership as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes transferOwnership with closed client', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.TransferOwnershipRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.TransferOwnershipRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.transferOwnership(request), expectedError);
+        });
+    });
+
+    describe('listPermissions', () => {
+        it('invokes listPermissions without error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.ListPermissionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+            ];
+            client.innerApiCalls.listPermissions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPermissions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPermissions without error using callback', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.ListPermissionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+            ];
+            client.innerApiCalls.listPermissions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPermissions(
+                    request,
+                    (err?: Error|null, result?: protos.google.ai.generativelanguage.v1beta.IPermission[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPermissions with error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.ListPermissionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPermissions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPermissionsStream without error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.ListPermissionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+            ];
+            client.descriptors.page.listPermissions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPermissionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.ai.generativelanguage.v1beta.Permission[] = [];
+                stream.on('data', (response: protos.google.ai.generativelanguage.v1beta.Permission) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPermissions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPermissions, request));
+            assert(
+                (client.descriptors.page.listPermissions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPermissionsStream with error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.ListPermissionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPermissions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPermissionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.ai.generativelanguage.v1beta.Permission[] = [];
+                stream.on('data', (response: protos.google.ai.generativelanguage.v1beta.Permission) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPermissions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPermissions, request));
+            assert(
+                (client.descriptors.page.listPermissions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPermissions without error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.ListPermissionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+              generateSampleMessage(new protos.google.ai.generativelanguage.v1beta.Permission()),
+            ];
+            client.descriptors.page.listPermissions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.ai.generativelanguage.v1beta.IPermission[] = [];
+            const iterable = client.listPermissionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPermission with error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.CreatePermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.CreatePermissionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createPermission = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createPermission(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createPermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPermission with closed client', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.CreatePermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.CreatePermissionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createPermission(request), expectedError);
-    });
-  });
-
-  describe('getPermission', () => {
-    it('invokes getPermission without error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.GetPermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.GetPermissionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.Permission()
-      );
-      client.innerApiCalls.getPermission = stubSimpleCall(expectedResponse);
-      const [response] = await client.getPermission(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPermission without error using callback', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.GetPermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.GetPermissionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.Permission()
-      );
-      client.innerApiCalls.getPermission =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPermission(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.ai.generativelanguage.v1beta.IPermission | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPermission with error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.GetPermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.GetPermissionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPermission = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPermission(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getPermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPermission with closed client', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.GetPermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.GetPermissionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getPermission(request), expectedError);
-    });
-  });
-
-  describe('updatePermission', () => {
-    it('invokes updatePermission without error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.UpdatePermissionRequest()
-      );
-      request.permission ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.UpdatePermissionRequest',
-        ['permission', 'name']
-      );
-      request.permission.name = defaultValue1;
-      const expectedHeaderRequestParams = `permission.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.Permission()
-      );
-      client.innerApiCalls.updatePermission = stubSimpleCall(expectedResponse);
-      const [response] = await client.updatePermission(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePermission without error using callback', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.UpdatePermissionRequest()
-      );
-      request.permission ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.UpdatePermissionRequest',
-        ['permission', 'name']
-      );
-      request.permission.name = defaultValue1;
-      const expectedHeaderRequestParams = `permission.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.Permission()
-      );
-      client.innerApiCalls.updatePermission =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updatePermission(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.ai.generativelanguage.v1beta.IPermission | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePermission with error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.UpdatePermissionRequest()
-      );
-      request.permission ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.UpdatePermissionRequest',
-        ['permission', 'name']
-      );
-      request.permission.name = defaultValue1;
-      const expectedHeaderRequestParams = `permission.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updatePermission = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updatePermission(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updatePermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePermission with closed client', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.UpdatePermissionRequest()
-      );
-      request.permission ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.UpdatePermissionRequest',
-        ['permission', 'name']
-      );
-      request.permission.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updatePermission(request), expectedError);
-    });
-  });
-
-  describe('deletePermission', () => {
-    it('invokes deletePermission without error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.DeletePermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.DeletePermissionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePermission = stubSimpleCall(expectedResponse);
-      const [response] = await client.deletePermission(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePermission without error using callback', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.DeletePermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.DeletePermissionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePermission =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deletePermission(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePermission with error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.DeletePermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.DeletePermissionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePermission = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deletePermission(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deletePermission as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePermission as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePermission with closed client', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.DeletePermissionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.DeletePermissionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deletePermission(request), expectedError);
-    });
-  });
-
-  describe('transferOwnership', () => {
-    it('invokes transferOwnership without error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.TransferOwnershipRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.TransferOwnershipRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.TransferOwnershipResponse()
-      );
-      client.innerApiCalls.transferOwnership = stubSimpleCall(expectedResponse);
-      const [response] = await client.transferOwnership(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.transferOwnership as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.transferOwnership as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes transferOwnership without error using callback', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.TransferOwnershipRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.TransferOwnershipRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.TransferOwnershipResponse()
-      );
-      client.innerApiCalls.transferOwnership =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.transferOwnership(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.ai.generativelanguage.v1beta.ITransferOwnershipResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.transferOwnership as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.transferOwnership as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes transferOwnership with error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.TransferOwnershipRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.TransferOwnershipRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.transferOwnership = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.transferOwnership(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.transferOwnership as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.transferOwnership as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes transferOwnership with closed client', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.TransferOwnershipRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.TransferOwnershipRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.transferOwnership(request), expectedError);
-    });
-  });
-
-  describe('listPermissions', () => {
-    it('invokes listPermissions without error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.ListPermissionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-      ];
-      client.innerApiCalls.listPermissions = stubSimpleCall(expectedResponse);
-      const [response] = await client.listPermissions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPermissions without error using callback', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.ListPermissionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-      ];
-      client.innerApiCalls.listPermissions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPermissions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.ai.generativelanguage.v1beta.IPermission[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPermissions with error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.ListPermissionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listPermissions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPermissionsStream without error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.ListPermissionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-      ];
-      client.descriptors.page.listPermissions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPermissionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.ai.generativelanguage.v1beta.Permission[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.ai.generativelanguage.v1beta.Permission) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPermissions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPermissions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listPermissions with error', async () => {
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ai.generativelanguage.v1beta.ListPermissionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPermissions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPermissionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.ai.generativelanguage.v1beta.IPermission[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPermissions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPermissions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listPermissions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPermissions, request)
-      );
-      assert(
-        (client.descriptors.page.listPermissions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listPermissionsStream with error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.ListPermissionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPermissions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPermissionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.ai.generativelanguage.v1beta.Permission[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.ai.generativelanguage.v1beta.Permission) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('Path templates', () => {
+
+        describe('cachedContent', async () => {
+            const fakePath = "/rendered/path/cachedContent";
+            const expectedParameters = {
+                id: "idValue",
+            };
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cachedContentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cachedContentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cachedContentPath', () => {
+                const result = client.cachedContentPath("idValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cachedContentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchIdFromCachedContentName', () => {
+                const result = client.matchIdFromCachedContentName(fakePath);
+                assert.strictEqual(result, "idValue");
+                assert((client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        describe('chunk', async () => {
+            const fakePath = "/rendered/path/chunk";
+            const expectedParameters = {
+                corpus: "corpusValue",
+                document: "documentValue",
+                chunk: "chunkValue",
+            };
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.chunkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.chunkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('chunkPath', () => {
+                const result = client.chunkPath("corpusValue", "documentValue", "chunkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.chunkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchCorpusFromChunkName', () => {
+                const result = client.matchCorpusFromChunkName(fakePath);
+                assert.strictEqual(result, "corpusValue");
+                assert((client.pathTemplates.chunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromChunkName', () => {
+                const result = client.matchDocumentFromChunkName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.chunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChunkFromChunkName', () => {
+                const result = client.matchChunkFromChunkName(fakePath);
+                assert.strictEqual(result, "chunkValue");
+                assert((client.pathTemplates.chunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listPermissions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPermissions, request)
-      );
-      assert(
-        (client.descriptors.page.listPermissions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        describe('corpus', async () => {
+            const fakePath = "/rendered/path/corpus";
+            const expectedParameters = {
+                corpus: "corpusValue",
+            };
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.corpusPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.corpusPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('corpusPath', () => {
+                const result = client.corpusPath("corpusValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.corpusPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchCorpusFromCorpusName', () => {
+                const result = client.matchCorpusFromCorpusName(fakePath);
+                assert.strictEqual(result, "corpusValue");
+                assert((client.pathTemplates.corpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('corpusPermissions', async () => {
+            const fakePath = "/rendered/path/corpusPermissions";
+            const expectedParameters = {
+                corpus: "corpusValue",
+                permission: "permissionValue",
+            };
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.corpusPermissionsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.corpusPermissionsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('corpusPermissionsPath', () => {
+                const result = client.corpusPermissionsPath("corpusValue", "permissionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.corpusPermissionsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchCorpusFromCorpusPermissionsName', () => {
+                const result = client.matchCorpusFromCorpusPermissionsName(fakePath);
+                assert.strictEqual(result, "corpusValue");
+                assert((client.pathTemplates.corpusPermissionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPermissionFromCorpusPermissionsName', () => {
+                const result = client.matchPermissionFromCorpusPermissionsName(fakePath);
+                assert.strictEqual(result, "permissionValue");
+                assert((client.pathTemplates.corpusPermissionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('document', async () => {
+            const fakePath = "/rendered/path/document";
+            const expectedParameters = {
+                corpus: "corpusValue",
+                document: "documentValue",
+            };
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.documentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.documentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('documentPath', () => {
+                const result = client.documentPath("corpusValue", "documentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.documentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchCorpusFromDocumentName', () => {
+                const result = client.matchCorpusFromDocumentName(fakePath);
+                assert.strictEqual(result, "corpusValue");
+                assert((client.pathTemplates.documentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDocumentFromDocumentName', () => {
+                const result = client.matchDocumentFromDocumentName(fakePath);
+                assert.strictEqual(result, "documentValue");
+                assert((client.pathTemplates.documentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('file', async () => {
+            const fakePath = "/rendered/path/file";
+            const expectedParameters = {
+                file: "fileValue",
+            };
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.filePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.filePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('filePath', () => {
+                const result = client.filePath("fileValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.filePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFileFromFileName', () => {
+                const result = client.matchFileFromFileName(fakePath);
+                assert.strictEqual(result, "fileValue");
+                assert((client.pathTemplates.filePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('model', async () => {
+            const fakePath = "/rendered/path/model";
+            const expectedParameters = {
+                model: "modelValue",
+            };
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.modelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.modelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('modelPath', () => {
+                const result = client.modelPath("modelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.modelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchModelFromModelName', () => {
+                const result = client.matchModelFromModelName(fakePath);
+                assert.strictEqual(result, "modelValue");
+                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tunedModel', async () => {
+            const fakePath = "/rendered/path/tunedModel";
+            const expectedParameters = {
+                tuned_model: "tunedModelValue",
+            };
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tunedModelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tunedModelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tunedModelPath', () => {
+                const result = client.tunedModelPath("tunedModelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tunedModelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchTunedModelFromTunedModelName', () => {
+                const result = client.matchTunedModelFromTunedModelName(fakePath);
+                assert.strictEqual(result, "tunedModelValue");
+                assert((client.pathTemplates.tunedModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tunedModelPermissions', async () => {
+            const fakePath = "/rendered/path/tunedModelPermissions";
+            const expectedParameters = {
+                tuned_model: "tunedModelValue",
+                permission: "permissionValue",
+            };
+            const client = new permissionserviceModule.v1beta.PermissionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tunedModelPermissionsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tunedModelPermissionsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tunedModelPermissionsPath', () => {
+                const result = client.tunedModelPermissionsPath("tunedModelValue", "permissionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tunedModelPermissionsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchTunedModelFromTunedModelPermissionsName', () => {
+                const result = client.matchTunedModelFromTunedModelPermissionsName(fakePath);
+                assert.strictEqual(result, "tunedModelValue");
+                assert((client.pathTemplates.tunedModelPermissionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPermissionFromTunedModelPermissionsName', () => {
+                const result = client.matchPermissionFromTunedModelPermissionsName(fakePath);
+                assert.strictEqual(result, "permissionValue");
+                assert((client.pathTemplates.tunedModelPermissionsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    it('uses async iteration with listPermissions without error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.ListPermissionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-        generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.Permission()
-        ),
-      ];
-      client.descriptors.page.listPermissions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.ai.generativelanguage.v1beta.IPermission[] =
-        [];
-      const iterable = client.listPermissionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPermissions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPermissions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listPermissions with error', async () => {
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.ListPermissionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPermissions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPermissionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.ai.generativelanguage.v1beta.IPermission[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPermissions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPermissions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('cachedContent', async () => {
-      const fakePath = '/rendered/path/cachedContent';
-      const expectedParameters = {
-        id: 'idValue',
-      };
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.cachedContentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cachedContentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('cachedContentPath', () => {
-        const result = client.cachedContentPath('idValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cachedContentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchIdFromCachedContentName', () => {
-        const result = client.matchIdFromCachedContentName(fakePath);
-        assert.strictEqual(result, 'idValue');
-        assert(
-          (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('chunk', async () => {
-      const fakePath = '/rendered/path/chunk';
-      const expectedParameters = {
-        corpus: 'corpusValue',
-        document: 'documentValue',
-        chunk: 'chunkValue',
-      };
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.chunkPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.chunkPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('chunkPath', () => {
-        const result = client.chunkPath(
-          'corpusValue',
-          'documentValue',
-          'chunkValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.chunkPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchCorpusFromChunkName', () => {
-        const result = client.matchCorpusFromChunkName(fakePath);
-        assert.strictEqual(result, 'corpusValue');
-        assert(
-          (client.pathTemplates.chunkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromChunkName', () => {
-        const result = client.matchDocumentFromChunkName(fakePath);
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (client.pathTemplates.chunkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchChunkFromChunkName', () => {
-        const result = client.matchChunkFromChunkName(fakePath);
-        assert.strictEqual(result, 'chunkValue');
-        assert(
-          (client.pathTemplates.chunkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('corpus', async () => {
-      const fakePath = '/rendered/path/corpus';
-      const expectedParameters = {
-        corpus: 'corpusValue',
-      };
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.corpusPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.corpusPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('corpusPath', () => {
-        const result = client.corpusPath('corpusValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.corpusPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchCorpusFromCorpusName', () => {
-        const result = client.matchCorpusFromCorpusName(fakePath);
-        assert.strictEqual(result, 'corpusValue');
-        assert(
-          (client.pathTemplates.corpusPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('corpusPermission', async () => {
-      const fakePath = '/rendered/path/corpusPermission';
-      const expectedParameters = {
-        corpus: 'corpusValue',
-        permission: 'permissionValue',
-      };
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.corpusPermissionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.corpusPermissionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('corpusPermissionPath', () => {
-        const result = client.corpusPermissionPath(
-          'corpusValue',
-          'permissionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.corpusPermissionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchCorpusFromCorpusPermissionName', () => {
-        const result = client.matchCorpusFromCorpusPermissionName(fakePath);
-        assert.strictEqual(result, 'corpusValue');
-        assert(
-          (client.pathTemplates.corpusPermissionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPermissionFromCorpusPermissionName', () => {
-        const result = client.matchPermissionFromCorpusPermissionName(fakePath);
-        assert.strictEqual(result, 'permissionValue');
-        assert(
-          (client.pathTemplates.corpusPermissionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('document', async () => {
-      const fakePath = '/rendered/path/document';
-      const expectedParameters = {
-        corpus: 'corpusValue',
-        document: 'documentValue',
-      };
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.documentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.documentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('documentPath', () => {
-        const result = client.documentPath('corpusValue', 'documentValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.documentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchCorpusFromDocumentName', () => {
-        const result = client.matchCorpusFromDocumentName(fakePath);
-        assert.strictEqual(result, 'corpusValue');
-        assert(
-          (client.pathTemplates.documentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromDocumentName', () => {
-        const result = client.matchDocumentFromDocumentName(fakePath);
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (client.pathTemplates.documentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('file', async () => {
-      const fakePath = '/rendered/path/file';
-      const expectedParameters = {
-        file: 'fileValue',
-      };
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.filePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.filePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('filePath', () => {
-        const result = client.filePath('fileValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.filePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFileFromFileName', () => {
-        const result = client.matchFileFromFileName(fakePath);
-        assert.strictEqual(result, 'fileValue');
-        assert(
-          (client.pathTemplates.filePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('model', async () => {
-      const fakePath = '/rendered/path/model';
-      const expectedParameters = {
-        model: 'modelValue',
-      };
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.modelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.modelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('modelPath', () => {
-        const result = client.modelPath('modelValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.modelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchModelFromModelName', () => {
-        const result = client.matchModelFromModelName(fakePath);
-        assert.strictEqual(result, 'modelValue');
-        assert(
-          (client.pathTemplates.modelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('tunedModel', async () => {
-      const fakePath = '/rendered/path/tunedModel';
-      const expectedParameters = {
-        tuned_model: 'tunedModelValue',
-      };
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.tunedModelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tunedModelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('tunedModelPath', () => {
-        const result = client.tunedModelPath('tunedModelValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tunedModelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchTunedModelFromTunedModelName', () => {
-        const result = client.matchTunedModelFromTunedModelName(fakePath);
-        assert.strictEqual(result, 'tunedModelValue');
-        assert(
-          (client.pathTemplates.tunedModelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('tunedModelPermission', async () => {
-      const fakePath = '/rendered/path/tunedModelPermission';
-      const expectedParameters = {
-        tuned_model: 'tunedModelValue',
-        permission: 'permissionValue',
-      };
-      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.tunedModelPermissionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tunedModelPermissionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('tunedModelPermissionPath', () => {
-        const result = client.tunedModelPermissionPath(
-          'tunedModelValue',
-          'permissionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.tunedModelPermissionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchTunedModelFromTunedModelPermissionName', () => {
-        const result =
-          client.matchTunedModelFromTunedModelPermissionName(fakePath);
-        assert.strictEqual(result, 'tunedModelValue');
-        assert(
-          (
-            client.pathTemplates.tunedModelPermissionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPermissionFromTunedModelPermissionName', () => {
-        const result =
-          client.matchPermissionFromTunedModelPermissionName(fakePath);
-        assert.strictEqual(result, 'permissionValue');
-        assert(
-          (
-            client.pathTemplates.tunedModelPermissionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,42 +100,20 @@ export class ConferenceRecordsServiceClient {
    *     const client = new ConferenceRecordsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof ConferenceRecordsServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof ConferenceRecordsServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'meet.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class ConferenceRecordsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class ConferenceRecordsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -218,7 +192,9 @@ export class ConferenceRecordsServiceClient {
       recordingPathTemplate: new this._gaxModule.PathTemplate(
         'conferenceRecords/{conference_record}/recordings/{recording}'
       ),
-      spacePathTemplate: new this._gaxModule.PathTemplate('spaces/{space}'),
+      spacePathTemplate: new this._gaxModule.PathTemplate(
+        'spaces/{space}'
+      ),
       transcriptPathTemplate: new this._gaxModule.PathTemplate(
         'conferenceRecords/{conference_record}/transcripts/{transcript}'
       ),
@@ -231,45 +207,24 @@ export class ConferenceRecordsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConferenceRecords: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'conferenceRecords'
-      ),
-      listParticipants: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'participants'
-      ),
-      listParticipantSessions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'participantSessions'
-      ),
-      listRecordings: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'recordings'
-      ),
-      listTranscripts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'transcripts'
-      ),
-      listTranscriptEntries: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'transcriptEntries'
-      ),
+      listConferenceRecords:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'conferenceRecords'),
+      listParticipants:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'participants'),
+      listParticipantSessions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'participantSessions'),
+      listRecordings:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'recordings'),
+      listTranscripts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'transcripts'),
+      listTranscriptEntries:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'transcriptEntries')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.apps.meet.v2beta.ConferenceRecordsService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.apps.meet.v2beta.ConferenceRecordsService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -300,49 +255,32 @@ export class ConferenceRecordsServiceClient {
     // Put together the "service stub" for
     // google.apps.meet.v2beta.ConferenceRecordsService.
     this.conferenceRecordsServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.apps.meet.v2beta.ConferenceRecordsService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.apps.meet.v2beta
-            .ConferenceRecordsService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.apps.meet.v2beta.ConferenceRecordsService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.apps.meet.v2beta.ConferenceRecordsService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const conferenceRecordsServiceStubMethods = [
-      'getConferenceRecord',
-      'listConferenceRecords',
-      'getParticipant',
-      'listParticipants',
-      'getParticipantSession',
-      'listParticipantSessions',
-      'getRecording',
-      'listRecordings',
-      'getTranscript',
-      'listTranscripts',
-      'getTranscriptEntry',
-      'listTranscriptEntries',
-    ];
+    const conferenceRecordsServiceStubMethods =
+        ['getConferenceRecord', 'listConferenceRecords', 'getParticipant', 'listParticipants', 'getParticipantSession', 'listParticipantSessions', 'getRecording', 'listRecordings', 'getTranscript', 'listTranscripts', 'getTranscriptEntry', 'listTranscriptEntries'];
     for (const methodName of conferenceRecordsServiceStubMethods) {
       const callPromise = this.conferenceRecordsServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -362,14 +300,8 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'meet.googleapis.com';
   }
@@ -380,14 +312,8 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'meet.googleapis.com';
   }
@@ -420,7 +346,7 @@ export class ConferenceRecordsServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/meetings.space.created',
-      'https://www.googleapis.com/auth/meetings.space.readonly',
+      'https://www.googleapis.com/auth/meetings.space.readonly'
     ];
   }
 
@@ -430,9 +356,8 @@ export class ConferenceRecordsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -443,828 +368,670 @@ export class ConferenceRecordsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a conference record by conference ID.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the conference.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.ConferenceRecord|ConferenceRecord}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.get_conference_record.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetConferenceRecord_async
-   */
+/**
+ * Gets a conference record by conference ID.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the conference.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.ConferenceRecord|ConferenceRecord}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.get_conference_record.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetConferenceRecord_async
+ */
   getConferenceRecord(
-    request?: protos.google.apps.meet.v2beta.IGetConferenceRecordRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IConferenceRecord,
-      protos.google.apps.meet.v2beta.IGetConferenceRecordRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IGetConferenceRecordRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.IConferenceRecord,
+        protos.google.apps.meet.v2beta.IGetConferenceRecordRequest|undefined, {}|undefined
+      ]>;
   getConferenceRecord(
-    request: protos.google.apps.meet.v2beta.IGetConferenceRecordRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.IConferenceRecord,
-      | protos.google.apps.meet.v2beta.IGetConferenceRecordRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConferenceRecord(
-    request: protos.google.apps.meet.v2beta.IGetConferenceRecordRequest,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.IConferenceRecord,
-      | protos.google.apps.meet.v2beta.IGetConferenceRecordRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConferenceRecord(
-    request?: protos.google.apps.meet.v2beta.IGetConferenceRecordRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.apps.meet.v2beta.IGetConferenceRecordRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.apps.meet.v2beta.IConferenceRecord,
-          | protos.google.apps.meet.v2beta.IGetConferenceRecordRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.apps.meet.v2beta.IConferenceRecord,
-      | protos.google.apps.meet.v2beta.IGetConferenceRecordRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IConferenceRecord,
-      protos.google.apps.meet.v2beta.IGetConferenceRecordRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IGetConferenceRecordRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConferenceRecord(
+      request: protos.google.apps.meet.v2beta.IGetConferenceRecordRequest,
+      callback: Callback<
+          protos.google.apps.meet.v2beta.IConferenceRecord,
+          protos.google.apps.meet.v2beta.IGetConferenceRecordRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConferenceRecord(
+      request?: protos.google.apps.meet.v2beta.IGetConferenceRecordRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.apps.meet.v2beta.IConferenceRecord,
+          protos.google.apps.meet.v2beta.IGetConferenceRecordRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.apps.meet.v2beta.IConferenceRecord,
+          protos.google.apps.meet.v2beta.IGetConferenceRecordRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.apps.meet.v2beta.IConferenceRecord,
+        protos.google.apps.meet.v2beta.IGetConferenceRecordRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getConferenceRecord request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.apps.meet.v2beta.IConferenceRecord,
-          | protos.google.apps.meet.v2beta.IGetConferenceRecordRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.apps.meet.v2beta.IConferenceRecord,
+        protos.google.apps.meet.v2beta.IGetConferenceRecordRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConferenceRecord response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getConferenceRecord(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.apps.meet.v2beta.IConferenceRecord,
-          (
-            | protos.google.apps.meet.v2beta.IGetConferenceRecordRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getConferenceRecord response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getConferenceRecord(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.apps.meet.v2beta.IConferenceRecord,
+        protos.google.apps.meet.v2beta.IGetConferenceRecordRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getConferenceRecord response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a participant by participant ID.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the participant.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.Participant|Participant}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.get_participant.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetParticipant_async
-   */
+/**
+ * Gets a participant by participant ID.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the participant.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.Participant|Participant}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.get_participant.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetParticipant_async
+ */
   getParticipant(
-    request?: protos.google.apps.meet.v2beta.IGetParticipantRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IParticipant,
-      protos.google.apps.meet.v2beta.IGetParticipantRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IGetParticipantRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.IParticipant,
+        protos.google.apps.meet.v2beta.IGetParticipantRequest|undefined, {}|undefined
+      ]>;
   getParticipant(
-    request: protos.google.apps.meet.v2beta.IGetParticipantRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.IParticipant,
-      protos.google.apps.meet.v2beta.IGetParticipantRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getParticipant(
-    request: protos.google.apps.meet.v2beta.IGetParticipantRequest,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.IParticipant,
-      protos.google.apps.meet.v2beta.IGetParticipantRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getParticipant(
-    request?: protos.google.apps.meet.v2beta.IGetParticipantRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.apps.meet.v2beta.IGetParticipantRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.apps.meet.v2beta.IParticipant,
-          | protos.google.apps.meet.v2beta.IGetParticipantRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.apps.meet.v2beta.IParticipant,
-      protos.google.apps.meet.v2beta.IGetParticipantRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IParticipant,
-      protos.google.apps.meet.v2beta.IGetParticipantRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IGetParticipantRequest|null|undefined,
+          {}|null|undefined>): void;
+  getParticipant(
+      request: protos.google.apps.meet.v2beta.IGetParticipantRequest,
+      callback: Callback<
+          protos.google.apps.meet.v2beta.IParticipant,
+          protos.google.apps.meet.v2beta.IGetParticipantRequest|null|undefined,
+          {}|null|undefined>): void;
+  getParticipant(
+      request?: protos.google.apps.meet.v2beta.IGetParticipantRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.apps.meet.v2beta.IParticipant,
+          protos.google.apps.meet.v2beta.IGetParticipantRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.apps.meet.v2beta.IParticipant,
+          protos.google.apps.meet.v2beta.IGetParticipantRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.apps.meet.v2beta.IParticipant,
+        protos.google.apps.meet.v2beta.IGetParticipantRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getParticipant request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.apps.meet.v2beta.IParticipant,
-          | protos.google.apps.meet.v2beta.IGetParticipantRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.apps.meet.v2beta.IParticipant,
+        protos.google.apps.meet.v2beta.IGetParticipantRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getParticipant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getParticipant(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.apps.meet.v2beta.IParticipant,
-          protos.google.apps.meet.v2beta.IGetParticipantRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getParticipant response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getParticipant(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.apps.meet.v2beta.IParticipant,
+        protos.google.apps.meet.v2beta.IGetParticipantRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getParticipant response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a participant session by participant session ID.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the participant.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.ParticipantSession|ParticipantSession}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.get_participant_session.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetParticipantSession_async
-   */
+/**
+ * Gets a participant session by participant session ID.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the participant.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.ParticipantSession|ParticipantSession}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.get_participant_session.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetParticipantSession_async
+ */
   getParticipantSession(
-    request?: protos.google.apps.meet.v2beta.IGetParticipantSessionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IParticipantSession,
-      protos.google.apps.meet.v2beta.IGetParticipantSessionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IGetParticipantSessionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.IParticipantSession,
+        protos.google.apps.meet.v2beta.IGetParticipantSessionRequest|undefined, {}|undefined
+      ]>;
   getParticipantSession(
-    request: protos.google.apps.meet.v2beta.IGetParticipantSessionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.IParticipantSession,
-      | protos.google.apps.meet.v2beta.IGetParticipantSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getParticipantSession(
-    request: protos.google.apps.meet.v2beta.IGetParticipantSessionRequest,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.IParticipantSession,
-      | protos.google.apps.meet.v2beta.IGetParticipantSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getParticipantSession(
-    request?: protos.google.apps.meet.v2beta.IGetParticipantSessionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.apps.meet.v2beta.IGetParticipantSessionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.apps.meet.v2beta.IParticipantSession,
-          | protos.google.apps.meet.v2beta.IGetParticipantSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.apps.meet.v2beta.IParticipantSession,
-      | protos.google.apps.meet.v2beta.IGetParticipantSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IParticipantSession,
-      protos.google.apps.meet.v2beta.IGetParticipantSessionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IGetParticipantSessionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getParticipantSession(
+      request: protos.google.apps.meet.v2beta.IGetParticipantSessionRequest,
+      callback: Callback<
+          protos.google.apps.meet.v2beta.IParticipantSession,
+          protos.google.apps.meet.v2beta.IGetParticipantSessionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getParticipantSession(
+      request?: protos.google.apps.meet.v2beta.IGetParticipantSessionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.apps.meet.v2beta.IParticipantSession,
+          protos.google.apps.meet.v2beta.IGetParticipantSessionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.apps.meet.v2beta.IParticipantSession,
+          protos.google.apps.meet.v2beta.IGetParticipantSessionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.apps.meet.v2beta.IParticipantSession,
+        protos.google.apps.meet.v2beta.IGetParticipantSessionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getParticipantSession request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.apps.meet.v2beta.IParticipantSession,
-          | protos.google.apps.meet.v2beta.IGetParticipantSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.apps.meet.v2beta.IParticipantSession,
+        protos.google.apps.meet.v2beta.IGetParticipantSessionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getParticipantSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getParticipantSession(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.apps.meet.v2beta.IParticipantSession,
-          (
-            | protos.google.apps.meet.v2beta.IGetParticipantSessionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getParticipantSession response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getParticipantSession(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.apps.meet.v2beta.IParticipantSession,
+        protos.google.apps.meet.v2beta.IGetParticipantSessionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getParticipantSession response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a recording by recording ID.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the recording.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.Recording|Recording}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.get_recording.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetRecording_async
-   */
+/**
+ * Gets a recording by recording ID.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the recording.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.Recording|Recording}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.get_recording.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetRecording_async
+ */
   getRecording(
-    request?: protos.google.apps.meet.v2beta.IGetRecordingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IRecording,
-      protos.google.apps.meet.v2beta.IGetRecordingRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IGetRecordingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.IRecording,
+        protos.google.apps.meet.v2beta.IGetRecordingRequest|undefined, {}|undefined
+      ]>;
   getRecording(
-    request: protos.google.apps.meet.v2beta.IGetRecordingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.IRecording,
-      protos.google.apps.meet.v2beta.IGetRecordingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRecording(
-    request: protos.google.apps.meet.v2beta.IGetRecordingRequest,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.IRecording,
-      protos.google.apps.meet.v2beta.IGetRecordingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRecording(
-    request?: protos.google.apps.meet.v2beta.IGetRecordingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.apps.meet.v2beta.IGetRecordingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.apps.meet.v2beta.IRecording,
-          | protos.google.apps.meet.v2beta.IGetRecordingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.apps.meet.v2beta.IRecording,
-      protos.google.apps.meet.v2beta.IGetRecordingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IRecording,
-      protos.google.apps.meet.v2beta.IGetRecordingRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IGetRecordingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRecording(
+      request: protos.google.apps.meet.v2beta.IGetRecordingRequest,
+      callback: Callback<
+          protos.google.apps.meet.v2beta.IRecording,
+          protos.google.apps.meet.v2beta.IGetRecordingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRecording(
+      request?: protos.google.apps.meet.v2beta.IGetRecordingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.apps.meet.v2beta.IRecording,
+          protos.google.apps.meet.v2beta.IGetRecordingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.apps.meet.v2beta.IRecording,
+          protos.google.apps.meet.v2beta.IGetRecordingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.apps.meet.v2beta.IRecording,
+        protos.google.apps.meet.v2beta.IGetRecordingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRecording request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.apps.meet.v2beta.IRecording,
-          | protos.google.apps.meet.v2beta.IGetRecordingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.apps.meet.v2beta.IRecording,
+        protos.google.apps.meet.v2beta.IGetRecordingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRecording response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRecording(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.apps.meet.v2beta.IRecording,
-          protos.google.apps.meet.v2beta.IGetRecordingRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getRecording response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRecording(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.apps.meet.v2beta.IRecording,
+        protos.google.apps.meet.v2beta.IGetRecordingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRecording response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a transcript by transcript ID.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the transcript.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.Transcript|Transcript}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.get_transcript.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetTranscript_async
-   */
+/**
+ * Gets a transcript by transcript ID.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the transcript.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.Transcript|Transcript}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.get_transcript.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetTranscript_async
+ */
   getTranscript(
-    request?: protos.google.apps.meet.v2beta.IGetTranscriptRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.ITranscript,
-      protos.google.apps.meet.v2beta.IGetTranscriptRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IGetTranscriptRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.ITranscript,
+        protos.google.apps.meet.v2beta.IGetTranscriptRequest|undefined, {}|undefined
+      ]>;
   getTranscript(
-    request: protos.google.apps.meet.v2beta.IGetTranscriptRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.ITranscript,
-      protos.google.apps.meet.v2beta.IGetTranscriptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTranscript(
-    request: protos.google.apps.meet.v2beta.IGetTranscriptRequest,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.ITranscript,
-      protos.google.apps.meet.v2beta.IGetTranscriptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTranscript(
-    request?: protos.google.apps.meet.v2beta.IGetTranscriptRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.apps.meet.v2beta.IGetTranscriptRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.apps.meet.v2beta.ITranscript,
-          | protos.google.apps.meet.v2beta.IGetTranscriptRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.apps.meet.v2beta.ITranscript,
-      protos.google.apps.meet.v2beta.IGetTranscriptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.ITranscript,
-      protos.google.apps.meet.v2beta.IGetTranscriptRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IGetTranscriptRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTranscript(
+      request: protos.google.apps.meet.v2beta.IGetTranscriptRequest,
+      callback: Callback<
+          protos.google.apps.meet.v2beta.ITranscript,
+          protos.google.apps.meet.v2beta.IGetTranscriptRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTranscript(
+      request?: protos.google.apps.meet.v2beta.IGetTranscriptRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.apps.meet.v2beta.ITranscript,
+          protos.google.apps.meet.v2beta.IGetTranscriptRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.apps.meet.v2beta.ITranscript,
+          protos.google.apps.meet.v2beta.IGetTranscriptRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.apps.meet.v2beta.ITranscript,
+        protos.google.apps.meet.v2beta.IGetTranscriptRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getTranscript request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.apps.meet.v2beta.ITranscript,
-          | protos.google.apps.meet.v2beta.IGetTranscriptRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.apps.meet.v2beta.ITranscript,
+        protos.google.apps.meet.v2beta.IGetTranscriptRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTranscript response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getTranscript(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.apps.meet.v2beta.ITranscript,
-          protos.google.apps.meet.v2beta.IGetTranscriptRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getTranscript response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getTranscript(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.apps.meet.v2beta.ITranscript,
+        protos.google.apps.meet.v2beta.IGetTranscriptRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTranscript response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a `TranscriptEntry` resource by entry ID.
-   *
-   * Note: The transcript entries returned by the Google Meet API might not
-   * match the transcription found in the Google Docs transcript file. This can
-   * occur when the Google Docs transcript file is modified after generation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the `TranscriptEntry`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.TranscriptEntry|TranscriptEntry}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.get_transcript_entry.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetTranscriptEntry_async
-   */
+/**
+ * Gets a `TranscriptEntry` resource by entry ID.
+ *
+ * Note: The transcript entries returned by the Google Meet API might not
+ * match the transcription found in the Google Docs transcript file. This can
+ * occur when the Google Docs transcript file is modified after generation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the `TranscriptEntry`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.TranscriptEntry|TranscriptEntry}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.get_transcript_entry.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetTranscriptEntry_async
+ */
   getTranscriptEntry(
-    request?: protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.ITranscriptEntry,
-      protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.ITranscriptEntry,
+        protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest|undefined, {}|undefined
+      ]>;
   getTranscriptEntry(
-    request: protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.ITranscriptEntry,
-      | protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTranscriptEntry(
-    request: protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest,
-    callback: Callback<
-      protos.google.apps.meet.v2beta.ITranscriptEntry,
-      | protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTranscriptEntry(
-    request?: protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.apps.meet.v2beta.ITranscriptEntry,
-          | protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.apps.meet.v2beta.ITranscriptEntry,
-      | protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.ITranscriptEntry,
-      protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTranscriptEntry(
+      request: protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest,
+      callback: Callback<
+          protos.google.apps.meet.v2beta.ITranscriptEntry,
+          protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTranscriptEntry(
+      request?: protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.apps.meet.v2beta.ITranscriptEntry,
+          protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.apps.meet.v2beta.ITranscriptEntry,
+          protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.apps.meet.v2beta.ITranscriptEntry,
+        protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getTranscriptEntry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.apps.meet.v2beta.ITranscriptEntry,
-          | protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.apps.meet.v2beta.ITranscriptEntry,
+        protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTranscriptEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getTranscriptEntry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.apps.meet.v2beta.ITranscriptEntry,
-          protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getTranscriptEntry response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getTranscriptEntry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.apps.meet.v2beta.ITranscriptEntry,
+        protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTranscriptEntry response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists the conference records. By default, ordered by start time and in
-   * descending order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of conference records to return. The service might
-   *   return fewer than this value. If unspecified, at most 25 conference records
-   *   are returned. The maximum value is 100; values above 100 are coerced to
-   *   100. Maximum might change in the future.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token returned from previous List Call.
-   * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in [EBNF
-   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
-   *   The following are the filterable fields:
-   *
-   *   * `space.meeting_code`
-   *   * `space.name`
-   *   * `start_time`
-   *   * `end_time`
-   *
-   *   For example, consider the following filters:
-   *
-   *   * `space.name = "spaces/NAME"`
-   *   * `space.meeting_code = "abc-mnop-xyz"`
-   *   * `start_time>="2024-01-01T00:00:00.000Z" AND
-   *   start_time<="2024-01-02T00:00:00.000Z"`
-   *   * `end_time IS NULL`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.ConferenceRecord|ConferenceRecord}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConferenceRecordsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the conference records. By default, ordered by start time and in
+ * descending order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of conference records to return. The service might
+ *   return fewer than this value. If unspecified, at most 25 conference records
+ *   are returned. The maximum value is 100; values above 100 are coerced to
+ *   100. Maximum might change in the future.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token returned from previous List Call.
+ * @param {string} [request.filter]
+ *   Optional. User specified filtering condition in [EBNF
+ *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+ *   The following are the filterable fields:
+ *
+ *   * `space.meeting_code`
+ *   * `space.name`
+ *   * `start_time`
+ *   * `end_time`
+ *
+ *   For example, consider the following filters:
+ *
+ *   * `space.name = "spaces/NAME"`
+ *   * `space.meeting_code = "abc-mnop-xyz"`
+ *   * `start_time>="2024-01-01T00:00:00.000Z" AND
+ *   start_time<="2024-01-02T00:00:00.000Z"`
+ *   * `end_time IS NULL`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.ConferenceRecord|ConferenceRecord}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listConferenceRecordsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConferenceRecords(
-    request?: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IConferenceRecord[],
-      protos.google.apps.meet.v2beta.IListConferenceRecordsRequest | null,
-      protos.google.apps.meet.v2beta.IListConferenceRecordsResponse,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.IConferenceRecord[],
+        protos.google.apps.meet.v2beta.IListConferenceRecordsRequest|null,
+        protos.google.apps.meet.v2beta.IListConferenceRecordsResponse
+      ]>;
   listConferenceRecords(
-    request: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
-      | protos.google.apps.meet.v2beta.IListConferenceRecordsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.IConferenceRecord
-    >
-  ): void;
-  listConferenceRecords(
-    request: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
-      | protos.google.apps.meet.v2beta.IListConferenceRecordsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.IConferenceRecord
-    >
-  ): void;
-  listConferenceRecords(
-    request?: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
-          | protos.google.apps.meet.v2beta.IListConferenceRecordsResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.IConferenceRecord
-        >,
-    callback?: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
-      | protos.google.apps.meet.v2beta.IListConferenceRecordsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.IConferenceRecord
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IConferenceRecord[],
-      protos.google.apps.meet.v2beta.IListConferenceRecordsRequest | null,
-      protos.google.apps.meet.v2beta.IListConferenceRecordsResponse,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IListConferenceRecordsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IConferenceRecord>): void;
+  listConferenceRecords(
+      request: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
+      callback: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
+          protos.google.apps.meet.v2beta.IListConferenceRecordsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IConferenceRecord>): void;
+  listConferenceRecords(
+      request?: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
+          protos.google.apps.meet.v2beta.IListConferenceRecordsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IConferenceRecord>,
+      callback?: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
+          protos.google.apps.meet.v2beta.IListConferenceRecordsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IConferenceRecord>):
+      Promise<[
+        protos.google.apps.meet.v2beta.IConferenceRecord[],
+        protos.google.apps.meet.v2beta.IListConferenceRecordsRequest|null,
+        protos.google.apps.meet.v2beta.IListConferenceRecordsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
-          | protos.google.apps.meet.v2beta.IListConferenceRecordsResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.IConferenceRecord
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
+      protos.google.apps.meet.v2beta.IListConferenceRecordsResponse|null|undefined,
+      protos.google.apps.meet.v2beta.IConferenceRecord>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConferenceRecords values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1273,70 +1040,66 @@ export class ConferenceRecordsServiceClient {
     this._log.info('listConferenceRecords request %j', request);
     return this.innerApiCalls
       .listConferenceRecords(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.apps.meet.v2beta.IConferenceRecord[],
-          protos.google.apps.meet.v2beta.IListConferenceRecordsRequest | null,
-          protos.google.apps.meet.v2beta.IListConferenceRecordsResponse,
-        ]) => {
-          this._log.info('listConferenceRecords values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.apps.meet.v2beta.IConferenceRecord[],
+        protos.google.apps.meet.v2beta.IListConferenceRecordsRequest|null,
+        protos.google.apps.meet.v2beta.IListConferenceRecordsResponse
+      ]) => {
+        this._log.info('listConferenceRecords values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listConferenceRecords`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of conference records to return. The service might
-   *   return fewer than this value. If unspecified, at most 25 conference records
-   *   are returned. The maximum value is 100; values above 100 are coerced to
-   *   100. Maximum might change in the future.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token returned from previous List Call.
-   * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in [EBNF
-   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
-   *   The following are the filterable fields:
-   *
-   *   * `space.meeting_code`
-   *   * `space.name`
-   *   * `start_time`
-   *   * `end_time`
-   *
-   *   For example, consider the following filters:
-   *
-   *   * `space.name = "spaces/NAME"`
-   *   * `space.meeting_code = "abc-mnop-xyz"`
-   *   * `start_time>="2024-01-01T00:00:00.000Z" AND
-   *   start_time<="2024-01-02T00:00:00.000Z"`
-   *   * `end_time IS NULL`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.ConferenceRecord|ConferenceRecord} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConferenceRecordsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listConferenceRecords`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of conference records to return. The service might
+ *   return fewer than this value. If unspecified, at most 25 conference records
+ *   are returned. The maximum value is 100; values above 100 are coerced to
+ *   100. Maximum might change in the future.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token returned from previous List Call.
+ * @param {string} [request.filter]
+ *   Optional. User specified filtering condition in [EBNF
+ *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+ *   The following are the filterable fields:
+ *
+ *   * `space.meeting_code`
+ *   * `space.name`
+ *   * `start_time`
+ *   * `end_time`
+ *
+ *   For example, consider the following filters:
+ *
+ *   * `space.name = "spaces/NAME"`
+ *   * `space.meeting_code = "abc-mnop-xyz"`
+ *   * `start_time>="2024-01-01T00:00:00.000Z" AND
+ *   start_time<="2024-01-02T00:00:00.000Z"`
+ *   * `end_time IS NULL`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.ConferenceRecord|ConferenceRecord} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listConferenceRecordsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConferenceRecordsStream(
-    request?: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listConferenceRecords'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConferenceRecords stream %j', request);
     return this.descriptors.page.listConferenceRecords.createStream(
       this.innerApiCalls.listConferenceRecords as GaxCall,
@@ -1345,61 +1108,59 @@ export class ConferenceRecordsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listConferenceRecords`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of conference records to return. The service might
-   *   return fewer than this value. If unspecified, at most 25 conference records
-   *   are returned. The maximum value is 100; values above 100 are coerced to
-   *   100. Maximum might change in the future.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token returned from previous List Call.
-   * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in [EBNF
-   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
-   *   The following are the filterable fields:
-   *
-   *   * `space.meeting_code`
-   *   * `space.name`
-   *   * `start_time`
-   *   * `end_time`
-   *
-   *   For example, consider the following filters:
-   *
-   *   * `space.name = "spaces/NAME"`
-   *   * `space.meeting_code = "abc-mnop-xyz"`
-   *   * `start_time>="2024-01-01T00:00:00.000Z" AND
-   *   start_time<="2024-01-02T00:00:00.000Z"`
-   *   * `end_time IS NULL`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.apps.meet.v2beta.ConferenceRecord|ConferenceRecord}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.list_conference_records.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListConferenceRecords_async
-   */
+/**
+ * Equivalent to `listConferenceRecords`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of conference records to return. The service might
+ *   return fewer than this value. If unspecified, at most 25 conference records
+ *   are returned. The maximum value is 100; values above 100 are coerced to
+ *   100. Maximum might change in the future.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token returned from previous List Call.
+ * @param {string} [request.filter]
+ *   Optional. User specified filtering condition in [EBNF
+ *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+ *   The following are the filterable fields:
+ *
+ *   * `space.meeting_code`
+ *   * `space.name`
+ *   * `start_time`
+ *   * `end_time`
+ *
+ *   For example, consider the following filters:
+ *
+ *   * `space.name = "spaces/NAME"`
+ *   * `space.meeting_code = "abc-mnop-xyz"`
+ *   * `start_time>="2024-01-01T00:00:00.000Z" AND
+ *   start_time<="2024-01-02T00:00:00.000Z"`
+ *   * `end_time IS NULL`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.apps.meet.v2beta.ConferenceRecord|ConferenceRecord}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.list_conference_records.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListConferenceRecords_async
+ */
   listConferenceRecordsAsync(
-    request?: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.apps.meet.v2beta.IConferenceRecord> {
+      request?: protos.google.apps.meet.v2beta.IListConferenceRecordsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.apps.meet.v2beta.IConferenceRecord>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listConferenceRecords'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConferenceRecords iterate %j', request);
     return this.descriptors.page.listConferenceRecords.asyncIterate(
       this.innerApiCalls['listConferenceRecords'] as GaxCall,
@@ -1407,130 +1168,105 @@ export class ConferenceRecordsServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.apps.meet.v2beta.IConferenceRecord>;
   }
-  /**
-   * Lists the participants in a conference record. By default, ordered by join
-   * time and in descending order. This API supports `fields` as standard
-   * parameters like every other API. However, when the `fields` request
-   * parameter is omitted, this API defaults to `'participants/*,
-   * next_page_token'`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format: `conferenceRecords/{conference_record}`
-   * @param {number} request.pageSize
-   *   Maximum number of participants to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 100 participants are returned.
-   *   The maximum value is 250; values above 250 are coerced to 250.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in [EBNF
-   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
-   *   The following are the filterable fields:
-   *
-   *   * `earliest_start_time`
-   *   * `latest_end_time`
-   *
-   *   For example, `latest_end_time IS NULL` returns active participants in
-   *   the conference.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.Participant|Participant}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listParticipantsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the participants in a conference record. By default, ordered by join
+ * time and in descending order. This API supports `fields` as standard
+ * parameters like every other API. However, when the `fields` request
+ * parameter is omitted, this API defaults to `'participants/*,
+ * next_page_token'`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `conferenceRecords/{conference_record}`
+ * @param {number} request.pageSize
+ *   Maximum number of participants to return. The service might return fewer
+ *   than this value.
+ *   If unspecified, at most 100 participants are returned.
+ *   The maximum value is 250; values above 250 are coerced to 250.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {string} [request.filter]
+ *   Optional. User specified filtering condition in [EBNF
+ *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+ *   The following are the filterable fields:
+ *
+ *   * `earliest_start_time`
+ *   * `latest_end_time`
+ *
+ *   For example, `latest_end_time IS NULL` returns active participants in
+ *   the conference.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.Participant|Participant}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listParticipantsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listParticipants(
-    request?: protos.google.apps.meet.v2beta.IListParticipantsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IParticipant[],
-      protos.google.apps.meet.v2beta.IListParticipantsRequest | null,
-      protos.google.apps.meet.v2beta.IListParticipantsResponse,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IListParticipantsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.IParticipant[],
+        protos.google.apps.meet.v2beta.IListParticipantsRequest|null,
+        protos.google.apps.meet.v2beta.IListParticipantsResponse
+      ]>;
   listParticipants(
-    request: protos.google.apps.meet.v2beta.IListParticipantsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListParticipantsRequest,
-      | protos.google.apps.meet.v2beta.IListParticipantsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.IParticipant
-    >
-  ): void;
-  listParticipants(
-    request: protos.google.apps.meet.v2beta.IListParticipantsRequest,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListParticipantsRequest,
-      | protos.google.apps.meet.v2beta.IListParticipantsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.IParticipant
-    >
-  ): void;
-  listParticipants(
-    request?: protos.google.apps.meet.v2beta.IListParticipantsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.apps.meet.v2beta.IListParticipantsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.apps.meet.v2beta.IListParticipantsRequest,
-          | protos.google.apps.meet.v2beta.IListParticipantsResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.IParticipant
-        >,
-    callback?: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListParticipantsRequest,
-      | protos.google.apps.meet.v2beta.IListParticipantsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.IParticipant
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IParticipant[],
-      protos.google.apps.meet.v2beta.IListParticipantsRequest | null,
-      protos.google.apps.meet.v2beta.IListParticipantsResponse,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IListParticipantsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IParticipant>): void;
+  listParticipants(
+      request: protos.google.apps.meet.v2beta.IListParticipantsRequest,
+      callback: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListParticipantsRequest,
+          protos.google.apps.meet.v2beta.IListParticipantsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IParticipant>): void;
+  listParticipants(
+      request?: protos.google.apps.meet.v2beta.IListParticipantsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.apps.meet.v2beta.IListParticipantsRequest,
+          protos.google.apps.meet.v2beta.IListParticipantsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IParticipant>,
+      callback?: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListParticipantsRequest,
+          protos.google.apps.meet.v2beta.IListParticipantsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IParticipant>):
+      Promise<[
+        protos.google.apps.meet.v2beta.IParticipant[],
+        protos.google.apps.meet.v2beta.IListParticipantsRequest|null,
+        protos.google.apps.meet.v2beta.IListParticipantsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.apps.meet.v2beta.IListParticipantsRequest,
-          | protos.google.apps.meet.v2beta.IListParticipantsResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.IParticipant
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.apps.meet.v2beta.IListParticipantsRequest,
+      protos.google.apps.meet.v2beta.IListParticipantsResponse|null|undefined,
+      protos.google.apps.meet.v2beta.IParticipant>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listParticipants values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1539,70 +1275,67 @@ export class ConferenceRecordsServiceClient {
     this._log.info('listParticipants request %j', request);
     return this.innerApiCalls
       .listParticipants(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.apps.meet.v2beta.IParticipant[],
-          protos.google.apps.meet.v2beta.IListParticipantsRequest | null,
-          protos.google.apps.meet.v2beta.IListParticipantsResponse,
-        ]) => {
-          this._log.info('listParticipants values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.apps.meet.v2beta.IParticipant[],
+        protos.google.apps.meet.v2beta.IListParticipantsRequest|null,
+        protos.google.apps.meet.v2beta.IListParticipantsResponse
+      ]) => {
+        this._log.info('listParticipants values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listParticipants`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format: `conferenceRecords/{conference_record}`
-   * @param {number} request.pageSize
-   *   Maximum number of participants to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 100 participants are returned.
-   *   The maximum value is 250; values above 250 are coerced to 250.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in [EBNF
-   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
-   *   The following are the filterable fields:
-   *
-   *   * `earliest_start_time`
-   *   * `latest_end_time`
-   *
-   *   For example, `latest_end_time IS NULL` returns active participants in
-   *   the conference.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.Participant|Participant} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listParticipantsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listParticipants`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `conferenceRecords/{conference_record}`
+ * @param {number} request.pageSize
+ *   Maximum number of participants to return. The service might return fewer
+ *   than this value.
+ *   If unspecified, at most 100 participants are returned.
+ *   The maximum value is 250; values above 250 are coerced to 250.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {string} [request.filter]
+ *   Optional. User specified filtering condition in [EBNF
+ *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+ *   The following are the filterable fields:
+ *
+ *   * `earliest_start_time`
+ *   * `latest_end_time`
+ *
+ *   For example, `latest_end_time IS NULL` returns active participants in
+ *   the conference.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.Participant|Participant} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listParticipantsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listParticipantsStream(
-    request?: protos.google.apps.meet.v2beta.IListParticipantsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.apps.meet.v2beta.IListParticipantsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listParticipants stream %j', request);
     return this.descriptors.page.listParticipants.createStream(
       this.innerApiCalls.listParticipants as GaxCall,
@@ -1611,61 +1344,60 @@ export class ConferenceRecordsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listParticipants`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format: `conferenceRecords/{conference_record}`
-   * @param {number} request.pageSize
-   *   Maximum number of participants to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 100 participants are returned.
-   *   The maximum value is 250; values above 250 are coerced to 250.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in [EBNF
-   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
-   *   The following are the filterable fields:
-   *
-   *   * `earliest_start_time`
-   *   * `latest_end_time`
-   *
-   *   For example, `latest_end_time IS NULL` returns active participants in
-   *   the conference.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.apps.meet.v2beta.Participant|Participant}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.list_participants.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListParticipants_async
-   */
+/**
+ * Equivalent to `listParticipants`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `conferenceRecords/{conference_record}`
+ * @param {number} request.pageSize
+ *   Maximum number of participants to return. The service might return fewer
+ *   than this value.
+ *   If unspecified, at most 100 participants are returned.
+ *   The maximum value is 250; values above 250 are coerced to 250.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {string} [request.filter]
+ *   Optional. User specified filtering condition in [EBNF
+ *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+ *   The following are the filterable fields:
+ *
+ *   * `earliest_start_time`
+ *   * `latest_end_time`
+ *
+ *   For example, `latest_end_time IS NULL` returns active participants in
+ *   the conference.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.apps.meet.v2beta.Participant|Participant}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.list_participants.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListParticipants_async
+ */
   listParticipantsAsync(
-    request?: protos.google.apps.meet.v2beta.IListParticipantsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.apps.meet.v2beta.IParticipant> {
+      request?: protos.google.apps.meet.v2beta.IListParticipantsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.apps.meet.v2beta.IParticipant>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listParticipants iterate %j', request);
     return this.descriptors.page.listParticipants.asyncIterate(
       this.innerApiCalls['listParticipants'] as GaxCall,
@@ -1673,130 +1405,105 @@ export class ConferenceRecordsServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.apps.meet.v2beta.IParticipant>;
   }
-  /**
-   * Lists the participant sessions of a participant in a conference record. By
-   * default, ordered by join time and in descending order. This API supports
-   * `fields` as standard parameters like every other API. However, when the
-   * `fields` request parameter is omitted this API defaults to
-   * `'participantsessions/*, next_page_token'`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format:
-   *   `conferenceRecords/{conference_record}/participants/{participant}`
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of participant sessions to return. The service
-   *   might return fewer than this value. If unspecified, at most 100
-   *   participants are returned. The maximum value is 250; values above 250 are
-   *   coerced to 250. Maximum might change in the future.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token returned from previous List Call.
-   * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in [EBNF
-   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
-   *   The following are the filterable fields:
-   *
-   *   * `start_time`
-   *   * `end_time`
-   *
-   *   For example, `end_time IS NULL` returns active participant sessions in
-   *   the conference record.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.ParticipantSession|ParticipantSession}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listParticipantSessionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the participant sessions of a participant in a conference record. By
+ * default, ordered by join time and in descending order. This API supports
+ * `fields` as standard parameters like every other API. However, when the
+ * `fields` request parameter is omitted this API defaults to
+ * `'participantsessions/*, next_page_token'`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format:
+ *   `conferenceRecords/{conference_record}/participants/{participant}`
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of participant sessions to return. The service
+ *   might return fewer than this value. If unspecified, at most 100
+ *   participants are returned. The maximum value is 250; values above 250 are
+ *   coerced to 250. Maximum might change in the future.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token returned from previous List Call.
+ * @param {string} [request.filter]
+ *   Optional. User specified filtering condition in [EBNF
+ *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+ *   The following are the filterable fields:
+ *
+ *   * `start_time`
+ *   * `end_time`
+ *
+ *   For example, `end_time IS NULL` returns active participant sessions in
+ *   the conference record.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.ParticipantSession|ParticipantSession}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listParticipantSessionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listParticipantSessions(
-    request?: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IParticipantSession[],
-      protos.google.apps.meet.v2beta.IListParticipantSessionsRequest | null,
-      protos.google.apps.meet.v2beta.IListParticipantSessionsResponse,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.IParticipantSession[],
+        protos.google.apps.meet.v2beta.IListParticipantSessionsRequest|null,
+        protos.google.apps.meet.v2beta.IListParticipantSessionsResponse
+      ]>;
   listParticipantSessions(
-    request: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
-      | protos.google.apps.meet.v2beta.IListParticipantSessionsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.IParticipantSession
-    >
-  ): void;
-  listParticipantSessions(
-    request: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
-      | protos.google.apps.meet.v2beta.IListParticipantSessionsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.IParticipantSession
-    >
-  ): void;
-  listParticipantSessions(
-    request?: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
-          | protos.google.apps.meet.v2beta.IListParticipantSessionsResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.IParticipantSession
-        >,
-    callback?: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
-      | protos.google.apps.meet.v2beta.IListParticipantSessionsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.IParticipantSession
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IParticipantSession[],
-      protos.google.apps.meet.v2beta.IListParticipantSessionsRequest | null,
-      protos.google.apps.meet.v2beta.IListParticipantSessionsResponse,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IListParticipantSessionsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IParticipantSession>): void;
+  listParticipantSessions(
+      request: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
+      callback: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
+          protos.google.apps.meet.v2beta.IListParticipantSessionsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IParticipantSession>): void;
+  listParticipantSessions(
+      request?: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
+          protos.google.apps.meet.v2beta.IListParticipantSessionsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IParticipantSession>,
+      callback?: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
+          protos.google.apps.meet.v2beta.IListParticipantSessionsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IParticipantSession>):
+      Promise<[
+        protos.google.apps.meet.v2beta.IParticipantSession[],
+        protos.google.apps.meet.v2beta.IListParticipantSessionsRequest|null,
+        protos.google.apps.meet.v2beta.IListParticipantSessionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
-          | protos.google.apps.meet.v2beta.IListParticipantSessionsResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.IParticipantSession
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
+      protos.google.apps.meet.v2beta.IListParticipantSessionsResponse|null|undefined,
+      protos.google.apps.meet.v2beta.IParticipantSession>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listParticipantSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1805,70 +1512,67 @@ export class ConferenceRecordsServiceClient {
     this._log.info('listParticipantSessions request %j', request);
     return this.innerApiCalls
       .listParticipantSessions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.apps.meet.v2beta.IParticipantSession[],
-          protos.google.apps.meet.v2beta.IListParticipantSessionsRequest | null,
-          protos.google.apps.meet.v2beta.IListParticipantSessionsResponse,
-        ]) => {
-          this._log.info('listParticipantSessions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.apps.meet.v2beta.IParticipantSession[],
+        protos.google.apps.meet.v2beta.IListParticipantSessionsRequest|null,
+        protos.google.apps.meet.v2beta.IListParticipantSessionsResponse
+      ]) => {
+        this._log.info('listParticipantSessions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listParticipantSessions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format:
-   *   `conferenceRecords/{conference_record}/participants/{participant}`
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of participant sessions to return. The service
-   *   might return fewer than this value. If unspecified, at most 100
-   *   participants are returned. The maximum value is 250; values above 250 are
-   *   coerced to 250. Maximum might change in the future.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token returned from previous List Call.
-   * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in [EBNF
-   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
-   *   The following are the filterable fields:
-   *
-   *   * `start_time`
-   *   * `end_time`
-   *
-   *   For example, `end_time IS NULL` returns active participant sessions in
-   *   the conference record.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.ParticipantSession|ParticipantSession} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listParticipantSessionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listParticipantSessions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format:
+ *   `conferenceRecords/{conference_record}/participants/{participant}`
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of participant sessions to return. The service
+ *   might return fewer than this value. If unspecified, at most 100
+ *   participants are returned. The maximum value is 250; values above 250 are
+ *   coerced to 250. Maximum might change in the future.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token returned from previous List Call.
+ * @param {string} [request.filter]
+ *   Optional. User specified filtering condition in [EBNF
+ *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+ *   The following are the filterable fields:
+ *
+ *   * `start_time`
+ *   * `end_time`
+ *
+ *   For example, `end_time IS NULL` returns active participant sessions in
+ *   the conference record.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.ParticipantSession|ParticipantSession} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listParticipantSessionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listParticipantSessionsStream(
-    request?: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listParticipantSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listParticipantSessions stream %j', request);
     return this.descriptors.page.listParticipantSessions.createStream(
       this.innerApiCalls.listParticipantSessions as GaxCall,
@@ -1877,61 +1581,60 @@ export class ConferenceRecordsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listParticipantSessions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format:
-   *   `conferenceRecords/{conference_record}/participants/{participant}`
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of participant sessions to return. The service
-   *   might return fewer than this value. If unspecified, at most 100
-   *   participants are returned. The maximum value is 250; values above 250 are
-   *   coerced to 250. Maximum might change in the future.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token returned from previous List Call.
-   * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in [EBNF
-   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
-   *   The following are the filterable fields:
-   *
-   *   * `start_time`
-   *   * `end_time`
-   *
-   *   For example, `end_time IS NULL` returns active participant sessions in
-   *   the conference record.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.apps.meet.v2beta.ParticipantSession|ParticipantSession}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.list_participant_sessions.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListParticipantSessions_async
-   */
+/**
+ * Equivalent to `listParticipantSessions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format:
+ *   `conferenceRecords/{conference_record}/participants/{participant}`
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of participant sessions to return. The service
+ *   might return fewer than this value. If unspecified, at most 100
+ *   participants are returned. The maximum value is 250; values above 250 are
+ *   coerced to 250. Maximum might change in the future.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token returned from previous List Call.
+ * @param {string} [request.filter]
+ *   Optional. User specified filtering condition in [EBNF
+ *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+ *   The following are the filterable fields:
+ *
+ *   * `start_time`
+ *   * `end_time`
+ *
+ *   For example, `end_time IS NULL` returns active participant sessions in
+ *   the conference record.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.apps.meet.v2beta.ParticipantSession|ParticipantSession}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.list_participant_sessions.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListParticipantSessions_async
+ */
   listParticipantSessionsAsync(
-    request?: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.apps.meet.v2beta.IParticipantSession> {
+      request?: protos.google.apps.meet.v2beta.IListParticipantSessionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.apps.meet.v2beta.IParticipantSession>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listParticipantSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listParticipantSessions iterate %j', request);
     return this.descriptors.page.listParticipantSessions.asyncIterate(
       this.innerApiCalls['listParticipantSessions'] as GaxCall,
@@ -1939,111 +1642,92 @@ export class ConferenceRecordsServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.apps.meet.v2beta.IParticipantSession>;
   }
-  /**
-   * Lists the recording resources from the conference record. By default,
-   * ordered by start time and in ascending order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format: `conferenceRecords/{conference_record}`
-   * @param {number} request.pageSize
-   *   Maximum number of recordings to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 10 recordings are returned.
-   *   The maximum value is 100; values above 100 are coerced to 100.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.Recording|Recording}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRecordingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the recording resources from the conference record. By default,
+ * ordered by start time and in ascending order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `conferenceRecords/{conference_record}`
+ * @param {number} request.pageSize
+ *   Maximum number of recordings to return. The service might return fewer
+ *   than this value.
+ *   If unspecified, at most 10 recordings are returned.
+ *   The maximum value is 100; values above 100 are coerced to 100.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.Recording|Recording}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRecordingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRecordings(
-    request?: protos.google.apps.meet.v2beta.IListRecordingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IRecording[],
-      protos.google.apps.meet.v2beta.IListRecordingsRequest | null,
-      protos.google.apps.meet.v2beta.IListRecordingsResponse,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IListRecordingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.IRecording[],
+        protos.google.apps.meet.v2beta.IListRecordingsRequest|null,
+        protos.google.apps.meet.v2beta.IListRecordingsResponse
+      ]>;
   listRecordings(
-    request: protos.google.apps.meet.v2beta.IListRecordingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListRecordingsRequest,
-      protos.google.apps.meet.v2beta.IListRecordingsResponse | null | undefined,
-      protos.google.apps.meet.v2beta.IRecording
-    >
-  ): void;
-  listRecordings(
-    request: protos.google.apps.meet.v2beta.IListRecordingsRequest,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListRecordingsRequest,
-      protos.google.apps.meet.v2beta.IListRecordingsResponse | null | undefined,
-      protos.google.apps.meet.v2beta.IRecording
-    >
-  ): void;
-  listRecordings(
-    request?: protos.google.apps.meet.v2beta.IListRecordingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.apps.meet.v2beta.IListRecordingsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.apps.meet.v2beta.IListRecordingsRequest,
-          | protos.google.apps.meet.v2beta.IListRecordingsResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.IRecording
-        >,
-    callback?: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListRecordingsRequest,
-      protos.google.apps.meet.v2beta.IListRecordingsResponse | null | undefined,
-      protos.google.apps.meet.v2beta.IRecording
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.IRecording[],
-      protos.google.apps.meet.v2beta.IListRecordingsRequest | null,
-      protos.google.apps.meet.v2beta.IListRecordingsResponse,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IListRecordingsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IRecording>): void;
+  listRecordings(
+      request: protos.google.apps.meet.v2beta.IListRecordingsRequest,
+      callback: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListRecordingsRequest,
+          protos.google.apps.meet.v2beta.IListRecordingsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IRecording>): void;
+  listRecordings(
+      request?: protos.google.apps.meet.v2beta.IListRecordingsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.apps.meet.v2beta.IListRecordingsRequest,
+          protos.google.apps.meet.v2beta.IListRecordingsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IRecording>,
+      callback?: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListRecordingsRequest,
+          protos.google.apps.meet.v2beta.IListRecordingsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.IRecording>):
+      Promise<[
+        protos.google.apps.meet.v2beta.IRecording[],
+        protos.google.apps.meet.v2beta.IListRecordingsRequest|null,
+        protos.google.apps.meet.v2beta.IListRecordingsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.apps.meet.v2beta.IListRecordingsRequest,
-          | protos.google.apps.meet.v2beta.IListRecordingsResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.IRecording
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.apps.meet.v2beta.IListRecordingsRequest,
+      protos.google.apps.meet.v2beta.IListRecordingsResponse|null|undefined,
+      protos.google.apps.meet.v2beta.IRecording>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRecordings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2052,60 +1736,57 @@ export class ConferenceRecordsServiceClient {
     this._log.info('listRecordings request %j', request);
     return this.innerApiCalls
       .listRecordings(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.apps.meet.v2beta.IRecording[],
-          protos.google.apps.meet.v2beta.IListRecordingsRequest | null,
-          protos.google.apps.meet.v2beta.IListRecordingsResponse,
-        ]) => {
-          this._log.info('listRecordings values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.apps.meet.v2beta.IRecording[],
+        protos.google.apps.meet.v2beta.IListRecordingsRequest|null,
+        protos.google.apps.meet.v2beta.IListRecordingsResponse
+      ]) => {
+        this._log.info('listRecordings values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRecordings`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format: `conferenceRecords/{conference_record}`
-   * @param {number} request.pageSize
-   *   Maximum number of recordings to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 10 recordings are returned.
-   *   The maximum value is 100; values above 100 are coerced to 100.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.Recording|Recording} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRecordingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRecordings`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `conferenceRecords/{conference_record}`
+ * @param {number} request.pageSize
+ *   Maximum number of recordings to return. The service might return fewer
+ *   than this value.
+ *   If unspecified, at most 10 recordings are returned.
+ *   The maximum value is 100; values above 100 are coerced to 100.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.Recording|Recording} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRecordingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRecordingsStream(
-    request?: protos.google.apps.meet.v2beta.IListRecordingsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.apps.meet.v2beta.IListRecordingsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRecordings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRecordings stream %j', request);
     return this.descriptors.page.listRecordings.createStream(
       this.innerApiCalls.listRecordings as GaxCall,
@@ -2114,51 +1795,50 @@ export class ConferenceRecordsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listRecordings`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format: `conferenceRecords/{conference_record}`
-   * @param {number} request.pageSize
-   *   Maximum number of recordings to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 10 recordings are returned.
-   *   The maximum value is 100; values above 100 are coerced to 100.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.apps.meet.v2beta.Recording|Recording}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.list_recordings.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListRecordings_async
-   */
+/**
+ * Equivalent to `listRecordings`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `conferenceRecords/{conference_record}`
+ * @param {number} request.pageSize
+ *   Maximum number of recordings to return. The service might return fewer
+ *   than this value.
+ *   If unspecified, at most 10 recordings are returned.
+ *   The maximum value is 100; values above 100 are coerced to 100.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.apps.meet.v2beta.Recording|Recording}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.list_recordings.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListRecordings_async
+ */
   listRecordingsAsync(
-    request?: protos.google.apps.meet.v2beta.IListRecordingsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.apps.meet.v2beta.IRecording> {
+      request?: protos.google.apps.meet.v2beta.IListRecordingsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.apps.meet.v2beta.IRecording>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRecordings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRecordings iterate %j', request);
     return this.descriptors.page.listRecordings.asyncIterate(
       this.innerApiCalls['listRecordings'] as GaxCall,
@@ -2166,117 +1846,92 @@ export class ConferenceRecordsServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.apps.meet.v2beta.IRecording>;
   }
-  /**
-   * Lists the set of transcripts from the conference record. By default,
-   * ordered by start time and in ascending order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format: `conferenceRecords/{conference_record}`
-   * @param {number} request.pageSize
-   *   Maximum number of transcripts to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 10 transcripts are returned.
-   *   The maximum value is 100; values above 100 are coerced to 100.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.Transcript|Transcript}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTranscriptsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the set of transcripts from the conference record. By default,
+ * ordered by start time and in ascending order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `conferenceRecords/{conference_record}`
+ * @param {number} request.pageSize
+ *   Maximum number of transcripts to return. The service might return fewer
+ *   than this value.
+ *   If unspecified, at most 10 transcripts are returned.
+ *   The maximum value is 100; values above 100 are coerced to 100.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.Transcript|Transcript}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTranscriptsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTranscripts(
-    request?: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.ITranscript[],
-      protos.google.apps.meet.v2beta.IListTranscriptsRequest | null,
-      protos.google.apps.meet.v2beta.IListTranscriptsResponse,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.ITranscript[],
+        protos.google.apps.meet.v2beta.IListTranscriptsRequest|null,
+        protos.google.apps.meet.v2beta.IListTranscriptsResponse
+      ]>;
   listTranscripts(
-    request: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListTranscriptsRequest,
-      | protos.google.apps.meet.v2beta.IListTranscriptsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.ITranscript
-    >
-  ): void;
-  listTranscripts(
-    request: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListTranscriptsRequest,
-      | protos.google.apps.meet.v2beta.IListTranscriptsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.ITranscript
-    >
-  ): void;
-  listTranscripts(
-    request?: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.apps.meet.v2beta.IListTranscriptsRequest,
-          | protos.google.apps.meet.v2beta.IListTranscriptsResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.ITranscript
-        >,
-    callback?: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListTranscriptsRequest,
-      | protos.google.apps.meet.v2beta.IListTranscriptsResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.ITranscript
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.ITranscript[],
-      protos.google.apps.meet.v2beta.IListTranscriptsRequest | null,
-      protos.google.apps.meet.v2beta.IListTranscriptsResponse,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IListTranscriptsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.ITranscript>): void;
+  listTranscripts(
+      request: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
+      callback: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListTranscriptsRequest,
+          protos.google.apps.meet.v2beta.IListTranscriptsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.ITranscript>): void;
+  listTranscripts(
+      request?: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.apps.meet.v2beta.IListTranscriptsRequest,
+          protos.google.apps.meet.v2beta.IListTranscriptsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.ITranscript>,
+      callback?: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListTranscriptsRequest,
+          protos.google.apps.meet.v2beta.IListTranscriptsResponse|null|undefined,
+          protos.google.apps.meet.v2beta.ITranscript>):
+      Promise<[
+        protos.google.apps.meet.v2beta.ITranscript[],
+        protos.google.apps.meet.v2beta.IListTranscriptsRequest|null,
+        protos.google.apps.meet.v2beta.IListTranscriptsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.apps.meet.v2beta.IListTranscriptsRequest,
-          | protos.google.apps.meet.v2beta.IListTranscriptsResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.ITranscript
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.apps.meet.v2beta.IListTranscriptsRequest,
+      protos.google.apps.meet.v2beta.IListTranscriptsResponse|null|undefined,
+      protos.google.apps.meet.v2beta.ITranscript>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTranscripts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2285,60 +1940,57 @@ export class ConferenceRecordsServiceClient {
     this._log.info('listTranscripts request %j', request);
     return this.innerApiCalls
       .listTranscripts(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.apps.meet.v2beta.ITranscript[],
-          protos.google.apps.meet.v2beta.IListTranscriptsRequest | null,
-          protos.google.apps.meet.v2beta.IListTranscriptsResponse,
-        ]) => {
-          this._log.info('listTranscripts values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.apps.meet.v2beta.ITranscript[],
+        protos.google.apps.meet.v2beta.IListTranscriptsRequest|null,
+        protos.google.apps.meet.v2beta.IListTranscriptsResponse
+      ]) => {
+        this._log.info('listTranscripts values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listTranscripts`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format: `conferenceRecords/{conference_record}`
-   * @param {number} request.pageSize
-   *   Maximum number of transcripts to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 10 transcripts are returned.
-   *   The maximum value is 100; values above 100 are coerced to 100.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.Transcript|Transcript} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTranscriptsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listTranscripts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `conferenceRecords/{conference_record}`
+ * @param {number} request.pageSize
+ *   Maximum number of transcripts to return. The service might return fewer
+ *   than this value.
+ *   If unspecified, at most 10 transcripts are returned.
+ *   The maximum value is 100; values above 100 are coerced to 100.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.Transcript|Transcript} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTranscriptsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTranscriptsStream(
-    request?: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTranscripts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTranscripts stream %j', request);
     return this.descriptors.page.listTranscripts.createStream(
       this.innerApiCalls.listTranscripts as GaxCall,
@@ -2347,51 +1999,50 @@ export class ConferenceRecordsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listTranscripts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format: `conferenceRecords/{conference_record}`
-   * @param {number} request.pageSize
-   *   Maximum number of transcripts to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 10 transcripts are returned.
-   *   The maximum value is 100; values above 100 are coerced to 100.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.apps.meet.v2beta.Transcript|Transcript}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.list_transcripts.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListTranscripts_async
-   */
+/**
+ * Equivalent to `listTranscripts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `conferenceRecords/{conference_record}`
+ * @param {number} request.pageSize
+ *   Maximum number of transcripts to return. The service might return fewer
+ *   than this value.
+ *   If unspecified, at most 10 transcripts are returned.
+ *   The maximum value is 100; values above 100 are coerced to 100.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.apps.meet.v2beta.Transcript|Transcript}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.list_transcripts.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListTranscripts_async
+ */
   listTranscriptsAsync(
-    request?: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.apps.meet.v2beta.ITranscript> {
+      request?: protos.google.apps.meet.v2beta.IListTranscriptsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.apps.meet.v2beta.ITranscript>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTranscripts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTranscripts iterate %j', request);
     return this.descriptors.page.listTranscripts.asyncIterate(
       this.innerApiCalls['listTranscripts'] as GaxCall,
@@ -2399,122 +2050,97 @@ export class ConferenceRecordsServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.apps.meet.v2beta.ITranscript>;
   }
-  /**
-   * Lists the structured transcript entries per transcript. By default, ordered
-   * by start time and in ascending order.
-   *
-   * Note: The transcript entries returned by the Google Meet API might not
-   * match the transcription found in the Google Docs transcript file. This can
-   * occur when the Google Docs transcript file is modified after generation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format:
-   *   `conferenceRecords/{conference_record}/transcripts/{transcript}`
-   * @param {number} request.pageSize
-   *   Maximum number of entries to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 10 entries are returned.
-   *   The maximum value is 100; values above 100 are coerced to 100.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.TranscriptEntry|TranscriptEntry}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTranscriptEntriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the structured transcript entries per transcript. By default, ordered
+ * by start time and in ascending order.
+ *
+ * Note: The transcript entries returned by the Google Meet API might not
+ * match the transcription found in the Google Docs transcript file. This can
+ * occur when the Google Docs transcript file is modified after generation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format:
+ *   `conferenceRecords/{conference_record}/transcripts/{transcript}`
+ * @param {number} request.pageSize
+ *   Maximum number of entries to return. The service might return fewer than
+ *   this value.
+ *   If unspecified, at most 10 entries are returned.
+ *   The maximum value is 100; values above 100 are coerced to 100.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.TranscriptEntry|TranscriptEntry}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTranscriptEntriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTranscriptEntries(
-    request?: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.ITranscriptEntry[],
-      protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest | null,
-      protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse,
-    ]
-  >;
+      request?: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.meet.v2beta.ITranscriptEntry[],
+        protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest|null,
+        protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse
+      ]>;
   listTranscriptEntries(
-    request: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
-      | protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.ITranscriptEntry
-    >
-  ): void;
-  listTranscriptEntries(
-    request: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
-    callback: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
-      | protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.ITranscriptEntry
-    >
-  ): void;
-  listTranscriptEntries(
-    request?: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
-          | protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.ITranscriptEntry
-        >,
-    callback?: PaginationCallback<
-      protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
-      | protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse
-      | null
-      | undefined,
-      protos.google.apps.meet.v2beta.ITranscriptEntry
-    >
-  ): Promise<
-    [
-      protos.google.apps.meet.v2beta.ITranscriptEntry[],
-      protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest | null,
-      protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse,
-    ]
-  > | void {
+          protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse|null|undefined,
+          protos.google.apps.meet.v2beta.ITranscriptEntry>): void;
+  listTranscriptEntries(
+      request: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
+      callback: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
+          protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse|null|undefined,
+          protos.google.apps.meet.v2beta.ITranscriptEntry>): void;
+  listTranscriptEntries(
+      request?: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
+          protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse|null|undefined,
+          protos.google.apps.meet.v2beta.ITranscriptEntry>,
+      callback?: PaginationCallback<
+          protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
+          protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse|null|undefined,
+          protos.google.apps.meet.v2beta.ITranscriptEntry>):
+      Promise<[
+        protos.google.apps.meet.v2beta.ITranscriptEntry[],
+        protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest|null,
+        protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
-          | protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse
-          | null
-          | undefined,
-          protos.google.apps.meet.v2beta.ITranscriptEntry
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
+      protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse|null|undefined,
+      protos.google.apps.meet.v2beta.ITranscriptEntry>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTranscriptEntries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2523,61 +2149,58 @@ export class ConferenceRecordsServiceClient {
     this._log.info('listTranscriptEntries request %j', request);
     return this.innerApiCalls
       .listTranscriptEntries(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.apps.meet.v2beta.ITranscriptEntry[],
-          protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest | null,
-          protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse,
-        ]) => {
-          this._log.info('listTranscriptEntries values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.apps.meet.v2beta.ITranscriptEntry[],
+        protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest|null,
+        protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse
+      ]) => {
+        this._log.info('listTranscriptEntries values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listTranscriptEntries`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format:
-   *   `conferenceRecords/{conference_record}/transcripts/{transcript}`
-   * @param {number} request.pageSize
-   *   Maximum number of entries to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 10 entries are returned.
-   *   The maximum value is 100; values above 100 are coerced to 100.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.TranscriptEntry|TranscriptEntry} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTranscriptEntriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listTranscriptEntries`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format:
+ *   `conferenceRecords/{conference_record}/transcripts/{transcript}`
+ * @param {number} request.pageSize
+ *   Maximum number of entries to return. The service might return fewer than
+ *   this value.
+ *   If unspecified, at most 10 entries are returned.
+ *   The maximum value is 100; values above 100 are coerced to 100.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.TranscriptEntry|TranscriptEntry} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTranscriptEntriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTranscriptEntriesStream(
-    request?: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTranscriptEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTranscriptEntries stream %j', request);
     return this.descriptors.page.listTranscriptEntries.createStream(
       this.innerApiCalls.listTranscriptEntries as GaxCall,
@@ -2586,52 +2209,51 @@ export class ConferenceRecordsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listTranscriptEntries`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format:
-   *   `conferenceRecords/{conference_record}/transcripts/{transcript}`
-   * @param {number} request.pageSize
-   *   Maximum number of entries to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 10 entries are returned.
-   *   The maximum value is 100; values above 100 are coerced to 100.
-   *   Maximum might change in the future.
-   * @param {string} request.pageToken
-   *   Page token returned from previous List Call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.apps.meet.v2beta.TranscriptEntry|TranscriptEntry}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/conference_records_service.list_transcript_entries.js</caption>
-   * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListTranscriptEntries_async
-   */
+/**
+ * Equivalent to `listTranscriptEntries`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format:
+ *   `conferenceRecords/{conference_record}/transcripts/{transcript}`
+ * @param {number} request.pageSize
+ *   Maximum number of entries to return. The service might return fewer than
+ *   this value.
+ *   If unspecified, at most 10 entries are returned.
+ *   The maximum value is 100; values above 100 are coerced to 100.
+ *   Maximum might change in the future.
+ * @param {string} request.pageToken
+ *   Page token returned from previous List Call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.apps.meet.v2beta.TranscriptEntry|TranscriptEntry}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/conference_records_service.list_transcript_entries.js</caption>
+ * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListTranscriptEntries_async
+ */
   listTranscriptEntriesAsync(
-    request?: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.apps.meet.v2beta.ITranscriptEntry> {
+      request?: protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.apps.meet.v2beta.ITranscriptEntry>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTranscriptEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTranscriptEntries iterate %j', request);
     return this.descriptors.page.listTranscriptEntries.asyncIterate(
       this.innerApiCalls['listTranscriptEntries'] as GaxCall,
@@ -2649,7 +2271,7 @@ export class ConferenceRecordsServiceClient {
    * @param {string} conference_record
    * @returns {string} Resource name string.
    */
-  conferenceRecordPath(conferenceRecord: string) {
+  conferenceRecordPath(conferenceRecord:string) {
     return this.pathTemplates.conferenceRecordPathTemplate.render({
       conference_record: conferenceRecord,
     });
@@ -2663,9 +2285,7 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} A string representing the conference_record.
    */
   matchConferenceRecordFromConferenceRecordName(conferenceRecordName: string) {
-    return this.pathTemplates.conferenceRecordPathTemplate.match(
-      conferenceRecordName
-    ).conference_record;
+    return this.pathTemplates.conferenceRecordPathTemplate.match(conferenceRecordName).conference_record;
   }
 
   /**
@@ -2675,7 +2295,7 @@ export class ConferenceRecordsServiceClient {
    * @param {string} member
    * @returns {string} Resource name string.
    */
-  memberPath(space: string, member: string) {
+  memberPath(space:string,member:string) {
     return this.pathTemplates.memberPathTemplate.render({
       space: space,
       member: member,
@@ -2711,7 +2331,7 @@ export class ConferenceRecordsServiceClient {
    * @param {string} participant
    * @returns {string} Resource name string.
    */
-  participantPath(conferenceRecord: string, participant: string) {
+  participantPath(conferenceRecord:string,participant:string) {
     return this.pathTemplates.participantPathTemplate.render({
       conference_record: conferenceRecord,
       participant: participant,
@@ -2726,8 +2346,7 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} A string representing the conference_record.
    */
   matchConferenceRecordFromParticipantName(participantName: string) {
-    return this.pathTemplates.participantPathTemplate.match(participantName)
-      .conference_record;
+    return this.pathTemplates.participantPathTemplate.match(participantName).conference_record;
   }
 
   /**
@@ -2738,8 +2357,7 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} A string representing the participant.
    */
   matchParticipantFromParticipantName(participantName: string) {
-    return this.pathTemplates.participantPathTemplate.match(participantName)
-      .participant;
+    return this.pathTemplates.participantPathTemplate.match(participantName).participant;
   }
 
   /**
@@ -2750,11 +2368,7 @@ export class ConferenceRecordsServiceClient {
    * @param {string} participant_session
    * @returns {string} Resource name string.
    */
-  participantSessionPath(
-    conferenceRecord: string,
-    participant: string,
-    participantSession: string
-  ) {
+  participantSessionPath(conferenceRecord:string,participant:string,participantSession:string) {
     return this.pathTemplates.participantSessionPathTemplate.render({
       conference_record: conferenceRecord,
       participant: participant,
@@ -2769,12 +2383,8 @@ export class ConferenceRecordsServiceClient {
    *   A fully-qualified path representing ParticipantSession resource.
    * @returns {string} A string representing the conference_record.
    */
-  matchConferenceRecordFromParticipantSessionName(
-    participantSessionName: string
-  ) {
-    return this.pathTemplates.participantSessionPathTemplate.match(
-      participantSessionName
-    ).conference_record;
+  matchConferenceRecordFromParticipantSessionName(participantSessionName: string) {
+    return this.pathTemplates.participantSessionPathTemplate.match(participantSessionName).conference_record;
   }
 
   /**
@@ -2785,9 +2395,7 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} A string representing the participant.
    */
   matchParticipantFromParticipantSessionName(participantSessionName: string) {
-    return this.pathTemplates.participantSessionPathTemplate.match(
-      participantSessionName
-    ).participant;
+    return this.pathTemplates.participantSessionPathTemplate.match(participantSessionName).participant;
   }
 
   /**
@@ -2797,12 +2405,8 @@ export class ConferenceRecordsServiceClient {
    *   A fully-qualified path representing ParticipantSession resource.
    * @returns {string} A string representing the participant_session.
    */
-  matchParticipantSessionFromParticipantSessionName(
-    participantSessionName: string
-  ) {
-    return this.pathTemplates.participantSessionPathTemplate.match(
-      participantSessionName
-    ).participant_session;
+  matchParticipantSessionFromParticipantSessionName(participantSessionName: string) {
+    return this.pathTemplates.participantSessionPathTemplate.match(participantSessionName).participant_session;
   }
 
   /**
@@ -2812,7 +2416,7 @@ export class ConferenceRecordsServiceClient {
    * @param {string} recording
    * @returns {string} Resource name string.
    */
-  recordingPath(conferenceRecord: string, recording: string) {
+  recordingPath(conferenceRecord:string,recording:string) {
     return this.pathTemplates.recordingPathTemplate.render({
       conference_record: conferenceRecord,
       recording: recording,
@@ -2827,8 +2431,7 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} A string representing the conference_record.
    */
   matchConferenceRecordFromRecordingName(recordingName: string) {
-    return this.pathTemplates.recordingPathTemplate.match(recordingName)
-      .conference_record;
+    return this.pathTemplates.recordingPathTemplate.match(recordingName).conference_record;
   }
 
   /**
@@ -2839,8 +2442,7 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} A string representing the recording.
    */
   matchRecordingFromRecordingName(recordingName: string) {
-    return this.pathTemplates.recordingPathTemplate.match(recordingName)
-      .recording;
+    return this.pathTemplates.recordingPathTemplate.match(recordingName).recording;
   }
 
   /**
@@ -2849,7 +2451,7 @@ export class ConferenceRecordsServiceClient {
    * @param {string} space
    * @returns {string} Resource name string.
    */
-  spacePath(space: string) {
+  spacePath(space:string) {
     return this.pathTemplates.spacePathTemplate.render({
       space: space,
     });
@@ -2873,7 +2475,7 @@ export class ConferenceRecordsServiceClient {
    * @param {string} transcript
    * @returns {string} Resource name string.
    */
-  transcriptPath(conferenceRecord: string, transcript: string) {
+  transcriptPath(conferenceRecord:string,transcript:string) {
     return this.pathTemplates.transcriptPathTemplate.render({
       conference_record: conferenceRecord,
       transcript: transcript,
@@ -2888,8 +2490,7 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} A string representing the conference_record.
    */
   matchConferenceRecordFromTranscriptName(transcriptName: string) {
-    return this.pathTemplates.transcriptPathTemplate.match(transcriptName)
-      .conference_record;
+    return this.pathTemplates.transcriptPathTemplate.match(transcriptName).conference_record;
   }
 
   /**
@@ -2900,8 +2501,7 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} A string representing the transcript.
    */
   matchTranscriptFromTranscriptName(transcriptName: string) {
-    return this.pathTemplates.transcriptPathTemplate.match(transcriptName)
-      .transcript;
+    return this.pathTemplates.transcriptPathTemplate.match(transcriptName).transcript;
   }
 
   /**
@@ -2912,11 +2512,7 @@ export class ConferenceRecordsServiceClient {
    * @param {string} entry
    * @returns {string} Resource name string.
    */
-  transcriptEntryPath(
-    conferenceRecord: string,
-    transcript: string,
-    entry: string
-  ) {
+  transcriptEntryPath(conferenceRecord:string,transcript:string,entry:string) {
     return this.pathTemplates.transcriptEntryPathTemplate.render({
       conference_record: conferenceRecord,
       transcript: transcript,
@@ -2932,9 +2528,7 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} A string representing the conference_record.
    */
   matchConferenceRecordFromTranscriptEntryName(transcriptEntryName: string) {
-    return this.pathTemplates.transcriptEntryPathTemplate.match(
-      transcriptEntryName
-    ).conference_record;
+    return this.pathTemplates.transcriptEntryPathTemplate.match(transcriptEntryName).conference_record;
   }
 
   /**
@@ -2945,9 +2539,7 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} A string representing the transcript.
    */
   matchTranscriptFromTranscriptEntryName(transcriptEntryName: string) {
-    return this.pathTemplates.transcriptEntryPathTemplate.match(
-      transcriptEntryName
-    ).transcript;
+    return this.pathTemplates.transcriptEntryPathTemplate.match(transcriptEntryName).transcript;
   }
 
   /**
@@ -2958,9 +2550,7 @@ export class ConferenceRecordsServiceClient {
    * @returns {string} A string representing the entry.
    */
   matchEntryFromTranscriptEntryName(transcriptEntryName: string) {
-    return this.pathTemplates.transcriptEntryPathTemplate.match(
-      transcriptEntryName
-    ).entry;
+    return this.pathTemplates.transcriptEntryPathTemplate.match(transcriptEntryName).entry;
   }
 
   /**

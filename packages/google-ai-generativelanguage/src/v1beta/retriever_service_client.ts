@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class RetrieverServiceClient {
    *     const client = new RetrieverServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof RetrieverServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class RetrieverServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class RetrieverServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -208,19 +183,25 @@ export class RetrieverServiceClient {
       chunkPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}/chunks/{chunk}'
       ),
-      corpusPathTemplate: new this._gaxModule.PathTemplate('corpora/{corpus}'),
-      corpusPermissionPathTemplate: new this._gaxModule.PathTemplate(
+      corpusPathTemplate: new this._gaxModule.PathTemplate(
+        'corpora/{corpus}'
+      ),
+      corpusPermissionsPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/permissions/{permission}'
       ),
       documentPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}'
       ),
-      filePathTemplate: new this._gaxModule.PathTemplate('files/{file}'),
-      modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
+      filePathTemplate: new this._gaxModule.PathTemplate(
+        'files/{file}'
+      ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'models/{model}'
+      ),
       tunedModelPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}'
       ),
-      tunedModelPermissionPathTemplate: new this._gaxModule.PathTemplate(
+      tunedModelPermissionsPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}/permissions/{permission}'
       ),
     };
@@ -229,30 +210,18 @@ export class RetrieverServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCorpora: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'corpora'
-      ),
-      listDocuments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'documents'
-      ),
-      listChunks: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'chunks'
-      ),
+      listCorpora:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'corpora'),
+      listDocuments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'documents'),
+      listChunks:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'chunks')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.ai.generativelanguage.v1beta.RetrieverService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.ai.generativelanguage.v1beta.RetrieverService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -283,57 +252,32 @@ export class RetrieverServiceClient {
     // Put together the "service stub" for
     // google.ai.generativelanguage.v1beta.RetrieverService.
     this.retrieverServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.ai.generativelanguage.v1beta.RetrieverService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.ai.generativelanguage.v1beta
-            .RetrieverService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.ai.generativelanguage.v1beta.RetrieverService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.ai.generativelanguage.v1beta.RetrieverService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const retrieverServiceStubMethods = [
-      'createCorpus',
-      'getCorpus',
-      'updateCorpus',
-      'deleteCorpus',
-      'listCorpora',
-      'queryCorpus',
-      'createDocument',
-      'getDocument',
-      'updateDocument',
-      'deleteDocument',
-      'listDocuments',
-      'queryDocument',
-      'createChunk',
-      'batchCreateChunks',
-      'getChunk',
-      'updateChunk',
-      'batchUpdateChunks',
-      'deleteChunk',
-      'batchDeleteChunks',
-      'listChunks',
-    ];
+    const retrieverServiceStubMethods =
+        ['createCorpus', 'getCorpus', 'updateCorpus', 'deleteCorpus', 'listCorpora', 'queryCorpus', 'createDocument', 'getDocument', 'updateDocument', 'deleteDocument', 'listDocuments', 'queryDocument', 'createChunk', 'batchCreateChunks', 'getChunk', 'updateChunk', 'batchUpdateChunks', 'deleteChunk', 'batchDeleteChunks', 'listChunks'];
     for (const methodName of retrieverServiceStubMethods) {
       const callPromise = this.retrieverServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -353,14 +297,8 @@ export class RetrieverServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -371,14 +309,8 @@ export class RetrieverServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -418,9 +350,8 @@ export class RetrieverServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -431,2390 +362,1814 @@ export class RetrieverServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates an empty `Corpus`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.ai.generativelanguage.v1beta.Corpus} request.corpus
-   *   Required. The `Corpus` to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.create_corpus.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_CreateCorpus_async
-   */
+/**
+ * Creates an empty `Corpus`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.ai.generativelanguage.v1beta.Corpus} request.corpus
+ *   Required. The `Corpus` to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.create_corpus.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_CreateCorpus_async
+ */
   createCorpus(
-    request?: protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      (
-        | protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest|undefined, {}|undefined
+      ]>;
   createCorpus(
-    request: protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      | protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCorpus(
-    request: protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      | protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCorpus(
-    request?: protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.ICorpus,
-          | protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      | protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      (
-        | protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCorpus(
+      request: protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCorpus(
+      request?: protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('createCorpus request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.ICorpus,
-          | protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCorpus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createCorpus(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.ICorpus,
-          (
-            | protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createCorpus response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createCorpus(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createCorpus response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets information about a specific `Corpus`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `Corpus`.
-   *   Example: `corpora/my-corpus-123`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.get_corpus.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_GetCorpus_async
-   */
+/**
+ * Gets information about a specific `Corpus`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `Corpus`.
+ *   Example: `corpora/my-corpus-123`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.get_corpus.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_GetCorpus_async
+ */
   getCorpus(
-    request?: protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest|undefined, {}|undefined
+      ]>;
   getCorpus(
-    request: protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      | protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCorpus(
-    request: protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      | protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCorpus(
-    request?: protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.ICorpus,
-          | protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      | protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCorpus(
+      request: protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCorpus(
+      request?: protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCorpus request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.ICorpus,
-          | protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCorpus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCorpus(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.ICorpus,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCorpus response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCorpus(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCorpus response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a `Corpus`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.ai.generativelanguage.v1beta.Corpus} request.corpus
-   *   Required. The `Corpus` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to update.
-   *   Currently, this only supports updating `display_name`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.update_corpus.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_UpdateCorpus_async
-   */
+/**
+ * Updates a `Corpus`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.ai.generativelanguage.v1beta.Corpus} request.corpus
+ *   Required. The `Corpus` to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update.
+ *   Currently, this only supports updating `display_name`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.update_corpus.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_UpdateCorpus_async
+ */
   updateCorpus(
-    request?: protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest|undefined, {}|undefined
+      ]>;
   updateCorpus(
-    request: protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      | protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCorpus(
-    request: protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      | protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCorpus(
-    request?: protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.ICorpus,
-          | protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      | protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.ICorpus,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCorpus(
+      request: protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCorpus(
+      request?: protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'corpus.name': request.corpus!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'corpus.name': request.corpus!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateCorpus request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.ICorpus,
-          | protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCorpus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateCorpus(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.ICorpus,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCorpus response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateCorpus(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.ICorpus,
+        protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateCorpus response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a `Corpus`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the `Corpus`.
-   *   Example: `corpora/my-corpus-123`
-   * @param {boolean} [request.force]
-   *   Optional. If set to true, any `Document`s and objects related to this
-   *   `Corpus` will also be deleted.
-   *
-   *   If false (the default), a `FAILED_PRECONDITION` error will be returned if
-   *   `Corpus` contains any `Document`s.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.delete_corpus.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_DeleteCorpus_async
-   */
+/**
+ * Deletes a `Corpus`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the `Corpus`.
+ *   Example: `corpora/my-corpus-123`
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, any `Document`s and objects related to this
+ *   `Corpus` will also be deleted.
+ *
+ *   If false (the default), a `FAILED_PRECONDITION` error will be returned if
+ *   `Corpus` contains any `Document`s.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.delete_corpus.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_DeleteCorpus_async
+ */
   deleteCorpus(
-    request?: protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest|undefined, {}|undefined
+      ]>;
   deleteCorpus(
-    request: protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCorpus(
-    request: protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCorpus(
-    request?: protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCorpus(
+      request: protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCorpus(
+      request?: protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteCorpus request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteCorpus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteCorpus(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCorpus response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteCorpus(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteCorpus response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Performs semantic search over a `Corpus`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `Corpus` to query.
-   *   Example: `corpora/my-corpus-123`
-   * @param {string} request.query
-   *   Required. Query string to perform semantic search.
-   * @param {number[]} [request.metadataFilters]
-   *   Optional. Filter for `Chunk` and `Document` metadata. Each `MetadataFilter`
-   *   object should correspond to a unique key. Multiple `MetadataFilter` objects
-   *   are joined by logical "AND"s.
-   *
-   *   Example query at document level:
-   *   (year >= 2020 OR year < 2010) AND (genre = drama OR genre = action)
-   *
-   *   `MetadataFilter` object list:
-   *    metadata_filters = [
-   *    {key = "document.custom_metadata.year"
-   *     conditions = [{int_value = 2020, operation = GREATER_EQUAL},
-   *                   {int_value = 2010, operation = LESS}]},
-   *    {key = "document.custom_metadata.year"
-   *     conditions = [{int_value = 2020, operation = GREATER_EQUAL},
-   *                   {int_value = 2010, operation = LESS}]},
-   *    {key = "document.custom_metadata.genre"
-   *     conditions = [{string_value = "drama", operation = EQUAL},
-   *                   {string_value = "action", operation = EQUAL}]}]
-   *
-   *   Example query at chunk level for a numeric range of values:
-   *   (year > 2015 AND year <= 2020)
-   *
-   *   `MetadataFilter` object list:
-   *    metadata_filters = [
-   *    {key = "chunk.custom_metadata.year"
-   *     conditions = [{int_value = 2015, operation = GREATER}]},
-   *    {key = "chunk.custom_metadata.year"
-   *     conditions = [{int_value = 2020, operation = LESS_EQUAL}]}]
-   *
-   *   Note: "AND"s for the same key are only supported for numeric values. String
-   *   values only support "OR"s for the same key.
-   * @param {number} [request.resultsCount]
-   *   Optional. The maximum number of `Chunk`s to return.
-   *   The service may return fewer `Chunk`s.
-   *
-   *   If unspecified, at most 10 `Chunk`s will be returned.
-   *   The maximum specified result count is 100.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.QueryCorpusResponse|QueryCorpusResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.query_corpus.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_QueryCorpus_async
-   */
+/**
+ * Performs semantic search over a `Corpus`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `Corpus` to query.
+ *   Example: `corpora/my-corpus-123`
+ * @param {string} request.query
+ *   Required. Query string to perform semantic search.
+ * @param {number[]} [request.metadataFilters]
+ *   Optional. Filter for `Chunk` and `Document` metadata. Each `MetadataFilter`
+ *   object should correspond to a unique key. Multiple `MetadataFilter` objects
+ *   are joined by logical "AND"s.
+ *
+ *   Example query at document level:
+ *   (year >= 2020 OR year < 2010) AND (genre = drama OR genre = action)
+ *
+ *   `MetadataFilter` object list:
+ *    metadata_filters = [
+ *    {key = "document.custom_metadata.year"
+ *     conditions = [{int_value = 2020, operation = GREATER_EQUAL},
+ *                   {int_value = 2010, operation = LESS}]},
+ *    {key = "document.custom_metadata.year"
+ *     conditions = [{int_value = 2020, operation = GREATER_EQUAL},
+ *                   {int_value = 2010, operation = LESS}]},
+ *    {key = "document.custom_metadata.genre"
+ *     conditions = [{string_value = "drama", operation = EQUAL},
+ *                   {string_value = "action", operation = EQUAL}]}]
+ *
+ *   Example query at chunk level for a numeric range of values:
+ *   (year > 2015 AND year <= 2020)
+ *
+ *   `MetadataFilter` object list:
+ *    metadata_filters = [
+ *    {key = "chunk.custom_metadata.year"
+ *     conditions = [{int_value = 2015, operation = GREATER}]},
+ *    {key = "chunk.custom_metadata.year"
+ *     conditions = [{int_value = 2020, operation = LESS_EQUAL}]}]
+ *
+ *   Note: "AND"s for the same key are only supported for numeric values. String
+ *   values only support "OR"s for the same key.
+ * @param {number} [request.resultsCount]
+ *   Optional. The maximum number of `Chunk`s to return.
+ *   The service may return fewer `Chunk`s.
+ *
+ *   If unspecified, at most 10 `Chunk`s will be returned.
+ *   The maximum specified result count is 100.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.QueryCorpusResponse|QueryCorpusResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.query_corpus.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_QueryCorpus_async
+ */
   queryCorpus(
-    request?: protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
+        protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest|undefined, {}|undefined
+      ]>;
   queryCorpus(
-    request: protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
-      | protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryCorpus(
-    request: protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
-      | protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryCorpus(
-    request?: protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
-          | protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
-      | protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryCorpus(
+      request: protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
+          protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryCorpus(
+      request?: protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
+          protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
+          protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
+        protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('queryCorpus request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
-          | protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
+        protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('queryCorpus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .queryCorpus(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('queryCorpus response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.queryCorpus(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
+        protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('queryCorpus response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates an empty `Document`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the `Corpus` where this `Document` will be created.
-   *   Example: `corpora/my-corpus-123`
-   * @param {google.ai.generativelanguage.v1beta.Document} request.document
-   *   Required. The `Document` to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Document|Document}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.create_document.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_CreateDocument_async
-   */
+/**
+ * Creates an empty `Document`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the `Corpus` where this `Document` will be created.
+ *   Example: `corpora/my-corpus-123`
+ * @param {google.ai.generativelanguage.v1beta.Document} request.document
+ *   Required. The `Document` to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Document|Document}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.create_document.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_CreateDocument_async
+ */
   createDocument(
-    request?: protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      (
-        | protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest|undefined, {}|undefined
+      ]>;
   createDocument(
-    request: protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      | protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDocument(
-    request: protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      | protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDocument(
-    request?: protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IDocument,
-          | protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      | protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      (
-        | protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDocument(
+      request: protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDocument(
+      request?: protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDocument request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IDocument,
-          | protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IDocument,
-          (
-            | protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDocument response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDocument(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDocument response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets information about a specific `Document`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `Document` to retrieve.
-   *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Document|Document}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.get_document.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_GetDocument_async
-   */
+/**
+ * Gets information about a specific `Document`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `Document` to retrieve.
+ *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Document|Document}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.get_document.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_GetDocument_async
+ */
   getDocument(
-    request?: protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest|undefined, {}|undefined
+      ]>;
   getDocument(
-    request: protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      | protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDocument(
-    request: protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      | protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDocument(
-    request?: protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IDocument,
-          | protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      | protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDocument(
+      request: protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDocument(
+      request?: protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDocument request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IDocument,
-          | protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IDocument,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDocument response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDocument(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDocument response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a `Document`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.ai.generativelanguage.v1beta.Document} request.document
-   *   Required. The `Document` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to update.
-   *   Currently, this only supports updating `display_name` and
-   *   `custom_metadata`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Document|Document}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.update_document.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_UpdateDocument_async
-   */
+/**
+ * Updates a `Document`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.ai.generativelanguage.v1beta.Document} request.document
+ *   Required. The `Document` to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update.
+ *   Currently, this only supports updating `display_name` and
+ *   `custom_metadata`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Document|Document}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.update_document.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_UpdateDocument_async
+ */
   updateDocument(
-    request?: protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest|undefined, {}|undefined
+      ]>;
   updateDocument(
-    request: protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      | protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDocument(
-    request: protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      | protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDocument(
-    request?: protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IDocument,
-          | protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      | protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IDocument,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDocument(
+      request: protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDocument(
+      request?: protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'document.name': request.document!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'document.name': request.document!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDocument request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IDocument,
-          | protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IDocument,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDocument response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDocument(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IDocument,
+        protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDocument response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a `Document`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the `Document` to delete.
-   *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
-   * @param {boolean} [request.force]
-   *   Optional. If set to true, any `Chunk`s and objects related to this
-   *   `Document` will also be deleted.
-   *
-   *   If false (the default), a `FAILED_PRECONDITION` error will be returned if
-   *   `Document` contains any `Chunk`s.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.delete_document.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_DeleteDocument_async
-   */
+/**
+ * Deletes a `Document`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the `Document` to delete.
+ *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, any `Chunk`s and objects related to this
+ *   `Document` will also be deleted.
+ *
+ *   If false (the default), a `FAILED_PRECONDITION` error will be returned if
+ *   `Document` contains any `Chunk`s.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.delete_document.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_DeleteDocument_async
+ */
   deleteDocument(
-    request?: protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest|undefined, {}|undefined
+      ]>;
   deleteDocument(
-    request: protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDocument(
-    request: protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDocument(
-    request?: protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDocument(
+      request: protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDocument(
+      request?: protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDocument request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDocument response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDocument(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDocument response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Performs semantic search over a `Document`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `Document` to query.
-   *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
-   * @param {string} request.query
-   *   Required. Query string to perform semantic search.
-   * @param {number} [request.resultsCount]
-   *   Optional. The maximum number of `Chunk`s to return.
-   *   The service may return fewer `Chunk`s.
-   *
-   *   If unspecified, at most 10 `Chunk`s will be returned.
-   *   The maximum specified result count is 100.
-   * @param {number[]} [request.metadataFilters]
-   *   Optional. Filter for `Chunk` metadata. Each `MetadataFilter` object should
-   *   correspond to a unique key. Multiple `MetadataFilter` objects are joined by
-   *   logical "AND"s.
-   *
-   *   Note: `Document`-level filtering is not supported for this request because
-   *   a `Document` name is already specified.
-   *
-   *   Example query:
-   *   (year >= 2020 OR year < 2010) AND (genre = drama OR genre = action)
-   *
-   *   `MetadataFilter` object list:
-   *    metadata_filters = [
-   *    {key = "chunk.custom_metadata.year"
-   *     conditions = [{int_value = 2020, operation = GREATER_EQUAL},
-   *                   {int_value = 2010, operation = LESS}},
-   *    {key = "chunk.custom_metadata.genre"
-   *     conditions = [{string_value = "drama", operation = EQUAL},
-   *                   {string_value = "action", operation = EQUAL}}]
-   *
-   *   Example query for a numeric range of values:
-   *   (year > 2015 AND year <= 2020)
-   *
-   *   `MetadataFilter` object list:
-   *    metadata_filters = [
-   *    {key = "chunk.custom_metadata.year"
-   *     conditions = [{int_value = 2015, operation = GREATER}]},
-   *    {key = "chunk.custom_metadata.year"
-   *     conditions = [{int_value = 2020, operation = LESS_EQUAL}]}]
-   *
-   *   Note: "AND"s for the same key are only supported for numeric values. String
-   *   values only support "OR"s for the same key.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.QueryDocumentResponse|QueryDocumentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.query_document.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_QueryDocument_async
-   */
+/**
+ * Performs semantic search over a `Document`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `Document` to query.
+ *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
+ * @param {string} request.query
+ *   Required. Query string to perform semantic search.
+ * @param {number} [request.resultsCount]
+ *   Optional. The maximum number of `Chunk`s to return.
+ *   The service may return fewer `Chunk`s.
+ *
+ *   If unspecified, at most 10 `Chunk`s will be returned.
+ *   The maximum specified result count is 100.
+ * @param {number[]} [request.metadataFilters]
+ *   Optional. Filter for `Chunk` metadata. Each `MetadataFilter` object should
+ *   correspond to a unique key. Multiple `MetadataFilter` objects are joined by
+ *   logical "AND"s.
+ *
+ *   Note: `Document`-level filtering is not supported for this request because
+ *   a `Document` name is already specified.
+ *
+ *   Example query:
+ *   (year >= 2020 OR year < 2010) AND (genre = drama OR genre = action)
+ *
+ *   `MetadataFilter` object list:
+ *    metadata_filters = [
+ *    {key = "chunk.custom_metadata.year"
+ *     conditions = [{int_value = 2020, operation = GREATER_EQUAL},
+ *                   {int_value = 2010, operation = LESS}},
+ *    {key = "chunk.custom_metadata.genre"
+ *     conditions = [{string_value = "drama", operation = EQUAL},
+ *                   {string_value = "action", operation = EQUAL}}]
+ *
+ *   Example query for a numeric range of values:
+ *   (year > 2015 AND year <= 2020)
+ *
+ *   `MetadataFilter` object list:
+ *    metadata_filters = [
+ *    {key = "chunk.custom_metadata.year"
+ *     conditions = [{int_value = 2015, operation = GREATER}]},
+ *    {key = "chunk.custom_metadata.year"
+ *     conditions = [{int_value = 2020, operation = LESS_EQUAL}]}]
+ *
+ *   Note: "AND"s for the same key are only supported for numeric values. String
+ *   values only support "OR"s for the same key.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.QueryDocumentResponse|QueryDocumentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.query_document.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_QueryDocument_async
+ */
   queryDocument(
-    request?: protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
+        protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest|undefined, {}|undefined
+      ]>;
   queryDocument(
-    request: protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
-      | protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryDocument(
-    request: protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
-      | protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryDocument(
-    request?: protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
-          | protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
-      | protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryDocument(
+      request: protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
+          protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryDocument(
+      request?: protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
+          protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
+          protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
+        protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('queryDocument request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
-          | protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
+        protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('queryDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .queryDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('queryDocument response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.queryDocument(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
+        protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('queryDocument response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a `Chunk`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the `Document` where this `Chunk` will be created.
-   *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
-   * @param {google.ai.generativelanguage.v1beta.Chunk} request.chunk
-   *   Required. The `Chunk` to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.create_chunk.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_CreateChunk_async
-   */
+/**
+ * Creates a `Chunk`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the `Document` where this `Chunk` will be created.
+ *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
+ * @param {google.ai.generativelanguage.v1beta.Chunk} request.chunk
+ *   Required. The `Chunk` to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.create_chunk.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_CreateChunk_async
+ */
   createChunk(
-    request?: protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      (
-        | protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest|undefined, {}|undefined
+      ]>;
   createChunk(
-    request: protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      | protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createChunk(
-    request: protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      | protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createChunk(
-    request?: protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IChunk,
-          | protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      | protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      (
-        | protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest|null|undefined,
+          {}|null|undefined>): void;
+  createChunk(
+      request: protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest|null|undefined,
+          {}|null|undefined>): void;
+  createChunk(
+      request?: protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createChunk request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IChunk,
-          | protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createChunk response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createChunk(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IChunk,
-          (
-            | protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createChunk response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createChunk(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createChunk response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Batch create `Chunk`s.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} [request.parent]
-   *   Optional. The name of the `Document` where this batch of `Chunk`s will be
-   *   created. The parent field in every `CreateChunkRequest` must match this
-   *   value. Example: `corpora/my-corpus-123/documents/the-doc-abc`
-   * @param {number[]} request.requests
-   *   Required. The request messages specifying the `Chunk`s to create.
-   *   A maximum of 100 `Chunk`s can be created in a batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.BatchCreateChunksResponse|BatchCreateChunksResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.batch_create_chunks.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_BatchCreateChunks_async
-   */
+/**
+ * Batch create `Chunk`s.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} [request.parent]
+ *   Optional. The name of the `Document` where this batch of `Chunk`s will be
+ *   created. The parent field in every `CreateChunkRequest` must match this
+ *   value. Example: `corpora/my-corpus-123/documents/the-doc-abc`
+ * @param {number[]} request.requests
+ *   Required. The request messages specifying the `Chunk`s to create.
+ *   A maximum of 100 `Chunk`s can be created in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.BatchCreateChunksResponse|BatchCreateChunksResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.batch_create_chunks.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_BatchCreateChunks_async
+ */
   batchCreateChunks(
-    request?: protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest|undefined, {}|undefined
+      ]>;
   batchCreateChunks(
-    request: protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
-      | protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchCreateChunks(
-    request: protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
-      | protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchCreateChunks(
-    request?: protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
-          | protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
-      | protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateChunks(
+      request: protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
+          protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateChunks(
+      request?: protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
+          protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
+          protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchCreateChunks request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
-          | protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchCreateChunks response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchCreateChunks(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchCreateChunks response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchCreateChunks(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchCreateChunks response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets information about a specific `Chunk`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `Chunk` to retrieve.
-   *   Example: `corpora/my-corpus-123/documents/the-doc-abc/chunks/some-chunk`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.get_chunk.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_GetChunk_async
-   */
+/**
+ * Gets information about a specific `Chunk`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `Chunk` to retrieve.
+ *   Example: `corpora/my-corpus-123/documents/the-doc-abc/chunks/some-chunk`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.get_chunk.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_GetChunk_async
+ */
   getChunk(
-    request?: protos.google.ai.generativelanguage.v1beta.IGetChunkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      protos.google.ai.generativelanguage.v1beta.IGetChunkRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IGetChunkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.IGetChunkRequest|undefined, {}|undefined
+      ]>;
   getChunk(
-    request: protos.google.ai.generativelanguage.v1beta.IGetChunkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      | protos.google.ai.generativelanguage.v1beta.IGetChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getChunk(
-    request: protos.google.ai.generativelanguage.v1beta.IGetChunkRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      | protos.google.ai.generativelanguage.v1beta.IGetChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getChunk(
-    request?: protos.google.ai.generativelanguage.v1beta.IGetChunkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IGetChunkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IChunk,
-          | protos.google.ai.generativelanguage.v1beta.IGetChunkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      | protos.google.ai.generativelanguage.v1beta.IGetChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      protos.google.ai.generativelanguage.v1beta.IGetChunkRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IGetChunkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getChunk(
+      request: protos.google.ai.generativelanguage.v1beta.IGetChunkRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          protos.google.ai.generativelanguage.v1beta.IGetChunkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getChunk(
+      request?: protos.google.ai.generativelanguage.v1beta.IGetChunkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          protos.google.ai.generativelanguage.v1beta.IGetChunkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          protos.google.ai.generativelanguage.v1beta.IGetChunkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.IGetChunkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getChunk request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IChunk,
-          | protos.google.ai.generativelanguage.v1beta.IGetChunkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.IGetChunkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getChunk response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getChunk(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IChunk,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IGetChunkRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getChunk response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getChunk(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.IGetChunkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getChunk response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a `Chunk`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.ai.generativelanguage.v1beta.Chunk} request.chunk
-   *   Required. The `Chunk` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to update.
-   *   Currently, this only supports updating `custom_metadata` and `data`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.update_chunk.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_UpdateChunk_async
-   */
+/**
+ * Updates a `Chunk`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.ai.generativelanguage.v1beta.Chunk} request.chunk
+ *   Required. The `Chunk` to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update.
+ *   Currently, this only supports updating `custom_metadata` and `data`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.update_chunk.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_UpdateChunk_async
+ */
   updateChunk(
-    request?: protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest|undefined, {}|undefined
+      ]>;
   updateChunk(
-    request: protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      | protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateChunk(
-    request: protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      | protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateChunk(
-    request?: protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IChunk,
-          | protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      | protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IChunk,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateChunk(
+      request: protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateChunk(
+      request?: protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'chunk.name': request.chunk!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'chunk.name': request.chunk!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateChunk request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IChunk,
-          | protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateChunk response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateChunk(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IChunk,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateChunk response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateChunk(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IChunk,
+        protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateChunk response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Batch update `Chunk`s.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} [request.parent]
-   *   Optional. The name of the `Document` containing the `Chunk`s to update.
-   *   The parent field in every `UpdateChunkRequest` must match this value.
-   *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
-   * @param {number[]} request.requests
-   *   Required. The request messages specifying the `Chunk`s to update.
-   *   A maximum of 100 `Chunk`s can be updated in a batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.BatchUpdateChunksResponse|BatchUpdateChunksResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.batch_update_chunks.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_BatchUpdateChunks_async
-   */
+/**
+ * Batch update `Chunk`s.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} [request.parent]
+ *   Optional. The name of the `Document` containing the `Chunk`s to update.
+ *   The parent field in every `UpdateChunkRequest` must match this value.
+ *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
+ * @param {number[]} request.requests
+ *   Required. The request messages specifying the `Chunk`s to update.
+ *   A maximum of 100 `Chunk`s can be updated in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.BatchUpdateChunksResponse|BatchUpdateChunksResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.batch_update_chunks.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_BatchUpdateChunks_async
+ */
   batchUpdateChunks(
-    request?: protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest|undefined, {}|undefined
+      ]>;
   batchUpdateChunks(
-    request: protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
-      | protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdateChunks(
-    request: protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
-      | protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdateChunks(
-    request?: protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
-          | protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
-      | protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateChunks(
+      request: protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
+          protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateChunks(
+      request?: protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
+          protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
+          protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchUpdateChunks request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
-          | protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchUpdateChunks response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchUpdateChunks(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchUpdateChunks response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchUpdateChunks(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchUpdateChunks response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a `Chunk`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the `Chunk` to delete.
-   *   Example: `corpora/my-corpus-123/documents/the-doc-abc/chunks/some-chunk`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.delete_chunk.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_DeleteChunk_async
-   */
+/**
+ * Deletes a `Chunk`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the `Chunk` to delete.
+ *   Example: `corpora/my-corpus-123/documents/the-doc-abc/chunks/some-chunk`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.delete_chunk.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_DeleteChunk_async
+ */
   deleteChunk(
-    request?: protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest|undefined, {}|undefined
+      ]>;
   deleteChunk(
-    request: protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteChunk(
-    request: protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteChunk(
-    request?: protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteChunk(
+      request: protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteChunk(
+      request?: protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteChunk request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteChunk response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteChunk(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteChunk response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteChunk(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteChunk response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Batch delete `Chunk`s.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} [request.parent]
-   *   Optional. The name of the `Document` containing the `Chunk`s to delete.
-   *   The parent field in every `DeleteChunkRequest` must match this value.
-   *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
-   * @param {number[]} request.requests
-   *   Required. The request messages specifying the `Chunk`s to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.batch_delete_chunks.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_BatchDeleteChunks_async
-   */
+/**
+ * Batch delete `Chunk`s.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} [request.parent]
+ *   Optional. The name of the `Document` containing the `Chunk`s to delete.
+ *   The parent field in every `DeleteChunkRequest` must match this value.
+ *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
+ * @param {number[]} request.requests
+ *   Required. The request messages specifying the `Chunk`s to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.batch_delete_chunks.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_BatchDeleteChunks_async
+ */
   batchDeleteChunks(
-    request?: protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest|undefined, {}|undefined
+      ]>;
   batchDeleteChunks(
-    request: protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchDeleteChunks(
-    request: protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchDeleteChunks(
-    request?: protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteChunks(
+      request: protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteChunks(
+      request?: protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchDeleteChunks request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchDeleteChunks response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchDeleteChunks(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchDeleteChunks response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchDeleteChunks(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchDeleteChunks response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists all `Corpora` owned by the user.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Corpora` to return (per page).
-   *   The service may return fewer `Corpora`.
-   *
-   *   If unspecified, at most 10 `Corpora` will be returned.
-   *   The maximum size limit is 20 `Corpora` per page.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListCorpora` call.
-   *
-   *   Provide the `next_page_token` returned in the response as an argument to
-   *   the next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListCorpora`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCorporaAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all `Corpora` owned by the user.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Corpora` to return (per page).
+ *   The service may return fewer `Corpora`.
+ *
+ *   If unspecified, at most 10 `Corpora` will be returned.
+ *   The maximum size limit is 20 `Corpora` per page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListCorpora` call.
+ *
+ *   Provide the `next_page_token` returned in the response as an argument to
+ *   the next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListCorpora`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCorporaAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCorpora(
-    request?: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.ICorpus[],
-      protos.google.ai.generativelanguage.v1beta.IListCorporaRequest | null,
-      protos.google.ai.generativelanguage.v1beta.IListCorporaResponse,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.ICorpus[],
+        protos.google.ai.generativelanguage.v1beta.IListCorporaRequest|null,
+        protos.google.ai.generativelanguage.v1beta.IListCorporaResponse
+      ]>;
   listCorpora(
-    request: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
-      | protos.google.ai.generativelanguage.v1beta.IListCorporaResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1beta.ICorpus
-    >
-  ): void;
-  listCorpora(
-    request: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
-    callback: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
-      | protos.google.ai.generativelanguage.v1beta.IListCorporaResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1beta.ICorpus
-    >
-  ): void;
-  listCorpora(
-    request?: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
-          | protos.google.ai.generativelanguage.v1beta.IListCorporaResponse
-          | null
-          | undefined,
-          protos.google.ai.generativelanguage.v1beta.ICorpus
-        >,
-    callback?: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
-      | protos.google.ai.generativelanguage.v1beta.IListCorporaResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1beta.ICorpus
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.ICorpus[],
-      protos.google.ai.generativelanguage.v1beta.IListCorporaRequest | null,
-      protos.google.ai.generativelanguage.v1beta.IListCorporaResponse,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IListCorporaResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.ICorpus>): void;
+  listCorpora(
+      request: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
+      callback: PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
+          protos.google.ai.generativelanguage.v1beta.IListCorporaResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.ICorpus>): void;
+  listCorpora(
+      request?: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
+          protos.google.ai.generativelanguage.v1beta.IListCorporaResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.ICorpus>,
+      callback?: PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
+          protos.google.ai.generativelanguage.v1beta.IListCorporaResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.ICorpus>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.ICorpus[],
+        protos.google.ai.generativelanguage.v1beta.IListCorporaRequest|null,
+        protos.google.ai.generativelanguage.v1beta.IListCorporaResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
-          | protos.google.ai.generativelanguage.v1beta.IListCorporaResponse
-          | null
-          | undefined,
-          protos.google.ai.generativelanguage.v1beta.ICorpus
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
+      protos.google.ai.generativelanguage.v1beta.IListCorporaResponse|null|undefined,
+      protos.google.ai.generativelanguage.v1beta.ICorpus>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCorpora values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2823,60 +2178,56 @@ export class RetrieverServiceClient {
     this._log.info('listCorpora request %j', request);
     return this.innerApiCalls
       .listCorpora(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.ai.generativelanguage.v1beta.ICorpus[],
-          protos.google.ai.generativelanguage.v1beta.IListCorporaRequest | null,
-          protos.google.ai.generativelanguage.v1beta.IListCorporaResponse,
-        ]) => {
-          this._log.info('listCorpora values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.ai.generativelanguage.v1beta.ICorpus[],
+        protos.google.ai.generativelanguage.v1beta.IListCorporaRequest|null,
+        protos.google.ai.generativelanguage.v1beta.IListCorporaResponse
+      ]) => {
+        this._log.info('listCorpora values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCorpora`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Corpora` to return (per page).
-   *   The service may return fewer `Corpora`.
-   *
-   *   If unspecified, at most 10 `Corpora` will be returned.
-   *   The maximum size limit is 20 `Corpora` per page.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListCorpora` call.
-   *
-   *   Provide the `next_page_token` returned in the response as an argument to
-   *   the next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListCorpora`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCorporaAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCorpora`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Corpora` to return (per page).
+ *   The service may return fewer `Corpora`.
+ *
+ *   If unspecified, at most 10 `Corpora` will be returned.
+ *   The maximum size limit is 20 `Corpora` per page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListCorpora` call.
+ *
+ *   Provide the `next_page_token` returned in the response as an argument to
+ *   the next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListCorpora`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCorporaAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCorporaStream(
-    request?: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCorpora stream %j', request);
     return this.descriptors.page.listCorpora.createStream(
       this.innerApiCalls.listCorpora as GaxCall,
@@ -2885,51 +2236,49 @@ export class RetrieverServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listCorpora`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Corpora` to return (per page).
-   *   The service may return fewer `Corpora`.
-   *
-   *   If unspecified, at most 10 `Corpora` will be returned.
-   *   The maximum size limit is 20 `Corpora` per page.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListCorpora` call.
-   *
-   *   Provide the `next_page_token` returned in the response as an argument to
-   *   the next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListCorpora`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.list_corpora.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_ListCorpora_async
-   */
+/**
+ * Equivalent to `listCorpora`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Corpora` to return (per page).
+ *   The service may return fewer `Corpora`.
+ *
+ *   If unspecified, at most 10 `Corpora` will be returned.
+ *   The maximum size limit is 20 `Corpora` per page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListCorpora` call.
+ *
+ *   Provide the `next_page_token` returned in the response as an argument to
+ *   the next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListCorpora`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.ai.generativelanguage.v1beta.Corpus|Corpus}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.list_corpora.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_ListCorpora_async
+ */
   listCorporaAsync(
-    request?: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.ai.generativelanguage.v1beta.ICorpus> {
+      request?: protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.ai.generativelanguage.v1beta.ICorpus>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCorpora iterate %j', request);
     return this.descriptors.page.listCorpora.asyncIterate(
       this.innerApiCalls['listCorpora'] as GaxCall,
@@ -2937,123 +2286,98 @@ export class RetrieverServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.ai.generativelanguage.v1beta.ICorpus>;
   }
-  /**
-   * Lists all `Document`s in a `Corpus`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the `Corpus` containing `Document`s.
-   *   Example: `corpora/my-corpus-123`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Document`s to return (per page).
-   *   The service may return fewer `Document`s.
-   *
-   *   If unspecified, at most 10 `Document`s will be returned.
-   *   The maximum size limit is 20 `Document`s per page.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListDocuments` call.
-   *
-   *   Provide the `next_page_token` returned in the response as an argument to
-   *   the next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListDocuments`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.Document|Document}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDocumentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all `Document`s in a `Corpus`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the `Corpus` containing `Document`s.
+ *   Example: `corpora/my-corpus-123`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Document`s to return (per page).
+ *   The service may return fewer `Document`s.
+ *
+ *   If unspecified, at most 10 `Document`s will be returned.
+ *   The maximum size limit is 20 `Document`s per page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListDocuments` call.
+ *
+ *   Provide the `next_page_token` returned in the response as an argument to
+ *   the next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListDocuments`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.Document|Document}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDocumentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDocuments(
-    request?: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IDocument[],
-      protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest | null,
-      protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IDocument[],
+        protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest|null,
+        protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse
+      ]>;
   listDocuments(
-    request: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
-      | protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1beta.IDocument
-    >
-  ): void;
-  listDocuments(
-    request: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
-    callback: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
-      | protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1beta.IDocument
-    >
-  ): void;
-  listDocuments(
-    request?: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
-          | protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse
-          | null
-          | undefined,
-          protos.google.ai.generativelanguage.v1beta.IDocument
-        >,
-    callback?: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
-      | protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1beta.IDocument
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IDocument[],
-      protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest | null,
-      protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.IDocument>): void;
+  listDocuments(
+      request: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
+      callback: PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
+          protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.IDocument>): void;
+  listDocuments(
+      request?: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
+          protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.IDocument>,
+      callback?: PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
+          protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.IDocument>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IDocument[],
+        protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest|null,
+        protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
-          | protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse
-          | null
-          | undefined,
-          protos.google.ai.generativelanguage.v1beta.IDocument
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
+      protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse|null|undefined,
+      protos.google.ai.generativelanguage.v1beta.IDocument>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDocuments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3062,67 +2386,64 @@ export class RetrieverServiceClient {
     this._log.info('listDocuments request %j', request);
     return this.innerApiCalls
       .listDocuments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.ai.generativelanguage.v1beta.IDocument[],
-          protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest | null,
-          protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse,
-        ]) => {
-          this._log.info('listDocuments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.ai.generativelanguage.v1beta.IDocument[],
+        protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest|null,
+        protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse
+      ]) => {
+        this._log.info('listDocuments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDocuments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the `Corpus` containing `Document`s.
-   *   Example: `corpora/my-corpus-123`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Document`s to return (per page).
-   *   The service may return fewer `Document`s.
-   *
-   *   If unspecified, at most 10 `Document`s will be returned.
-   *   The maximum size limit is 20 `Document`s per page.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListDocuments` call.
-   *
-   *   Provide the `next_page_token` returned in the response as an argument to
-   *   the next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListDocuments`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.Document|Document} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDocumentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDocuments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the `Corpus` containing `Document`s.
+ *   Example: `corpora/my-corpus-123`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Document`s to return (per page).
+ *   The service may return fewer `Document`s.
+ *
+ *   If unspecified, at most 10 `Document`s will be returned.
+ *   The maximum size limit is 20 `Document`s per page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListDocuments` call.
+ *
+ *   Provide the `next_page_token` returned in the response as an argument to
+ *   the next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListDocuments`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.Document|Document} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDocumentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDocumentsStream(
-    request?: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDocuments stream %j', request);
     return this.descriptors.page.listDocuments.createStream(
       this.innerApiCalls.listDocuments as GaxCall,
@@ -3131,58 +2452,57 @@ export class RetrieverServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDocuments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the `Corpus` containing `Document`s.
-   *   Example: `corpora/my-corpus-123`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Document`s to return (per page).
-   *   The service may return fewer `Document`s.
-   *
-   *   If unspecified, at most 10 `Document`s will be returned.
-   *   The maximum size limit is 20 `Document`s per page.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListDocuments` call.
-   *
-   *   Provide the `next_page_token` returned in the response as an argument to
-   *   the next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListDocuments`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.ai.generativelanguage.v1beta.Document|Document}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.list_documents.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_ListDocuments_async
-   */
+/**
+ * Equivalent to `listDocuments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the `Corpus` containing `Document`s.
+ *   Example: `corpora/my-corpus-123`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Document`s to return (per page).
+ *   The service may return fewer `Document`s.
+ *
+ *   If unspecified, at most 10 `Document`s will be returned.
+ *   The maximum size limit is 20 `Document`s per page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListDocuments` call.
+ *
+ *   Provide the `next_page_token` returned in the response as an argument to
+ *   the next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListDocuments`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.ai.generativelanguage.v1beta.Document|Document}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.list_documents.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_ListDocuments_async
+ */
   listDocumentsAsync(
-    request?: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.ai.generativelanguage.v1beta.IDocument> {
+      request?: protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.ai.generativelanguage.v1beta.IDocument>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDocuments iterate %j', request);
     return this.descriptors.page.listDocuments.asyncIterate(
       this.innerApiCalls['listDocuments'] as GaxCall,
@@ -3190,123 +2510,98 @@ export class RetrieverServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.ai.generativelanguage.v1beta.IDocument>;
   }
-  /**
-   * Lists all `Chunk`s in a `Document`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the `Document` containing `Chunk`s.
-   *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Chunk`s to return (per page).
-   *   The service may return fewer `Chunk`s.
-   *
-   *   If unspecified, at most 10 `Chunk`s will be returned.
-   *   The maximum size limit is 100 `Chunk`s per page.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListChunks` call.
-   *
-   *   Provide the `next_page_token` returned in the response as an argument to
-   *   the next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListChunks`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listChunksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all `Chunk`s in a `Document`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the `Document` containing `Chunk`s.
+ *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Chunk`s to return (per page).
+ *   The service may return fewer `Chunk`s.
+ *
+ *   If unspecified, at most 10 `Chunk`s will be returned.
+ *   The maximum size limit is 100 `Chunk`s per page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListChunks` call.
+ *
+ *   Provide the `next_page_token` returned in the response as an argument to
+ *   the next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListChunks`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listChunksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listChunks(
-    request?: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IChunk[],
-      protos.google.ai.generativelanguage.v1beta.IListChunksRequest | null,
-      protos.google.ai.generativelanguage.v1beta.IListChunksResponse,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IChunk[],
+        protos.google.ai.generativelanguage.v1beta.IListChunksRequest|null,
+        protos.google.ai.generativelanguage.v1beta.IListChunksResponse
+      ]>;
   listChunks(
-    request: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
-      | protos.google.ai.generativelanguage.v1beta.IListChunksResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1beta.IChunk
-    >
-  ): void;
-  listChunks(
-    request: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
-    callback: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
-      | protos.google.ai.generativelanguage.v1beta.IListChunksResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1beta.IChunk
-    >
-  ): void;
-  listChunks(
-    request?: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
-          | protos.google.ai.generativelanguage.v1beta.IListChunksResponse
-          | null
-          | undefined,
-          protos.google.ai.generativelanguage.v1beta.IChunk
-        >,
-    callback?: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
-      | protos.google.ai.generativelanguage.v1beta.IListChunksResponse
-      | null
-      | undefined,
-      protos.google.ai.generativelanguage.v1beta.IChunk
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IChunk[],
-      protos.google.ai.generativelanguage.v1beta.IListChunksRequest | null,
-      protos.google.ai.generativelanguage.v1beta.IListChunksResponse,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IListChunksResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.IChunk>): void;
+  listChunks(
+      request: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
+      callback: PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
+          protos.google.ai.generativelanguage.v1beta.IListChunksResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.IChunk>): void;
+  listChunks(
+      request?: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
+          protos.google.ai.generativelanguage.v1beta.IListChunksResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.IChunk>,
+      callback?: PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
+          protos.google.ai.generativelanguage.v1beta.IListChunksResponse|null|undefined,
+          protos.google.ai.generativelanguage.v1beta.IChunk>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IChunk[],
+        protos.google.ai.generativelanguage.v1beta.IListChunksRequest|null,
+        protos.google.ai.generativelanguage.v1beta.IListChunksResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
-          | protos.google.ai.generativelanguage.v1beta.IListChunksResponse
-          | null
-          | undefined,
-          protos.google.ai.generativelanguage.v1beta.IChunk
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
+      protos.google.ai.generativelanguage.v1beta.IListChunksResponse|null|undefined,
+      protos.google.ai.generativelanguage.v1beta.IChunk>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listChunks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3315,67 +2610,64 @@ export class RetrieverServiceClient {
     this._log.info('listChunks request %j', request);
     return this.innerApiCalls
       .listChunks(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.ai.generativelanguage.v1beta.IChunk[],
-          protos.google.ai.generativelanguage.v1beta.IListChunksRequest | null,
-          protos.google.ai.generativelanguage.v1beta.IListChunksResponse,
-        ]) => {
-          this._log.info('listChunks values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.ai.generativelanguage.v1beta.IChunk[],
+        protos.google.ai.generativelanguage.v1beta.IListChunksRequest|null,
+        protos.google.ai.generativelanguage.v1beta.IListChunksResponse
+      ]) => {
+        this._log.info('listChunks values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listChunks`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the `Document` containing `Chunk`s.
-   *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Chunk`s to return (per page).
-   *   The service may return fewer `Chunk`s.
-   *
-   *   If unspecified, at most 10 `Chunk`s will be returned.
-   *   The maximum size limit is 100 `Chunk`s per page.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListChunks` call.
-   *
-   *   Provide the `next_page_token` returned in the response as an argument to
-   *   the next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListChunks`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listChunksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listChunks`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the `Document` containing `Chunk`s.
+ *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Chunk`s to return (per page).
+ *   The service may return fewer `Chunk`s.
+ *
+ *   If unspecified, at most 10 `Chunk`s will be returned.
+ *   The maximum size limit is 100 `Chunk`s per page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListChunks` call.
+ *
+ *   Provide the `next_page_token` returned in the response as an argument to
+ *   the next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListChunks`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listChunksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listChunksStream(
-    request?: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listChunks stream %j', request);
     return this.descriptors.page.listChunks.createStream(
       this.innerApiCalls.listChunks as GaxCall,
@@ -3384,58 +2676,57 @@ export class RetrieverServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listChunks`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the `Document` containing `Chunk`s.
-   *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Chunk`s to return (per page).
-   *   The service may return fewer `Chunk`s.
-   *
-   *   If unspecified, at most 10 `Chunk`s will be returned.
-   *   The maximum size limit is 100 `Chunk`s per page.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListChunks` call.
-   *
-   *   Provide the `next_page_token` returned in the response as an argument to
-   *   the next request to retrieve the next page.
-   *
-   *   When paginating, all other parameters provided to `ListChunks`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/retriever_service.list_chunks.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_RetrieverService_ListChunks_async
-   */
+/**
+ * Equivalent to `listChunks`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the `Document` containing `Chunk`s.
+ *   Example: `corpora/my-corpus-123/documents/the-doc-abc`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Chunk`s to return (per page).
+ *   The service may return fewer `Chunk`s.
+ *
+ *   If unspecified, at most 10 `Chunk`s will be returned.
+ *   The maximum size limit is 100 `Chunk`s per page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListChunks` call.
+ *
+ *   Provide the `next_page_token` returned in the response as an argument to
+ *   the next request to retrieve the next page.
+ *
+ *   When paginating, all other parameters provided to `ListChunks`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.ai.generativelanguage.v1beta.Chunk|Chunk}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/retriever_service.list_chunks.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_RetrieverService_ListChunks_async
+ */
   listChunksAsync(
-    request?: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.ai.generativelanguage.v1beta.IChunk> {
+      request?: protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.ai.generativelanguage.v1beta.IChunk>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listChunks iterate %j', request);
     return this.descriptors.page.listChunks.asyncIterate(
       this.innerApiCalls['listChunks'] as GaxCall,
@@ -3453,7 +2744,7 @@ export class RetrieverServiceClient {
    * @param {string} id
    * @returns {string} Resource name string.
    */
-  cachedContentPath(id: string) {
+  cachedContentPath(id:string) {
     return this.pathTemplates.cachedContentPathTemplate.render({
       id: id,
     });
@@ -3467,8 +2758,7 @@ export class RetrieverServiceClient {
    * @returns {string} A string representing the id.
    */
   matchIdFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
-      .id;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).id;
   }
 
   /**
@@ -3479,7 +2769,7 @@ export class RetrieverServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  chunkPath(corpus: string, document: string, chunk: string) {
+  chunkPath(corpus:string,document:string,chunk:string) {
     return this.pathTemplates.chunkPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -3526,7 +2816,7 @@ export class RetrieverServiceClient {
    * @param {string} corpus
    * @returns {string} Resource name string.
    */
-  corpusPath(corpus: string) {
+  corpusPath(corpus:string) {
     return this.pathTemplates.corpusPathTemplate.render({
       corpus: corpus,
     });
@@ -3544,43 +2834,39 @@ export class RetrieverServiceClient {
   }
 
   /**
-   * Return a fully-qualified corpusPermission resource name string.
+   * Return a fully-qualified corpusPermissions resource name string.
    *
    * @param {string} corpus
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  corpusPermissionPath(corpus: string, permission: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.render({
+  corpusPermissionsPath(corpus:string,permission:string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.render({
       corpus: corpus,
       permission: permission,
     });
   }
 
   /**
-   * Parse the corpus from CorpusPermission resource.
+   * Parse the corpus from CorpusPermissions resource.
    *
-   * @param {string} corpusPermissionName
-   *   A fully-qualified path representing corpus_permission resource.
+   * @param {string} corpusPermissionsName
+   *   A fully-qualified path representing corpus_permissions resource.
    * @returns {string} A string representing the corpus.
    */
-  matchCorpusFromCorpusPermissionName(corpusPermissionName: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.match(
-      corpusPermissionName
-    ).corpus;
+  matchCorpusFromCorpusPermissionsName(corpusPermissionsName: string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).corpus;
   }
 
   /**
-   * Parse the permission from CorpusPermission resource.
+   * Parse the permission from CorpusPermissions resource.
    *
-   * @param {string} corpusPermissionName
-   *   A fully-qualified path representing corpus_permission resource.
+   * @param {string} corpusPermissionsName
+   *   A fully-qualified path representing corpus_permissions resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromCorpusPermissionName(corpusPermissionName: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.match(
-      corpusPermissionName
-    ).permission;
+  matchPermissionFromCorpusPermissionsName(corpusPermissionsName: string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).permission;
   }
 
   /**
@@ -3590,7 +2876,7 @@ export class RetrieverServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  documentPath(corpus: string, document: string) {
+  documentPath(corpus:string,document:string) {
     return this.pathTemplates.documentPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -3625,7 +2911,7 @@ export class RetrieverServiceClient {
    * @param {string} file
    * @returns {string} Resource name string.
    */
-  filePath(file: string) {
+  filePath(file:string) {
     return this.pathTemplates.filePathTemplate.render({
       file: file,
     });
@@ -3648,7 +2934,7 @@ export class RetrieverServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(model: string) {
+  modelPath(model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       model: model,
     });
@@ -3671,7 +2957,7 @@ export class RetrieverServiceClient {
    * @param {string} tuned_model
    * @returns {string} Resource name string.
    */
-  tunedModelPath(tunedModel: string) {
+  tunedModelPath(tunedModel:string) {
     return this.pathTemplates.tunedModelPathTemplate.render({
       tuned_model: tunedModel,
     });
@@ -3685,52 +2971,43 @@ export class RetrieverServiceClient {
    * @returns {string} A string representing the tuned_model.
    */
   matchTunedModelFromTunedModelName(tunedModelName: string) {
-    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName)
-      .tuned_model;
+    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName).tuned_model;
   }
 
   /**
-   * Return a fully-qualified tunedModelPermission resource name string.
+   * Return a fully-qualified tunedModelPermissions resource name string.
    *
    * @param {string} tuned_model
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  tunedModelPermissionPath(tunedModel: string, permission: string) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.render({
+  tunedModelPermissionsPath(tunedModel:string,permission:string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.render({
       tuned_model: tunedModel,
       permission: permission,
     });
   }
 
   /**
-   * Parse the tuned_model from TunedModelPermission resource.
+   * Parse the tuned_model from TunedModelPermissions resource.
    *
-   * @param {string} tunedModelPermissionName
-   *   A fully-qualified path representing tuned_model_permission resource.
+   * @param {string} tunedModelPermissionsName
+   *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the tuned_model.
    */
-  matchTunedModelFromTunedModelPermissionName(
-    tunedModelPermissionName: string
-  ) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.match(
-      tunedModelPermissionName
-    ).tuned_model;
+  matchTunedModelFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).tuned_model;
   }
 
   /**
-   * Parse the permission from TunedModelPermission resource.
+   * Parse the permission from TunedModelPermissions resource.
    *
-   * @param {string} tunedModelPermissionName
-   *   A fully-qualified path representing tuned_model_permission resource.
+   * @param {string} tunedModelPermissionsName
+   *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromTunedModelPermissionName(
-    tunedModelPermissionName: string
-  ) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.match(
-      tunedModelPermissionName
-    ).permission;
+  matchPermissionFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).permission;
   }
 
   /**

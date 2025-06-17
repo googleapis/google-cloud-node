@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class DomainMappingsClient {
    *     const client = new DomainMappingsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DomainMappingsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'appengine.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class DomainMappingsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class DomainMappingsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -214,89 +187,55 @@ export class DomainMappingsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDomainMappings: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'domainMappings'
-      ),
+      listDomainMappings:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'domainMappings')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=apps/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=apps/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=apps/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=apps/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=apps/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=apps/*}/locations',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=apps/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=apps/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createDomainMappingResponse = protoFilesRoot.lookup(
-      '.google.appengine.v1.DomainMapping'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.DomainMapping') as gax.protobuf.Type;
     const createDomainMappingMetadata = protoFilesRoot.lookup(
-      '.google.appengine.v1.OperationMetadataV1'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.OperationMetadataV1') as gax.protobuf.Type;
     const updateDomainMappingResponse = protoFilesRoot.lookup(
-      '.google.appengine.v1.DomainMapping'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.DomainMapping') as gax.protobuf.Type;
     const updateDomainMappingMetadata = protoFilesRoot.lookup(
-      '.google.appengine.v1.OperationMetadataV1'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.OperationMetadataV1') as gax.protobuf.Type;
     const deleteDomainMappingResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteDomainMappingMetadata = protoFilesRoot.lookup(
-      '.google.appengine.v1.OperationMetadataV1'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.OperationMetadataV1') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDomainMapping: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createDomainMappingResponse.decode.bind(createDomainMappingResponse),
-        createDomainMappingMetadata.decode.bind(createDomainMappingMetadata)
-      ),
+        createDomainMappingMetadata.decode.bind(createDomainMappingMetadata)),
       updateDomainMapping: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateDomainMappingResponse.decode.bind(updateDomainMappingResponse),
-        updateDomainMappingMetadata.decode.bind(updateDomainMappingMetadata)
-      ),
+        updateDomainMappingMetadata.decode.bind(updateDomainMappingMetadata)),
       deleteDomainMapping: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDomainMappingResponse.decode.bind(deleteDomainMappingResponse),
-        deleteDomainMappingMetadata.decode.bind(deleteDomainMappingMetadata)
-      ),
+        deleteDomainMappingMetadata.decode.bind(deleteDomainMappingMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.appengine.v1.DomainMappings',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.appengine.v1.DomainMappings', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -327,39 +266,28 @@ export class DomainMappingsClient {
     // Put together the "service stub" for
     // google.appengine.v1.DomainMappings.
     this.domainMappingsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.appengine.v1.DomainMappings'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.appengine.v1.DomainMappings') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.appengine.v1.DomainMappings,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const domainMappingsStubMethods = [
-      'listDomainMappings',
-      'getDomainMapping',
-      'createDomainMapping',
-      'updateDomainMapping',
-      'deleteDomainMapping',
-    ];
+    const domainMappingsStubMethods =
+        ['listDomainMappings', 'getDomainMapping', 'createDomainMapping', 'updateDomainMapping', 'deleteDomainMapping'];
     for (const methodName of domainMappingsStubMethods) {
       const callPromise = this.domainMappingsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -384,14 +312,8 @@ export class DomainMappingsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'appengine.googleapis.com';
   }
@@ -402,14 +324,8 @@ export class DomainMappingsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'appengine.googleapis.com';
   }
@@ -443,7 +359,7 @@ export class DomainMappingsClient {
     return [
       'https://www.googleapis.com/auth/appengine.admin',
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-platform.read-only',
+      'https://www.googleapis.com/auth/cloud-platform.read-only'
     ];
   }
 
@@ -453,9 +369,8 @@ export class DomainMappingsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -466,746 +381,523 @@ export class DomainMappingsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the specified domain mapping.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example:
-   *   `apps/myapp/domainMappings/example.com`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.appengine.v1.DomainMapping|DomainMapping}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domain_mappings.get_domain_mapping.js</caption>
-   * region_tag:appengine_v1_generated_DomainMappings_GetDomainMapping_async
-   */
+/**
+ * Gets the specified domain mapping.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource requested. Example:
+ *   `apps/myapp/domainMappings/example.com`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.appengine.v1.DomainMapping|DomainMapping}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domain_mappings.get_domain_mapping.js</caption>
+ * region_tag:appengine_v1_generated_DomainMappings_GetDomainMapping_async
+ */
   getDomainMapping(
-    request?: protos.google.appengine.v1.IGetDomainMappingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IDomainMapping,
-      protos.google.appengine.v1.IGetDomainMappingRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IGetDomainMappingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.appengine.v1.IDomainMapping,
+        protos.google.appengine.v1.IGetDomainMappingRequest|undefined, {}|undefined
+      ]>;
   getDomainMapping(
-    request: protos.google.appengine.v1.IGetDomainMappingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.appengine.v1.IDomainMapping,
-      protos.google.appengine.v1.IGetDomainMappingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDomainMapping(
-    request: protos.google.appengine.v1.IGetDomainMappingRequest,
-    callback: Callback<
-      protos.google.appengine.v1.IDomainMapping,
-      protos.google.appengine.v1.IGetDomainMappingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDomainMapping(
-    request?: protos.google.appengine.v1.IGetDomainMappingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.appengine.v1.IGetDomainMappingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.appengine.v1.IDomainMapping,
-          | protos.google.appengine.v1.IGetDomainMappingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.appengine.v1.IDomainMapping,
-      protos.google.appengine.v1.IGetDomainMappingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.appengine.v1.IDomainMapping,
-      protos.google.appengine.v1.IGetDomainMappingRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.appengine.v1.IGetDomainMappingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDomainMapping(
+      request: protos.google.appengine.v1.IGetDomainMappingRequest,
+      callback: Callback<
+          protos.google.appengine.v1.IDomainMapping,
+          protos.google.appengine.v1.IGetDomainMappingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDomainMapping(
+      request?: protos.google.appengine.v1.IGetDomainMappingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.appengine.v1.IDomainMapping,
+          protos.google.appengine.v1.IGetDomainMappingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.appengine.v1.IDomainMapping,
+          protos.google.appengine.v1.IGetDomainMappingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.appengine.v1.IDomainMapping,
+        protos.google.appengine.v1.IGetDomainMappingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDomainMapping request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.appengine.v1.IDomainMapping,
-          | protos.google.appengine.v1.IGetDomainMappingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.appengine.v1.IDomainMapping,
+        protos.google.appengine.v1.IGetDomainMappingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDomainMapping response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDomainMapping(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.appengine.v1.IDomainMapping,
-          protos.google.appengine.v1.IGetDomainMappingRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getDomainMapping response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDomainMapping(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.appengine.v1.IDomainMapping,
+        protos.google.appengine.v1.IGetDomainMappingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDomainMapping response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Maps a domain to an application. A user must be authorized to administer a
-   * domain in order to map it to an application. For a list of available
-   * authorized domains, see [`AuthorizedDomains.ListAuthorizedDomains`]().
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent Application resource. Example: `apps/myapp`.
-   * @param {google.appengine.v1.DomainMapping} request.domainMapping
-   *   Domain mapping configuration.
-   * @param {google.appengine.v1.DomainOverrideStrategy} request.overrideStrategy
-   *   Whether the domain creation should override any existing mappings for this
-   *   domain. By default, overrides are rejected.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domain_mappings.create_domain_mapping.js</caption>
-   * region_tag:appengine_v1_generated_DomainMappings_CreateDomainMapping_async
-   */
+/**
+ * Maps a domain to an application. A user must be authorized to administer a
+ * domain in order to map it to an application. For a list of available
+ * authorized domains, see [`AuthorizedDomains.ListAuthorizedDomains`]().
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent Application resource. Example: `apps/myapp`.
+ * @param {google.appengine.v1.DomainMapping} request.domainMapping
+ *   Domain mapping configuration.
+ * @param {google.appengine.v1.DomainOverrideStrategy} request.overrideStrategy
+ *   Whether the domain creation should override any existing mappings for this
+ *   domain. By default, overrides are rejected.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domain_mappings.create_domain_mapping.js</caption>
+ * region_tag:appengine_v1_generated_DomainMappings_CreateDomainMapping_async
+ */
   createDomainMapping(
-    request?: protos.google.appengine.v1.ICreateDomainMappingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IDomainMapping,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.ICreateDomainMappingRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createDomainMapping(
-    request: protos.google.appengine.v1.ICreateDomainMappingRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IDomainMapping,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.ICreateDomainMappingRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createDomainMapping(
-    request: protos.google.appengine.v1.ICreateDomainMappingRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IDomainMapping,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.ICreateDomainMappingRequest,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createDomainMapping(
-    request?: protos.google.appengine.v1.ICreateDomainMappingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IDomainMapping,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.appengine.v1.IDomainMapping,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IDomainMapping,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.appengine.v1.ICreateDomainMappingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IDomainMapping,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createDomainMapping response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createDomainMapping request %j', request);
-    return this.innerApiCalls
-      .createDomainMapping(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.appengine.v1.IDomainMapping,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createDomainMapping response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createDomainMapping(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createDomainMapping response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createDomainMapping()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domain_mappings.create_domain_mapping.js</caption>
-   * region_tag:appengine_v1_generated_DomainMappings_CreateDomainMapping_async
-   */
-  async checkCreateDomainMappingProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.appengine.v1.DomainMapping,
-      protos.google.appengine.v1.OperationMetadataV1
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createDomainMapping()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domain_mappings.create_domain_mapping.js</caption>
+ * region_tag:appengine_v1_generated_DomainMappings_CreateDomainMapping_async
+ */
+  async checkCreateDomainMappingProgress(name: string): Promise<LROperation<protos.google.appengine.v1.DomainMapping, protos.google.appengine.v1.OperationMetadataV1>>{
     this._log.info('createDomainMapping long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createDomainMapping,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.appengine.v1.DomainMapping,
-      protos.google.appengine.v1.OperationMetadataV1
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createDomainMapping, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.appengine.v1.DomainMapping, protos.google.appengine.v1.OperationMetadataV1>;
   }
-  /**
-   * Updates the specified domain mapping. To map an SSL certificate to a
-   * domain mapping, update `certificate_id` to point to an `AuthorizedCertificate`
-   * resource. A user must be authorized to administer the associated domain
-   * in order to update a `DomainMapping` resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource to update. Example:
-   *   `apps/myapp/domainMappings/example.com`.
-   * @param {google.appengine.v1.DomainMapping} request.domainMapping
-   *   A domain mapping containing the updated resource. Only fields set
-   *   in the field mask will be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Standard field mask for the set of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domain_mappings.update_domain_mapping.js</caption>
-   * region_tag:appengine_v1_generated_DomainMappings_UpdateDomainMapping_async
-   */
+/**
+ * Updates the specified domain mapping. To map an SSL certificate to a
+ * domain mapping, update `certificate_id` to point to an `AuthorizedCertificate`
+ * resource. A user must be authorized to administer the associated domain
+ * in order to update a `DomainMapping` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource to update. Example:
+ *   `apps/myapp/domainMappings/example.com`.
+ * @param {google.appengine.v1.DomainMapping} request.domainMapping
+ *   A domain mapping containing the updated resource. Only fields set
+ *   in the field mask will be updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Standard field mask for the set of fields to be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domain_mappings.update_domain_mapping.js</caption>
+ * region_tag:appengine_v1_generated_DomainMappings_UpdateDomainMapping_async
+ */
   updateDomainMapping(
-    request?: protos.google.appengine.v1.IUpdateDomainMappingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IDomainMapping,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IUpdateDomainMappingRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateDomainMapping(
-    request: protos.google.appengine.v1.IUpdateDomainMappingRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IDomainMapping,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IUpdateDomainMappingRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDomainMapping(
-    request: protos.google.appengine.v1.IUpdateDomainMappingRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IDomainMapping,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IUpdateDomainMappingRequest,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDomainMapping(
-    request?: protos.google.appengine.v1.IUpdateDomainMappingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IDomainMapping,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.appengine.v1.IDomainMapping,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IDomainMapping,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.appengine.v1.IUpdateDomainMappingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IDomainMapping,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateDomainMapping response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateDomainMapping request %j', request);
-    return this.innerApiCalls
-      .updateDomainMapping(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.appengine.v1.IDomainMapping,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDomainMapping response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateDomainMapping(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.appengine.v1.IDomainMapping, protos.google.appengine.v1.IOperationMetadataV1>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateDomainMapping response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateDomainMapping()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domain_mappings.update_domain_mapping.js</caption>
-   * region_tag:appengine_v1_generated_DomainMappings_UpdateDomainMapping_async
-   */
-  async checkUpdateDomainMappingProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.appengine.v1.DomainMapping,
-      protos.google.appengine.v1.OperationMetadataV1
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateDomainMapping()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domain_mappings.update_domain_mapping.js</caption>
+ * region_tag:appengine_v1_generated_DomainMappings_UpdateDomainMapping_async
+ */
+  async checkUpdateDomainMappingProgress(name: string): Promise<LROperation<protos.google.appengine.v1.DomainMapping, protos.google.appengine.v1.OperationMetadataV1>>{
     this._log.info('updateDomainMapping long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateDomainMapping,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.appengine.v1.DomainMapping,
-      protos.google.appengine.v1.OperationMetadataV1
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateDomainMapping, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.appengine.v1.DomainMapping, protos.google.appengine.v1.OperationMetadataV1>;
   }
-  /**
-   * Deletes the specified domain mapping. A user must be authorized to
-   * administer the associated domain in order to delete a `DomainMapping`
-   * resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource to delete. Example:
-   *   `apps/myapp/domainMappings/example.com`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domain_mappings.delete_domain_mapping.js</caption>
-   * region_tag:appengine_v1_generated_DomainMappings_DeleteDomainMapping_async
-   */
+/**
+ * Deletes the specified domain mapping. A user must be authorized to
+ * administer the associated domain in order to delete a `DomainMapping`
+ * resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource to delete. Example:
+ *   `apps/myapp/domainMappings/example.com`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domain_mappings.delete_domain_mapping.js</caption>
+ * region_tag:appengine_v1_generated_DomainMappings_DeleteDomainMapping_async
+ */
   deleteDomainMapping(
-    request?: protos.google.appengine.v1.IDeleteDomainMappingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IDeleteDomainMappingRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteDomainMapping(
-    request: protos.google.appengine.v1.IDeleteDomainMappingRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IDeleteDomainMappingRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDomainMapping(
-    request: protos.google.appengine.v1.IDeleteDomainMappingRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IDeleteDomainMappingRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDomainMapping(
-    request?: protos.google.appengine.v1.IDeleteDomainMappingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.appengine.v1.IDeleteDomainMappingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteDomainMapping response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteDomainMapping request %j', request);
-    return this.innerApiCalls
-      .deleteDomainMapping(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDomainMapping response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteDomainMapping(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.appengine.v1.IOperationMetadataV1>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteDomainMapping response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteDomainMapping()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domain_mappings.delete_domain_mapping.js</caption>
-   * region_tag:appengine_v1_generated_DomainMappings_DeleteDomainMapping_async
-   */
-  async checkDeleteDomainMappingProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.appengine.v1.OperationMetadataV1
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteDomainMapping()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domain_mappings.delete_domain_mapping.js</caption>
+ * region_tag:appengine_v1_generated_DomainMappings_DeleteDomainMapping_async
+ */
+  async checkDeleteDomainMappingProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.appengine.v1.OperationMetadataV1>>{
     this._log.info('deleteDomainMapping long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteDomainMapping,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.appengine.v1.OperationMetadataV1
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteDomainMapping, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.appengine.v1.OperationMetadataV1>;
   }
-  /**
-   * Lists the domain mappings on an application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent Application resource. Example: `apps/myapp`.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.appengine.v1.DomainMapping|DomainMapping}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDomainMappingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the domain mappings on an application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent Application resource. Example: `apps/myapp`.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.appengine.v1.DomainMapping|DomainMapping}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDomainMappingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDomainMappings(
-    request?: protos.google.appengine.v1.IListDomainMappingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IDomainMapping[],
-      protos.google.appengine.v1.IListDomainMappingsRequest | null,
-      protos.google.appengine.v1.IListDomainMappingsResponse,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IListDomainMappingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.appengine.v1.IDomainMapping[],
+        protos.google.appengine.v1.IListDomainMappingsRequest|null,
+        protos.google.appengine.v1.IListDomainMappingsResponse
+      ]>;
   listDomainMappings(
-    request: protos.google.appengine.v1.IListDomainMappingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.appengine.v1.IListDomainMappingsRequest,
-      protos.google.appengine.v1.IListDomainMappingsResponse | null | undefined,
-      protos.google.appengine.v1.IDomainMapping
-    >
-  ): void;
-  listDomainMappings(
-    request: protos.google.appengine.v1.IListDomainMappingsRequest,
-    callback: PaginationCallback<
-      protos.google.appengine.v1.IListDomainMappingsRequest,
-      protos.google.appengine.v1.IListDomainMappingsResponse | null | undefined,
-      protos.google.appengine.v1.IDomainMapping
-    >
-  ): void;
-  listDomainMappings(
-    request?: protos.google.appengine.v1.IListDomainMappingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.appengine.v1.IListDomainMappingsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.appengine.v1.IListDomainMappingsRequest,
-          | protos.google.appengine.v1.IListDomainMappingsResponse
-          | null
-          | undefined,
-          protos.google.appengine.v1.IDomainMapping
-        >,
-    callback?: PaginationCallback<
-      protos.google.appengine.v1.IListDomainMappingsRequest,
-      protos.google.appengine.v1.IListDomainMappingsResponse | null | undefined,
-      protos.google.appengine.v1.IDomainMapping
-    >
-  ): Promise<
-    [
-      protos.google.appengine.v1.IDomainMapping[],
-      protos.google.appengine.v1.IListDomainMappingsRequest | null,
-      protos.google.appengine.v1.IListDomainMappingsResponse,
-    ]
-  > | void {
+          protos.google.appengine.v1.IListDomainMappingsResponse|null|undefined,
+          protos.google.appengine.v1.IDomainMapping>): void;
+  listDomainMappings(
+      request: protos.google.appengine.v1.IListDomainMappingsRequest,
+      callback: PaginationCallback<
+          protos.google.appengine.v1.IListDomainMappingsRequest,
+          protos.google.appengine.v1.IListDomainMappingsResponse|null|undefined,
+          protos.google.appengine.v1.IDomainMapping>): void;
+  listDomainMappings(
+      request?: protos.google.appengine.v1.IListDomainMappingsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.appengine.v1.IListDomainMappingsRequest,
+          protos.google.appengine.v1.IListDomainMappingsResponse|null|undefined,
+          protos.google.appengine.v1.IDomainMapping>,
+      callback?: PaginationCallback<
+          protos.google.appengine.v1.IListDomainMappingsRequest,
+          protos.google.appengine.v1.IListDomainMappingsResponse|null|undefined,
+          protos.google.appengine.v1.IDomainMapping>):
+      Promise<[
+        protos.google.appengine.v1.IDomainMapping[],
+        protos.google.appengine.v1.IListDomainMappingsRequest|null,
+        protos.google.appengine.v1.IListDomainMappingsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.appengine.v1.IListDomainMappingsRequest,
-          | protos.google.appengine.v1.IListDomainMappingsResponse
-          | null
-          | undefined,
-          protos.google.appengine.v1.IDomainMapping
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.appengine.v1.IListDomainMappingsRequest,
+      protos.google.appengine.v1.IListDomainMappingsResponse|null|undefined,
+      protos.google.appengine.v1.IDomainMapping>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDomainMappings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1214,56 +906,53 @@ export class DomainMappingsClient {
     this._log.info('listDomainMappings request %j', request);
     return this.innerApiCalls
       .listDomainMappings(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.appengine.v1.IDomainMapping[],
-          protos.google.appengine.v1.IListDomainMappingsRequest | null,
-          protos.google.appengine.v1.IListDomainMappingsResponse,
-        ]) => {
-          this._log.info('listDomainMappings values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.appengine.v1.IDomainMapping[],
+        protos.google.appengine.v1.IListDomainMappingsRequest|null,
+        protos.google.appengine.v1.IListDomainMappingsResponse
+      ]) => {
+        this._log.info('listDomainMappings values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDomainMappings`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent Application resource. Example: `apps/myapp`.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.appengine.v1.DomainMapping|DomainMapping} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDomainMappingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDomainMappings`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent Application resource. Example: `apps/myapp`.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.appengine.v1.DomainMapping|DomainMapping} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDomainMappingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDomainMappingsStream(
-    request?: protos.google.appengine.v1.IListDomainMappingsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.appengine.v1.IListDomainMappingsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDomainMappings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDomainMappings stream %j', request);
     return this.descriptors.page.listDomainMappings.createStream(
       this.innerApiCalls.listDomainMappings as GaxCall,
@@ -1272,47 +961,46 @@ export class DomainMappingsClient {
     );
   }
 
-  /**
-   * Equivalent to `listDomainMappings`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent Application resource. Example: `apps/myapp`.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.appengine.v1.DomainMapping|DomainMapping}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domain_mappings.list_domain_mappings.js</caption>
-   * region_tag:appengine_v1_generated_DomainMappings_ListDomainMappings_async
-   */
+/**
+ * Equivalent to `listDomainMappings`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent Application resource. Example: `apps/myapp`.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.appengine.v1.DomainMapping|DomainMapping}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domain_mappings.list_domain_mappings.js</caption>
+ * region_tag:appengine_v1_generated_DomainMappings_ListDomainMappings_async
+ */
   listDomainMappingsAsync(
-    request?: protos.google.appengine.v1.IListDomainMappingsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.appengine.v1.IDomainMapping> {
+      request?: protos.google.appengine.v1.IListDomainMappingsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.appengine.v1.IDomainMapping>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDomainMappings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDomainMappings iterate %j', request);
     return this.descriptors.page.listDomainMappings.asyncIterate(
       this.innerApiCalls['listDomainMappings'] as GaxCall,
@@ -1333,12 +1021,7 @@ export class DomainMappingsClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(
-    app: string,
-    service: string,
-    version: string,
-    instance: string
-  ) {
+  instancePath(app:string,service:string,version:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       app: app,
       service: service,

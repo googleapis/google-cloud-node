@@ -25,11 +25,6 @@ const SpacesServiceClient = v2.SpacesServiceClient;
 type SpacesServiceClient = v2.SpacesServiceClient;
 
 export {v2, v2beta, ConferenceRecordsServiceClient, SpacesServiceClient};
-export default {
-  v2,
-  v2beta,
-  ConferenceRecordsServiceClient,
-  SpacesServiceClient,
-};
+export default {v2, v2beta, ConferenceRecordsServiceClient, SpacesServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
