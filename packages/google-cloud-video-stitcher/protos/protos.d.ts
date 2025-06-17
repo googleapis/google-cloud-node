@@ -696,7 +696,7 @@ export namespace google {
                     interface IGoogleCdnKey {
 
                         /** GoogleCdnKey privateKey */
-                        privateKey?: (Uint8Array|string|null);
+                        privateKey?: (Uint8Array|Buffer|string|null);
 
                         /** GoogleCdnKey keyName */
                         keyName?: (string|null);
@@ -712,7 +712,7 @@ export namespace google {
                         constructor(properties?: google.cloud.video.stitcher.v1.IGoogleCdnKey);
 
                         /** GoogleCdnKey privateKey. */
-                        public privateKey: (Uint8Array|string);
+                        public privateKey: (Uint8Array|Buffer|string);
 
                         /** GoogleCdnKey keyName. */
                         public keyName: string;
@@ -799,7 +799,7 @@ export namespace google {
                     interface IAkamaiCdnKey {
 
                         /** AkamaiCdnKey tokenKey */
-                        tokenKey?: (Uint8Array|string|null);
+                        tokenKey?: (Uint8Array|Buffer|string|null);
                     }
 
                     /** Represents an AkamaiCdnKey. */
@@ -812,7 +812,7 @@ export namespace google {
                         constructor(properties?: google.cloud.video.stitcher.v1.IAkamaiCdnKey);
 
                         /** AkamaiCdnKey tokenKey. */
-                        public tokenKey: (Uint8Array|string);
+                        public tokenKey: (Uint8Array|Buffer|string);
 
                         /**
                          * Creates a new AkamaiCdnKey instance using the specified properties.
@@ -896,7 +896,7 @@ export namespace google {
                     interface IMediaCdnKey {
 
                         /** MediaCdnKey privateKey */
-                        privateKey?: (Uint8Array|string|null);
+                        privateKey?: (Uint8Array|Buffer|string|null);
 
                         /** MediaCdnKey keyName */
                         keyName?: (string|null);
@@ -915,7 +915,7 @@ export namespace google {
                         constructor(properties?: google.cloud.video.stitcher.v1.IMediaCdnKey);
 
                         /** MediaCdnKey privateKey. */
-                        public privateKey: (Uint8Array|string);
+                        public privateKey: (Uint8Array|Buffer|string);
 
                         /** MediaCdnKey keyName. */
                         public keyName: string;
@@ -9811,6 +9811,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -9851,6 +9854,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -13804,6 +13810,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -14055,7 +14064,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -14086,7 +14095,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -15554,7 +15563,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -15570,7 +15579,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

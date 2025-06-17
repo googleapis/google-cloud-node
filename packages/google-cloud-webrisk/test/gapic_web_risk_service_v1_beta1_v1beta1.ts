@@ -27,520 +27,413 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
 describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'webrisk.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client
-            .servicePath;
-        assert.strictEqual(servicePath, 'webrisk.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client
-            .apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'webrisk.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'webrisk.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'webrisk.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'webrisk.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'webrisk.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-              {universeDomain: 'configured.example.com'}
+        it('has universeDomain', () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client.servicePath;
+                assert.strictEqual(servicePath, 'webrisk.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'webrisk.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'webrisk.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'webrisk.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'webrisk.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'webrisk.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.webRiskServiceV1Beta1Stub, undefined);
+            await client.initialize();
+            assert(client.webRiskServiceV1Beta1Stub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.webRiskServiceV1Beta1Stub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.webRiskServiceV1Beta1Stub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
+    });
+
+    describe('computeThreatListDiff', () => {
+        it('invokes computeThreatListDiff without error', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
             );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'webrisk.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse()
+            );
+            client.innerApiCalls.computeThreatListDiff = stubSimpleCall(expectedResponse);
+            const [response] = await client.computeThreatListDiff(request);
+            assert.deepStrictEqual(response, expectedResponse);
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        it('invokes computeThreatListDiff without error using callback', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse()
+            );
+            client.innerApiCalls.computeThreatListDiff = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.computeThreatListDiff(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
         });
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          fallback: true,
+        it('invokes computeThreatListDiff with error', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.computeThreatListDiff = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.computeThreatListDiff(request), expectedError);
         });
-      assert(client);
-    });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.webRiskServiceV1Beta1Stub, undefined);
-      await client.initialize();
-      assert(client.webRiskServiceV1Beta1Stub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.webRiskServiceV1Beta1Stub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('invokes computeThreatListDiff with closed client', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
+            );
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.computeThreatListDiff(request), expectedError);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('searchUris', () => {
+        it('invokes searchUris without error', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchUrisResponse()
+            );
+            client.innerApiCalls.searchUris = stubSimpleCall(expectedResponse);
+            const [response] = await client.searchUris(request);
+            assert.deepStrictEqual(response, expectedResponse);
         });
-      assert.strictEqual(client.webRiskServiceV1Beta1Stub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+
+        it('invokes searchUris without error using callback', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchUrisResponse()
+            );
+            client.innerApiCalls.searchUris = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.searchUris(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.webrisk.v1beta1.ISearchUrisResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes searchUris with error', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.searchUris = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.searchUris(request), expectedError);
+        });
+
+        it('invokes searchUris with closed client', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
+            );
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.searchUris(request), expectedError);
         });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('searchHashes', () => {
+        it('invokes searchHashes without error', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchHashesResponse()
+            );
+            client.innerApiCalls.searchHashes = stubSimpleCall(expectedResponse);
+            const [response] = await client.searchHashes(request);
+            assert.deepStrictEqual(response, expectedResponse);
         });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
 
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes searchHashes without error using callback', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchHashesResponse()
+            );
+            client.innerApiCalls.searchHashes = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.searchHashes(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.webrisk.v1beta1.ISearchHashesResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
         });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('computeThreatListDiff', () => {
-    it('invokes computeThreatListDiff without error', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes searchHashes with error', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.searchHashes = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.searchHashes(request), expectedError);
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse()
-      );
-      client.innerApiCalls.computeThreatListDiff =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.computeThreatListDiff(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
 
-    it('invokes computeThreatListDiff without error using callback', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes searchHashes with closed client', async () => {
+            const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
+            );
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.searchHashes(request), expectedError);
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse()
-      );
-      client.innerApiCalls.computeThreatListDiff =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.computeThreatListDiff(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
     });
-
-    it('invokes computeThreatListDiff with error', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.computeThreatListDiff = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.computeThreatListDiff(request),
-        expectedError
-      );
-    });
-
-    it('invokes computeThreatListDiff with closed client', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
-      );
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.computeThreatListDiff(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('searchUris', () => {
-    it('invokes searchUris without error', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchUrisResponse()
-      );
-      client.innerApiCalls.searchUris = stubSimpleCall(expectedResponse);
-      const [response] = await client.searchUris(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes searchUris without error using callback', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchUrisResponse()
-      );
-      client.innerApiCalls.searchUris =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.searchUris(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.webrisk.v1beta1.ISearchUrisResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes searchUris with error', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.searchUris = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.searchUris(request), expectedError);
-    });
-
-    it('invokes searchUris with closed client', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
-      );
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.searchUris(request), expectedError);
-    });
-  });
-
-  describe('searchHashes', () => {
-    it('invokes searchHashes without error', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchHashesResponse()
-      );
-      client.innerApiCalls.searchHashes = stubSimpleCall(expectedResponse);
-      const [response] = await client.searchHashes(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes searchHashes without error using callback', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchHashesResponse()
-      );
-      client.innerApiCalls.searchHashes =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.searchHashes(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.webrisk.v1beta1.ISearchHashesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes searchHashes with error', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.searchHashes = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.searchHashes(request), expectedError);
-    });
-
-    it('invokes searchHashes with closed client', async () => {
-      const client =
-        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
-      );
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.searchHashes(request), expectedError);
-    });
-  });
 });

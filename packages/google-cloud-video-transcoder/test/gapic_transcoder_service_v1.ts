@@ -29,1909 +29,1504 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.TranscoderServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'transcoder.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          transcoderserviceModule.v1.TranscoderServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'transcoder.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          transcoderserviceModule.v1.TranscoderServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'transcoder.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'transcoder.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'transcoder.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new transcoderserviceModule.v1.TranscoderServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'transcoder.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'transcoder.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new transcoderserviceModule.v1.TranscoderServiceClient(
-            {universeDomain: 'configured.example.com'}
-          );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'transcoder.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new transcoderserviceModule.v1.TranscoderServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = transcoderserviceModule.v1.TranscoderServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = transcoderserviceModule.v1.TranscoderServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'transcoder.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.transcoderServiceStub, undefined);
-      await client.initialize();
-      assert(client.transcoderServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.transcoderServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.transcoderServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createJob', () => {
-    it('invokes createJob without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.Job()
-      );
-      client.innerApiCalls.createJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.createJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createJob without error using callback', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.Job()
-      );
-      client.innerApiCalls.createJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.transcoder.v1.IJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createJob with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.createJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createJob with closed client', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createJob(request), expectedError);
-    });
-  });
-
-  describe('getJob', () => {
-    it('invokes getJob without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.Job()
-      );
-      client.innerApiCalls.getJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.getJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJob without error using callback', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.Job()
-      );
-      client.innerApiCalls.getJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.transcoder.v1.IJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJob with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getJob(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJob with closed client', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getJob(request), expectedError);
-    });
-  });
-
-  describe('deleteJob', () => {
-    it('invokes deleteJob without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteJob without error using callback', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteJob with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.deleteJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteJob with closed client', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteJob(request), expectedError);
-    });
-  });
-
-  describe('createJobTemplate', () => {
-    it('invokes createJobTemplate without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.CreateJobTemplateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.JobTemplate()
-      );
-      client.innerApiCalls.createJobTemplate = stubSimpleCall(expectedResponse);
-      const [response] = await client.createJobTemplate(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createJobTemplate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createJobTemplate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createJobTemplate without error using callback', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.CreateJobTemplateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.JobTemplate()
-      );
-      client.innerApiCalls.createJobTemplate =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createJobTemplate(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.transcoder.v1.IJobTemplate | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createJobTemplate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createJobTemplate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createJobTemplate with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.CreateJobTemplateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createJobTemplate = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createJobTemplate(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createJobTemplate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createJobTemplate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createJobTemplate with closed client', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.CreateJobTemplateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createJobTemplate(request), expectedError);
-    });
-  });
-
-  describe('getJobTemplate', () => {
-    it('invokes getJobTemplate without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.GetJobTemplateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.JobTemplate()
-      );
-      client.innerApiCalls.getJobTemplate = stubSimpleCall(expectedResponse);
-      const [response] = await client.getJobTemplate(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getJobTemplate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJobTemplate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJobTemplate without error using callback', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.GetJobTemplateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.JobTemplate()
-      );
-      client.innerApiCalls.getJobTemplate =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getJobTemplate(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.transcoder.v1.IJobTemplate | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getJobTemplate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJobTemplate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJobTemplate with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.GetJobTemplateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getJobTemplate = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getJobTemplate(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getJobTemplate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJobTemplate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJobTemplate with closed client', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.GetJobTemplateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getJobTemplate(request), expectedError);
-    });
-  });
-
-  describe('deleteJobTemplate', () => {
-    it('invokes deleteJobTemplate without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteJobTemplate = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteJobTemplate(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteJobTemplate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteJobTemplate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteJobTemplate without error using callback', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteJobTemplate =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteJobTemplate(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteJobTemplate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteJobTemplate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteJobTemplate with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteJobTemplate = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteJobTemplate(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteJobTemplate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteJobTemplate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteJobTemplate with closed client', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteJobTemplate(request), expectedError);
-    });
-  });
-
-  describe('listJobs', () => {
-    it('invokes listJobs without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-      ];
-      client.innerApiCalls.listJobs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listJobs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobs without error using callback', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-      ];
-      client.innerApiCalls.listJobs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listJobs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.transcoder.v1.IJob[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobs with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listJobs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobsStream without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-      ];
-      client.descriptors.page.listJobs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.transcoder.v1.Job[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.transcoder.v1.Job) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listJobsStream with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.transcoder.v1.Job[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.transcoder.v1.Job) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listJobs without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.Job()
-        ),
-      ];
-      client.descriptors.page.listJobs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.video.transcoder.v1.IJob[] = [];
-      const iterable = client.listJobsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listJobs with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listJobsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.video.transcoder.v1.IJob[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = transcoderserviceModule.v1.TranscoderServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'transcoder.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listJobTemplates', () => {
-    it('invokes listJobTemplates without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-      ];
-      client.innerApiCalls.listJobTemplates = stubSimpleCall(expectedResponse);
-      const [response] = await client.listJobTemplates(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listJobTemplates as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobTemplates as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobTemplates without error using callback', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-      ];
-      client.innerApiCalls.listJobTemplates =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listJobTemplates(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.video.transcoder.v1.IJobTemplate[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listJobTemplates as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobTemplates as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobTemplates with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listJobTemplates = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listJobTemplates(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listJobTemplates as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobTemplates as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobTemplatesStream without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-      ];
-      client.descriptors.page.listJobTemplates.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listJobTemplatesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.transcoder.v1.JobTemplate[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.transcoder.v1.JobTemplate) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'transcoder.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listJobTemplates.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listJobTemplates, request)
-      );
-      assert(
-        (client.descriptors.page.listJobTemplates.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listJobTemplatesStream with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listJobTemplates.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listJobTemplatesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.transcoder.v1.JobTemplate[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.transcoder.v1.JobTemplate) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'transcoder.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listJobTemplates.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listJobTemplates, request)
-      );
-      assert(
-        (client.descriptors.page.listJobTemplates.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listJobTemplates without error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.transcoder.v1.JobTemplate()
-        ),
-      ];
-      client.descriptors.page.listJobTemplates.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.video.transcoder.v1.IJobTemplate[] =
-        [];
-      const iterable = client.listJobTemplatesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listJobTemplates.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listJobTemplates.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new transcoderserviceModule.v1.TranscoderServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'transcoder.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listJobTemplates with error', async () => {
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listJobTemplates.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listJobTemplatesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.video.transcoder.v1.IJobTemplate[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new transcoderserviceModule.v1.TranscoderServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'transcoder.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listJobTemplates.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listJobTemplates.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new transcoderserviceModule.v1.TranscoderServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('Path templates', () => {
-    describe('job', async () => {
-      const fakePath = '/rendered/path/job';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        job: 'jobValue',
-      };
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.jobPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.jobPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has port', () => {
+            const port = transcoderserviceModule.v1.TranscoderServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('jobPath', () => {
-        const result = client.jobPath(
-          'projectValue',
-          'locationValue',
-          'jobValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.jobPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient();
+            assert(client);
+        });
 
-      it('matchProjectFromJobName', () => {
-        const result = client.matchProjectFromJobName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('matchLocationFromJobName', () => {
-        const result = client.matchLocationFromJobName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.transcoderServiceStub, undefined);
+            await client.initialize();
+            assert(client.transcoderServiceStub);
+        });
 
-      it('matchJobFromJobName', () => {
-        const result = client.matchJobFromJobName(fakePath);
-        assert.strictEqual(result, 'jobValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('has close method for the initialized client', done => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.transcoderServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-    describe('jobTemplate', async () => {
-      const fakePath = '/rendered/path/jobTemplate';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        job_template: 'jobTemplateValue',
-      };
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.jobTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.jobTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has close method for the non-initialized client', done => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.transcoderServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('jobTemplatePath', () => {
-        const result = client.jobTemplatePath(
-          'projectValue',
-          'locationValue',
-          'jobTemplateValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.jobTemplatePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
 
-      it('matchProjectFromJobTemplateName', () => {
-        const result = client.matchProjectFromJobTemplateName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.jobTemplatePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromJobTemplateName', () => {
-        const result = client.matchLocationFromJobTemplateName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.jobTemplatePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchJobTemplateFromJobTemplateName', () => {
-        const result = client.matchJobTemplateFromJobTemplateName(fakePath);
-        assert.strictEqual(result, 'jobTemplateValue');
-        assert(
-          (client.pathTemplates.jobTemplatePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('createJob', () => {
+        it('invokes createJob without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.CreateJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.Job()
+            );
+            client.innerApiCalls.createJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.createJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createJob without error using callback', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.CreateJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.Job()
+            );
+            client.innerApiCalls.createJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.transcoder.v1.IJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createJob with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.CreateJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createJob with closed client', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.CreateJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createJob(request), expectedError);
+        });
     });
-  });
+
+    describe('getJob', () => {
+        it('invokes getJob without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.Job()
+            );
+            client.innerApiCalls.getJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.getJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJob without error using callback', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.Job()
+            );
+            client.innerApiCalls.getJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.transcoder.v1.IJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJob with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJob with closed client', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getJob(request), expectedError);
+        });
+    });
+
+    describe('deleteJob', () => {
+        it('invokes deleteJob without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.DeleteJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteJob without error using callback', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.DeleteJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteJob with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.DeleteJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteJob with closed client', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.DeleteJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteJob(request), expectedError);
+        });
+    });
+
+    describe('createJobTemplate', () => {
+        it('invokes createJobTemplate without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.CreateJobTemplateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.JobTemplate()
+            );
+            client.innerApiCalls.createJobTemplate = stubSimpleCall(expectedResponse);
+            const [response] = await client.createJobTemplate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createJobTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createJobTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createJobTemplate without error using callback', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.CreateJobTemplateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.JobTemplate()
+            );
+            client.innerApiCalls.createJobTemplate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createJobTemplate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.transcoder.v1.IJobTemplate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createJobTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createJobTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createJobTemplate with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.CreateJobTemplateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createJobTemplate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createJobTemplate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createJobTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createJobTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createJobTemplate with closed client', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.CreateJobTemplateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createJobTemplate(request), expectedError);
+        });
+    });
+
+    describe('getJobTemplate', () => {
+        it('invokes getJobTemplate without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.GetJobTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.JobTemplate()
+            );
+            client.innerApiCalls.getJobTemplate = stubSimpleCall(expectedResponse);
+            const [response] = await client.getJobTemplate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJobTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJobTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJobTemplate without error using callback', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.GetJobTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.JobTemplate()
+            );
+            client.innerApiCalls.getJobTemplate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getJobTemplate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.transcoder.v1.IJobTemplate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJobTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJobTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJobTemplate with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.GetJobTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getJobTemplate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getJobTemplate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getJobTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJobTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJobTemplate with closed client', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.GetJobTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getJobTemplate(request), expectedError);
+        });
+    });
+
+    describe('deleteJobTemplate', () => {
+        it('invokes deleteJobTemplate without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteJobTemplate = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteJobTemplate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteJobTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteJobTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteJobTemplate without error using callback', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteJobTemplate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteJobTemplate(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteJobTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteJobTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteJobTemplate with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteJobTemplate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteJobTemplate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteJobTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteJobTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteJobTemplate with closed client', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteJobTemplate(request), expectedError);
+        });
+    });
+
+    describe('listJobs', () => {
+        it('invokes listJobs without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+            ];
+            client.innerApiCalls.listJobs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listJobs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listJobs without error using callback', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+            ];
+            client.innerApiCalls.listJobs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listJobs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.transcoder.v1.IJob[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listJobs with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listJobs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listJobsStream without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+            ];
+            client.descriptors.page.listJobs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.transcoder.v1.Job[] = [];
+                stream.on('data', (response: protos.google.cloud.video.transcoder.v1.Job) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listJobs, request));
+            assert(
+                (client.descriptors.page.listJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listJobsStream with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listJobs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.transcoder.v1.Job[] = [];
+                stream.on('data', (response: protos.google.cloud.video.transcoder.v1.Job) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listJobs, request));
+            assert(
+                (client.descriptors.page.listJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listJobs without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.Job()),
+            ];
+            client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.video.transcoder.v1.IJob[] = [];
+            const iterable = client.listJobsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listJobs with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listJobsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.video.transcoder.v1.IJob[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listJobTemplates', () => {
+        it('invokes listJobTemplates without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+            ];
+            client.innerApiCalls.listJobTemplates = stubSimpleCall(expectedResponse);
+            const [response] = await client.listJobTemplates(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listJobTemplates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobTemplates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listJobTemplates without error using callback', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+            ];
+            client.innerApiCalls.listJobTemplates = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listJobTemplates(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.transcoder.v1.IJobTemplate[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listJobTemplates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobTemplates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listJobTemplates with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listJobTemplates = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listJobTemplates(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listJobTemplates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobTemplates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listJobTemplatesStream without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+            ];
+            client.descriptors.page.listJobTemplates.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listJobTemplatesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.transcoder.v1.JobTemplate[] = [];
+                stream.on('data', (response: protos.google.cloud.video.transcoder.v1.JobTemplate) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listJobTemplates.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listJobTemplates, request));
+            assert(
+                (client.descriptors.page.listJobTemplates.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listJobTemplatesStream with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listJobTemplates.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listJobTemplatesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.transcoder.v1.JobTemplate[] = [];
+                stream.on('data', (response: protos.google.cloud.video.transcoder.v1.JobTemplate) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listJobTemplates.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listJobTemplates, request));
+            assert(
+                (client.descriptors.page.listJobTemplates.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listJobTemplates without error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+              generateSampleMessage(new protos.google.cloud.video.transcoder.v1.JobTemplate()),
+            ];
+            client.descriptors.page.listJobTemplates.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.video.transcoder.v1.IJobTemplate[] = [];
+            const iterable = client.listJobTemplatesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listJobTemplates.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listJobTemplates.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listJobTemplates with error', async () => {
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.transcoder.v1.ListJobTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listJobTemplates.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listJobTemplatesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.video.transcoder.v1.IJobTemplate[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listJobTemplates.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listJobTemplates.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('job', async () => {
+            const fakePath = "/rendered/path/job";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                job: "jobValue",
+            };
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.jobPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.jobPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('jobPath', () => {
+                const result = client.jobPath("projectValue", "locationValue", "jobValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.jobPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromJobName', () => {
+                const result = client.matchProjectFromJobName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromJobName', () => {
+                const result = client.matchLocationFromJobName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchJobFromJobName', () => {
+                const result = client.matchJobFromJobName(fakePath);
+                assert.strictEqual(result, "jobValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('jobTemplate', async () => {
+            const fakePath = "/rendered/path/jobTemplate";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                job_template: "jobTemplateValue",
+            };
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.jobTemplatePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.jobTemplatePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('jobTemplatePath', () => {
+                const result = client.jobTemplatePath("projectValue", "locationValue", "jobTemplateValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.jobTemplatePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromJobTemplateName', () => {
+                const result = client.matchProjectFromJobTemplateName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.jobTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromJobTemplateName', () => {
+                const result = client.matchLocationFromJobTemplateName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.jobTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchJobTemplateFromJobTemplateName', () => {
+                const result = client.matchJobTemplateFromJobTemplateName(fakePath);
+                assert.strictEqual(result, "jobTemplateValue");
+                assert((client.pathTemplates.jobTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

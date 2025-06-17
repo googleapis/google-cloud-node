@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class JobServiceClient {
    *     const client = new JobServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof JobServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'jobs.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class JobServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class JobServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -223,77 +196,55 @@ export class JobServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listJobs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'jobs'
-      ),
+      listJobs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'jobs')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v4/{name=projects/*/operations/*}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v4/{name=projects/*/operations/*}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const batchCreateJobsResponse = protoFilesRoot.lookup(
-      '.google.cloud.talent.v4.BatchCreateJobsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.talent.v4.BatchCreateJobsResponse') as gax.protobuf.Type;
     const batchCreateJobsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.talent.v4.BatchOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.talent.v4.BatchOperationMetadata') as gax.protobuf.Type;
     const batchUpdateJobsResponse = protoFilesRoot.lookup(
-      '.google.cloud.talent.v4.BatchUpdateJobsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.talent.v4.BatchUpdateJobsResponse') as gax.protobuf.Type;
     const batchUpdateJobsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.talent.v4.BatchOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.talent.v4.BatchOperationMetadata') as gax.protobuf.Type;
     const batchDeleteJobsResponse = protoFilesRoot.lookup(
-      '.google.cloud.talent.v4.BatchDeleteJobsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.talent.v4.BatchDeleteJobsResponse') as gax.protobuf.Type;
     const batchDeleteJobsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.talent.v4.BatchOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.talent.v4.BatchOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       batchCreateJobs: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchCreateJobsResponse.decode.bind(batchCreateJobsResponse),
-        batchCreateJobsMetadata.decode.bind(batchCreateJobsMetadata)
-      ),
+        batchCreateJobsMetadata.decode.bind(batchCreateJobsMetadata)),
       batchUpdateJobs: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchUpdateJobsResponse.decode.bind(batchUpdateJobsResponse),
-        batchUpdateJobsMetadata.decode.bind(batchUpdateJobsMetadata)
-      ),
+        batchUpdateJobsMetadata.decode.bind(batchUpdateJobsMetadata)),
       batchDeleteJobs: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchDeleteJobsResponse.decode.bind(batchDeleteJobsResponse),
-        batchDeleteJobsMetadata.decode.bind(batchDeleteJobsMetadata)
-      ),
+        batchDeleteJobsMetadata.decode.bind(batchDeleteJobsMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.talent.v4.JobService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.talent.v4.JobService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -324,44 +275,28 @@ export class JobServiceClient {
     // Put together the "service stub" for
     // google.cloud.talent.v4.JobService.
     this.jobServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.talent.v4.JobService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.talent.v4.JobService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.talent.v4.JobService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const jobServiceStubMethods = [
-      'createJob',
-      'batchCreateJobs',
-      'getJob',
-      'updateJob',
-      'batchUpdateJobs',
-      'deleteJob',
-      'batchDeleteJobs',
-      'listJobs',
-      'searchJobs',
-      'searchJobsForAlert',
-    ];
+    const jobServiceStubMethods =
+        ['createJob', 'batchCreateJobs', 'getJob', 'updateJob', 'batchUpdateJobs', 'deleteJob', 'batchDeleteJobs', 'listJobs', 'searchJobs', 'searchJobsForAlert'];
     for (const methodName of jobServiceStubMethods) {
       const callPromise = this.jobServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -386,14 +321,8 @@ export class JobServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'jobs.googleapis.com';
   }
@@ -404,14 +333,8 @@ export class JobServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'jobs.googleapis.com';
   }
@@ -444,7 +367,7 @@ export class JobServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/jobs',
+      'https://www.googleapis.com/auth/jobs'
     ];
   }
 
@@ -454,9 +377,8 @@ export class JobServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -467,1940 +389,1655 @@ export class JobServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a new job.
-   *
-   * Typically, the job becomes searchable within 10 seconds, but it may take
-   * up to 5 minutes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the tenant under which the job is created.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-   *   "projects/foo/tenants/bar".
-   * @param {google.cloud.talent.v4.Job} request.job
-   *   Required. The Job to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.Job|Job}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.create_job.js</caption>
-   * region_tag:jobs_v4_generated_JobService_CreateJob_async
-   */
+/**
+ * Creates a new job.
+ *
+ * Typically, the job becomes searchable within 10 seconds, but it may take
+ * up to 5 minutes.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the tenant under which the job is created.
+ *
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
+ * @param {google.cloud.talent.v4.Job} request.job
+ *   Required. The Job to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.Job|Job}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.create_job.js</caption>
+ * region_tag:jobs_v4_generated_JobService_CreateJob_async
+ */
   createJob(
-    request?: protos.google.cloud.talent.v4.ICreateJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.ICreateJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.talent.v4.ICreateJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.ICreateJobRequest|undefined, {}|undefined
+      ]>;
   createJob(
-    request: protos.google.cloud.talent.v4.ICreateJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.ICreateJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createJob(
-    request: protos.google.cloud.talent.v4.ICreateJobRequest,
-    callback: Callback<
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.ICreateJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createJob(
-    request?: protos.google.cloud.talent.v4.ICreateJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.talent.v4.ICreateJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.talent.v4.IJob,
-          protos.google.cloud.talent.v4.ICreateJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.ICreateJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.ICreateJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.talent.v4.ICreateJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  createJob(
+      request: protos.google.cloud.talent.v4.ICreateJobRequest,
+      callback: Callback<
+          protos.google.cloud.talent.v4.IJob,
+          protos.google.cloud.talent.v4.ICreateJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  createJob(
+      request?: protos.google.cloud.talent.v4.ICreateJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.talent.v4.IJob,
+          protos.google.cloud.talent.v4.ICreateJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.talent.v4.IJob,
+          protos.google.cloud.talent.v4.ICreateJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.ICreateJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.talent.v4.IJob,
-          protos.google.cloud.talent.v4.ICreateJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.ICreateJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.talent.v4.IJob,
-          protos.google.cloud.talent.v4.ICreateJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.ICreateJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves the specified job, whose status is OPEN or recently EXPIRED
-   * within the last 90 days.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the job to retrieve.
-   *
-   *   The format is
-   *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
-   *   example, "projects/foo/tenants/bar/jobs/baz".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.Job|Job}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.get_job.js</caption>
-   * region_tag:jobs_v4_generated_JobService_GetJob_async
-   */
+/**
+ * Retrieves the specified job, whose status is OPEN or recently EXPIRED
+ * within the last 90 days.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the job to retrieve.
+ *
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
+ *   example, "projects/foo/tenants/bar/jobs/baz".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.Job|Job}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.get_job.js</caption>
+ * region_tag:jobs_v4_generated_JobService_GetJob_async
+ */
   getJob(
-    request?: protos.google.cloud.talent.v4.IGetJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.IGetJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.talent.v4.IGetJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.IGetJobRequest|undefined, {}|undefined
+      ]>;
   getJob(
-    request: protos.google.cloud.talent.v4.IGetJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.IGetJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJob(
-    request: protos.google.cloud.talent.v4.IGetJobRequest,
-    callback: Callback<
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.IGetJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJob(
-    request?: protos.google.cloud.talent.v4.IGetJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.talent.v4.IGetJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.talent.v4.IJob,
-          protos.google.cloud.talent.v4.IGetJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.IGetJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.IGetJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.talent.v4.IGetJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getJob(
+      request: protos.google.cloud.talent.v4.IGetJobRequest,
+      callback: Callback<
+          protos.google.cloud.talent.v4.IJob,
+          protos.google.cloud.talent.v4.IGetJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getJob(
+      request?: protos.google.cloud.talent.v4.IGetJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.talent.v4.IJob,
+          protos.google.cloud.talent.v4.IGetJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.talent.v4.IJob,
+          protos.google.cloud.talent.v4.IGetJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.IGetJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.talent.v4.IJob,
-          protos.google.cloud.talent.v4.IGetJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.IGetJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.talent.v4.IJob,
-          protos.google.cloud.talent.v4.IGetJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.IGetJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates specified job.
-   *
-   * Typically, updated contents become visible in search results within 10
-   * seconds, but it may take up to 5 minutes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.talent.v4.Job} request.job
-   *   Required. The Job to be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Strongly recommended for the best service experience.
-   *
-   *   If {@link protos.google.cloud.talent.v4.UpdateJobRequest.update_mask|update_mask} is
-   *   provided, only the specified fields in
-   *   {@link protos.google.cloud.talent.v4.UpdateJobRequest.job|job} are updated. Otherwise
-   *   all the fields are updated.
-   *
-   *   A field mask to restrict the fields that are updated. Only
-   *   top level fields of {@link protos.google.cloud.talent.v4.Job|Job} are supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.Job|Job}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.update_job.js</caption>
-   * region_tag:jobs_v4_generated_JobService_UpdateJob_async
-   */
+/**
+ * Updates specified job.
+ *
+ * Typically, updated contents become visible in search results within 10
+ * seconds, but it may take up to 5 minutes.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.talent.v4.Job} request.job
+ *   Required. The Job to be updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Strongly recommended for the best service experience.
+ *
+ *   If {@link protos.google.cloud.talent.v4.UpdateJobRequest.update_mask|update_mask} is
+ *   provided, only the specified fields in
+ *   {@link protos.google.cloud.talent.v4.UpdateJobRequest.job|job} are updated. Otherwise
+ *   all the fields are updated.
+ *
+ *   A field mask to restrict the fields that are updated. Only
+ *   top level fields of {@link protos.google.cloud.talent.v4.Job|Job} are supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.Job|Job}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.update_job.js</caption>
+ * region_tag:jobs_v4_generated_JobService_UpdateJob_async
+ */
   updateJob(
-    request?: protos.google.cloud.talent.v4.IUpdateJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.IUpdateJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.talent.v4.IUpdateJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.IUpdateJobRequest|undefined, {}|undefined
+      ]>;
   updateJob(
-    request: protos.google.cloud.talent.v4.IUpdateJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.IUpdateJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateJob(
-    request: protos.google.cloud.talent.v4.IUpdateJobRequest,
-    callback: Callback<
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.IUpdateJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateJob(
-    request?: protos.google.cloud.talent.v4.IUpdateJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.talent.v4.IUpdateJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.talent.v4.IJob,
-          protos.google.cloud.talent.v4.IUpdateJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.IUpdateJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.IJob,
-      protos.google.cloud.talent.v4.IUpdateJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.talent.v4.IUpdateJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateJob(
+      request: protos.google.cloud.talent.v4.IUpdateJobRequest,
+      callback: Callback<
+          protos.google.cloud.talent.v4.IJob,
+          protos.google.cloud.talent.v4.IUpdateJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateJob(
+      request?: protos.google.cloud.talent.v4.IUpdateJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.talent.v4.IJob,
+          protos.google.cloud.talent.v4.IUpdateJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.talent.v4.IJob,
+          protos.google.cloud.talent.v4.IUpdateJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.IUpdateJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'job.name': request.job!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'job.name': request.job!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.talent.v4.IJob,
-          protos.google.cloud.talent.v4.IUpdateJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.IUpdateJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.talent.v4.IJob,
-          protos.google.cloud.talent.v4.IUpdateJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.talent.v4.IJob,
+        protos.google.cloud.talent.v4.IUpdateJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the specified job.
-   *
-   * Typically, the job becomes unsearchable within 10 seconds, but it may take
-   * up to 5 minutes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the job to be deleted.
-   *
-   *   The format is
-   *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
-   *   example, "projects/foo/tenants/bar/jobs/baz".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.delete_job.js</caption>
-   * region_tag:jobs_v4_generated_JobService_DeleteJob_async
-   */
+/**
+ * Deletes the specified job.
+ *
+ * Typically, the job becomes unsearchable within 10 seconds, but it may take
+ * up to 5 minutes.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the job to be deleted.
+ *
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
+ *   example, "projects/foo/tenants/bar/jobs/baz".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.delete_job.js</caption>
+ * region_tag:jobs_v4_generated_JobService_DeleteJob_async
+ */
   deleteJob(
-    request?: protos.google.cloud.talent.v4.IDeleteJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.talent.v4.IDeleteJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.talent.v4.IDeleteJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.talent.v4.IDeleteJobRequest|undefined, {}|undefined
+      ]>;
   deleteJob(
-    request: protos.google.cloud.talent.v4.IDeleteJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.talent.v4.IDeleteJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteJob(
-    request: protos.google.cloud.talent.v4.IDeleteJobRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.talent.v4.IDeleteJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteJob(
-    request?: protos.google.cloud.talent.v4.IDeleteJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.talent.v4.IDeleteJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.talent.v4.IDeleteJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.talent.v4.IDeleteJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.talent.v4.IDeleteJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.talent.v4.IDeleteJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteJob(
+      request: protos.google.cloud.talent.v4.IDeleteJobRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.talent.v4.IDeleteJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteJob(
+      request?: protos.google.cloud.talent.v4.IDeleteJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.talent.v4.IDeleteJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.talent.v4.IDeleteJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.talent.v4.IDeleteJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.talent.v4.IDeleteJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.talent.v4.IDeleteJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.talent.v4.IDeleteJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.talent.v4.IDeleteJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Searches for jobs using the provided
-   * {@link protos.google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
-   *
-   * This call constrains the
-   * {@link protos.google.cloud.talent.v4.Job.visibility|visibility} of jobs present in the
-   * database, and only returns jobs that the caller has permission to search
-   * against.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the tenant to search within.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-   *   "projects/foo/tenants/bar".
-   * @param {google.cloud.talent.v4.SearchJobsRequest.SearchMode} request.searchMode
-   *   Mode of a search.
-   *
-   *   Defaults to
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
-   * @param {google.cloud.talent.v4.RequestMetadata} request.requestMetadata
-   *   Required. The meta information collected about the job searcher, used to
-   *   improve the search quality of the service. The identifiers (such as
-   *   `user_id`) are provided by users, and must be unique and consistent.
-   * @param {google.cloud.talent.v4.JobQuery} request.jobQuery
-   *   Query used to search against jobs, such as keyword, location filters, etc.
-   * @param {boolean} request.enableBroadening
-   *   Controls whether to broaden the search when it produces sparse results.
-   *   Broadened queries append results to the end of the matching results
-   *   list.
-   *
-   *   Defaults to false.
-   * @param {number[]} request.histogramQueries
-   *   An expression specifies a histogram request against matching jobs.
-   *
-   *   Expression syntax is an aggregation function call with histogram facets and
-   *   other options.
-   *
-   *   Available aggregation function calls are:
-   *   * `count(string_histogram_facet)`: Count the number of matching entities,
-   *   for each distinct attribute value.
-   *   * `count(numeric_histogram_facet, list of buckets)`: Count the number of
-   *   matching entities within each bucket.
-   *
-   *   A maximum of 200 histogram buckets are supported.
-   *
-   *   Data types:
-   *
-   *   * Histogram facet: facet names with format `{@link protos.a-zA-Z0-9_|a-zA-Z}+`.
-   *   * String: string like "any string with backslash escape for quote(\")."
-   *   * Number: whole number and floating point number like 10, -1 and -0.01.
-   *   * List: list of elements with comma(,) separator surrounded by square
-   *   brackets, for example, [1, 2, 3] and ["one", "two", "three"].
-   *
-   *   Built-in constants:
-   *
-   *   * MIN (minimum number similar to java Double.MIN_VALUE)
-   *   * MAX (maximum number similar to java Double.MAX_VALUE)
-   *
-   *   Built-in functions:
-   *
-   *   * bucket(start, end[, label]): bucket built-in function creates a bucket
-   *   with range of [start, end). Note that the end is exclusive, for example,
-   *   bucket(1, MAX, "positive number") or bucket(1, 10).
-   *
-   *   Job histogram facets:
-   *
-   *   * company_display_name: histogram by
-   *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
-   *   * employment_type: histogram by
-   *   {@link protos.google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for
-   *   example,
-   *     "FULL_TIME", "PART_TIME".
-   *   * company_size (DEPRECATED): histogram by
-   *   {@link protos.google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
-   *   "MEDIUM", "BIG".
-   *   * publish_time_in_day: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
-   *     in days.
-   *     Must specify list of numeric buckets in spec.
-   *   * publish_time_in_month: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
-   *     in months.
-   *     Must specify list of numeric buckets in spec.
-   *   * publish_time_in_year: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
-   *     in years.
-   *     Must specify list of numeric buckets in spec.
-   *   * degree_types: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
-   *     "Bachelors", "Masters".
-   *   * job_level: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
-   *     Level".
-   *   * country: histogram by the country code of jobs, for example, "US", "FR".
-   *   * admin1: histogram by the admin1 code of jobs, which is a global
-   *     placeholder referring to the state, province, or the particular term a
-   *     country uses to define the geographic structure below the country level,
-   *     for example, "CA", "IL".
-   *   * city: histogram by a combination of the "city name, admin1 code". For
-   *     example,  "Mountain View, CA", "New York, NY".
-   *   * admin1_country: histogram by a combination of the "admin1 code, country",
-   *     for example, "CA, US", "IL, US".
-   *   * city_coordinate: histogram by the city center's GPS coordinates (latitude
-   *     and longitude), for example, 37.4038522,-122.0987765. Since the
-   *     coordinates of a city center can change, customers may need to refresh
-   *     them periodically.
-   *   * locale: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code}, for example,
-   *   "en-US",
-   *     "fr-FR".
-   *   * language: histogram by the language subtag of the
-   *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code},
-   *     for example, "en", "fr".
-   *   * category: histogram by the
-   *   {@link protos.google.cloud.talent.v4.JobCategory|JobCategory}, for example,
-   *     "COMPUTER_AND_IT", "HEALTHCARE".
-   *   * base_compensation_unit: histogram by the
-   *     {@link protos.google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit}
-   *     of base salary, for example, "WEEKLY", "MONTHLY".
-   *   * base_compensation: histogram by the base salary. Must specify list of
-   *     numeric buckets to group results by.
-   *   * annualized_base_compensation: histogram by the base annualized salary.
-   *     Must specify list of numeric buckets to group results by.
-   *   * annualized_total_compensation: histogram by the total annualized salary.
-   *     Must specify list of numeric buckets to group results by.
-   *   * string_custom_attribute: histogram by string
-   *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
-   *     Values can be accessed via square bracket notations like
-   *     string_custom_attribute["key1"].
-   *   * numeric_custom_attribute: histogram by numeric
-   *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
-   *     Values can be accessed via square bracket notations like
-   *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
-   *     group results by.
-   *
-   *   Example expressions:
-   *
-   *   * `count(admin1)`
-   *   * `count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
-   *   bucket(100000, MAX)])`
-   *   * `count(string_custom_attribute["some-string-custom-attribute"])`
-   *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
-   * @param {google.cloud.talent.v4.JobView} request.jobView
-   *   The desired job attributes returned for jobs in the search response.
-   *   Defaults to
-   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if
-   *   no value is specified.
-   * @param {number} request.offset
-   *   An integer that specifies the current offset (that is, starting result
-   *   location, amongst the jobs deemed by the API as relevant) in search
-   *   results. This field is only considered if
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
-   *
-   *   The maximum allowed value is 5000. Otherwise an error is thrown.
-   *
-   *   For example, 0 means to  return results starting from the first matching
-   *   job, and 10 means to return from the 11th job. This can be used for
-   *   pagination, (for example, pageSize = 10 and offset = 10 means to return
-   *   from the second page).
-   * @param {number} request.maxPageSize
-   *   A limit on the number of jobs returned in the search results.
-   *   Increasing this value above the default value of 10 can increase search
-   *   response time. The value can be between 1 and 100.
-   * @param {string} request.pageToken
-   *   The token specifying the current offset within
-   *   search results. See
-   *   {@link protos.google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token}
-   *   for an explanation of how to obtain the next set of query results.
-   * @param {string} request.orderBy
-   *   The criteria determining how search results are sorted. Default is
-   *   `"relevance desc"`.
-   *
-   *   Supported options are:
-   *
-   *   * `"relevance desc"`: By relevance descending, as determined by the API
-   *     algorithms. Relevance thresholding of query results is only available
-   *     with this ordering.
-   *   * `"posting_publish_time desc"`: By
-   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
-   *     descending.
-   *   * `"posting_update_time desc"`: By
-   *   {@link protos.google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
-   *     descending.
-   *   * `"title"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title} ascending.
-   *   * `"title desc"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title}
-   *   descending.
-   *   * `"annualized_base_compensation"`: By job's
-   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
-   *     ascending. Jobs whose annualized base compensation is unspecified are put
-   *     at the end of search results.
-   *   * `"annualized_base_compensation desc"`: By job's
-   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
-   *     descending. Jobs whose annualized base compensation is unspecified are
-   *     put at the end of search results.
-   *   * `"annualized_total_compensation"`: By job's
-   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
-   *     ascending. Jobs whose annualized base compensation is unspecified are put
-   *     at the end of search results.
-   *   * `"annualized_total_compensation desc"`: By job's
-   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
-   *     descending. Jobs whose annualized base compensation is unspecified are
-   *     put at the end of search results.
-   *   * `"custom_ranking desc"`: By the relevance score adjusted to the
-   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression}
-   *     with weight factor assigned by
-   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level}
-   *     in descending order.
-   *   * Location sorting: Use the special syntax to order jobs by distance:<br>
-   *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
-   *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
-   *     `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
-   *     multiple locations. See details below.<br>
-   *     `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
-   *     multiple locations. See details below.<br>
-   *     The string can have a maximum of 256 characters. When multiple distance
-   *     centers are provided, a job that is close to any of the distance centers
-   *     would have a high rank. When a job has multiple locations, the job
-   *     location closest to one of the distance centers will be used. Jobs that
-   *     don't have locations will be ranked at the bottom. Distance is calculated
-   *     with a precision of 11.3 meters (37.4 feet). Diversification strategy is
-   *     still applied unless explicitly disabled in
-   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.diversification_level|diversification_level}.
-   * @param {google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel} request.diversificationLevel
-   *   Controls whether highly similar jobs are returned next to each other in
-   *   the search results. Jobs are identified as highly similar based on
-   *   their titles, job categories, and locations. Highly similar results are
-   *   clustered so that only one representative job of the cluster is
-   *   displayed to the job seeker higher up in the results, with the other jobs
-   *   being displayed lower down in the results.
-   *
-   *   Defaults to
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE}
-   *   if no value is specified.
-   * @param {google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo} request.customRankingInfo
-   *   Controls over how job documents get ranked on top of existing relevance
-   *   score (determined by API algorithm).
-   * @param {boolean} request.disableKeywordMatch
-   *   This field is deprecated. Please use
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
-   *   going forward.
-   *
-   *   To migrate, disable_keyword_match set to false maps to
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL},
-   *   and disable_keyword_match set to true maps to
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}.
-   *   If
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
-   *   is set, this field is ignored.
-   *
-   *   Controls whether to disable exact keyword match on
-   *   {@link protos.google.cloud.talent.v4.Job.title|Job.title},
-   *   {@link protos.google.cloud.talent.v4.Job.description|Job.description},
-   *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name},
-   *   {@link protos.google.cloud.talent.v4.Job.addresses|Job.addresses},
-   *   {@link protos.google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When
-   *   disable keyword match is turned off, a keyword match returns jobs that do
-   *   not match given category filters when there are matching keywords. For
-   *   example, for the query "program manager," a result is returned even if the
-   *   job posting has the title "software developer," which doesn't fall into
-   *   "program manager" ontology, but does have "program manager" appearing in
-   *   its description.
-   *
-   *   For queries like "cloud" that don't contain title or
-   *   location specific ontology, jobs with "cloud" keyword matches are returned
-   *   regardless of this flag's value.
-   *
-   *   Use
-   *   {@link protos.google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes}
-   *   if company-specific globally matched custom field/attribute string values
-   *   are needed. Enabling keyword match improves recall of subsequent search
-   *   requests.
-   *
-   *   Defaults to false.
-   * @param {google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode} request.keywordMatchMode
-   *   Controls what keyword match options to use. If both keyword_match_mode and
-   *   disable_keyword_match are set, keyword_match_mode will take precedence.
-   *
-   *   Defaults to
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
-   *   if no value is specified.
-   * @param {google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold} [request.relevanceThreshold]
-   *   Optional. The relevance threshold of the search results.
-   *
-   *   Default to Google defined threshold, leveraging a balance of
-   *   precision and recall to deliver both highly accurate results and
-   *   comprehensive coverage of relevant information.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.SearchJobsResponse|SearchJobsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.search_jobs.js</caption>
-   * region_tag:jobs_v4_generated_JobService_SearchJobs_async
-   */
+/**
+ * Searches for jobs using the provided
+ * {@link protos.google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
+ *
+ * This call constrains the
+ * {@link protos.google.cloud.talent.v4.Job.visibility|visibility} of jobs present in the
+ * database, and only returns jobs that the caller has permission to search
+ * against.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the tenant to search within.
+ *
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
+ * @param {google.cloud.talent.v4.SearchJobsRequest.SearchMode} request.searchMode
+ *   Mode of a search.
+ *
+ *   Defaults to
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
+ * @param {google.cloud.talent.v4.RequestMetadata} request.requestMetadata
+ *   Required. The meta information collected about the job searcher, used to
+ *   improve the search quality of the service. The identifiers (such as
+ *   `user_id`) are provided by users, and must be unique and consistent.
+ * @param {google.cloud.talent.v4.JobQuery} request.jobQuery
+ *   Query used to search against jobs, such as keyword, location filters, etc.
+ * @param {boolean} request.enableBroadening
+ *   Controls whether to broaden the search when it produces sparse results.
+ *   Broadened queries append results to the end of the matching results
+ *   list.
+ *
+ *   Defaults to false.
+ * @param {number[]} request.histogramQueries
+ *   An expression specifies a histogram request against matching jobs.
+ *
+ *   Expression syntax is an aggregation function call with histogram facets and
+ *   other options.
+ *
+ *   Available aggregation function calls are:
+ *   * `count(string_histogram_facet)`: Count the number of matching entities,
+ *   for each distinct attribute value.
+ *   * `count(numeric_histogram_facet, list of buckets)`: Count the number of
+ *   matching entities within each bucket.
+ *
+ *   A maximum of 200 histogram buckets are supported.
+ *
+ *   Data types:
+ *
+ *   * Histogram facet: facet names with format `{@link protos.a-zA-Z0-9_|a-zA-Z}+`.
+ *   * String: string like "any string with backslash escape for quote(\")."
+ *   * Number: whole number and floating point number like 10, -1 and -0.01.
+ *   * List: list of elements with comma(,) separator surrounded by square
+ *   brackets, for example, [1, 2, 3] and ["one", "two", "three"].
+ *
+ *   Built-in constants:
+ *
+ *   * MIN (minimum number similar to java Double.MIN_VALUE)
+ *   * MAX (maximum number similar to java Double.MAX_VALUE)
+ *
+ *   Built-in functions:
+ *
+ *   * bucket(start, end[, label]): bucket built-in function creates a bucket
+ *   with range of [start, end). Note that the end is exclusive, for example,
+ *   bucket(1, MAX, "positive number") or bucket(1, 10).
+ *
+ *   Job histogram facets:
+ *
+ *   * company_display_name: histogram by
+ *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
+ *   * employment_type: histogram by
+ *   {@link protos.google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for
+ *   example,
+ *     "FULL_TIME", "PART_TIME".
+ *   * company_size (DEPRECATED): histogram by
+ *   {@link protos.google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
+ *   "MEDIUM", "BIG".
+ *   * publish_time_in_day: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+ *     in days.
+ *     Must specify list of numeric buckets in spec.
+ *   * publish_time_in_month: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+ *     in months.
+ *     Must specify list of numeric buckets in spec.
+ *   * publish_time_in_year: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+ *     in years.
+ *     Must specify list of numeric buckets in spec.
+ *   * degree_types: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
+ *     "Bachelors", "Masters".
+ *   * job_level: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
+ *     Level".
+ *   * country: histogram by the country code of jobs, for example, "US", "FR".
+ *   * admin1: histogram by the admin1 code of jobs, which is a global
+ *     placeholder referring to the state, province, or the particular term a
+ *     country uses to define the geographic structure below the country level,
+ *     for example, "CA", "IL".
+ *   * city: histogram by a combination of the "city name, admin1 code". For
+ *     example,  "Mountain View, CA", "New York, NY".
+ *   * admin1_country: histogram by a combination of the "admin1 code, country",
+ *     for example, "CA, US", "IL, US".
+ *   * city_coordinate: histogram by the city center's GPS coordinates (latitude
+ *     and longitude), for example, 37.4038522,-122.0987765. Since the
+ *     coordinates of a city center can change, customers may need to refresh
+ *     them periodically.
+ *   * locale: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code}, for example,
+ *   "en-US",
+ *     "fr-FR".
+ *   * language: histogram by the language subtag of the
+ *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code},
+ *     for example, "en", "fr".
+ *   * category: histogram by the
+ *   {@link protos.google.cloud.talent.v4.JobCategory|JobCategory}, for example,
+ *     "COMPUTER_AND_IT", "HEALTHCARE".
+ *   * base_compensation_unit: histogram by the
+ *     {@link protos.google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit}
+ *     of base salary, for example, "WEEKLY", "MONTHLY".
+ *   * base_compensation: histogram by the base salary. Must specify list of
+ *     numeric buckets to group results by.
+ *   * annualized_base_compensation: histogram by the base annualized salary.
+ *     Must specify list of numeric buckets to group results by.
+ *   * annualized_total_compensation: histogram by the total annualized salary.
+ *     Must specify list of numeric buckets to group results by.
+ *   * string_custom_attribute: histogram by string
+ *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+ *     Values can be accessed via square bracket notations like
+ *     string_custom_attribute["key1"].
+ *   * numeric_custom_attribute: histogram by numeric
+ *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+ *     Values can be accessed via square bracket notations like
+ *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
+ *     group results by.
+ *
+ *   Example expressions:
+ *
+ *   * `count(admin1)`
+ *   * `count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
+ *   bucket(100000, MAX)])`
+ *   * `count(string_custom_attribute["some-string-custom-attribute"])`
+ *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
+ *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
+ * @param {google.cloud.talent.v4.JobView} request.jobView
+ *   The desired job attributes returned for jobs in the search response.
+ *   Defaults to
+ *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if
+ *   no value is specified.
+ * @param {number} request.offset
+ *   An integer that specifies the current offset (that is, starting result
+ *   location, amongst the jobs deemed by the API as relevant) in search
+ *   results. This field is only considered if
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
+ *
+ *   The maximum allowed value is 5000. Otherwise an error is thrown.
+ *
+ *   For example, 0 means to  return results starting from the first matching
+ *   job, and 10 means to return from the 11th job. This can be used for
+ *   pagination, (for example, pageSize = 10 and offset = 10 means to return
+ *   from the second page).
+ * @param {number} request.maxPageSize
+ *   A limit on the number of jobs returned in the search results.
+ *   Increasing this value above the default value of 10 can increase search
+ *   response time. The value can be between 1 and 100.
+ * @param {string} request.pageToken
+ *   The token specifying the current offset within
+ *   search results. See
+ *   {@link protos.google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token}
+ *   for an explanation of how to obtain the next set of query results.
+ * @param {string} request.orderBy
+ *   The criteria determining how search results are sorted. Default is
+ *   `"relevance desc"`.
+ *
+ *   Supported options are:
+ *
+ *   * `"relevance desc"`: By relevance descending, as determined by the API
+ *     algorithms. Relevance thresholding of query results is only available
+ *     with this ordering.
+ *   * `"posting_publish_time desc"`: By
+ *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+ *     descending.
+ *   * `"posting_update_time desc"`: By
+ *   {@link protos.google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
+ *     descending.
+ *   * `"title"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title} ascending.
+ *   * `"title desc"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title}
+ *   descending.
+ *   * `"annualized_base_compensation"`: By job's
+ *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+ *     ascending. Jobs whose annualized base compensation is unspecified are put
+ *     at the end of search results.
+ *   * `"annualized_base_compensation desc"`: By job's
+ *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+ *     descending. Jobs whose annualized base compensation is unspecified are
+ *     put at the end of search results.
+ *   * `"annualized_total_compensation"`: By job's
+ *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+ *     ascending. Jobs whose annualized base compensation is unspecified are put
+ *     at the end of search results.
+ *   * `"annualized_total_compensation desc"`: By job's
+ *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+ *     descending. Jobs whose annualized base compensation is unspecified are
+ *     put at the end of search results.
+ *   * `"custom_ranking desc"`: By the relevance score adjusted to the
+ *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression}
+ *     with weight factor assigned by
+ *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level}
+ *     in descending order.
+ *   * Location sorting: Use the special syntax to order jobs by distance:<br>
+ *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
+ *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
+ *     `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
+ *     multiple locations. See details below.<br>
+ *     `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
+ *     multiple locations. See details below.<br>
+ *     The string can have a maximum of 256 characters. When multiple distance
+ *     centers are provided, a job that is close to any of the distance centers
+ *     would have a high rank. When a job has multiple locations, the job
+ *     location closest to one of the distance centers will be used. Jobs that
+ *     don't have locations will be ranked at the bottom. Distance is calculated
+ *     with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+ *     still applied unless explicitly disabled in
+ *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.diversification_level|diversification_level}.
+ * @param {google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel} request.diversificationLevel
+ *   Controls whether highly similar jobs are returned next to each other in
+ *   the search results. Jobs are identified as highly similar based on
+ *   their titles, job categories, and locations. Highly similar results are
+ *   clustered so that only one representative job of the cluster is
+ *   displayed to the job seeker higher up in the results, with the other jobs
+ *   being displayed lower down in the results.
+ *
+ *   Defaults to
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE}
+ *   if no value is specified.
+ * @param {google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo} request.customRankingInfo
+ *   Controls over how job documents get ranked on top of existing relevance
+ *   score (determined by API algorithm).
+ * @param {boolean} request.disableKeywordMatch
+ *   This field is deprecated. Please use
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+ *   going forward.
+ *
+ *   To migrate, disable_keyword_match set to false maps to
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL},
+ *   and disable_keyword_match set to true maps to
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}.
+ *   If
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+ *   is set, this field is ignored.
+ *
+ *   Controls whether to disable exact keyword match on
+ *   {@link protos.google.cloud.talent.v4.Job.title|Job.title},
+ *   {@link protos.google.cloud.talent.v4.Job.description|Job.description},
+ *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name},
+ *   {@link protos.google.cloud.talent.v4.Job.addresses|Job.addresses},
+ *   {@link protos.google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When
+ *   disable keyword match is turned off, a keyword match returns jobs that do
+ *   not match given category filters when there are matching keywords. For
+ *   example, for the query "program manager," a result is returned even if the
+ *   job posting has the title "software developer," which doesn't fall into
+ *   "program manager" ontology, but does have "program manager" appearing in
+ *   its description.
+ *
+ *   For queries like "cloud" that don't contain title or
+ *   location specific ontology, jobs with "cloud" keyword matches are returned
+ *   regardless of this flag's value.
+ *
+ *   Use
+ *   {@link protos.google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes}
+ *   if company-specific globally matched custom field/attribute string values
+ *   are needed. Enabling keyword match improves recall of subsequent search
+ *   requests.
+ *
+ *   Defaults to false.
+ * @param {google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode} request.keywordMatchMode
+ *   Controls what keyword match options to use. If both keyword_match_mode and
+ *   disable_keyword_match are set, keyword_match_mode will take precedence.
+ *
+ *   Defaults to
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
+ *   if no value is specified.
+ * @param {google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold} [request.relevanceThreshold]
+ *   Optional. The relevance threshold of the search results.
+ *
+ *   Default to Google defined threshold, leveraging a balance of
+ *   precision and recall to deliver both highly accurate results and
+ *   comprehensive coverage of relevant information.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.SearchJobsResponse|SearchJobsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.search_jobs.js</caption>
+ * region_tag:jobs_v4_generated_JobService_SearchJobs_async
+ */
   searchJobs(
-    request?: protos.google.cloud.talent.v4.ISearchJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.ISearchJobsResponse,
-      protos.google.cloud.talent.v4.ISearchJobsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.talent.v4.ISearchJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.talent.v4.ISearchJobsResponse,
+        protos.google.cloud.talent.v4.ISearchJobsRequest|undefined, {}|undefined
+      ]>;
   searchJobs(
-    request: protos.google.cloud.talent.v4.ISearchJobsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.talent.v4.ISearchJobsResponse,
-      protos.google.cloud.talent.v4.ISearchJobsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  searchJobs(
-    request: protos.google.cloud.talent.v4.ISearchJobsRequest,
-    callback: Callback<
-      protos.google.cloud.talent.v4.ISearchJobsResponse,
-      protos.google.cloud.talent.v4.ISearchJobsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  searchJobs(
-    request?: protos.google.cloud.talent.v4.ISearchJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.talent.v4.ISearchJobsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.talent.v4.ISearchJobsResponse,
-          protos.google.cloud.talent.v4.ISearchJobsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.talent.v4.ISearchJobsResponse,
-      protos.google.cloud.talent.v4.ISearchJobsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.ISearchJobsResponse,
-      protos.google.cloud.talent.v4.ISearchJobsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.talent.v4.ISearchJobsRequest|null|undefined,
+          {}|null|undefined>): void;
+  searchJobs(
+      request: protos.google.cloud.talent.v4.ISearchJobsRequest,
+      callback: Callback<
+          protos.google.cloud.talent.v4.ISearchJobsResponse,
+          protos.google.cloud.talent.v4.ISearchJobsRequest|null|undefined,
+          {}|null|undefined>): void;
+  searchJobs(
+      request?: protos.google.cloud.talent.v4.ISearchJobsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.talent.v4.ISearchJobsResponse,
+          protos.google.cloud.talent.v4.ISearchJobsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.talent.v4.ISearchJobsResponse,
+          protos.google.cloud.talent.v4.ISearchJobsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.talent.v4.ISearchJobsResponse,
+        protos.google.cloud.talent.v4.ISearchJobsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchJobs request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.talent.v4.ISearchJobsResponse,
-          protos.google.cloud.talent.v4.ISearchJobsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.talent.v4.ISearchJobsResponse,
+        protos.google.cloud.talent.v4.ISearchJobsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('searchJobs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .searchJobs(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.talent.v4.ISearchJobsResponse,
-          protos.google.cloud.talent.v4.ISearchJobsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('searchJobs response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.searchJobs(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.talent.v4.ISearchJobsResponse,
+        protos.google.cloud.talent.v4.ISearchJobsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('searchJobs response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Searches for jobs using the provided
-   * {@link protos.google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
-   *
-   * This API call is intended for the use case of targeting passive job
-   * seekers (for example, job seekers who have signed up to receive email
-   * alerts about potential job opportunities), it has different algorithmic
-   * adjustments that are designed to specifically target passive job seekers.
-   *
-   * This call constrains the
-   * {@link protos.google.cloud.talent.v4.Job.visibility|visibility} of jobs present in the
-   * database, and only returns jobs the caller has permission to search
-   * against.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the tenant to search within.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-   *   "projects/foo/tenants/bar".
-   * @param {google.cloud.talent.v4.SearchJobsRequest.SearchMode} request.searchMode
-   *   Mode of a search.
-   *
-   *   Defaults to
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
-   * @param {google.cloud.talent.v4.RequestMetadata} request.requestMetadata
-   *   Required. The meta information collected about the job searcher, used to
-   *   improve the search quality of the service. The identifiers (such as
-   *   `user_id`) are provided by users, and must be unique and consistent.
-   * @param {google.cloud.talent.v4.JobQuery} request.jobQuery
-   *   Query used to search against jobs, such as keyword, location filters, etc.
-   * @param {boolean} request.enableBroadening
-   *   Controls whether to broaden the search when it produces sparse results.
-   *   Broadened queries append results to the end of the matching results
-   *   list.
-   *
-   *   Defaults to false.
-   * @param {number[]} request.histogramQueries
-   *   An expression specifies a histogram request against matching jobs.
-   *
-   *   Expression syntax is an aggregation function call with histogram facets and
-   *   other options.
-   *
-   *   Available aggregation function calls are:
-   *   * `count(string_histogram_facet)`: Count the number of matching entities,
-   *   for each distinct attribute value.
-   *   * `count(numeric_histogram_facet, list of buckets)`: Count the number of
-   *   matching entities within each bucket.
-   *
-   *   A maximum of 200 histogram buckets are supported.
-   *
-   *   Data types:
-   *
-   *   * Histogram facet: facet names with format `{@link protos.a-zA-Z0-9_|a-zA-Z}+`.
-   *   * String: string like "any string with backslash escape for quote(\")."
-   *   * Number: whole number and floating point number like 10, -1 and -0.01.
-   *   * List: list of elements with comma(,) separator surrounded by square
-   *   brackets, for example, [1, 2, 3] and ["one", "two", "three"].
-   *
-   *   Built-in constants:
-   *
-   *   * MIN (minimum number similar to java Double.MIN_VALUE)
-   *   * MAX (maximum number similar to java Double.MAX_VALUE)
-   *
-   *   Built-in functions:
-   *
-   *   * bucket(start, end[, label]): bucket built-in function creates a bucket
-   *   with range of [start, end). Note that the end is exclusive, for example,
-   *   bucket(1, MAX, "positive number") or bucket(1, 10).
-   *
-   *   Job histogram facets:
-   *
-   *   * company_display_name: histogram by
-   *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
-   *   * employment_type: histogram by
-   *   {@link protos.google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for
-   *   example,
-   *     "FULL_TIME", "PART_TIME".
-   *   * company_size (DEPRECATED): histogram by
-   *   {@link protos.google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
-   *   "MEDIUM", "BIG".
-   *   * publish_time_in_day: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
-   *     in days.
-   *     Must specify list of numeric buckets in spec.
-   *   * publish_time_in_month: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
-   *     in months.
-   *     Must specify list of numeric buckets in spec.
-   *   * publish_time_in_year: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
-   *     in years.
-   *     Must specify list of numeric buckets in spec.
-   *   * degree_types: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
-   *     "Bachelors", "Masters".
-   *   * job_level: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
-   *     Level".
-   *   * country: histogram by the country code of jobs, for example, "US", "FR".
-   *   * admin1: histogram by the admin1 code of jobs, which is a global
-   *     placeholder referring to the state, province, or the particular term a
-   *     country uses to define the geographic structure below the country level,
-   *     for example, "CA", "IL".
-   *   * city: histogram by a combination of the "city name, admin1 code". For
-   *     example,  "Mountain View, CA", "New York, NY".
-   *   * admin1_country: histogram by a combination of the "admin1 code, country",
-   *     for example, "CA, US", "IL, US".
-   *   * city_coordinate: histogram by the city center's GPS coordinates (latitude
-   *     and longitude), for example, 37.4038522,-122.0987765. Since the
-   *     coordinates of a city center can change, customers may need to refresh
-   *     them periodically.
-   *   * locale: histogram by the
-   *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code}, for example,
-   *   "en-US",
-   *     "fr-FR".
-   *   * language: histogram by the language subtag of the
-   *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code},
-   *     for example, "en", "fr".
-   *   * category: histogram by the
-   *   {@link protos.google.cloud.talent.v4.JobCategory|JobCategory}, for example,
-   *     "COMPUTER_AND_IT", "HEALTHCARE".
-   *   * base_compensation_unit: histogram by the
-   *     {@link protos.google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit}
-   *     of base salary, for example, "WEEKLY", "MONTHLY".
-   *   * base_compensation: histogram by the base salary. Must specify list of
-   *     numeric buckets to group results by.
-   *   * annualized_base_compensation: histogram by the base annualized salary.
-   *     Must specify list of numeric buckets to group results by.
-   *   * annualized_total_compensation: histogram by the total annualized salary.
-   *     Must specify list of numeric buckets to group results by.
-   *   * string_custom_attribute: histogram by string
-   *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
-   *     Values can be accessed via square bracket notations like
-   *     string_custom_attribute["key1"].
-   *   * numeric_custom_attribute: histogram by numeric
-   *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
-   *     Values can be accessed via square bracket notations like
-   *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
-   *     group results by.
-   *
-   *   Example expressions:
-   *
-   *   * `count(admin1)`
-   *   * `count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
-   *   bucket(100000, MAX)])`
-   *   * `count(string_custom_attribute["some-string-custom-attribute"])`
-   *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
-   * @param {google.cloud.talent.v4.JobView} request.jobView
-   *   The desired job attributes returned for jobs in the search response.
-   *   Defaults to
-   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if
-   *   no value is specified.
-   * @param {number} request.offset
-   *   An integer that specifies the current offset (that is, starting result
-   *   location, amongst the jobs deemed by the API as relevant) in search
-   *   results. This field is only considered if
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
-   *
-   *   The maximum allowed value is 5000. Otherwise an error is thrown.
-   *
-   *   For example, 0 means to  return results starting from the first matching
-   *   job, and 10 means to return from the 11th job. This can be used for
-   *   pagination, (for example, pageSize = 10 and offset = 10 means to return
-   *   from the second page).
-   * @param {number} request.maxPageSize
-   *   A limit on the number of jobs returned in the search results.
-   *   Increasing this value above the default value of 10 can increase search
-   *   response time. The value can be between 1 and 100.
-   * @param {string} request.pageToken
-   *   The token specifying the current offset within
-   *   search results. See
-   *   {@link protos.google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token}
-   *   for an explanation of how to obtain the next set of query results.
-   * @param {string} request.orderBy
-   *   The criteria determining how search results are sorted. Default is
-   *   `"relevance desc"`.
-   *
-   *   Supported options are:
-   *
-   *   * `"relevance desc"`: By relevance descending, as determined by the API
-   *     algorithms. Relevance thresholding of query results is only available
-   *     with this ordering.
-   *   * `"posting_publish_time desc"`: By
-   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
-   *     descending.
-   *   * `"posting_update_time desc"`: By
-   *   {@link protos.google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
-   *     descending.
-   *   * `"title"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title} ascending.
-   *   * `"title desc"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title}
-   *   descending.
-   *   * `"annualized_base_compensation"`: By job's
-   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
-   *     ascending. Jobs whose annualized base compensation is unspecified are put
-   *     at the end of search results.
-   *   * `"annualized_base_compensation desc"`: By job's
-   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
-   *     descending. Jobs whose annualized base compensation is unspecified are
-   *     put at the end of search results.
-   *   * `"annualized_total_compensation"`: By job's
-   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
-   *     ascending. Jobs whose annualized base compensation is unspecified are put
-   *     at the end of search results.
-   *   * `"annualized_total_compensation desc"`: By job's
-   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
-   *     descending. Jobs whose annualized base compensation is unspecified are
-   *     put at the end of search results.
-   *   * `"custom_ranking desc"`: By the relevance score adjusted to the
-   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression}
-   *     with weight factor assigned by
-   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level}
-   *     in descending order.
-   *   * Location sorting: Use the special syntax to order jobs by distance:<br>
-   *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
-   *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
-   *     `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
-   *     multiple locations. See details below.<br>
-   *     `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
-   *     multiple locations. See details below.<br>
-   *     The string can have a maximum of 256 characters. When multiple distance
-   *     centers are provided, a job that is close to any of the distance centers
-   *     would have a high rank. When a job has multiple locations, the job
-   *     location closest to one of the distance centers will be used. Jobs that
-   *     don't have locations will be ranked at the bottom. Distance is calculated
-   *     with a precision of 11.3 meters (37.4 feet). Diversification strategy is
-   *     still applied unless explicitly disabled in
-   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.diversification_level|diversification_level}.
-   * @param {google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel} request.diversificationLevel
-   *   Controls whether highly similar jobs are returned next to each other in
-   *   the search results. Jobs are identified as highly similar based on
-   *   their titles, job categories, and locations. Highly similar results are
-   *   clustered so that only one representative job of the cluster is
-   *   displayed to the job seeker higher up in the results, with the other jobs
-   *   being displayed lower down in the results.
-   *
-   *   Defaults to
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE}
-   *   if no value is specified.
-   * @param {google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo} request.customRankingInfo
-   *   Controls over how job documents get ranked on top of existing relevance
-   *   score (determined by API algorithm).
-   * @param {boolean} request.disableKeywordMatch
-   *   This field is deprecated. Please use
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
-   *   going forward.
-   *
-   *   To migrate, disable_keyword_match set to false maps to
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL},
-   *   and disable_keyword_match set to true maps to
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}.
-   *   If
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
-   *   is set, this field is ignored.
-   *
-   *   Controls whether to disable exact keyword match on
-   *   {@link protos.google.cloud.talent.v4.Job.title|Job.title},
-   *   {@link protos.google.cloud.talent.v4.Job.description|Job.description},
-   *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name},
-   *   {@link protos.google.cloud.talent.v4.Job.addresses|Job.addresses},
-   *   {@link protos.google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When
-   *   disable keyword match is turned off, a keyword match returns jobs that do
-   *   not match given category filters when there are matching keywords. For
-   *   example, for the query "program manager," a result is returned even if the
-   *   job posting has the title "software developer," which doesn't fall into
-   *   "program manager" ontology, but does have "program manager" appearing in
-   *   its description.
-   *
-   *   For queries like "cloud" that don't contain title or
-   *   location specific ontology, jobs with "cloud" keyword matches are returned
-   *   regardless of this flag's value.
-   *
-   *   Use
-   *   {@link protos.google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes}
-   *   if company-specific globally matched custom field/attribute string values
-   *   are needed. Enabling keyword match improves recall of subsequent search
-   *   requests.
-   *
-   *   Defaults to false.
-   * @param {google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode} request.keywordMatchMode
-   *   Controls what keyword match options to use. If both keyword_match_mode and
-   *   disable_keyword_match are set, keyword_match_mode will take precedence.
-   *
-   *   Defaults to
-   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
-   *   if no value is specified.
-   * @param {google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold} [request.relevanceThreshold]
-   *   Optional. The relevance threshold of the search results.
-   *
-   *   Default to Google defined threshold, leveraging a balance of
-   *   precision and recall to deliver both highly accurate results and
-   *   comprehensive coverage of relevant information.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.SearchJobsResponse|SearchJobsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.search_jobs_for_alert.js</caption>
-   * region_tag:jobs_v4_generated_JobService_SearchJobsForAlert_async
-   */
+/**
+ * Searches for jobs using the provided
+ * {@link protos.google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
+ *
+ * This API call is intended for the use case of targeting passive job
+ * seekers (for example, job seekers who have signed up to receive email
+ * alerts about potential job opportunities), it has different algorithmic
+ * adjustments that are designed to specifically target passive job seekers.
+ *
+ * This call constrains the
+ * {@link protos.google.cloud.talent.v4.Job.visibility|visibility} of jobs present in the
+ * database, and only returns jobs the caller has permission to search
+ * against.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the tenant to search within.
+ *
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
+ * @param {google.cloud.talent.v4.SearchJobsRequest.SearchMode} request.searchMode
+ *   Mode of a search.
+ *
+ *   Defaults to
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
+ * @param {google.cloud.talent.v4.RequestMetadata} request.requestMetadata
+ *   Required. The meta information collected about the job searcher, used to
+ *   improve the search quality of the service. The identifiers (such as
+ *   `user_id`) are provided by users, and must be unique and consistent.
+ * @param {google.cloud.talent.v4.JobQuery} request.jobQuery
+ *   Query used to search against jobs, such as keyword, location filters, etc.
+ * @param {boolean} request.enableBroadening
+ *   Controls whether to broaden the search when it produces sparse results.
+ *   Broadened queries append results to the end of the matching results
+ *   list.
+ *
+ *   Defaults to false.
+ * @param {number[]} request.histogramQueries
+ *   An expression specifies a histogram request against matching jobs.
+ *
+ *   Expression syntax is an aggregation function call with histogram facets and
+ *   other options.
+ *
+ *   Available aggregation function calls are:
+ *   * `count(string_histogram_facet)`: Count the number of matching entities,
+ *   for each distinct attribute value.
+ *   * `count(numeric_histogram_facet, list of buckets)`: Count the number of
+ *   matching entities within each bucket.
+ *
+ *   A maximum of 200 histogram buckets are supported.
+ *
+ *   Data types:
+ *
+ *   * Histogram facet: facet names with format `{@link protos.a-zA-Z0-9_|a-zA-Z}+`.
+ *   * String: string like "any string with backslash escape for quote(\")."
+ *   * Number: whole number and floating point number like 10, -1 and -0.01.
+ *   * List: list of elements with comma(,) separator surrounded by square
+ *   brackets, for example, [1, 2, 3] and ["one", "two", "three"].
+ *
+ *   Built-in constants:
+ *
+ *   * MIN (minimum number similar to java Double.MIN_VALUE)
+ *   * MAX (maximum number similar to java Double.MAX_VALUE)
+ *
+ *   Built-in functions:
+ *
+ *   * bucket(start, end[, label]): bucket built-in function creates a bucket
+ *   with range of [start, end). Note that the end is exclusive, for example,
+ *   bucket(1, MAX, "positive number") or bucket(1, 10).
+ *
+ *   Job histogram facets:
+ *
+ *   * company_display_name: histogram by
+ *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
+ *   * employment_type: histogram by
+ *   {@link protos.google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for
+ *   example,
+ *     "FULL_TIME", "PART_TIME".
+ *   * company_size (DEPRECATED): histogram by
+ *   {@link protos.google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
+ *   "MEDIUM", "BIG".
+ *   * publish_time_in_day: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+ *     in days.
+ *     Must specify list of numeric buckets in spec.
+ *   * publish_time_in_month: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+ *     in months.
+ *     Must specify list of numeric buckets in spec.
+ *   * publish_time_in_year: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+ *     in years.
+ *     Must specify list of numeric buckets in spec.
+ *   * degree_types: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
+ *     "Bachelors", "Masters".
+ *   * job_level: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
+ *     Level".
+ *   * country: histogram by the country code of jobs, for example, "US", "FR".
+ *   * admin1: histogram by the admin1 code of jobs, which is a global
+ *     placeholder referring to the state, province, or the particular term a
+ *     country uses to define the geographic structure below the country level,
+ *     for example, "CA", "IL".
+ *   * city: histogram by a combination of the "city name, admin1 code". For
+ *     example,  "Mountain View, CA", "New York, NY".
+ *   * admin1_country: histogram by a combination of the "admin1 code, country",
+ *     for example, "CA, US", "IL, US".
+ *   * city_coordinate: histogram by the city center's GPS coordinates (latitude
+ *     and longitude), for example, 37.4038522,-122.0987765. Since the
+ *     coordinates of a city center can change, customers may need to refresh
+ *     them periodically.
+ *   * locale: histogram by the
+ *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code}, for example,
+ *   "en-US",
+ *     "fr-FR".
+ *   * language: histogram by the language subtag of the
+ *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code},
+ *     for example, "en", "fr".
+ *   * category: histogram by the
+ *   {@link protos.google.cloud.talent.v4.JobCategory|JobCategory}, for example,
+ *     "COMPUTER_AND_IT", "HEALTHCARE".
+ *   * base_compensation_unit: histogram by the
+ *     {@link protos.google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit}
+ *     of base salary, for example, "WEEKLY", "MONTHLY".
+ *   * base_compensation: histogram by the base salary. Must specify list of
+ *     numeric buckets to group results by.
+ *   * annualized_base_compensation: histogram by the base annualized salary.
+ *     Must specify list of numeric buckets to group results by.
+ *   * annualized_total_compensation: histogram by the total annualized salary.
+ *     Must specify list of numeric buckets to group results by.
+ *   * string_custom_attribute: histogram by string
+ *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+ *     Values can be accessed via square bracket notations like
+ *     string_custom_attribute["key1"].
+ *   * numeric_custom_attribute: histogram by numeric
+ *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+ *     Values can be accessed via square bracket notations like
+ *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
+ *     group results by.
+ *
+ *   Example expressions:
+ *
+ *   * `count(admin1)`
+ *   * `count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
+ *   bucket(100000, MAX)])`
+ *   * `count(string_custom_attribute["some-string-custom-attribute"])`
+ *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
+ *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
+ * @param {google.cloud.talent.v4.JobView} request.jobView
+ *   The desired job attributes returned for jobs in the search response.
+ *   Defaults to
+ *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if
+ *   no value is specified.
+ * @param {number} request.offset
+ *   An integer that specifies the current offset (that is, starting result
+ *   location, amongst the jobs deemed by the API as relevant) in search
+ *   results. This field is only considered if
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
+ *
+ *   The maximum allowed value is 5000. Otherwise an error is thrown.
+ *
+ *   For example, 0 means to  return results starting from the first matching
+ *   job, and 10 means to return from the 11th job. This can be used for
+ *   pagination, (for example, pageSize = 10 and offset = 10 means to return
+ *   from the second page).
+ * @param {number} request.maxPageSize
+ *   A limit on the number of jobs returned in the search results.
+ *   Increasing this value above the default value of 10 can increase search
+ *   response time. The value can be between 1 and 100.
+ * @param {string} request.pageToken
+ *   The token specifying the current offset within
+ *   search results. See
+ *   {@link protos.google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token}
+ *   for an explanation of how to obtain the next set of query results.
+ * @param {string} request.orderBy
+ *   The criteria determining how search results are sorted. Default is
+ *   `"relevance desc"`.
+ *
+ *   Supported options are:
+ *
+ *   * `"relevance desc"`: By relevance descending, as determined by the API
+ *     algorithms. Relevance thresholding of query results is only available
+ *     with this ordering.
+ *   * `"posting_publish_time desc"`: By
+ *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+ *     descending.
+ *   * `"posting_update_time desc"`: By
+ *   {@link protos.google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
+ *     descending.
+ *   * `"title"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title} ascending.
+ *   * `"title desc"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title}
+ *   descending.
+ *   * `"annualized_base_compensation"`: By job's
+ *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+ *     ascending. Jobs whose annualized base compensation is unspecified are put
+ *     at the end of search results.
+ *   * `"annualized_base_compensation desc"`: By job's
+ *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+ *     descending. Jobs whose annualized base compensation is unspecified are
+ *     put at the end of search results.
+ *   * `"annualized_total_compensation"`: By job's
+ *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+ *     ascending. Jobs whose annualized base compensation is unspecified are put
+ *     at the end of search results.
+ *   * `"annualized_total_compensation desc"`: By job's
+ *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+ *     descending. Jobs whose annualized base compensation is unspecified are
+ *     put at the end of search results.
+ *   * `"custom_ranking desc"`: By the relevance score adjusted to the
+ *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression}
+ *     with weight factor assigned by
+ *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level}
+ *     in descending order.
+ *   * Location sorting: Use the special syntax to order jobs by distance:<br>
+ *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
+ *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
+ *     `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
+ *     multiple locations. See details below.<br>
+ *     `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
+ *     multiple locations. See details below.<br>
+ *     The string can have a maximum of 256 characters. When multiple distance
+ *     centers are provided, a job that is close to any of the distance centers
+ *     would have a high rank. When a job has multiple locations, the job
+ *     location closest to one of the distance centers will be used. Jobs that
+ *     don't have locations will be ranked at the bottom. Distance is calculated
+ *     with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+ *     still applied unless explicitly disabled in
+ *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.diversification_level|diversification_level}.
+ * @param {google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel} request.diversificationLevel
+ *   Controls whether highly similar jobs are returned next to each other in
+ *   the search results. Jobs are identified as highly similar based on
+ *   their titles, job categories, and locations. Highly similar results are
+ *   clustered so that only one representative job of the cluster is
+ *   displayed to the job seeker higher up in the results, with the other jobs
+ *   being displayed lower down in the results.
+ *
+ *   Defaults to
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE}
+ *   if no value is specified.
+ * @param {google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo} request.customRankingInfo
+ *   Controls over how job documents get ranked on top of existing relevance
+ *   score (determined by API algorithm).
+ * @param {boolean} request.disableKeywordMatch
+ *   This field is deprecated. Please use
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+ *   going forward.
+ *
+ *   To migrate, disable_keyword_match set to false maps to
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL},
+ *   and disable_keyword_match set to true maps to
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}.
+ *   If
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+ *   is set, this field is ignored.
+ *
+ *   Controls whether to disable exact keyword match on
+ *   {@link protos.google.cloud.talent.v4.Job.title|Job.title},
+ *   {@link protos.google.cloud.talent.v4.Job.description|Job.description},
+ *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name},
+ *   {@link protos.google.cloud.talent.v4.Job.addresses|Job.addresses},
+ *   {@link protos.google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When
+ *   disable keyword match is turned off, a keyword match returns jobs that do
+ *   not match given category filters when there are matching keywords. For
+ *   example, for the query "program manager," a result is returned even if the
+ *   job posting has the title "software developer," which doesn't fall into
+ *   "program manager" ontology, but does have "program manager" appearing in
+ *   its description.
+ *
+ *   For queries like "cloud" that don't contain title or
+ *   location specific ontology, jobs with "cloud" keyword matches are returned
+ *   regardless of this flag's value.
+ *
+ *   Use
+ *   {@link protos.google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes}
+ *   if company-specific globally matched custom field/attribute string values
+ *   are needed. Enabling keyword match improves recall of subsequent search
+ *   requests.
+ *
+ *   Defaults to false.
+ * @param {google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode} request.keywordMatchMode
+ *   Controls what keyword match options to use. If both keyword_match_mode and
+ *   disable_keyword_match are set, keyword_match_mode will take precedence.
+ *
+ *   Defaults to
+ *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
+ *   if no value is specified.
+ * @param {google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold} [request.relevanceThreshold]
+ *   Optional. The relevance threshold of the search results.
+ *
+ *   Default to Google defined threshold, leveraging a balance of
+ *   precision and recall to deliver both highly accurate results and
+ *   comprehensive coverage of relevant information.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.SearchJobsResponse|SearchJobsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.search_jobs_for_alert.js</caption>
+ * region_tag:jobs_v4_generated_JobService_SearchJobsForAlert_async
+ */
   searchJobsForAlert(
-    request?: protos.google.cloud.talent.v4.ISearchJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.ISearchJobsResponse,
-      protos.google.cloud.talent.v4.ISearchJobsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.talent.v4.ISearchJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.talent.v4.ISearchJobsResponse,
+        protos.google.cloud.talent.v4.ISearchJobsRequest|undefined, {}|undefined
+      ]>;
   searchJobsForAlert(
-    request: protos.google.cloud.talent.v4.ISearchJobsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.talent.v4.ISearchJobsResponse,
-      protos.google.cloud.talent.v4.ISearchJobsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  searchJobsForAlert(
-    request: protos.google.cloud.talent.v4.ISearchJobsRequest,
-    callback: Callback<
-      protos.google.cloud.talent.v4.ISearchJobsResponse,
-      protos.google.cloud.talent.v4.ISearchJobsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  searchJobsForAlert(
-    request?: protos.google.cloud.talent.v4.ISearchJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.talent.v4.ISearchJobsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.talent.v4.ISearchJobsResponse,
-          protos.google.cloud.talent.v4.ISearchJobsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.talent.v4.ISearchJobsResponse,
-      protos.google.cloud.talent.v4.ISearchJobsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.ISearchJobsResponse,
-      protos.google.cloud.talent.v4.ISearchJobsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.talent.v4.ISearchJobsRequest|null|undefined,
+          {}|null|undefined>): void;
+  searchJobsForAlert(
+      request: protos.google.cloud.talent.v4.ISearchJobsRequest,
+      callback: Callback<
+          protos.google.cloud.talent.v4.ISearchJobsResponse,
+          protos.google.cloud.talent.v4.ISearchJobsRequest|null|undefined,
+          {}|null|undefined>): void;
+  searchJobsForAlert(
+      request?: protos.google.cloud.talent.v4.ISearchJobsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.talent.v4.ISearchJobsResponse,
+          protos.google.cloud.talent.v4.ISearchJobsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.talent.v4.ISearchJobsResponse,
+          protos.google.cloud.talent.v4.ISearchJobsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.talent.v4.ISearchJobsResponse,
+        protos.google.cloud.talent.v4.ISearchJobsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchJobsForAlert request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.talent.v4.ISearchJobsResponse,
-          protos.google.cloud.talent.v4.ISearchJobsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.talent.v4.ISearchJobsResponse,
+        protos.google.cloud.talent.v4.ISearchJobsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('searchJobsForAlert response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .searchJobsForAlert(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.talent.v4.ISearchJobsResponse,
-          protos.google.cloud.talent.v4.ISearchJobsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('searchJobsForAlert response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.searchJobsForAlert(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.talent.v4.ISearchJobsResponse,
+        protos.google.cloud.talent.v4.ISearchJobsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('searchJobsForAlert response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Begins executing a batch create jobs operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the tenant under which the job is created.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-   *   "projects/foo/tenants/bar".
-   * @param {number[]} request.jobs
-   *   Required. The jobs to be created.
-   *   A maximum of 200 jobs can be created in a batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.batch_create_jobs.js</caption>
-   * region_tag:jobs_v4_generated_JobService_BatchCreateJobs_async
-   */
+/**
+ * Begins executing a batch create jobs operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the tenant under which the job is created.
+ *
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
+ * @param {number[]} request.jobs
+ *   Required. The jobs to be created.
+ *   A maximum of 200 jobs can be created in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.batch_create_jobs.js</caption>
+ * region_tag:jobs_v4_generated_JobService_BatchCreateJobs_async
+ */
   batchCreateJobs(
-    request?: protos.google.cloud.talent.v4.IBatchCreateJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchCreateJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.talent.v4.IBatchCreateJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.talent.v4.IBatchCreateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   batchCreateJobs(
-    request: protos.google.cloud.talent.v4.IBatchCreateJobsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchCreateJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.talent.v4.IBatchCreateJobsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchCreateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchCreateJobs(
-    request: protos.google.cloud.talent.v4.IBatchCreateJobsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchCreateJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.talent.v4.IBatchCreateJobsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchCreateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchCreateJobs(
-    request?: protos.google.cloud.talent.v4.IBatchCreateJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.talent.v4.IBatchCreateJobsResponse,
-            protos.google.cloud.talent.v4.IBatchOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchCreateJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchCreateJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.talent.v4.IBatchCreateJobsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchCreateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchCreateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.talent.v4.IBatchCreateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.talent.v4.IBatchCreateJobsResponse,
-            protos.google.cloud.talent.v4.IBatchOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchCreateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('batchCreateJobs response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchCreateJobs request %j', request);
-    return this.innerApiCalls
-      .batchCreateJobs(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.talent.v4.IBatchCreateJobsResponse,
-            protos.google.cloud.talent.v4.IBatchOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('batchCreateJobs response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.batchCreateJobs(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.talent.v4.IBatchCreateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('batchCreateJobs response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `batchCreateJobs()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.batch_create_jobs.js</caption>
-   * region_tag:jobs_v4_generated_JobService_BatchCreateJobs_async
-   */
-  async checkBatchCreateJobsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.talent.v4.BatchCreateJobsResponse,
-      protos.google.cloud.talent.v4.BatchOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `batchCreateJobs()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.batch_create_jobs.js</caption>
+ * region_tag:jobs_v4_generated_JobService_BatchCreateJobs_async
+ */
+  async checkBatchCreateJobsProgress(name: string): Promise<LROperation<protos.google.cloud.talent.v4.BatchCreateJobsResponse, protos.google.cloud.talent.v4.BatchOperationMetadata>>{
     this._log.info('batchCreateJobs long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.batchCreateJobs,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.talent.v4.BatchCreateJobsResponse,
-      protos.google.cloud.talent.v4.BatchOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchCreateJobs, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.talent.v4.BatchCreateJobsResponse, protos.google.cloud.talent.v4.BatchOperationMetadata>;
   }
-  /**
-   * Begins executing a batch update jobs operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the tenant under which the job is created.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-   *   "projects/foo/tenants/bar".
-   * @param {number[]} request.jobs
-   *   Required. The jobs to be updated.
-   *   A maximum of 200 jobs can be updated in a batch.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Strongly recommended for the best service experience. Be aware that it will
-   *   also increase latency when checking the status of a batch operation.
-   *
-   *   If {@link protos.google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask}
-   *   is provided, only the specified fields in {@link protos.google.cloud.talent.v4.Job|Job}
-   *   are updated. Otherwise all the fields are updated.
-   *
-   *   A field mask to restrict the fields that are updated. Only
-   *   top level fields of {@link protos.google.cloud.talent.v4.Job|Job} are supported.
-   *
-   *   If {@link protos.google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask}
-   *   is provided, The {@link protos.google.cloud.talent.v4.Job|Job} inside
-   *   {@link protos.google.cloud.talent.v4.JobResult|JobResult}
-   *   will only contains fields that is updated, plus the Id of the Job.
-   *   Otherwise,  {@link protos.google.cloud.talent.v4.Job|Job} will include all fields,
-   *   which can yield a very large response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.batch_update_jobs.js</caption>
-   * region_tag:jobs_v4_generated_JobService_BatchUpdateJobs_async
-   */
+/**
+ * Begins executing a batch update jobs operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the tenant under which the job is created.
+ *
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
+ * @param {number[]} request.jobs
+ *   Required. The jobs to be updated.
+ *   A maximum of 200 jobs can be updated in a batch.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Strongly recommended for the best service experience. Be aware that it will
+ *   also increase latency when checking the status of a batch operation.
+ *
+ *   If {@link protos.google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask}
+ *   is provided, only the specified fields in {@link protos.google.cloud.talent.v4.Job|Job}
+ *   are updated. Otherwise all the fields are updated.
+ *
+ *   A field mask to restrict the fields that are updated. Only
+ *   top level fields of {@link protos.google.cloud.talent.v4.Job|Job} are supported.
+ *
+ *   If {@link protos.google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask}
+ *   is provided, The {@link protos.google.cloud.talent.v4.Job|Job} inside
+ *   {@link protos.google.cloud.talent.v4.JobResult|JobResult}
+ *   will only contains fields that is updated, plus the Id of the Job.
+ *   Otherwise,  {@link protos.google.cloud.talent.v4.Job|Job} will include all fields,
+ *   which can yield a very large response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.batch_update_jobs.js</caption>
+ * region_tag:jobs_v4_generated_JobService_BatchUpdateJobs_async
+ */
   batchUpdateJobs(
-    request?: protos.google.cloud.talent.v4.IBatchUpdateJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchUpdateJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.talent.v4.IBatchUpdateJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.talent.v4.IBatchUpdateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   batchUpdateJobs(
-    request: protos.google.cloud.talent.v4.IBatchUpdateJobsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchUpdateJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.talent.v4.IBatchUpdateJobsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchUpdateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchUpdateJobs(
-    request: protos.google.cloud.talent.v4.IBatchUpdateJobsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchUpdateJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.talent.v4.IBatchUpdateJobsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchUpdateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchUpdateJobs(
-    request?: protos.google.cloud.talent.v4.IBatchUpdateJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.talent.v4.IBatchUpdateJobsResponse,
-            protos.google.cloud.talent.v4.IBatchOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchUpdateJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchUpdateJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.talent.v4.IBatchUpdateJobsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchUpdateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchUpdateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.talent.v4.IBatchUpdateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.talent.v4.IBatchUpdateJobsResponse,
-            protos.google.cloud.talent.v4.IBatchOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchUpdateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('batchUpdateJobs response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchUpdateJobs request %j', request);
-    return this.innerApiCalls
-      .batchUpdateJobs(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.talent.v4.IBatchUpdateJobsResponse,
-            protos.google.cloud.talent.v4.IBatchOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('batchUpdateJobs response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.batchUpdateJobs(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.talent.v4.IBatchUpdateJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('batchUpdateJobs response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `batchUpdateJobs()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.batch_update_jobs.js</caption>
-   * region_tag:jobs_v4_generated_JobService_BatchUpdateJobs_async
-   */
-  async checkBatchUpdateJobsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.talent.v4.BatchUpdateJobsResponse,
-      protos.google.cloud.talent.v4.BatchOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `batchUpdateJobs()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.batch_update_jobs.js</caption>
+ * region_tag:jobs_v4_generated_JobService_BatchUpdateJobs_async
+ */
+  async checkBatchUpdateJobsProgress(name: string): Promise<LROperation<protos.google.cloud.talent.v4.BatchUpdateJobsResponse, protos.google.cloud.talent.v4.BatchOperationMetadata>>{
     this._log.info('batchUpdateJobs long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.batchUpdateJobs,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.talent.v4.BatchUpdateJobsResponse,
-      protos.google.cloud.talent.v4.BatchOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchUpdateJobs, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.talent.v4.BatchUpdateJobsResponse, protos.google.cloud.talent.v4.BatchOperationMetadata>;
   }
-  /**
-   * Begins executing a batch delete jobs operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the tenant under which the job is created.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-   *   "projects/foo/tenants/bar".
-   *
-   *   The parent of all of the jobs specified in `names` must match this field.
-   * @param {string[]} request.names
-   *   The names of the jobs to delete.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}".
-   *   For example, "projects/foo/tenants/bar/jobs/baz".
-   *
-   *   A maximum of 200 jobs can be deleted in a batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.batch_delete_jobs.js</caption>
-   * region_tag:jobs_v4_generated_JobService_BatchDeleteJobs_async
-   */
+/**
+ * Begins executing a batch delete jobs operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the tenant under which the job is created.
+ *
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
+ *
+ *   The parent of all of the jobs specified in `names` must match this field.
+ * @param {string[]} request.names
+ *   The names of the jobs to delete.
+ *
+ *   The format is "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}".
+ *   For example, "projects/foo/tenants/bar/jobs/baz".
+ *
+ *   A maximum of 200 jobs can be deleted in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.batch_delete_jobs.js</caption>
+ * region_tag:jobs_v4_generated_JobService_BatchDeleteJobs_async
+ */
   batchDeleteJobs(
-    request?: protos.google.cloud.talent.v4.IBatchDeleteJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchDeleteJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.talent.v4.IBatchDeleteJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.talent.v4.IBatchDeleteJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   batchDeleteJobs(
-    request: protos.google.cloud.talent.v4.IBatchDeleteJobsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchDeleteJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.talent.v4.IBatchDeleteJobsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchDeleteJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchDeleteJobs(
-    request: protos.google.cloud.talent.v4.IBatchDeleteJobsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchDeleteJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.talent.v4.IBatchDeleteJobsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchDeleteJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchDeleteJobs(
-    request?: protos.google.cloud.talent.v4.IBatchDeleteJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.talent.v4.IBatchDeleteJobsResponse,
-            protos.google.cloud.talent.v4.IBatchOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchDeleteJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.talent.v4.IBatchDeleteJobsResponse,
-        protos.google.cloud.talent.v4.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.talent.v4.IBatchDeleteJobsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchDeleteJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchDeleteJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.talent.v4.IBatchDeleteJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.talent.v4.IBatchDeleteJobsResponse,
-            protos.google.cloud.talent.v4.IBatchOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.talent.v4.IBatchDeleteJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('batchDeleteJobs response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchDeleteJobs request %j', request);
-    return this.innerApiCalls
-      .batchDeleteJobs(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.talent.v4.IBatchDeleteJobsResponse,
-            protos.google.cloud.talent.v4.IBatchOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('batchDeleteJobs response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.batchDeleteJobs(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.talent.v4.IBatchDeleteJobsResponse, protos.google.cloud.talent.v4.IBatchOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('batchDeleteJobs response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `batchDeleteJobs()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.batch_delete_jobs.js</caption>
-   * region_tag:jobs_v4_generated_JobService_BatchDeleteJobs_async
-   */
-  async checkBatchDeleteJobsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.talent.v4.BatchDeleteJobsResponse,
-      protos.google.cloud.talent.v4.BatchOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `batchDeleteJobs()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.batch_delete_jobs.js</caption>
+ * region_tag:jobs_v4_generated_JobService_BatchDeleteJobs_async
+ */
+  async checkBatchDeleteJobsProgress(name: string): Promise<LROperation<protos.google.cloud.talent.v4.BatchDeleteJobsResponse, protos.google.cloud.talent.v4.BatchOperationMetadata>>{
     this._log.info('batchDeleteJobs long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.batchDeleteJobs,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.talent.v4.BatchDeleteJobsResponse,
-      protos.google.cloud.talent.v4.BatchOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchDeleteJobs, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.talent.v4.BatchDeleteJobsResponse, protos.google.cloud.talent.v4.BatchOperationMetadata>;
   }
-  /**
-   * Lists jobs by filter.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the tenant under which the job is created.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-   *   "projects/foo/tenants/bar".
-   * @param {string} request.filter
-   *   Required. The filter string specifies the jobs to be enumerated.
-   *
-   *   Supported operator: =, AND
-   *
-   *   The fields eligible for filtering are:
-   *
-   *   * `companyName`
-   *   * `requisitionId`
-   *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
-   *   OPEN if no value is specified.
-   *
-   *   At least one of `companyName` and `requisitionId` must present or an
-   *   INVALID_ARGUMENT error is thrown.
-   *
-   *   Sample Query:
-   *
-   *   * companyName = "projects/foo/tenants/bar/companies/baz"
-   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
-   *   requisitionId = "req-1"
-   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
-   *   status = "EXPIRED"
-   *   * requisitionId = "req-1"
-   *   * requisitionId = "req-1" AND status = "EXPIRED"
-   * @param {string} request.pageToken
-   *   The starting point of a query result.
-   * @param {number} request.pageSize
-   *   The maximum number of jobs to be returned per page of results.
-   *
-   *   If {@link protos.google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
-   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
-   *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
-   *   size is 100.
-   *
-   *   Default is 100 if empty or a number < 1 is specified.
-   * @param {google.cloud.talent.v4.JobView} request.jobView
-   *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to
-   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
-   *   value is specified.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.talent.v4.Job|Job}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists jobs by filter.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the tenant under which the job is created.
+ *
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
+ * @param {string} request.filter
+ *   Required. The filter string specifies the jobs to be enumerated.
+ *
+ *   Supported operator: =, AND
+ *
+ *   The fields eligible for filtering are:
+ *
+ *   * `companyName`
+ *   * `requisitionId`
+ *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
+ *   OPEN if no value is specified.
+ *
+ *   At least one of `companyName` and `requisitionId` must present or an
+ *   INVALID_ARGUMENT error is thrown.
+ *
+ *   Sample Query:
+ *
+ *   * companyName = "projects/foo/tenants/bar/companies/baz"
+ *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
+ *   requisitionId = "req-1"
+ *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
+ *   status = "EXPIRED"
+ *   * requisitionId = "req-1"
+ *   * requisitionId = "req-1" AND status = "EXPIRED"
+ * @param {string} request.pageToken
+ *   The starting point of a query result.
+ * @param {number} request.pageSize
+ *   The maximum number of jobs to be returned per page of results.
+ *
+ *   If {@link protos.google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
+ *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
+ *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
+ *   size is 100.
+ *
+ *   Default is 100 if empty or a number < 1 is specified.
+ * @param {google.cloud.talent.v4.JobView} request.jobView
+ *   The desired job attributes returned for jobs in the
+ *   search response. Defaults to
+ *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
+ *   value is specified.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.talent.v4.Job|Job}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listJobs(
-    request?: protos.google.cloud.talent.v4.IListJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.IJob[],
-      protos.google.cloud.talent.v4.IListJobsRequest | null,
-      protos.google.cloud.talent.v4.IListJobsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.talent.v4.IListJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.talent.v4.IJob[],
+        protos.google.cloud.talent.v4.IListJobsRequest|null,
+        protos.google.cloud.talent.v4.IListJobsResponse
+      ]>;
   listJobs(
-    request: protos.google.cloud.talent.v4.IListJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.talent.v4.IListJobsRequest,
-      protos.google.cloud.talent.v4.IListJobsResponse | null | undefined,
-      protos.google.cloud.talent.v4.IJob
-    >
-  ): void;
-  listJobs(
-    request: protos.google.cloud.talent.v4.IListJobsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.talent.v4.IListJobsRequest,
-      protos.google.cloud.talent.v4.IListJobsResponse | null | undefined,
-      protos.google.cloud.talent.v4.IJob
-    >
-  ): void;
-  listJobs(
-    request?: protos.google.cloud.talent.v4.IListJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.talent.v4.IListJobsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.talent.v4.IListJobsRequest,
-          protos.google.cloud.talent.v4.IListJobsResponse | null | undefined,
-          protos.google.cloud.talent.v4.IJob
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.talent.v4.IListJobsRequest,
-      protos.google.cloud.talent.v4.IListJobsResponse | null | undefined,
-      protos.google.cloud.talent.v4.IJob
-    >
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.IJob[],
-      protos.google.cloud.talent.v4.IListJobsRequest | null,
-      protos.google.cloud.talent.v4.IListJobsResponse,
-    ]
-  > | void {
+          protos.google.cloud.talent.v4.IListJobsResponse|null|undefined,
+          protos.google.cloud.talent.v4.IJob>): void;
+  listJobs(
+      request: protos.google.cloud.talent.v4.IListJobsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.talent.v4.IListJobsRequest,
+          protos.google.cloud.talent.v4.IListJobsResponse|null|undefined,
+          protos.google.cloud.talent.v4.IJob>): void;
+  listJobs(
+      request?: protos.google.cloud.talent.v4.IListJobsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.talent.v4.IListJobsRequest,
+          protos.google.cloud.talent.v4.IListJobsResponse|null|undefined,
+          protos.google.cloud.talent.v4.IJob>,
+      callback?: PaginationCallback<
+          protos.google.cloud.talent.v4.IListJobsRequest,
+          protos.google.cloud.talent.v4.IListJobsResponse|null|undefined,
+          protos.google.cloud.talent.v4.IJob>):
+      Promise<[
+        protos.google.cloud.talent.v4.IJob[],
+        protos.google.cloud.talent.v4.IListJobsRequest|null,
+        protos.google.cloud.talent.v4.IListJobsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.talent.v4.IListJobsRequest,
-          protos.google.cloud.talent.v4.IListJobsResponse | null | undefined,
-          protos.google.cloud.talent.v4.IJob
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.talent.v4.IListJobsRequest,
+      protos.google.cloud.talent.v4.IListJobsResponse|null|undefined,
+      protos.google.cloud.talent.v4.IJob>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2409,95 +2046,92 @@ export class JobServiceClient {
     this._log.info('listJobs request %j', request);
     return this.innerApiCalls
       .listJobs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.talent.v4.IJob[],
-          protos.google.cloud.talent.v4.IListJobsRequest | null,
-          protos.google.cloud.talent.v4.IListJobsResponse,
-        ]) => {
-          this._log.info('listJobs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.talent.v4.IJob[],
+        protos.google.cloud.talent.v4.IListJobsRequest|null,
+        protos.google.cloud.talent.v4.IListJobsResponse
+      ]) => {
+        this._log.info('listJobs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listJobs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the tenant under which the job is created.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-   *   "projects/foo/tenants/bar".
-   * @param {string} request.filter
-   *   Required. The filter string specifies the jobs to be enumerated.
-   *
-   *   Supported operator: =, AND
-   *
-   *   The fields eligible for filtering are:
-   *
-   *   * `companyName`
-   *   * `requisitionId`
-   *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
-   *   OPEN if no value is specified.
-   *
-   *   At least one of `companyName` and `requisitionId` must present or an
-   *   INVALID_ARGUMENT error is thrown.
-   *
-   *   Sample Query:
-   *
-   *   * companyName = "projects/foo/tenants/bar/companies/baz"
-   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
-   *   requisitionId = "req-1"
-   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
-   *   status = "EXPIRED"
-   *   * requisitionId = "req-1"
-   *   * requisitionId = "req-1" AND status = "EXPIRED"
-   * @param {string} request.pageToken
-   *   The starting point of a query result.
-   * @param {number} request.pageSize
-   *   The maximum number of jobs to be returned per page of results.
-   *
-   *   If {@link protos.google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
-   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
-   *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
-   *   size is 100.
-   *
-   *   Default is 100 if empty or a number < 1 is specified.
-   * @param {google.cloud.talent.v4.JobView} request.jobView
-   *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to
-   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
-   *   value is specified.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.talent.v4.Job|Job} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listJobs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the tenant under which the job is created.
+ *
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
+ * @param {string} request.filter
+ *   Required. The filter string specifies the jobs to be enumerated.
+ *
+ *   Supported operator: =, AND
+ *
+ *   The fields eligible for filtering are:
+ *
+ *   * `companyName`
+ *   * `requisitionId`
+ *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
+ *   OPEN if no value is specified.
+ *
+ *   At least one of `companyName` and `requisitionId` must present or an
+ *   INVALID_ARGUMENT error is thrown.
+ *
+ *   Sample Query:
+ *
+ *   * companyName = "projects/foo/tenants/bar/companies/baz"
+ *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
+ *   requisitionId = "req-1"
+ *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
+ *   status = "EXPIRED"
+ *   * requisitionId = "req-1"
+ *   * requisitionId = "req-1" AND status = "EXPIRED"
+ * @param {string} request.pageToken
+ *   The starting point of a query result.
+ * @param {number} request.pageSize
+ *   The maximum number of jobs to be returned per page of results.
+ *
+ *   If {@link protos.google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
+ *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
+ *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
+ *   size is 100.
+ *
+ *   Default is 100 if empty or a number < 1 is specified.
+ * @param {google.cloud.talent.v4.JobView} request.jobView
+ *   The desired job attributes returned for jobs in the
+ *   search response. Defaults to
+ *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
+ *   value is specified.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.talent.v4.Job|Job} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listJobsStream(
-    request?: protos.google.cloud.talent.v4.IListJobsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.talent.v4.IListJobsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
@@ -2506,86 +2140,85 @@ export class JobServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listJobs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the tenant under which the job is created.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-   *   "projects/foo/tenants/bar".
-   * @param {string} request.filter
-   *   Required. The filter string specifies the jobs to be enumerated.
-   *
-   *   Supported operator: =, AND
-   *
-   *   The fields eligible for filtering are:
-   *
-   *   * `companyName`
-   *   * `requisitionId`
-   *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
-   *   OPEN if no value is specified.
-   *
-   *   At least one of `companyName` and `requisitionId` must present or an
-   *   INVALID_ARGUMENT error is thrown.
-   *
-   *   Sample Query:
-   *
-   *   * companyName = "projects/foo/tenants/bar/companies/baz"
-   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
-   *   requisitionId = "req-1"
-   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
-   *   status = "EXPIRED"
-   *   * requisitionId = "req-1"
-   *   * requisitionId = "req-1" AND status = "EXPIRED"
-   * @param {string} request.pageToken
-   *   The starting point of a query result.
-   * @param {number} request.pageSize
-   *   The maximum number of jobs to be returned per page of results.
-   *
-   *   If {@link protos.google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
-   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
-   *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
-   *   size is 100.
-   *
-   *   Default is 100 if empty or a number < 1 is specified.
-   * @param {google.cloud.talent.v4.JobView} request.jobView
-   *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to
-   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
-   *   value is specified.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.talent.v4.Job|Job}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4/job_service.list_jobs.js</caption>
-   * region_tag:jobs_v4_generated_JobService_ListJobs_async
-   */
+/**
+ * Equivalent to `listJobs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the tenant under which the job is created.
+ *
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
+ * @param {string} request.filter
+ *   Required. The filter string specifies the jobs to be enumerated.
+ *
+ *   Supported operator: =, AND
+ *
+ *   The fields eligible for filtering are:
+ *
+ *   * `companyName`
+ *   * `requisitionId`
+ *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
+ *   OPEN if no value is specified.
+ *
+ *   At least one of `companyName` and `requisitionId` must present or an
+ *   INVALID_ARGUMENT error is thrown.
+ *
+ *   Sample Query:
+ *
+ *   * companyName = "projects/foo/tenants/bar/companies/baz"
+ *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
+ *   requisitionId = "req-1"
+ *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
+ *   status = "EXPIRED"
+ *   * requisitionId = "req-1"
+ *   * requisitionId = "req-1" AND status = "EXPIRED"
+ * @param {string} request.pageToken
+ *   The starting point of a query result.
+ * @param {number} request.pageSize
+ *   The maximum number of jobs to be returned per page of results.
+ *
+ *   If {@link protos.google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
+ *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
+ *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
+ *   size is 100.
+ *
+ *   Default is 100 if empty or a number < 1 is specified.
+ * @param {google.cloud.talent.v4.JobView} request.jobView
+ *   The desired job attributes returned for jobs in the
+ *   search response. Defaults to
+ *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
+ *   value is specified.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.talent.v4.Job|Job}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v4/job_service.list_jobs.js</caption>
+ * region_tag:jobs_v4_generated_JobService_ListJobs_async
+ */
   listJobsAsync(
-    request?: protos.google.cloud.talent.v4.IListJobsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.talent.v4.IJob> {
+      request?: protos.google.cloud.talent.v4.IListJobsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.talent.v4.IJob>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
@@ -2593,7 +2226,7 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.talent.v4.IJob>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2638,20 +2271,20 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2688,13 +2321,13 @@ export class JobServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2728,7 +2361,7 @@ export class JobServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2743,20 +2376,20 @@ export class JobServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2800,20 +2433,20 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2829,7 +2462,7 @@ export class JobServiceClient {
    * @param {string} company
    * @returns {string} Resource name string.
    */
-  companyPath(project: string, tenant: string, company: string) {
+  companyPath(project:string,tenant:string,company:string) {
     return this.pathTemplates.companyPathTemplate.render({
       project: project,
       tenant: tenant,
@@ -2878,7 +2511,7 @@ export class JobServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  jobPath(project: string, tenant: string, job: string) {
+  jobPath(project:string,tenant:string,job:string) {
     return this.pathTemplates.jobPathTemplate.render({
       project: project,
       tenant: tenant,
@@ -2925,7 +2558,7 @@ export class JobServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2949,7 +2582,7 @@ export class JobServiceClient {
    * @param {string} tenant
    * @returns {string} Resource name string.
    */
-  tenantPath(project: string, tenant: string) {
+  tenantPath(project:string,tenant:string) {
     return this.pathTemplates.tenantPathTemplate.render({
       project: project,
       tenant: tenant,

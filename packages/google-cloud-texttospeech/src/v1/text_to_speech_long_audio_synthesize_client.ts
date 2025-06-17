@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,42 +100,20 @@ export class TextToSpeechLongAudioSynthesizeClient {
    *     const client = new TextToSpeechLongAudioSynthesizeClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof TextToSpeechLongAudioSynthesizeClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof TextToSpeechLongAudioSynthesizeClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'texttospeech.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class TextToSpeechLongAudioSynthesizeClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -199,52 +173,35 @@ export class TextToSpeechLongAudioSynthesizeClient {
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const synthesizeLongAudioResponse = protoFilesRoot.lookup(
-      '.google.cloud.texttospeech.v1.SynthesizeLongAudioResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.texttospeech.v1.SynthesizeLongAudioResponse') as gax.protobuf.Type;
     const synthesizeLongAudioMetadata = protoFilesRoot.lookup(
-      '.google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       synthesizeLongAudio: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         synthesizeLongAudioResponse.decode.bind(synthesizeLongAudioResponse),
-        synthesizeLongAudioMetadata.decode.bind(synthesizeLongAudioMetadata)
-      ),
+        synthesizeLongAudioMetadata.decode.bind(synthesizeLongAudioMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -275,36 +232,32 @@ export class TextToSpeechLongAudioSynthesizeClient {
     // Put together the "service stub" for
     // google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize.
     this.textToSpeechLongAudioSynthesizeStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.texttospeech.v1
-            .TextToSpeechLongAudioSynthesize,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const textToSpeechLongAudioSynthesizeStubMethods = ['synthesizeLongAudio'];
+    const textToSpeechLongAudioSynthesizeStubMethods =
+        ['synthesizeLongAudio'];
     for (const methodName of textToSpeechLongAudioSynthesizeStubMethods) {
       const callPromise = this.textToSpeechLongAudioSynthesizeStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -324,14 +277,8 @@ export class TextToSpeechLongAudioSynthesizeClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'texttospeech.googleapis.com';
   }
@@ -342,14 +289,8 @@ export class TextToSpeechLongAudioSynthesizeClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'texttospeech.googleapis.com';
   }
@@ -380,7 +321,9 @@ export class TextToSpeechLongAudioSynthesizeClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -389,9 +332,8 @@ export class TextToSpeechLongAudioSynthesizeClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -403,187 +345,125 @@ export class TextToSpeechLongAudioSynthesizeClient {
   // -- Service calls --
   // -------------------
 
-  /**
-   * Synthesizes long form text asynchronously.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The resource states of the request in the form of
-   *   `projects/* /locations/*`.
-   * @param {google.cloud.texttospeech.v1.SynthesisInput} request.input
-   *   Required. The Synthesizer requires either plain text or SSML as input.
-   * @param {google.cloud.texttospeech.v1.AudioConfig} request.audioConfig
-   *   Required. The configuration of the synthesized audio.
-   * @param {string} request.outputGcsUri
-   *   Required. Specifies a Cloud Storage URI for the synthesis results. Must be
-   *   specified in the format: `gs://bucket_name/object_name`, and the bucket
-   *   must already exist.
-   * @param {google.cloud.texttospeech.v1.VoiceSelectionParams} request.voice
-   *   Required. The desired voice of the synthesized audio.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js</caption>
-   * region_tag:texttospeech_v1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_async
-   */
+/**
+ * Synthesizes long form text asynchronously.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The resource states of the request in the form of
+ *   `projects/* /locations/*`.
+ * @param {google.cloud.texttospeech.v1.SynthesisInput} request.input
+ *   Required. The Synthesizer requires either plain text or SSML as input.
+ * @param {google.cloud.texttospeech.v1.AudioConfig} request.audioConfig
+ *   Required. The configuration of the synthesized audio.
+ * @param {string} request.outputGcsUri
+ *   Required. Specifies a Cloud Storage URI for the synthesis results. Must be
+ *   specified in the format: `gs://bucket_name/object_name`, and the bucket
+ *   must already exist.
+ * @param {google.cloud.texttospeech.v1.VoiceSelectionParams} request.voice
+ *   Required. The desired voice of the synthesized audio.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js</caption>
+ * region_tag:texttospeech_v1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_async
+ */
   synthesizeLongAudio(
-    request?: protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse,
-        protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse, protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   synthesizeLongAudio(
-    request: protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse,
-        protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse, protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   synthesizeLongAudio(
-    request: protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse,
-        protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse, protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   synthesizeLongAudio(
-    request?: protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse,
-            protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse,
-        protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse,
-        protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse, protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse, protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse, protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse,
-            protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse, protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('synthesizeLongAudio response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('synthesizeLongAudio request %j', request);
-    return this.innerApiCalls
-      .synthesizeLongAudio(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse,
-            protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('synthesizeLongAudio response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.synthesizeLongAudio(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse, protos.google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('synthesizeLongAudio response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `synthesizeLongAudio()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js</caption>
-   * region_tag:texttospeech_v1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_async
-   */
-  async checkSynthesizeLongAudioProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.texttospeech.v1.SynthesizeLongAudioResponse,
-      protos.google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `synthesizeLongAudio()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js</caption>
+ * region_tag:texttospeech_v1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_async
+ */
+  async checkSynthesizeLongAudioProgress(name: string): Promise<LROperation<protos.google.cloud.texttospeech.v1.SynthesizeLongAudioResponse, protos.google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata>>{
     this._log.info('synthesizeLongAudio long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.synthesizeLongAudio,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.texttospeech.v1.SynthesizeLongAudioResponse,
-      protos.google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.synthesizeLongAudio, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.texttospeech.v1.SynthesizeLongAudioResponse, protos.google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -628,20 +508,20 @@ export class TextToSpeechLongAudioSynthesizeClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -678,13 +558,13 @@ export class TextToSpeechLongAudioSynthesizeClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -718,7 +598,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -733,20 +613,20 @@ export class TextToSpeechLongAudioSynthesizeClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -790,22 +670,23 @@ export class TextToSpeechLongAudioSynthesizeClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.

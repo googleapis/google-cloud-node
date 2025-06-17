@@ -78,7 +78,7 @@ export namespace google {
                     inputUri?: (string|null);
 
                     /** AnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|string|null);
+                    inputContent?: (Uint8Array|Buffer|string|null);
 
                     /** AnnotateVideoRequest features */
                     features?: (google.cloud.videointelligence.v1.Feature[]|null);
@@ -106,7 +106,7 @@ export namespace google {
                     public inputUri: string;
 
                     /** AnnotateVideoRequest inputContent. */
-                    public inputContent: (Uint8Array|string);
+                    public inputContent: (Uint8Array|Buffer|string);
 
                     /** AnnotateVideoRequest features. */
                     public features: google.cloud.videointelligence.v1.Feature[];
@@ -1975,7 +1975,7 @@ export namespace google {
                     tracks?: (google.cloud.videointelligence.v1.ITrack[]|null);
 
                     /** FaceDetectionAnnotation thumbnail */
-                    thumbnail?: (Uint8Array|string|null);
+                    thumbnail?: (Uint8Array|Buffer|string|null);
 
                     /** FaceDetectionAnnotation version */
                     version?: (string|null);
@@ -1994,7 +1994,7 @@ export namespace google {
                     public tracks: google.cloud.videointelligence.v1.ITrack[];
 
                     /** FaceDetectionAnnotation thumbnail. */
-                    public thumbnail: (Uint8Array|string);
+                    public thumbnail: (Uint8Array|Buffer|string);
 
                     /** FaceDetectionAnnotation version. */
                     public version: string;
@@ -2384,7 +2384,7 @@ export namespace google {
                 interface IFaceAnnotation {
 
                     /** FaceAnnotation thumbnail */
-                    thumbnail?: (Uint8Array|string|null);
+                    thumbnail?: (Uint8Array|Buffer|string|null);
 
                     /** FaceAnnotation segments */
                     segments?: (google.cloud.videointelligence.v1.IFaceSegment[]|null);
@@ -2403,7 +2403,7 @@ export namespace google {
                     constructor(properties?: google.cloud.videointelligence.v1.IFaceAnnotation);
 
                     /** FaceAnnotation thumbnail. */
-                    public thumbnail: (Uint8Array|string);
+                    public thumbnail: (Uint8Array|Buffer|string);
 
                     /** FaceAnnotation segments. */
                     public segments: google.cloud.videointelligence.v1.IFaceSegment[];
@@ -4945,7 +4945,7 @@ export namespace google {
                     inputUri?: (string|null);
 
                     /** AnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|string|null);
+                    inputContent?: (Uint8Array|Buffer|string|null);
 
                     /** AnnotateVideoRequest features */
                     features?: (google.cloud.videointelligence.v1beta2.Feature[]|null);
@@ -4973,7 +4973,7 @@ export namespace google {
                     public inputUri: string;
 
                     /** AnnotateVideoRequest inputContent. */
-                    public inputContent: (Uint8Array|string);
+                    public inputContent: (Uint8Array|Buffer|string);
 
                     /** AnnotateVideoRequest features. */
                     public features: google.cloud.videointelligence.v1beta2.Feature[];
@@ -6644,7 +6644,7 @@ export namespace google {
                 interface IFaceAnnotation {
 
                     /** FaceAnnotation thumbnail */
-                    thumbnail?: (Uint8Array|string|null);
+                    thumbnail?: (Uint8Array|Buffer|string|null);
 
                     /** FaceAnnotation segments */
                     segments?: (google.cloud.videointelligence.v1beta2.IFaceSegment[]|null);
@@ -6663,7 +6663,7 @@ export namespace google {
                     constructor(properties?: google.cloud.videointelligence.v1beta2.IFaceAnnotation);
 
                     /** FaceAnnotation thumbnail. */
-                    public thumbnail: (Uint8Array|string);
+                    public thumbnail: (Uint8Array|Buffer|string);
 
                     /** FaceAnnotation segments. */
                     public segments: google.cloud.videointelligence.v1beta2.IFaceSegment[];
@@ -7280,7 +7280,7 @@ export namespace google {
                     inputUri?: (string|null);
 
                     /** AnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|string|null);
+                    inputContent?: (Uint8Array|Buffer|string|null);
 
                     /** AnnotateVideoRequest features */
                     features?: (google.cloud.videointelligence.v1p1beta1.Feature[]|null);
@@ -7308,7 +7308,7 @@ export namespace google {
                     public inputUri: string;
 
                     /** AnnotateVideoRequest inputContent. */
-                    public inputContent: (Uint8Array|string);
+                    public inputContent: (Uint8Array|Buffer|string);
 
                     /** AnnotateVideoRequest features. */
                     public features: google.cloud.videointelligence.v1p1beta1.Feature[];
@@ -9627,7 +9627,7 @@ export namespace google {
                     inputUri?: (string|null);
 
                     /** AnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|string|null);
+                    inputContent?: (Uint8Array|Buffer|string|null);
 
                     /** AnnotateVideoRequest features */
                     features?: (google.cloud.videointelligence.v1p2beta1.Feature[]|null);
@@ -9655,7 +9655,7 @@ export namespace google {
                     public inputUri: string;
 
                     /** AnnotateVideoRequest inputContent. */
-                    public inputContent: (Uint8Array|string);
+                    public inputContent: (Uint8Array|Buffer|string);
 
                     /** AnnotateVideoRequest features. */
                     public features: google.cloud.videointelligence.v1p2beta1.Feature[];
@@ -12441,7 +12441,7 @@ export namespace google {
                     inputUri?: (string|null);
 
                     /** AnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|string|null);
+                    inputContent?: (Uint8Array|Buffer|string|null);
 
                     /** AnnotateVideoRequest features */
                     features?: (google.cloud.videointelligence.v1p3beta1.Feature[]|null);
@@ -12469,7 +12469,7 @@ export namespace google {
                     public inputUri: string;
 
                     /** AnnotateVideoRequest inputContent. */
-                    public inputContent: (Uint8Array|string);
+                    public inputContent: (Uint8Array|Buffer|string);
 
                     /** AnnotateVideoRequest features. */
                     public features: google.cloud.videointelligence.v1p3beta1.Feature[];
@@ -15202,7 +15202,7 @@ export namespace google {
                     tracks?: (google.cloud.videointelligence.v1p3beta1.ITrack[]|null);
 
                     /** FaceDetectionAnnotation thumbnail */
-                    thumbnail?: (Uint8Array|string|null);
+                    thumbnail?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a FaceDetectionAnnotation. */
@@ -15218,7 +15218,7 @@ export namespace google {
                     public tracks: google.cloud.videointelligence.v1p3beta1.ITrack[];
 
                     /** FaceDetectionAnnotation thumbnail. */
-                    public thumbnail: (Uint8Array|string);
+                    public thumbnail: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new FaceDetectionAnnotation instance using the specified properties.
@@ -17342,7 +17342,7 @@ export namespace google {
                     videoConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig|null);
 
                     /** StreamingAnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|string|null);
+                    inputContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a StreamingAnnotateVideoRequest. */
@@ -17358,7 +17358,7 @@ export namespace google {
                     public videoConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig|null);
 
                     /** StreamingAnnotateVideoRequest inputContent. */
-                    public inputContent?: (Uint8Array|string|null);
+                    public inputContent?: (Uint8Array|Buffer|string|null);
 
                     /** StreamingAnnotateVideoRequest streamingRequest. */
                     public streamingRequest?: ("videoConfig"|"inputContent");
@@ -19235,6 +19235,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -19275,6 +19278,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -23232,6 +23238,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -23483,7 +23492,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -23514,7 +23523,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -24653,7 +24662,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -24669,7 +24678,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

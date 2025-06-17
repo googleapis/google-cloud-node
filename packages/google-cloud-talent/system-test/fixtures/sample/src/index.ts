@@ -16,13 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  CompanyServiceClient,
-  CompletionClient,
-  EventServiceClient,
-  JobServiceClient,
-  TenantServiceClient,
-} from '@google-cloud/talent';
+import {CompanyServiceClient, CompletionClient, EventServiceClient, JobServiceClient, TenantServiceClient} from '@google-cloud/talent';
 
 // check that the client class type name can be used
 function doStuffWithCompanyServiceClient(client: CompanyServiceClient) {

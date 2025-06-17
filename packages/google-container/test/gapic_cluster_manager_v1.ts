@@ -29,7335 +29,5493 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.ClusterManagerClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'container.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          clustermanagerModule.v1.ClusterManagerClient.servicePath;
-        assert.strictEqual(servicePath, 'container.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          clustermanagerModule.v1.ClusterManagerClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'container.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'container.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'container.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new clustermanagerModule.v1.ClusterManagerClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'container.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'container.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new clustermanagerModule.v1.ClusterManagerClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'container.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new clustermanagerModule.v1.ClusterManagerClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = clustermanagerModule.v1.ClusterManagerClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.clusterManagerStub, undefined);
-      await client.initialize();
-      assert(client.clusterManagerStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.clusterManagerStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.clusterManagerStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('listClusters', () => {
-    it('invokes listClusters without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.ListClustersResponse()
-      );
-      client.innerApiCalls.listClusters = stubSimpleCall(expectedResponse);
-      const [response] = await client.listClusters(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClusters without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.ListClustersResponse()
-      );
-      client.innerApiCalls.listClusters =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listClusters(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IListClustersResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClusters with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listClusters = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listClusters(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClusters with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListClustersRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.listClusters(request), expectedError);
-    });
-  });
-
-  describe('getCluster', () => {
-    it('invokes getCluster without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Cluster()
-      );
-      client.innerApiCalls.getCluster = stubSimpleCall(expectedResponse);
-      const [response] = await client.getCluster(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Cluster()
-      );
-      client.innerApiCalls.getCluster =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.ICluster | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getCluster = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getCluster(request), expectedError);
-    });
-  });
-
-  describe('createCluster', () => {
-    it('invokes createCluster without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.createCluster = stubSimpleCall(expectedResponse);
-      const [response] = await client.createCluster(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.createCluster =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createCluster = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CreateClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createCluster(request), expectedError);
-    });
-  });
-
-  describe('updateCluster', () => {
-    it('invokes updateCluster without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.updateCluster = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateCluster(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.updateCluster =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCluster = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateCluster(request), expectedError);
-    });
-  });
-
-  describe('updateNodePool', () => {
-    it('invokes updateNodePool without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.updateNodePool = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateNodePool(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNodePool without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.updateNodePool =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNodePool with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateNodePool = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNodePool with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.UpdateNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateNodePool(request), expectedError);
-    });
-  });
-
-  describe('setNodePoolAutoscaling', () => {
-    it('invokes setNodePoolAutoscaling without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolAutoscalingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setNodePoolAutoscaling =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.setNodePoolAutoscaling(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setNodePoolAutoscaling as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNodePoolAutoscaling as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNodePoolAutoscaling without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolAutoscalingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setNodePoolAutoscaling =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setNodePoolAutoscaling(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setNodePoolAutoscaling as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNodePoolAutoscaling as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNodePoolAutoscaling with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolAutoscalingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setNodePoolAutoscaling = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.setNodePoolAutoscaling(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.setNodePoolAutoscaling as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNodePoolAutoscaling as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNodePoolAutoscaling with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolAutoscalingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolAutoscalingRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.setNodePoolAutoscaling(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('setLoggingService', () => {
-    it('invokes setLoggingService without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLoggingServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setLoggingService = stubSimpleCall(expectedResponse);
-      const [response] = await client.setLoggingService(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setLoggingService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLoggingService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLoggingService without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLoggingServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setLoggingService =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setLoggingService(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setLoggingService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLoggingService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLoggingService with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLoggingServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setLoggingService = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setLoggingService(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setLoggingService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLoggingService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLoggingService with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLoggingServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLoggingServiceRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setLoggingService(request), expectedError);
-    });
-  });
-
-  describe('setMonitoringService', () => {
-    it('invokes setMonitoringService without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMonitoringServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setMonitoringService =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.setMonitoringService(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setMonitoringService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMonitoringService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMonitoringService without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMonitoringServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setMonitoringService =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setMonitoringService(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setMonitoringService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMonitoringService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMonitoringService with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMonitoringServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setMonitoringService = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setMonitoringService(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setMonitoringService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMonitoringService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMonitoringService with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMonitoringServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMonitoringServiceRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setMonitoringService(request), expectedError);
-    });
-  });
-
-  describe('setAddonsConfig', () => {
-    it('invokes setAddonsConfig without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetAddonsConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setAddonsConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.setAddonsConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setAddonsConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setAddonsConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setAddonsConfig without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetAddonsConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setAddonsConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setAddonsConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setAddonsConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setAddonsConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setAddonsConfig with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetAddonsConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setAddonsConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setAddonsConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setAddonsConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setAddonsConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setAddonsConfig with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetAddonsConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetAddonsConfigRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setAddonsConfig(request), expectedError);
-    });
-  });
-
-  describe('setLocations', () => {
-    it('invokes setLocations without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLocationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setLocations = stubSimpleCall(expectedResponse);
-      const [response] = await client.setLocations(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setLocations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLocations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLocations without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLocationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setLocations =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setLocations(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setLocations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLocations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLocations with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLocationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setLocations = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setLocations(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.setLocations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLocations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLocations with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLocationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLocationsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setLocations(request), expectedError);
-      assert(stub.calledOnce);
-    });
-  });
-
-  describe('updateMaster', () => {
-    it('invokes updateMaster without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateMasterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.updateMaster = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateMaster(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateMaster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateMaster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateMaster without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateMasterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.updateMaster =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateMaster(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateMaster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateMaster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateMaster with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateMasterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateMaster = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateMaster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateMaster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateMaster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateMaster with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.UpdateMasterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.UpdateMasterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateMaster(request), expectedError);
-    });
-  });
-
-  describe('setMasterAuth', () => {
-    it('invokes setMasterAuth without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMasterAuthRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setMasterAuth = stubSimpleCall(expectedResponse);
-      const [response] = await client.setMasterAuth(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setMasterAuth as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMasterAuth as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMasterAuth without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMasterAuthRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setMasterAuth =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setMasterAuth(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setMasterAuth as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMasterAuth as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMasterAuth with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMasterAuthRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setMasterAuth = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setMasterAuth(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setMasterAuth as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMasterAuth as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMasterAuth with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMasterAuthRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMasterAuthRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setMasterAuth(request), expectedError);
-    });
-  });
-
-  describe('deleteCluster', () => {
-    it('invokes deleteCluster without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.deleteCluster = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteCluster(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.deleteCluster =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteCluster = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.DeleteClusterRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteCluster(request), expectedError);
-    });
-  });
-
-  describe('listOperations', () => {
-    it('invokes listOperations without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListOperationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.ListOperationsResponse()
-      );
-      client.innerApiCalls.listOperations = stubSimpleCall(expectedResponse);
-      const [response] = await client.listOperations(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOperations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOperations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOperations without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListOperationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.ListOperationsResponse()
-      );
-      client.innerApiCalls.listOperations =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listOperations(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IListOperationsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOperations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOperations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOperations with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListOperationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listOperations = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listOperations(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listOperations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOperations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOperations with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListOperationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListOperationsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.listOperations(request), expectedError);
-    });
-  });
-
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetOperationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['operationId']
-      );
-      request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.getOperation = stubSimpleCall(expectedResponse);
-      const [response] = await client.getOperation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getOperation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOperation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOperation without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetOperationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['operationId']
-      );
-      request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.getOperation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getOperation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getOperation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOperation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOperation with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetOperationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['operationId']
-      );
-      request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getOperation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getOperation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOperation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOperation with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetOperationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetOperationRequest',
-        ['operationId']
-      );
-      request.operationId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getOperation(request), expectedError);
-    });
-  });
-
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CancelOperationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['operationId']
-      );
-      request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.cancelOperation = stubSimpleCall(expectedResponse);
-      const [response] = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.cancelOperation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelOperation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CancelOperationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['operationId']
-      );
-      request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.cancelOperation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.cancelOperation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.cancelOperation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelOperation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelOperation with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CancelOperationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['operationId']
-      );
-      request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.cancelOperation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.cancelOperation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelOperation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelOperation with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CancelOperationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CancelOperationRequest',
-        ['operationId']
-      );
-      request.operationId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.cancelOperation(request), expectedError);
-    });
-  });
-
-  describe('getServerConfig', () => {
-    it('invokes getServerConfig without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.ServerConfig()
-      );
-      client.innerApiCalls.getServerConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.getServerConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServerConfig without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.ServerConfig()
-      );
-      client.innerApiCalls.getServerConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getServerConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IServerConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServerConfig with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getServerConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getServerConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServerConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServerConfig with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetServerConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetServerConfigRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getServerConfig(request), expectedError);
-    });
-  });
-
-  describe('getJSONWebKeys', () => {
-    it('invokes getJSONWebKeys without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetJSONWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetJSONWebKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.GetJSONWebKeysResponse()
-      );
-      client.innerApiCalls.getJsonWebKeys = stubSimpleCall(expectedResponse);
-      const [response] = await client.getJSONWebKeys(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJSONWebKeys without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetJSONWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetJSONWebKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.GetJSONWebKeysResponse()
-      );
-      client.innerApiCalls.getJsonWebKeys =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getJSONWebKeys(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IGetJSONWebKeysResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJSONWebKeys with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetJSONWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetJSONWebKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getJsonWebKeys = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getJSONWebKeys(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJSONWebKeys with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetJSONWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetJSONWebKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getJSONWebKeys(request), expectedError);
-    });
-  });
-
-  describe('listNodePools', () => {
-    it('invokes listNodePools without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.ListNodePoolsResponse()
-      );
-      client.innerApiCalls.listNodePools = stubSimpleCall(expectedResponse);
-      const [response] = await client.listNodePools(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNodePools without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.ListNodePoolsResponse()
-      );
-      client.innerApiCalls.listNodePools =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listNodePools(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IListNodePoolsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNodePools with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listNodePools = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listNodePools(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNodePools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNodePools with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListNodePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.ListNodePoolsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.listNodePools(request), expectedError);
-    });
-  });
-
-  describe('getNodePool', () => {
-    it('invokes getNodePool without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.NodePool()
-      );
-      client.innerApiCalls.getNodePool = stubSimpleCall(expectedResponse);
-      const [response] = await client.getNodePool(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNodePool without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.NodePool()
-      );
-      client.innerApiCalls.getNodePool =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.INodePool | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNodePool with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getNodePool = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNodePool with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.GetNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.GetNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getNodePool(request), expectedError);
-    });
-  });
-
-  describe('createNodePool', () => {
-    it('invokes createNodePool without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CreateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.createNodePool = stubSimpleCall(expectedResponse);
-      const [response] = await client.createNodePool(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNodePool without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CreateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.createNodePool =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNodePool with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CreateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createNodePool = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNodePool with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CreateNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CreateNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createNodePool(request), expectedError);
-    });
-  });
-
-  describe('deleteNodePool', () => {
-    it('invokes deleteNodePool without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.DeleteNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.deleteNodePool = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteNodePool(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNodePool without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.DeleteNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.deleteNodePool =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteNodePool(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNodePool with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.DeleteNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteNodePool = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteNodePool(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNodePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNodePool with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.DeleteNodePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.DeleteNodePoolRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteNodePool(request), expectedError);
-    });
-  });
-
-  describe('completeNodePoolUpgrade', () => {
-    it('invokes completeNodePoolUpgrade without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CompleteNodePoolUpgradeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.completeNodePoolUpgrade =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.completeNodePoolUpgrade(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.completeNodePoolUpgrade as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.completeNodePoolUpgrade as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes completeNodePoolUpgrade without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CompleteNodePoolUpgradeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.completeNodePoolUpgrade =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.completeNodePoolUpgrade(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.completeNodePoolUpgrade as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.completeNodePoolUpgrade as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes completeNodePoolUpgrade with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CompleteNodePoolUpgradeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.completeNodePoolUpgrade = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.completeNodePoolUpgrade(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.completeNodePoolUpgrade as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.completeNodePoolUpgrade as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes completeNodePoolUpgrade with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CompleteNodePoolUpgradeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.completeNodePoolUpgrade(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('rollbackNodePoolUpgrade', () => {
-    it('invokes rollbackNodePoolUpgrade without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.rollbackNodePoolUpgrade =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.rollbackNodePoolUpgrade(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rollbackNodePoolUpgrade without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.rollbackNodePoolUpgrade =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.rollbackNodePoolUpgrade(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rollbackNodePoolUpgrade with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.rollbackNodePoolUpgrade = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.rollbackNodePoolUpgrade(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rollbackNodePoolUpgrade with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.RollbackNodePoolUpgradeRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.rollbackNodePoolUpgrade(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('setNodePoolManagement', () => {
-    it('invokes setNodePoolManagement without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolManagementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setNodePoolManagement =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.setNodePoolManagement(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setNodePoolManagement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNodePoolManagement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNodePoolManagement without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolManagementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setNodePoolManagement =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setNodePoolManagement(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setNodePoolManagement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNodePoolManagement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNodePoolManagement with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolManagementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setNodePoolManagement = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.setNodePoolManagement(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.setNodePoolManagement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNodePoolManagement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNodePoolManagement with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolManagementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolManagementRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.setNodePoolManagement(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('setLabels', () => {
-    it('invokes setLabels without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setLabels = stubSimpleCall(expectedResponse);
-      const [response] = await client.setLabels(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setLabels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLabels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLabels without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setLabels =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setLabels(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setLabels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLabels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLabels with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.setLabels(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setLabels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLabels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLabels with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLabelsRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setLabels(request), expectedError);
-    });
-  });
-
-  describe('setLegacyAbac', () => {
-    it('invokes setLegacyAbac without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLegacyAbacRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setLegacyAbac = stubSimpleCall(expectedResponse);
-      const [response] = await client.setLegacyAbac(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setLegacyAbac as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLegacyAbac as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLegacyAbac without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLegacyAbacRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setLegacyAbac =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setLegacyAbac(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setLegacyAbac as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLegacyAbac as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLegacyAbac with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLegacyAbacRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setLegacyAbac = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setLegacyAbac(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setLegacyAbac as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setLegacyAbac as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setLegacyAbac with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetLegacyAbacRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetLegacyAbacRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setLegacyAbac(request), expectedError);
-    });
-  });
-
-  describe('startIPRotation', () => {
-    it('invokes startIPRotation without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.StartIPRotationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.startIpRotation = stubSimpleCall(expectedResponse);
-      const [response] = await client.startIPRotation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.startIpRotation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startIpRotation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startIPRotation without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.StartIPRotationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.startIpRotation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.startIPRotation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.startIpRotation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startIpRotation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startIPRotation with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.StartIPRotationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.startIpRotation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.startIPRotation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.startIpRotation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startIpRotation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startIPRotation with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.StartIPRotationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.StartIPRotationRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.startIPRotation(request), expectedError);
-    });
-  });
-
-  describe('completeIPRotation', () => {
-    it('invokes completeIPRotation without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CompleteIPRotationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.completeIpRotation =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.completeIPRotation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.completeIpRotation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.completeIpRotation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes completeIPRotation without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CompleteIPRotationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.completeIpRotation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.completeIPRotation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.completeIpRotation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.completeIpRotation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes completeIPRotation with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CompleteIPRotationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.completeIpRotation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.completeIPRotation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.completeIpRotation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.completeIpRotation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes completeIPRotation with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CompleteIPRotationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.CompleteIPRotationRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.completeIPRotation(request), expectedError);
-    });
-  });
-
-  describe('setNodePoolSize', () => {
-    it('invokes setNodePoolSize without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolSizeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setNodePoolSize = stubSimpleCall(expectedResponse);
-      const [response] = await client.setNodePoolSize(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setNodePoolSize as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNodePoolSize as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNodePoolSize without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolSizeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setNodePoolSize =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setNodePoolSize(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setNodePoolSize as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNodePoolSize as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNodePoolSize with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolSizeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setNodePoolSize = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setNodePoolSize(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setNodePoolSize as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNodePoolSize as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNodePoolSize with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNodePoolSizeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue(
-        '.google.container.v1.SetNodePoolSizeRequest',
-        ['nodePoolId']
-      );
-      request.nodePoolId = defaultValue5;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setNodePoolSize(request), expectedError);
-    });
-  });
-
-  describe('setNetworkPolicy', () => {
-    it('invokes setNetworkPolicy without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNetworkPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setNetworkPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.setNetworkPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setNetworkPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNetworkPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNetworkPolicy without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNetworkPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setNetworkPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setNetworkPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setNetworkPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNetworkPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNetworkPolicy with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNetworkPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setNetworkPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setNetworkPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setNetworkPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setNetworkPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setNetworkPolicy with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetNetworkPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetNetworkPolicyRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setNetworkPolicy(request), expectedError);
-    });
-  });
-
-  describe('setMaintenancePolicy', () => {
-    it('invokes setMaintenancePolicy without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMaintenancePolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setMaintenancePolicy =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.setMaintenancePolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setMaintenancePolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMaintenancePolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMaintenancePolicy without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMaintenancePolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.Operation()
-      );
-      client.innerApiCalls.setMaintenancePolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setMaintenancePolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setMaintenancePolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMaintenancePolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMaintenancePolicy with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMaintenancePolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setMaintenancePolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setMaintenancePolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setMaintenancePolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setMaintenancePolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setMaintenancePolicy with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.SetMaintenancePolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['zone']
-      );
-      request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.container.v1.SetMaintenancePolicyRequest',
-        ['clusterId']
-      );
-      request.clusterId = defaultValue4;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setMaintenancePolicy(request), expectedError);
-    });
-  });
-
-  describe('checkAutopilotCompatibility', () => {
-    it('invokes checkAutopilotCompatibility without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CheckAutopilotCompatibilityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.CheckAutopilotCompatibilityResponse()
-      );
-      client.innerApiCalls.checkAutopilotCompatibility =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.checkAutopilotCompatibility(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkAutopilotCompatibility without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CheckAutopilotCompatibilityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.CheckAutopilotCompatibilityResponse()
-      );
-      client.innerApiCalls.checkAutopilotCompatibility =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.checkAutopilotCompatibility(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.ICheckAutopilotCompatibilityResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkAutopilotCompatibility with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CheckAutopilotCompatibilityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.checkAutopilotCompatibility = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkAutopilotCompatibility(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkAutopilotCompatibility with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.CheckAutopilotCompatibilityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.checkAutopilotCompatibility(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('fetchClusterUpgradeInfo', () => {
-    it('invokes fetchClusterUpgradeInfo without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.FetchClusterUpgradeInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.FetchClusterUpgradeInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.ClusterUpgradeInfo()
-      );
-      client.innerApiCalls.fetchClusterUpgradeInfo =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchClusterUpgradeInfo(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchClusterUpgradeInfo without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.FetchClusterUpgradeInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.FetchClusterUpgradeInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.ClusterUpgradeInfo()
-      );
-      client.innerApiCalls.fetchClusterUpgradeInfo =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.fetchClusterUpgradeInfo(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IClusterUpgradeInfo | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchClusterUpgradeInfo with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.FetchClusterUpgradeInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.FetchClusterUpgradeInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.fetchClusterUpgradeInfo = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.fetchClusterUpgradeInfo(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchClusterUpgradeInfo with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.FetchClusterUpgradeInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.FetchClusterUpgradeInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.fetchClusterUpgradeInfo(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('fetchNodePoolUpgradeInfo', () => {
-    it('invokes fetchNodePoolUpgradeInfo without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.FetchNodePoolUpgradeInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.FetchNodePoolUpgradeInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.NodePoolUpgradeInfo()
-      );
-      client.innerApiCalls.fetchNodePoolUpgradeInfo =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchNodePoolUpgradeInfo(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchNodePoolUpgradeInfo without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.FetchNodePoolUpgradeInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.FetchNodePoolUpgradeInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1.NodePoolUpgradeInfo()
-      );
-      client.innerApiCalls.fetchNodePoolUpgradeInfo =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.fetchNodePoolUpgradeInfo(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.INodePoolUpgradeInfo | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchNodePoolUpgradeInfo with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.FetchNodePoolUpgradeInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.FetchNodePoolUpgradeInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.fetchNodePoolUpgradeInfo = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.fetchNodePoolUpgradeInfo(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchNodePoolUpgradeInfo with closed client', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.FetchNodePoolUpgradeInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.FetchNodePoolUpgradeInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.fetchNodePoolUpgradeInfo(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('listUsableSubnetworks', () => {
-    it('invokes listUsableSubnetworks without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListUsableSubnetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-      ];
-      client.innerApiCalls.listUsableSubnetworks =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listUsableSubnetworks(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listUsableSubnetworks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUsableSubnetworks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listUsableSubnetworks without error using callback', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListUsableSubnetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-      ];
-      client.innerApiCalls.listUsableSubnetworks =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listUsableSubnetworks(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1.IUsableSubnetwork[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listUsableSubnetworks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUsableSubnetworks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listUsableSubnetworks with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListUsableSubnetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listUsableSubnetworks = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listUsableSubnetworks(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listUsableSubnetworks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUsableSubnetworks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listUsableSubnetworksStream without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListUsableSubnetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-      ];
-      client.descriptors.page.listUsableSubnetworks.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listUsableSubnetworksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.container.v1.UsableSubnetwork[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.container.v1.UsableSubnetwork) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listUsableSubnetworks
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listUsableSubnetworks, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listUsableSubnetworks
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listUsableSubnetworksStream with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListUsableSubnetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listUsableSubnetworks.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listUsableSubnetworksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.container.v1.UsableSubnetwork[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.container.v1.UsableSubnetwork) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listUsableSubnetworks
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listUsableSubnetworks, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listUsableSubnetworks
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listUsableSubnetworks without error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListUsableSubnetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-        generateSampleMessage(
-          new protos.google.container.v1.UsableSubnetwork()
-        ),
-      ];
-      client.descriptors.page.listUsableSubnetworks.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.container.v1.IUsableSubnetwork[] = [];
-      const iterable = client.listUsableSubnetworksAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listUsableSubnetworks
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listUsableSubnetworks
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listUsableSubnetworks with error', async () => {
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1.ListUsableSubnetworksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1.ListUsableSubnetworksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listUsableSubnetworks.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listUsableSubnetworksAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.container.v1.IUsableSubnetwork[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = clustermanagerModule.v1.ClusterManagerClient.servicePath;
+                assert.strictEqual(servicePath, 'container.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = clustermanagerModule.v1.ClusterManagerClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'container.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listUsableSubnetworks
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listUsableSubnetworks
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'container.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'container.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new clustermanagerModule.v1.ClusterManagerClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'container.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new clustermanagerModule.v1.ClusterManagerClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'container.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new clustermanagerModule.v1.ClusterManagerClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = clustermanagerModule.v1.ClusterManagerClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.clusterManagerStub, undefined);
+            await client.initialize();
+            assert(client.clusterManagerStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.clusterManagerStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.clusterManagerStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
 
-  describe('Path templates', () => {
-    describe('caPool', async () => {
-      const fakePath = '/rendered/path/caPool';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        ca_pool: 'caPoolValue',
-      };
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.caPoolPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.caPoolPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('listClusters', () => {
+        it('invokes listClusters without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.ListClustersResponse()
+            );
+            client.innerApiCalls.listClusters = stubSimpleCall(expectedResponse);
+            const [response] = await client.listClusters(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('caPoolPath', () => {
-        const result = client.caPoolPath(
-          'projectValue',
-          'locationValue',
-          'caPoolValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.caPoolPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes listClusters without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.ListClustersResponse()
+            );
+            client.innerApiCalls.listClusters = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listClusters(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IListClustersResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromCaPoolName', () => {
-        const result = client.matchProjectFromCaPoolName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listClusters with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listClusters = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listClusters(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromCaPoolName', () => {
-        const result = client.matchLocationFromCaPoolName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCaPoolFromCaPoolName', () => {
-        const result = client.matchCaPoolFromCaPoolName(fakePath);
-        assert.strictEqual(result, 'caPoolValue');
-        assert(
-          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listClusters with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListClustersRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.listClusters(request), expectedError);
+        });
     });
 
-    describe('cryptoKeyVersion', async () => {
-      const fakePath = '/rendered/path/cryptoKeyVersion';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-        crypto_key: 'cryptoKeyValue',
-        crypto_key_version: 'cryptoKeyVersionValue',
-      };
-      const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cryptoKeyVersionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getCluster', () => {
+        it('invokes getCluster without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Cluster()
+            );
+            client.innerApiCalls.getCluster = stubSimpleCall(expectedResponse);
+            const [response] = await client.getCluster(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('cryptoKeyVersionPath', () => {
-        const result = client.cryptoKeyVersionPath(
-          'projectValue',
-          'locationValue',
-          'keyRingValue',
-          'cryptoKeyValue',
-          'cryptoKeyVersionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.cryptoKeyVersionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getCluster without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Cluster()
+            );
+            client.innerApiCalls.getCluster = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getCluster(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.ICluster|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromCryptoKeyVersionName', () => {
-        const result = client.matchProjectFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getCluster with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getCluster = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromCryptoKeyVersionName', () => {
-        const result = client.matchLocationFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyRingFromCryptoKeyVersionName', () => {
-        const result = client.matchKeyRingFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyFromCryptoKeyVersionName', () => {
-        const result = client.matchCryptoKeyFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyVersionFromCryptoKeyVersionName', () => {
-        const result =
-          client.matchCryptoKeyVersionFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyVersionValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getCluster with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getCluster(request), expectedError);
+        });
     });
-  });
+
+    describe('createCluster', () => {
+        it('invokes createCluster without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.createCluster = stubSimpleCall(expectedResponse);
+            const [response] = await client.createCluster(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.createCluster = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createCluster(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCluster = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CreateClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createCluster(request), expectedError);
+        });
+    });
+
+    describe('updateCluster', () => {
+        it('invokes updateCluster without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.updateCluster = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateCluster(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.updateCluster = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCluster(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCluster = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateCluster(request), expectedError);
+        });
+    });
+
+    describe('updateNodePool', () => {
+        it('invokes updateNodePool without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.updateNodePool = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateNodePool(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNodePool without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.updateNodePool = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateNodePool(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNodePool with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateNodePool = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNodePool with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.UpdateNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateNodePool(request), expectedError);
+        });
+    });
+
+    describe('setNodePoolAutoscaling', () => {
+        it('invokes setNodePoolAutoscaling without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolAutoscalingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setNodePoolAutoscaling = stubSimpleCall(expectedResponse);
+            const [response] = await client.setNodePoolAutoscaling(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setNodePoolAutoscaling as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNodePoolAutoscaling as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNodePoolAutoscaling without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolAutoscalingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setNodePoolAutoscaling = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setNodePoolAutoscaling(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setNodePoolAutoscaling as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNodePoolAutoscaling as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNodePoolAutoscaling with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolAutoscalingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setNodePoolAutoscaling = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setNodePoolAutoscaling(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setNodePoolAutoscaling as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNodePoolAutoscaling as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNodePoolAutoscaling with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolAutoscalingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolAutoscalingRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setNodePoolAutoscaling(request), expectedError);
+        });
+    });
+
+    describe('setLoggingService', () => {
+        it('invokes setLoggingService without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLoggingServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setLoggingService = stubSimpleCall(expectedResponse);
+            const [response] = await client.setLoggingService(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setLoggingService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLoggingService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLoggingService without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLoggingServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setLoggingService = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setLoggingService(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setLoggingService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLoggingService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLoggingService with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLoggingServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setLoggingService = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setLoggingService(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setLoggingService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLoggingService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLoggingService with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLoggingServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLoggingServiceRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setLoggingService(request), expectedError);
+        });
+    });
+
+    describe('setMonitoringService', () => {
+        it('invokes setMonitoringService without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMonitoringServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setMonitoringService = stubSimpleCall(expectedResponse);
+            const [response] = await client.setMonitoringService(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setMonitoringService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMonitoringService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMonitoringService without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMonitoringServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setMonitoringService = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setMonitoringService(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setMonitoringService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMonitoringService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMonitoringService with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMonitoringServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setMonitoringService = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setMonitoringService(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setMonitoringService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMonitoringService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMonitoringService with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMonitoringServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMonitoringServiceRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setMonitoringService(request), expectedError);
+        });
+    });
+
+    describe('setAddonsConfig', () => {
+        it('invokes setAddonsConfig without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetAddonsConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setAddonsConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.setAddonsConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setAddonsConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setAddonsConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setAddonsConfig without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetAddonsConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setAddonsConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setAddonsConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setAddonsConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setAddonsConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setAddonsConfig with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetAddonsConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setAddonsConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setAddonsConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setAddonsConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setAddonsConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setAddonsConfig with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetAddonsConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetAddonsConfigRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setAddonsConfig(request), expectedError);
+        });
+    });
+
+    describe('setLocations', () => {
+        it('invokes setLocations without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLocationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setLocations = stubSimpleCall(expectedResponse);
+            const [response] = await client.setLocations(request);
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setLocations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLocations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLocations without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLocationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setLocations = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setLocations(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert(stub.calledOnce);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setLocations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLocations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLocations with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLocationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setLocations = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setLocations(request), expectedError);
+            assert(stub.calledOnce);
+            const actualRequest = (client.innerApiCalls.setLocations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLocations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLocations with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const stub = sinon.stub(client, 'warn');
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLocationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLocationsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setLocations(request), expectedError);
+            assert(stub.calledOnce);
+        });
+    });
+
+    describe('updateMaster', () => {
+        it('invokes updateMaster without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateMasterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.updateMaster = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateMaster(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMaster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMaster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMaster without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateMasterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.updateMaster = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateMaster(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMaster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMaster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMaster with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateMasterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateMaster = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateMaster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateMaster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMaster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMaster with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.UpdateMasterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.UpdateMasterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateMaster(request), expectedError);
+        });
+    });
+
+    describe('setMasterAuth', () => {
+        it('invokes setMasterAuth without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMasterAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setMasterAuth = stubSimpleCall(expectedResponse);
+            const [response] = await client.setMasterAuth(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setMasterAuth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMasterAuth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMasterAuth without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMasterAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setMasterAuth = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setMasterAuth(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setMasterAuth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMasterAuth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMasterAuth with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMasterAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setMasterAuth = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setMasterAuth(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setMasterAuth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMasterAuth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMasterAuth with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMasterAuthRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMasterAuthRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setMasterAuth(request), expectedError);
+        });
+    });
+
+    describe('deleteCluster', () => {
+        it('invokes deleteCluster without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.deleteCluster = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteCluster(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.deleteCluster = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteCluster(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCluster = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.DeleteClusterRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteCluster(request), expectedError);
+        });
+    });
+
+    describe('listOperations', () => {
+        it('invokes listOperations without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListOperationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.ListOperationsResponse()
+            );
+            client.innerApiCalls.listOperations = stubSimpleCall(expectedResponse);
+            const [response] = await client.listOperations(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOperations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOperations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOperations without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListOperationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.ListOperationsResponse()
+            );
+            client.innerApiCalls.listOperations = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listOperations(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IListOperationsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOperations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOperations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOperations with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListOperationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listOperations = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listOperations(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listOperations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOperations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOperations with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListOperationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListOperationsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.listOperations(request), expectedError);
+        });
+    });
+
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['operationId']);
+            request.operationId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&operation_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.getOperation = stubSimpleCall(expectedResponse);
+            const [response] = await client.getOperation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOperation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOperation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOperation without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['operationId']);
+            request.operationId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&operation_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.getOperation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getOperation(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOperation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOperation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOperation with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['operationId']);
+            request.operationId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&operation_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getOperation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getOperation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOperation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOperation with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetOperationRequest', ['operationId']);
+            request.operationId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getOperation(request), expectedError);
+        });
+    });
+
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CancelOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['operationId']);
+            request.operationId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&operation_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.cancelOperation = stubSimpleCall(expectedResponse);
+            const [response] = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelOperation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelOperation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CancelOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['operationId']);
+            request.operationId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&operation_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.cancelOperation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.cancelOperation(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelOperation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelOperation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelOperation with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CancelOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['operationId']);
+            request.operationId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&operation_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.cancelOperation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.cancelOperation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelOperation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelOperation with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CancelOperationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CancelOperationRequest', ['operationId']);
+            request.operationId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.cancelOperation(request), expectedError);
+        });
+    });
+
+    describe('getServerConfig', () => {
+        it('invokes getServerConfig without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.ServerConfig()
+            );
+            client.innerApiCalls.getServerConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getServerConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServerConfig without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.ServerConfig()
+            );
+            client.innerApiCalls.getServerConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getServerConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IServerConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServerConfig with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getServerConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getServerConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServerConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServerConfig with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetServerConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetServerConfigRequest', ['zone']);
+            request.zone = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getServerConfig(request), expectedError);
+        });
+    });
+
+    describe('getJSONWebKeys', () => {
+        it('invokes getJSONWebKeys without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetJSONWebKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetJSONWebKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.GetJSONWebKeysResponse()
+            );
+            client.innerApiCalls.getJsonWebKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.getJSONWebKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJsonWebKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJsonWebKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJSONWebKeys without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetJSONWebKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetJSONWebKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.GetJSONWebKeysResponse()
+            );
+            client.innerApiCalls.getJsonWebKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getJSONWebKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IGetJSONWebKeysResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJsonWebKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJsonWebKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJSONWebKeys with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetJSONWebKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetJSONWebKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getJsonWebKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getJSONWebKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getJsonWebKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJsonWebKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJSONWebKeys with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetJSONWebKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetJSONWebKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getJSONWebKeys(request), expectedError);
+        });
+    });
+
+    describe('listNodePools', () => {
+        it('invokes listNodePools without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.ListNodePoolsResponse()
+            );
+            client.innerApiCalls.listNodePools = stubSimpleCall(expectedResponse);
+            const [response] = await client.listNodePools(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNodePools without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.ListNodePoolsResponse()
+            );
+            client.innerApiCalls.listNodePools = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listNodePools(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IListNodePoolsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNodePools with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listNodePools = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listNodePools(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNodePools as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNodePools with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListNodePoolsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.ListNodePoolsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.listNodePools(request), expectedError);
+        });
+    });
+
+    describe('getNodePool', () => {
+        it('invokes getNodePool without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.NodePool()
+            );
+            client.innerApiCalls.getNodePool = stubSimpleCall(expectedResponse);
+            const [response] = await client.getNodePool(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNodePool without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.NodePool()
+            );
+            client.innerApiCalls.getNodePool = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getNodePool(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.INodePool|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNodePool with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getNodePool = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getNodePool with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.GetNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.GetNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getNodePool(request), expectedError);
+        });
+    });
+
+    describe('createNodePool', () => {
+        it('invokes createNodePool without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CreateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.createNodePool = stubSimpleCall(expectedResponse);
+            const [response] = await client.createNodePool(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNodePool without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CreateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.createNodePool = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createNodePool(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNodePool with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CreateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createNodePool = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNodePool with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CreateNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['parent']);
+            request.parent = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CreateNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createNodePool(request), expectedError);
+        });
+    });
+
+    describe('deleteNodePool', () => {
+        it('invokes deleteNodePool without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.DeleteNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.deleteNodePool = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteNodePool(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNodePool without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.DeleteNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.deleteNodePool = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteNodePool(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNodePool with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.DeleteNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteNodePool = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteNodePool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNodePool as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNodePool with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.DeleteNodePoolRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.DeleteNodePoolRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteNodePool(request), expectedError);
+        });
+    });
+
+    describe('completeNodePoolUpgrade', () => {
+        it('invokes completeNodePoolUpgrade without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CompleteNodePoolUpgradeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.completeNodePoolUpgrade = stubSimpleCall(expectedResponse);
+            const [response] = await client.completeNodePoolUpgrade(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.completeNodePoolUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.completeNodePoolUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes completeNodePoolUpgrade without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CompleteNodePoolUpgradeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.completeNodePoolUpgrade = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.completeNodePoolUpgrade(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.completeNodePoolUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.completeNodePoolUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes completeNodePoolUpgrade with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CompleteNodePoolUpgradeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.completeNodePoolUpgrade = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.completeNodePoolUpgrade(request), expectedError);
+            const actualRequest = (client.innerApiCalls.completeNodePoolUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.completeNodePoolUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes completeNodePoolUpgrade with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CompleteNodePoolUpgradeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.completeNodePoolUpgrade(request), expectedError);
+        });
+    });
+
+    describe('rollbackNodePoolUpgrade', () => {
+        it('invokes rollbackNodePoolUpgrade without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.rollbackNodePoolUpgrade = stubSimpleCall(expectedResponse);
+            const [response] = await client.rollbackNodePoolUpgrade(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rollbackNodePoolUpgrade without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.rollbackNodePoolUpgrade = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.rollbackNodePoolUpgrade(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rollbackNodePoolUpgrade with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.rollbackNodePoolUpgrade = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.rollbackNodePoolUpgrade(request), expectedError);
+            const actualRequest = (client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rollbackNodePoolUpgrade with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.RollbackNodePoolUpgradeRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.rollbackNodePoolUpgrade(request), expectedError);
+        });
+    });
+
+    describe('setNodePoolManagement', () => {
+        it('invokes setNodePoolManagement without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolManagementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setNodePoolManagement = stubSimpleCall(expectedResponse);
+            const [response] = await client.setNodePoolManagement(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setNodePoolManagement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNodePoolManagement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNodePoolManagement without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolManagementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setNodePoolManagement = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setNodePoolManagement(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setNodePoolManagement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNodePoolManagement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNodePoolManagement with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolManagementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setNodePoolManagement = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setNodePoolManagement(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setNodePoolManagement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNodePoolManagement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNodePoolManagement with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolManagementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolManagementRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setNodePoolManagement(request), expectedError);
+        });
+    });
+
+    describe('setLabels', () => {
+        it('invokes setLabels without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setLabels = stubSimpleCall(expectedResponse);
+            const [response] = await client.setLabels(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setLabels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLabels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLabels without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setLabels = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setLabels(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setLabels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLabels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLabels with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setLabels(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setLabels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLabels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLabels with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLabelsRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setLabels(request), expectedError);
+        });
+    });
+
+    describe('setLegacyAbac', () => {
+        it('invokes setLegacyAbac without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLegacyAbacRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setLegacyAbac = stubSimpleCall(expectedResponse);
+            const [response] = await client.setLegacyAbac(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setLegacyAbac as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLegacyAbac as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLegacyAbac without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLegacyAbacRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setLegacyAbac = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setLegacyAbac(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setLegacyAbac as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLegacyAbac as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLegacyAbac with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLegacyAbacRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setLegacyAbac = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setLegacyAbac(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setLegacyAbac as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setLegacyAbac as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setLegacyAbac with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetLegacyAbacRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetLegacyAbacRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setLegacyAbac(request), expectedError);
+        });
+    });
+
+    describe('startIPRotation', () => {
+        it('invokes startIPRotation without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.StartIPRotationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.startIpRotation = stubSimpleCall(expectedResponse);
+            const [response] = await client.startIPRotation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.startIpRotation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startIpRotation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startIPRotation without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.StartIPRotationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.startIpRotation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.startIPRotation(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.startIpRotation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startIpRotation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startIPRotation with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.StartIPRotationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.startIpRotation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.startIPRotation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.startIpRotation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startIpRotation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startIPRotation with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.StartIPRotationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.StartIPRotationRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.startIPRotation(request), expectedError);
+        });
+    });
+
+    describe('completeIPRotation', () => {
+        it('invokes completeIPRotation without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CompleteIPRotationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.completeIpRotation = stubSimpleCall(expectedResponse);
+            const [response] = await client.completeIPRotation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.completeIpRotation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.completeIpRotation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes completeIPRotation without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CompleteIPRotationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.completeIpRotation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.completeIPRotation(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.completeIpRotation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.completeIpRotation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes completeIPRotation with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CompleteIPRotationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.completeIpRotation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.completeIPRotation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.completeIpRotation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.completeIpRotation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes completeIPRotation with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CompleteIPRotationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.CompleteIPRotationRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.completeIPRotation(request), expectedError);
+        });
+    });
+
+    describe('setNodePoolSize', () => {
+        it('invokes setNodePoolSize without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolSizeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setNodePoolSize = stubSimpleCall(expectedResponse);
+            const [response] = await client.setNodePoolSize(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setNodePoolSize as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNodePoolSize as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNodePoolSize without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolSizeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setNodePoolSize = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setNodePoolSize(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setNodePoolSize as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNodePoolSize as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNodePoolSize with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolSizeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }&node_pool_id=${defaultValue5 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setNodePoolSize = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setNodePoolSize(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setNodePoolSize as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNodePoolSize as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNodePoolSize with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNodePoolSizeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const defaultValue5 =
+              getTypeDefaultValue('.google.container.v1.SetNodePoolSizeRequest', ['nodePoolId']);
+            request.nodePoolId = defaultValue5;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setNodePoolSize(request), expectedError);
+        });
+    });
+
+    describe('setNetworkPolicy', () => {
+        it('invokes setNetworkPolicy without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNetworkPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setNetworkPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.setNetworkPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setNetworkPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNetworkPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNetworkPolicy without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNetworkPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setNetworkPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setNetworkPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setNetworkPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNetworkPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNetworkPolicy with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNetworkPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setNetworkPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setNetworkPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setNetworkPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setNetworkPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setNetworkPolicy with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetNetworkPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetNetworkPolicyRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setNetworkPolicy(request), expectedError);
+        });
+    });
+
+    describe('setMaintenancePolicy', () => {
+        it('invokes setMaintenancePolicy without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMaintenancePolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setMaintenancePolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.setMaintenancePolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setMaintenancePolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMaintenancePolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMaintenancePolicy without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMaintenancePolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.Operation()
+            );
+            client.innerApiCalls.setMaintenancePolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setMaintenancePolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setMaintenancePolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMaintenancePolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMaintenancePolicy with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMaintenancePolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }&project_id=${defaultValue2 ?? '' }&zone=${defaultValue3 ?? '' }&cluster_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setMaintenancePolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setMaintenancePolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setMaintenancePolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setMaintenancePolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setMaintenancePolicy with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.SetMaintenancePolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['projectId']);
+            request.projectId = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['zone']);
+            request.zone = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.container.v1.SetMaintenancePolicyRequest', ['clusterId']);
+            request.clusterId = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setMaintenancePolicy(request), expectedError);
+        });
+    });
+
+    describe('checkAutopilotCompatibility', () => {
+        it('invokes checkAutopilotCompatibility without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CheckAutopilotCompatibilityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.CheckAutopilotCompatibilityResponse()
+            );
+            client.innerApiCalls.checkAutopilotCompatibility = stubSimpleCall(expectedResponse);
+            const [response] = await client.checkAutopilotCompatibility(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.checkAutopilotCompatibility as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.checkAutopilotCompatibility as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkAutopilotCompatibility without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CheckAutopilotCompatibilityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.CheckAutopilotCompatibilityResponse()
+            );
+            client.innerApiCalls.checkAutopilotCompatibility = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.checkAutopilotCompatibility(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.ICheckAutopilotCompatibilityResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.checkAutopilotCompatibility as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.checkAutopilotCompatibility as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkAutopilotCompatibility with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CheckAutopilotCompatibilityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.checkAutopilotCompatibility = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkAutopilotCompatibility(request), expectedError);
+            const actualRequest = (client.innerApiCalls.checkAutopilotCompatibility as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.checkAutopilotCompatibility as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkAutopilotCompatibility with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.CheckAutopilotCompatibilityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.checkAutopilotCompatibility(request), expectedError);
+        });
+    });
+
+    describe('fetchClusterUpgradeInfo', () => {
+        it('invokes fetchClusterUpgradeInfo without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.FetchClusterUpgradeInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.FetchClusterUpgradeInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.ClusterUpgradeInfo()
+            );
+            client.innerApiCalls.fetchClusterUpgradeInfo = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchClusterUpgradeInfo(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchClusterUpgradeInfo without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.FetchClusterUpgradeInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.FetchClusterUpgradeInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.ClusterUpgradeInfo()
+            );
+            client.innerApiCalls.fetchClusterUpgradeInfo = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchClusterUpgradeInfo(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IClusterUpgradeInfo|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchClusterUpgradeInfo with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.FetchClusterUpgradeInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.FetchClusterUpgradeInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchClusterUpgradeInfo = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchClusterUpgradeInfo(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchClusterUpgradeInfo with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.FetchClusterUpgradeInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.FetchClusterUpgradeInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.fetchClusterUpgradeInfo(request), expectedError);
+        });
+    });
+
+    describe('fetchNodePoolUpgradeInfo', () => {
+        it('invokes fetchNodePoolUpgradeInfo without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.FetchNodePoolUpgradeInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.FetchNodePoolUpgradeInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.NodePoolUpgradeInfo()
+            );
+            client.innerApiCalls.fetchNodePoolUpgradeInfo = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchNodePoolUpgradeInfo(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchNodePoolUpgradeInfo without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.FetchNodePoolUpgradeInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.FetchNodePoolUpgradeInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.container.v1.NodePoolUpgradeInfo()
+            );
+            client.innerApiCalls.fetchNodePoolUpgradeInfo = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchNodePoolUpgradeInfo(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.INodePoolUpgradeInfo|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchNodePoolUpgradeInfo with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.FetchNodePoolUpgradeInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.FetchNodePoolUpgradeInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchNodePoolUpgradeInfo = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchNodePoolUpgradeInfo(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchNodePoolUpgradeInfo with closed client', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.FetchNodePoolUpgradeInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.FetchNodePoolUpgradeInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.fetchNodePoolUpgradeInfo(request), expectedError);
+        });
+    });
+
+    describe('listUsableSubnetworks', () => {
+        it('invokes listUsableSubnetworks without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListUsableSubnetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+            ];
+            client.innerApiCalls.listUsableSubnetworks = stubSimpleCall(expectedResponse);
+            const [response] = await client.listUsableSubnetworks(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUsableSubnetworks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUsableSubnetworks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUsableSubnetworks without error using callback', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListUsableSubnetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+            ];
+            client.innerApiCalls.listUsableSubnetworks = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listUsableSubnetworks(
+                    request,
+                    (err?: Error|null, result?: protos.google.container.v1.IUsableSubnetwork[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUsableSubnetworks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUsableSubnetworks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUsableSubnetworks with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListUsableSubnetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listUsableSubnetworks = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listUsableSubnetworks(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listUsableSubnetworks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUsableSubnetworks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUsableSubnetworksStream without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListUsableSubnetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+            ];
+            client.descriptors.page.listUsableSubnetworks.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listUsableSubnetworksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.container.v1.UsableSubnetwork[] = [];
+                stream.on('data', (response: protos.google.container.v1.UsableSubnetwork) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listUsableSubnetworks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUsableSubnetworks, request));
+            assert(
+                (client.descriptors.page.listUsableSubnetworks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listUsableSubnetworksStream with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListUsableSubnetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUsableSubnetworks.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listUsableSubnetworksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.container.v1.UsableSubnetwork[] = [];
+                stream.on('data', (response: protos.google.container.v1.UsableSubnetwork) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listUsableSubnetworks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUsableSubnetworks, request));
+            assert(
+                (client.descriptors.page.listUsableSubnetworks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listUsableSubnetworks without error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListUsableSubnetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+              generateSampleMessage(new protos.google.container.v1.UsableSubnetwork()),
+            ];
+            client.descriptors.page.listUsableSubnetworks.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.container.v1.IUsableSubnetwork[] = [];
+            const iterable = client.listUsableSubnetworksAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUsableSubnetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUsableSubnetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listUsableSubnetworks with error', async () => {
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.container.v1.ListUsableSubnetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.container.v1.ListUsableSubnetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUsableSubnetworks.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listUsableSubnetworksAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.container.v1.IUsableSubnetwork[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUsableSubnetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUsableSubnetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('caPool', async () => {
+            const fakePath = "/rendered/path/caPool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                ca_pool: "caPoolValue",
+            };
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.caPoolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.caPoolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('caPoolPath', () => {
+                const result = client.caPoolPath("projectValue", "locationValue", "caPoolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.caPoolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCaPoolName', () => {
+                const result = client.matchProjectFromCaPoolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCaPoolName', () => {
+                const result = client.matchLocationFromCaPoolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCaPoolFromCaPoolName', () => {
+                const result = client.matchCaPoolFromCaPoolName(fakePath);
+                assert.strictEqual(result, "caPoolValue");
+                assert((client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cryptoKeyVersion', async () => {
+            const fakePath = "/rendered/path/cryptoKeyVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+                crypto_key_version: "cryptoKeyVersionValue",
+            };
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cryptoKeyVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cryptoKeyVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cryptoKeyVersionPath', () => {
+                const result = client.cryptoKeyVersionPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue", "cryptoKeyVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCryptoKeyVersionName', () => {
+                const result = client.matchProjectFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCryptoKeyVersionName', () => {
+                const result = client.matchLocationFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromCryptoKeyVersionName', () => {
+                const result = client.matchKeyRingFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromCryptoKeyVersionName', () => {
+                const result = client.matchCryptoKeyFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyVersionFromCryptoKeyVersionName', () => {
+                const result = client.matchCryptoKeyVersionFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "cryptoKeyVersionValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

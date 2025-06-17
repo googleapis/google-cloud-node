@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class ClusterManagerClient {
    *     const client = new ClusterManagerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ClusterManagerClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'container.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class ClusterManagerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class ClusterManagerClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -214,20 +189,14 @@ export class ClusterManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listUsableSubnetworks: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'subnetworks'
-      ),
+      listUsableSubnetworks:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'subnetworks')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.container.v1.ClusterManager',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.container.v1.ClusterManager', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -258,72 +227,32 @@ export class ClusterManagerClient {
     // Put together the "service stub" for
     // google.container.v1.ClusterManager.
     this.clusterManagerStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.container.v1.ClusterManager'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.container.v1.ClusterManager') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.container.v1.ClusterManager,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const clusterManagerStubMethods = [
-      'listClusters',
-      'getCluster',
-      'createCluster',
-      'updateCluster',
-      'updateNodePool',
-      'setNodePoolAutoscaling',
-      'setLoggingService',
-      'setMonitoringService',
-      'setAddonsConfig',
-      'setLocations',
-      'updateMaster',
-      'setMasterAuth',
-      'deleteCluster',
-      'listOperations',
-      'getOperation',
-      'cancelOperation',
-      'getServerConfig',
-      'getJsonWebKeys',
-      'listNodePools',
-      'getNodePool',
-      'createNodePool',
-      'deleteNodePool',
-      'completeNodePoolUpgrade',
-      'rollbackNodePoolUpgrade',
-      'setNodePoolManagement',
-      'setLabels',
-      'setLegacyAbac',
-      'startIpRotation',
-      'completeIpRotation',
-      'setNodePoolSize',
-      'setNetworkPolicy',
-      'setMaintenancePolicy',
-      'listUsableSubnetworks',
-      'checkAutopilotCompatibility',
-      'fetchClusterUpgradeInfo',
-      'fetchNodePoolUpgradeInfo',
-    ];
+    const clusterManagerStubMethods =
+        ['listClusters', 'getCluster', 'createCluster', 'updateCluster', 'updateNodePool', 'setNodePoolAutoscaling', 'setLoggingService', 'setMonitoringService', 'setAddonsConfig', 'setLocations', 'updateMaster', 'setMasterAuth', 'deleteCluster', 'listOperations', 'getOperation', 'cancelOperation', 'getServerConfig', 'getJsonWebKeys', 'listNodePools', 'getNodePool', 'createNodePool', 'deleteNodePool', 'completeNodePoolUpgrade', 'rollbackNodePoolUpgrade', 'setNodePoolManagement', 'setLabels', 'setLegacyAbac', 'startIpRotation', 'completeIpRotation', 'setNodePoolSize', 'setNetworkPolicy', 'setMaintenancePolicy', 'listUsableSubnetworks', 'checkAutopilotCompatibility', 'fetchClusterUpgradeInfo', 'fetchNodePoolUpgradeInfo'];
     for (const methodName of clusterManagerStubMethods) {
       const callPromise = this.clusterManagerStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -343,14 +272,8 @@ export class ClusterManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'container.googleapis.com';
   }
@@ -361,14 +284,8 @@ export class ClusterManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'container.googleapis.com';
   }
@@ -399,7 +316,9 @@ export class ClusterManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -408,9 +327,8 @@ export class ClusterManagerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -421,4763 +339,4121 @@ export class ClusterManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Lists all clusters owned by a project in either the specified zone or all
-   * zones.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the parent field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides, or "-" for all zones. This field has been deprecated and
-   *   replaced by the parent field.
-   * @param {string} request.parent
-   *   The parent (project and location) where the clusters will be listed.
-   *   Specified in the format `projects/* /locations/*`.
-   *   Location "-" matches all zones and all regions.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.ListClustersResponse|ListClustersResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.list_clusters.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_ListClusters_async
-   */
+/**
+ * Lists all clusters owned by a project in either the specified zone or all
+ * zones.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the parent field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides, or "-" for all zones. This field has been deprecated and
+ *   replaced by the parent field.
+ * @param {string} request.parent
+ *   The parent (project and location) where the clusters will be listed.
+ *   Specified in the format `projects/* /locations/*`.
+ *   Location "-" matches all zones and all regions.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.ListClustersResponse|ListClustersResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.list_clusters.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_ListClusters_async
+ */
   listClusters(
-    request?: protos.google.container.v1.IListClustersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IListClustersResponse,
-      protos.google.container.v1.IListClustersRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IListClustersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IListClustersResponse,
+        protos.google.container.v1.IListClustersRequest|undefined, {}|undefined
+      ]>;
   listClusters(
-    request: protos.google.container.v1.IListClustersRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IListClustersResponse,
-      protos.google.container.v1.IListClustersRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listClusters(
-    request: protos.google.container.v1.IListClustersRequest,
-    callback: Callback<
-      protos.google.container.v1.IListClustersResponse,
-      protos.google.container.v1.IListClustersRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listClusters(
-    request?: protos.google.container.v1.IListClustersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IListClustersRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IListClustersResponse,
-          protos.google.container.v1.IListClustersRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IListClustersResponse,
-      protos.google.container.v1.IListClustersRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IListClustersResponse,
-      protos.google.container.v1.IListClustersRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IListClustersRequest|null|undefined,
+          {}|null|undefined>): void;
+  listClusters(
+      request: protos.google.container.v1.IListClustersRequest,
+      callback: Callback<
+          protos.google.container.v1.IListClustersResponse,
+          protos.google.container.v1.IListClustersRequest|null|undefined,
+          {}|null|undefined>): void;
+  listClusters(
+      request?: protos.google.container.v1.IListClustersRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IListClustersResponse,
+          protos.google.container.v1.IListClustersRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IListClustersResponse,
+          protos.google.container.v1.IListClustersRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IListClustersResponse,
+        protos.google.container.v1.IListClustersRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listClusters request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IListClustersResponse,
-          protos.google.container.v1.IListClustersRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IListClustersResponse,
+        protos.google.container.v1.IListClustersRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listClusters response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listClusters(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IListClustersResponse,
-          protos.google.container.v1.IListClustersRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('listClusters response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listClusters(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IListClustersResponse,
+        protos.google.container.v1.IListClustersRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listClusters response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the details of a specific cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to retrieve.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.name
-   *   The name (project, location, cluster) of the cluster to retrieve.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Cluster|Cluster}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.get_cluster.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_GetCluster_async
-   */
+/**
+ * Gets the details of a specific cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to retrieve.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.name
+ *   The name (project, location, cluster) of the cluster to retrieve.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Cluster|Cluster}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.get_cluster.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_GetCluster_async
+ */
   getCluster(
-    request?: protos.google.container.v1.IGetClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.ICluster,
-      protos.google.container.v1.IGetClusterRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IGetClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.ICluster,
+        protos.google.container.v1.IGetClusterRequest|undefined, {}|undefined
+      ]>;
   getCluster(
-    request: protos.google.container.v1.IGetClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.ICluster,
-      protos.google.container.v1.IGetClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCluster(
-    request: protos.google.container.v1.IGetClusterRequest,
-    callback: Callback<
-      protos.google.container.v1.ICluster,
-      protos.google.container.v1.IGetClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCluster(
-    request?: protos.google.container.v1.IGetClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IGetClusterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.ICluster,
-          protos.google.container.v1.IGetClusterRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.ICluster,
-      protos.google.container.v1.IGetClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.ICluster,
-      protos.google.container.v1.IGetClusterRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IGetClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCluster(
+      request: protos.google.container.v1.IGetClusterRequest,
+      callback: Callback<
+          protos.google.container.v1.ICluster,
+          protos.google.container.v1.IGetClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCluster(
+      request?: protos.google.container.v1.IGetClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.ICluster,
+          protos.google.container.v1.IGetClusterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.ICluster,
+          protos.google.container.v1.IGetClusterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.ICluster,
+        protos.google.container.v1.IGetClusterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCluster request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.ICluster,
-          protos.google.container.v1.IGetClusterRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.ICluster,
+        protos.google.container.v1.IGetClusterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.ICluster,
-          protos.google.container.v1.IGetClusterRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getCluster response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCluster(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.ICluster,
+        protos.google.container.v1.IGetClusterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCluster response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a cluster, consisting of the specified number and type of Google
-   * Compute Engine instances.
-   *
-   * By default, the cluster is created in the project's
-   * [default
-   * network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
-   *
-   * One firewall is added for the cluster. After cluster creation,
-   * the Kubelet creates routes for each node to allow the containers
-   * on that node to communicate with all other instances in the
-   * cluster.
-   *
-   * Finally, an entry is added to the project's global metadata indicating
-   * which CIDR range the cluster is using.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the parent field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the parent
-   *   field.
-   * @param {google.container.v1.Cluster} request.cluster
-   *   Required. A [cluster
-   *   resource](https://cloud.google.com/container-engine/reference/rest/v1/projects.locations.clusters)
-   * @param {string} request.parent
-   *   The parent (project and location) where the cluster will be created.
-   *   Specified in the format `projects/* /locations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.create_cluster.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_CreateCluster_async
-   */
+/**
+ * Creates a cluster, consisting of the specified number and type of Google
+ * Compute Engine instances.
+ *
+ * By default, the cluster is created in the project's
+ * [default
+ * network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
+ *
+ * One firewall is added for the cluster. After cluster creation,
+ * the Kubelet creates routes for each node to allow the containers
+ * on that node to communicate with all other instances in the
+ * cluster.
+ *
+ * Finally, an entry is added to the project's global metadata indicating
+ * which CIDR range the cluster is using.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the parent field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the parent
+ *   field.
+ * @param {google.container.v1.Cluster} request.cluster
+ *   Required. A [cluster
+ *   resource](https://cloud.google.com/container-engine/reference/rest/v1/projects.locations.clusters)
+ * @param {string} request.parent
+ *   The parent (project and location) where the cluster will be created.
+ *   Specified in the format `projects/* /locations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.create_cluster.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_CreateCluster_async
+ */
   createCluster(
-    request?: protos.google.container.v1.ICreateClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateClusterRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ICreateClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICreateClusterRequest|undefined, {}|undefined
+      ]>;
   createCluster(
-    request: protos.google.container.v1.ICreateClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCluster(
-    request: protos.google.container.v1.ICreateClusterRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCluster(
-    request?: protos.google.container.v1.ICreateClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ICreateClusterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.ICreateClusterRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateClusterRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ICreateClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCluster(
+      request: protos.google.container.v1.ICreateClusterRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ICreateClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCluster(
+      request?: protos.google.container.v1.ICreateClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ICreateClusterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ICreateClusterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICreateClusterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createCluster request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ICreateClusterRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICreateClusterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ICreateClusterRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createCluster response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createCluster(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICreateClusterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createCluster response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the settings of a specific cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {google.container.v1.ClusterUpdate} request.update
-   *   Required. A description of the update.
-   * @param {string} request.name
-   *   The name (project, location, cluster) of the cluster to update.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.update_cluster.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_UpdateCluster_async
-   */
+/**
+ * Updates the settings of a specific cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {google.container.v1.ClusterUpdate} request.update
+ *   Required. A description of the update.
+ * @param {string} request.name
+ *   The name (project, location, cluster) of the cluster to update.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.update_cluster.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_UpdateCluster_async
+ */
   updateCluster(
-    request?: protos.google.container.v1.IUpdateClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateClusterRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IUpdateClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateClusterRequest|undefined, {}|undefined
+      ]>;
   updateCluster(
-    request: protos.google.container.v1.IUpdateClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCluster(
-    request: protos.google.container.v1.IUpdateClusterRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCluster(
-    request?: protos.google.container.v1.IUpdateClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IUpdateClusterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.IUpdateClusterRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateClusterRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IUpdateClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCluster(
+      request: protos.google.container.v1.IUpdateClusterRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCluster(
+      request?: protos.google.container.v1.IUpdateClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateClusterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateClusterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateClusterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateCluster request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IUpdateClusterRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateClusterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IUpdateClusterRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCluster response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateCluster(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateClusterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateCluster response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the version and/or image type for the specified node pool.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to upgrade.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.nodeVersion
-   *   Required. The Kubernetes version to change the nodes to (typically an
-   *   upgrade).
-   *
-   *   Users may specify either explicit versions offered by Kubernetes Engine or
-   *   version aliases, which have the following behavior:
-   *
-   *   - "latest": picks the highest valid Kubernetes version
-   *   - "1.X": picks the highest valid patch+gke.N patch in the 1.X version
-   *   - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
-   *   - "1.X.Y-gke.N": picks an explicit Kubernetes version
-   *   - "-": picks the Kubernetes master version
-   * @param {string} request.imageType
-   *   Required. The desired image type for the node pool. Please see
-   *   https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
-   *   available image types.
-   * @param {string} request.name
-   *   The name (project, location, cluster, node pool) of the node pool to
-   *   update. Specified in the format
-   *   `projects/* /locations/* /clusters/* /nodePools/*`.
-   * @param {string[]} request.locations
-   *   The desired list of Google Compute Engine
-   *   [zones](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   node pool's nodes should be located. Changing the locations for a node pool
-   *   will result in nodes being either created or removed from the node pool,
-   *   depending on whether locations are being added or removed.
-   * @param {google.container.v1.WorkloadMetadataConfig} request.workloadMetadataConfig
-   *   The desired workload metadata config for the node pool.
-   * @param {google.container.v1.NodePool.UpgradeSettings} request.upgradeSettings
-   *   Upgrade settings control disruption and speed of the upgrade.
-   * @param {google.container.v1.NetworkTags} request.tags
-   *   The desired network tags to be applied to all nodes in the node pool.
-   *   If this field is not present, the tags will not be changed. Otherwise,
-   *   the existing network tags will be *replaced* with the provided tags.
-   * @param {google.container.v1.NodeTaints} request.taints
-   *   The desired node taints to be applied to all nodes in the node pool.
-   *   If this field is not present, the taints will not be changed. Otherwise,
-   *   the existing node taints will be *replaced* with the provided taints.
-   * @param {google.container.v1.NodeLabels} request.labels
-   *   The desired node labels to be applied to all nodes in the node pool.
-   *   If this field is not present, the labels will not be changed. Otherwise,
-   *   the existing node labels will be *replaced* with the provided labels.
-   * @param {google.container.v1.LinuxNodeConfig} request.linuxNodeConfig
-   *   Parameters that can be configured on Linux nodes.
-   * @param {google.container.v1.NodeKubeletConfig} request.kubeletConfig
-   *   Node kubelet configs.
-   * @param {google.container.v1.NodeNetworkConfig} request.nodeNetworkConfig
-   *   Node network config.
-   * @param {google.container.v1.GcfsConfig} request.gcfsConfig
-   *   GCFS config.
-   * @param {google.container.v1.ConfidentialNodes} request.confidentialNodes
-   *   Confidential nodes config.
-   *   All the nodes in the node pool will be Confidential VM once enabled.
-   * @param {google.container.v1.VirtualNIC} request.gvnic
-   *   Enable or disable gvnic on the node pool.
-   * @param {string} request.etag
-   *   The current etag of the node pool.
-   *   If an etag is provided and does not match the current etag of the node
-   *   pool, update will be blocked and an ABORTED error will be returned.
-   * @param {google.container.v1.FastSocket} request.fastSocket
-   *   Enable or disable NCCL fast socket for the node pool.
-   * @param {google.container.v1.NodePoolLoggingConfig} request.loggingConfig
-   *   Logging configuration.
-   * @param {google.container.v1.ResourceLabels} request.resourceLabels
-   *   The resource labels for the node pool to use to annotate any related
-   *   Google Compute Engine resources.
-   * @param {google.container.v1.WindowsNodeConfig} request.windowsNodeConfig
-   *   Parameters that can be configured on Windows nodes.
-   * @param {number[]} request.accelerators
-   *   A list of hardware accelerators to be attached to each node.
-   *   See https://cloud.google.com/compute/docs/gpus for more information about
-   *   support for GPUs.
-   * @param {string} [request.machineType]
-   *   Optional. The desired [Google Compute Engine machine
-   *   type](https://cloud.google.com/compute/docs/machine-types) for nodes in the
-   *   node pool. Initiates an upgrade operation that migrates the nodes in the
-   *   node pool to the specified machine type.
-   * @param {string} [request.diskType]
-   *   Optional. The desired disk type (e.g. 'pd-standard', 'pd-ssd' or
-   *   'pd-balanced') for nodes in the node pool.
-   *   Initiates an upgrade operation that migrates the nodes in the
-   *   node pool to the specified disk type.
-   * @param {number} [request.diskSizeGb]
-   *   Optional. The desired disk size for nodes in the node pool specified in GB.
-   *   The smallest allowed disk size is 10GB.
-   *   Initiates an upgrade operation that migrates the nodes in the
-   *   node pool to the specified disk size.
-   * @param {google.container.v1.ResourceManagerTags} request.resourceManagerTags
-   *   Desired resource manager tag keys and values to be attached to the nodes
-   *   for managing Compute Engine firewalls using Network Firewall Policies.
-   *   Existing tags will be replaced with new values.
-   * @param {google.container.v1.ContainerdConfig} request.containerdConfig
-   *   The desired containerd config for nodes in the node pool.
-   *   Initiates an upgrade operation that recreates the nodes with the new
-   *   config.
-   * @param {google.container.v1.NodePool.QueuedProvisioning} request.queuedProvisioning
-   *   Specifies the configuration of queued provisioning.
-   * @param {string[]} request.storagePools
-   *   List of Storage Pools where boot disks are provisioned.
-   *   Existing Storage Pools will be replaced with storage-pools.
-   * @param {google.protobuf.Duration} request.maxRunDuration
-   *   The maximum duration for the nodes to exist.
-   *   If unspecified, the nodes can exist indefinitely.
-   * @param {boolean} request.flexStart
-   *   Flex Start flag for enabling Flex Start VM.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.update_node_pool.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_UpdateNodePool_async
-   */
+/**
+ * Updates the version and/or image type for the specified node pool.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.nodePoolId
+ *   Deprecated. The name of the node pool to upgrade.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.nodeVersion
+ *   Required. The Kubernetes version to change the nodes to (typically an
+ *   upgrade).
+ *
+ *   Users may specify either explicit versions offered by Kubernetes Engine or
+ *   version aliases, which have the following behavior:
+ *
+ *   - "latest": picks the highest valid Kubernetes version
+ *   - "1.X": picks the highest valid patch+gke.N patch in the 1.X version
+ *   - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
+ *   - "1.X.Y-gke.N": picks an explicit Kubernetes version
+ *   - "-": picks the Kubernetes master version
+ * @param {string} request.imageType
+ *   Required. The desired image type for the node pool. Please see
+ *   https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+ *   available image types.
+ * @param {string} request.name
+ *   The name (project, location, cluster, node pool) of the node pool to
+ *   update. Specified in the format
+ *   `projects/* /locations/* /clusters/* /nodePools/*`.
+ * @param {string[]} request.locations
+ *   The desired list of Google Compute Engine
+ *   [zones](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   node pool's nodes should be located. Changing the locations for a node pool
+ *   will result in nodes being either created or removed from the node pool,
+ *   depending on whether locations are being added or removed.
+ * @param {google.container.v1.WorkloadMetadataConfig} request.workloadMetadataConfig
+ *   The desired workload metadata config for the node pool.
+ * @param {google.container.v1.NodePool.UpgradeSettings} request.upgradeSettings
+ *   Upgrade settings control disruption and speed of the upgrade.
+ * @param {google.container.v1.NetworkTags} request.tags
+ *   The desired network tags to be applied to all nodes in the node pool.
+ *   If this field is not present, the tags will not be changed. Otherwise,
+ *   the existing network tags will be *replaced* with the provided tags.
+ * @param {google.container.v1.NodeTaints} request.taints
+ *   The desired node taints to be applied to all nodes in the node pool.
+ *   If this field is not present, the taints will not be changed. Otherwise,
+ *   the existing node taints will be *replaced* with the provided taints.
+ * @param {google.container.v1.NodeLabels} request.labels
+ *   The desired node labels to be applied to all nodes in the node pool.
+ *   If this field is not present, the labels will not be changed. Otherwise,
+ *   the existing node labels will be *replaced* with the provided labels.
+ * @param {google.container.v1.LinuxNodeConfig} request.linuxNodeConfig
+ *   Parameters that can be configured on Linux nodes.
+ * @param {google.container.v1.NodeKubeletConfig} request.kubeletConfig
+ *   Node kubelet configs.
+ * @param {google.container.v1.NodeNetworkConfig} request.nodeNetworkConfig
+ *   Node network config.
+ * @param {google.container.v1.GcfsConfig} request.gcfsConfig
+ *   GCFS config.
+ * @param {google.container.v1.ConfidentialNodes} request.confidentialNodes
+ *   Confidential nodes config.
+ *   All the nodes in the node pool will be Confidential VM once enabled.
+ * @param {google.container.v1.VirtualNIC} request.gvnic
+ *   Enable or disable gvnic on the node pool.
+ * @param {string} request.etag
+ *   The current etag of the node pool.
+ *   If an etag is provided and does not match the current etag of the node
+ *   pool, update will be blocked and an ABORTED error will be returned.
+ * @param {google.container.v1.FastSocket} request.fastSocket
+ *   Enable or disable NCCL fast socket for the node pool.
+ * @param {google.container.v1.NodePoolLoggingConfig} request.loggingConfig
+ *   Logging configuration.
+ * @param {google.container.v1.ResourceLabels} request.resourceLabels
+ *   The resource labels for the node pool to use to annotate any related
+ *   Google Compute Engine resources.
+ * @param {google.container.v1.WindowsNodeConfig} request.windowsNodeConfig
+ *   Parameters that can be configured on Windows nodes.
+ * @param {number[]} request.accelerators
+ *   A list of hardware accelerators to be attached to each node.
+ *   See https://cloud.google.com/compute/docs/gpus for more information about
+ *   support for GPUs.
+ * @param {string} [request.machineType]
+ *   Optional. The desired [Google Compute Engine machine
+ *   type](https://cloud.google.com/compute/docs/machine-types) for nodes in the
+ *   node pool. Initiates an upgrade operation that migrates the nodes in the
+ *   node pool to the specified machine type.
+ * @param {string} [request.diskType]
+ *   Optional. The desired disk type (e.g. 'pd-standard', 'pd-ssd' or
+ *   'pd-balanced') for nodes in the node pool.
+ *   Initiates an upgrade operation that migrates the nodes in the
+ *   node pool to the specified disk type.
+ * @param {number} [request.diskSizeGb]
+ *   Optional. The desired disk size for nodes in the node pool specified in GB.
+ *   The smallest allowed disk size is 10GB.
+ *   Initiates an upgrade operation that migrates the nodes in the
+ *   node pool to the specified disk size.
+ * @param {google.container.v1.ResourceManagerTags} request.resourceManagerTags
+ *   Desired resource manager tag keys and values to be attached to the nodes
+ *   for managing Compute Engine firewalls using Network Firewall Policies.
+ *   Existing tags will be replaced with new values.
+ * @param {google.container.v1.ContainerdConfig} request.containerdConfig
+ *   The desired containerd config for nodes in the node pool.
+ *   Initiates an upgrade operation that recreates the nodes with the new
+ *   config.
+ * @param {google.container.v1.NodePool.QueuedProvisioning} request.queuedProvisioning
+ *   Specifies the configuration of queued provisioning.
+ * @param {string[]} request.storagePools
+ *   List of Storage Pools where boot disks are provisioned.
+ *   Existing Storage Pools will be replaced with storage-pools.
+ * @param {google.protobuf.Duration} request.maxRunDuration
+ *   The maximum duration for the nodes to exist.
+ *   If unspecified, the nodes can exist indefinitely.
+ * @param {boolean} request.flexStart
+ *   Flex Start flag for enabling Flex Start VM.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.update_node_pool.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_UpdateNodePool_async
+ */
   updateNodePool(
-    request?: protos.google.container.v1.IUpdateNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateNodePoolRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IUpdateNodePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateNodePoolRequest|undefined, {}|undefined
+      ]>;
   updateNodePool(
-    request: protos.google.container.v1.IUpdateNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNodePool(
-    request: protos.google.container.v1.IUpdateNodePoolRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNodePool(
-    request?: protos.google.container.v1.IUpdateNodePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IUpdateNodePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateNodePoolRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IUpdateNodePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNodePool(
+      request: protos.google.container.v1.IUpdateNodePoolRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateNodePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNodePool(
+      request?: protos.google.container.v1.IUpdateNodePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateNodePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateNodePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateNodePoolRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-        node_pool_id: request.nodePoolId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
+      'node_pool_id': request.nodePoolId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateNodePool request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateNodePoolRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateNodePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateNodePool(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IUpdateNodePoolRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateNodePool response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateNodePool(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateNodePoolRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateNodePool response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the autoscaling settings for the specified node pool.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to upgrade.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {google.container.v1.NodePoolAutoscaling} request.autoscaling
-   *   Required. Autoscaling configuration for the node pool.
-   * @param {string} request.name
-   *   The name (project, location, cluster, node pool) of the node pool to set
-   *   autoscaler settings. Specified in the format
-   *   `projects/* /locations/* /clusters/* /nodePools/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_node_pool_autoscaling.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetNodePoolAutoscaling_async
-   */
+/**
+ * Sets the autoscaling settings for the specified node pool.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.nodePoolId
+ *   Deprecated. The name of the node pool to upgrade.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {google.container.v1.NodePoolAutoscaling} request.autoscaling
+ *   Required. Autoscaling configuration for the node pool.
+ * @param {string} request.name
+ *   The name (project, location, cluster, node pool) of the node pool to set
+ *   autoscaler settings. Specified in the format
+ *   `projects/* /locations/* /clusters/* /nodePools/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_node_pool_autoscaling.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetNodePoolAutoscaling_async
+ */
   setNodePoolAutoscaling(
-    request?: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolAutoscalingRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolAutoscalingRequest|undefined, {}|undefined
+      ]>;
   setNodePoolAutoscaling(
-    request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetNodePoolAutoscalingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNodePoolAutoscaling(
-    request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetNodePoolAutoscalingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNodePoolAutoscaling(
-    request?: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetNodePoolAutoscalingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetNodePoolAutoscalingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolAutoscalingRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetNodePoolAutoscalingRequest|null|undefined,
+          {}|null|undefined>): void;
+  setNodePoolAutoscaling(
+      request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNodePoolAutoscalingRequest|null|undefined,
+          {}|null|undefined>): void;
+  setNodePoolAutoscaling(
+      request?: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNodePoolAutoscalingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNodePoolAutoscalingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolAutoscalingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-        node_pool_id: request.nodePoolId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
+      'node_pool_id': request.nodePoolId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setNodePoolAutoscaling request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetNodePoolAutoscalingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolAutoscalingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setNodePoolAutoscaling response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setNodePoolAutoscaling(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetNodePoolAutoscalingRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setNodePoolAutoscaling response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setNodePoolAutoscaling(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolAutoscalingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setNodePoolAutoscaling response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the logging service for a specific cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.loggingService
-   *   Required. The logging service the cluster should use to write logs.
-   *   Currently available options:
-   *
-   *   * `logging.googleapis.com/kubernetes` - The Cloud Logging
-   *   service with a Kubernetes-native resource model
-   *   * `logging.googleapis.com` - The legacy Cloud Logging service (no longer
-   *     available as of GKE 1.15).
-   *   * `none` - no logs will be exported from the cluster.
-   *
-   *   If left as an empty string,`logging.googleapis.com/kubernetes` will be
-   *   used for GKE 1.14+ or `logging.googleapis.com` for earlier versions.
-   * @param {string} request.name
-   *   The name (project, location, cluster) of the cluster to set logging.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_logging_service.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetLoggingService_async
-   */
+/**
+ * Sets the logging service for a specific cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.loggingService
+ *   Required. The logging service the cluster should use to write logs.
+ *   Currently available options:
+ *
+ *   * `logging.googleapis.com/kubernetes` - The Cloud Logging
+ *   service with a Kubernetes-native resource model
+ *   * `logging.googleapis.com` - The legacy Cloud Logging service (no longer
+ *     available as of GKE 1.15).
+ *   * `none` - no logs will be exported from the cluster.
+ *
+ *   If left as an empty string,`logging.googleapis.com/kubernetes` will be
+ *   used for GKE 1.14+ or `logging.googleapis.com` for earlier versions.
+ * @param {string} request.name
+ *   The name (project, location, cluster) of the cluster to set logging.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_logging_service.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetLoggingService_async
+ */
   setLoggingService(
-    request?: protos.google.container.v1.ISetLoggingServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLoggingServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetLoggingServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLoggingServiceRequest|undefined, {}|undefined
+      ]>;
   setLoggingService(
-    request: protos.google.container.v1.ISetLoggingServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLoggingServiceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLoggingService(
-    request: protos.google.container.v1.ISetLoggingServiceRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLoggingServiceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLoggingService(
-    request?: protos.google.container.v1.ISetLoggingServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetLoggingServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetLoggingServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLoggingServiceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLoggingServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetLoggingServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setLoggingService(
+      request: protos.google.container.v1.ISetLoggingServiceRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLoggingServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setLoggingService(
+      request?: protos.google.container.v1.ISetLoggingServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLoggingServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLoggingServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLoggingServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setLoggingService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetLoggingServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLoggingServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setLoggingService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setLoggingService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetLoggingServiceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setLoggingService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setLoggingService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLoggingServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setLoggingService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the monitoring service for a specific cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.monitoringService
-   *   Required. The monitoring service the cluster should use to write metrics.
-   *   Currently available options:
-   *
-   *   * `monitoring.googleapis.com/kubernetes` - The Cloud Monitoring
-   *   service with a Kubernetes-native resource model
-   *   * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
-   *     longer available as of GKE 1.15).
-   *   * `none` - No metrics will be exported from the cluster.
-   *
-   *   If left as an empty string,`monitoring.googleapis.com/kubernetes` will be
-   *   used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.
-   * @param {string} request.name
-   *   The name (project, location, cluster) of the cluster to set monitoring.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_monitoring_service.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetMonitoringService_async
-   */
+/**
+ * Sets the monitoring service for a specific cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.monitoringService
+ *   Required. The monitoring service the cluster should use to write metrics.
+ *   Currently available options:
+ *
+ *   * `monitoring.googleapis.com/kubernetes` - The Cloud Monitoring
+ *   service with a Kubernetes-native resource model
+ *   * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
+ *     longer available as of GKE 1.15).
+ *   * `none` - No metrics will be exported from the cluster.
+ *
+ *   If left as an empty string,`monitoring.googleapis.com/kubernetes` will be
+ *   used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.
+ * @param {string} request.name
+ *   The name (project, location, cluster) of the cluster to set monitoring.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_monitoring_service.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetMonitoringService_async
+ */
   setMonitoringService(
-    request?: protos.google.container.v1.ISetMonitoringServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMonitoringServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetMonitoringServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMonitoringServiceRequest|undefined, {}|undefined
+      ]>;
   setMonitoringService(
-    request: protos.google.container.v1.ISetMonitoringServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetMonitoringServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMonitoringService(
-    request: protos.google.container.v1.ISetMonitoringServiceRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetMonitoringServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMonitoringService(
-    request?: protos.google.container.v1.ISetMonitoringServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetMonitoringServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetMonitoringServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetMonitoringServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMonitoringServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetMonitoringServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMonitoringService(
+      request: protos.google.container.v1.ISetMonitoringServiceRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetMonitoringServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMonitoringService(
+      request?: protos.google.container.v1.ISetMonitoringServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetMonitoringServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetMonitoringServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMonitoringServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setMonitoringService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetMonitoringServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMonitoringServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setMonitoringService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setMonitoringService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetMonitoringServiceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setMonitoringService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setMonitoringService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMonitoringServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setMonitoringService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the addons for a specific cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {google.container.v1.AddonsConfig} request.addonsConfig
-   *   Required. The desired configurations for the various addons available to
-   *   run in the cluster.
-   * @param {string} request.name
-   *   The name (project, location, cluster) of the cluster to set addons.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_addons_config.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetAddonsConfig_async
-   */
+/**
+ * Sets the addons for a specific cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {google.container.v1.AddonsConfig} request.addonsConfig
+ *   Required. The desired configurations for the various addons available to
+ *   run in the cluster.
+ * @param {string} request.name
+ *   The name (project, location, cluster) of the cluster to set addons.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_addons_config.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetAddonsConfig_async
+ */
   setAddonsConfig(
-    request?: protos.google.container.v1.ISetAddonsConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetAddonsConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetAddonsConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetAddonsConfigRequest|undefined, {}|undefined
+      ]>;
   setAddonsConfig(
-    request: protos.google.container.v1.ISetAddonsConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setAddonsConfig(
-    request: protos.google.container.v1.ISetAddonsConfigRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setAddonsConfig(
-    request?: protos.google.container.v1.ISetAddonsConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetAddonsConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetAddonsConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetAddonsConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  setAddonsConfig(
+      request: protos.google.container.v1.ISetAddonsConfigRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetAddonsConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  setAddonsConfig(
+      request?: protos.google.container.v1.ISetAddonsConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetAddonsConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetAddonsConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetAddonsConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setAddonsConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetAddonsConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setAddonsConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setAddonsConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetAddonsConfigRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setAddonsConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setAddonsConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetAddonsConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setAddonsConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the locations for a specific cluster.
-   * Deprecated. Use
-   * [projects.locations.clusters.update](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/update)
-   * instead.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string[]} request.locations
-   *   Required. The desired list of Google Compute Engine
-   *   [zones](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster's nodes should be located. Changing the locations a cluster is in
-   *   will result in nodes being either created or removed from the cluster,
-   *   depending on whether locations are being added or removed.
-   *
-   *   This list must always include the cluster's primary zone.
-   * @param {string} request.name
-   *   The name (project, location, cluster) of the cluster to set locations.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_locations.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetLocations_async
-   * @deprecated SetLocations is deprecated and may be removed in a future version.
-   */
+/**
+ * Sets the locations for a specific cluster.
+ * Deprecated. Use
+ * [projects.locations.clusters.update](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/update)
+ * instead.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string[]} request.locations
+ *   Required. The desired list of Google Compute Engine
+ *   [zones](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster's nodes should be located. Changing the locations a cluster is in
+ *   will result in nodes being either created or removed from the cluster,
+ *   depending on whether locations are being added or removed.
+ *
+ *   This list must always include the cluster's primary zone.
+ * @param {string} request.name
+ *   The name (project, location, cluster) of the cluster to set locations.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_locations.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetLocations_async
+ * @deprecated SetLocations is deprecated and may be removed in a future version.
+ */
   setLocations(
-    request?: protos.google.container.v1.ISetLocationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLocationsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetLocationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLocationsRequest|undefined, {}|undefined
+      ]>;
   setLocations(
-    request: protos.google.container.v1.ISetLocationsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLocationsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLocations(
-    request: protos.google.container.v1.ISetLocationsRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLocationsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLocations(
-    request?: protos.google.container.v1.ISetLocationsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetLocationsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetLocationsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLocationsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLocationsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetLocationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  setLocations(
+      request: protos.google.container.v1.ISetLocationsRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLocationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  setLocations(
+      request?: protos.google.container.v1.ISetLocationsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLocationsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLocationsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLocationsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
-    this.warn(
-      'DEP$ClusterManager-$SetLocations',
-      'SetLocations is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$ClusterManager-$SetLocations','SetLocations is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('setLocations request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetLocationsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLocationsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setLocations response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setLocations(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetLocationsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setLocations response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setLocations(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLocationsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setLocations response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the master for a specific cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.masterVersion
-   *   Required. The Kubernetes version to change the master to.
-   *
-   *   Users may specify either explicit versions offered by Kubernetes Engine or
-   *   version aliases, which have the following behavior:
-   *
-   *   - "latest": picks the highest valid Kubernetes version
-   *   - "1.X": picks the highest valid patch+gke.N patch in the 1.X version
-   *   - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
-   *   - "1.X.Y-gke.N": picks an explicit Kubernetes version
-   *   - "-": picks the default Kubernetes version
-   * @param {string} request.name
-   *   The name (project, location, cluster) of the cluster to update.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.update_master.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_UpdateMaster_async
-   */
+/**
+ * Updates the master for a specific cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.masterVersion
+ *   Required. The Kubernetes version to change the master to.
+ *
+ *   Users may specify either explicit versions offered by Kubernetes Engine or
+ *   version aliases, which have the following behavior:
+ *
+ *   - "latest": picks the highest valid Kubernetes version
+ *   - "1.X": picks the highest valid patch+gke.N patch in the 1.X version
+ *   - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
+ *   - "1.X.Y-gke.N": picks an explicit Kubernetes version
+ *   - "-": picks the default Kubernetes version
+ * @param {string} request.name
+ *   The name (project, location, cluster) of the cluster to update.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.update_master.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_UpdateMaster_async
+ */
   updateMaster(
-    request?: protos.google.container.v1.IUpdateMasterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateMasterRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IUpdateMasterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateMasterRequest|undefined, {}|undefined
+      ]>;
   updateMaster(
-    request: protos.google.container.v1.IUpdateMasterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateMasterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateMaster(
-    request: protos.google.container.v1.IUpdateMasterRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateMasterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateMaster(
-    request?: protos.google.container.v1.IUpdateMasterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IUpdateMasterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.IUpdateMasterRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateMasterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateMasterRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IUpdateMasterRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateMaster(
+      request: protos.google.container.v1.IUpdateMasterRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateMasterRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateMaster(
+      request?: protos.google.container.v1.IUpdateMasterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateMasterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateMasterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateMasterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateMaster request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IUpdateMasterRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateMasterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateMaster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateMaster(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IUpdateMasterRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateMaster response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateMaster(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IUpdateMasterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateMaster response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets master auth materials. Currently supports changing the admin password
-   * or a specific cluster, either via password generation or explicitly setting
-   * the password.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {google.container.v1.SetMasterAuthRequest.Action} request.action
-   *   Required. The exact form of action to be taken on the master auth.
-   * @param {google.container.v1.MasterAuth} request.update
-   *   Required. A description of the update.
-   * @param {string} request.name
-   *   The name (project, location, cluster) of the cluster to set auth.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_master_auth.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetMasterAuth_async
-   */
+/**
+ * Sets master auth materials. Currently supports changing the admin password
+ * or a specific cluster, either via password generation or explicitly setting
+ * the password.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {google.container.v1.SetMasterAuthRequest.Action} request.action
+ *   Required. The exact form of action to be taken on the master auth.
+ * @param {google.container.v1.MasterAuth} request.update
+ *   Required. A description of the update.
+ * @param {string} request.name
+ *   The name (project, location, cluster) of the cluster to set auth.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_master_auth.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetMasterAuth_async
+ */
   setMasterAuth(
-    request?: protos.google.container.v1.ISetMasterAuthRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMasterAuthRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetMasterAuthRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMasterAuthRequest|undefined, {}|undefined
+      ]>;
   setMasterAuth(
-    request: protos.google.container.v1.ISetMasterAuthRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMasterAuth(
-    request: protos.google.container.v1.ISetMasterAuthRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMasterAuth(
-    request?: protos.google.container.v1.ISetMasterAuthRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetMasterAuthRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMasterAuthRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetMasterAuthRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMasterAuth(
+      request: protos.google.container.v1.ISetMasterAuthRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetMasterAuthRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMasterAuth(
+      request?: protos.google.container.v1.ISetMasterAuthRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetMasterAuthRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetMasterAuthRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMasterAuthRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setMasterAuth request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMasterAuthRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setMasterAuth response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setMasterAuth(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetMasterAuthRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setMasterAuth response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setMasterAuth(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMasterAuthRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setMasterAuth response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the cluster, including the Kubernetes endpoint and all worker
-   * nodes.
-   *
-   * Firewalls and routes that were configured during cluster creation
-   * are also deleted.
-   *
-   * Other Google Compute Engine resources that might be in use by the cluster,
-   * such as load balancer resources, are not deleted if they weren't present
-   * when the cluster was initially created.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to delete.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.name
-   *   The name (project, location, cluster) of the cluster to delete.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.delete_cluster.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_DeleteCluster_async
-   */
+/**
+ * Deletes the cluster, including the Kubernetes endpoint and all worker
+ * nodes.
+ *
+ * Firewalls and routes that were configured during cluster creation
+ * are also deleted.
+ *
+ * Other Google Compute Engine resources that might be in use by the cluster,
+ * such as load balancer resources, are not deleted if they weren't present
+ * when the cluster was initially created.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to delete.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.name
+ *   The name (project, location, cluster) of the cluster to delete.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.delete_cluster.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_DeleteCluster_async
+ */
   deleteCluster(
-    request?: protos.google.container.v1.IDeleteClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteClusterRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IDeleteClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IDeleteClusterRequest|undefined, {}|undefined
+      ]>;
   deleteCluster(
-    request: protos.google.container.v1.IDeleteClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCluster(
-    request: protos.google.container.v1.IDeleteClusterRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCluster(
-    request?: protos.google.container.v1.IDeleteClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IDeleteClusterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.IDeleteClusterRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteClusterRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IDeleteClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCluster(
+      request: protos.google.container.v1.IDeleteClusterRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IDeleteClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCluster(
+      request?: protos.google.container.v1.IDeleteClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IDeleteClusterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IDeleteClusterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IDeleteClusterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteCluster request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IDeleteClusterRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IDeleteClusterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IDeleteClusterRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCluster response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteCluster(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IDeleteClusterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteCluster response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lists all operations in a project in a specific zone or all zones.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the parent field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) to return
-   *   operations for, or `-` for all zones. This field has been deprecated and
-   *   replaced by the parent field.
-   * @param {string} request.parent
-   *   The parent (project and location) where the operations will be listed.
-   *   Specified in the format `projects/* /locations/*`.
-   *   Location "-" matches all zones and all regions.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.ListOperationsResponse|ListOperationsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.list_operations.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_ListOperations_async
-   */
+/**
+ * Lists all operations in a project in a specific zone or all zones.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the parent field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) to return
+ *   operations for, or `-` for all zones. This field has been deprecated and
+ *   replaced by the parent field.
+ * @param {string} request.parent
+ *   The parent (project and location) where the operations will be listed.
+ *   Specified in the format `projects/* /locations/*`.
+ *   Location "-" matches all zones and all regions.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.ListOperationsResponse|ListOperationsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.list_operations.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_ListOperations_async
+ */
   listOperations(
-    request?: protos.google.container.v1.IListOperationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IListOperationsResponse,
-      protos.google.container.v1.IListOperationsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IListOperationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IListOperationsResponse,
+        protos.google.container.v1.IListOperationsRequest|undefined, {}|undefined
+      ]>;
   listOperations(
-    request: protos.google.container.v1.IListOperationsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IListOperationsResponse,
-      protos.google.container.v1.IListOperationsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listOperations(
-    request: protos.google.container.v1.IListOperationsRequest,
-    callback: Callback<
-      protos.google.container.v1.IListOperationsResponse,
-      protos.google.container.v1.IListOperationsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listOperations(
-    request?: protos.google.container.v1.IListOperationsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IListOperationsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IListOperationsResponse,
-          protos.google.container.v1.IListOperationsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IListOperationsResponse,
-      protos.google.container.v1.IListOperationsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IListOperationsResponse,
-      protos.google.container.v1.IListOperationsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IListOperationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listOperations(
+      request: protos.google.container.v1.IListOperationsRequest,
+      callback: Callback<
+          protos.google.container.v1.IListOperationsResponse,
+          protos.google.container.v1.IListOperationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listOperations(
+      request?: protos.google.container.v1.IListOperationsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IListOperationsResponse,
+          protos.google.container.v1.IListOperationsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IListOperationsResponse,
+          protos.google.container.v1.IListOperationsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IListOperationsResponse,
+        protos.google.container.v1.IListOperationsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOperations request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IListOperationsResponse,
-          protos.google.container.v1.IListOperationsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IListOperationsResponse,
+        protos.google.container.v1.IListOperationsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listOperations response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listOperations(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IListOperationsResponse,
-          protos.google.container.v1.IListOperationsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('listOperations response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listOperations(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IListOperationsResponse,
+        protos.google.container.v1.IListOperationsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listOperations response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the specified operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.operationId
-   *   Deprecated. The server-assigned `name` of the operation.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.name
-   *   The name (project, location, operation id) of the operation to get.
-   *   Specified in the format `projects/* /locations/* /operations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.get_operation.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_GetOperation_async
-   */
+/**
+ * Gets the specified operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.operationId
+ *   Deprecated. The server-assigned `name` of the operation.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.name
+ *   The name (project, location, operation id) of the operation to get.
+ *   Specified in the format `projects/* /locations/* /operations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.get_operation.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_GetOperation_async
+ */
   getOperation(
-    request?: protos.google.container.v1.IGetOperationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IGetOperationRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IGetOperationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IGetOperationRequest|undefined, {}|undefined
+      ]>;
   getOperation(
-    request: protos.google.container.v1.IGetOperationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IGetOperationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOperation(
-    request: protos.google.container.v1.IGetOperationRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IGetOperationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOperation(
-    request?: protos.google.container.v1.IGetOperationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IGetOperationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.IGetOperationRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IGetOperationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IGetOperationRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IGetOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOperation(
+      request: protos.google.container.v1.IGetOperationRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IGetOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOperation(
+      request?: protos.google.container.v1.IGetOperationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IGetOperationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IGetOperationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IGetOperationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        operation_id: request.operationId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'operation_id': request.operationId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getOperation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IGetOperationRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IGetOperationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getOperation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getOperation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IGetOperationRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getOperation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getOperation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IGetOperationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getOperation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Cancels the specified operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   operation resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.operationId
-   *   Deprecated. The server-assigned `name` of the operation.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.name
-   *   The name (project, location, operation id) of the operation to cancel.
-   *   Specified in the format `projects/* /locations/* /operations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.cancel_operation.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_CancelOperation_async
-   */
+/**
+ * Cancels the specified operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   operation resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.operationId
+ *   Deprecated. The server-assigned `name` of the operation.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.name
+ *   The name (project, location, operation id) of the operation to cancel.
+ *   Specified in the format `projects/* /locations/* /operations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.cancel_operation.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_CancelOperation_async
+ */
   cancelOperation(
-    request?: protos.google.container.v1.ICancelOperationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.container.v1.ICancelOperationRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ICancelOperationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.container.v1.ICancelOperationRequest|undefined, {}|undefined
+      ]>;
   cancelOperation(
-    request: protos.google.container.v1.ICancelOperationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.container.v1.ICancelOperationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelOperation(
-    request: protos.google.container.v1.ICancelOperationRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.container.v1.ICancelOperationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelOperation(
-    request?: protos.google.container.v1.ICancelOperationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ICancelOperationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.container.v1.ICancelOperationRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.container.v1.ICancelOperationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.container.v1.ICancelOperationRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ICancelOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelOperation(
+      request: protos.google.container.v1.ICancelOperationRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.container.v1.ICancelOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelOperation(
+      request?: protos.google.container.v1.ICancelOperationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.container.v1.ICancelOperationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.container.v1.ICancelOperationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.container.v1.ICancelOperationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        operation_id: request.operationId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'operation_id': request.operationId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('cancelOperation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.container.v1.ICancelOperationRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.container.v1.ICancelOperationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelOperation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .cancelOperation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.container.v1.ICancelOperationRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('cancelOperation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.cancelOperation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.container.v1.ICancelOperationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('cancelOperation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns configuration info about the Google Kubernetes Engine service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) to return
-   *   operations for. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.name
-   *   The name (project and location) of the server config to get,
-   *   specified in the format `projects/* /locations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.ServerConfig|ServerConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.get_server_config.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_GetServerConfig_async
-   */
+/**
+ * Returns configuration info about the Google Kubernetes Engine service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) to return
+ *   operations for. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.name
+ *   The name (project and location) of the server config to get,
+ *   specified in the format `projects/* /locations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.ServerConfig|ServerConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.get_server_config.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_GetServerConfig_async
+ */
   getServerConfig(
-    request?: protos.google.container.v1.IGetServerConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IServerConfig,
-      protos.google.container.v1.IGetServerConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IGetServerConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IServerConfig,
+        protos.google.container.v1.IGetServerConfigRequest|undefined, {}|undefined
+      ]>;
   getServerConfig(
-    request: protos.google.container.v1.IGetServerConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IServerConfig,
-      protos.google.container.v1.IGetServerConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getServerConfig(
-    request: protos.google.container.v1.IGetServerConfigRequest,
-    callback: Callback<
-      protos.google.container.v1.IServerConfig,
-      protos.google.container.v1.IGetServerConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getServerConfig(
-    request?: protos.google.container.v1.IGetServerConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IGetServerConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IServerConfig,
-          protos.google.container.v1.IGetServerConfigRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IServerConfig,
-      protos.google.container.v1.IGetServerConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IServerConfig,
-      protos.google.container.v1.IGetServerConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IGetServerConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServerConfig(
+      request: protos.google.container.v1.IGetServerConfigRequest,
+      callback: Callback<
+          protos.google.container.v1.IServerConfig,
+          protos.google.container.v1.IGetServerConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServerConfig(
+      request?: protos.google.container.v1.IGetServerConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IServerConfig,
+          protos.google.container.v1.IGetServerConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IServerConfig,
+          protos.google.container.v1.IGetServerConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IServerConfig,
+        protos.google.container.v1.IGetServerConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getServerConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IServerConfig,
-          protos.google.container.v1.IGetServerConfigRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IServerConfig,
+        protos.google.container.v1.IGetServerConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getServerConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getServerConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IServerConfig,
-          protos.google.container.v1.IGetServerConfigRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getServerConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getServerConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IServerConfig,
+        protos.google.container.v1.IGetServerConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getServerConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the public component of the cluster signing keys in
-   * JSON Web Key format.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The cluster (project, location, cluster name) to get keys for. Specified in
-   *   the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.GetJSONWebKeysResponse|GetJSONWebKeysResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.get_j_s_o_n_web_keys.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_GetJSONWebKeys_async
-   */
+/**
+ * Gets the public component of the cluster signing keys in
+ * JSON Web Key format.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The cluster (project, location, cluster name) to get keys for. Specified in
+ *   the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.GetJSONWebKeysResponse|GetJSONWebKeysResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.get_j_s_o_n_web_keys.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_GetJSONWebKeys_async
+ */
   getJSONWebKeys(
-    request?: protos.google.container.v1.IGetJSONWebKeysRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IGetJSONWebKeysResponse,
-      protos.google.container.v1.IGetJSONWebKeysRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IGetJSONWebKeysRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IGetJSONWebKeysResponse,
+        protos.google.container.v1.IGetJSONWebKeysRequest|undefined, {}|undefined
+      ]>;
   getJSONWebKeys(
-    request: protos.google.container.v1.IGetJSONWebKeysRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IGetJSONWebKeysResponse,
-      protos.google.container.v1.IGetJSONWebKeysRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJSONWebKeys(
-    request: protos.google.container.v1.IGetJSONWebKeysRequest,
-    callback: Callback<
-      protos.google.container.v1.IGetJSONWebKeysResponse,
-      protos.google.container.v1.IGetJSONWebKeysRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJSONWebKeys(
-    request?: protos.google.container.v1.IGetJSONWebKeysRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IGetJSONWebKeysRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IGetJSONWebKeysResponse,
-          protos.google.container.v1.IGetJSONWebKeysRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IGetJSONWebKeysResponse,
-      protos.google.container.v1.IGetJSONWebKeysRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IGetJSONWebKeysResponse,
-      protos.google.container.v1.IGetJSONWebKeysRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IGetJSONWebKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  getJSONWebKeys(
+      request: protos.google.container.v1.IGetJSONWebKeysRequest,
+      callback: Callback<
+          protos.google.container.v1.IGetJSONWebKeysResponse,
+          protos.google.container.v1.IGetJSONWebKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  getJSONWebKeys(
+      request?: protos.google.container.v1.IGetJSONWebKeysRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IGetJSONWebKeysResponse,
+          protos.google.container.v1.IGetJSONWebKeysRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IGetJSONWebKeysResponse,
+          protos.google.container.v1.IGetJSONWebKeysRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IGetJSONWebKeysResponse,
+        protos.google.container.v1.IGetJSONWebKeysRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getJSONWebKeys request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IGetJSONWebKeysResponse,
-          protos.google.container.v1.IGetJSONWebKeysRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IGetJSONWebKeysResponse,
+        protos.google.container.v1.IGetJSONWebKeysRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getJSONWebKeys response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getJsonWebKeys(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IGetJSONWebKeysResponse,
-          protos.google.container.v1.IGetJSONWebKeysRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getJSONWebKeys response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getJsonWebKeys(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IGetJSONWebKeysResponse,
+        protos.google.container.v1.IGetJSONWebKeysRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getJSONWebKeys response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lists the node pools for a cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the parent field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the parent
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
-   *   This field has been deprecated and replaced by the parent field.
-   * @param {string} request.parent
-   *   The parent (project, location, cluster name) where the node pools will be
-   *   listed. Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.ListNodePoolsResponse|ListNodePoolsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.list_node_pools.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_ListNodePools_async
-   */
+/**
+ * Lists the node pools for a cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the parent field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the parent
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the parent field.
+ * @param {string} request.parent
+ *   The parent (project, location, cluster name) where the node pools will be
+ *   listed. Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.ListNodePoolsResponse|ListNodePoolsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.list_node_pools.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_ListNodePools_async
+ */
   listNodePools(
-    request?: protos.google.container.v1.IListNodePoolsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IListNodePoolsResponse,
-      protos.google.container.v1.IListNodePoolsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IListNodePoolsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IListNodePoolsResponse,
+        protos.google.container.v1.IListNodePoolsRequest|undefined, {}|undefined
+      ]>;
   listNodePools(
-    request: protos.google.container.v1.IListNodePoolsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IListNodePoolsResponse,
-      protos.google.container.v1.IListNodePoolsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listNodePools(
-    request: protos.google.container.v1.IListNodePoolsRequest,
-    callback: Callback<
-      protos.google.container.v1.IListNodePoolsResponse,
-      protos.google.container.v1.IListNodePoolsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listNodePools(
-    request?: protos.google.container.v1.IListNodePoolsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IListNodePoolsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IListNodePoolsResponse,
-          protos.google.container.v1.IListNodePoolsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IListNodePoolsResponse,
-      protos.google.container.v1.IListNodePoolsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IListNodePoolsResponse,
-      protos.google.container.v1.IListNodePoolsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IListNodePoolsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listNodePools(
+      request: protos.google.container.v1.IListNodePoolsRequest,
+      callback: Callback<
+          protos.google.container.v1.IListNodePoolsResponse,
+          protos.google.container.v1.IListNodePoolsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listNodePools(
+      request?: protos.google.container.v1.IListNodePoolsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IListNodePoolsResponse,
+          protos.google.container.v1.IListNodePoolsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IListNodePoolsResponse,
+          protos.google.container.v1.IListNodePoolsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IListNodePoolsResponse,
+        protos.google.container.v1.IListNodePoolsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNodePools request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IListNodePoolsResponse,
-          protos.google.container.v1.IListNodePoolsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IListNodePoolsResponse,
+        protos.google.container.v1.IListNodePoolsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listNodePools response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listNodePools(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IListNodePoolsResponse,
-          protos.google.container.v1.IListNodePoolsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('listNodePools response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listNodePools(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IListNodePoolsResponse,
+        protos.google.container.v1.IListNodePoolsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listNodePools response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves the requested node pool.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.name
-   *   The name (project, location, cluster, node pool id) of the node pool to
-   *   get. Specified in the format
-   *   `projects/* /locations/* /clusters/* /nodePools/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.NodePool|NodePool}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.get_node_pool.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_GetNodePool_async
-   */
+/**
+ * Retrieves the requested node pool.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.nodePoolId
+ *   Deprecated. The name of the node pool.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.name
+ *   The name (project, location, cluster, node pool id) of the node pool to
+ *   get. Specified in the format
+ *   `projects/* /locations/* /clusters/* /nodePools/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.NodePool|NodePool}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.get_node_pool.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_GetNodePool_async
+ */
   getNodePool(
-    request?: protos.google.container.v1.IGetNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.INodePool,
-      protos.google.container.v1.IGetNodePoolRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IGetNodePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.INodePool,
+        protos.google.container.v1.IGetNodePoolRequest|undefined, {}|undefined
+      ]>;
   getNodePool(
-    request: protos.google.container.v1.IGetNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.INodePool,
-      protos.google.container.v1.IGetNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNodePool(
-    request: protos.google.container.v1.IGetNodePoolRequest,
-    callback: Callback<
-      protos.google.container.v1.INodePool,
-      protos.google.container.v1.IGetNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNodePool(
-    request?: protos.google.container.v1.IGetNodePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IGetNodePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.INodePool,
-          protos.google.container.v1.IGetNodePoolRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.INodePool,
-      protos.google.container.v1.IGetNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.INodePool,
-      protos.google.container.v1.IGetNodePoolRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IGetNodePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNodePool(
+      request: protos.google.container.v1.IGetNodePoolRequest,
+      callback: Callback<
+          protos.google.container.v1.INodePool,
+          protos.google.container.v1.IGetNodePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNodePool(
+      request?: protos.google.container.v1.IGetNodePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.INodePool,
+          protos.google.container.v1.IGetNodePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.INodePool,
+          protos.google.container.v1.IGetNodePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.INodePool,
+        protos.google.container.v1.IGetNodePoolRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-        node_pool_id: request.nodePoolId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
+      'node_pool_id': request.nodePoolId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getNodePool request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.INodePool,
-          protos.google.container.v1.IGetNodePoolRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.INodePool,
+        protos.google.container.v1.IGetNodePoolRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNodePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getNodePool(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.INodePool,
-          protos.google.container.v1.IGetNodePoolRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getNodePool response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getNodePool(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.INodePool,
+        protos.google.container.v1.IGetNodePoolRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNodePool response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a node pool for a cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the parent field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the parent
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
-   *   This field has been deprecated and replaced by the parent field.
-   * @param {google.container.v1.NodePool} request.nodePool
-   *   Required. The node pool to create.
-   * @param {string} request.parent
-   *   The parent (project, location, cluster name) where the node pool will be
-   *   created. Specified in the format
-   *   `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.create_node_pool.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_CreateNodePool_async
-   */
+/**
+ * Creates a node pool for a cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the parent field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the parent
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the parent field.
+ * @param {google.container.v1.NodePool} request.nodePool
+ *   Required. The node pool to create.
+ * @param {string} request.parent
+ *   The parent (project, location, cluster name) where the node pool will be
+ *   created. Specified in the format
+ *   `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.create_node_pool.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_CreateNodePool_async
+ */
   createNodePool(
-    request?: protos.google.container.v1.ICreateNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateNodePoolRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ICreateNodePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICreateNodePoolRequest|undefined, {}|undefined
+      ]>;
   createNodePool(
-    request: protos.google.container.v1.ICreateNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNodePool(
-    request: protos.google.container.v1.ICreateNodePoolRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNodePool(
-    request?: protos.google.container.v1.ICreateNodePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ICreateNodePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateNodePoolRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ICreateNodePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNodePool(
+      request: protos.google.container.v1.ICreateNodePoolRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ICreateNodePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNodePool(
+      request?: protos.google.container.v1.ICreateNodePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ICreateNodePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ICreateNodePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICreateNodePoolRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createNodePool request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICreateNodePoolRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createNodePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createNodePool(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ICreateNodePoolRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createNodePool response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createNodePool(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICreateNodePoolRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createNodePool response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a node pool from a cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to delete.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.name
-   *   The name (project, location, cluster, node pool id) of the node pool to
-   *   delete. Specified in the format
-   *   `projects/* /locations/* /clusters/* /nodePools/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.delete_node_pool.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_DeleteNodePool_async
-   */
+/**
+ * Deletes a node pool from a cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.nodePoolId
+ *   Deprecated. The name of the node pool to delete.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.name
+ *   The name (project, location, cluster, node pool id) of the node pool to
+ *   delete. Specified in the format
+ *   `projects/* /locations/* /clusters/* /nodePools/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.delete_node_pool.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_DeleteNodePool_async
+ */
   deleteNodePool(
-    request?: protos.google.container.v1.IDeleteNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteNodePoolRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IDeleteNodePoolRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IDeleteNodePoolRequest|undefined, {}|undefined
+      ]>;
   deleteNodePool(
-    request: protos.google.container.v1.IDeleteNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNodePool(
-    request: protos.google.container.v1.IDeleteNodePoolRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNodePool(
-    request?: protos.google.container.v1.IDeleteNodePoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IDeleteNodePoolRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteNodePoolRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IDeleteNodePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNodePool(
+      request: protos.google.container.v1.IDeleteNodePoolRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IDeleteNodePoolRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNodePool(
+      request?: protos.google.container.v1.IDeleteNodePoolRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IDeleteNodePoolRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IDeleteNodePoolRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IDeleteNodePoolRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-        node_pool_id: request.nodePoolId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
+      'node_pool_id': request.nodePoolId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteNodePool request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IDeleteNodePoolRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteNodePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteNodePool(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IDeleteNodePoolRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteNodePool response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteNodePool(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IDeleteNodePoolRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteNodePool response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * CompleteNodePoolUpgrade will signal an on-going node pool upgrade to
-   * complete.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name (project, location, cluster, node pool id) of the node pool to
-   *   complete upgrade.
-   *   Specified in the format `projects/* /locations/* /clusters/* /nodePools/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.complete_node_pool_upgrade.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_CompleteNodePoolUpgrade_async
-   */
+/**
+ * CompleteNodePoolUpgrade will signal an on-going node pool upgrade to
+ * complete.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name (project, location, cluster, node pool id) of the node pool to
+ *   complete upgrade.
+ *   Specified in the format `projects/* /locations/* /clusters/* /nodePools/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.complete_node_pool_upgrade.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_CompleteNodePoolUpgrade_async
+ */
   completeNodePoolUpgrade(
-    request?: protos.google.container.v1.ICompleteNodePoolUpgradeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.container.v1.ICompleteNodePoolUpgradeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ICompleteNodePoolUpgradeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.container.v1.ICompleteNodePoolUpgradeRequest|undefined, {}|undefined
+      ]>;
   completeNodePoolUpgrade(
-    request: protos.google.container.v1.ICompleteNodePoolUpgradeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.container.v1.ICompleteNodePoolUpgradeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  completeNodePoolUpgrade(
-    request: protos.google.container.v1.ICompleteNodePoolUpgradeRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.container.v1.ICompleteNodePoolUpgradeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  completeNodePoolUpgrade(
-    request?: protos.google.container.v1.ICompleteNodePoolUpgradeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ICompleteNodePoolUpgradeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.container.v1.ICompleteNodePoolUpgradeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.container.v1.ICompleteNodePoolUpgradeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.container.v1.ICompleteNodePoolUpgradeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ICompleteNodePoolUpgradeRequest|null|undefined,
+          {}|null|undefined>): void;
+  completeNodePoolUpgrade(
+      request: protos.google.container.v1.ICompleteNodePoolUpgradeRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.container.v1.ICompleteNodePoolUpgradeRequest|null|undefined,
+          {}|null|undefined>): void;
+  completeNodePoolUpgrade(
+      request?: protos.google.container.v1.ICompleteNodePoolUpgradeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.container.v1.ICompleteNodePoolUpgradeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.container.v1.ICompleteNodePoolUpgradeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.container.v1.ICompleteNodePoolUpgradeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('completeNodePoolUpgrade request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.container.v1.ICompleteNodePoolUpgradeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.container.v1.ICompleteNodePoolUpgradeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('completeNodePoolUpgrade response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .completeNodePoolUpgrade(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.container.v1.ICompleteNodePoolUpgradeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('completeNodePoolUpgrade response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.completeNodePoolUpgrade(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.container.v1.ICompleteNodePoolUpgradeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('completeNodePoolUpgrade response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Rolls back a previously Aborted or Failed NodePool upgrade.
-   * This makes no changes if the last upgrade successfully completed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to rollback.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to rollback.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.name
-   *   The name (project, location, cluster, node pool id) of the node poll to
-   *   rollback upgrade.
-   *   Specified in the format `projects/* /locations/* /clusters/* /nodePools/*`.
-   * @param {boolean} request.respectPdb
-   *   Option for rollback to ignore the PodDisruptionBudget.
-   *   Default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.rollback_node_pool_upgrade.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_RollbackNodePoolUpgrade_async
-   */
+/**
+ * Rolls back a previously Aborted or Failed NodePool upgrade.
+ * This makes no changes if the last upgrade successfully completed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to rollback.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.nodePoolId
+ *   Deprecated. The name of the node pool to rollback.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.name
+ *   The name (project, location, cluster, node pool id) of the node poll to
+ *   rollback upgrade.
+ *   Specified in the format `projects/* /locations/* /clusters/* /nodePools/*`.
+ * @param {boolean} request.respectPdb
+ *   Option for rollback to ignore the PodDisruptionBudget.
+ *   Default value is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.rollback_node_pool_upgrade.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_RollbackNodePoolUpgrade_async
+ */
   rollbackNodePoolUpgrade(
-    request?: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IRollbackNodePoolUpgradeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IRollbackNodePoolUpgradeRequest|undefined, {}|undefined
+      ]>;
   rollbackNodePoolUpgrade(
-    request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rollbackNodePoolUpgrade(
-    request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rollbackNodePoolUpgrade(
-    request?: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IRollbackNodePoolUpgradeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IRollbackNodePoolUpgradeRequest|null|undefined,
+          {}|null|undefined>): void;
+  rollbackNodePoolUpgrade(
+      request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IRollbackNodePoolUpgradeRequest|null|undefined,
+          {}|null|undefined>): void;
+  rollbackNodePoolUpgrade(
+      request?: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IRollbackNodePoolUpgradeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IRollbackNodePoolUpgradeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IRollbackNodePoolUpgradeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-        node_pool_id: request.nodePoolId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
+      'node_pool_id': request.nodePoolId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('rollbackNodePoolUpgrade request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IRollbackNodePoolUpgradeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('rollbackNodePoolUpgrade response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .rollbackNodePoolUpgrade(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          (
-            | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('rollbackNodePoolUpgrade response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.rollbackNodePoolUpgrade(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IRollbackNodePoolUpgradeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('rollbackNodePoolUpgrade response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the NodeManagement options for a node pool.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to update.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to update.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {google.container.v1.NodeManagement} request.management
-   *   Required. NodeManagement configuration for the node pool.
-   * @param {string} request.name
-   *   The name (project, location, cluster, node pool id) of the node pool to set
-   *   management properties. Specified in the format
-   *   `projects/* /locations/* /clusters/* /nodePools/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_node_pool_management.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetNodePoolManagement_async
-   */
+/**
+ * Sets the NodeManagement options for a node pool.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to update.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.nodePoolId
+ *   Deprecated. The name of the node pool to update.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {google.container.v1.NodeManagement} request.management
+ *   Required. NodeManagement configuration for the node pool.
+ * @param {string} request.name
+ *   The name (project, location, cluster, node pool id) of the node pool to set
+ *   management properties. Specified in the format
+ *   `projects/* /locations/* /clusters/* /nodePools/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_node_pool_management.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetNodePoolManagement_async
+ */
   setNodePoolManagement(
-    request?: protos.google.container.v1.ISetNodePoolManagementRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolManagementRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetNodePoolManagementRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolManagementRequest|undefined, {}|undefined
+      ]>;
   setNodePoolManagement(
-    request: protos.google.container.v1.ISetNodePoolManagementRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetNodePoolManagementRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNodePoolManagement(
-    request: protos.google.container.v1.ISetNodePoolManagementRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetNodePoolManagementRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNodePoolManagement(
-    request?: protos.google.container.v1.ISetNodePoolManagementRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetNodePoolManagementRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetNodePoolManagementRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetNodePoolManagementRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolManagementRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetNodePoolManagementRequest|null|undefined,
+          {}|null|undefined>): void;
+  setNodePoolManagement(
+      request: protos.google.container.v1.ISetNodePoolManagementRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNodePoolManagementRequest|null|undefined,
+          {}|null|undefined>): void;
+  setNodePoolManagement(
+      request?: protos.google.container.v1.ISetNodePoolManagementRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNodePoolManagementRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNodePoolManagementRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolManagementRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-        node_pool_id: request.nodePoolId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
+      'node_pool_id': request.nodePoolId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setNodePoolManagement request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetNodePoolManagementRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolManagementRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setNodePoolManagement response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setNodePoolManagement(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetNodePoolManagementRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setNodePoolManagement response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setNodePoolManagement(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolManagementRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setNodePoolManagement response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets labels on a cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {number[]} request.resourceLabels
-   *   Required. The labels to set for that cluster.
-   * @param {string} request.labelFingerprint
-   *   Required. The fingerprint of the previous set of labels for this resource,
-   *   used to detect conflicts. The fingerprint is initially generated by
-   *   Kubernetes Engine and changes after every request to modify or update
-   *   labels. You must always provide an up-to-date fingerprint hash when
-   *   updating or changing labels. Make a `get()` request to the
-   *   resource to get the latest fingerprint.
-   * @param {string} request.name
-   *   The name (project, location, cluster name) of the cluster to set labels.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_labels.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetLabels_async
-   */
+/**
+ * Sets labels on a cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {number[]} request.resourceLabels
+ *   Required. The labels to set for that cluster.
+ * @param {string} request.labelFingerprint
+ *   Required. The fingerprint of the previous set of labels for this resource,
+ *   used to detect conflicts. The fingerprint is initially generated by
+ *   Kubernetes Engine and changes after every request to modify or update
+ *   labels. You must always provide an up-to-date fingerprint hash when
+ *   updating or changing labels. Make a `get()` request to the
+ *   resource to get the latest fingerprint.
+ * @param {string} request.name
+ *   The name (project, location, cluster name) of the cluster to set labels.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_labels.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetLabels_async
+ */
   setLabels(
-    request?: protos.google.container.v1.ISetLabelsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLabelsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetLabelsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLabelsRequest|undefined, {}|undefined
+      ]>;
   setLabels(
-    request: protos.google.container.v1.ISetLabelsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLabelsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLabels(
-    request: protos.google.container.v1.ISetLabelsRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLabelsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLabels(
-    request?: protos.google.container.v1.ISetLabelsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetLabelsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetLabelsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLabelsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLabelsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetLabelsRequest|null|undefined,
+          {}|null|undefined>): void;
+  setLabels(
+      request: protos.google.container.v1.ISetLabelsRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLabelsRequest|null|undefined,
+          {}|null|undefined>): void;
+  setLabels(
+      request?: protos.google.container.v1.ISetLabelsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLabelsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLabelsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLabelsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setLabels request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetLabelsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLabelsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setLabels response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setLabels(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetLabelsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setLabels response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setLabels(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLabelsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setLabels response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Enables or disables the ABAC authorization mechanism on a cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to update.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {boolean} request.enabled
-   *   Required. Whether ABAC authorization will be enabled in the cluster.
-   * @param {string} request.name
-   *   The name (project, location, cluster name) of the cluster to set legacy
-   *   abac. Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_legacy_abac.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetLegacyAbac_async
-   */
+/**
+ * Enables or disables the ABAC authorization mechanism on a cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to update.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {boolean} request.enabled
+ *   Required. Whether ABAC authorization will be enabled in the cluster.
+ * @param {string} request.name
+ *   The name (project, location, cluster name) of the cluster to set legacy
+ *   abac. Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_legacy_abac.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetLegacyAbac_async
+ */
   setLegacyAbac(
-    request?: protos.google.container.v1.ISetLegacyAbacRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLegacyAbacRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetLegacyAbacRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLegacyAbacRequest|undefined, {}|undefined
+      ]>;
   setLegacyAbac(
-    request: protos.google.container.v1.ISetLegacyAbacRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLegacyAbac(
-    request: protos.google.container.v1.ISetLegacyAbacRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLegacyAbac(
-    request?: protos.google.container.v1.ISetLegacyAbacRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetLegacyAbacRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLegacyAbacRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetLegacyAbacRequest|null|undefined,
+          {}|null|undefined>): void;
+  setLegacyAbac(
+      request: protos.google.container.v1.ISetLegacyAbacRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLegacyAbacRequest|null|undefined,
+          {}|null|undefined>): void;
+  setLegacyAbac(
+      request?: protos.google.container.v1.ISetLegacyAbacRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLegacyAbacRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLegacyAbacRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLegacyAbacRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setLegacyAbac request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLegacyAbacRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setLegacyAbac response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setLegacyAbac(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetLegacyAbacRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setLegacyAbac response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setLegacyAbac(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetLegacyAbacRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setLegacyAbac response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Starts master IP rotation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.name
-   *   The name (project, location, cluster name) of the cluster to start IP
-   *   rotation. Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {boolean} request.rotateCredentials
-   *   Whether to rotate credentials during IP rotation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.start_i_p_rotation.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_StartIPRotation_async
-   */
+/**
+ * Starts master IP rotation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.name
+ *   The name (project, location, cluster name) of the cluster to start IP
+ *   rotation. Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {boolean} request.rotateCredentials
+ *   Whether to rotate credentials during IP rotation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.start_i_p_rotation.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_StartIPRotation_async
+ */
   startIPRotation(
-    request?: protos.google.container.v1.IStartIPRotationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IStartIPRotationRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IStartIPRotationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IStartIPRotationRequest|undefined, {}|undefined
+      ]>;
   startIPRotation(
-    request: protos.google.container.v1.IStartIPRotationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IStartIPRotationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startIPRotation(
-    request: protos.google.container.v1.IStartIPRotationRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IStartIPRotationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startIPRotation(
-    request?: protos.google.container.v1.IStartIPRotationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IStartIPRotationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.IStartIPRotationRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IStartIPRotationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IStartIPRotationRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IStartIPRotationRequest|null|undefined,
+          {}|null|undefined>): void;
+  startIPRotation(
+      request: protos.google.container.v1.IStartIPRotationRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IStartIPRotationRequest|null|undefined,
+          {}|null|undefined>): void;
+  startIPRotation(
+      request?: protos.google.container.v1.IStartIPRotationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IStartIPRotationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IStartIPRotationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IStartIPRotationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('startIPRotation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IStartIPRotationRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IStartIPRotationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('startIPRotation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .startIpRotation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.IStartIPRotationRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('startIPRotation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.startIpRotation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.IStartIPRotationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('startIPRotation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Completes master IP rotation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.name
-   *   The name (project, location, cluster name) of the cluster to complete IP
-   *   rotation. Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.complete_i_p_rotation.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_CompleteIPRotation_async
-   */
+/**
+ * Completes master IP rotation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.name
+ *   The name (project, location, cluster name) of the cluster to complete IP
+ *   rotation. Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.complete_i_p_rotation.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_CompleteIPRotation_async
+ */
   completeIPRotation(
-    request?: protos.google.container.v1.ICompleteIPRotationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICompleteIPRotationRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ICompleteIPRotationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICompleteIPRotationRequest|undefined, {}|undefined
+      ]>;
   completeIPRotation(
-    request: protos.google.container.v1.ICompleteIPRotationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICompleteIPRotationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  completeIPRotation(
-    request: protos.google.container.v1.ICompleteIPRotationRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICompleteIPRotationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  completeIPRotation(
-    request?: protos.google.container.v1.ICompleteIPRotationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ICompleteIPRotationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ICompleteIPRotationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICompleteIPRotationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICompleteIPRotationRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ICompleteIPRotationRequest|null|undefined,
+          {}|null|undefined>): void;
+  completeIPRotation(
+      request: protos.google.container.v1.ICompleteIPRotationRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ICompleteIPRotationRequest|null|undefined,
+          {}|null|undefined>): void;
+  completeIPRotation(
+      request?: protos.google.container.v1.ICompleteIPRotationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ICompleteIPRotationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ICompleteIPRotationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICompleteIPRotationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('completeIPRotation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ICompleteIPRotationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICompleteIPRotationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('completeIPRotation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .completeIpRotation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ICompleteIPRotationRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('completeIPRotation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.completeIpRotation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ICompleteIPRotationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('completeIPRotation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the size for a specific node pool. The new size will be used for all
-   * replicas, including future replicas created by modifying
-   * {@link protos.google.container.v1.NodePool.locations|NodePool.locations}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to update.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to update.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {number} request.nodeCount
-   *   Required. The desired node count for the pool.
-   * @param {string} request.name
-   *   The name (project, location, cluster, node pool id) of the node pool to set
-   *   size.
-   *   Specified in the format `projects/* /locations/* /clusters/* /nodePools/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_node_pool_size.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetNodePoolSize_async
-   */
+/**
+ * Sets the size for a specific node pool. The new size will be used for all
+ * replicas, including future replicas created by modifying
+ * {@link protos.google.container.v1.NodePool.locations|NodePool.locations}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster to update.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.nodePoolId
+ *   Deprecated. The name of the node pool to update.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {number} request.nodeCount
+ *   Required. The desired node count for the pool.
+ * @param {string} request.name
+ *   The name (project, location, cluster, node pool id) of the node pool to set
+ *   size.
+ *   Specified in the format `projects/* /locations/* /clusters/* /nodePools/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_node_pool_size.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetNodePoolSize_async
+ */
   setNodePoolSize(
-    request?: protos.google.container.v1.ISetNodePoolSizeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolSizeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetNodePoolSizeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolSizeRequest|undefined, {}|undefined
+      ]>;
   setNodePoolSize(
-    request: protos.google.container.v1.ISetNodePoolSizeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNodePoolSize(
-    request: protos.google.container.v1.ISetNodePoolSizeRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNodePoolSize(
-    request?: protos.google.container.v1.ISetNodePoolSizeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetNodePoolSizeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolSizeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetNodePoolSizeRequest|null|undefined,
+          {}|null|undefined>): void;
+  setNodePoolSize(
+      request: protos.google.container.v1.ISetNodePoolSizeRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNodePoolSizeRequest|null|undefined,
+          {}|null|undefined>): void;
+  setNodePoolSize(
+      request?: protos.google.container.v1.ISetNodePoolSizeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNodePoolSizeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNodePoolSizeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolSizeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-        node_pool_id: request.nodePoolId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
+      'node_pool_id': request.nodePoolId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setNodePoolSize request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolSizeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setNodePoolSize response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setNodePoolSize(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetNodePoolSizeRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setNodePoolSize response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setNodePoolSize(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNodePoolSizeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setNodePoolSize response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Enables or disables Network Policy for a cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
-   *   This field has been deprecated and replaced by the name field.
-   * @param {google.container.v1.NetworkPolicy} request.networkPolicy
-   *   Required. Configuration options for the NetworkPolicy feature.
-   * @param {string} request.name
-   *   The name (project, location, cluster name) of the cluster to set networking
-   *   policy. Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_network_policy.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetNetworkPolicy_async
-   */
+/**
+ * Enables or disables Network Policy for a cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Deprecated. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ *   This field has been deprecated and replaced by the name field.
+ * @param {string} request.zone
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides. This field has been deprecated and replaced by the name
+ *   field.
+ * @param {string} request.clusterId
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
+ * @param {google.container.v1.NetworkPolicy} request.networkPolicy
+ *   Required. Configuration options for the NetworkPolicy feature.
+ * @param {string} request.name
+ *   The name (project, location, cluster name) of the cluster to set networking
+ *   policy. Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_network_policy.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetNetworkPolicy_async
+ */
   setNetworkPolicy(
-    request?: protos.google.container.v1.ISetNetworkPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNetworkPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetNetworkPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNetworkPolicyRequest|undefined, {}|undefined
+      ]>;
   setNetworkPolicy(
-    request: protos.google.container.v1.ISetNetworkPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNetworkPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNetworkPolicy(
-    request: protos.google.container.v1.ISetNetworkPolicyRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNetworkPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNetworkPolicy(
-    request?: protos.google.container.v1.ISetNetworkPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetNetworkPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetNetworkPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNetworkPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNetworkPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetNetworkPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setNetworkPolicy(
+      request: protos.google.container.v1.ISetNetworkPolicyRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNetworkPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setNetworkPolicy(
+      request?: protos.google.container.v1.ISetNetworkPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNetworkPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNetworkPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNetworkPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setNetworkPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetNetworkPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNetworkPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setNetworkPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setNetworkPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetNetworkPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setNetworkPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setNetworkPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetNetworkPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setNetworkPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the maintenance policy for a cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The Google Developers Console [project ID or project
-   *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-   * @param {string} request.zone
-   *   Required. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides.
-   * @param {string} request.clusterId
-   *   Required. The name of the cluster to update.
-   * @param {google.container.v1.MaintenancePolicy} request.maintenancePolicy
-   *   Required. The maintenance policy to be set for the cluster. An empty field
-   *   clears the existing maintenance policy.
-   * @param {string} request.name
-   *   The name (project, location, cluster name) of the cluster to set
-   *   maintenance policy.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.set_maintenance_policy.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_SetMaintenancePolicy_async
-   */
+/**
+ * Sets the maintenance policy for a cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Required. The Google Developers Console [project ID or project
+ *   number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+ * @param {string} request.zone
+ *   Required. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+ *   cluster resides.
+ * @param {string} request.clusterId
+ *   Required. The name of the cluster to update.
+ * @param {google.container.v1.MaintenancePolicy} request.maintenancePolicy
+ *   Required. The maintenance policy to be set for the cluster. An empty field
+ *   clears the existing maintenance policy.
+ * @param {string} request.name
+ *   The name (project, location, cluster name) of the cluster to set
+ *   maintenance policy.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.set_maintenance_policy.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_SetMaintenancePolicy_async
+ */
   setMaintenancePolicy(
-    request?: protos.google.container.v1.ISetMaintenancePolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMaintenancePolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ISetMaintenancePolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMaintenancePolicyRequest|undefined, {}|undefined
+      ]>;
   setMaintenancePolicy(
-    request: protos.google.container.v1.ISetMaintenancePolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetMaintenancePolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMaintenancePolicy(
-    request: protos.google.container.v1.ISetMaintenancePolicyRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetMaintenancePolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMaintenancePolicy(
-    request?: protos.google.container.v1.ISetMaintenancePolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ISetMaintenancePolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetMaintenancePolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetMaintenancePolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMaintenancePolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ISetMaintenancePolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMaintenancePolicy(
+      request: protos.google.container.v1.ISetMaintenancePolicyRequest,
+      callback: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetMaintenancePolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMaintenancePolicy(
+      request?: protos.google.container.v1.ISetMaintenancePolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetMaintenancePolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetMaintenancePolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMaintenancePolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-        project_id: request.projectId ?? '',
-        zone: request.zone ?? '',
-        cluster_id: request.clusterId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+      'project_id': request.projectId ?? '',
+      'zone': request.zone ?? '',
+      'cluster_id': request.clusterId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setMaintenancePolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IOperation,
-          | protos.google.container.v1.ISetMaintenancePolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMaintenancePolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setMaintenancePolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setMaintenancePolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IOperation,
-          protos.google.container.v1.ISetMaintenancePolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setMaintenancePolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setMaintenancePolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IOperation,
+        protos.google.container.v1.ISetMaintenancePolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setMaintenancePolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Checks the cluster compatibility with Autopilot mode, and returns a list of
-   * compatibility issues.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name (project, location, cluster) of the cluster to retrieve.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.CheckAutopilotCompatibilityResponse|CheckAutopilotCompatibilityResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.check_autopilot_compatibility.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_CheckAutopilotCompatibility_async
-   */
+/**
+ * Checks the cluster compatibility with Autopilot mode, and returns a list of
+ * compatibility issues.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name (project, location, cluster) of the cluster to retrieve.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.CheckAutopilotCompatibilityResponse|CheckAutopilotCompatibilityResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.check_autopilot_compatibility.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_CheckAutopilotCompatibility_async
+ */
   checkAutopilotCompatibility(
-    request?: protos.google.container.v1.ICheckAutopilotCompatibilityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
-      (
-        | protos.google.container.v1.ICheckAutopilotCompatibilityRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.ICheckAutopilotCompatibilityRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
+        protos.google.container.v1.ICheckAutopilotCompatibilityRequest|undefined, {}|undefined
+      ]>;
   checkAutopilotCompatibility(
-    request: protos.google.container.v1.ICheckAutopilotCompatibilityRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
-      | protos.google.container.v1.ICheckAutopilotCompatibilityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  checkAutopilotCompatibility(
-    request: protos.google.container.v1.ICheckAutopilotCompatibilityRequest,
-    callback: Callback<
-      protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
-      | protos.google.container.v1.ICheckAutopilotCompatibilityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  checkAutopilotCompatibility(
-    request?: protos.google.container.v1.ICheckAutopilotCompatibilityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.ICheckAutopilotCompatibilityRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
-          | protos.google.container.v1.ICheckAutopilotCompatibilityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
-      | protos.google.container.v1.ICheckAutopilotCompatibilityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
-      (
-        | protos.google.container.v1.ICheckAutopilotCompatibilityRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.ICheckAutopilotCompatibilityRequest|null|undefined,
+          {}|null|undefined>): void;
+  checkAutopilotCompatibility(
+      request: protos.google.container.v1.ICheckAutopilotCompatibilityRequest,
+      callback: Callback<
+          protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
+          protos.google.container.v1.ICheckAutopilotCompatibilityRequest|null|undefined,
+          {}|null|undefined>): void;
+  checkAutopilotCompatibility(
+      request?: protos.google.container.v1.ICheckAutopilotCompatibilityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
+          protos.google.container.v1.ICheckAutopilotCompatibilityRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
+          protos.google.container.v1.ICheckAutopilotCompatibilityRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
+        protos.google.container.v1.ICheckAutopilotCompatibilityRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('checkAutopilotCompatibility request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
-          | protos.google.container.v1.ICheckAutopilotCompatibilityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
+        protos.google.container.v1.ICheckAutopilotCompatibilityRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('checkAutopilotCompatibility response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .checkAutopilotCompatibility(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
-          (
-            | protos.google.container.v1.ICheckAutopilotCompatibilityRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('checkAutopilotCompatibility response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.checkAutopilotCompatibility(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.ICheckAutopilotCompatibilityResponse,
+        protos.google.container.v1.ICheckAutopilotCompatibilityRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('checkAutopilotCompatibility response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetch upgrade information of a specific cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name (project, location, cluster) of the cluster to get.
-   *   Specified in the format `projects/* /locations/* /clusters/*` or
-   *   `projects/* /zones/* /clusters/*`.
-   * @param {string} request.version
-   *   API request version that initiates this operation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.ClusterUpgradeInfo|ClusterUpgradeInfo}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.fetch_cluster_upgrade_info.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_FetchClusterUpgradeInfo_async
-   */
+/**
+ * Fetch upgrade information of a specific cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name (project, location, cluster) of the cluster to get.
+ *   Specified in the format `projects/* /locations/* /clusters/*` or
+ *   `projects/* /zones/* /clusters/*`.
+ * @param {string} request.version
+ *   API request version that initiates this operation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.ClusterUpgradeInfo|ClusterUpgradeInfo}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.fetch_cluster_upgrade_info.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_FetchClusterUpgradeInfo_async
+ */
   fetchClusterUpgradeInfo(
-    request?: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IClusterUpgradeInfo,
-      protos.google.container.v1.IFetchClusterUpgradeInfoRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IClusterUpgradeInfo,
+        protos.google.container.v1.IFetchClusterUpgradeInfoRequest|undefined, {}|undefined
+      ]>;
   fetchClusterUpgradeInfo(
-    request: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IClusterUpgradeInfo,
-      | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchClusterUpgradeInfo(
-    request: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
-    callback: Callback<
-      protos.google.container.v1.IClusterUpgradeInfo,
-      | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchClusterUpgradeInfo(
-    request?: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.IClusterUpgradeInfo,
-          | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.IClusterUpgradeInfo,
-      | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IClusterUpgradeInfo,
-      protos.google.container.v1.IFetchClusterUpgradeInfoRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IFetchClusterUpgradeInfoRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchClusterUpgradeInfo(
+      request: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
+      callback: Callback<
+          protos.google.container.v1.IClusterUpgradeInfo,
+          protos.google.container.v1.IFetchClusterUpgradeInfoRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchClusterUpgradeInfo(
+      request?: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.IClusterUpgradeInfo,
+          protos.google.container.v1.IFetchClusterUpgradeInfoRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.IClusterUpgradeInfo,
+          protos.google.container.v1.IFetchClusterUpgradeInfoRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.IClusterUpgradeInfo,
+        protos.google.container.v1.IFetchClusterUpgradeInfoRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchClusterUpgradeInfo request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.IClusterUpgradeInfo,
-          | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.IClusterUpgradeInfo,
+        protos.google.container.v1.IFetchClusterUpgradeInfoRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchClusterUpgradeInfo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchClusterUpgradeInfo(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.IClusterUpgradeInfo,
-          (
-            | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchClusterUpgradeInfo response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.fetchClusterUpgradeInfo(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.IClusterUpgradeInfo,
+        protos.google.container.v1.IFetchClusterUpgradeInfoRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchClusterUpgradeInfo response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetch upgrade information of a specific nodepool.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name (project, location, cluster, nodepool) of the nodepool
-   *   to get. Specified in the format
-   *   `projects/* /locations/* /clusters/* /nodePools/*` or
-   *   `projects/* /zones/* /clusters/* /nodePools/*`.
-   * @param {string} request.version
-   *   API request version that initiates this operation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.container.v1.NodePoolUpgradeInfo|NodePoolUpgradeInfo}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.fetch_node_pool_upgrade_info.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_FetchNodePoolUpgradeInfo_async
-   */
+/**
+ * Fetch upgrade information of a specific nodepool.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name (project, location, cluster, nodepool) of the nodepool
+ *   to get. Specified in the format
+ *   `projects/* /locations/* /clusters/* /nodePools/*` or
+ *   `projects/* /zones/* /clusters/* /nodePools/*`.
+ * @param {string} request.version
+ *   API request version that initiates this operation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1.NodePoolUpgradeInfo|NodePoolUpgradeInfo}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.fetch_node_pool_upgrade_info.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_FetchNodePoolUpgradeInfo_async
+ */
   fetchNodePoolUpgradeInfo(
-    request?: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.INodePoolUpgradeInfo,
-      protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.INodePoolUpgradeInfo,
+        protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest|undefined, {}|undefined
+      ]>;
   fetchNodePoolUpgradeInfo(
-    request: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.INodePoolUpgradeInfo,
-      | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchNodePoolUpgradeInfo(
-    request: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
-    callback: Callback<
-      protos.google.container.v1.INodePoolUpgradeInfo,
-      | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchNodePoolUpgradeInfo(
-    request?: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.container.v1.INodePoolUpgradeInfo,
-          | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1.INodePoolUpgradeInfo,
-      | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.INodePoolUpgradeInfo,
-      protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchNodePoolUpgradeInfo(
+      request: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
+      callback: Callback<
+          protos.google.container.v1.INodePoolUpgradeInfo,
+          protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchNodePoolUpgradeInfo(
+      request?: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1.INodePoolUpgradeInfo,
+          protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1.INodePoolUpgradeInfo,
+          protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1.INodePoolUpgradeInfo,
+        protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchNodePoolUpgradeInfo request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.container.v1.INodePoolUpgradeInfo,
-          | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.container.v1.INodePoolUpgradeInfo,
+        protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchNodePoolUpgradeInfo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchNodePoolUpgradeInfo(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.container.v1.INodePoolUpgradeInfo,
-          (
-            | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchNodePoolUpgradeInfo response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.fetchNodePoolUpgradeInfo(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1.INodePoolUpgradeInfo,
+        protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchNodePoolUpgradeInfo response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists subnetworks that are usable for creating clusters in a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The parent project where subnetworks are usable.
-   *   Specified in the format `projects/*`.
-   * @param {string} request.filter
-   *   Filtering currently only supports equality on the networkProjectId and must
-   *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
-   *   is the project which owns the listed subnetworks. This defaults to the
-   *   parent project ID.
-   * @param {number} request.pageSize
-   *   The max number of results per page that should be returned. If the number
-   *   of available results is larger than `page_size`, a `next_page_token` is
-   *   returned which can be used to get the next page of results in subsequent
-   *   requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set this to the nextPageToken returned by
-   *   previous list requests to get the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.container.v1.UsableSubnetwork|UsableSubnetwork}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listUsableSubnetworksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists subnetworks that are usable for creating clusters in a project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The parent project where subnetworks are usable.
+ *   Specified in the format `projects/*`.
+ * @param {string} request.filter
+ *   Filtering currently only supports equality on the networkProjectId and must
+ *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+ *   is the project which owns the listed subnetworks. This defaults to the
+ *   parent project ID.
+ * @param {number} request.pageSize
+ *   The max number of results per page that should be returned. If the number
+ *   of available results is larger than `page_size`, a `next_page_token` is
+ *   returned which can be used to get the next page of results in subsequent
+ *   requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set this to the nextPageToken returned by
+ *   previous list requests to get the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.container.v1.UsableSubnetwork|UsableSubnetwork}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listUsableSubnetworksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listUsableSubnetworks(
-    request?: protos.google.container.v1.IListUsableSubnetworksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IUsableSubnetwork[],
-      protos.google.container.v1.IListUsableSubnetworksRequest | null,
-      protos.google.container.v1.IListUsableSubnetworksResponse,
-    ]
-  >;
+      request?: protos.google.container.v1.IListUsableSubnetworksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1.IUsableSubnetwork[],
+        protos.google.container.v1.IListUsableSubnetworksRequest|null,
+        protos.google.container.v1.IListUsableSubnetworksResponse
+      ]>;
   listUsableSubnetworks(
-    request: protos.google.container.v1.IListUsableSubnetworksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.container.v1.IListUsableSubnetworksRequest,
-      | protos.google.container.v1.IListUsableSubnetworksResponse
-      | null
-      | undefined,
-      protos.google.container.v1.IUsableSubnetwork
-    >
-  ): void;
-  listUsableSubnetworks(
-    request: protos.google.container.v1.IListUsableSubnetworksRequest,
-    callback: PaginationCallback<
-      protos.google.container.v1.IListUsableSubnetworksRequest,
-      | protos.google.container.v1.IListUsableSubnetworksResponse
-      | null
-      | undefined,
-      protos.google.container.v1.IUsableSubnetwork
-    >
-  ): void;
-  listUsableSubnetworks(
-    request?: protos.google.container.v1.IListUsableSubnetworksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.container.v1.IListUsableSubnetworksRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.container.v1.IListUsableSubnetworksRequest,
-          | protos.google.container.v1.IListUsableSubnetworksResponse
-          | null
-          | undefined,
-          protos.google.container.v1.IUsableSubnetwork
-        >,
-    callback?: PaginationCallback<
-      protos.google.container.v1.IListUsableSubnetworksRequest,
-      | protos.google.container.v1.IListUsableSubnetworksResponse
-      | null
-      | undefined,
-      protos.google.container.v1.IUsableSubnetwork
-    >
-  ): Promise<
-    [
-      protos.google.container.v1.IUsableSubnetwork[],
-      protos.google.container.v1.IListUsableSubnetworksRequest | null,
-      protos.google.container.v1.IListUsableSubnetworksResponse,
-    ]
-  > | void {
+          protos.google.container.v1.IListUsableSubnetworksResponse|null|undefined,
+          protos.google.container.v1.IUsableSubnetwork>): void;
+  listUsableSubnetworks(
+      request: protos.google.container.v1.IListUsableSubnetworksRequest,
+      callback: PaginationCallback<
+          protos.google.container.v1.IListUsableSubnetworksRequest,
+          protos.google.container.v1.IListUsableSubnetworksResponse|null|undefined,
+          protos.google.container.v1.IUsableSubnetwork>): void;
+  listUsableSubnetworks(
+      request?: protos.google.container.v1.IListUsableSubnetworksRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.container.v1.IListUsableSubnetworksRequest,
+          protos.google.container.v1.IListUsableSubnetworksResponse|null|undefined,
+          protos.google.container.v1.IUsableSubnetwork>,
+      callback?: PaginationCallback<
+          protos.google.container.v1.IListUsableSubnetworksRequest,
+          protos.google.container.v1.IListUsableSubnetworksResponse|null|undefined,
+          protos.google.container.v1.IUsableSubnetwork>):
+      Promise<[
+        protos.google.container.v1.IUsableSubnetwork[],
+        protos.google.container.v1.IListUsableSubnetworksRequest|null,
+        protos.google.container.v1.IListUsableSubnetworksResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.container.v1.IListUsableSubnetworksRequest,
-          | protos.google.container.v1.IListUsableSubnetworksResponse
-          | null
-          | undefined,
-          protos.google.container.v1.IUsableSubnetwork
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.container.v1.IListUsableSubnetworksRequest,
+      protos.google.container.v1.IListUsableSubnetworksResponse|null|undefined,
+      protos.google.container.v1.IUsableSubnetwork>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listUsableSubnetworks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5186,66 +4462,63 @@ export class ClusterManagerClient {
     this._log.info('listUsableSubnetworks request %j', request);
     return this.innerApiCalls
       .listUsableSubnetworks(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.container.v1.IUsableSubnetwork[],
-          protos.google.container.v1.IListUsableSubnetworksRequest | null,
-          protos.google.container.v1.IListUsableSubnetworksResponse,
-        ]) => {
-          this._log.info('listUsableSubnetworks values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.container.v1.IUsableSubnetwork[],
+        protos.google.container.v1.IListUsableSubnetworksRequest|null,
+        protos.google.container.v1.IListUsableSubnetworksResponse
+      ]) => {
+        this._log.info('listUsableSubnetworks values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listUsableSubnetworks`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The parent project where subnetworks are usable.
-   *   Specified in the format `projects/*`.
-   * @param {string} request.filter
-   *   Filtering currently only supports equality on the networkProjectId and must
-   *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
-   *   is the project which owns the listed subnetworks. This defaults to the
-   *   parent project ID.
-   * @param {number} request.pageSize
-   *   The max number of results per page that should be returned. If the number
-   *   of available results is larger than `page_size`, a `next_page_token` is
-   *   returned which can be used to get the next page of results in subsequent
-   *   requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set this to the nextPageToken returned by
-   *   previous list requests to get the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.container.v1.UsableSubnetwork|UsableSubnetwork} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listUsableSubnetworksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listUsableSubnetworks`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The parent project where subnetworks are usable.
+ *   Specified in the format `projects/*`.
+ * @param {string} request.filter
+ *   Filtering currently only supports equality on the networkProjectId and must
+ *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+ *   is the project which owns the listed subnetworks. This defaults to the
+ *   parent project ID.
+ * @param {number} request.pageSize
+ *   The max number of results per page that should be returned. If the number
+ *   of available results is larger than `page_size`, a `next_page_token` is
+ *   returned which can be used to get the next page of results in subsequent
+ *   requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set this to the nextPageToken returned by
+ *   previous list requests to get the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.container.v1.UsableSubnetwork|UsableSubnetwork} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listUsableSubnetworksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listUsableSubnetworksStream(
-    request?: protos.google.container.v1.IListUsableSubnetworksRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.container.v1.IListUsableSubnetworksRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listUsableSubnetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listUsableSubnetworks stream %j', request);
     return this.descriptors.page.listUsableSubnetworks.createStream(
       this.innerApiCalls.listUsableSubnetworks as GaxCall,
@@ -5254,57 +4527,56 @@ export class ClusterManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listUsableSubnetworks`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The parent project where subnetworks are usable.
-   *   Specified in the format `projects/*`.
-   * @param {string} request.filter
-   *   Filtering currently only supports equality on the networkProjectId and must
-   *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
-   *   is the project which owns the listed subnetworks. This defaults to the
-   *   parent project ID.
-   * @param {number} request.pageSize
-   *   The max number of results per page that should be returned. If the number
-   *   of available results is larger than `page_size`, a `next_page_token` is
-   *   returned which can be used to get the next page of results in subsequent
-   *   requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set this to the nextPageToken returned by
-   *   previous list requests to get the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.container.v1.UsableSubnetwork|UsableSubnetwork}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cluster_manager.list_usable_subnetworks.js</caption>
-   * region_tag:container_v1_generated_ClusterManager_ListUsableSubnetworks_async
-   */
+/**
+ * Equivalent to `listUsableSubnetworks`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The parent project where subnetworks are usable.
+ *   Specified in the format `projects/*`.
+ * @param {string} request.filter
+ *   Filtering currently only supports equality on the networkProjectId and must
+ *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+ *   is the project which owns the listed subnetworks. This defaults to the
+ *   parent project ID.
+ * @param {number} request.pageSize
+ *   The max number of results per page that should be returned. If the number
+ *   of available results is larger than `page_size`, a `next_page_token` is
+ *   returned which can be used to get the next page of results in subsequent
+ *   requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set this to the nextPageToken returned by
+ *   previous list requests to get the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.container.v1.UsableSubnetwork|UsableSubnetwork}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cluster_manager.list_usable_subnetworks.js</caption>
+ * region_tag:container_v1_generated_ClusterManager_ListUsableSubnetworks_async
+ */
   listUsableSubnetworksAsync(
-    request?: protos.google.container.v1.IListUsableSubnetworksRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.container.v1.IUsableSubnetwork> {
+      request?: protos.google.container.v1.IListUsableSubnetworksRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.container.v1.IUsableSubnetwork>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listUsableSubnetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listUsableSubnetworks iterate %j', request);
     return this.descriptors.page.listUsableSubnetworks.asyncIterate(
       this.innerApiCalls['listUsableSubnetworks'] as GaxCall,
@@ -5324,7 +4596,7 @@ export class ClusterManagerClient {
    * @param {string} ca_pool
    * @returns {string} Resource name string.
    */
-  caPoolPath(project: string, location: string, caPool: string) {
+  caPoolPath(project:string,location:string,caPool:string) {
     return this.pathTemplates.caPoolPathTemplate.render({
       project: project,
       location: location,
@@ -5375,13 +4647,7 @@ export class ClusterManagerClient {
    * @param {string} crypto_key_version
    * @returns {string} Resource name string.
    */
-  cryptoKeyVersionPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string,
-    cryptoKeyVersion: string
-  ) {
+  cryptoKeyVersionPath(project:string,location:string,keyRing:string,cryptoKey:string,cryptoKeyVersion:string) {
     return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
       project: project,
       location: location,
@@ -5399,9 +4665,7 @@ export class ClusterManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).project;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).project;
   }
 
   /**
@@ -5412,9 +4676,7 @@ export class ClusterManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).location;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).location;
   }
 
   /**
@@ -5425,9 +4687,7 @@ export class ClusterManagerClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).key_ring;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).key_ring;
   }
 
   /**
@@ -5438,9 +4698,7 @@ export class ClusterManagerClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).crypto_key;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key;
   }
 
   /**
@@ -5451,9 +4709,7 @@ export class ClusterManagerClient {
    * @returns {string} A string representing the crypto_key_version.
    */
   matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).crypto_key_version;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key_version;
   }
 
   /**

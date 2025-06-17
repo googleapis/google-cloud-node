@@ -29,1336 +29,1077 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v4.TenantServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'jobs.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          tenantserviceModule.v4.TenantServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'jobs.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          tenantserviceModule.v4.TenantServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'jobs.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'jobs.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'jobs.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new tenantserviceModule.v4.TenantServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'jobs.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'jobs.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new tenantserviceModule.v4.TenantServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'jobs.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new tenantserviceModule.v4.TenantServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = tenantserviceModule.v4.TenantServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = tenantserviceModule.v4.TenantServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'jobs.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.tenantServiceStub, undefined);
-      await client.initialize();
-      assert(client.tenantServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.tenantServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.tenantServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createTenant', () => {
-    it('invokes createTenant without error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.CreateTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.CreateTenantRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.talent.v4.Tenant()
-      );
-      client.innerApiCalls.createTenant = stubSimpleCall(expectedResponse);
-      const [response] = await client.createTenant(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTenant without error using callback', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.CreateTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.CreateTenantRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.talent.v4.Tenant()
-      );
-      client.innerApiCalls.createTenant =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createTenant(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.talent.v4.ITenant | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTenant with error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.CreateTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.CreateTenantRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createTenant = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createTenant(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTenant with closed client', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.CreateTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.CreateTenantRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createTenant(request), expectedError);
-    });
-  });
-
-  describe('getTenant', () => {
-    it('invokes getTenant without error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.GetTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.GetTenantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.talent.v4.Tenant()
-      );
-      client.innerApiCalls.getTenant = stubSimpleCall(expectedResponse);
-      const [response] = await client.getTenant(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTenant without error using callback', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.GetTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.GetTenantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.talent.v4.Tenant()
-      );
-      client.innerApiCalls.getTenant =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getTenant(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.talent.v4.ITenant | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTenant with error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.GetTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.GetTenantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getTenant = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getTenant(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTenant with closed client', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.GetTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.GetTenantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getTenant(request), expectedError);
-    });
-  });
-
-  describe('updateTenant', () => {
-    it('invokes updateTenant without error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.UpdateTenantRequest()
-      );
-      request.tenant ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.UpdateTenantRequest',
-        ['tenant', 'name']
-      );
-      request.tenant.name = defaultValue1;
-      const expectedHeaderRequestParams = `tenant.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.talent.v4.Tenant()
-      );
-      client.innerApiCalls.updateTenant = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateTenant(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTenant without error using callback', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.UpdateTenantRequest()
-      );
-      request.tenant ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.UpdateTenantRequest',
-        ['tenant', 'name']
-      );
-      request.tenant.name = defaultValue1;
-      const expectedHeaderRequestParams = `tenant.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.talent.v4.Tenant()
-      );
-      client.innerApiCalls.updateTenant =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateTenant(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.talent.v4.ITenant | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTenant with error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.UpdateTenantRequest()
-      );
-      request.tenant ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.UpdateTenantRequest',
-        ['tenant', 'name']
-      );
-      request.tenant.name = defaultValue1;
-      const expectedHeaderRequestParams = `tenant.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateTenant = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateTenant(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTenant with closed client', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.UpdateTenantRequest()
-      );
-      request.tenant ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.UpdateTenantRequest',
-        ['tenant', 'name']
-      );
-      request.tenant.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateTenant(request), expectedError);
-    });
-  });
-
-  describe('deleteTenant', () => {
-    it('invokes deleteTenant without error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.DeleteTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.DeleteTenantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteTenant = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteTenant(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTenant without error using callback', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.DeleteTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.DeleteTenantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteTenant =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteTenant(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTenant with error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.DeleteTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.DeleteTenantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTenant = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteTenant(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteTenant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTenant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTenant with closed client', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.DeleteTenantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.DeleteTenantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteTenant(request), expectedError);
-    });
-  });
-
-  describe('listTenants', () => {
-    it('invokes listTenants without error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.ListTenantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.ListTenantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-      ];
-      client.innerApiCalls.listTenants = stubSimpleCall(expectedResponse);
-      const [response] = await client.listTenants(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTenants as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTenants as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTenants without error using callback', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.ListTenantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.ListTenantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-      ];
-      client.innerApiCalls.listTenants =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listTenants(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.talent.v4.ITenant[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTenants as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTenants as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTenants with error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.ListTenantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.ListTenantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listTenants = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listTenants(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listTenants as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTenants as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTenantsStream without error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.ListTenantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.ListTenantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-      ];
-      client.descriptors.page.listTenants.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listTenantsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.talent.v4.Tenant[] = [];
-        stream.on('data', (response: protos.google.cloud.talent.v4.Tenant) => {
-          responses.push(response);
-        });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listTenants.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTenants, request)
-      );
-      assert(
-        (client.descriptors.page.listTenants.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listTenantsStream with error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.ListTenantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.ListTenantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTenants.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listTenantsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.talent.v4.Tenant[] = [];
-        stream.on('data', (response: protos.google.cloud.talent.v4.Tenant) => {
-          responses.push(response);
-        });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listTenants.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTenants, request)
-      );
-      assert(
-        (client.descriptors.page.listTenants.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listTenants without error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.ListTenantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.ListTenantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-        generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
-      ];
-      client.descriptors.page.listTenants.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.talent.v4.ITenant[] = [];
-      const iterable = client.listTenantsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listTenants.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTenants.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listTenants with error', async () => {
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4.ListTenantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.talent.v4.ListTenantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTenants.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listTenantsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.talent.v4.ITenant[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = tenantserviceModule.v4.TenantServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'jobs.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listTenants.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTenants.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'jobs.example.com');
+        });
 
-  describe('Path templates', () => {
-    describe('company', async () => {
-      const fakePath = '/rendered/path/company';
-      const expectedParameters = {
-        project: 'projectValue',
-        tenant: 'tenantValue',
-        company: 'companyValue',
-      };
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.companyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.companyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'jobs.example.com');
+        });
 
-      it('companyPath', () => {
-        const result = client.companyPath(
-          'projectValue',
-          'tenantValue',
-          'companyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.companyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new tenantserviceModule.v4.TenantServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'jobs.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-      it('matchProjectFromCompanyName', () => {
-        const result = client.matchProjectFromCompanyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.companyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new tenantserviceModule.v4.TenantServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'jobs.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new tenantserviceModule.v4.TenantServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-      it('matchTenantFromCompanyName', () => {
-        const result = client.matchTenantFromCompanyName(fakePath);
-        assert.strictEqual(result, 'tenantValue');
-        assert(
-          (client.pathTemplates.companyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has port', () => {
+            const port = tenantserviceModule.v4.TenantServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('matchCompanyFromCompanyName', () => {
-        const result = client.matchCompanyFromCompanyName(fakePath);
-        assert.strictEqual(result, 'companyValue');
-        assert(
-          (client.pathTemplates.companyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('should create a client with no option', () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient();
+            assert(client);
+        });
 
-    describe('job', async () => {
-      const fakePath = '/rendered/path/job';
-      const expectedParameters = {
-        project: 'projectValue',
-        tenant: 'tenantValue',
-        job: 'jobValue',
-      };
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.jobPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.jobPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('should create a client with gRPC fallback', () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('jobPath', () => {
-        const result = client.jobPath(
-          'projectValue',
-          'tenantValue',
-          'jobValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.jobPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.tenantServiceStub, undefined);
+            await client.initialize();
+            assert(client.tenantServiceStub);
+        });
 
-      it('matchProjectFromJobName', () => {
-        const result = client.matchProjectFromJobName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the initialized client', done => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.tenantServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchTenantFromJobName', () => {
-        const result = client.matchTenantFromJobName(fakePath);
-        assert.strictEqual(result, 'tenantValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the non-initialized client', done => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.tenantServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchJobFromJobName', () => {
-        const result = client.matchJobFromJobName(fakePath);
-        assert.strictEqual(result, 'jobValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('createTenant', () => {
+        it('invokes createTenant without error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.CreateTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.CreateTenantRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.talent.v4.Tenant()
+            );
+            client.innerApiCalls.createTenant = stubSimpleCall(expectedResponse);
+            const [response] = await client.createTenant(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createTenant without error using callback', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.CreateTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.CreateTenantRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.talent.v4.Tenant()
+            );
+            client.innerApiCalls.createTenant = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createTenant(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.talent.v4.ITenant|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createTenant with error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.CreateTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.CreateTenantRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createTenant = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createTenant(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTenant with closed client', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.CreateTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.CreateTenantRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createTenant(request), expectedError);
+        });
     });
 
-    describe('tenant', async () => {
-      const fakePath = '/rendered/path/tenant';
-      const expectedParameters = {
-        project: 'projectValue',
-        tenant: 'tenantValue',
-      };
-      const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tenantPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tenantPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getTenant', () => {
+        it('invokes getTenant without error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.GetTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.GetTenantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.talent.v4.Tenant()
+            );
+            client.innerApiCalls.getTenant = stubSimpleCall(expectedResponse);
+            const [response] = await client.getTenant(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('tenantPath', () => {
-        const result = client.tenantPath('projectValue', 'tenantValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tenantPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getTenant without error using callback', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.GetTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.GetTenantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.talent.v4.Tenant()
+            );
+            client.innerApiCalls.getTenant = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getTenant(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.talent.v4.ITenant|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromTenantName', () => {
-        const result = client.matchProjectFromTenantName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.tenantPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getTenant with error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.GetTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.GetTenantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getTenant = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getTenant(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchTenantFromTenantName', () => {
-        const result = client.matchTenantFromTenantName(fakePath);
-        assert.strictEqual(result, 'tenantValue');
-        assert(
-          (client.pathTemplates.tenantPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getTenant with closed client', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.GetTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.GetTenantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getTenant(request), expectedError);
+        });
     });
-  });
+
+    describe('updateTenant', () => {
+        it('invokes updateTenant without error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.UpdateTenantRequest()
+            );
+            request.tenant ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.UpdateTenantRequest', ['tenant', 'name']);
+            request.tenant.name = defaultValue1;
+            const expectedHeaderRequestParams = `tenant.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.talent.v4.Tenant()
+            );
+            client.innerApiCalls.updateTenant = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateTenant(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTenant without error using callback', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.UpdateTenantRequest()
+            );
+            request.tenant ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.UpdateTenantRequest', ['tenant', 'name']);
+            request.tenant.name = defaultValue1;
+            const expectedHeaderRequestParams = `tenant.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.talent.v4.Tenant()
+            );
+            client.innerApiCalls.updateTenant = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateTenant(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.talent.v4.ITenant|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTenant with error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.UpdateTenantRequest()
+            );
+            request.tenant ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.UpdateTenantRequest', ['tenant', 'name']);
+            request.tenant.name = defaultValue1;
+            const expectedHeaderRequestParams = `tenant.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateTenant = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateTenant(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTenant with closed client', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.UpdateTenantRequest()
+            );
+            request.tenant ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.UpdateTenantRequest', ['tenant', 'name']);
+            request.tenant.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateTenant(request), expectedError);
+        });
+    });
+
+    describe('deleteTenant', () => {
+        it('invokes deleteTenant without error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.DeleteTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.DeleteTenantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteTenant = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteTenant(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTenant without error using callback', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.DeleteTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.DeleteTenantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteTenant = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteTenant(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTenant with error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.DeleteTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.DeleteTenantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteTenant = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteTenant(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteTenant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTenant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTenant with closed client', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.DeleteTenantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.DeleteTenantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteTenant(request), expectedError);
+        });
+    });
+
+    describe('listTenants', () => {
+        it('invokes listTenants without error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.ListTenantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.ListTenantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+            ];
+            client.innerApiCalls.listTenants = stubSimpleCall(expectedResponse);
+            const [response] = await client.listTenants(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTenants as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTenants as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTenants without error using callback', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.ListTenantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.ListTenantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+            ];
+            client.innerApiCalls.listTenants = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listTenants(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.talent.v4.ITenant[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTenants as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTenants as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTenants with error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.ListTenantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.ListTenantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listTenants = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listTenants(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listTenants as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTenants as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTenantsStream without error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.ListTenantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.ListTenantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+            ];
+            client.descriptors.page.listTenants.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listTenantsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.talent.v4.Tenant[] = [];
+                stream.on('data', (response: protos.google.cloud.talent.v4.Tenant) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listTenants.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTenants, request));
+            assert(
+                (client.descriptors.page.listTenants.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listTenantsStream with error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.ListTenantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.ListTenantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTenants.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listTenantsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.talent.v4.Tenant[] = [];
+                stream.on('data', (response: protos.google.cloud.talent.v4.Tenant) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listTenants.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTenants, request));
+            assert(
+                (client.descriptors.page.listTenants.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listTenants without error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.ListTenantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.ListTenantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+              generateSampleMessage(new protos.google.cloud.talent.v4.Tenant()),
+            ];
+            client.descriptors.page.listTenants.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.talent.v4.ITenant[] = [];
+            const iterable = client.listTenantsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTenants.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTenants.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listTenants with error', async () => {
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.talent.v4.ListTenantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.talent.v4.ListTenantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTenants.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listTenantsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.talent.v4.ITenant[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTenants.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTenants.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('company', async () => {
+            const fakePath = "/rendered/path/company";
+            const expectedParameters = {
+                project: "projectValue",
+                tenant: "tenantValue",
+                company: "companyValue",
+            };
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.companyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.companyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('companyPath', () => {
+                const result = client.companyPath("projectValue", "tenantValue", "companyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.companyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCompanyName', () => {
+                const result = client.matchProjectFromCompanyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.companyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTenantFromCompanyName', () => {
+                const result = client.matchTenantFromCompanyName(fakePath);
+                assert.strictEqual(result, "tenantValue");
+                assert((client.pathTemplates.companyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCompanyFromCompanyName', () => {
+                const result = client.matchCompanyFromCompanyName(fakePath);
+                assert.strictEqual(result, "companyValue");
+                assert((client.pathTemplates.companyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('job', async () => {
+            const fakePath = "/rendered/path/job";
+            const expectedParameters = {
+                project: "projectValue",
+                tenant: "tenantValue",
+                job: "jobValue",
+            };
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.jobPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.jobPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('jobPath', () => {
+                const result = client.jobPath("projectValue", "tenantValue", "jobValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.jobPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromJobName', () => {
+                const result = client.matchProjectFromJobName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTenantFromJobName', () => {
+                const result = client.matchTenantFromJobName(fakePath);
+                assert.strictEqual(result, "tenantValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchJobFromJobName', () => {
+                const result = client.matchJobFromJobName(fakePath);
+                assert.strictEqual(result, "jobValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tenant', async () => {
+            const fakePath = "/rendered/path/tenant";
+            const expectedParameters = {
+                project: "projectValue",
+                tenant: "tenantValue",
+            };
+            const client = new tenantserviceModule.v4.TenantServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tenantPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tenantPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tenantPath', () => {
+                const result = client.tenantPath("projectValue", "tenantValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tenantPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTenantName', () => {
+                const result = client.matchProjectFromTenantName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.tenantPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTenantFromTenantName', () => {
+                const result = client.matchTenantFromTenantName(fakePath);
+                assert.strictEqual(result, "tenantValue");
+                assert((client.pathTemplates.tenantPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

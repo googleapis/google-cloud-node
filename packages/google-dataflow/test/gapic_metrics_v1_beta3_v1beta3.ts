@@ -29,1337 +29,960 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta3.MetricsV1Beta3Client', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'dataflow.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          metricsv1beta3Module.v1beta3.MetricsV1Beta3Client.servicePath;
-        assert.strictEqual(servicePath, 'dataflow.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          metricsv1beta3Module.v1beta3.MetricsV1Beta3Client.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'dataflow.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'dataflow.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'dataflow.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'dataflow.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'dataflow.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'dataflow.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = metricsv1beta3Module.v1beta3.MetricsV1Beta3Client.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = metricsv1beta3Module.v1beta3.MetricsV1Beta3Client.servicePath;
+                assert.strictEqual(servicePath, 'dataflow.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.metricsV1Beta3Stub, undefined);
-      await client.initialize();
-      assert(client.metricsV1Beta3Stub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.metricsV1Beta3Stub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.metricsV1Beta3Stub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getJobMetrics', () => {
-    it('invokes getJobMetrics without error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.JobMetrics()
-      );
-      client.innerApiCalls.getJobMetrics = stubSimpleCall(expectedResponse);
-      const [response] = await client.getJobMetrics(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getJobMetrics as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJobMetrics as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJobMetrics without error using callback', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.JobMetrics()
-      );
-      client.innerApiCalls.getJobMetrics =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getJobMetrics(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.dataflow.v1beta3.IJobMetrics | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getJobMetrics as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJobMetrics as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJobMetrics with error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getJobMetrics = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getJobMetrics(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getJobMetrics as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJobMetrics as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJobMetrics with closed client', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobMetricsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getJobMetrics(request), expectedError);
-    });
-  });
-
-  describe('getJobExecutionDetails', () => {
-    it('invokes getJobExecutionDetails without error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-      ];
-      client.innerApiCalls.getJobExecutionDetails =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getJobExecutionDetails(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getJobExecutionDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJobExecutionDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJobExecutionDetails without error using callback', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-      ];
-      client.innerApiCalls.getJobExecutionDetails =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getJobExecutionDetails(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.dataflow.v1beta3.IStageSummary[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getJobExecutionDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJobExecutionDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJobExecutionDetails with error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getJobExecutionDetails = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getJobExecutionDetails(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getJobExecutionDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJobExecutionDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJobExecutionDetailsStream without error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-      ];
-      client.descriptors.page.getJobExecutionDetails.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.getJobExecutionDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.dataflow.v1beta3.StageSummary[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.dataflow.v1beta3.StageSummary) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.getJobExecutionDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.getJobExecutionDetails, request)
-      );
-      assert(
-        (
-          client.descriptors.page.getJobExecutionDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes getJobExecutionDetailsStream with error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.getJobExecutionDetails.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.getJobExecutionDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.dataflow.v1beta3.StageSummary[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.dataflow.v1beta3.StageSummary) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.getJobExecutionDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.getJobExecutionDetails, request)
-      );
-      assert(
-        (
-          client.descriptors.page.getJobExecutionDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with getJobExecutionDetails without error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.StageSummary()
-        ),
-      ];
-      client.descriptors.page.getJobExecutionDetails.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.dataflow.v1beta3.IStageSummary[] = [];
-      const iterable = client.getJobExecutionDetailsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.getJobExecutionDetails
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.getJobExecutionDetails
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with getJobExecutionDetails with error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.getJobExecutionDetails.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.getJobExecutionDetailsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.dataflow.v1beta3.IStageSummary[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = metricsv1beta3Module.v1beta3.MetricsV1Beta3Client.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'dataflow.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.getJobExecutionDetails
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.getJobExecutionDetails
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('getStageExecutionDetails', () => {
-    it('invokes getStageExecutionDetails without error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['stageId']
-      );
-      request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-      ];
-      client.innerApiCalls.getStageExecutionDetails =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getStageExecutionDetails(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getStageExecutionDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getStageExecutionDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getStageExecutionDetails without error using callback', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['stageId']
-      );
-      request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-      ];
-      client.innerApiCalls.getStageExecutionDetails =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getStageExecutionDetails(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.dataflow.v1beta3.IWorkerDetails[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getStageExecutionDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getStageExecutionDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getStageExecutionDetails with error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['stageId']
-      );
-      request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getStageExecutionDetails = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getStageExecutionDetails(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getStageExecutionDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getStageExecutionDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getStageExecutionDetailsStream without error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['stageId']
-      );
-      request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-      ];
-      client.descriptors.page.getStageExecutionDetails.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.getStageExecutionDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.dataflow.v1beta3.WorkerDetails[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.dataflow.v1beta3.WorkerDetails) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'dataflow.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.getStageExecutionDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.getStageExecutionDetails, request)
-      );
-      assert(
-        (
-          client.descriptors.page.getStageExecutionDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('invokes getStageExecutionDetailsStream with error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['stageId']
-      );
-      request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.getStageExecutionDetails.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.getStageExecutionDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.dataflow.v1beta3.WorkerDetails[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.dataflow.v1beta3.WorkerDetails) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'dataflow.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.getStageExecutionDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.getStageExecutionDetails, request)
-      );
-      assert(
-        (
-          client.descriptors.page.getStageExecutionDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with getStageExecutionDetails without error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['stageId']
-      );
-      request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.dataflow.v1beta3.WorkerDetails()
-        ),
-      ];
-      client.descriptors.page.getStageExecutionDetails.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.dataflow.v1beta3.IWorkerDetails[] = [];
-      const iterable = client.getStageExecutionDetailsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.getStageExecutionDetails
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.getStageExecutionDetails
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'dataflow.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with getStageExecutionDetails with error', async () => {
-      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['location']
-      );
-      request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['jobId']
-      );
-      request.jobId = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue(
-        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
-        ['stageId']
-      );
-      request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.getStageExecutionDetails.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.getStageExecutionDetailsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.dataflow.v1beta3.IWorkerDetails[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'dataflow.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.getStageExecutionDetails
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.getStageExecutionDetails
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = metricsv1beta3Module.v1beta3.MetricsV1Beta3Client.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.metricsV1Beta3Stub, undefined);
+            await client.initialize();
+            assert(client.metricsV1Beta3Stub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.metricsV1Beta3Stub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.metricsV1Beta3Stub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
+
+    describe('getJobMetrics', () => {
+        it('invokes getJobMetrics without error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.JobMetrics()
+            );
+            client.innerApiCalls.getJobMetrics = stubSimpleCall(expectedResponse);
+            const [response] = await client.getJobMetrics(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJobMetrics as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJobMetrics as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJobMetrics without error using callback', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.JobMetrics()
+            );
+            client.innerApiCalls.getJobMetrics = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getJobMetrics(
+                    request,
+                    (err?: Error|null, result?: protos.google.dataflow.v1beta3.IJobMetrics|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJobMetrics as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJobMetrics as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJobMetrics with error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getJobMetrics = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getJobMetrics(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getJobMetrics as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJobMetrics as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJobMetrics with closed client', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobMetricsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getJobMetrics(request), expectedError);
+        });
+    });
+
+    describe('getJobExecutionDetails', () => {
+        it('invokes getJobExecutionDetails without error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+            ];
+            client.innerApiCalls.getJobExecutionDetails = stubSimpleCall(expectedResponse);
+            const [response] = await client.getJobExecutionDetails(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJobExecutionDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJobExecutionDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJobExecutionDetails without error using callback', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+            ];
+            client.innerApiCalls.getJobExecutionDetails = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getJobExecutionDetails(
+                    request,
+                    (err?: Error|null, result?: protos.google.dataflow.v1beta3.IStageSummary[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJobExecutionDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJobExecutionDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJobExecutionDetails with error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getJobExecutionDetails = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getJobExecutionDetails(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getJobExecutionDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJobExecutionDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJobExecutionDetailsStream without error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+            ];
+            client.descriptors.page.getJobExecutionDetails.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.getJobExecutionDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.dataflow.v1beta3.StageSummary[] = [];
+                stream.on('data', (response: protos.google.dataflow.v1beta3.StageSummary) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.getJobExecutionDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.getJobExecutionDetails, request));
+            assert(
+                (client.descriptors.page.getJobExecutionDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes getJobExecutionDetailsStream with error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.getJobExecutionDetails.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.getJobExecutionDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.dataflow.v1beta3.StageSummary[] = [];
+                stream.on('data', (response: protos.google.dataflow.v1beta3.StageSummary) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.getJobExecutionDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.getJobExecutionDetails, request));
+            assert(
+                (client.descriptors.page.getJobExecutionDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with getJobExecutionDetails without error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.StageSummary()),
+            ];
+            client.descriptors.page.getJobExecutionDetails.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.dataflow.v1beta3.IStageSummary[] = [];
+            const iterable = client.getJobExecutionDetailsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.getJobExecutionDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.getJobExecutionDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with getJobExecutionDetails with error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetJobExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.getJobExecutionDetails.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.getJobExecutionDetailsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.dataflow.v1beta3.IStageSummary[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.getJobExecutionDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.getJobExecutionDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('getStageExecutionDetails', () => {
+        it('invokes getStageExecutionDetails without error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['stageId']);
+            request.stageId = defaultValue4;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }&stage_id=${defaultValue4 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+            ];
+            client.innerApiCalls.getStageExecutionDetails = stubSimpleCall(expectedResponse);
+            const [response] = await client.getStageExecutionDetails(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getStageExecutionDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getStageExecutionDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getStageExecutionDetails without error using callback', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['stageId']);
+            request.stageId = defaultValue4;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }&stage_id=${defaultValue4 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+            ];
+            client.innerApiCalls.getStageExecutionDetails = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getStageExecutionDetails(
+                    request,
+                    (err?: Error|null, result?: protos.google.dataflow.v1beta3.IWorkerDetails[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getStageExecutionDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getStageExecutionDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getStageExecutionDetails with error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['stageId']);
+            request.stageId = defaultValue4;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }&stage_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getStageExecutionDetails = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getStageExecutionDetails(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getStageExecutionDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getStageExecutionDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getStageExecutionDetailsStream without error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['stageId']);
+            request.stageId = defaultValue4;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }&stage_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+            ];
+            client.descriptors.page.getStageExecutionDetails.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.getStageExecutionDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.dataflow.v1beta3.WorkerDetails[] = [];
+                stream.on('data', (response: protos.google.dataflow.v1beta3.WorkerDetails) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.getStageExecutionDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.getStageExecutionDetails, request));
+            assert(
+                (client.descriptors.page.getStageExecutionDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes getStageExecutionDetailsStream with error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['stageId']);
+            request.stageId = defaultValue4;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }&stage_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.getStageExecutionDetails.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.getStageExecutionDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.dataflow.v1beta3.WorkerDetails[] = [];
+                stream.on('data', (response: protos.google.dataflow.v1beta3.WorkerDetails) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.getStageExecutionDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.getStageExecutionDetails, request));
+            assert(
+                (client.descriptors.page.getStageExecutionDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with getStageExecutionDetails without error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['stageId']);
+            request.stageId = defaultValue4;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }&stage_id=${defaultValue4 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+              generateSampleMessage(new protos.google.dataflow.v1beta3.WorkerDetails()),
+            ];
+            client.descriptors.page.getStageExecutionDetails.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.dataflow.v1beta3.IWorkerDetails[] = [];
+            const iterable = client.getStageExecutionDetailsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.getStageExecutionDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.getStageExecutionDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with getStageExecutionDetails with error', async () => {
+            const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['projectId']);
+            request.projectId = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['location']);
+            request.location = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['jobId']);
+            request.jobId = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.dataflow.v1beta3.GetStageExecutionDetailsRequest', ['stageId']);
+            request.stageId = defaultValue4;
+            const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? '' }&location=${defaultValue2 ?? '' }&job_id=${defaultValue3 ?? '' }&stage_id=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.getStageExecutionDetails.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.getStageExecutionDetailsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.dataflow.v1beta3.IWorkerDetails[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.getStageExecutionDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.getStageExecutionDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
 });

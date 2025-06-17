@@ -25,8656 +25,6507 @@ import * as telcoautomationModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1alpha1.TelcoAutomationClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'telcoautomation.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          telcoautomationModule.v1alpha1.TelcoAutomationClient.servicePath;
-        assert.strictEqual(servicePath, 'telcoautomation.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          telcoautomationModule.v1alpha1.TelcoAutomationClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'telcoautomation.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'telcoautomation.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'telcoautomation.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new telcoautomationModule.v1alpha1.TelcoAutomationClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'telcoautomation.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'telcoautomation.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = telcoautomationModule.v1alpha1.TelcoAutomationClient.servicePath;
+                assert.strictEqual(servicePath, 'telcoautomation.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'telcoautomation.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = telcoautomationModule.v1alpha1.TelcoAutomationClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.telcoAutomationStub, undefined);
-      await client.initialize();
-      assert(client.telcoAutomationStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.telcoAutomationStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.telcoAutomationStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getOrchestrationCluster', () => {
-    it('invokes getOrchestrationCluster without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-      );
-      client.innerApiCalls.getOrchestrationCluster =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getOrchestrationCluster(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getOrchestrationCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrchestrationCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOrchestrationCluster without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-      );
-      client.innerApiCalls.getOrchestrationCluster =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getOrchestrationCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getOrchestrationCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrchestrationCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOrchestrationCluster with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getOrchestrationCluster = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getOrchestrationCluster(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getOrchestrationCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrchestrationCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getOrchestrationCluster with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getOrchestrationCluster(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getEdgeSlm', () => {
-    it('invokes getEdgeSlm without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-      );
-      client.innerApiCalls.getEdgeSlm = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEdgeSlm(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEdgeSlm as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEdgeSlm as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEdgeSlm without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-      );
-      client.innerApiCalls.getEdgeSlm =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEdgeSlm(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEdgeSlm as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEdgeSlm as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEdgeSlm with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEdgeSlm = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getEdgeSlm(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEdgeSlm as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEdgeSlm as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEdgeSlm with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getEdgeSlm(request), expectedError);
-    });
-  });
-
-  describe('createBlueprint', () => {
-    it('invokes createBlueprint without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.createBlueprint = stubSimpleCall(expectedResponse);
-      const [response] = await client.createBlueprint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBlueprint without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.createBlueprint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createBlueprint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBlueprint with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBlueprint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createBlueprint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBlueprint with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createBlueprint(request), expectedError);
-    });
-  });
-
-  describe('updateBlueprint', () => {
-    it('invokes updateBlueprint without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
-      );
-      request.blueprint ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest',
-        ['blueprint', 'name']
-      );
-      request.blueprint.name = defaultValue1;
-      const expectedHeaderRequestParams = `blueprint.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.updateBlueprint = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateBlueprint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBlueprint without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
-      );
-      request.blueprint ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest',
-        ['blueprint', 'name']
-      );
-      request.blueprint.name = defaultValue1;
-      const expectedHeaderRequestParams = `blueprint.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.updateBlueprint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateBlueprint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBlueprint with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
-      );
-      request.blueprint ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest',
-        ['blueprint', 'name']
-      );
-      request.blueprint.name = defaultValue1;
-      const expectedHeaderRequestParams = `blueprint.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBlueprint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateBlueprint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBlueprint with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
-      );
-      request.blueprint ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest',
-        ['blueprint', 'name']
-      );
-      request.blueprint.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateBlueprint(request), expectedError);
-    });
-  });
-
-  describe('getBlueprint', () => {
-    it('invokes getBlueprint without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.getBlueprint = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBlueprint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBlueprint without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.getBlueprint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBlueprint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBlueprint with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBlueprint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getBlueprint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBlueprint with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBlueprint(request), expectedError);
-    });
-  });
-
-  describe('deleteBlueprint', () => {
-    it('invokes deleteBlueprint without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteBlueprint = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteBlueprint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBlueprint without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteBlueprint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteBlueprint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBlueprint with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBlueprint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteBlueprint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBlueprint with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteBlueprint(request), expectedError);
-    });
-  });
-
-  describe('approveBlueprint', () => {
-    it('invokes approveBlueprint without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.approveBlueprint = stubSimpleCall(expectedResponse);
-      const [response] = await client.approveBlueprint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.approveBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.approveBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes approveBlueprint without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.approveBlueprint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.approveBlueprint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.approveBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.approveBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes approveBlueprint with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.approveBlueprint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.approveBlueprint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.approveBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.approveBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes approveBlueprint with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.approveBlueprint(request), expectedError);
-    });
-  });
-
-  describe('proposeBlueprint', () => {
-    it('invokes proposeBlueprint without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.proposeBlueprint = stubSimpleCall(expectedResponse);
-      const [response] = await client.proposeBlueprint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.proposeBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.proposeBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes proposeBlueprint without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.proposeBlueprint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.proposeBlueprint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.proposeBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.proposeBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes proposeBlueprint with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.proposeBlueprint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.proposeBlueprint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.proposeBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.proposeBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes proposeBlueprint with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.proposeBlueprint(request), expectedError);
-    });
-  });
-
-  describe('rejectBlueprint', () => {
-    it('invokes rejectBlueprint without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.rejectBlueprint = stubSimpleCall(expectedResponse);
-      const [response] = await client.rejectBlueprint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rejectBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rejectBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rejectBlueprint without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-      );
-      client.innerApiCalls.rejectBlueprint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.rejectBlueprint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rejectBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rejectBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rejectBlueprint with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.rejectBlueprint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.rejectBlueprint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.rejectBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rejectBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rejectBlueprint with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.rejectBlueprint(request), expectedError);
-    });
-  });
-
-  describe('discardBlueprintChanges', () => {
-    it('invokes discardBlueprintChanges without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesResponse()
-      );
-      client.innerApiCalls.discardBlueprintChanges =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.discardBlueprintChanges(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.discardBlueprintChanges as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.discardBlueprintChanges as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes discardBlueprintChanges without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesResponse()
-      );
-      client.innerApiCalls.discardBlueprintChanges =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.discardBlueprintChanges(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IDiscardBlueprintChangesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.discardBlueprintChanges as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.discardBlueprintChanges as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes discardBlueprintChanges with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.discardBlueprintChanges = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.discardBlueprintChanges(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.discardBlueprintChanges as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.discardBlueprintChanges as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes discardBlueprintChanges with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.discardBlueprintChanges(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getPublicBlueprint', () => {
-    it('invokes getPublicBlueprint without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-      );
-      client.innerApiCalls.getPublicBlueprint =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getPublicBlueprint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPublicBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPublicBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPublicBlueprint without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-      );
-      client.innerApiCalls.getPublicBlueprint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPublicBlueprint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPublicBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPublicBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPublicBlueprint with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPublicBlueprint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPublicBlueprint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getPublicBlueprint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPublicBlueprint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPublicBlueprint with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getPublicBlueprint(request), expectedError);
-    });
-  });
-
-  describe('createDeployment', () => {
-    it('invokes createDeployment without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-      );
-      client.innerApiCalls.createDeployment = stubSimpleCall(expectedResponse);
-      const [response] = await client.createDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDeployment without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-      );
-      client.innerApiCalls.createDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDeployment with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDeployment with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createDeployment(request), expectedError);
-    });
-  });
-
-  describe('updateDeployment', () => {
-    it('invokes updateDeployment without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
-      );
-      request.deployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest',
-        ['deployment', 'name']
-      );
-      request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-      );
-      client.innerApiCalls.updateDeployment = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDeployment without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
-      );
-      request.deployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest',
-        ['deployment', 'name']
-      );
-      request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-      );
-      client.innerApiCalls.updateDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDeployment with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
-      );
-      request.deployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest',
-        ['deployment', 'name']
-      );
-      request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDeployment with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
-      );
-      request.deployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest',
-        ['deployment', 'name']
-      );
-      request.deployment.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateDeployment(request), expectedError);
-    });
-  });
-
-  describe('getDeployment', () => {
-    it('invokes getDeployment without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-      );
-      client.innerApiCalls.getDeployment = stubSimpleCall(expectedResponse);
-      const [response] = await client.getDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDeployment without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-      );
-      client.innerApiCalls.getDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDeployment with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDeployment with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getDeployment(request), expectedError);
-    });
-  });
-
-  describe('removeDeployment', () => {
-    it('invokes removeDeployment without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.removeDeployment = stubSimpleCall(expectedResponse);
-      const [response] = await client.removeDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeDeployment without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.removeDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.removeDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeDeployment with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.removeDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.removeDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.removeDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeDeployment with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.removeDeployment(request), expectedError);
-    });
-  });
-
-  describe('discardDeploymentChanges', () => {
-    it('invokes discardDeploymentChanges without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesResponse()
-      );
-      client.innerApiCalls.discardDeploymentChanges =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.discardDeploymentChanges(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.discardDeploymentChanges as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.discardDeploymentChanges as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes discardDeploymentChanges without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesResponse()
-      );
-      client.innerApiCalls.discardDeploymentChanges =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.discardDeploymentChanges(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IDiscardDeploymentChangesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.discardDeploymentChanges as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.discardDeploymentChanges as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes discardDeploymentChanges with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.discardDeploymentChanges = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.discardDeploymentChanges(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.discardDeploymentChanges as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.discardDeploymentChanges as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes discardDeploymentChanges with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.discardDeploymentChanges(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('applyDeployment', () => {
-    it('invokes applyDeployment without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-      );
-      client.innerApiCalls.applyDeployment = stubSimpleCall(expectedResponse);
-      const [response] = await client.applyDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.applyDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.applyDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes applyDeployment without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-      );
-      client.innerApiCalls.applyDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.applyDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.applyDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.applyDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes applyDeployment with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.applyDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.applyDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.applyDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.applyDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes applyDeployment with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.applyDeployment(request), expectedError);
-    });
-  });
-
-  describe('computeDeploymentStatus', () => {
-    it('invokes computeDeploymentStatus without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusResponse()
-      );
-      client.innerApiCalls.computeDeploymentStatus =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.computeDeploymentStatus(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.computeDeploymentStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.computeDeploymentStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes computeDeploymentStatus without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusResponse()
-      );
-      client.innerApiCalls.computeDeploymentStatus =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.computeDeploymentStatus(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IComputeDeploymentStatusResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.computeDeploymentStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.computeDeploymentStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes computeDeploymentStatus with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.computeDeploymentStatus = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.computeDeploymentStatus(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.computeDeploymentStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.computeDeploymentStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes computeDeploymentStatus with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.computeDeploymentStatus(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('rollbackDeployment', () => {
-    it('invokes rollbackDeployment without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-      );
-      client.innerApiCalls.rollbackDeployment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.rollbackDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rollbackDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rollbackDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rollbackDeployment without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-      );
-      client.innerApiCalls.rollbackDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.rollbackDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rollbackDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rollbackDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rollbackDeployment with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.rollbackDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.rollbackDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.rollbackDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rollbackDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rollbackDeployment with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.rollbackDeployment(request), expectedError);
-    });
-  });
-
-  describe('getHydratedDeployment', () => {
-    it('invokes getHydratedDeployment without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-      );
-      client.innerApiCalls.getHydratedDeployment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getHydratedDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getHydratedDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getHydratedDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getHydratedDeployment without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-      );
-      client.innerApiCalls.getHydratedDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getHydratedDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getHydratedDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getHydratedDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getHydratedDeployment with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getHydratedDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getHydratedDeployment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getHydratedDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getHydratedDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getHydratedDeployment with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getHydratedDeployment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('updateHydratedDeployment', () => {
-    it('invokes updateHydratedDeployment without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
-      );
-      request.hydratedDeployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest',
-        ['hydratedDeployment', 'name']
-      );
-      request.hydratedDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-      );
-      client.innerApiCalls.updateHydratedDeployment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateHydratedDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateHydratedDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateHydratedDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateHydratedDeployment without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
-      );
-      request.hydratedDeployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest',
-        ['hydratedDeployment', 'name']
-      );
-      request.hydratedDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-      );
-      client.innerApiCalls.updateHydratedDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateHydratedDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateHydratedDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateHydratedDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateHydratedDeployment with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
-      );
-      request.hydratedDeployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest',
-        ['hydratedDeployment', 'name']
-      );
-      request.hydratedDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateHydratedDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateHydratedDeployment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateHydratedDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateHydratedDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateHydratedDeployment with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
-      );
-      request.hydratedDeployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest',
-        ['hydratedDeployment', 'name']
-      );
-      request.hydratedDeployment.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateHydratedDeployment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('applyHydratedDeployment', () => {
-    it('invokes applyHydratedDeployment without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-      );
-      client.innerApiCalls.applyHydratedDeployment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.applyHydratedDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.applyHydratedDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.applyHydratedDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes applyHydratedDeployment without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-      );
-      client.innerApiCalls.applyHydratedDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.applyHydratedDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.applyHydratedDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.applyHydratedDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes applyHydratedDeployment with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.applyHydratedDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.applyHydratedDeployment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.applyHydratedDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.applyHydratedDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes applyHydratedDeployment with closed client', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.applyHydratedDeployment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('createOrchestrationCluster', () => {
-    it('invokes createOrchestrationCluster without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createOrchestrationCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createOrchestrationCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createOrchestrationCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createOrchestrationCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createOrchestrationCluster without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createOrchestrationCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createOrchestrationCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster,
-              protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster,
-        protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createOrchestrationCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createOrchestrationCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createOrchestrationCluster with call error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createOrchestrationCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createOrchestrationCluster(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createOrchestrationCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createOrchestrationCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createOrchestrationCluster with LRO error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createOrchestrationCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createOrchestrationCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createOrchestrationCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createOrchestrationCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateOrchestrationClusterProgress without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkCreateOrchestrationClusterProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateOrchestrationClusterProgress with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateOrchestrationClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteOrchestrationCluster', () => {
-    it('invokes deleteOrchestrationCluster without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteOrchestrationCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteOrchestrationCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteOrchestrationCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteOrchestrationCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteOrchestrationCluster without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteOrchestrationCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteOrchestrationCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteOrchestrationCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteOrchestrationCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteOrchestrationCluster with call error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteOrchestrationCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteOrchestrationCluster(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteOrchestrationCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteOrchestrationCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteOrchestrationCluster with LRO error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteOrchestrationCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteOrchestrationCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteOrchestrationCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteOrchestrationCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteOrchestrationClusterProgress without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkDeleteOrchestrationClusterProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteOrchestrationClusterProgress with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteOrchestrationClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createEdgeSlm', () => {
-    it('invokes createEdgeSlm without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createEdgeSlm =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createEdgeSlm(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEdgeSlm as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEdgeSlm as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEdgeSlm without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createEdgeSlm =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createEdgeSlm(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm,
-              protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm,
-        protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEdgeSlm as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEdgeSlm as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEdgeSlm with call error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEdgeSlm = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createEdgeSlm(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEdgeSlm as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEdgeSlm as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEdgeSlm with LRO error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEdgeSlm = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createEdgeSlm(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEdgeSlm as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEdgeSlm as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateEdgeSlmProgress without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateEdgeSlmProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateEdgeSlmProgress with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateEdgeSlmProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteEdgeSlm', () => {
-    it('invokes deleteEdgeSlm without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteEdgeSlm =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteEdgeSlm(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEdgeSlm as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEdgeSlm as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEdgeSlm without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteEdgeSlm =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteEdgeSlm(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEdgeSlm as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEdgeSlm as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEdgeSlm with call error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEdgeSlm = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteEdgeSlm(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteEdgeSlm as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEdgeSlm as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEdgeSlm with LRO error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEdgeSlm = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteEdgeSlm(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteEdgeSlm as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEdgeSlm as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteEdgeSlmProgress without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteEdgeSlmProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteEdgeSlmProgress with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteEdgeSlmProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listOrchestrationClusters', () => {
-    it('invokes listOrchestrationClusters without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-      ];
-      client.innerApiCalls.listOrchestrationClusters =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listOrchestrationClusters(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOrchestrationClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrchestrationClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOrchestrationClusters without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-      ];
-      client.innerApiCalls.listOrchestrationClusters =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listOrchestrationClusters(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOrchestrationClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrchestrationClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOrchestrationClusters with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listOrchestrationClusters = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listOrchestrationClusters(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listOrchestrationClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrchestrationClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOrchestrationClustersStream without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-      ];
-      client.descriptors.page.listOrchestrationClusters.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listOrchestrationClustersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listOrchestrationClusters
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOrchestrationClusters, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listOrchestrationClusters
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listOrchestrationClustersStream with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOrchestrationClusters.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listOrchestrationClustersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listOrchestrationClusters
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOrchestrationClusters, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listOrchestrationClusters
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listOrchestrationClusters without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
-        ),
-      ];
-      client.descriptors.page.listOrchestrationClusters.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster[] =
-        [];
-      const iterable = client.listOrchestrationClustersAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listOrchestrationClusters
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listOrchestrationClusters
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listOrchestrationClusters with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOrchestrationClusters.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listOrchestrationClustersAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = telcoautomationModule.v1alpha1.TelcoAutomationClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'telcoautomation.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listOrchestrationClusters
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listOrchestrationClusters
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('listEdgeSlms', () => {
-    it('invokes listEdgeSlms without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-      ];
-      client.innerApiCalls.listEdgeSlms = stubSimpleCall(expectedResponse);
-      const [response] = await client.listEdgeSlms(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEdgeSlms as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEdgeSlms as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEdgeSlms without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-      ];
-      client.innerApiCalls.listEdgeSlms =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listEdgeSlms(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEdgeSlms as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEdgeSlms as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEdgeSlms with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listEdgeSlms = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listEdgeSlms(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listEdgeSlms as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEdgeSlms as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEdgeSlmsStream without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-      ];
-      client.descriptors.page.listEdgeSlms.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listEdgeSlmsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'telcoautomation.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listEdgeSlms.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEdgeSlms, request)
-      );
-      assert(
-        (client.descriptors.page.listEdgeSlms.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listEdgeSlmsStream with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEdgeSlms.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listEdgeSlmsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'telcoautomation.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listEdgeSlms.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEdgeSlms, request)
-      );
-      assert(
-        (client.descriptors.page.listEdgeSlms.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listEdgeSlms without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
-        ),
-      ];
-      client.descriptors.page.listEdgeSlms.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm[] =
-        [];
-      const iterable = client.listEdgeSlmsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEdgeSlms.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEdgeSlms.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'telcoautomation.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listEdgeSlms with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEdgeSlms.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listEdgeSlmsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'telcoautomation.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEdgeSlms.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEdgeSlms.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new telcoautomationModule.v1alpha1.TelcoAutomationClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listBlueprints', () => {
-    it('invokes listBlueprints without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.innerApiCalls.listBlueprints = stubSimpleCall(expectedResponse);
-      const [response] = await client.listBlueprints(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBlueprints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBlueprints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = telcoautomationModule.v1alpha1.TelcoAutomationClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.telcoAutomationStub, undefined);
+            await client.initialize();
+            assert(client.telcoAutomationStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.telcoAutomationStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.telcoAutomationStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listBlueprints without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.innerApiCalls.listBlueprints =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBlueprints(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getOrchestrationCluster', () => {
+        it('invokes getOrchestrationCluster without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
+            );
+            client.innerApiCalls.getOrchestrationCluster = stubSimpleCall(expectedResponse);
+            const [response] = await client.getOrchestrationCluster(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOrchestrationCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrchestrationCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOrchestrationCluster without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()
+            );
+            client.innerApiCalls.getOrchestrationCluster = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getOrchestrationCluster(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOrchestrationCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrchestrationCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOrchestrationCluster with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getOrchestrationCluster = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getOrchestrationCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getOrchestrationCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrchestrationCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOrchestrationCluster with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getOrchestrationCluster(request), expectedError);
+        });
+    });
+
+    describe('getEdgeSlm', () => {
+        it('invokes getEdgeSlm without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
+            );
+            client.innerApiCalls.getEdgeSlm = stubSimpleCall(expectedResponse);
+            const [response] = await client.getEdgeSlm(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEdgeSlm as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEdgeSlm as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEdgeSlm without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()
+            );
+            client.innerApiCalls.getEdgeSlm = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getEdgeSlm(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEdgeSlm as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEdgeSlm as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEdgeSlm with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getEdgeSlm = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getEdgeSlm(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getEdgeSlm as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEdgeSlm as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEdgeSlm with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getEdgeSlm(request), expectedError);
+        });
+    });
+
+    describe('createBlueprint', () => {
+        it('invokes createBlueprint without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.createBlueprint = stubSimpleCall(expectedResponse);
+            const [response] = await client.createBlueprint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBlueprint without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.createBlueprint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createBlueprint(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBlueprint with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBlueprint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createBlueprint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBlueprint with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createBlueprint(request), expectedError);
+        });
+    });
+
+    describe('updateBlueprint', () => {
+        it('invokes updateBlueprint without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
+            );
+            request.blueprint ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest', ['blueprint', 'name']);
+            request.blueprint.name = defaultValue1;
+            const expectedHeaderRequestParams = `blueprint.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.updateBlueprint = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateBlueprint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBlueprint without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
+            );
+            request.blueprint ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest', ['blueprint', 'name']);
+            request.blueprint.name = defaultValue1;
+            const expectedHeaderRequestParams = `blueprint.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.updateBlueprint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateBlueprint(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBlueprint with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
+            );
+            request.blueprint ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest', ['blueprint', 'name']);
+            request.blueprint.name = defaultValue1;
+            const expectedHeaderRequestParams = `blueprint.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBlueprint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateBlueprint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBlueprint with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
+            );
+            request.blueprint ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest', ['blueprint', 'name']);
+            request.blueprint.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateBlueprint(request), expectedError);
+        });
+    });
+
+    describe('getBlueprint', () => {
+        it('invokes getBlueprint without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.getBlueprint = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBlueprint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBlueprint without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.getBlueprint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBlueprint(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBlueprint with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBlueprint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBlueprint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBlueprint with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBlueprint(request), expectedError);
+        });
+    });
+
+    describe('deleteBlueprint', () => {
+        it('invokes deleteBlueprint without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteBlueprint = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteBlueprint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBlueprint without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteBlueprint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteBlueprint(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBlueprint with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBlueprint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteBlueprint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBlueprint with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteBlueprint(request), expectedError);
+        });
+    });
+
+    describe('approveBlueprint', () => {
+        it('invokes approveBlueprint without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.approveBlueprint = stubSimpleCall(expectedResponse);
+            const [response] = await client.approveBlueprint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.approveBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveBlueprint without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.approveBlueprint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.approveBlueprint(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.approveBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveBlueprint with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.approveBlueprint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.approveBlueprint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.approveBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveBlueprint with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.approveBlueprint(request), expectedError);
+        });
+    });
+
+    describe('proposeBlueprint', () => {
+        it('invokes proposeBlueprint without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.proposeBlueprint = stubSimpleCall(expectedResponse);
+            const [response] = await client.proposeBlueprint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.proposeBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.proposeBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes proposeBlueprint without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.proposeBlueprint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.proposeBlueprint(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.proposeBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.proposeBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes proposeBlueprint with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.proposeBlueprint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.proposeBlueprint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.proposeBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.proposeBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes proposeBlueprint with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.proposeBlueprint(request), expectedError);
+        });
+    });
+
+    describe('rejectBlueprint', () => {
+        it('invokes rejectBlueprint without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.rejectBlueprint = stubSimpleCall(expectedResponse);
+            const [response] = await client.rejectBlueprint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rejectBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rejectBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rejectBlueprint without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
+            );
+            client.innerApiCalls.rejectBlueprint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.rejectBlueprint(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rejectBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rejectBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rejectBlueprint with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.rejectBlueprint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.rejectBlueprint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.rejectBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rejectBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rejectBlueprint with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.rejectBlueprint(request), expectedError);
+        });
+    });
+
+    describe('discardBlueprintChanges', () => {
+        it('invokes discardBlueprintChanges without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesResponse()
+            );
+            client.innerApiCalls.discardBlueprintChanges = stubSimpleCall(expectedResponse);
+            const [response] = await client.discardBlueprintChanges(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.discardBlueprintChanges as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.discardBlueprintChanges as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes discardBlueprintChanges without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesResponse()
+            );
+            client.innerApiCalls.discardBlueprintChanges = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.discardBlueprintChanges(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IDiscardBlueprintChangesResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.discardBlueprintChanges as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.discardBlueprintChanges as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes discardBlueprintChanges with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.discardBlueprintChanges = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.discardBlueprintChanges(request), expectedError);
+            const actualRequest = (client.innerApiCalls.discardBlueprintChanges as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.discardBlueprintChanges as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes discardBlueprintChanges with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.discardBlueprintChanges(request), expectedError);
+        });
+    });
+
+    describe('getPublicBlueprint', () => {
+        it('invokes getPublicBlueprint without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
+            );
+            client.innerApiCalls.getPublicBlueprint = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPublicBlueprint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPublicBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPublicBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPublicBlueprint without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
+            );
+            client.innerApiCalls.getPublicBlueprint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPublicBlueprint(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPublicBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPublicBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPublicBlueprint with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPublicBlueprint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPublicBlueprint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPublicBlueprint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPublicBlueprint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPublicBlueprint with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPublicBlueprint(request), expectedError);
+        });
+    });
+
+    describe('createDeployment', () => {
+        it('invokes createDeployment without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
+            );
+            client.innerApiCalls.createDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.createDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDeployment without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
+            );
+            client.innerApiCalls.createDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDeployment with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDeployment with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createDeployment(request), expectedError);
+        });
+    });
+
+    describe('updateDeployment', () => {
+        it('invokes updateDeployment without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
+            );
+            request.deployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest', ['deployment', 'name']);
+            request.deployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
+            );
+            client.innerApiCalls.updateDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDeployment without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
+            );
+            request.deployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest', ['deployment', 'name']);
+            request.deployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
+            );
+            client.innerApiCalls.updateDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDeployment with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
+            );
+            request.deployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest', ['deployment', 'name']);
+            request.deployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDeployment with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
+            );
+            request.deployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest', ['deployment', 'name']);
+            request.deployment.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateDeployment(request), expectedError);
+        });
+    });
+
+    describe('getDeployment', () => {
+        it('invokes getDeployment without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
+            );
+            client.innerApiCalls.getDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeployment without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
+            );
+            client.innerApiCalls.getDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeployment with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeployment with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDeployment(request), expectedError);
+        });
+    });
+
+    describe('removeDeployment', () => {
+        it('invokes removeDeployment without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.removeDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.removeDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeDeployment without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.removeDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.removeDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeDeployment with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removeDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.removeDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.removeDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeDeployment with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.removeDeployment(request), expectedError);
+        });
+    });
+
+    describe('discardDeploymentChanges', () => {
+        it('invokes discardDeploymentChanges without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesResponse()
+            );
+            client.innerApiCalls.discardDeploymentChanges = stubSimpleCall(expectedResponse);
+            const [response] = await client.discardDeploymentChanges(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.discardDeploymentChanges as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.discardDeploymentChanges as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes discardDeploymentChanges without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesResponse()
+            );
+            client.innerApiCalls.discardDeploymentChanges = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.discardDeploymentChanges(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IDiscardDeploymentChangesResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.discardDeploymentChanges as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.discardDeploymentChanges as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes discardDeploymentChanges with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.discardDeploymentChanges = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.discardDeploymentChanges(request), expectedError);
+            const actualRequest = (client.innerApiCalls.discardDeploymentChanges as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.discardDeploymentChanges as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes discardDeploymentChanges with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.discardDeploymentChanges(request), expectedError);
+        });
+    });
+
+    describe('applyDeployment', () => {
+        it('invokes applyDeployment without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
+            );
+            client.innerApiCalls.applyDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.applyDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.applyDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.applyDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes applyDeployment without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
+            );
+            client.innerApiCalls.applyDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.applyDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.applyDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.applyDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes applyDeployment with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.applyDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.applyDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.applyDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.applyDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes applyDeployment with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.applyDeployment(request), expectedError);
+        });
+    });
+
+    describe('computeDeploymentStatus', () => {
+        it('invokes computeDeploymentStatus without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusResponse()
+            );
+            client.innerApiCalls.computeDeploymentStatus = stubSimpleCall(expectedResponse);
+            const [response] = await client.computeDeploymentStatus(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.computeDeploymentStatus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.computeDeploymentStatus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes computeDeploymentStatus without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusResponse()
+            );
+            client.innerApiCalls.computeDeploymentStatus = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.computeDeploymentStatus(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IComputeDeploymentStatusResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.computeDeploymentStatus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.computeDeploymentStatus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes computeDeploymentStatus with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.computeDeploymentStatus = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.computeDeploymentStatus(request), expectedError);
+            const actualRequest = (client.innerApiCalls.computeDeploymentStatus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.computeDeploymentStatus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes computeDeploymentStatus with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.computeDeploymentStatus(request), expectedError);
+        });
+    });
+
+    describe('rollbackDeployment', () => {
+        it('invokes rollbackDeployment without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
+            );
+            client.innerApiCalls.rollbackDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.rollbackDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rollbackDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rollbackDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rollbackDeployment without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
+            );
+            client.innerApiCalls.rollbackDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.rollbackDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rollbackDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rollbackDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rollbackDeployment with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.rollbackDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.rollbackDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.rollbackDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rollbackDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rollbackDeployment with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.rollbackDeployment(request), expectedError);
+        });
+    });
+
+    describe('getHydratedDeployment', () => {
+        it('invokes getHydratedDeployment without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
+            );
+            client.innerApiCalls.getHydratedDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getHydratedDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHydratedDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHydratedDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHydratedDeployment without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
+            );
+            client.innerApiCalls.getHydratedDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getHydratedDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHydratedDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHydratedDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHydratedDeployment with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getHydratedDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getHydratedDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getHydratedDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHydratedDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHydratedDeployment with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getHydratedDeployment(request), expectedError);
+        });
+    });
+
+    describe('updateHydratedDeployment', () => {
+        it('invokes updateHydratedDeployment without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
+            );
+            request.hydratedDeployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest', ['hydratedDeployment', 'name']);
+            request.hydratedDeployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
+            );
+            client.innerApiCalls.updateHydratedDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateHydratedDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateHydratedDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHydratedDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHydratedDeployment without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
+            );
+            request.hydratedDeployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest', ['hydratedDeployment', 'name']);
+            request.hydratedDeployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
+            );
+            client.innerApiCalls.updateHydratedDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateHydratedDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateHydratedDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHydratedDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHydratedDeployment with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
+            );
+            request.hydratedDeployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest', ['hydratedDeployment', 'name']);
+            request.hydratedDeployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `hydrated_deployment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateHydratedDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateHydratedDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateHydratedDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHydratedDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHydratedDeployment with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
+            );
+            request.hydratedDeployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest', ['hydratedDeployment', 'name']);
+            request.hydratedDeployment.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateHydratedDeployment(request), expectedError);
+        });
+    });
+
+    describe('applyHydratedDeployment', () => {
+        it('invokes applyHydratedDeployment without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
+            );
+            client.innerApiCalls.applyHydratedDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.applyHydratedDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.applyHydratedDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.applyHydratedDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes applyHydratedDeployment without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
+            );
+            client.innerApiCalls.applyHydratedDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.applyHydratedDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.applyHydratedDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.applyHydratedDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes applyHydratedDeployment with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.applyHydratedDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.applyHydratedDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.applyHydratedDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.applyHydratedDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes applyHydratedDeployment with closed client', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.applyHydratedDeployment(request), expectedError);
+        });
+    });
+
+    describe('createOrchestrationCluster', () => {
+        it('invokes createOrchestrationCluster without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createOrchestrationCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createOrchestrationCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createOrchestrationCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOrchestrationCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOrchestrationCluster without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createOrchestrationCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createOrchestrationCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster, protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster, protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createOrchestrationCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOrchestrationCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOrchestrationCluster with call error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createOrchestrationCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createOrchestrationCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createOrchestrationCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOrchestrationCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOrchestrationCluster with LRO error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createOrchestrationCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createOrchestrationCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createOrchestrationCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOrchestrationCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateOrchestrationClusterProgress without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateOrchestrationClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateOrchestrationClusterProgress with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateOrchestrationClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteOrchestrationCluster', () => {
+        it('invokes deleteOrchestrationCluster without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteOrchestrationCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteOrchestrationCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteOrchestrationCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOrchestrationCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOrchestrationCluster without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteOrchestrationCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteOrchestrationCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteOrchestrationCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOrchestrationCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOrchestrationCluster with call error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteOrchestrationCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteOrchestrationCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteOrchestrationCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOrchestrationCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOrchestrationCluster with LRO error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteOrchestrationCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteOrchestrationCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteOrchestrationCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOrchestrationCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteOrchestrationClusterProgress without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteOrchestrationClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteOrchestrationClusterProgress with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteOrchestrationClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createEdgeSlm', () => {
+        it('invokes createEdgeSlm without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createEdgeSlm = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createEdgeSlm(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEdgeSlm as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEdgeSlm as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEdgeSlm without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createEdgeSlm = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createEdgeSlm(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm, protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm, protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEdgeSlm as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEdgeSlm as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEdgeSlm with call error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEdgeSlm = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createEdgeSlm(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createEdgeSlm as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEdgeSlm as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEdgeSlm with LRO error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEdgeSlm = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createEdgeSlm(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createEdgeSlm as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEdgeSlm as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateEdgeSlmProgress without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateEdgeSlmProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateEdgeSlmProgress with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateEdgeSlmProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteEdgeSlm', () => {
+        it('invokes deleteEdgeSlm without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteEdgeSlm = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteEdgeSlm(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEdgeSlm as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEdgeSlm as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEdgeSlm without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteEdgeSlm = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteEdgeSlm(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEdgeSlm as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEdgeSlm as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEdgeSlm with call error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEdgeSlm = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteEdgeSlm(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEdgeSlm as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEdgeSlm as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEdgeSlm with LRO error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEdgeSlm = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteEdgeSlm(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEdgeSlm as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEdgeSlm as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteEdgeSlmProgress without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteEdgeSlmProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteEdgeSlmProgress with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteEdgeSlmProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listOrchestrationClusters', () => {
+        it('invokes listOrchestrationClusters without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+            ];
+            client.innerApiCalls.listOrchestrationClusters = stubSimpleCall(expectedResponse);
+            const [response] = await client.listOrchestrationClusters(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOrchestrationClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrchestrationClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOrchestrationClusters without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+            ];
+            client.innerApiCalls.listOrchestrationClusters = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listOrchestrationClusters(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOrchestrationClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrchestrationClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOrchestrationClusters with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listOrchestrationClusters = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listOrchestrationClusters(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listOrchestrationClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrchestrationClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOrchestrationClustersStream without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+            ];
+            client.descriptors.page.listOrchestrationClusters.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listOrchestrationClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listOrchestrationClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOrchestrationClusters, request));
+            assert(
+                (client.descriptors.page.listOrchestrationClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listOrchestrationClustersStream with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOrchestrationClusters.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listOrchestrationClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listOrchestrationClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOrchestrationClusters, request));
+            assert(
+                (client.descriptors.page.listOrchestrationClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listOrchestrationClusters without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.OrchestrationCluster()),
+            ];
+            client.descriptors.page.listOrchestrationClusters.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster[] = [];
+            const iterable = client.listOrchestrationClustersAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBlueprints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBlueprints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBlueprints with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBlueprints = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listBlueprints(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listBlueprints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBlueprints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBlueprintsStream without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.descriptors.page.listBlueprints.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBlueprintsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOrchestrationClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOrchestrationClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listOrchestrationClusters with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOrchestrationClusters.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listOrchestrationClustersAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOrchestrationClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOrchestrationClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listBlueprints.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBlueprints, request)
-      );
-      assert(
-        (client.descriptors.page.listBlueprints.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listBlueprintsStream with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBlueprints.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listBlueprintsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listEdgeSlms', () => {
+        it('invokes listEdgeSlms without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+            ];
+            client.innerApiCalls.listEdgeSlms = stubSimpleCall(expectedResponse);
+            const [response] = await client.listEdgeSlms(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEdgeSlms as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEdgeSlms as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listEdgeSlms without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+            ];
+            client.innerApiCalls.listEdgeSlms = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listEdgeSlms(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEdgeSlms as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEdgeSlms as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listBlueprints.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBlueprints, request)
-      );
-      assert(
-        (client.descriptors.page.listBlueprints.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listBlueprints without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.descriptors.page.listBlueprints.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] =
-        [];
-      const iterable = client.listBlueprintsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBlueprints.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBlueprints.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listEdgeSlms with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listEdgeSlms = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listEdgeSlms(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listEdgeSlms as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEdgeSlms as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listBlueprints with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBlueprints.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listBlueprintsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBlueprints.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBlueprints.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listEdgeSlmsStream without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+            ];
+            client.descriptors.page.listEdgeSlms.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listEdgeSlmsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listEdgeSlms.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEdgeSlms, request));
+            assert(
+                (client.descriptors.page.listEdgeSlms.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listBlueprintRevisions', () => {
-    it('invokes listBlueprintRevisions without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.innerApiCalls.listBlueprintRevisions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listBlueprintRevisions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBlueprintRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBlueprintRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listEdgeSlmsStream with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEdgeSlms.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listEdgeSlmsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listEdgeSlms.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEdgeSlms, request));
+            assert(
+                (client.descriptors.page.listEdgeSlms.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listBlueprintRevisions without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.innerApiCalls.listBlueprintRevisions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBlueprintRevisions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listEdgeSlms without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.EdgeSlm()),
+            ];
+            client.descriptors.page.listEdgeSlms.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm[] = [];
+            const iterable = client.listEdgeSlmsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBlueprintRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBlueprintRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBlueprintRevisions with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBlueprintRevisions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listBlueprintRevisions(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listBlueprintRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBlueprintRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBlueprintRevisionsStream without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.descriptors.page.listBlueprintRevisions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBlueprintRevisionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEdgeSlms.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEdgeSlms.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listEdgeSlms with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEdgeSlms.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listEdgeSlmsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEdgeSlms.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEdgeSlms.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listBlueprintRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBlueprintRevisions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listBlueprintRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listBlueprintRevisionsStream with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBlueprintRevisions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listBlueprintRevisionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listBlueprints', () => {
+        it('invokes listBlueprints without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.innerApiCalls.listBlueprints = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBlueprints(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBlueprints as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBlueprints as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listBlueprints without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.innerApiCalls.listBlueprints = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBlueprints(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBlueprints as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBlueprints as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listBlueprintRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBlueprintRevisions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listBlueprintRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listBlueprintRevisions without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.descriptors.page.listBlueprintRevisions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] =
-        [];
-      const iterable = client.listBlueprintRevisionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBlueprintRevisions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listBlueprintRevisions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listBlueprints with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBlueprints = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBlueprints(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBlueprints as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBlueprints as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listBlueprintRevisions with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBlueprintRevisions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listBlueprintRevisionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBlueprintRevisions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listBlueprintRevisions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('invokes listBlueprintsStream without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.descriptors.page.listBlueprints.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBlueprintsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBlueprints.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBlueprints, request));
+            assert(
+                (client.descriptors.page.listBlueprints.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('searchBlueprintRevisions', () => {
-    it('invokes searchBlueprintRevisions without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.innerApiCalls.searchBlueprintRevisions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.searchBlueprintRevisions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchBlueprintRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchBlueprintRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listBlueprintsStream with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBlueprints.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBlueprintsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBlueprints.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBlueprints, request));
+            assert(
+                (client.descriptors.page.listBlueprints.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes searchBlueprintRevisions without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.innerApiCalls.searchBlueprintRevisions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.searchBlueprintRevisions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listBlueprints without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.descriptors.page.listBlueprints.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] = [];
+            const iterable = client.listBlueprintsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchBlueprintRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchBlueprintRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchBlueprintRevisions with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.searchBlueprintRevisions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.searchBlueprintRevisions(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.searchBlueprintRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchBlueprintRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchBlueprintRevisionsStream without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.descriptors.page.searchBlueprintRevisions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.searchBlueprintRevisionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBlueprints.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBlueprints.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listBlueprints with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBlueprints.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBlueprintsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBlueprints.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBlueprints.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.searchBlueprintRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchBlueprintRevisions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.searchBlueprintRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes searchBlueprintRevisionsStream with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchBlueprintRevisions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.searchBlueprintRevisionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listBlueprintRevisions', () => {
+        it('invokes listBlueprintRevisions without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.innerApiCalls.listBlueprintRevisions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBlueprintRevisions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBlueprintRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBlueprintRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listBlueprintRevisions without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.innerApiCalls.listBlueprintRevisions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBlueprintRevisions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBlueprintRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBlueprintRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.searchBlueprintRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchBlueprintRevisions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.searchBlueprintRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with searchBlueprintRevisions without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()
-        ),
-      ];
-      client.descriptors.page.searchBlueprintRevisions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] =
-        [];
-      const iterable = client.searchBlueprintRevisionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchBlueprintRevisions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.searchBlueprintRevisions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listBlueprintRevisions with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBlueprintRevisions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBlueprintRevisions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBlueprintRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBlueprintRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with searchBlueprintRevisions with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchBlueprintRevisions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.searchBlueprintRevisionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchBlueprintRevisions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.searchBlueprintRevisions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('invokes listBlueprintRevisionsStream without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.descriptors.page.listBlueprintRevisions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBlueprintRevisionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBlueprintRevisions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBlueprintRevisions, request));
+            assert(
+                (client.descriptors.page.listBlueprintRevisions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('searchDeploymentRevisions', () => {
-    it('invokes searchDeploymentRevisions without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.innerApiCalls.searchDeploymentRevisions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.searchDeploymentRevisions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchDeploymentRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchDeploymentRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listBlueprintRevisionsStream with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBlueprintRevisions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBlueprintRevisionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBlueprintRevisions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBlueprintRevisions, request));
+            assert(
+                (client.descriptors.page.listBlueprintRevisions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes searchDeploymentRevisions without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.innerApiCalls.searchDeploymentRevisions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.searchDeploymentRevisions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.telcoautomation.v1alpha1.IDeployment[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listBlueprintRevisions without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.descriptors.page.listBlueprintRevisions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] = [];
+            const iterable = client.listBlueprintRevisionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchDeploymentRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchDeploymentRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchDeploymentRevisions with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.searchDeploymentRevisions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.searchDeploymentRevisions(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.searchDeploymentRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchDeploymentRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchDeploymentRevisionsStream without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.descriptors.page.searchDeploymentRevisions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.searchDeploymentRevisionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Deployment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBlueprintRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBlueprintRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listBlueprintRevisions with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBlueprintRevisions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBlueprintRevisionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBlueprintRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBlueprintRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.searchDeploymentRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchDeploymentRevisions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.searchDeploymentRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes searchDeploymentRevisionsStream with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchDeploymentRevisions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.searchDeploymentRevisionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Deployment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('searchBlueprintRevisions', () => {
+        it('invokes searchBlueprintRevisions without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.innerApiCalls.searchBlueprintRevisions = stubSimpleCall(expectedResponse);
+            const [response] = await client.searchBlueprintRevisions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchBlueprintRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchBlueprintRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes searchBlueprintRevisions without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.innerApiCalls.searchBlueprintRevisions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.searchBlueprintRevisions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchBlueprintRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchBlueprintRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.searchDeploymentRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchDeploymentRevisions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.searchDeploymentRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with searchDeploymentRevisions without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.descriptors.page.searchDeploymentRevisions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] =
-        [];
-      const iterable = client.searchDeploymentRevisionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchDeploymentRevisions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.searchDeploymentRevisions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes searchBlueprintRevisions with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.searchBlueprintRevisions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.searchBlueprintRevisions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.searchBlueprintRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchBlueprintRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with searchDeploymentRevisions with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchDeploymentRevisions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.searchDeploymentRevisionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchDeploymentRevisions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.searchDeploymentRevisions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('invokes searchBlueprintRevisionsStream without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.descriptors.page.searchBlueprintRevisions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.searchBlueprintRevisionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.searchBlueprintRevisions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchBlueprintRevisions, request));
+            assert(
+                (client.descriptors.page.searchBlueprintRevisions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listPublicBlueprints', () => {
-    it('invokes listPublicBlueprints without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-      ];
-      client.innerApiCalls.listPublicBlueprints =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listPublicBlueprints(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPublicBlueprints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPublicBlueprints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes searchBlueprintRevisionsStream with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchBlueprintRevisions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.searchBlueprintRevisionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Blueprint[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Blueprint) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.searchBlueprintRevisions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchBlueprintRevisions, request));
+            assert(
+                (client.descriptors.page.searchBlueprintRevisions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listPublicBlueprints without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-      ];
-      client.innerApiCalls.listPublicBlueprints =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPublicBlueprints(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with searchBlueprintRevisions without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Blueprint()),
+            ];
+            client.descriptors.page.searchBlueprintRevisions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] = [];
+            const iterable = client.searchBlueprintRevisionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPublicBlueprints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPublicBlueprints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPublicBlueprints with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPublicBlueprints = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listPublicBlueprints(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listPublicBlueprints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPublicBlueprints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPublicBlueprintsStream without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-      ];
-      client.descriptors.page.listPublicBlueprints.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPublicBlueprintsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchBlueprintRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchBlueprintRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with searchBlueprintRevisions with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchBlueprintRevisions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.searchBlueprintRevisionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchBlueprintRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchBlueprintRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listPublicBlueprints.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPublicBlueprints, request)
-      );
-      assert(
-        (client.descriptors.page.listPublicBlueprints.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listPublicBlueprintsStream with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPublicBlueprints.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPublicBlueprintsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('searchDeploymentRevisions', () => {
+        it('invokes searchDeploymentRevisions without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.innerApiCalls.searchDeploymentRevisions = stubSimpleCall(expectedResponse);
+            const [response] = await client.searchDeploymentRevisions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchDeploymentRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchDeploymentRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes searchDeploymentRevisions without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.innerApiCalls.searchDeploymentRevisions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.searchDeploymentRevisions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchDeploymentRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchDeploymentRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listPublicBlueprints.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPublicBlueprints, request)
-      );
-      assert(
-        (client.descriptors.page.listPublicBlueprints.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listPublicBlueprints without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()
-        ),
-      ];
-      client.descriptors.page.listPublicBlueprints.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint[] =
-        [];
-      const iterable = client.listPublicBlueprintsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPublicBlueprints.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPublicBlueprints.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes searchDeploymentRevisions with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.searchDeploymentRevisions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.searchDeploymentRevisions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.searchDeploymentRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchDeploymentRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listPublicBlueprints with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPublicBlueprints.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPublicBlueprintsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPublicBlueprints.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPublicBlueprints.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes searchDeploymentRevisionsStream without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.descriptors.page.searchDeploymentRevisions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.searchDeploymentRevisionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Deployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.searchDeploymentRevisions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchDeploymentRevisions, request));
+            assert(
+                (client.descriptors.page.searchDeploymentRevisions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listDeployments', () => {
-    it('invokes listDeployments without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.innerApiCalls.listDeployments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listDeployments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes searchDeploymentRevisionsStream with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchDeploymentRevisions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.searchDeploymentRevisionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Deployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.searchDeploymentRevisions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchDeploymentRevisions, request));
+            assert(
+                (client.descriptors.page.searchDeploymentRevisions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listDeployments without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.innerApiCalls.listDeployments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listDeployments(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.telcoautomation.v1alpha1.IDeployment[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with searchDeploymentRevisions without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.descriptors.page.searchDeploymentRevisions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] = [];
+            const iterable = client.searchDeploymentRevisionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDeployments with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listDeployments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listDeployments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDeploymentsStream without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.descriptors.page.listDeployments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDeploymentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Deployment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchDeploymentRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchDeploymentRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with searchDeploymentRevisions with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchDeploymentRevisions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.searchDeploymentRevisionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchDeploymentRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchDeploymentRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listDeployments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDeployments, request)
-      );
-      assert(
-        (client.descriptors.page.listDeployments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listDeploymentsStream with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDeployments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listDeploymentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Deployment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listPublicBlueprints', () => {
+        it('invokes listPublicBlueprints without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+            ];
+            client.innerApiCalls.listPublicBlueprints = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPublicBlueprints(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPublicBlueprints as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPublicBlueprints as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listPublicBlueprints without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+            ];
+            client.innerApiCalls.listPublicBlueprints = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPublicBlueprints(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPublicBlueprints as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPublicBlueprints as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listDeployments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDeployments, request)
-      );
-      assert(
-        (client.descriptors.page.listDeployments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listDeployments without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.descriptors.page.listDeployments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] =
-        [];
-      const iterable = client.listDeploymentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDeployments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listPublicBlueprints with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPublicBlueprints = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPublicBlueprints(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPublicBlueprints as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPublicBlueprints as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listDeployments with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDeployments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDeploymentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDeployments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listPublicBlueprintsStream without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+            ];
+            client.descriptors.page.listPublicBlueprints.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPublicBlueprintsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPublicBlueprints.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPublicBlueprints, request));
+            assert(
+                (client.descriptors.page.listPublicBlueprints.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listDeploymentRevisions', () => {
-    it('invokes listDeploymentRevisions without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.innerApiCalls.listDeploymentRevisions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listDeploymentRevisions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDeploymentRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeploymentRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listPublicBlueprintsStream with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPublicBlueprints.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPublicBlueprintsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPublicBlueprints.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPublicBlueprints, request));
+            assert(
+                (client.descriptors.page.listPublicBlueprints.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listDeploymentRevisions without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.innerApiCalls.listDeploymentRevisions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listDeploymentRevisions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.telcoautomation.v1alpha1.IDeployment[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listPublicBlueprints without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.PublicBlueprint()),
+            ];
+            client.descriptors.page.listPublicBlueprints.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint[] = [];
+            const iterable = client.listPublicBlueprintsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDeploymentRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeploymentRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDeploymentRevisions with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listDeploymentRevisions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listDeploymentRevisions(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listDeploymentRevisions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeploymentRevisions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDeploymentRevisionsStream without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.descriptors.page.listDeploymentRevisions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDeploymentRevisionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Deployment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPublicBlueprints.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPublicBlueprints.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listPublicBlueprints with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPublicBlueprints.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPublicBlueprintsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPublicBlueprints.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPublicBlueprints.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listDeploymentRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDeploymentRevisions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listDeploymentRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listDeploymentRevisionsStream with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDeploymentRevisions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listDeploymentRevisionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.Deployment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listDeployments', () => {
+        it('invokes listDeployments without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.innerApiCalls.listDeployments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDeployments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listDeployments without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.innerApiCalls.listDeployments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDeployments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listDeploymentRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDeploymentRevisions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listDeploymentRevisions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listDeploymentRevisions without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.Deployment()
-        ),
-      ];
-      client.descriptors.page.listDeploymentRevisions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] =
-        [];
-      const iterable = client.listDeploymentRevisionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDeploymentRevisions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listDeploymentRevisions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listDeployments with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDeployments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDeployments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listDeploymentRevisions with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDeploymentRevisions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDeploymentRevisionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDeploymentRevisions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listDeploymentRevisions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('invokes listDeploymentsStream without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.descriptors.page.listDeployments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDeploymentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Deployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDeployments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeployments, request));
+            assert(
+                (client.descriptors.page.listDeployments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listHydratedDeployments', () => {
-    it('invokes listHydratedDeployments without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-      ];
-      client.innerApiCalls.listHydratedDeployments =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listHydratedDeployments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listHydratedDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listHydratedDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listDeploymentsStream with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeployments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDeploymentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Deployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDeployments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeployments, request));
+            assert(
+                (client.descriptors.page.listDeployments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listHydratedDeployments without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-      ];
-      client.innerApiCalls.listHydratedDeployments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listHydratedDeployments(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listDeployments without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.descriptors.page.listDeployments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] = [];
+            const iterable = client.listDeploymentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listHydratedDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listHydratedDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listHydratedDeployments with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listHydratedDeployments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listHydratedDeployments(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listHydratedDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listHydratedDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listHydratedDeploymentsStream without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-      ];
-      client.descriptors.page.listHydratedDeployments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listHydratedDeploymentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listDeployments with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeployments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDeploymentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listHydratedDeployments
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listHydratedDeployments, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listHydratedDeployments
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listHydratedDeploymentsStream with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listHydratedDeployments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listHydratedDeploymentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listDeploymentRevisions', () => {
+        it('invokes listDeploymentRevisions without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.innerApiCalls.listDeploymentRevisions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDeploymentRevisions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeploymentRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listDeploymentRevisions without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.innerApiCalls.listDeploymentRevisions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDeploymentRevisions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeploymentRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listHydratedDeployments
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listHydratedDeployments, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listHydratedDeployments
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listHydratedDeployments without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()
-        ),
-      ];
-      client.descriptors.page.listHydratedDeployments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment[] =
-        [];
-      const iterable = client.listHydratedDeploymentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listHydratedDeployments
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listHydratedDeployments
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listDeploymentRevisions with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDeploymentRevisions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDeploymentRevisions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDeploymentRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listHydratedDeployments with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listHydratedDeployments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listHydratedDeploymentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listHydratedDeployments
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listHydratedDeployments
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listDeploymentRevisionsStream without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.descriptors.page.listDeploymentRevisions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDeploymentRevisionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Deployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDeploymentRevisions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeploymentRevisions, request));
+            assert(
+                (client.descriptors.page.listDeploymentRevisions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDeploymentRevisionsStream with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeploymentRevisions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDeploymentRevisionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.Deployment[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.Deployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDeploymentRevisions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeploymentRevisions, request));
+            assert(
+                (client.descriptors.page.listDeploymentRevisions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDeploymentRevisions without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.Deployment()),
+            ];
+            client.descriptors.page.listDeploymentRevisions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] = [];
+            const iterable = client.listDeploymentRevisionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeploymentRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeploymentRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDeploymentRevisions with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeploymentRevisions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDeploymentRevisionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.IDeployment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeploymentRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeploymentRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getLocation with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('listHydratedDeployments', () => {
+        it('invokes listHydratedDeployments without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+            ];
+            client.innerApiCalls.listHydratedDeployments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listHydratedDeployments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listHydratedDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHydratedDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listHydratedDeployments without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+            ];
+            client.innerApiCalls.listHydratedDeployments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listHydratedDeployments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listHydratedDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHydratedDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listHydratedDeployments with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listHydratedDeployments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listHydratedDeployments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listHydratedDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHydratedDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listHydratedDeploymentsStream without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+            ];
+            client.descriptors.page.listHydratedDeployments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listHydratedDeploymentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listHydratedDeployments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listHydratedDeployments, request));
+            assert(
+                (client.descriptors.page.listHydratedDeployments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listHydratedDeploymentsStream with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listHydratedDeployments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listHydratedDeploymentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment[] = [];
+                stream.on('data', (response: protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listHydratedDeployments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listHydratedDeployments, request));
+            assert(
+                (client.descriptors.page.listHydratedDeployments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listHydratedDeployments without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+              generateSampleMessage(new protos.google.cloud.telcoautomation.v1alpha1.HydratedDeployment()),
+            ];
+            client.descriptors.page.listHydratedDeployments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment[] = [];
+            const iterable = client.listHydratedDeploymentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listHydratedDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listHydratedDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listHydratedDeployments with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listHydratedDeployments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listHydratedDeploymentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listHydratedDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listHydratedDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('blueprint', async () => {
-      const fakePath = '/rendered/path/blueprint';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        orchestration_cluster: 'orchestrationClusterValue',
-        blueprint: 'blueprintValue',
-      };
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.blueprintPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.blueprintPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('blueprintPath', () => {
-        const result = client.blueprintPath(
-          'projectValue',
-          'locationValue',
-          'orchestrationClusterValue',
-          'blueprintValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.blueprintPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromBlueprintName', () => {
-        const result = client.matchProjectFromBlueprintName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.blueprintPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBlueprintName', () => {
-        const result = client.matchLocationFromBlueprintName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.blueprintPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchOrchestrationClusterFromBlueprintName', () => {
-        const result =
-          client.matchOrchestrationClusterFromBlueprintName(fakePath);
-        assert.strictEqual(result, 'orchestrationClusterValue');
-        assert(
-          (client.pathTemplates.blueprintPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBlueprintFromBlueprintName', () => {
-        const result = client.matchBlueprintFromBlueprintName(fakePath);
-        assert.strictEqual(result, 'blueprintValue');
-        assert(
-          (client.pathTemplates.blueprintPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('deployment', async () => {
-      const fakePath = '/rendered/path/deployment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        orchestration_cluster: 'orchestrationClusterValue',
-        deployment: 'deploymentValue',
-      };
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.deploymentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.deploymentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('deploymentPath', () => {
-        const result = client.deploymentPath(
-          'projectValue',
-          'locationValue',
-          'orchestrationClusterValue',
-          'deploymentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('blueprint', async () => {
+            const fakePath = "/rendered/path/blueprint";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                orchestration_cluster: "orchestrationClusterValue",
+                blueprint: "blueprintValue",
+            };
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.blueprintPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.blueprintPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromDeploymentName', () => {
-        const result = client.matchProjectFromDeploymentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('blueprintPath', () => {
+                const result = client.blueprintPath("projectValue", "locationValue", "orchestrationClusterValue", "blueprintValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.blueprintPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromDeploymentName', () => {
-        const result = client.matchLocationFromDeploymentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromBlueprintName', () => {
+                const result = client.matchProjectFromBlueprintName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.blueprintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchOrchestrationClusterFromDeploymentName', () => {
-        const result =
-          client.matchOrchestrationClusterFromDeploymentName(fakePath);
-        assert.strictEqual(result, 'orchestrationClusterValue');
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromBlueprintName', () => {
+                const result = client.matchLocationFromBlueprintName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.blueprintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchDeploymentFromDeploymentName', () => {
-        const result = client.matchDeploymentFromDeploymentName(fakePath);
-        assert.strictEqual(result, 'deploymentValue');
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchOrchestrationClusterFromBlueprintName', () => {
+                const result = client.matchOrchestrationClusterFromBlueprintName(fakePath);
+                assert.strictEqual(result, "orchestrationClusterValue");
+                assert((client.pathTemplates.blueprintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBlueprintFromBlueprintName', () => {
+                const result = client.matchBlueprintFromBlueprintName(fakePath);
+                assert.strictEqual(result, "blueprintValue");
+                assert((client.pathTemplates.blueprintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('deployment', async () => {
+            const fakePath = "/rendered/path/deployment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                orchestration_cluster: "orchestrationClusterValue",
+                deployment: "deploymentValue",
+            };
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deploymentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deploymentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deploymentPath', () => {
+                const result = client.deploymentPath("projectValue", "locationValue", "orchestrationClusterValue", "deploymentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deploymentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDeploymentName', () => {
+                const result = client.matchProjectFromDeploymentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDeploymentName', () => {
+                const result = client.matchLocationFromDeploymentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOrchestrationClusterFromDeploymentName', () => {
+                const result = client.matchOrchestrationClusterFromDeploymentName(fakePath);
+                assert.strictEqual(result, "orchestrationClusterValue");
+                assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeploymentFromDeploymentName', () => {
+                const result = client.matchDeploymentFromDeploymentName(fakePath);
+                assert.strictEqual(result, "deploymentValue");
+                assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('edgeSlm', async () => {
+            const fakePath = "/rendered/path/edgeSlm";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                edge_slm: "edgeSlmValue",
+            };
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.edgeSlmPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.edgeSlmPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('edgeSlmPath', () => {
+                const result = client.edgeSlmPath("projectValue", "locationValue", "edgeSlmValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.edgeSlmPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEdgeSlmName', () => {
+                const result = client.matchProjectFromEdgeSlmName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.edgeSlmPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEdgeSlmName', () => {
+                const result = client.matchLocationFromEdgeSlmName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.edgeSlmPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEdgeSlmFromEdgeSlmName', () => {
+                const result = client.matchEdgeSlmFromEdgeSlmName(fakePath);
+                assert.strictEqual(result, "edgeSlmValue");
+                assert((client.pathTemplates.edgeSlmPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('hydratedDeployment', async () => {
+            const fakePath = "/rendered/path/hydratedDeployment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                orchestration_cluster: "orchestrationClusterValue",
+                deployment: "deploymentValue",
+                hydrated_deployment: "hydratedDeploymentValue",
+            };
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.hydratedDeploymentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.hydratedDeploymentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('hydratedDeploymentPath', () => {
+                const result = client.hydratedDeploymentPath("projectValue", "locationValue", "orchestrationClusterValue", "deploymentValue", "hydratedDeploymentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.hydratedDeploymentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromHydratedDeploymentName', () => {
+                const result = client.matchProjectFromHydratedDeploymentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.hydratedDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromHydratedDeploymentName', () => {
+                const result = client.matchLocationFromHydratedDeploymentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.hydratedDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOrchestrationClusterFromHydratedDeploymentName', () => {
+                const result = client.matchOrchestrationClusterFromHydratedDeploymentName(fakePath);
+                assert.strictEqual(result, "orchestrationClusterValue");
+                assert((client.pathTemplates.hydratedDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeploymentFromHydratedDeploymentName', () => {
+                const result = client.matchDeploymentFromHydratedDeploymentName(fakePath);
+                assert.strictEqual(result, "deploymentValue");
+                assert((client.pathTemplates.hydratedDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchHydratedDeploymentFromHydratedDeploymentName', () => {
+                const result = client.matchHydratedDeploymentFromHydratedDeploymentName(fakePath);
+                assert.strictEqual(result, "hydratedDeploymentValue");
+                assert((client.pathTemplates.hydratedDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('orchestrationCluster', async () => {
+            const fakePath = "/rendered/path/orchestrationCluster";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                orchestration_cluster: "orchestrationClusterValue",
+            };
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.orchestrationClusterPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.orchestrationClusterPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('orchestrationClusterPath', () => {
+                const result = client.orchestrationClusterPath("projectValue", "locationValue", "orchestrationClusterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.orchestrationClusterPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromOrchestrationClusterName', () => {
+                const result = client.matchProjectFromOrchestrationClusterName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.orchestrationClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrchestrationClusterName', () => {
+                const result = client.matchLocationFromOrchestrationClusterName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.orchestrationClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOrchestrationClusterFromOrchestrationClusterName', () => {
+                const result = client.matchOrchestrationClusterFromOrchestrationClusterName(fakePath);
+                assert.strictEqual(result, "orchestrationClusterValue");
+                assert((client.pathTemplates.orchestrationClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('publicBlueprint', async () => {
+            const fakePath = "/rendered/path/publicBlueprint";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                public_lueprint: "publicLueprintValue",
+            };
+            const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.publicBlueprintPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.publicBlueprintPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('publicBlueprintPath', () => {
+                const result = client.publicBlueprintPath("projectValue", "locationValue", "publicLueprintValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.publicBlueprintPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPublicBlueprintName', () => {
+                const result = client.matchProjectFromPublicBlueprintName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.publicBlueprintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPublicBlueprintName', () => {
+                const result = client.matchLocationFromPublicBlueprintName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.publicBlueprintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPublicLueprintFromPublicBlueprintName', () => {
+                const result = client.matchPublicLueprintFromPublicBlueprintName(fakePath);
+                assert.strictEqual(result, "publicLueprintValue");
+                assert((client.pathTemplates.publicBlueprintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('edgeSlm', async () => {
-      const fakePath = '/rendered/path/edgeSlm';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        edge_slm: 'edgeSlmValue',
-      };
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.edgeSlmPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.edgeSlmPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('edgeSlmPath', () => {
-        const result = client.edgeSlmPath(
-          'projectValue',
-          'locationValue',
-          'edgeSlmValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.edgeSlmPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEdgeSlmName', () => {
-        const result = client.matchProjectFromEdgeSlmName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.edgeSlmPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEdgeSlmName', () => {
-        const result = client.matchLocationFromEdgeSlmName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.edgeSlmPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEdgeSlmFromEdgeSlmName', () => {
-        const result = client.matchEdgeSlmFromEdgeSlmName(fakePath);
-        assert.strictEqual(result, 'edgeSlmValue');
-        assert(
-          (client.pathTemplates.edgeSlmPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('hydratedDeployment', async () => {
-      const fakePath = '/rendered/path/hydratedDeployment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        orchestration_cluster: 'orchestrationClusterValue',
-        deployment: 'deploymentValue',
-        hydrated_deployment: 'hydratedDeploymentValue',
-      };
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.hydratedDeploymentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.hydratedDeploymentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('hydratedDeploymentPath', () => {
-        const result = client.hydratedDeploymentPath(
-          'projectValue',
-          'locationValue',
-          'orchestrationClusterValue',
-          'deploymentValue',
-          'hydratedDeploymentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.hydratedDeploymentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromHydratedDeploymentName', () => {
-        const result = client.matchProjectFromHydratedDeploymentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.hydratedDeploymentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromHydratedDeploymentName', () => {
-        const result = client.matchLocationFromHydratedDeploymentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.hydratedDeploymentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchOrchestrationClusterFromHydratedDeploymentName', () => {
-        const result =
-          client.matchOrchestrationClusterFromHydratedDeploymentName(fakePath);
-        assert.strictEqual(result, 'orchestrationClusterValue');
-        assert(
-          (
-            client.pathTemplates.hydratedDeploymentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDeploymentFromHydratedDeploymentName', () => {
-        const result =
-          client.matchDeploymentFromHydratedDeploymentName(fakePath);
-        assert.strictEqual(result, 'deploymentValue');
-        assert(
-          (
-            client.pathTemplates.hydratedDeploymentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchHydratedDeploymentFromHydratedDeploymentName', () => {
-        const result =
-          client.matchHydratedDeploymentFromHydratedDeploymentName(fakePath);
-        assert.strictEqual(result, 'hydratedDeploymentValue');
-        assert(
-          (
-            client.pathTemplates.hydratedDeploymentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('orchestrationCluster', async () => {
-      const fakePath = '/rendered/path/orchestrationCluster';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        orchestration_cluster: 'orchestrationClusterValue',
-      };
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.orchestrationClusterPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.orchestrationClusterPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('orchestrationClusterPath', () => {
-        const result = client.orchestrationClusterPath(
-          'projectValue',
-          'locationValue',
-          'orchestrationClusterValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.orchestrationClusterPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromOrchestrationClusterName', () => {
-        const result =
-          client.matchProjectFromOrchestrationClusterName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.orchestrationClusterPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrchestrationClusterName', () => {
-        const result =
-          client.matchLocationFromOrchestrationClusterName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.orchestrationClusterPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchOrchestrationClusterFromOrchestrationClusterName', () => {
-        const result =
-          client.matchOrchestrationClusterFromOrchestrationClusterName(
-            fakePath
-          );
-        assert.strictEqual(result, 'orchestrationClusterValue');
-        assert(
-          (
-            client.pathTemplates.orchestrationClusterPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('publicBlueprint', async () => {
-      const fakePath = '/rendered/path/publicBlueprint';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        public_lueprint: 'publicLueprintValue',
-      };
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.publicBlueprintPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.publicBlueprintPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('publicBlueprintPath', () => {
-        const result = client.publicBlueprintPath(
-          'projectValue',
-          'locationValue',
-          'publicLueprintValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.publicBlueprintPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromPublicBlueprintName', () => {
-        const result = client.matchProjectFromPublicBlueprintName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.publicBlueprintPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromPublicBlueprintName', () => {
-        const result = client.matchLocationFromPublicBlueprintName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.publicBlueprintPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPublicLueprintFromPublicBlueprintName', () => {
-        const result =
-          client.matchPublicLueprintFromPublicBlueprintName(fakePath);
-        assert.strictEqual(result, 'publicLueprintValue');
-        assert(
-          (client.pathTemplates.publicBlueprintPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

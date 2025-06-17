@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -115,41 +104,20 @@ export class WorkflowsClient {
    *     const client = new WorkflowsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof WorkflowsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'workflows.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -175,7 +143,7 @@ export class WorkflowsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -191,9 +159,13 @@ export class WorkflowsClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -232,98 +204,57 @@ export class WorkflowsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listWorkflows: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'workflows'
-      ),
-      listWorkflowRevisions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'workflows'
-      ),
+      listWorkflows:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workflows'),
+      listWorkflowRevisions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workflows')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createWorkflowResponse = protoFilesRoot.lookup(
-      '.google.cloud.workflows.v1.Workflow'
-    ) as gax.protobuf.Type;
+      '.google.cloud.workflows.v1.Workflow') as gax.protobuf.Type;
     const createWorkflowMetadata = protoFilesRoot.lookup(
-      '.google.cloud.workflows.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.workflows.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteWorkflowResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteWorkflowMetadata = protoFilesRoot.lookup(
-      '.google.cloud.workflows.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.workflows.v1.OperationMetadata') as gax.protobuf.Type;
     const updateWorkflowResponse = protoFilesRoot.lookup(
-      '.google.cloud.workflows.v1.Workflow'
-    ) as gax.protobuf.Type;
+      '.google.cloud.workflows.v1.Workflow') as gax.protobuf.Type;
     const updateWorkflowMetadata = protoFilesRoot.lookup(
-      '.google.cloud.workflows.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.workflows.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createWorkflow: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createWorkflowResponse.decode.bind(createWorkflowResponse),
-        createWorkflowMetadata.decode.bind(createWorkflowMetadata)
-      ),
+        createWorkflowMetadata.decode.bind(createWorkflowMetadata)),
       deleteWorkflow: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteWorkflowResponse.decode.bind(deleteWorkflowResponse),
-        deleteWorkflowMetadata.decode.bind(deleteWorkflowMetadata)
-      ),
+        deleteWorkflowMetadata.decode.bind(deleteWorkflowMetadata)),
       updateWorkflow: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateWorkflowResponse.decode.bind(updateWorkflowResponse),
-        updateWorkflowMetadata.decode.bind(updateWorkflowMetadata)
-      ),
+        updateWorkflowMetadata.decode.bind(updateWorkflowMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.workflows.v1.Workflows',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.workflows.v1.Workflows', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -354,40 +285,28 @@ export class WorkflowsClient {
     // Put together the "service stub" for
     // google.cloud.workflows.v1.Workflows.
     this.workflowsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.workflows.v1.Workflows'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.workflows.v1.Workflows') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.workflows.v1.Workflows,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const workflowsStubMethods = [
-      'listWorkflows',
-      'getWorkflow',
-      'createWorkflow',
-      'deleteWorkflow',
-      'updateWorkflow',
-      'listWorkflowRevisions',
-    ];
+    const workflowsStubMethods =
+        ['listWorkflows', 'getWorkflow', 'createWorkflow', 'deleteWorkflow', 'updateWorkflow', 'listWorkflowRevisions'];
     for (const methodName of workflowsStubMethods) {
       const callPromise = this.workflowsStub.then(
-        (stub) =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -412,14 +331,8 @@ export class WorkflowsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'workflows.googleapis.com';
   }
@@ -430,14 +343,8 @@ export class WorkflowsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'workflows.googleapis.com';
   }
@@ -468,7 +375,9 @@ export class WorkflowsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -477,9 +386,8 @@ export class WorkflowsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -490,789 +398,560 @@ export class WorkflowsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single workflow.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the workflow for which information should be retrieved.
-   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
-   * @param {string} [request.revisionId]
-   *   Optional. The revision of the workflow to retrieve. If the revision_id is
-   *   empty, the latest revision is retrieved.
-   *   The format is "000001-a4d", where the first six characters define
-   *   the zero-padded decimal revision number. They are followed by a hyphen and
-   *   three hexadecimal characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.workflows.v1.Workflow|Workflow}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/workflows.get_workflow.js</caption>
-   * region_tag:workflows_v1_generated_Workflows_GetWorkflow_async
-   */
+/**
+ * Gets details of a single workflow.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the workflow for which information should be retrieved.
+ *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+ * @param {string} [request.revisionId]
+ *   Optional. The revision of the workflow to retrieve. If the revision_id is
+ *   empty, the latest revision is retrieved.
+ *   The format is "000001-a4d", where the first six characters define
+ *   the zero-padded decimal revision number. They are followed by a hyphen and
+ *   three hexadecimal characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.workflows.v1.Workflow|Workflow}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/workflows.get_workflow.js</caption>
+ * region_tag:workflows_v1_generated_Workflows_GetWorkflow_async
+ */
   getWorkflow(
-    request?: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.workflows.v1.IWorkflow,
-      protos.google.cloud.workflows.v1.IGetWorkflowRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IGetWorkflowRequest|undefined, {}|undefined
+      ]>;
   getWorkflow(
-    request: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.workflows.v1.IWorkflow,
-      protos.google.cloud.workflows.v1.IGetWorkflowRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkflow(
-    request: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
-    callback: Callback<
-      protos.google.cloud.workflows.v1.IWorkflow,
-      protos.google.cloud.workflows.v1.IGetWorkflowRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkflow(
-    request?: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.workflows.v1.IWorkflow,
-          | protos.google.cloud.workflows.v1.IGetWorkflowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.workflows.v1.IWorkflow,
-      protos.google.cloud.workflows.v1.IGetWorkflowRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.workflows.v1.IWorkflow,
-      protos.google.cloud.workflows.v1.IGetWorkflowRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.workflows.v1.IGetWorkflowRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkflow(
+      request: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
+      callback: Callback<
+          protos.google.cloud.workflows.v1.IWorkflow,
+          protos.google.cloud.workflows.v1.IGetWorkflowRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkflow(
+      request?: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.workflows.v1.IWorkflow,
+          protos.google.cloud.workflows.v1.IGetWorkflowRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.workflows.v1.IWorkflow,
+          protos.google.cloud.workflows.v1.IGetWorkflowRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IGetWorkflowRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch((err) => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getWorkflow request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.workflows.v1.IWorkflow,
-          | protos.google.cloud.workflows.v1.IGetWorkflowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IGetWorkflowRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getWorkflow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getWorkflow(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.workflows.v1.IWorkflow,
-          protos.google.cloud.workflows.v1.IGetWorkflowRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getWorkflow response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getWorkflow(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IGetWorkflowRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getWorkflow response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new workflow. If a workflow with the specified name already
-   * exists in the specified project and location, the long running operation
-   * returns a {@link protos.google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS} error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location in which the workflow should be created.
-   *   Format:  projects/{project}/locations/{location}
-   * @param {google.cloud.workflows.v1.Workflow} request.workflow
-   *   Required. Workflow to be created.
-   * @param {string} request.workflowId
-   *   Required. The ID of the workflow to be created. It has to fulfill the
-   *   following requirements:
-   *
-   *   * Must contain only letters, numbers, underscores and hyphens.
-   *   * Must start with a letter.
-   *   * Must be between 1-64 characters.
-   *   * Must end with a number or a letter.
-   *   * Must be unique within the customer project and location.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/workflows.create_workflow.js</caption>
-   * region_tag:workflows_v1_generated_Workflows_CreateWorkflow_async
-   */
+/**
+ * Creates a new workflow. If a workflow with the specified name already
+ * exists in the specified project and location, the long running operation
+ * returns a {@link protos.google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS} error.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location in which the workflow should be created.
+ *   Format:  projects/{project}/locations/{location}
+ * @param {google.cloud.workflows.v1.Workflow} request.workflow
+ *   Required. Workflow to be created.
+ * @param {string} request.workflowId
+ *   Required. The ID of the workflow to be created. It has to fulfill the
+ *   following requirements:
+ *
+ *   * Must contain only letters, numbers, underscores and hyphens.
+ *   * Must start with a letter.
+ *   * Must be between 1-64 characters.
+ *   * Must end with a number or a letter.
+ *   * Must be unique within the customer project and location.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/workflows.create_workflow.js</caption>
+ * region_tag:workflows_v1_generated_Workflows_CreateWorkflow_async
+ */
   createWorkflow(
-    request?: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.workflows.v1.IWorkflow,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createWorkflow(
-    request: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.workflows.v1.IWorkflow,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createWorkflow(
-    request: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.workflows.v1.IWorkflow,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createWorkflow(
-    request?: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.workflows.v1.IWorkflow,
-            protos.google.cloud.workflows.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.workflows.v1.IWorkflow,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.workflows.v1.IWorkflow,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch((err) => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.workflows.v1.IWorkflow,
-            protos.google.cloud.workflows.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createWorkflow response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createWorkflow request %j', request);
-    return this.innerApiCalls
-      .createWorkflow(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.workflows.v1.IWorkflow,
-            protos.google.cloud.workflows.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createWorkflow response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createWorkflow(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createWorkflow response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createWorkflow()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/workflows.create_workflow.js</caption>
-   * region_tag:workflows_v1_generated_Workflows_CreateWorkflow_async
-   */
-  async checkCreateWorkflowProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.workflows.v1.Workflow,
-      protos.google.cloud.workflows.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createWorkflow()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/workflows.create_workflow.js</caption>
+ * region_tag:workflows_v1_generated_Workflows_CreateWorkflow_async
+ */
+  async checkCreateWorkflowProgress(name: string): Promise<LROperation<protos.google.cloud.workflows.v1.Workflow, protos.google.cloud.workflows.v1.OperationMetadata>>{
     this._log.info('createWorkflow long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createWorkflow,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.workflows.v1.Workflow,
-      protos.google.cloud.workflows.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createWorkflow, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.workflows.v1.Workflow, protos.google.cloud.workflows.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a workflow with the specified name.
-   * This method also cancels and deletes all running executions of the
-   * workflow.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the workflow to be deleted.
-   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/workflows.delete_workflow.js</caption>
-   * region_tag:workflows_v1_generated_Workflows_DeleteWorkflow_async
-   */
+/**
+ * Deletes a workflow with the specified name.
+ * This method also cancels and deletes all running executions of the
+ * workflow.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the workflow to be deleted.
+ *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/workflows.delete_workflow.js</caption>
+ * region_tag:workflows_v1_generated_Workflows_DeleteWorkflow_async
+ */
   deleteWorkflow(
-    request?: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workflows.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteWorkflow(
-    request: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteWorkflow(
-    request: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteWorkflow(
-    request?: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.workflows.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workflows.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch((err) => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.workflows.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteWorkflow response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteWorkflow request %j', request);
-    return this.innerApiCalls
-      .deleteWorkflow(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.workflows.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteWorkflow response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteWorkflow(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.workflows.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteWorkflow response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteWorkflow()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/workflows.delete_workflow.js</caption>
-   * region_tag:workflows_v1_generated_Workflows_DeleteWorkflow_async
-   */
-  async checkDeleteWorkflowProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.workflows.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteWorkflow()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/workflows.delete_workflow.js</caption>
+ * region_tag:workflows_v1_generated_Workflows_DeleteWorkflow_async
+ */
+  async checkDeleteWorkflowProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.workflows.v1.OperationMetadata>>{
     this._log.info('deleteWorkflow long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteWorkflow,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.workflows.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteWorkflow, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.workflows.v1.OperationMetadata>;
   }
-  /**
-   * Updates an existing workflow.
-   * Running this method has no impact on already running executions of the
-   * workflow. A new revision of the workflow might be created as a result of a
-   * successful update operation. In that case, the new revision is used
-   * in new workflow executions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.workflows.v1.Workflow} request.workflow
-   *   Required. Workflow to be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   List of fields to be updated. If not present, the entire workflow
-   *   will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/workflows.update_workflow.js</caption>
-   * region_tag:workflows_v1_generated_Workflows_UpdateWorkflow_async
-   */
+/**
+ * Updates an existing workflow.
+ * Running this method has no impact on already running executions of the
+ * workflow. A new revision of the workflow might be created as a result of a
+ * successful update operation. In that case, the new revision is used
+ * in new workflow executions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.workflows.v1.Workflow} request.workflow
+ *   Required. Workflow to be updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   List of fields to be updated. If not present, the entire workflow
+ *   will be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/workflows.update_workflow.js</caption>
+ * region_tag:workflows_v1_generated_Workflows_UpdateWorkflow_async
+ */
   updateWorkflow(
-    request?: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.workflows.v1.IWorkflow,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateWorkflow(
-    request: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.workflows.v1.IWorkflow,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateWorkflow(
-    request: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.workflows.v1.IWorkflow,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateWorkflow(
-    request?: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.workflows.v1.IWorkflow,
-            protos.google.cloud.workflows.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.workflows.v1.IWorkflow,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.workflows.v1.IWorkflow,
-        protos.google.cloud.workflows.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'workflow.name': request.workflow!.name ?? '',
-      });
-    this.initialize().catch((err) => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'workflow.name': request.workflow!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.workflows.v1.IWorkflow,
-            protos.google.cloud.workflows.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateWorkflow response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateWorkflow request %j', request);
-    return this.innerApiCalls
-      .updateWorkflow(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.workflows.v1.IWorkflow,
-            protos.google.cloud.workflows.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateWorkflow response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateWorkflow(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.workflows.v1.IWorkflow, protos.google.cloud.workflows.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateWorkflow response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateWorkflow()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/workflows.update_workflow.js</caption>
-   * region_tag:workflows_v1_generated_Workflows_UpdateWorkflow_async
-   */
-  async checkUpdateWorkflowProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.workflows.v1.Workflow,
-      protos.google.cloud.workflows.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateWorkflow()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/workflows.update_workflow.js</caption>
+ * region_tag:workflows_v1_generated_Workflows_UpdateWorkflow_async
+ */
+  async checkUpdateWorkflowProgress(name: string): Promise<LROperation<protos.google.cloud.workflows.v1.Workflow, protos.google.cloud.workflows.v1.OperationMetadata>>{
     this._log.info('updateWorkflow long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateWorkflow,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.workflows.v1.Workflow,
-      protos.google.cloud.workflows.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateWorkflow, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.workflows.v1.Workflow, protos.google.cloud.workflows.v1.OperationMetadata>;
   }
-  /**
-   * Lists workflows in a given project and location.
-   * The default order is not specified.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location from which the workflows should be listed.
-   *   Format: projects/{project}/locations/{location}
-   * @param {number} request.pageSize
-   *   Maximum number of workflows to return per call. The service might return
-   *   fewer than this value even if not at the end of the collection. If a value
-   *   is not specified, a default value of 500 is used. The maximum permitted
-   *   value is 1000 and values greater than 1000 are coerced down to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListWorkflows` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkflows` must
-   *   match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter to restrict results to specific workflows.
-   *   For details, see <a href="https://google.aip.dev/160"
-   *   class="external">AIP-160</a>.
-   *
-   *   For example, if you are using the Google APIs Explorer:
-   *
-   *   `state="SUCCEEDED"`
-   *
-   *   or
-   *
-   *   `createTime>"2023-08-01" AND state="FAILED"`
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields that specify the order of the results.
-   *   Default sorting order for a field is ascending. To specify descending order
-   *   for a field, append a "desc" suffix.
-   *   If not specified, the results are returned in an unspecified order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.workflows.v1.Workflow|Workflow}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listWorkflowsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists workflows in a given project and location.
+ * The default order is not specified.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location from which the workflows should be listed.
+ *   Format: projects/{project}/locations/{location}
+ * @param {number} request.pageSize
+ *   Maximum number of workflows to return per call. The service might return
+ *   fewer than this value even if not at the end of the collection. If a value
+ *   is not specified, a default value of 500 is used. The maximum permitted
+ *   value is 1000 and values greater than 1000 are coerced down to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListWorkflows` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkflows` must
+ *   match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filter to restrict results to specific workflows.
+ *   For details, see <a href="https://google.aip.dev/160"
+ *   class="external">AIP-160</a>.
+ *
+ *   For example, if you are using the Google APIs Explorer:
+ *
+ *   `state="SUCCEEDED"`
+ *
+ *   or
+ *
+ *   `createTime>"2023-08-01" AND state="FAILED"`
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields that specify the order of the results.
+ *   Default sorting order for a field is ascending. To specify descending order
+ *   for a field, append a "desc" suffix.
+ *   If not specified, the results are returned in an unspecified order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.workflows.v1.Workflow|Workflow}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listWorkflowsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkflows(
-    request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.workflows.v1.IWorkflow[],
-      protos.google.cloud.workflows.v1.IListWorkflowsRequest | null,
-      protos.google.cloud.workflows.v1.IListWorkflowsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.workflows.v1.IWorkflow[],
+        protos.google.cloud.workflows.v1.IListWorkflowsRequest|null,
+        protos.google.cloud.workflows.v1.IListWorkflowsResponse
+      ]>;
   listWorkflows(
-    request: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-      | protos.google.cloud.workflows.v1.IListWorkflowsResponse
-      | null
-      | undefined,
-      protos.google.cloud.workflows.v1.IWorkflow
-    >
-  ): void;
-  listWorkflows(
-    request: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-      | protos.google.cloud.workflows.v1.IListWorkflowsResponse
-      | null
-      | undefined,
-      protos.google.cloud.workflows.v1.IWorkflow
-    >
-  ): void;
-  listWorkflows(
-    request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-          | protos.google.cloud.workflows.v1.IListWorkflowsResponse
-          | null
-          | undefined,
-          protos.google.cloud.workflows.v1.IWorkflow
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-      | protos.google.cloud.workflows.v1.IListWorkflowsResponse
-      | null
-      | undefined,
-      protos.google.cloud.workflows.v1.IWorkflow
-    >
-  ): Promise<
-    [
-      protos.google.cloud.workflows.v1.IWorkflow[],
-      protos.google.cloud.workflows.v1.IListWorkflowsRequest | null,
-      protos.google.cloud.workflows.v1.IListWorkflowsResponse,
-    ]
-  > | void {
+          protos.google.cloud.workflows.v1.IListWorkflowsResponse|null|undefined,
+          protos.google.cloud.workflows.v1.IWorkflow>): void;
+  listWorkflows(
+      request: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+          protos.google.cloud.workflows.v1.IListWorkflowsResponse|null|undefined,
+          protos.google.cloud.workflows.v1.IWorkflow>): void;
+  listWorkflows(
+      request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+          protos.google.cloud.workflows.v1.IListWorkflowsResponse|null|undefined,
+          protos.google.cloud.workflows.v1.IWorkflow>,
+      callback?: PaginationCallback<
+          protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+          protos.google.cloud.workflows.v1.IListWorkflowsResponse|null|undefined,
+          protos.google.cloud.workflows.v1.IWorkflow>):
+      Promise<[
+        protos.google.cloud.workflows.v1.IWorkflow[],
+        protos.google.cloud.workflows.v1.IListWorkflowsRequest|null,
+        protos.google.cloud.workflows.v1.IListWorkflowsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch((err) => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-          | protos.google.cloud.workflows.v1.IListWorkflowsResponse
-          | null
-          | undefined,
-          protos.google.cloud.workflows.v1.IWorkflow
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      protos.google.cloud.workflows.v1.IListWorkflowsResponse|null|undefined,
+      protos.google.cloud.workflows.v1.IWorkflow>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listWorkflows values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1281,81 +960,78 @@ export class WorkflowsClient {
     this._log.info('listWorkflows request %j', request);
     return this.innerApiCalls
       .listWorkflows(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.workflows.v1.IWorkflow[],
-          protos.google.cloud.workflows.v1.IListWorkflowsRequest | null,
-          protos.google.cloud.workflows.v1.IListWorkflowsResponse,
-        ]) => {
-          this._log.info('listWorkflows values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.workflows.v1.IWorkflow[],
+        protos.google.cloud.workflows.v1.IListWorkflowsRequest|null,
+        protos.google.cloud.workflows.v1.IListWorkflowsResponse
+      ]) => {
+        this._log.info('listWorkflows values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listWorkflows`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location from which the workflows should be listed.
-   *   Format: projects/{project}/locations/{location}
-   * @param {number} request.pageSize
-   *   Maximum number of workflows to return per call. The service might return
-   *   fewer than this value even if not at the end of the collection. If a value
-   *   is not specified, a default value of 500 is used. The maximum permitted
-   *   value is 1000 and values greater than 1000 are coerced down to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListWorkflows` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkflows` must
-   *   match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter to restrict results to specific workflows.
-   *   For details, see <a href="https://google.aip.dev/160"
-   *   class="external">AIP-160</a>.
-   *
-   *   For example, if you are using the Google APIs Explorer:
-   *
-   *   `state="SUCCEEDED"`
-   *
-   *   or
-   *
-   *   `createTime>"2023-08-01" AND state="FAILED"`
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields that specify the order of the results.
-   *   Default sorting order for a field is ascending. To specify descending order
-   *   for a field, append a "desc" suffix.
-   *   If not specified, the results are returned in an unspecified order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.workflows.v1.Workflow|Workflow} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listWorkflowsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listWorkflows`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location from which the workflows should be listed.
+ *   Format: projects/{project}/locations/{location}
+ * @param {number} request.pageSize
+ *   Maximum number of workflows to return per call. The service might return
+ *   fewer than this value even if not at the end of the collection. If a value
+ *   is not specified, a default value of 500 is used. The maximum permitted
+ *   value is 1000 and values greater than 1000 are coerced down to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListWorkflows` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkflows` must
+ *   match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filter to restrict results to specific workflows.
+ *   For details, see <a href="https://google.aip.dev/160"
+ *   class="external">AIP-160</a>.
+ *
+ *   For example, if you are using the Google APIs Explorer:
+ *
+ *   `state="SUCCEEDED"`
+ *
+ *   or
+ *
+ *   `createTime>"2023-08-01" AND state="FAILED"`
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields that specify the order of the results.
+ *   Default sorting order for a field is ascending. To specify descending order
+ *   for a field, append a "desc" suffix.
+ *   If not specified, the results are returned in an unspecified order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.workflows.v1.Workflow|Workflow} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listWorkflowsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkflowsStream(
-    request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkflows stream %j', request);
     return this.descriptors.page.listWorkflows.createStream(
       this.innerApiCalls.listWorkflows as GaxCall,
@@ -1364,72 +1040,71 @@ export class WorkflowsClient {
     );
   }
 
-  /**
-   * Equivalent to `listWorkflows`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location from which the workflows should be listed.
-   *   Format: projects/{project}/locations/{location}
-   * @param {number} request.pageSize
-   *   Maximum number of workflows to return per call. The service might return
-   *   fewer than this value even if not at the end of the collection. If a value
-   *   is not specified, a default value of 500 is used. The maximum permitted
-   *   value is 1000 and values greater than 1000 are coerced down to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListWorkflows` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkflows` must
-   *   match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter to restrict results to specific workflows.
-   *   For details, see <a href="https://google.aip.dev/160"
-   *   class="external">AIP-160</a>.
-   *
-   *   For example, if you are using the Google APIs Explorer:
-   *
-   *   `state="SUCCEEDED"`
-   *
-   *   or
-   *
-   *   `createTime>"2023-08-01" AND state="FAILED"`
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields that specify the order of the results.
-   *   Default sorting order for a field is ascending. To specify descending order
-   *   for a field, append a "desc" suffix.
-   *   If not specified, the results are returned in an unspecified order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.workflows.v1.Workflow|Workflow}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/workflows.list_workflows.js</caption>
-   * region_tag:workflows_v1_generated_Workflows_ListWorkflows_async
-   */
+/**
+ * Equivalent to `listWorkflows`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location from which the workflows should be listed.
+ *   Format: projects/{project}/locations/{location}
+ * @param {number} request.pageSize
+ *   Maximum number of workflows to return per call. The service might return
+ *   fewer than this value even if not at the end of the collection. If a value
+ *   is not specified, a default value of 500 is used. The maximum permitted
+ *   value is 1000 and values greater than 1000 are coerced down to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListWorkflows` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListWorkflows` must
+ *   match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filter to restrict results to specific workflows.
+ *   For details, see <a href="https://google.aip.dev/160"
+ *   class="external">AIP-160</a>.
+ *
+ *   For example, if you are using the Google APIs Explorer:
+ *
+ *   `state="SUCCEEDED"`
+ *
+ *   or
+ *
+ *   `createTime>"2023-08-01" AND state="FAILED"`
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields that specify the order of the results.
+ *   Default sorting order for a field is ascending. To specify descending order
+ *   for a field, append a "desc" suffix.
+ *   If not specified, the results are returned in an unspecified order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.workflows.v1.Workflow|Workflow}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/workflows.list_workflows.js</caption>
+ * region_tag:workflows_v1_generated_Workflows_ListWorkflows_async
+ */
   listWorkflowsAsync(
-    request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow> {
+      request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkflows iterate %j', request);
     return this.descriptors.page.listWorkflows.asyncIterate(
       this.innerApiCalls['listWorkflows'] as GaxCall,
@@ -1437,116 +1112,91 @@ export class WorkflowsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow>;
   }
-  /**
-   * Lists revisions for a given workflow.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Workflow for which the revisions should be listed.
-   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
-   * @param {number} request.pageSize
-   *   The maximum number of revisions to return per page. If a value is not
-   *   specified, a default value of 20 is used. The maximum permitted value is
-   *   100. Values greater than 100 are coerced down to 100.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListWorkflowRevisions call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.workflows.v1.Workflow|Workflow}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listWorkflowRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists revisions for a given workflow.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Workflow for which the revisions should be listed.
+ *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+ * @param {number} request.pageSize
+ *   The maximum number of revisions to return per page. If a value is not
+ *   specified, a default value of 20 is used. The maximum permitted value is
+ *   100. Values greater than 100 are coerced down to 100.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListWorkflowRevisions call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.workflows.v1.Workflow|Workflow}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listWorkflowRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkflowRevisions(
-    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.workflows.v1.IWorkflow[],
-      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest | null,
-      protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.workflows.v1.IWorkflow[],
+        protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest|null,
+        protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+      ]>;
   listWorkflowRevisions(
-    request: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
-      | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.workflows.v1.IWorkflow
-    >
-  ): void;
-  listWorkflowRevisions(
-    request: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
-      | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.workflows.v1.IWorkflow
-    >
-  ): void;
-  listWorkflowRevisions(
-    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
-          | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.workflows.v1.IWorkflow
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
-      | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.workflows.v1.IWorkflow
-    >
-  ): Promise<
-    [
-      protos.google.cloud.workflows.v1.IWorkflow[],
-      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest | null,
-      protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse|null|undefined,
+          protos.google.cloud.workflows.v1.IWorkflow>): void;
+  listWorkflowRevisions(
+      request: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse|null|undefined,
+          protos.google.cloud.workflows.v1.IWorkflow>): void;
+  listWorkflowRevisions(
+      request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse|null|undefined,
+          protos.google.cloud.workflows.v1.IWorkflow>,
+      callback?: PaginationCallback<
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse|null|undefined,
+          protos.google.cloud.workflows.v1.IWorkflow>):
+      Promise<[
+        protos.google.cloud.workflows.v1.IWorkflow[],
+        protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest|null,
+        protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch((err) => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
-          | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.workflows.v1.IWorkflow
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse|null|undefined,
+      protos.google.cloud.workflows.v1.IWorkflow>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listWorkflowRevisions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1555,60 +1205,57 @@ export class WorkflowsClient {
     this._log.info('listWorkflowRevisions request %j', request);
     return this.innerApiCalls
       .listWorkflowRevisions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.workflows.v1.IWorkflow[],
-          protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest | null,
-          protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse,
-        ]) => {
-          this._log.info('listWorkflowRevisions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.workflows.v1.IWorkflow[],
+        protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest|null,
+        protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+      ]) => {
+        this._log.info('listWorkflowRevisions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listWorkflowRevisions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Workflow for which the revisions should be listed.
-   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
-   * @param {number} request.pageSize
-   *   The maximum number of revisions to return per page. If a value is not
-   *   specified, a default value of 20 is used. The maximum permitted value is
-   *   100. Values greater than 100 are coerced down to 100.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListWorkflowRevisions call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.workflows.v1.Workflow|Workflow} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listWorkflowRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listWorkflowRevisions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Workflow for which the revisions should be listed.
+ *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+ * @param {number} request.pageSize
+ *   The maximum number of revisions to return per page. If a value is not
+ *   specified, a default value of 20 is used. The maximum permitted value is
+ *   100. Values greater than 100 are coerced down to 100.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListWorkflowRevisions call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.workflows.v1.Workflow|Workflow} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listWorkflowRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkflowRevisionsStream(
-    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkflowRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkflowRevisions stream %j', request);
     return this.descriptors.page.listWorkflowRevisions.createStream(
       this.innerApiCalls.listWorkflowRevisions as GaxCall,
@@ -1617,51 +1264,50 @@ export class WorkflowsClient {
     );
   }
 
-  /**
-   * Equivalent to `listWorkflowRevisions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Workflow for which the revisions should be listed.
-   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
-   * @param {number} request.pageSize
-   *   The maximum number of revisions to return per page. If a value is not
-   *   specified, a default value of 20 is used. The maximum permitted value is
-   *   100. Values greater than 100 are coerced down to 100.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListWorkflowRevisions call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.workflows.v1.Workflow|Workflow}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/workflows.list_workflow_revisions.js</caption>
-   * region_tag:workflows_v1_generated_Workflows_ListWorkflowRevisions_async
-   */
+/**
+ * Equivalent to `listWorkflowRevisions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Workflow for which the revisions should be listed.
+ *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+ * @param {number} request.pageSize
+ *   The maximum number of revisions to return per page. If a value is not
+ *   specified, a default value of 20 is used. The maximum permitted value is
+ *   100. Values greater than 100 are coerced down to 100.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListWorkflowRevisions call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.workflows.v1.Workflow|Workflow}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/workflows.list_workflow_revisions.js</caption>
+ * region_tag:workflows_v1_generated_Workflows_ListWorkflowRevisions_async
+ */
   listWorkflowRevisionsAsync(
-    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow> {
+      request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkflowRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkflowRevisions iterate %j', request);
     return this.descriptors.page.listWorkflowRevisions.asyncIterate(
       this.innerApiCalls['listWorkflowRevisions'] as GaxCall,
@@ -1669,7 +1315,7 @@ export class WorkflowsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1709,7 +1355,7 @@ export class WorkflowsClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1747,7 +1393,7 @@ export class WorkflowsClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1792,20 +1438,20 @@ export class WorkflowsClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1842,13 +1488,13 @@ export class WorkflowsClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1882,7 +1528,7 @@ export class WorkflowsClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1897,20 +1543,20 @@ export class WorkflowsClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1954,20 +1600,20 @@ export class WorkflowsClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1984,12 +1630,7 @@ export class WorkflowsClient {
    * @param {string} cryptoKey
    * @returns {string} Resource name string.
    */
-  cryptoKeyPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string
-  ) {
+  cryptoKeyPath(project:string,location:string,keyRing:string,cryptoKey:string) {
     return this.pathTemplates.cryptoKeyPathTemplate.render({
       project: project,
       location: location,
@@ -2006,8 +1647,7 @@ export class WorkflowsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .project;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).project;
   }
 
   /**
@@ -2018,8 +1658,7 @@ export class WorkflowsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .location;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).location;
   }
 
   /**
@@ -2030,8 +1669,7 @@ export class WorkflowsClient {
    * @returns {string} A string representing the keyRing.
    */
   matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .keyRing;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).keyRing;
   }
 
   /**
@@ -2042,8 +1680,7 @@ export class WorkflowsClient {
    * @returns {string} A string representing the cryptoKey.
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .cryptoKey;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).cryptoKey;
   }
 
   /**
@@ -2056,13 +1693,7 @@ export class WorkflowsClient {
    * @param {string} cryptoKeyVersion
    * @returns {string} Resource name string.
    */
-  cryptoKeyVersionPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string,
-    cryptoKeyVersion: string
-  ) {
+  cryptoKeyVersionPath(project:string,location:string,keyRing:string,cryptoKey:string,cryptoKeyVersion:string) {
     return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
       project: project,
       location: location,
@@ -2080,9 +1711,7 @@ export class WorkflowsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).project;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).project;
   }
 
   /**
@@ -2093,9 +1722,7 @@ export class WorkflowsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).location;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).location;
   }
 
   /**
@@ -2106,9 +1733,7 @@ export class WorkflowsClient {
    * @returns {string} A string representing the keyRing.
    */
   matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).keyRing;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).keyRing;
   }
 
   /**
@@ -2119,9 +1744,7 @@ export class WorkflowsClient {
    * @returns {string} A string representing the cryptoKey.
    */
   matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).cryptoKey;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).cryptoKey;
   }
 
   /**
@@ -2132,9 +1755,7 @@ export class WorkflowsClient {
    * @returns {string} A string representing the cryptoKeyVersion.
    */
   matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).cryptoKeyVersion;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).cryptoKeyVersion;
   }
 
   /**
@@ -2144,7 +1765,7 @@ export class WorkflowsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2181,7 +1802,7 @@ export class WorkflowsClient {
    * @param {string} workflow
    * @returns {string} Resource name string.
    */
-  workflowPath(project: string, location: string, workflow: string) {
+  workflowPath(project:string,location:string,workflow:string) {
     return this.pathTemplates.workflowPathTemplate.render({
       project: project,
       location: location,
@@ -2230,13 +1851,11 @@ export class WorkflowsClient {
    */
   close(): Promise<void> {
     if (this.workflowsStub && !this._terminated) {
-      return this.workflowsStub.then((stub) => {
+      return this.workflowsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

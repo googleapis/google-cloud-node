@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -115,41 +104,20 @@ export class VpcAccessServiceClient {
    *     const client = new VpcAccessServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof VpcAccessServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'vpcaccess.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -175,7 +143,7 @@ export class VpcAccessServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -191,9 +159,13 @@ export class VpcAccessServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -226,74 +198,47 @@ export class VpcAccessServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConnectors: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'connectors'
-      ),
+      listConnectors:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'connectors')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createConnectorResponse = protoFilesRoot.lookup(
-      '.google.cloud.vpcaccess.v1.Connector'
-    ) as gax.protobuf.Type;
+      '.google.cloud.vpcaccess.v1.Connector') as gax.protobuf.Type;
     const createConnectorMetadata = protoFilesRoot.lookup(
-      '.google.cloud.vpcaccess.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.vpcaccess.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteConnectorResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteConnectorMetadata = protoFilesRoot.lookup(
-      '.google.cloud.vpcaccess.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.vpcaccess.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createConnector: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createConnectorResponse.decode.bind(createConnectorResponse),
-        createConnectorMetadata.decode.bind(createConnectorMetadata)
-      ),
+        createConnectorMetadata.decode.bind(createConnectorMetadata)),
       deleteConnector: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteConnectorResponse.decode.bind(deleteConnectorResponse),
-        deleteConnectorMetadata.decode.bind(deleteConnectorMetadata)
-      ),
+        deleteConnectorMetadata.decode.bind(deleteConnectorMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.vpcaccess.v1.VpcAccessService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.vpcaccess.v1.VpcAccessService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -324,38 +269,28 @@ export class VpcAccessServiceClient {
     // Put together the "service stub" for
     // google.cloud.vpcaccess.v1.VpcAccessService.
     this.vpcAccessServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.vpcaccess.v1.VpcAccessService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.vpcaccess.v1.VpcAccessService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.vpcaccess.v1.VpcAccessService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const vpcAccessServiceStubMethods = [
-      'createConnector',
-      'getConnector',
-      'listConnectors',
-      'deleteConnector',
-    ];
+    const vpcAccessServiceStubMethods =
+        ['createConnector', 'getConnector', 'listConnectors', 'deleteConnector'];
     for (const methodName of vpcAccessServiceStubMethods) {
       const callPromise = this.vpcAccessServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -380,14 +315,8 @@ export class VpcAccessServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'vpcaccess.googleapis.com';
   }
@@ -398,14 +327,8 @@ export class VpcAccessServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'vpcaccess.googleapis.com';
   }
@@ -436,7 +359,9 @@ export class VpcAccessServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -445,9 +370,8 @@ export class VpcAccessServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -458,570 +382,403 @@ export class VpcAccessServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a Serverless VPC Access connector. Returns NOT_FOUND if the resource
-   * does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of a Serverless VPC Access connector to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.vpcaccess.v1.Connector|Connector}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/vpc_access_service.get_connector.js</caption>
-   * region_tag:vpcaccess_v1_generated_VpcAccessService_GetConnector_async
-   */
+/**
+ * Gets a Serverless VPC Access connector. Returns NOT_FOUND if the resource
+ * does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of a Serverless VPC Access connector to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.vpcaccess.v1.Connector|Connector}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vpc_access_service.get_connector.js</caption>
+ * region_tag:vpcaccess_v1_generated_VpcAccessService_GetConnector_async
+ */
   getConnector(
-    request?: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.vpcaccess.v1.IConnector,
-      protos.google.cloud.vpcaccess.v1.IGetConnectorRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.vpcaccess.v1.IConnector,
+        protos.google.cloud.vpcaccess.v1.IGetConnectorRequest|undefined, {}|undefined
+      ]>;
   getConnector(
-    request: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.vpcaccess.v1.IConnector,
-      protos.google.cloud.vpcaccess.v1.IGetConnectorRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnector(
-    request: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
-    callback: Callback<
-      protos.google.cloud.vpcaccess.v1.IConnector,
-      protos.google.cloud.vpcaccess.v1.IGetConnectorRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnector(
-    request?: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.vpcaccess.v1.IConnector,
-          | protos.google.cloud.vpcaccess.v1.IGetConnectorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.vpcaccess.v1.IConnector,
-      protos.google.cloud.vpcaccess.v1.IGetConnectorRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.vpcaccess.v1.IConnector,
-      protos.google.cloud.vpcaccess.v1.IGetConnectorRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.vpcaccess.v1.IGetConnectorRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnector(
+      request: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
+      callback: Callback<
+          protos.google.cloud.vpcaccess.v1.IConnector,
+          protos.google.cloud.vpcaccess.v1.IGetConnectorRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnector(
+      request?: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.vpcaccess.v1.IConnector,
+          protos.google.cloud.vpcaccess.v1.IGetConnectorRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.vpcaccess.v1.IConnector,
+          protos.google.cloud.vpcaccess.v1.IGetConnectorRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.vpcaccess.v1.IConnector,
+        protos.google.cloud.vpcaccess.v1.IGetConnectorRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getConnector request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.vpcaccess.v1.IConnector,
-          | protos.google.cloud.vpcaccess.v1.IGetConnectorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.vpcaccess.v1.IConnector,
+        protos.google.cloud.vpcaccess.v1.IGetConnectorRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getConnector(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.vpcaccess.v1.IConnector,
-          protos.google.cloud.vpcaccess.v1.IGetConnectorRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getConnector response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getConnector(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.vpcaccess.v1.IConnector,
+        protos.google.cloud.vpcaccess.v1.IGetConnectorRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getConnector response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a Serverless VPC Access connector, returns an operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location in which the configuration should be created,
-   *   specified in the format `projects/* /locations/*`.
-   * @param {string} request.connectorId
-   *   Required. The ID to use for this connector.
-   * @param {google.cloud.vpcaccess.v1.Connector} request.connector
-   *   Required. Resource to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/vpc_access_service.create_connector.js</caption>
-   * region_tag:vpcaccess_v1_generated_VpcAccessService_CreateConnector_async
-   */
+/**
+ * Creates a Serverless VPC Access connector, returns an operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location in which the configuration should be created,
+ *   specified in the format `projects/* /locations/*`.
+ * @param {string} request.connectorId
+ *   Required. The ID to use for this connector.
+ * @param {google.cloud.vpcaccess.v1.Connector} request.connector
+ *   Required. Resource to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vpc_access_service.create_connector.js</caption>
+ * region_tag:vpcaccess_v1_generated_VpcAccessService_CreateConnector_async
+ */
   createConnector(
-    request?: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.vpcaccess.v1.IConnector,
-        protos.google.cloud.vpcaccess.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.vpcaccess.v1.IConnector, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createConnector(
-    request: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.vpcaccess.v1.IConnector,
-        protos.google.cloud.vpcaccess.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.vpcaccess.v1.IConnector, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createConnector(
-    request: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.vpcaccess.v1.IConnector,
-        protos.google.cloud.vpcaccess.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.vpcaccess.v1.IConnector, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createConnector(
-    request?: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.vpcaccess.v1.IConnector,
-            protos.google.cloud.vpcaccess.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.vpcaccess.v1.IConnector,
-        protos.google.cloud.vpcaccess.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.vpcaccess.v1.IConnector,
-        protos.google.cloud.vpcaccess.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.vpcaccess.v1.IConnector, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.vpcaccess.v1.IConnector, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.vpcaccess.v1.IConnector, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.vpcaccess.v1.IConnector,
-            protos.google.cloud.vpcaccess.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.vpcaccess.v1.IConnector, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createConnector response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createConnector request %j', request);
-    return this.innerApiCalls
-      .createConnector(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.vpcaccess.v1.IConnector,
-            protos.google.cloud.vpcaccess.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createConnector response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createConnector(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.vpcaccess.v1.IConnector, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createConnector response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createConnector()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/vpc_access_service.create_connector.js</caption>
-   * region_tag:vpcaccess_v1_generated_VpcAccessService_CreateConnector_async
-   */
-  async checkCreateConnectorProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.vpcaccess.v1.Connector,
-      protos.google.cloud.vpcaccess.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createConnector()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vpc_access_service.create_connector.js</caption>
+ * region_tag:vpcaccess_v1_generated_VpcAccessService_CreateConnector_async
+ */
+  async checkCreateConnectorProgress(name: string): Promise<LROperation<protos.google.cloud.vpcaccess.v1.Connector, protos.google.cloud.vpcaccess.v1.OperationMetadata>>{
     this._log.info('createConnector long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createConnector,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.vpcaccess.v1.Connector,
-      protos.google.cloud.vpcaccess.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createConnector, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.vpcaccess.v1.Connector, protos.google.cloud.vpcaccess.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a Serverless VPC Access connector. Returns NOT_FOUND if the
-   * resource does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of a Serverless VPC Access connector to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/vpc_access_service.delete_connector.js</caption>
-   * region_tag:vpcaccess_v1_generated_VpcAccessService_DeleteConnector_async
-   */
+/**
+ * Deletes a Serverless VPC Access connector. Returns NOT_FOUND if the
+ * resource does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of a Serverless VPC Access connector to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vpc_access_service.delete_connector.js</caption>
+ * region_tag:vpcaccess_v1_generated_VpcAccessService_DeleteConnector_async
+ */
   deleteConnector(
-    request?: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vpcaccess.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteConnector(
-    request: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vpcaccess.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteConnector(
-    request: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vpcaccess.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteConnector(
-    request?: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.vpcaccess.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vpcaccess.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vpcaccess.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.vpcaccess.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteConnector response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteConnector request %j', request);
-    return this.innerApiCalls
-      .deleteConnector(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.vpcaccess.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteConnector response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteConnector(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vpcaccess.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteConnector response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteConnector()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/vpc_access_service.delete_connector.js</caption>
-   * region_tag:vpcaccess_v1_generated_VpcAccessService_DeleteConnector_async
-   */
-  async checkDeleteConnectorProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.vpcaccess.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteConnector()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vpc_access_service.delete_connector.js</caption>
+ * region_tag:vpcaccess_v1_generated_VpcAccessService_DeleteConnector_async
+ */
+  async checkDeleteConnectorProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.vpcaccess.v1.OperationMetadata>>{
     this._log.info('deleteConnector long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteConnector,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.vpcaccess.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteConnector, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.vpcaccess.v1.OperationMetadata>;
   }
-  /**
-   * Lists Serverless VPC Access connectors.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the routes should be listed.
-   * @param {number} request.pageSize
-   *   Maximum number of functions to return per call.
-   * @param {string} request.pageToken
-   *   Continuation token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.vpcaccess.v1.Connector|Connector}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConnectorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Serverless VPC Access connectors.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the routes should be listed.
+ * @param {number} request.pageSize
+ *   Maximum number of functions to return per call.
+ * @param {string} request.pageToken
+ *   Continuation token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.vpcaccess.v1.Connector|Connector}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listConnectorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnectors(
-    request?: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.vpcaccess.v1.IConnector[],
-      protos.google.cloud.vpcaccess.v1.IListConnectorsRequest | null,
-      protos.google.cloud.vpcaccess.v1.IListConnectorsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.vpcaccess.v1.IConnector[],
+        protos.google.cloud.vpcaccess.v1.IListConnectorsRequest|null,
+        protos.google.cloud.vpcaccess.v1.IListConnectorsResponse
+      ]>;
   listConnectors(
-    request: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
-      | protos.google.cloud.vpcaccess.v1.IListConnectorsResponse
-      | null
-      | undefined,
-      protos.google.cloud.vpcaccess.v1.IConnector
-    >
-  ): void;
-  listConnectors(
-    request: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
-      | protos.google.cloud.vpcaccess.v1.IListConnectorsResponse
-      | null
-      | undefined,
-      protos.google.cloud.vpcaccess.v1.IConnector
-    >
-  ): void;
-  listConnectors(
-    request?: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
-          | protos.google.cloud.vpcaccess.v1.IListConnectorsResponse
-          | null
-          | undefined,
-          protos.google.cloud.vpcaccess.v1.IConnector
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
-      | protos.google.cloud.vpcaccess.v1.IListConnectorsResponse
-      | null
-      | undefined,
-      protos.google.cloud.vpcaccess.v1.IConnector
-    >
-  ): Promise<
-    [
-      protos.google.cloud.vpcaccess.v1.IConnector[],
-      protos.google.cloud.vpcaccess.v1.IListConnectorsRequest | null,
-      protos.google.cloud.vpcaccess.v1.IListConnectorsResponse,
-    ]
-  > | void {
+          protos.google.cloud.vpcaccess.v1.IListConnectorsResponse|null|undefined,
+          protos.google.cloud.vpcaccess.v1.IConnector>): void;
+  listConnectors(
+      request: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+          protos.google.cloud.vpcaccess.v1.IListConnectorsResponse|null|undefined,
+          protos.google.cloud.vpcaccess.v1.IConnector>): void;
+  listConnectors(
+      request?: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+          protos.google.cloud.vpcaccess.v1.IListConnectorsResponse|null|undefined,
+          protos.google.cloud.vpcaccess.v1.IConnector>,
+      callback?: PaginationCallback<
+          protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+          protos.google.cloud.vpcaccess.v1.IListConnectorsResponse|null|undefined,
+          protos.google.cloud.vpcaccess.v1.IConnector>):
+      Promise<[
+        protos.google.cloud.vpcaccess.v1.IConnector[],
+        protos.google.cloud.vpcaccess.v1.IListConnectorsRequest|null,
+        protos.google.cloud.vpcaccess.v1.IListConnectorsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
-          | protos.google.cloud.vpcaccess.v1.IListConnectorsResponse
-          | null
-          | undefined,
-          protos.google.cloud.vpcaccess.v1.IConnector
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+      protos.google.cloud.vpcaccess.v1.IListConnectorsResponse|null|undefined,
+      protos.google.cloud.vpcaccess.v1.IConnector>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConnectors values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1030,56 +787,53 @@ export class VpcAccessServiceClient {
     this._log.info('listConnectors request %j', request);
     return this.innerApiCalls
       .listConnectors(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.vpcaccess.v1.IConnector[],
-          protos.google.cloud.vpcaccess.v1.IListConnectorsRequest | null,
-          protos.google.cloud.vpcaccess.v1.IListConnectorsResponse,
-        ]) => {
-          this._log.info('listConnectors values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.vpcaccess.v1.IConnector[],
+        protos.google.cloud.vpcaccess.v1.IListConnectorsRequest|null,
+        protos.google.cloud.vpcaccess.v1.IListConnectorsResponse
+      ]) => {
+        this._log.info('listConnectors values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listConnectors`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the routes should be listed.
-   * @param {number} request.pageSize
-   *   Maximum number of functions to return per call.
-   * @param {string} request.pageToken
-   *   Continuation token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.vpcaccess.v1.Connector|Connector} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConnectorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listConnectors`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the routes should be listed.
+ * @param {number} request.pageSize
+ *   Maximum number of functions to return per call.
+ * @param {string} request.pageToken
+ *   Continuation token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.vpcaccess.v1.Connector|Connector} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listConnectorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnectorsStream(
-    request?: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnectors stream %j', request);
     return this.descriptors.page.listConnectors.createStream(
       this.innerApiCalls.listConnectors as GaxCall,
@@ -1088,47 +842,46 @@ export class VpcAccessServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listConnectors`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the routes should be listed.
-   * @param {number} request.pageSize
-   *   Maximum number of functions to return per call.
-   * @param {string} request.pageToken
-   *   Continuation token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.vpcaccess.v1.Connector|Connector}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/vpc_access_service.list_connectors.js</caption>
-   * region_tag:vpcaccess_v1_generated_VpcAccessService_ListConnectors_async
-   */
+/**
+ * Equivalent to `listConnectors`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the routes should be listed.
+ * @param {number} request.pageSize
+ *   Maximum number of functions to return per call.
+ * @param {string} request.pageToken
+ *   Continuation token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.vpcaccess.v1.Connector|Connector}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vpc_access_service.list_connectors.js</caption>
+ * region_tag:vpcaccess_v1_generated_VpcAccessService_ListConnectors_async
+ */
   listConnectorsAsync(
-    request?: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.vpcaccess.v1.IConnector> {
+      request?: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.vpcaccess.v1.IConnector>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnectors iterate %j', request);
     return this.descriptors.page.listConnectors.asyncIterate(
       this.innerApiCalls['listConnectors'] as GaxCall,
@@ -1136,7 +889,7 @@ export class VpcAccessServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.vpcaccess.v1.IConnector>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1176,7 +929,7 @@ export class VpcAccessServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1214,7 +967,7 @@ export class VpcAccessServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1259,20 +1012,20 @@ export class VpcAccessServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1309,13 +1062,13 @@ export class VpcAccessServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1349,7 +1102,7 @@ export class VpcAccessServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1364,20 +1117,20 @@ export class VpcAccessServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1421,20 +1174,20 @@ export class VpcAccessServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1450,7 +1203,7 @@ export class VpcAccessServiceClient {
    * @param {string} connector
    * @returns {string} Resource name string.
    */
-  connectorPath(project: string, location: string, connector: string) {
+  connectorPath(project:string,location:string,connector:string) {
     return this.pathTemplates.connectorPathTemplate.render({
       project: project,
       location: location,
@@ -1466,8 +1219,7 @@ export class VpcAccessServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConnectorName(connectorName: string) {
-    return this.pathTemplates.connectorPathTemplate.match(connectorName)
-      .project;
+    return this.pathTemplates.connectorPathTemplate.match(connectorName).project;
   }
 
   /**
@@ -1478,8 +1230,7 @@ export class VpcAccessServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConnectorName(connectorName: string) {
-    return this.pathTemplates.connectorPathTemplate.match(connectorName)
-      .location;
+    return this.pathTemplates.connectorPathTemplate.match(connectorName).location;
   }
 
   /**
@@ -1490,8 +1241,7 @@ export class VpcAccessServiceClient {
    * @returns {string} A string representing the connector.
    */
   matchConnectorFromConnectorName(connectorName: string) {
-    return this.pathTemplates.connectorPathTemplate.match(connectorName)
-      .connector;
+    return this.pathTemplates.connectorPathTemplate.match(connectorName).connector;
   }
 
   /**
@@ -1501,7 +1251,7 @@ export class VpcAccessServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1542,9 +1292,7 @@ export class VpcAccessServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

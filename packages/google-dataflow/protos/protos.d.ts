@@ -1834,15 +1834,6 @@ export namespace google {
                 /** Job serviceResources. */
                 public serviceResources?: (google.dataflow.v1beta3.IServiceResources|null);
 
-                /** Job _runtimeUpdatableParams. */
-                public _runtimeUpdatableParams?: "runtimeUpdatableParams";
-
-                /** Job _satisfiesPzi. */
-                public _satisfiesPzi?: "satisfiesPzi";
-
-                /** Job _serviceResources. */
-                public _serviceResources?: "serviceResources";
-
                 /**
                  * Creates a new Job instance using the specified properties.
                  * @param [properties] Properties to set
@@ -2048,15 +2039,6 @@ export namespace google {
 
                 /** RuntimeUpdatableParams workerUtilizationHint. */
                 public workerUtilizationHint?: (number|null);
-
-                /** RuntimeUpdatableParams _maxNumWorkers. */
-                public _maxNumWorkers?: "maxNumWorkers";
-
-                /** RuntimeUpdatableParams _minNumWorkers. */
-                public _minNumWorkers?: "minNumWorkers";
-
-                /** RuntimeUpdatableParams _workerUtilizationHint. */
-                public _workerUtilizationHint?: "workerUtilizationHint";
 
                 /**
                  * Creates a new RuntimeUpdatableParams instance using the specified properties.
@@ -4778,9 +4760,6 @@ export namespace google {
                 /** UpdateJobRequest updateMask. */
                 public updateMask?: (google.protobuf.IFieldMask|null);
 
-                /** UpdateJobRequest _updateMask. */
-                public _updateMask?: "updateMask";
-
                 /**
                  * Creates a new UpdateJobRequest instance using the specified properties.
                  * @param [properties] Properties to set
@@ -4913,9 +4892,6 @@ export namespace google {
 
                 /** ListJobsRequest name. */
                 public name?: (string|null);
-
-                /** ListJobsRequest _name. */
-                public _name?: "name";
 
                 /**
                  * Creates a new ListJobsRequest instance using the specified properties.
@@ -11773,9 +11749,6 @@ export namespace google {
                 /** FlexTemplateRuntimeEnvironment streamingMode. */
                 public streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
 
-                /** FlexTemplateRuntimeEnvironment _streamingMode. */
-                public _streamingMode?: "streamingMode";
-
                 /**
                  * Creates a new FlexTemplateRuntimeEnvironment instance using the specified properties.
                  * @param [properties] Properties to set
@@ -12089,9 +12062,6 @@ export namespace google {
 
                 /** RuntimeEnvironment streamingMode. */
                 public streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
-
-                /** RuntimeEnvironment _streamingMode. */
-                public _streamingMode?: "streamingMode";
 
                 /**
                  * Creates a new RuntimeEnvironment instance using the specified properties.
@@ -14531,6 +14501,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -14571,6 +14544,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -18515,6 +18491,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -18763,7 +18742,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -18794,7 +18773,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -19830,7 +19809,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -19846,7 +19825,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

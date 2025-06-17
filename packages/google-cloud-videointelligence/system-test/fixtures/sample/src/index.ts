@@ -19,9 +19,7 @@
 import {VideoIntelligenceServiceClient} from '@google-cloud/video-intelligence';
 
 // check that the client class type name can be used
-function doStuffWithVideoIntelligenceServiceClient(
-  client: VideoIntelligenceServiceClient
-) {
+function doStuffWithVideoIntelligenceServiceClient(client: VideoIntelligenceServiceClient) {
   client.close();
 }
 

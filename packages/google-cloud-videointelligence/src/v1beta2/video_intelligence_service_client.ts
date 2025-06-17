@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,42 +100,20 @@ export class VideoIntelligenceServiceClient {
    *     const client = new VideoIntelligenceServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof VideoIntelligenceServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof VideoIntelligenceServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'videointelligence.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class VideoIntelligenceServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class VideoIntelligenceServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -199,77 +173,38 @@ export class VideoIntelligenceServiceClient {
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta2/{name=projects/*/locations/*}/operations',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta2/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v1beta2/operations/{name=projects/*/locations/*/operations/*}',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1beta2/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {
-              delete:
-                '/v1beta2/operations/{name=projects/*/locations/*/operations/*}',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1beta2/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1beta2/operations/{name=projects/*/locations/*/operations/*}:cancel',
-            },
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta2/{name=projects/*/locations/*}/operations',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta2/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1beta2/operations/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta2/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1beta2/operations/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta2/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1beta2/operations/{name=projects/*/locations/*/operations/*}:cancel',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const annotateVideoResponse = protoFilesRoot.lookup(
-      '.google.cloud.videointelligence.v1beta2.AnnotateVideoResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.videointelligence.v1beta2.AnnotateVideoResponse') as gax.protobuf.Type;
     const annotateVideoMetadata = protoFilesRoot.lookup(
-      '.google.cloud.videointelligence.v1beta2.AnnotateVideoProgress'
-    ) as gax.protobuf.Type;
+      '.google.cloud.videointelligence.v1beta2.AnnotateVideoProgress') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       annotateVideo: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         annotateVideoResponse.decode.bind(annotateVideoResponse),
-        annotateVideoMetadata.decode.bind(annotateVideoMetadata)
-      ),
+        annotateVideoMetadata.decode.bind(annotateVideoMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.videointelligence.v1beta2.VideoIntelligenceService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.videointelligence.v1beta2.VideoIntelligenceService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -300,36 +235,32 @@ export class VideoIntelligenceServiceClient {
     // Put together the "service stub" for
     // google.cloud.videointelligence.v1beta2.VideoIntelligenceService.
     this.videoIntelligenceServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.videointelligence.v1beta2.VideoIntelligenceService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.videointelligence.v1beta2
-            .VideoIntelligenceService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.videointelligence.v1beta2.VideoIntelligenceService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.videointelligence.v1beta2.VideoIntelligenceService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const videoIntelligenceServiceStubMethods = ['annotateVideo'];
+    const videoIntelligenceServiceStubMethods =
+        ['annotateVideo'];
     for (const methodName of videoIntelligenceServiceStubMethods) {
       const callPromise = this.videoIntelligenceServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -349,14 +280,8 @@ export class VideoIntelligenceServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'videointelligence.googleapis.com';
   }
@@ -367,14 +292,8 @@ export class VideoIntelligenceServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'videointelligence.googleapis.com';
   }
@@ -405,7 +324,9 @@ export class VideoIntelligenceServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -414,9 +335,8 @@ export class VideoIntelligenceServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -428,203 +348,140 @@ export class VideoIntelligenceServiceClient {
   // -- Service calls --
   // -------------------
 
-  /**
-   * Performs asynchronous video annotation. Progress and results can be
-   * retrieved through the `google.longrunning.Operations` interface.
-   * `Operation.metadata` contains `AnnotateVideoProgress` (progress).
-   * `Operation.response` contains `AnnotateVideoResponse` (results).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.inputUri
-   *   Input video location. Currently, only
-   *   [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
-   *   supported, which must be specified in the following format:
-   *   `gs://bucket-id/object-id` (other URI formats return
-   *   {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT}). For
-   *   more information, see [Request
-   *   URIs](https://cloud.google.com/storage/docs/request-endpoints). A video URI
-   *   may include wildcards in `object-id`, and thus identify multiple videos.
-   *   Supported wildcards: '*' to match 0 or more characters;
-   *   '?' to match 1 character. If unset, the input video should be embedded
-   *   in the request as `input_content`. If set, `input_content` should be unset.
-   * @param {Buffer} request.inputContent
-   *   The video data bytes.
-   *   If unset, the input video(s) should be specified via `input_uri`.
-   *   If set, `input_uri` should be unset.
-   * @param {number[]} request.features
-   *   Required. Requested video annotation features.
-   * @param {google.cloud.videointelligence.v1beta2.VideoContext} request.videoContext
-   *   Additional video context and/or feature-specific parameters.
-   * @param {string} [request.outputUri]
-   *   Optional. Location where the output (in JSON format) should be stored.
-   *   Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
-   *   URIs are supported, which must be specified in the following format:
-   *   `gs://bucket-id/object-id` (other URI formats return
-   *   {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT}). For
-   *   more information, see [Request
-   *   URIs](https://cloud.google.com/storage/docs/request-endpoints).
-   * @param {string} [request.locationId]
-   *   Optional. Cloud region where annotation should take place. Supported cloud
-   *   regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
-   *   is specified, a region will be determined based on video file location.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta2/video_intelligence_service.annotate_video.js</caption>
-   * region_tag:videointelligence_v1beta2_generated_VideoIntelligenceService_AnnotateVideo_async
-   */
+/**
+ * Performs asynchronous video annotation. Progress and results can be
+ * retrieved through the `google.longrunning.Operations` interface.
+ * `Operation.metadata` contains `AnnotateVideoProgress` (progress).
+ * `Operation.response` contains `AnnotateVideoResponse` (results).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.inputUri
+ *   Input video location. Currently, only
+ *   [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
+ *   supported, which must be specified in the following format:
+ *   `gs://bucket-id/object-id` (other URI formats return
+ *   {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT}). For
+ *   more information, see [Request
+ *   URIs](https://cloud.google.com/storage/docs/request-endpoints). A video URI
+ *   may include wildcards in `object-id`, and thus identify multiple videos.
+ *   Supported wildcards: '*' to match 0 or more characters;
+ *   '?' to match 1 character. If unset, the input video should be embedded
+ *   in the request as `input_content`. If set, `input_content` should be unset.
+ * @param {Buffer} request.inputContent
+ *   The video data bytes.
+ *   If unset, the input video(s) should be specified via `input_uri`.
+ *   If set, `input_uri` should be unset.
+ * @param {number[]} request.features
+ *   Required. Requested video annotation features.
+ * @param {google.cloud.videointelligence.v1beta2.VideoContext} request.videoContext
+ *   Additional video context and/or feature-specific parameters.
+ * @param {string} [request.outputUri]
+ *   Optional. Location where the output (in JSON format) should be stored.
+ *   Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
+ *   URIs are supported, which must be specified in the following format:
+ *   `gs://bucket-id/object-id` (other URI formats return
+ *   {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT}). For
+ *   more information, see [Request
+ *   URIs](https://cloud.google.com/storage/docs/request-endpoints).
+ * @param {string} [request.locationId]
+ *   Optional. Cloud region where annotation should take place. Supported cloud
+ *   regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
+ *   is specified, a region will be determined based on video file location.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta2/video_intelligence_service.annotate_video.js</caption>
+ * region_tag:videointelligence_v1beta2_generated_VideoIntelligenceService_AnnotateVideo_async
+ */
   annotateVideo(
-    request?: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   annotateVideo(
-    request: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   annotateVideo(
-    request: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   annotateVideo(
-    request?: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
-            protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
-            protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('annotateVideo response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('annotateVideo request %j', request);
-    return this.innerApiCalls
-      .annotateVideo(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
-            protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('annotateVideo response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.annotateVideo(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('annotateVideo response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `annotateVideo()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta2/video_intelligence_service.annotate_video.js</caption>
-   * region_tag:videointelligence_v1beta2_generated_VideoIntelligenceService_AnnotateVideo_async
-   */
-  async checkAnnotateVideoProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.videointelligence.v1beta2.AnnotateVideoResponse,
-      protos.google.cloud.videointelligence.v1beta2.AnnotateVideoProgress
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `annotateVideo()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta2/video_intelligence_service.annotate_video.js</caption>
+ * region_tag:videointelligence_v1beta2_generated_VideoIntelligenceService_AnnotateVideo_async
+ */
+  async checkAnnotateVideoProgress(name: string): Promise<LROperation<protos.google.cloud.videointelligence.v1beta2.AnnotateVideoResponse, protos.google.cloud.videointelligence.v1beta2.AnnotateVideoProgress>>{
     this._log.info('annotateVideo long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.annotateVideo,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.videointelligence.v1beta2.AnnotateVideoResponse,
-      protos.google.cloud.videointelligence.v1beta2.AnnotateVideoProgress
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.annotateVideo, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.videointelligence.v1beta2.AnnotateVideoResponse, protos.google.cloud.videointelligence.v1beta2.AnnotateVideoProgress>;
   }
 
   /**
