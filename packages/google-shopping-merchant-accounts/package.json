@@ -1,6 +1,6 @@
 {
   "name": "@google-shopping/accounts",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Merchant API client for Node.js",
   "repository": {
     "type": "git",

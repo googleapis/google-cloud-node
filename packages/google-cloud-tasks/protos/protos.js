@@ -10675,12 +10675,7 @@ export const google = $root.google = (() => {
                     // OneOf field names bound to virtual getters and setters
                     let $oneOfFields;
 
-                    /**
-                     * UploadQueueYamlRequest _httpBody.
-                     * @member {"httpBody"|undefined} _httpBody
-                     * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(UploadQueueYamlRequest.prototype, "_httpBody", {
                         get: $util.oneOfGetter($oneOfFields = ["httpBody"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -17561,34 +17556,19 @@ export const google = $root.google = (() => {
                     // OneOf field names bound to virtual getters and setters
                     let $oneOfFields;
 
-                    /**
-                     * UriOverride _scheme.
-                     * @member {"scheme"|undefined} _scheme
-                     * @memberof google.cloud.tasks.v2beta2.UriOverride
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(UriOverride.prototype, "_scheme", {
                         get: $util.oneOfGetter($oneOfFields = ["scheme"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
 
-                    /**
-                     * UriOverride _host.
-                     * @member {"host"|undefined} _host
-                     * @memberof google.cloud.tasks.v2beta2.UriOverride
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(UriOverride.prototype, "_host", {
                         get: $util.oneOfGetter($oneOfFields = ["host"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
 
-                    /**
-                     * UriOverride _port.
-                     * @member {"port"|undefined} _port
-                     * @memberof google.cloud.tasks.v2beta2.UriOverride
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(UriOverride.prototype, "_port", {
                         get: $util.oneOfGetter($oneOfFields = ["port"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -26986,34 +26966,19 @@ export const google = $root.google = (() => {
                     // OneOf field names bound to virtual getters and setters
                     let $oneOfFields;
 
-                    /**
-                     * UriOverride _scheme.
-                     * @member {"scheme"|undefined} _scheme
-                     * @memberof google.cloud.tasks.v2beta3.UriOverride
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(UriOverride.prototype, "_scheme", {
                         get: $util.oneOfGetter($oneOfFields = ["scheme"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
 
-                    /**
-                     * UriOverride _host.
-                     * @member {"host"|undefined} _host
-                     * @memberof google.cloud.tasks.v2beta3.UriOverride
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(UriOverride.prototype, "_host", {
                         get: $util.oneOfGetter($oneOfFields = ["host"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
 
-                    /**
-                     * UriOverride _port.
-                     * @member {"port"|undefined} _port
-                     * @memberof google.cloud.tasks.v2beta3.UriOverride
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(UriOverride.prototype, "_port", {
                         get: $util.oneOfGetter($oneOfFields = ["port"]),
                         set: $util.oneOfSetter($oneOfFields)

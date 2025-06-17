@@ -31380,6 +31380,235 @@
                         return SpeechAdaptation;
                     })();
     
+                    v2.DenoiserConfig = (function() {
+    
+                        /**
+                         * Properties of a DenoiserConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IDenoiserConfig
+                         * @property {boolean|null} [denoiseAudio] DenoiserConfig denoiseAudio
+                         * @property {number|null} [snrThreshold] DenoiserConfig snrThreshold
+                         */
+    
+                        /**
+                         * Constructs a new DenoiserConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a DenoiserConfig.
+                         * @implements IDenoiserConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IDenoiserConfig=} [properties] Properties to set
+                         */
+                        function DenoiserConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DenoiserConfig denoiseAudio.
+                         * @member {boolean} denoiseAudio
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @instance
+                         */
+                        DenoiserConfig.prototype.denoiseAudio = false;
+    
+                        /**
+                         * DenoiserConfig snrThreshold.
+                         * @member {number} snrThreshold
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @instance
+                         */
+                        DenoiserConfig.prototype.snrThreshold = 0;
+    
+                        /**
+                         * Creates a new DenoiserConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IDenoiserConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.DenoiserConfig} DenoiserConfig instance
+                         */
+                        DenoiserConfig.create = function create(properties) {
+                            return new DenoiserConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DenoiserConfig message. Does not implicitly {@link google.cloud.speech.v2.DenoiserConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IDenoiserConfig} message DenoiserConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DenoiserConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.denoiseAudio != null && Object.hasOwnProperty.call(message, "denoiseAudio"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.denoiseAudio);
+                            if (message.snrThreshold != null && Object.hasOwnProperty.call(message, "snrThreshold"))
+                                writer.uint32(/* id 2, wireType 5 =*/21).float(message.snrThreshold);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DenoiserConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.DenoiserConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IDenoiserConfig} message DenoiserConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DenoiserConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DenoiserConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.DenoiserConfig} DenoiserConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DenoiserConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.DenoiserConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.denoiseAudio = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.snrThreshold = reader.float();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DenoiserConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.DenoiserConfig} DenoiserConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DenoiserConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DenoiserConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DenoiserConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.denoiseAudio != null && message.hasOwnProperty("denoiseAudio"))
+                                if (typeof message.denoiseAudio !== "boolean")
+                                    return "denoiseAudio: boolean expected";
+                            if (message.snrThreshold != null && message.hasOwnProperty("snrThreshold"))
+                                if (typeof message.snrThreshold !== "number")
+                                    return "snrThreshold: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DenoiserConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.DenoiserConfig} DenoiserConfig
+                         */
+                        DenoiserConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.DenoiserConfig)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.DenoiserConfig();
+                            if (object.denoiseAudio != null)
+                                message.denoiseAudio = Boolean(object.denoiseAudio);
+                            if (object.snrThreshold != null)
+                                message.snrThreshold = Number(object.snrThreshold);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DenoiserConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.DenoiserConfig} message DenoiserConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DenoiserConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.denoiseAudio = false;
+                                object.snrThreshold = 0;
+                            }
+                            if (message.denoiseAudio != null && message.hasOwnProperty("denoiseAudio"))
+                                object.denoiseAudio = message.denoiseAudio;
+                            if (message.snrThreshold != null && message.hasOwnProperty("snrThreshold"))
+                                object.snrThreshold = options.json && !isFinite(message.snrThreshold) ? String(message.snrThreshold) : message.snrThreshold;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DenoiserConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DenoiserConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DenoiserConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DenoiserConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.DenoiserConfig";
+                        };
+    
+                        return DenoiserConfig;
+                    })();
+    
                     v2.RecognitionConfig = (function() {
     
                         /**
@@ -31394,6 +31623,7 @@
                          * @property {google.cloud.speech.v2.ISpeechAdaptation|null} [adaptation] RecognitionConfig adaptation
                          * @property {google.cloud.speech.v2.ITranscriptNormalization|null} [transcriptNormalization] RecognitionConfig transcriptNormalization
                          * @property {google.cloud.speech.v2.ITranslationConfig|null} [translationConfig] RecognitionConfig translationConfig
+                         * @property {google.cloud.speech.v2.IDenoiserConfig|null} [denoiserConfig] RecognitionConfig denoiserConfig
                          */
     
                         /**
@@ -31476,6 +31706,14 @@
                          */
                         RecognitionConfig.prototype.translationConfig = null;
     
+                        /**
+                         * RecognitionConfig denoiserConfig.
+                         * @member {google.cloud.speech.v2.IDenoiserConfig|null|undefined} denoiserConfig
+                         * @memberof google.cloud.speech.v2.RecognitionConfig
+                         * @instance
+                         */
+                        RecognitionConfig.prototype.denoiserConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -31531,6 +31769,8 @@
                                 $root.google.cloud.speech.v2.TranscriptNormalization.encode(message.transcriptNormalization, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.translationConfig != null && Object.hasOwnProperty.call(message, "translationConfig"))
                                 $root.google.cloud.speech.v2.TranslationConfig.encode(message.translationConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.denoiserConfig != null && Object.hasOwnProperty.call(message, "denoiserConfig"))
+                                $root.google.cloud.speech.v2.DenoiserConfig.encode(message.denoiserConfig, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             return writer;
                         };
     
@@ -31599,6 +31839,10 @@
                                     }
                                 case 15: {
                                         message.translationConfig = $root.google.cloud.speech.v2.TranslationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.denoiserConfig = $root.google.cloud.speech.v2.DenoiserConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -31685,6 +31929,11 @@
                                 if (error)
                                     return "translationConfig." + error;
                             }
+                            if (message.denoiserConfig != null && message.hasOwnProperty("denoiserConfig")) {
+                                var error = $root.google.cloud.speech.v2.DenoiserConfig.verify(message.denoiserConfig);
+                                if (error)
+                                    return "denoiserConfig." + error;
+                            }
                             return null;
                         };
     
@@ -31739,6 +31988,11 @@
                                     throw TypeError(".google.cloud.speech.v2.RecognitionConfig.translationConfig: object expected");
                                 message.translationConfig = $root.google.cloud.speech.v2.TranslationConfig.fromObject(object.translationConfig);
                             }
+                            if (object.denoiserConfig != null) {
+                                if (typeof object.denoiserConfig !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.RecognitionConfig.denoiserConfig: object expected");
+                                message.denoiserConfig = $root.google.cloud.speech.v2.DenoiserConfig.fromObject(object.denoiserConfig);
+                            }
                             return message;
                         };
     
@@ -31763,6 +32017,7 @@
                                 object.model = "";
                                 object.transcriptNormalization = null;
                                 object.translationConfig = null;
+                                object.denoiserConfig = null;
                             }
                             if (message.features != null && message.hasOwnProperty("features"))
                                 object.features = $root.google.cloud.speech.v2.RecognitionFeatures.toObject(message.features, options);
@@ -31789,6 +32044,8 @@
                                 object.transcriptNormalization = $root.google.cloud.speech.v2.TranscriptNormalization.toObject(message.transcriptNormalization, options);
                             if (message.translationConfig != null && message.hasOwnProperty("translationConfig"))
                                 object.translationConfig = $root.google.cloud.speech.v2.TranslationConfig.toObject(message.translationConfig, options);
+                            if (message.denoiserConfig != null && message.hasOwnProperty("denoiserConfig"))
+                                object.denoiserConfig = $root.google.cloud.speech.v2.DenoiserConfig.toObject(message.denoiserConfig, options);
                             return object;
                         };
     

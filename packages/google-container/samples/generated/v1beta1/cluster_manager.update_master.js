@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, masterVersion) {
+function main(masterVersion) {
   // [START container_v1beta1_generated_ClusterManager_UpdateMaster_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -54,9 +54,6 @@ function main(projectId, zone, clusterId, masterVersion) {
   async function callUpdateMaster() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
       masterVersion,
     };
 

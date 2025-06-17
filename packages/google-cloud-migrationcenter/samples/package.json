@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/migrationcenter": "^2.0.1"
+    "@google-cloud/migrationcenter": "^2.1.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

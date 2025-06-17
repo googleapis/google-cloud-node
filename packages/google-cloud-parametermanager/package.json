@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/parametermanager",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Parameter Manager API client for Node.js",
   "repository": {
     "type": "git",

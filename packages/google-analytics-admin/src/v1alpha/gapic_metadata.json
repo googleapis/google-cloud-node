@@ -650,6 +650,16 @@
                 "submitUserDeletion"
               ]
             },
+            "UpdateSubpropertySyncConfig": {
+              "methods": [
+                "updateSubpropertySyncConfig"
+              ]
+            },
+            "GetSubpropertySyncConfig": {
+              "methods": [
+                "getSubpropertySyncConfig"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -844,6 +854,13 @@
                 "listReportingDataAnnotations",
                 "listReportingDataAnnotationsStream",
                 "listReportingDataAnnotationsAsync"
+              ]
+            },
+            "ListSubpropertySyncConfigs": {
+              "methods": [
+                "listSubpropertySyncConfigs",
+                "listSubpropertySyncConfigsStream",
+                "listSubpropertySyncConfigsAsync"
               ]
             }
           }
@@ -1491,6 +1508,16 @@
                 "submitUserDeletion"
               ]
             },
+            "UpdateSubpropertySyncConfig": {
+              "methods": [
+                "updateSubpropertySyncConfig"
+              ]
+            },
+            "GetSubpropertySyncConfig": {
+              "methods": [
+                "getSubpropertySyncConfig"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -1685,6 +1712,13 @@
                 "listReportingDataAnnotations",
                 "listReportingDataAnnotationsStream",
                 "listReportingDataAnnotationsAsync"
+              ]
+            },
+            "ListSubpropertySyncConfigs": {
+              "methods": [
+                "listSubpropertySyncConfigs",
+                "listSubpropertySyncConfigsStream",
+                "listSubpropertySyncConfigsAsync"
               ]
             }
           }

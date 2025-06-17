@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "4.1.0",
+        "version": "4.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -6572,6 +6572,54 @@
                 "method": {
                     "shortName": "GetIndex",
                     "fullName": "google.cloud.aiplatform.v1beta1.IndexService.GetIndex",
+                    "service": {
+                        "shortName": "IndexService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.IndexService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_IndexService_ImportIndex_async",
+            "title": "DatasetService importIndex Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports an Index from an external source (e.g., BigQuery).",
+            "canonical": true,
+            "file": "index_service.import_index.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportIndex",
+                "fullName": "google.cloud.aiplatform.v1beta1.IndexService.ImportIndex",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "is_complete_overwrite",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ImportIndexRequest.ConnectorConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "IndexServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.IndexServiceClient"
+                },
+                "method": {
+                    "shortName": "ImportIndex",
+                    "fullName": "google.cloud.aiplatform.v1beta1.IndexService.ImportIndex",
                     "service": {
                         "shortName": "IndexService",
                         "fullName": "google.cloud.aiplatform.v1beta1.IndexService"

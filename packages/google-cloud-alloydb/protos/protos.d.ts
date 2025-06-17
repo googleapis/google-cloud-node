@@ -948,9 +948,6 @@ export namespace google {
                     /** AutomatedBackupPolicy retention. */
                     public retention?: ("timeBasedRetention"|"quantityBasedRetention");
 
-                    /** AutomatedBackupPolicy _enabled. */
-                    public _enabled?: "enabled";
-
                     /**
                      * Creates a new AutomatedBackupPolicy instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1359,9 +1356,6 @@ export namespace google {
 
                     /** ContinuousBackupConfig encryptionConfig. */
                     public encryptionConfig?: (google.cloud.alloydb.v1.IEncryptionConfig|null);
-
-                    /** ContinuousBackupConfig _enabled. */
-                    public _enabled?: "enabled";
 
                     /**
                      * Creates a new ContinuousBackupConfig instance using the specified properties.
@@ -3415,15 +3409,6 @@ export namespace google {
                         /** QueryInsightsInstanceConfig queryPlansPerMinute. */
                         public queryPlansPerMinute?: (number|null);
 
-                        /** QueryInsightsInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** QueryInsightsInstanceConfig _recordClientAddress. */
-                        public _recordClientAddress?: "recordClientAddress";
-
-                        /** QueryInsightsInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
                         /**
                          * Creates a new QueryInsightsInstanceConfig instance using the specified properties.
                          * @param [properties] Properties to set
@@ -3562,30 +3547,6 @@ export namespace google {
 
                         /** ObservabilityInstanceConfig trackActiveQueries. */
                         public trackActiveQueries?: (boolean|null);
-
-                        /** ObservabilityInstanceConfig _enabled. */
-                        public _enabled?: "enabled";
-
-                        /** ObservabilityInstanceConfig _preserveComments. */
-                        public _preserveComments?: "preserveComments";
-
-                        /** ObservabilityInstanceConfig _trackWaitEvents. */
-                        public _trackWaitEvents?: "trackWaitEvents";
-
-                        /** ObservabilityInstanceConfig _trackWaitEventTypes. */
-                        public _trackWaitEventTypes?: "trackWaitEventTypes";
-
-                        /** ObservabilityInstanceConfig _maxQueryStringLength. */
-                        public _maxQueryStringLength?: "maxQueryStringLength";
-
-                        /** ObservabilityInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** ObservabilityInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
-                        /** ObservabilityInstanceConfig _trackActiveQueries. */
-                        public _trackActiveQueries?: "trackActiveQueries";
 
                         /**
                          * Creates a new ObservabilityInstanceConfig instance using the specified properties.
@@ -7405,15 +7366,6 @@ export namespace google {
 
                         /** SqlExportOptions ifExistTargetObjects. */
                         public ifExistTargetObjects?: (boolean|null);
-
-                        /** SqlExportOptions _schemaOnly. */
-                        public _schemaOnly?: "schemaOnly";
-
-                        /** SqlExportOptions _cleanTargetObjects. */
-                        public _cleanTargetObjects?: "cleanTargetObjects";
-
-                        /** SqlExportOptions _ifExistTargetObjects. */
-                        public _ifExistTargetObjects?: "ifExistTargetObjects";
 
                         /**
                          * Creates a new SqlExportOptions instance using the specified properties.
@@ -14218,12 +14170,6 @@ export namespace google {
                     /** SqlResultValue nullValue. */
                     public nullValue?: (boolean|null);
 
-                    /** SqlResultValue _value. */
-                    public _value?: "value";
-
-                    /** SqlResultValue _nullValue. */
-                    public _nullValue?: "nullValue";
-
                     /**
                      * Creates a new SqlResultValue instance using the specified properties.
                      * @param [properties] Properties to set
@@ -15228,9 +15174,6 @@ export namespace google {
                     /** AutomatedBackupPolicy retention. */
                     public retention?: ("timeBasedRetention"|"quantityBasedRetention");
 
-                    /** AutomatedBackupPolicy _enabled. */
-                    public _enabled?: "enabled";
-
                     /**
                      * Creates a new AutomatedBackupPolicy instance using the specified properties.
                      * @param [properties] Properties to set
@@ -15640,9 +15583,6 @@ export namespace google {
                     /** ContinuousBackupConfig encryptionConfig. */
                     public encryptionConfig?: (google.cloud.alloydb.v1alpha.IEncryptionConfig|null);
 
-                    /** ContinuousBackupConfig _enabled. */
-                    public _enabled?: "enabled";
-
                     /**
                      * Creates a new ContinuousBackupConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -16047,6 +15987,9 @@ export namespace google {
 
                     /** MaintenanceUpdatePolicy maintenanceWindows */
                     maintenanceWindows?: (google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IMaintenanceWindow[]|null);
+
+                    /** MaintenanceUpdatePolicy denyMaintenancePeriods */
+                    denyMaintenancePeriods?: (google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod[]|null);
                 }
 
                 /** Represents a MaintenanceUpdatePolicy. */
@@ -16060,6 +16003,9 @@ export namespace google {
 
                     /** MaintenanceUpdatePolicy maintenanceWindows. */
                     public maintenanceWindows: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IMaintenanceWindow[];
+
+                    /** MaintenanceUpdatePolicy denyMaintenancePeriods. */
+                    public denyMaintenancePeriods: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod[];
 
                     /**
                      * Creates a new MaintenanceUpdatePolicy instance using the specified properties.
@@ -16238,6 +16184,115 @@ export namespace google {
 
                         /**
                          * Gets the default type url for MaintenanceWindow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DenyMaintenancePeriod. */
+                    interface IDenyMaintenancePeriod {
+
+                        /** DenyMaintenancePeriod startDate */
+                        startDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod endDate */
+                        endDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod time */
+                        time?: (google.type.ITimeOfDay|null);
+                    }
+
+                    /** Represents a DenyMaintenancePeriod. */
+                    class DenyMaintenancePeriod implements IDenyMaintenancePeriod {
+
+                        /**
+                         * Constructs a new DenyMaintenancePeriod.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod);
+
+                        /** DenyMaintenancePeriod startDate. */
+                        public startDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod endDate. */
+                        public endDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod time. */
+                        public time?: (google.type.ITimeOfDay|null);
+
+                        /**
+                         * Creates a new DenyMaintenancePeriod instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DenyMaintenancePeriod instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod): google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Encodes the specified DenyMaintenancePeriod message. Does not implicitly {@link google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                         * @param message DenyMaintenancePeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DenyMaintenancePeriod message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                         * @param message DenyMaintenancePeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DenyMaintenancePeriod message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DenyMaintenancePeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Decodes a DenyMaintenancePeriod message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DenyMaintenancePeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Verifies a DenyMaintenancePeriod message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DenyMaintenancePeriod message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DenyMaintenancePeriod
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Creates a plain object from a DenyMaintenancePeriod message. Also converts values to other types if specified.
+                         * @param message DenyMaintenancePeriod
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DenyMaintenancePeriod to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DenyMaintenancePeriod
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -16452,6 +16507,9 @@ export namespace google {
 
                     /** Cluster tags */
                     tags?: ({ [k: string]: string }|null);
+
+                    /** Cluster serviceAccountEmail */
+                    serviceAccountEmail?: (string|null);
                 }
 
                 /** Represents a Cluster. */
@@ -16570,6 +16628,9 @@ export namespace google {
 
                     /** Cluster tags. */
                     public tags: { [k: string]: string };
+
+                    /** Cluster serviceAccountEmail. */
+                    public serviceAccountEmail: string;
 
                     /** Cluster source. */
                     public source?: ("backupSource"|"migrationSource"|"cloudsqlBackupRunSource");
@@ -17287,6 +17348,12 @@ export namespace google {
                     /** Instance outboundPublicIpAddresses */
                     outboundPublicIpAddresses?: (string[]|null);
 
+                    /** Instance activationPolicy */
+                    activationPolicy?: (google.cloud.alloydb.v1alpha.Instance.ActivationPolicy|keyof typeof google.cloud.alloydb.v1alpha.Instance.ActivationPolicy|null);
+
+                    /** Instance connectionPoolConfig */
+                    connectionPoolConfig?: (google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig|null);
+
                     /** Instance gcaConfig */
                     gcaConfig?: (google.cloud.alloydb.v1alpha.IGCAInstanceConfig|null);
                 }
@@ -17392,6 +17459,12 @@ export namespace google {
 
                     /** Instance outboundPublicIpAddresses. */
                     public outboundPublicIpAddresses: string[];
+
+                    /** Instance activationPolicy. */
+                    public activationPolicy: (google.cloud.alloydb.v1alpha.Instance.ActivationPolicy|keyof typeof google.cloud.alloydb.v1alpha.Instance.ActivationPolicy);
+
+                    /** Instance connectionPoolConfig. */
+                    public connectionPoolConfig?: (google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig|null);
 
                     /** Instance gcaConfig. */
                     public gcaConfig?: (google.cloud.alloydb.v1alpha.IGCAInstanceConfig|null);
@@ -17731,15 +17804,6 @@ export namespace google {
                         /** QueryInsightsInstanceConfig queryPlansPerMinute. */
                         public queryPlansPerMinute?: (number|null);
 
-                        /** QueryInsightsInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** QueryInsightsInstanceConfig _recordClientAddress. */
-                        public _recordClientAddress?: "recordClientAddress";
-
-                        /** QueryInsightsInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
                         /**
                          * Creates a new QueryInsightsInstanceConfig instance using the specified properties.
                          * @param [properties] Properties to set
@@ -17847,6 +17911,9 @@ export namespace google {
 
                         /** ObservabilityInstanceConfig trackClientAddress */
                         trackClientAddress?: (boolean|null);
+
+                        /** ObservabilityInstanceConfig assistiveExperiencesEnabled */
+                        assistiveExperiencesEnabled?: (boolean|null);
                     }
 
                     /** Represents an ObservabilityInstanceConfig. */
@@ -17885,32 +17952,8 @@ export namespace google {
                         /** ObservabilityInstanceConfig trackClientAddress. */
                         public trackClientAddress?: (boolean|null);
 
-                        /** ObservabilityInstanceConfig _enabled. */
-                        public _enabled?: "enabled";
-
-                        /** ObservabilityInstanceConfig _preserveComments. */
-                        public _preserveComments?: "preserveComments";
-
-                        /** ObservabilityInstanceConfig _trackWaitEvents. */
-                        public _trackWaitEvents?: "trackWaitEvents";
-
-                        /** ObservabilityInstanceConfig _trackWaitEventTypes. */
-                        public _trackWaitEventTypes?: "trackWaitEventTypes";
-
-                        /** ObservabilityInstanceConfig _maxQueryStringLength. */
-                        public _maxQueryStringLength?: "maxQueryStringLength";
-
-                        /** ObservabilityInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** ObservabilityInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
-                        /** ObservabilityInstanceConfig _trackActiveQueries. */
-                        public _trackActiveQueries?: "trackActiveQueries";
-
-                        /** ObservabilityInstanceConfig _trackClientAddress. */
-                        public _trackClientAddress?: "trackClientAddress";
+                        /** ObservabilityInstanceConfig assistiveExperiencesEnabled. */
+                        public assistiveExperiencesEnabled?: (boolean|null);
 
                         /**
                          * Creates a new ObservabilityInstanceConfig instance using the specified properties.
@@ -18647,6 +18690,12 @@ export namespace google {
 
                         /** InstanceNetworkConfig enableOutboundPublicIp */
                         enableOutboundPublicIp?: (boolean|null);
+
+                        /** InstanceNetworkConfig network */
+                        network?: (string|null);
+
+                        /** InstanceNetworkConfig allocatedIpRangeOverride */
+                        allocatedIpRangeOverride?: (string|null);
                     }
 
                     /** Represents an InstanceNetworkConfig. */
@@ -18666,6 +18715,12 @@ export namespace google {
 
                         /** InstanceNetworkConfig enableOutboundPublicIp. */
                         public enableOutboundPublicIp: boolean;
+
+                        /** InstanceNetworkConfig network. */
+                        public network: string;
+
+                        /** InstanceNetworkConfig allocatedIpRangeOverride. */
+                        public allocatedIpRangeOverride: string;
 
                         /**
                          * Creates a new InstanceNetworkConfig instance using the specified properties.
@@ -18845,6 +18900,113 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a ConnectionPoolConfig. */
+                    interface IConnectionPoolConfig {
+
+                        /** ConnectionPoolConfig enabled */
+                        enabled?: (boolean|null);
+                    }
+
+                    /** Represents a ConnectionPoolConfig. */
+                    class ConnectionPoolConfig implements IConnectionPoolConfig {
+
+                        /**
+                         * Constructs a new ConnectionPoolConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig);
+
+                        /** ConnectionPoolConfig enabled. */
+                        public enabled: boolean;
+
+                        /**
+                         * Creates a new ConnectionPoolConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConnectionPoolConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig): google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Encodes the specified ConnectionPoolConfig message. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig.verify|verify} messages.
+                         * @param message ConnectionPoolConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConnectionPoolConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig.verify|verify} messages.
+                         * @param message ConnectionPoolConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConnectionPoolConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConnectionPoolConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Decodes a ConnectionPoolConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConnectionPoolConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Verifies a ConnectionPoolConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConnectionPoolConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConnectionPoolConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Creates a plain object from a ConnectionPoolConfig message. Also converts values to other types if specified.
+                         * @param message ConnectionPoolConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConnectionPoolConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConnectionPoolConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConnectionPoolConfig {
+
+                        /** PoolMode enum. */
+                        enum PoolMode {
+                            POOL_MODE_UNSPECIFIED = 0,
+                            POOL_MODE_SESSION = 1,
+                            POOL_MODE_TRANSACTION = 2
+                        }
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -18871,6 +19033,13 @@ export namespace google {
                         AVAILABILITY_TYPE_UNSPECIFIED = 0,
                         ZONAL = 1,
                         REGIONAL = 2
+                    }
+
+                    /** ActivationPolicy enum. */
+                    enum ActivationPolicy {
+                        ACTIVATION_POLICY_UNSPECIFIED = 0,
+                        ALWAYS = 1,
+                        NEVER = 2
                     }
                 }
 
@@ -19022,6 +19191,9 @@ export namespace google {
                     /** Backup deleteTime */
                     deleteTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Backup createCompletionTime */
+                    createCompletionTime?: (google.protobuf.ITimestamp|null);
+
                     /** Backup labels */
                     labels?: ({ [k: string]: string }|null);
 
@@ -19103,6 +19275,9 @@ export namespace google {
 
                     /** Backup deleteTime. */
                     public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup createCompletionTime. */
+                    public createCompletionTime?: (google.protobuf.ITimestamp|null);
 
                     /** Backup labels. */
                     public labels: { [k: string]: string };
@@ -22152,15 +22327,6 @@ export namespace google {
 
                         /** SqlExportOptions ifExistTargetObjects. */
                         public ifExistTargetObjects?: (boolean|null);
-
-                        /** SqlExportOptions _schemaOnly. */
-                        public _schemaOnly?: "schemaOnly";
-
-                        /** SqlExportOptions _cleanTargetObjects. */
-                        public _cleanTargetObjects?: "cleanTargetObjects";
-
-                        /** SqlExportOptions _ifExistTargetObjects. */
-                        public _ifExistTargetObjects?: "ifExistTargetObjects";
 
                         /**
                          * Creates a new SqlExportOptions instance using the specified properties.
@@ -29091,12 +29257,6 @@ export namespace google {
                     /** SqlResultValue nullValue. */
                     public nullValue?: (boolean|null);
 
-                    /** SqlResultValue _value. */
-                    public _value?: "value";
-
-                    /** SqlResultValue _nullValue. */
-                    public _nullValue?: "nullValue";
-
                     /**
                      * Creates a new SqlResultValue instance using the specified properties.
                      * @param [properties] Properties to set
@@ -30101,9 +30261,6 @@ export namespace google {
                     /** AutomatedBackupPolicy retention. */
                     public retention?: ("timeBasedRetention"|"quantityBasedRetention");
 
-                    /** AutomatedBackupPolicy _enabled. */
-                    public _enabled?: "enabled";
-
                     /**
                      * Creates a new AutomatedBackupPolicy instance using the specified properties.
                      * @param [properties] Properties to set
@@ -30512,9 +30669,6 @@ export namespace google {
 
                     /** ContinuousBackupConfig encryptionConfig. */
                     public encryptionConfig?: (google.cloud.alloydb.v1beta.IEncryptionConfig|null);
-
-                    /** ContinuousBackupConfig _enabled. */
-                    public _enabled?: "enabled";
 
                     /**
                      * Creates a new ContinuousBackupConfig instance using the specified properties.
@@ -32592,15 +32746,6 @@ export namespace google {
                         /** QueryInsightsInstanceConfig queryPlansPerMinute. */
                         public queryPlansPerMinute?: (number|null);
 
-                        /** QueryInsightsInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** QueryInsightsInstanceConfig _recordClientAddress. */
-                        public _recordClientAddress?: "recordClientAddress";
-
-                        /** QueryInsightsInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
                         /**
                          * Creates a new QueryInsightsInstanceConfig instance using the specified properties.
                          * @param [properties] Properties to set
@@ -32745,33 +32890,6 @@ export namespace google {
 
                         /** ObservabilityInstanceConfig trackClientAddress. */
                         public trackClientAddress?: (boolean|null);
-
-                        /** ObservabilityInstanceConfig _enabled. */
-                        public _enabled?: "enabled";
-
-                        /** ObservabilityInstanceConfig _preserveComments. */
-                        public _preserveComments?: "preserveComments";
-
-                        /** ObservabilityInstanceConfig _trackWaitEvents. */
-                        public _trackWaitEvents?: "trackWaitEvents";
-
-                        /** ObservabilityInstanceConfig _trackWaitEventTypes. */
-                        public _trackWaitEventTypes?: "trackWaitEventTypes";
-
-                        /** ObservabilityInstanceConfig _maxQueryStringLength. */
-                        public _maxQueryStringLength?: "maxQueryStringLength";
-
-                        /** ObservabilityInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** ObservabilityInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
-                        /** ObservabilityInstanceConfig _trackActiveQueries. */
-                        public _trackActiveQueries?: "trackActiveQueries";
-
-                        /** ObservabilityInstanceConfig _trackClientAddress. */
-                        public _trackClientAddress?: "trackClientAddress";
 
                         /**
                          * Creates a new ObservabilityInstanceConfig instance using the specified properties.
@@ -37007,15 +37125,6 @@ export namespace google {
 
                         /** SqlExportOptions ifExistTargetObjects. */
                         public ifExistTargetObjects?: (boolean|null);
-
-                        /** SqlExportOptions _schemaOnly. */
-                        public _schemaOnly?: "schemaOnly";
-
-                        /** SqlExportOptions _cleanTargetObjects. */
-                        public _cleanTargetObjects?: "cleanTargetObjects";
-
-                        /** SqlExportOptions _ifExistTargetObjects. */
-                        public _ifExistTargetObjects?: "ifExistTargetObjects";
 
                         /**
                          * Creates a new SqlExportOptions instance using the specified properties.
@@ -43946,12 +44055,6 @@ export namespace google {
                     /** SqlResultValue nullValue. */
                     public nullValue?: (boolean|null);
 
-                    /** SqlResultValue _value. */
-                    public _value?: "value";
-
-                    /** SqlResultValue _nullValue. */
-                    public _nullValue?: "nullValue";
-
                     /**
                      * Creates a new SqlResultValue instance using the specified properties.
                      * @param [properties] Properties to set
@@ -44701,6 +44804,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -44741,6 +44847,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -49058,6 +49167,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -49309,7 +49421,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -49340,7 +49452,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -51355,7 +51467,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -51368,7 +51480,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.
@@ -51455,7 +51567,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -51471,7 +51583,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -51864,6 +51976,115 @@ export namespace google {
 
             /**
              * Gets the default type url for TimeOfDay
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Date
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

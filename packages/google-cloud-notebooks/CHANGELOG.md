@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/notebooks-v4.0.1...notebooks-v4.1.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6301](https://github.com/googleapis/google-cloud-node/issues/6301)) ([42754a7](https://github.com/googleapis/google-cloud-node/commit/42754a72b34a01d201341428b4a358ff781b0612))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/notebooks-v4.0.0...notebooks-v4.0.1) (2025-03-21)
 
 

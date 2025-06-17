@@ -298,9 +298,14 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         throw err;
       });
       assert(client.telcoAutomationStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -309,9 +314,14 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.telcoAutomationStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -478,7 +488,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getOrchestrationCluster(request),
         expectedError
@@ -611,7 +623,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEdgeSlm(request), expectedError);
     });
   });
@@ -741,7 +755,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createBlueprint(request), expectedError);
     });
   });
@@ -875,7 +891,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.blueprint.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateBlueprint(request), expectedError);
     });
   });
@@ -1005,7 +1023,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getBlueprint(request), expectedError);
     });
   });
@@ -1135,7 +1155,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteBlueprint(request), expectedError);
     });
   });
@@ -1265,7 +1287,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.approveBlueprint(request), expectedError);
     });
   });
@@ -1395,7 +1419,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.proposeBlueprint(request), expectedError);
     });
   });
@@ -1525,7 +1551,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.rejectBlueprint(request), expectedError);
     });
   });
@@ -1659,7 +1687,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.discardBlueprintChanges(request),
         expectedError
@@ -1793,7 +1823,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPublicBlueprint(request), expectedError);
     });
   });
@@ -1923,7 +1955,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDeployment(request), expectedError);
     });
   });
@@ -2057,7 +2091,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.deployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDeployment(request), expectedError);
     });
   });
@@ -2187,7 +2223,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDeployment(request), expectedError);
     });
   });
@@ -2317,7 +2355,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.removeDeployment(request), expectedError);
     });
   });
@@ -2451,7 +2491,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.discardDeploymentChanges(request),
         expectedError
@@ -2584,7 +2626,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.applyDeployment(request), expectedError);
     });
   });
@@ -2718,7 +2762,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.computeDeploymentStatus(request),
         expectedError
@@ -2852,7 +2898,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.rollbackDeployment(request), expectedError);
     });
   });
@@ -2986,7 +3034,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getHydratedDeployment(request),
         expectedError
@@ -3127,7 +3177,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.hydratedDeployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateHydratedDeployment(request),
         expectedError
@@ -3264,7 +3316,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.applyHydratedDeployment(request),
         expectedError
@@ -7783,20 +7837,24 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -7863,20 +7921,24 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -7943,20 +8005,24 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);

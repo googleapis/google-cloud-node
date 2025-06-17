@@ -25,4114 +25,3273 @@ import * as depserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  IamProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.DepServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new depserviceModule.v1.DepServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'networkservices.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new depserviceModule.v1.DepServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = depserviceModule.v1.DepServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'networkservices.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = depserviceModule.v1.DepServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'networkservices.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'networkservices.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'networkservices.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new depserviceModule.v1.DepServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'networkservices.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new depserviceModule.v1.DepServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'networkservices.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new depserviceModule.v1.DepServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'networkservices.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new depserviceModule.v1.DepServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new depserviceModule.v1.DepServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = depserviceModule.v1.DepServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new depserviceModule.v1.DepServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.depServiceStub, undefined);
-      await client.initialize();
-      assert(client.depServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.depServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.depServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getLbTrafficExtension', () => {
-    it('invokes getLbTrafficExtension without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-      );
-      client.innerApiCalls.getLbTrafficExtension =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getLbTrafficExtension(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLbTrafficExtension without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-      );
-      client.innerApiCalls.getLbTrafficExtension =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLbTrafficExtension(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.networkservices.v1.ILbTrafficExtension | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLbTrafficExtension with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getLbTrafficExtension = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLbTrafficExtension(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLbTrafficExtension with closed client', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getLbTrafficExtension(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getLbRouteExtension', () => {
-    it('invokes getLbRouteExtension without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.GetLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.GetLbRouteExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.LbRouteExtension()
-      );
-      client.innerApiCalls.getLbRouteExtension =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getLbRouteExtension(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLbRouteExtension without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.GetLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.GetLbRouteExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.LbRouteExtension()
-      );
-      client.innerApiCalls.getLbRouteExtension =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLbRouteExtension(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.networkservices.v1.ILbRouteExtension | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLbRouteExtension with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.GetLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.GetLbRouteExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getLbRouteExtension = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getLbRouteExtension(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLbRouteExtension with closed client', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.GetLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.GetLbRouteExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getLbRouteExtension(request), expectedError);
-    });
-  });
-
-  describe('createLbTrafficExtension', () => {
-    it('invokes createLbTrafficExtension without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createLbTrafficExtension =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createLbTrafficExtension(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLbTrafficExtension without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createLbTrafficExtension =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createLbTrafficExtension(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-              protos.google.cloud.networkservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLbTrafficExtension with call error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createLbTrafficExtension = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createLbTrafficExtension(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLbTrafficExtension with LRO error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createLbTrafficExtension = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createLbTrafficExtension(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateLbTrafficExtensionProgress without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkCreateLbTrafficExtensionProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateLbTrafficExtensionProgress with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateLbTrafficExtensionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateLbTrafficExtension', () => {
-    it('invokes updateLbTrafficExtension without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest()
-      );
-      request.lbTrafficExtension ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest',
-        ['lbTrafficExtension', 'name']
-      );
-      request.lbTrafficExtension.name = defaultValue1;
-      const expectedHeaderRequestParams = `lb_traffic_extension.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateLbTrafficExtension =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateLbTrafficExtension(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLbTrafficExtension without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest()
-      );
-      request.lbTrafficExtension ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest',
-        ['lbTrafficExtension', 'name']
-      );
-      request.lbTrafficExtension.name = defaultValue1;
-      const expectedHeaderRequestParams = `lb_traffic_extension.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateLbTrafficExtension =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateLbTrafficExtension(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-              protos.google.cloud.networkservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLbTrafficExtension with call error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest()
-      );
-      request.lbTrafficExtension ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest',
-        ['lbTrafficExtension', 'name']
-      );
-      request.lbTrafficExtension.name = defaultValue1;
-      const expectedHeaderRequestParams = `lb_traffic_extension.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateLbTrafficExtension = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateLbTrafficExtension(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLbTrafficExtension with LRO error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest()
-      );
-      request.lbTrafficExtension ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest',
-        ['lbTrafficExtension', 'name']
-      );
-      request.lbTrafficExtension.name = defaultValue1;
-      const expectedHeaderRequestParams = `lb_traffic_extension.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateLbTrafficExtension = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateLbTrafficExtension(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateLbTrafficExtensionProgress without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkUpdateLbTrafficExtensionProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateLbTrafficExtensionProgress with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateLbTrafficExtensionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteLbTrafficExtension', () => {
-    it('invokes deleteLbTrafficExtension without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteLbTrafficExtension =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteLbTrafficExtension(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLbTrafficExtension without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteLbTrafficExtension =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteLbTrafficExtension(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.networkservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLbTrafficExtension with call error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteLbTrafficExtension = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteLbTrafficExtension(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLbTrafficExtension with LRO error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteLbTrafficExtension = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteLbTrafficExtension(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteLbTrafficExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLbTrafficExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteLbTrafficExtensionProgress without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkDeleteLbTrafficExtensionProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteLbTrafficExtensionProgress with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteLbTrafficExtensionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createLbRouteExtension', () => {
-    it('invokes createLbRouteExtension without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createLbRouteExtension =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createLbRouteExtension(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLbRouteExtension without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createLbRouteExtension =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createLbRouteExtension(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.networkservices.v1.ILbRouteExtension,
-              protos.google.cloud.networkservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLbRouteExtension with call error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createLbRouteExtension = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createLbRouteExtension(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLbRouteExtension with LRO error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createLbRouteExtension = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createLbRouteExtension(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateLbRouteExtensionProgress without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateLbRouteExtensionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateLbRouteExtensionProgress with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateLbRouteExtensionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateLbRouteExtension', () => {
-    it('invokes updateLbRouteExtension without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest()
-      );
-      request.lbRouteExtension ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest',
-        ['lbRouteExtension', 'name']
-      );
-      request.lbRouteExtension.name = defaultValue1;
-      const expectedHeaderRequestParams = `lb_route_extension.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateLbRouteExtension =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateLbRouteExtension(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLbRouteExtension without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest()
-      );
-      request.lbRouteExtension ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest',
-        ['lbRouteExtension', 'name']
-      );
-      request.lbRouteExtension.name = defaultValue1;
-      const expectedHeaderRequestParams = `lb_route_extension.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateLbRouteExtension =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateLbRouteExtension(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.networkservices.v1.ILbRouteExtension,
-              protos.google.cloud.networkservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLbRouteExtension with call error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest()
-      );
-      request.lbRouteExtension ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest',
-        ['lbRouteExtension', 'name']
-      );
-      request.lbRouteExtension.name = defaultValue1;
-      const expectedHeaderRequestParams = `lb_route_extension.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateLbRouteExtension = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateLbRouteExtension(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLbRouteExtension with LRO error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest()
-      );
-      request.lbRouteExtension ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest',
-        ['lbRouteExtension', 'name']
-      );
-      request.lbRouteExtension.name = defaultValue1;
-      const expectedHeaderRequestParams = `lb_route_extension.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateLbRouteExtension = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateLbRouteExtension(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateLbRouteExtensionProgress without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateLbRouteExtensionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateLbRouteExtensionProgress with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateLbRouteExtensionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteLbRouteExtension', () => {
-    it('invokes deleteLbRouteExtension without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteLbRouteExtension =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteLbRouteExtension(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLbRouteExtension without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteLbRouteExtension =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteLbRouteExtension(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.networkservices.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLbRouteExtension with call error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteLbRouteExtension = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteLbRouteExtension(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLbRouteExtension with LRO error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteLbRouteExtension = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteLbRouteExtension(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteLbRouteExtension as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLbRouteExtension as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteLbRouteExtensionProgress without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteLbRouteExtensionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteLbRouteExtensionProgress with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteLbRouteExtensionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listLbTrafficExtensions', () => {
-    it('invokes listLbTrafficExtensions without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-      ];
-      client.innerApiCalls.listLbTrafficExtensions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listLbTrafficExtensions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLbTrafficExtensions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLbTrafficExtensions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLbTrafficExtensions without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-      ];
-      client.innerApiCalls.listLbTrafficExtensions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listLbTrafficExtensions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.networkservices.v1.ILbTrafficExtension[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLbTrafficExtensions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLbTrafficExtensions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLbTrafficExtensions with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listLbTrafficExtensions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listLbTrafficExtensions(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listLbTrafficExtensions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLbTrafficExtensions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLbTrafficExtensionsStream without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-      ];
-      client.descriptors.page.listLbTrafficExtensions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listLbTrafficExtensionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networkservices.v1.LbTrafficExtension[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.networkservices.v1.LbTrafficExtension
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listLbTrafficExtensions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLbTrafficExtensions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listLbTrafficExtensions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listLbTrafficExtensionsStream with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLbTrafficExtensions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listLbTrafficExtensionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networkservices.v1.LbTrafficExtension[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.networkservices.v1.LbTrafficExtension
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listLbTrafficExtensions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLbTrafficExtensions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listLbTrafficExtensions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listLbTrafficExtensions without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbTrafficExtension()
-        ),
-      ];
-      client.descriptors.page.listLbTrafficExtensions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.networkservices.v1.ILbTrafficExtension[] =
-        [];
-      const iterable = client.listLbTrafficExtensionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLbTrafficExtensions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listLbTrafficExtensions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listLbTrafficExtensions with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLbTrafficExtensions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLbTrafficExtensionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.networkservices.v1.ILbTrafficExtension[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = depserviceModule.v1.DepServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'networkservices.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = depserviceModule.v1.DepServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'networkservices.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLbTrafficExtensions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listLbTrafficExtensions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('listLbRouteExtensions', () => {
-    it('invokes listLbRouteExtensions without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-      ];
-      client.innerApiCalls.listLbRouteExtensions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listLbRouteExtensions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLbRouteExtensions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLbRouteExtensions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLbRouteExtensions without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-      ];
-      client.innerApiCalls.listLbRouteExtensions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listLbRouteExtensions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.networkservices.v1.ILbRouteExtension[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLbRouteExtensions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLbRouteExtensions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLbRouteExtensions with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listLbRouteExtensions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listLbRouteExtensions(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listLbRouteExtensions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLbRouteExtensions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLbRouteExtensionsStream without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-      ];
-      client.descriptors.page.listLbRouteExtensions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listLbRouteExtensionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networkservices.v1.LbRouteExtension[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.networkservices.v1.LbRouteExtension
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new depserviceModule.v1.DepServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'networkservices.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listLbRouteExtensions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLbRouteExtensions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listLbRouteExtensions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('invokes listLbRouteExtensionsStream with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLbRouteExtensions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listLbRouteExtensionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networkservices.v1.LbRouteExtension[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.networkservices.v1.LbRouteExtension
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new depserviceModule.v1.DepServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'networkservices.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listLbRouteExtensions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLbRouteExtensions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listLbRouteExtensions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listLbRouteExtensions without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.networkservices.v1.LbRouteExtension()
-        ),
-      ];
-      client.descriptors.page.listLbRouteExtensions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.networkservices.v1.ILbRouteExtension[] =
-        [];
-      const iterable = client.listLbRouteExtensionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLbRouteExtensions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listLbRouteExtensions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new depserviceModule.v1.DepServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'networkservices.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listLbRouteExtensions with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLbRouteExtensions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLbRouteExtensionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.networkservices.v1.ILbRouteExtension[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new depserviceModule.v1.DepServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'networkservices.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLbRouteExtensions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listLbRouteExtensions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new depserviceModule.v1.DepServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = depserviceModule.v1.DepServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new depserviceModule.v1.DepServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.depServiceStub, undefined);
+            await client.initialize();
+            assert(client.depServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.depServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.depServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.getIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+
+    describe('getLbTrafficExtension', () => {
+        it('invokes getLbTrafficExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.LbTrafficExtension()
+            );
+            client.innerApiCalls.getLbTrafficExtension = stubSimpleCall(expectedResponse);
+            const [response] = await client.getLbTrafficExtension(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLbTrafficExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.LbTrafficExtension()
+            );
+            client.innerApiCalls.getLbTrafficExtension = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLbTrafficExtension(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.ILbTrafficExtension|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLbTrafficExtension with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getLbTrafficExtension = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLbTrafficExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLbTrafficExtension with closed client', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getLbTrafficExtension(request), expectedError);
+        });
     });
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .getIamPolicy(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('getLbRouteExtension', () => {
+        it('invokes getLbRouteExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbRouteExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.LbRouteExtension()
+            );
+            client.innerApiCalls.getLbRouteExtension = stubSimpleCall(expectedResponse);
+            const [response] = await client.getLbRouteExtension(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLbRouteExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbRouteExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.LbRouteExtension()
+            );
+            client.innerApiCalls.getLbRouteExtension = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLbRouteExtension(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.ILbRouteExtension|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLbRouteExtension with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbRouteExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getLbRouteExtension = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLbRouteExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLbRouteExtension with closed client', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbRouteExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getLbRouteExtension(request), expectedError);
+        });
+    });
+
+    describe('createLbTrafficExtension', () => {
+        it('invokes createLbTrafficExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createLbTrafficExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createLbTrafficExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLbTrafficExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createLbTrafficExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createLbTrafficExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLbTrafficExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLbTrafficExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createLbTrafficExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLbTrafficExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLbTrafficExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createLbTrafficExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateLbTrafficExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateLbTrafficExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateLbTrafficExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateLbTrafficExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateLbTrafficExtension', () => {
+        it('invokes updateLbTrafficExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest()
+            );
+            request.lbTrafficExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest', ['lbTrafficExtension', 'name']);
+            request.lbTrafficExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_traffic_extension.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateLbTrafficExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateLbTrafficExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLbTrafficExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest()
+            );
+            request.lbTrafficExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest', ['lbTrafficExtension', 'name']);
+            request.lbTrafficExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_traffic_extension.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateLbTrafficExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateLbTrafficExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLbTrafficExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest()
+            );
+            request.lbTrafficExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest', ['lbTrafficExtension', 'name']);
+            request.lbTrafficExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_traffic_extension.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateLbTrafficExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateLbTrafficExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLbTrafficExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest()
+            );
+            request.lbTrafficExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest', ['lbTrafficExtension', 'name']);
+            request.lbTrafficExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_traffic_extension.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateLbTrafficExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateLbTrafficExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateLbTrafficExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateLbTrafficExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateLbTrafficExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateLbTrafficExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteLbTrafficExtension', () => {
+        it('invokes deleteLbTrafficExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteLbTrafficExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteLbTrafficExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLbTrafficExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteLbTrafficExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteLbTrafficExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLbTrafficExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLbTrafficExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteLbTrafficExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLbTrafficExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLbTrafficExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteLbTrafficExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLbTrafficExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbTrafficExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteLbTrafficExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteLbTrafficExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteLbTrafficExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteLbTrafficExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createLbRouteExtension', () => {
+        it('invokes createLbRouteExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createLbRouteExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createLbRouteExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLbRouteExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createLbRouteExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createLbRouteExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLbRouteExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLbRouteExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createLbRouteExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLbRouteExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLbRouteExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createLbRouteExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateLbRouteExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateLbRouteExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateLbRouteExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateLbRouteExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateLbRouteExtension', () => {
+        it('invokes updateLbRouteExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest()
+            );
+            request.lbRouteExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest', ['lbRouteExtension', 'name']);
+            request.lbRouteExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_route_extension.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateLbRouteExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateLbRouteExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLbRouteExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest()
+            );
+            request.lbRouteExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest', ['lbRouteExtension', 'name']);
+            request.lbRouteExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_route_extension.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateLbRouteExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateLbRouteExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLbRouteExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest()
+            );
+            request.lbRouteExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest', ['lbRouteExtension', 'name']);
+            request.lbRouteExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_route_extension.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateLbRouteExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateLbRouteExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLbRouteExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest()
+            );
+            request.lbRouteExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest', ['lbRouteExtension', 'name']);
+            request.lbRouteExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_route_extension.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateLbRouteExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateLbRouteExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateLbRouteExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateLbRouteExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateLbRouteExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateLbRouteExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteLbRouteExtension', () => {
+        it('invokes deleteLbRouteExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteLbRouteExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteLbRouteExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLbRouteExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteLbRouteExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteLbRouteExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLbRouteExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLbRouteExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteLbRouteExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLbRouteExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLbRouteExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteLbRouteExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLbRouteExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbRouteExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteLbRouteExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteLbRouteExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteLbRouteExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteLbRouteExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listLbTrafficExtensions', () => {
+        it('invokes listLbTrafficExtensions without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+            ];
+            client.innerApiCalls.listLbTrafficExtensions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listLbTrafficExtensions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLbTrafficExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLbTrafficExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLbTrafficExtensions without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+            ];
+            client.innerApiCalls.listLbTrafficExtensions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listLbTrafficExtensions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.ILbTrafficExtension[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLbTrafficExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLbTrafficExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLbTrafficExtensions with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listLbTrafficExtensions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listLbTrafficExtensions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listLbTrafficExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLbTrafficExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLbTrafficExtensionsStream without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+            ];
+            client.descriptors.page.listLbTrafficExtensions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listLbTrafficExtensionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.LbTrafficExtension[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.LbTrafficExtension) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listLbTrafficExtensions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLbTrafficExtensions, request));
+            assert(
+                (client.descriptors.page.listLbTrafficExtensions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listLbTrafficExtensionsStream with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLbTrafficExtensions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listLbTrafficExtensionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.LbTrafficExtension[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.LbTrafficExtension) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listLbTrafficExtensions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLbTrafficExtensions, request));
+            assert(
+                (client.descriptors.page.listLbTrafficExtensions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listLbTrafficExtensions without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbTrafficExtension()),
+            ];
+            client.descriptors.page.listLbTrafficExtensions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networkservices.v1.ILbTrafficExtension[] = [];
+            const iterable = client.listLbTrafficExtensionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLbTrafficExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLbTrafficExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listLbTrafficExtensions with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLbTrafficExtensions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLbTrafficExtensionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networkservices.v1.ILbTrafficExtension[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLbTrafficExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLbTrafficExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getIamPolicy with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.getIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.setIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .setIamPolicy(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('listLbRouteExtensions', () => {
+        it('invokes listLbRouteExtensions without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+            ];
+            client.innerApiCalls.listLbRouteExtensions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listLbRouteExtensions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLbRouteExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLbRouteExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLbRouteExtensions without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+            ];
+            client.innerApiCalls.listLbRouteExtensions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listLbRouteExtensions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.ILbRouteExtension[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLbRouteExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLbRouteExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLbRouteExtensions with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listLbRouteExtensions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listLbRouteExtensions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listLbRouteExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLbRouteExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLbRouteExtensionsStream without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+            ];
+            client.descriptors.page.listLbRouteExtensions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listLbRouteExtensionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.LbRouteExtension[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.LbRouteExtension) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listLbRouteExtensions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLbRouteExtensions, request));
+            assert(
+                (client.descriptors.page.listLbRouteExtensions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listLbRouteExtensionsStream with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLbRouteExtensions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listLbRouteExtensionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.LbRouteExtension[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.LbRouteExtension) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listLbRouteExtensions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLbRouteExtensions, request));
+            assert(
+                (client.descriptors.page.listLbRouteExtensions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listLbRouteExtensions without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbRouteExtension()),
+            ];
+            client.descriptors.page.listLbRouteExtensions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networkservices.v1.ILbRouteExtension[] = [];
+            const iterable = client.listLbRouteExtensionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLbRouteExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLbRouteExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listLbRouteExtensions with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLbRouteExtensions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLbRouteExtensionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networkservices.v1.ILbRouteExtension[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLbRouteExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLbRouteExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes setIamPolicy with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.setIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.getIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getIamPolicy with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
-      const response = await client.testIamPermissions(
-        request,
-        expectedOptions
-      );
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.setIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes setIamPolicy with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .testIamPermissions(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
+            const response = await client.testIamPermissions(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.TestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0));
+        });
+        it('invokes testIamPermissions with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request, expectedOptions), expectedError);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes testIamPermissions with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.testIamPermissions(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('endpointPolicy', async () => {
-      const fakePath = '/rendered/path/endpointPolicy';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        endpoint_policy: 'endpointPolicyValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.endpointPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.endpointPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('endpointPolicyPath', () => {
-        const result = client.endpointPolicyPath(
-          'projectValue',
-          'locationValue',
-          'endpointPolicyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.endpointPolicyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEndpointPolicyName', () => {
-        const result = client.matchProjectFromEndpointPolicyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.endpointPolicyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEndpointPolicyName', () => {
-        const result = client.matchLocationFromEndpointPolicyName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.endpointPolicyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEndpointPolicyFromEndpointPolicyName', () => {
-        const result =
-          client.matchEndpointPolicyFromEndpointPolicyName(fakePath);
-        assert.strictEqual(result, 'endpointPolicyValue');
-        assert(
-          (client.pathTemplates.endpointPolicyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('gateway', async () => {
-      const fakePath = '/rendered/path/gateway';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        gateway: 'gatewayValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.gatewayPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.gatewayPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('gatewayPath', () => {
-        const result = client.gatewayPath(
-          'projectValue',
-          'locationValue',
-          'gatewayValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.gatewayPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('endpointPolicy', async () => {
+            const fakePath = "/rendered/path/endpointPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                endpoint_policy: "endpointPolicyValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.endpointPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.endpointPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromGatewayName', () => {
-        const result = client.matchProjectFromGatewayName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.gatewayPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('endpointPolicyPath', () => {
+                const result = client.endpointPolicyPath("projectValue", "locationValue", "endpointPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.endpointPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromGatewayName', () => {
-        const result = client.matchLocationFromGatewayName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.gatewayPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromEndpointPolicyName', () => {
+                const result = client.matchProjectFromEndpointPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.endpointPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchGatewayFromGatewayName', () => {
-        const result = client.matchGatewayFromGatewayName(fakePath);
-        assert.strictEqual(result, 'gatewayValue');
-        assert(
-          (client.pathTemplates.gatewayPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromEndpointPolicyName', () => {
+                const result = client.matchLocationFromEndpointPolicyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.endpointPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEndpointPolicyFromEndpointPolicyName', () => {
+                const result = client.matchEndpointPolicyFromEndpointPolicyName(fakePath);
+                assert.strictEqual(result, "endpointPolicyValue");
+                assert((client.pathTemplates.endpointPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('gateway', async () => {
+            const fakePath = "/rendered/path/gateway";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                gateway: "gatewayValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.gatewayPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.gatewayPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('gatewayPath', () => {
+                const result = client.gatewayPath("projectValue", "locationValue", "gatewayValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.gatewayPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGatewayName', () => {
+                const result = client.matchProjectFromGatewayName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.gatewayPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGatewayName', () => {
+                const result = client.matchLocationFromGatewayName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.gatewayPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGatewayFromGatewayName', () => {
+                const result = client.matchGatewayFromGatewayName(fakePath);
+                assert.strictEqual(result, "gatewayValue");
+                assert((client.pathTemplates.gatewayPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('gatewayRouteView', async () => {
+            const fakePath = "/rendered/path/gatewayRouteView";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                gateway: "gatewayValue",
+                route_view: "routeViewValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.gatewayRouteViewPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.gatewayRouteViewPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('gatewayRouteViewPath', () => {
+                const result = client.gatewayRouteViewPath("projectValue", "locationValue", "gatewayValue", "routeViewValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.gatewayRouteViewPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGatewayRouteViewName', () => {
+                const result = client.matchProjectFromGatewayRouteViewName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.gatewayRouteViewPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGatewayRouteViewName', () => {
+                const result = client.matchLocationFromGatewayRouteViewName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.gatewayRouteViewPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGatewayFromGatewayRouteViewName', () => {
+                const result = client.matchGatewayFromGatewayRouteViewName(fakePath);
+                assert.strictEqual(result, "gatewayValue");
+                assert((client.pathTemplates.gatewayRouteViewPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRouteViewFromGatewayRouteViewName', () => {
+                const result = client.matchRouteViewFromGatewayRouteViewName(fakePath);
+                assert.strictEqual(result, "routeViewValue");
+                assert((client.pathTemplates.gatewayRouteViewPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('grpcRoute', async () => {
+            const fakePath = "/rendered/path/grpcRoute";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                grpc_route: "grpcRouteValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.grpcRoutePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.grpcRoutePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('grpcRoutePath', () => {
+                const result = client.grpcRoutePath("projectValue", "locationValue", "grpcRouteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.grpcRoutePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGrpcRouteName', () => {
+                const result = client.matchProjectFromGrpcRouteName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.grpcRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGrpcRouteName', () => {
+                const result = client.matchLocationFromGrpcRouteName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.grpcRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGrpcRouteFromGrpcRouteName', () => {
+                const result = client.matchGrpcRouteFromGrpcRouteName(fakePath);
+                assert.strictEqual(result, "grpcRouteValue");
+                assert((client.pathTemplates.grpcRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('httpRoute', async () => {
+            const fakePath = "/rendered/path/httpRoute";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                http_route: "httpRouteValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.httpRoutePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.httpRoutePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('httpRoutePath', () => {
+                const result = client.httpRoutePath("projectValue", "locationValue", "httpRouteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.httpRoutePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromHttpRouteName', () => {
+                const result = client.matchProjectFromHttpRouteName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.httpRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromHttpRouteName', () => {
+                const result = client.matchLocationFromHttpRouteName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.httpRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchHttpRouteFromHttpRouteName', () => {
+                const result = client.matchHttpRouteFromHttpRouteName(fakePath);
+                assert.strictEqual(result, "httpRouteValue");
+                assert((client.pathTemplates.httpRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('lbRouteExtension', async () => {
+            const fakePath = "/rendered/path/lbRouteExtension";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lb_route_extension: "lbRouteExtensionValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lbRouteExtensionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lbRouteExtensionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lbRouteExtensionPath', () => {
+                const result = client.lbRouteExtensionPath("projectValue", "locationValue", "lbRouteExtensionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lbRouteExtensionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLbRouteExtensionName', () => {
+                const result = client.matchProjectFromLbRouteExtensionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLbRouteExtensionName', () => {
+                const result = client.matchLocationFromLbRouteExtensionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLbRouteExtensionFromLbRouteExtensionName', () => {
+                const result = client.matchLbRouteExtensionFromLbRouteExtensionName(fakePath);
+                assert.strictEqual(result, "lbRouteExtensionValue");
+                assert((client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('lbTrafficExtension', async () => {
+            const fakePath = "/rendered/path/lbTrafficExtension";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lb_traffic_extension: "lbTrafficExtensionValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lbTrafficExtensionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lbTrafficExtensionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lbTrafficExtensionPath', () => {
+                const result = client.lbTrafficExtensionPath("projectValue", "locationValue", "lbTrafficExtensionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lbTrafficExtensionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLbTrafficExtensionName', () => {
+                const result = client.matchProjectFromLbTrafficExtensionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.lbTrafficExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLbTrafficExtensionName', () => {
+                const result = client.matchLocationFromLbTrafficExtensionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.lbTrafficExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLbTrafficExtensionFromLbTrafficExtensionName', () => {
+                const result = client.matchLbTrafficExtensionFromLbTrafficExtensionName(fakePath);
+                assert.strictEqual(result, "lbTrafficExtensionValue");
+                assert((client.pathTemplates.lbTrafficExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mesh', async () => {
+            const fakePath = "/rendered/path/mesh";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                mesh: "meshValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.meshPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.meshPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('meshPath', () => {
+                const result = client.meshPath("projectValue", "locationValue", "meshValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.meshPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMeshName', () => {
+                const result = client.matchProjectFromMeshName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.meshPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMeshName', () => {
+                const result = client.matchLocationFromMeshName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.meshPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMeshFromMeshName', () => {
+                const result = client.matchMeshFromMeshName(fakePath);
+                assert.strictEqual(result, "meshValue");
+                assert((client.pathTemplates.meshPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('meshRouteView', async () => {
+            const fakePath = "/rendered/path/meshRouteView";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                mesh: "meshValue",
+                route_view: "routeViewValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.meshRouteViewPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.meshRouteViewPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('meshRouteViewPath', () => {
+                const result = client.meshRouteViewPath("projectValue", "locationValue", "meshValue", "routeViewValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.meshRouteViewPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMeshRouteViewName', () => {
+                const result = client.matchProjectFromMeshRouteViewName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.meshRouteViewPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMeshRouteViewName', () => {
+                const result = client.matchLocationFromMeshRouteViewName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.meshRouteViewPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMeshFromMeshRouteViewName', () => {
+                const result = client.matchMeshFromMeshRouteViewName(fakePath);
+                assert.strictEqual(result, "meshValue");
+                assert((client.pathTemplates.meshRouteViewPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRouteViewFromMeshRouteViewName', () => {
+                const result = client.matchRouteViewFromMeshRouteViewName(fakePath);
+                assert.strictEqual(result, "routeViewValue");
+                assert((client.pathTemplates.meshRouteViewPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('serviceBinding', async () => {
+            const fakePath = "/rendered/path/serviceBinding";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                service_binding: "serviceBindingValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.serviceBindingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.serviceBindingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('serviceBindingPath', () => {
+                const result = client.serviceBindingPath("projectValue", "locationValue", "serviceBindingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.serviceBindingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromServiceBindingName', () => {
+                const result = client.matchProjectFromServiceBindingName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.serviceBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromServiceBindingName', () => {
+                const result = client.matchLocationFromServiceBindingName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.serviceBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceBindingFromServiceBindingName', () => {
+                const result = client.matchServiceBindingFromServiceBindingName(fakePath);
+                assert.strictEqual(result, "serviceBindingValue");
+                assert((client.pathTemplates.serviceBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('serviceLbPolicy', async () => {
+            const fakePath = "/rendered/path/serviceLbPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                service_lb_policy: "serviceLbPolicyValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.serviceLbPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.serviceLbPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('serviceLbPolicyPath', () => {
+                const result = client.serviceLbPolicyPath("projectValue", "locationValue", "serviceLbPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.serviceLbPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromServiceLbPolicyName', () => {
+                const result = client.matchProjectFromServiceLbPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.serviceLbPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromServiceLbPolicyName', () => {
+                const result = client.matchLocationFromServiceLbPolicyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.serviceLbPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceLbPolicyFromServiceLbPolicyName', () => {
+                const result = client.matchServiceLbPolicyFromServiceLbPolicyName(fakePath);
+                assert.strictEqual(result, "serviceLbPolicyValue");
+                assert((client.pathTemplates.serviceLbPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tcpRoute', async () => {
+            const fakePath = "/rendered/path/tcpRoute";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                tcp_route: "tcpRouteValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tcpRoutePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tcpRoutePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tcpRoutePath', () => {
+                const result = client.tcpRoutePath("projectValue", "locationValue", "tcpRouteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tcpRoutePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTcpRouteName', () => {
+                const result = client.matchProjectFromTcpRouteName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.tcpRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTcpRouteName', () => {
+                const result = client.matchLocationFromTcpRouteName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.tcpRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTcpRouteFromTcpRouteName', () => {
+                const result = client.matchTcpRouteFromTcpRouteName(fakePath);
+                assert.strictEqual(result, "tcpRouteValue");
+                assert((client.pathTemplates.tcpRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tlsRoute', async () => {
+            const fakePath = "/rendered/path/tlsRoute";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                tls_route: "tlsRouteValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tlsRoutePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tlsRoutePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tlsRoutePath', () => {
+                const result = client.tlsRoutePath("projectValue", "locationValue", "tlsRouteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tlsRoutePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTlsRouteName', () => {
+                const result = client.matchProjectFromTlsRouteName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.tlsRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTlsRouteName', () => {
+                const result = client.matchLocationFromTlsRouteName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.tlsRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTlsRouteFromTlsRouteName', () => {
+                const result = client.matchTlsRouteFromTlsRouteName(fakePath);
+                assert.strictEqual(result, "tlsRouteValue");
+                assert((client.pathTemplates.tlsRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('grpcRoute', async () => {
-      const fakePath = '/rendered/path/grpcRoute';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        grpc_route: 'grpcRouteValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.grpcRoutePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.grpcRoutePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('grpcRoutePath', () => {
-        const result = client.grpcRoutePath(
-          'projectValue',
-          'locationValue',
-          'grpcRouteValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.grpcRoutePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromGrpcRouteName', () => {
-        const result = client.matchProjectFromGrpcRouteName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.grpcRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromGrpcRouteName', () => {
-        const result = client.matchLocationFromGrpcRouteName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.grpcRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchGrpcRouteFromGrpcRouteName', () => {
-        const result = client.matchGrpcRouteFromGrpcRouteName(fakePath);
-        assert.strictEqual(result, 'grpcRouteValue');
-        assert(
-          (client.pathTemplates.grpcRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('httpRoute', async () => {
-      const fakePath = '/rendered/path/httpRoute';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        http_route: 'httpRouteValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.httpRoutePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.httpRoutePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('httpRoutePath', () => {
-        const result = client.httpRoutePath(
-          'projectValue',
-          'locationValue',
-          'httpRouteValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.httpRoutePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromHttpRouteName', () => {
-        const result = client.matchProjectFromHttpRouteName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.httpRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromHttpRouteName', () => {
-        const result = client.matchLocationFromHttpRouteName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.httpRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchHttpRouteFromHttpRouteName', () => {
-        const result = client.matchHttpRouteFromHttpRouteName(fakePath);
-        assert.strictEqual(result, 'httpRouteValue');
-        assert(
-          (client.pathTemplates.httpRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('lbRouteExtension', async () => {
-      const fakePath = '/rendered/path/lbRouteExtension';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lb_route_extension: 'lbRouteExtensionValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.lbRouteExtensionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.lbRouteExtensionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('lbRouteExtensionPath', () => {
-        const result = client.lbRouteExtensionPath(
-          'projectValue',
-          'locationValue',
-          'lbRouteExtensionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.lbRouteExtensionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLbRouteExtensionName', () => {
-        const result = client.matchProjectFromLbRouteExtensionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLbRouteExtensionName', () => {
-        const result = client.matchLocationFromLbRouteExtensionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLbRouteExtensionFromLbRouteExtensionName', () => {
-        const result =
-          client.matchLbRouteExtensionFromLbRouteExtensionName(fakePath);
-        assert.strictEqual(result, 'lbRouteExtensionValue');
-        assert(
-          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('lbTrafficExtension', async () => {
-      const fakePath = '/rendered/path/lbTrafficExtension';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lb_traffic_extension: 'lbTrafficExtensionValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.lbTrafficExtensionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.lbTrafficExtensionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('lbTrafficExtensionPath', () => {
-        const result = client.lbTrafficExtensionPath(
-          'projectValue',
-          'locationValue',
-          'lbTrafficExtensionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.lbTrafficExtensionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLbTrafficExtensionName', () => {
-        const result = client.matchProjectFromLbTrafficExtensionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.lbTrafficExtensionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLbTrafficExtensionName', () => {
-        const result = client.matchLocationFromLbTrafficExtensionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.lbTrafficExtensionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLbTrafficExtensionFromLbTrafficExtensionName', () => {
-        const result =
-          client.matchLbTrafficExtensionFromLbTrafficExtensionName(fakePath);
-        assert.strictEqual(result, 'lbTrafficExtensionValue');
-        assert(
-          (
-            client.pathTemplates.lbTrafficExtensionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('mesh', async () => {
-      const fakePath = '/rendered/path/mesh';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        mesh: 'meshValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.meshPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.meshPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('meshPath', () => {
-        const result = client.meshPath(
-          'projectValue',
-          'locationValue',
-          'meshValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.meshPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromMeshName', () => {
-        const result = client.matchProjectFromMeshName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.meshPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromMeshName', () => {
-        const result = client.matchLocationFromMeshName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.meshPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMeshFromMeshName', () => {
-        const result = client.matchMeshFromMeshName(fakePath);
-        assert.strictEqual(result, 'meshValue');
-        assert(
-          (client.pathTemplates.meshPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('serviceBinding', async () => {
-      const fakePath = '/rendered/path/serviceBinding';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        service_binding: 'serviceBindingValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.serviceBindingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.serviceBindingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('serviceBindingPath', () => {
-        const result = client.serviceBindingPath(
-          'projectValue',
-          'locationValue',
-          'serviceBindingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.serviceBindingPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromServiceBindingName', () => {
-        const result = client.matchProjectFromServiceBindingName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.serviceBindingPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromServiceBindingName', () => {
-        const result = client.matchLocationFromServiceBindingName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.serviceBindingPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceBindingFromServiceBindingName', () => {
-        const result =
-          client.matchServiceBindingFromServiceBindingName(fakePath);
-        assert.strictEqual(result, 'serviceBindingValue');
-        assert(
-          (client.pathTemplates.serviceBindingPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('tcpRoute', async () => {
-      const fakePath = '/rendered/path/tcpRoute';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        tcp_route: 'tcpRouteValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tcpRoutePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tcpRoutePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('tcpRoutePath', () => {
-        const result = client.tcpRoutePath(
-          'projectValue',
-          'locationValue',
-          'tcpRouteValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tcpRoutePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTcpRouteName', () => {
-        const result = client.matchProjectFromTcpRouteName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.tcpRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromTcpRouteName', () => {
-        const result = client.matchLocationFromTcpRouteName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.tcpRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTcpRouteFromTcpRouteName', () => {
-        const result = client.matchTcpRouteFromTcpRouteName(fakePath);
-        assert.strictEqual(result, 'tcpRouteValue');
-        assert(
-          (client.pathTemplates.tcpRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('tlsRoute', async () => {
-      const fakePath = '/rendered/path/tlsRoute';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        tls_route: 'tlsRouteValue',
-      };
-      const client = new depserviceModule.v1.DepServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tlsRoutePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tlsRoutePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('tlsRoutePath', () => {
-        const result = client.tlsRoutePath(
-          'projectValue',
-          'locationValue',
-          'tlsRouteValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tlsRoutePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTlsRouteName', () => {
-        const result = client.matchProjectFromTlsRouteName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.tlsRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromTlsRouteName', () => {
-        const result = client.matchLocationFromTlsRouteName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.tlsRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTlsRouteFromTlsRouteName', () => {
-        const result = client.matchTlsRouteFromTlsRouteName(fakePath);
-        assert.strictEqual(result, 'tlsRouteValue');
-        assert(
-          (client.pathTemplates.tlsRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });
